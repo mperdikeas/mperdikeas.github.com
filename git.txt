@@ -1,0 +1,33 @@
+how to restore a specific file to the branch's image
+
+git checkout -f visualization "13 - COAST Caches/ccaches_protocol_types/src/org/coast/caches/network/types/CacheGetRequest.java"
+
+ttsiod explained that "visualization" (i.e. the branch name) is a tree-ish
+object in git. The general signature of git checkout is therefore:
+git checkout <tree-ish> <optional path within the tree-ish>
+
+
+2012-02-06:    overwrite local modifications
+                git checkout .
+
+2012-02-17:    bullet-proof way to reset all the files
+                in the local repository:
+                $ git clean -d -x -f
+                ... followed by:
+                $ git reset --hard
+                to just see which files will be deleted
+                by git clean do a:
+                $ git clean -d -x -n
+                (for a dry run)
+2012-02-17:    how to check differences between local 
+                and remote branches:
+                $ git diff master origin/master
+2012-03-16:    to avoid having to type:
+                git add . -A
+                followed by a:
+                git commit -m " .. "
+                do a:
+                git config --global alias.ac '!git add . -A && git commit'
+
+2012-03-19:     how to force git diff to always use color:
+                git config --global color.diff auto

@@ -1,0 +1,2 @@
+****Perl script to create a file with 1 million integers:
+    perl -e 'for($i=1000000; $i>0; $i--) { print $i."\n";}' > QuickSort.txt

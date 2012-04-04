@@ -1,0 +1,7 @@
+How to install the testing version of single Debian package without upgrading the whole distribution:
+
+(e.g. the testing version of ocaml when one finds himself in stable debian)
+sudo apt-get -t testing install ocaml
+
+How to find if a package is installed, e.g. package ncurses-term:
+#dpkg -s ncurses-term

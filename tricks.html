@@ -1,0 +1,137 @@
+<html>
+<body>
+<ol>
+<li> <b><u>How to create files of arbitrary size</u></b><p>
+<pre>
+mperdikeas@mperdikeas ~
+$ dd if=/dev/zero of=a_file_of_3MBs bs=1M count=3
+3+0 records in
+3+0 records out
+3145728 bytes (3.1 MB) copied, 0.00516917 s, 609 MB/s
+
+mperdikeas@mperdikeas ~
+$ dd if=/dev/zero of=a_file_of_1453bytes bs=1 count=1453
+1453+0 records in
+1453+0 records out
+1453 bytes (1.5 kB) copied, 0.0184214 s, 78.9 kB/s
+</pre>
+</li>
+
+<li><b><u>How to copy trees </b></u><p>
+How to copy a whole tree to another location in the same network.
+example copy folder "wa-integration" and its tree to the /c/BW location.
+
+<pre>
+tar cf - wa-integration/ | (cd /c/BW/ ; tar xvf - )
+</pre>
+</li>
+
+<li><b><u>How to count files</u></b></p>
+How to recursively count all "normal" files in a directory
+<pre>
+find directory_name -type f | wc -l
+</pre>
+</li>
+
+
+<li><b><u>How to grep in a large number of files</u></b><p>
+<pre>
+for i in `find ./sample/`; do grep -H "sample string" $i; done
+</pre>
+</li>
+
+<li><b><u>How to use curl to test GET, POST, etc.</u></b><p>
+
+GET:
+<pre>curl -HAccept:text/plain http://example.com/base</pre>
+
+PUT:
+<pre>curl -XPUT -HContent-type:text/plain --data "stuff:morestuff" http://example.com/base?param=val</pre>
+
+DELETE:
+<pre>curl -XDELETE http://example.com/base/user/123</pre>
+
+POST:
+<pre>curl -d "param1=value1&param2=value2" http://example.com/base/</pre>
+<p>
+Another curl tip: To send a POST request whose data is
+not in application/x-www-urlencoded format, use
+the --data-binary option instead of --data.
+</li>
+
+<li><b><u>How to use cut to only retain find's output from the 73rd column onwards</u></b><p>
+<pre>find folderToSearch/ | cut -c 73-</pre>
+</li>
+
+<li><b><u>Magic</u></b><p>
+<pre>
+$ cat nice.sh
+tr -cs A-Za-z '\n' |
+	tr A-Z a-z |
+	sort |
+	uniq -c |
+	sort -rn |
+	sed ${1}q
+</pre>
+What it does:
+<ul>
+<li>Make one-word lines by transliterating the complement (-c) of the alphabet into newlines (note the quoted newline), and squeezing out (-s) multiple newlines.
+<li>Transliterate upper case to lower case.
+<li>Sort to bring identical words together.
+<li>Replace each run of duplicate words with a single representative and include a count (-c).
+<li>Sort in reverse (-r) numeric (-n) order.
+<li>Pass through the stream editor; quit (q) after printing the number of lines designated by the script's first argument.
+</ul>
+<p>
+Given the above script the following text:<p>
+<i>
+   "Tests a distributed system made up of two LEON boards connected with the spacewire, 
+    and each one of them having a local FPGA component. The code is clear; the bug reports on Mantis"
+</i><p>
+becomes (when piped with: echo "(the above text)" | nice.sh 5) :
+<pre>
+      3 the
+      2 of
+      2 a
+      1 with
+      1 up
+</pre>
+</li>
+<li><b><u>How not to lose tty context</b></u><p>
+A utility that allows you to save all tty context and re-connect and recover everything in case of a connection lost (e.g. ssh) is screen. Invoked with "screen". Reconnect with "screen -r". To detach from the screen type "ctrl-a d". The screen deamon is visible with "ps auex".
+</li>
+
+<li><b><u>The scp utility to download / upload files from remote server (no FTP)</b></u><p>
+To download recursively a whole folder from remote directory:
+<pre>scp -r mperdikeas@elrond:~/TAPKIT/Conversions/Genesis/sources-auto /cygdrive/c/fromElrond</pre>
+To upload single file to remote directory:
+<pre>scp buildSpecification.py mperdikeas@elrond:~/TAPKIT/Conversions/Genesis/python</pre>
+
+scp can be setup to not prompt for password using ssh-keygen and appending the public key to the remote host(s)'s
+ ~/.ssh/authorized_keys file (for the respective user).
+</li>
+<p>
+<li><b><u>diff alternative in Linux</b></u><p>
+Use the vimdiff utility (navigation to next / previous difference with [c and ]c
+</li>
+
+<li><b><u>How to browse the web from a different IP address:</b></u><p>
+One can use the SOCKS protocol. The idea would be to open an SSH tunnel to a remote machine and then configure the browser to use the local machine as SOCKS host. The browser would then encapsulate all HTTP traffic into a SOCKS packet and send it through the tunnel to the remote SSH server which will also decapsulate the SOCKS protocol. So, the resolution of the domain name at the HTTP GET will be done at the remote server. Instructions for Firefox:
+<ol>
+<li>open cygwin shell in local machine and at the prompt enter:
+    ssh -D 9987 root@tapeditor.com
+<li>it will typically output something about an RSA fingerprint at which point you type yes
+<li>you are prompted for password (enter it)
+<li>you are now in the remote host and the tunnel is operational.
+<li>fire Mozilla Firefox
+<li>find the Firefox's proxy config page (tools->options->Network->Settings) and setup a Manual proxy configuration with SOCKS Host the local machine (enter "localhost", port 9987 (the one used in step [1] - it can be any port) and SOCKS version v5.
+<li>if you now visit www.whatismyipaddress.com you see the (usually public static IP address) of the other end of the tunnel.
+<li>you can now browse the web using that public IP address (so long as the tunnel opened in step [4] remains open).
+</ol>
+</li>
+<p>
+<li><b><u>emacs shortcuts in bash</b></u><p>
+Standard emacs shortcuts such as C-l, C-p and C-r come very handy in bash. C-l clears the screen whereas C-r allows
+easy repetition of previous commands (much better than history or C-p)
+</li>
+</ol>

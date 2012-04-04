@@ -1,0 +1,18 @@
+2012.02.29    Networking
+On the issue of VMWare networking ttsiodras told me that there are
+three modes of operation for a VMWare machine: (1) host, (2) bridged
+and (3) NAT.
+** Mode 1 (host) is like a twisted pair cable between the host and the VMWare
+machine in question. No broader network is visible from the VMWare machine.
+** Mode 2 (bridged) is the default and corresponds to the VMWare machine
+being on the same broadcast segment as the host (e.g. same Ethernet 
+segment or same wireless hotspot). In this mode (and perhaps in others too)
+the VMWare player itself acts as a DHCP server and allocates an IP address
+to the VMWare machine, on startup. The debian itself (or, in general,
+the operating system running in the virtual machine) has no concept that
+it's being run "inside" a virtual machine and so simply broadcasts a
+DHCP request on its MAC, since the VMWare Player's DHCP is the first DHCP
+to answer (being "closer") it obtains an IP from that deamon.
+** Mode 3 (NAT) corresponds to the host machine acting as a NAT front-end
+(providing forward and reverse lookup) for the virtual machine being 
+played.

@@ -1,0 +1,12 @@
+***   2012.01.30   ***   apt package manager
+apt-get update (to update packages - totally passive)
+apt-cache search [word] (to find packages whose description contains the word 'word')
+apt-get install [foo] (to install package foo and all its dependencies)
+
+to see all installed packages:
+dpkg -l
+
+sometimes, esp. in Debian which is very conservative packages may not be available with apt so they are installed as alternatives and are visible with:
+
+update-alternatives --list java
+

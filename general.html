@@ -1,0 +1,98 @@
+<html>
+<body>
+<ol>
+<li> <b><u>package managers</u></b><p>
+apt-get is used in Debian, Ubuntu and rpm in Fedora, Redhat, Suse. apt-get is better.
+<li><b><u>curl</u></b><p>
+curl is a Linux utility that can be used to simulate HTTP GET and HTTP POST requests.
+A simple:<pre>#curl www.in.gr</pre> ...will execute an HTTP GET against www.in.gr.
+<li><b><u>SSE time</u></b><p>
+get time in SSE:<pre>date +%s</pre>
+<li>2012-02-06: Linux print system information (including kernel 32 or 64 bits): uname -a
+2012-02-06: Find if CPU is 32 or 64 bits: grep flacs /proc/cpuinfo ("lm" means long mode CPU - 64 bit CPU)
+2012-02-06: find installed packages:
+                apt-cache search <search-string> - or -
+                dpkg --get-selections | grep <search-string>
+2012-02-06: install packages:
+                apt-get install <package-name>
+2012-02-06: how to find a file named "compile_decoder.sh" in a set of bz2 files:
+     for f in `ls *.bz2` ; do tar -jtvf  $f ; done | grep compile_decoder.sh
+
+... Actually, the following also works and produces identical output:
+    for f in `ls *.bz2` ; do tar -jtvf $f | grep compile_decoder.sh ; done
+2012-02-09: to find out the release:
+                $ lsb_release -a
+2012-02-13: how to start xserver in Cygwin : 
+                startxwin
+            ... and then to redirect X output from the new shell:
+                ssh -X mperdikeas@remote.location
+2012-02-14: web page to report your IP address:
+                http://checkip.dyndns.org/
+2012-02-14: tool to examine port usage in Windows: TCPView
+2012-02-17: to reboot a linux machine: $sudo reboot
+2012-02-17: see all processes run by user 'mperdikeas' : $ps -u mperdikeas
+2012-03-05: in order to create a bootable USB drive from an ISO image it
+                is not possible to use dd and perform a binary data copy.
+                Special magic has to be used. Ttsiodras sent me a folder
+                with the necessary magic. Bottom line is that the files
+                in the ISO image are actually copied and that special bits
+                are set in the flash drive's filesystem to denote the
+                partition as bootable. See folder CreateUSBstickFromISO.
+                However I was not able to make it work; the USB flash
+                drive was formated and created but I wasn't ablt to 
+                boot it. In the end I just burned a CD. BTW the following
+                page:
+                http://www.ubuntu.com/download/ubuntu/download
+                created detailed instructions on how to create a USB
+                flash drive and suggests another solution ("Pen Drive
+                Linux's USB Installer").
+
+                There is also another option which is to create a Live Linux
+                USB stick or even a persistent one (with the ability to
+                save files, install programs and so on). This option is
+                possible using the "LinuxLive USB Creator 2.8.10.exe"
+                program.
+2012-03-06: to find the Linux kernel release:
+                uname -mrs
+2012-03-06: to find the Linux distro:
+                lsb_release -a
+2012-03-08: how to find if a Linux machine is 32 or 64 bits:
+            uname -m
+             - or -
+            cat /proc/cpuinfo
+2012-03-14: how to display recursive size of folders (i.e. including
+                contents):
+                sudo du - s -m *
+                (because ls -lah only displays the size of the
+                directory file).
+2012-03-14: proper way to copy recursively (including file permissions etc):
+                cp -a /a /b
+2012-03-15: how to find in which package a binary belongs,
+            e.g. the lsb_release binary:
+            dpkg -S $(which lsb_release)
+2012-03-15: how to show the versions of debian apt packages:
+            use the apt_show_versions utility
+2012-03-15: the /etc/apt/sources.list file is not directly related to the 
+            operations of the:
+                apt-get dist-upgrade command
+            the dist-upgrade command always stays in the same Debian version
+            but implements the progression: stable->testing->unstable.
+            So, for instance from the stable phase it takes two invocations
+            of the dist-upgrade to reach the unstable phase; from the
+            testing phase only one. And you can't go backwards.
+            The /etc/apt/sources.list file "simply" provides the URL of
+            the repositories for each version.
+2012-03-19: for hex-dump:
+                hexdump -C <filename> ('C' for console output)
+            to edit: hexedit
+
+how to cut the first few lines of a file (in the below example, the 1st one):
+    tail -n +2 "$FILE"
+
+how to remove the last line from a file (in place editing):
+    sed -i '$d' filename
+
+how to remove the last n lines from a file (in the below example n = 2):
+    head -`wc -l thefile | awk '{print ($1-1)}'` thefile
+</body>
+</html>

@@ -1,0 +1,147 @@
+**** 2012-02-29    There is no concept of "configuring" a DHCP server.
+The DHCP server simply listens and requests to a DHCP server are sent by 
+broadcasting to the local broadcast segment,
+the first DHCP server to answer is the
+one who also gets to choose the IP address.
+
+**** 2012-02-29    The functionality of a DNS server includes not only the
+lookup functionality but also a registration functionality, i.e. a function
+like: "put (IP, hostname)". The registration ("put") functionality is not
+always provided though. For instance, typically wireless router name servers
+only provide the lookup function.
+
+**** 2012-02-29    In Windows Enterprise Server solutions it is
+typical for the DHCP Server and the DNS server to be 
+provided together, in close coupling,
+as part of a unified "domain controller" solution. That is, when a DHCP
+receives a request for the acquisition of an IP address it also forwards
+the host name to the DNS server letting it know that from now on, this host-
+name corresponds to that IP address. This solution of course is premised
+on the assumption that the broadcast query sent by the bootstrapping machine
+also includes the hostname. Ttsiodras told me that that's the case but 
+from a cursory examination of the DHCP protocol specification I found
+no such field.
+
+*** 2012-03-07    many switches and routers typically use the
+                  192.168.0.254 address for configuration (exposing
+                  a web server).
+*** 2012-03-07    typical default passwords for routers / switches are:
+                  admin, adminadmin, password and pwd.
+
+*** 2012-03-07    view network connections in Windows 7:
+                  Control Panel -> search for "connections" -> select
+                  "view network connections". Select the adapter you
+                  are interested in, right click "properties", select
+                  "networking" tab, edit the "Internet Protocol Version 4
+                  (TCP/IPv4)" properties.
+
+*** 2012-03-07    the nslookup utility in Linux can be used to check the
+                  responses of different DNS servers.
+
+*** 2012-03-07    the route utility in Linux allows one to examine the
+                  kernel routing table. Below follows, verbatim an
+                  example of its use in Linux with the "-n" option:
+
+mperdikeas@hurin:~/playground/java-pg$ sudo route -n
+[sudo] password for mperdikeas:
+Sorry, try again.
+[sudo] password for mperdikeas:
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+192.168.0.0     0.0.0.0         255.255.255.0   U     0      0        0 eth0
+0.0.0.0         192.168.0.3     0.0.0.0         UG    0      0        0 eth0
+
+                what the above routing table tells us is that if the destination
+                IP address is in the 192.168.0.x domain (logical And between the
+                Destination and Genmask columns) then the Gateway is 0.0.0.0
+                (which is a special value indicating that you are already in the
+                destination broadcast domain and so the MAC packet can have as
+                destination the actual MAC address of the destination IP (which
+                can be obtained since we are on the destination broadcast domain)
+                and the interface through which the packet should leave the node
+                is "eth0". For all other cases (the 0.0.0.0 / 0.0.0.0 Destination/Genmask
+                combo is the catch-all case) the following logic applies. Assume
+                that source IP and port is SRC-IP and SRC-port respectively,
+                and that the dest IP address is 192.168.1.1 (so it doesn't fall
+                in the 192.168.0.x subnet) and the dest IP port is 80.
+                Further assume that the MAC address
+                of the catch-all case default gateway (192.168.0.3) is MACGW: then
+                the following IP packet:
+                [SRC-IP; SCR-port; 192.168.1.1; 80] will be carried in the payload
+                of the following MAC packet:
+                [MAC dest: MACGW, payload: ip packet above]
+                That is, although the IP protocol does not have the concept of
+                a "final destination IP", the dest IP found in the IP packet
+                and carried transparently in the payload of the MAC packet can
+                be thought of as the "final destination" IP, and the IP of the
+                gateway as the "destination" (plain) IP; of course the gateway's
+                IP doesn't appear in the MAC packet or its payload; only the MAC
+                address of the gateway.
+                It follows from the above discussion that gateways should always
+                be in the same broadcast domain otherwise they can't be used.
+                Indeed, in the above routing table it is seen that the Gateway's
+                IP (192.168.0.3) does indeed fall in the broadcast domain
+                192.168.0.x. The broadcast domain is quite simply the one for which
+                the 0.0.0.0 gateway is configured.
+
+*** 2012-03-07  according to ttsiod most routers / hubs act as DHCP/DNS server combo.
+*** 2012-03-07  8.8.8.8 is the Google Domain Name Server that can always be used.
+
+
+*** 2012-03-15  to permanently configure a static IP in debian (together with the netmask,
+                network, broadcast address and gateway that goes with that
+                interface) you need to edit the following file:
+                /etc/network/interfaces
+                as follows (e.g.):
+                ==== start of verbatim ===
+# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+
+# The loopback interface
+auto lo
+iface lo inet loopback
+
+# The first network card - this entry was created during the Debian installation
+# (network, broadcast and gateway are optional)
+auto eth0
+
+
+iface eth0 inet static
+       address 192.168.1.10
+       netmask 255.255.255.0
+       network 192.168.1.0
+       broadcast 192.168.1.255
+       gateway 192.168.1.1
+                ==== end of verbatim ====
+                Pay attention to change the "dhcp" that usually lies
+                to the right of "iface eth0 inet" with "static".
+                Also, note that the changes don't take effect immediately
+                only on next reboot. To immediately effect the changes
+                you do an:
+                ==== start of verbatim web copy ====
+First we bring down the interface.
+
+     # ifconfig eth0 inet down
+     # ifconfig
+     lo   Link encap:Local Loopback
+       ... (no more eth0 entry)
+     # route
+       ... (no more routing table entries)
+Then we bring it up with the new IP address and new routing.
+
+     # ifconfig eth0 inet up 192.168.0.111 \
+                netmask 255.255.255.0 broadcast 192.168.0.255
+     # route add -net 10.0.0.0 netmask 255.0.0.0 gw 192.168.0.1 dev eth0
+                ==== end of verbatim web copy ====
+
+*** 2012.03.22  to transiently configure a static route in Debian (for the duration of the session only)
+                you give the following command, e.g. to a subnet 192.168.0.0/24 via 192.168.69.13
+                (which is on the same broadcast segment as the host under configuration) over the
+                local wireless interface.
+                sudo route add -net 192.168.0.0 netmask 255.255.255.0 gw 192.168.69.13 wlan0
+
+*** 2012.03.22  to transiently configure a default gateway in Debian:
+                sudo route add default gw 192.168.0.3
+
+*** 2012.03.22  to connect to SSH to a host it is sometimes necessary
+                that the routing tables of both the client and the server
+                are modified.

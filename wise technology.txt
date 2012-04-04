@@ -1,0 +1,92 @@
+2011-02-18
+In this file I keep wise sayings on software construction
+that can be applicable in deliverables, presentations etc.
+
+It is not usually until you've built and used a version of the program 
+that you understand the issues well enough to get the design right.
+—Brian Kernighan, Rob Pike, The Practice of Programming
+
+2011-03-22 why OSGi sucks
+It is very very hard to find opinions of what might be “not so great” about OSGi, or reasons that hinder it’s adoption. It’s even harder to find that kind of info from insiders who truly know OSGi by heart.
+Most criticism is received with flames, so most times it isn’t even worth it to comment on critical posts, attracting flamers.
+As a thank you for your article I want to live you this comment from a complete ousider to OSGi, who has been keeping it under watch for 2 years now. Perhaps you might find it somehow useful, o rperhaps you might give me some more insight on the value that I’m missing:
+The reasons why I’ve passed on adopting OSGi as the core for developing software at my software company, are:
+First of all, we are a software company that develops, deplyos and supports software as solutions, for telcos.
+To us, modularity is not a goal on it’s own. It’s a means to an end. ?what end? The technical benefits achieved by it, you know them. So at least for my company the issue is that the extent to which we might need those benefits afforded by OSGi’s modularuty (like being able to deploy and kill individual runtime components, downsize or grow footprint, etc) is not large enough for us to want to pay for it’s full price (more on the price later).
+For isolation from other solution provider’s systems we just reside on our own JVM, in its own server. For provisioning of resources, said server can be virtual. To integrate with third parties, SOA does the deal without putting us all in the same bed (JVM). And this is not for a technical reason but a business reason: ?coexisting with oter vendor’s software on the same JVM? ?Having to demonstrate to the customer that OutOfMemory Exceptions or excessive CPU consumption is due to that other vendor?. It’s not an attractive proposition unless we could charge lot for that feature, but the customer won’t pay more for it, and they probably already payed VMWare to solve that kind of problems. Of course there is also “internal” isolation of our own modules from each other. However, as an architect I don’t see isolation “beyond what can be done with packages” as something I want whithin my own product. I don’t want people reinventing wheels, nor pointing fingers at each other. I want a collaborative culture, and a framework that forces isolation within my product into isles is not something I really want. I am an agilist, and thus a believer in not applying technical fixes to cultural problems.
+About the feature of restarting individual components, we already deal with it, since redundant servers (needed by HA) allow us to make said restarts without much detriment to end users, and our customers are OK with it. OSGi could make us more dynamic on this, yes, and more fine-grained, but we are “just fine” as is. I reckon many other software developers don’t have this luxury and could profit from OSGi, just not us.
+About managing the complexity of dependencies, our software is in the thousands of classes and 40 MB in libraries, yet for us, Java’s own classloader is still enough to deal with dependencies, and this -as I see it- is because the whole set of “what goes into the classpath” is under our control as the Software vendor with on-site support of the app in production, so we can just apply a tried-and-true-and-cheap way to keep a system that uses a lot of dependencies stable: stay with the versions of the libraries that are known to work, and not update any until we need a feature in the newer version that is worth the cost of spending time to evaluate that newer version and change our code to support it. This approach just works. We can stay a whole year with an old version of a library, yet the customer is happy, and it’s not hard to keep the versions of libraries synchronized between our dev servers and the customers test and production servers. I belive in this regard that OSGi is a great technology that would make much more sense as a core for an IT department that needs to integrate software that it subcontracts from various providers (such as small companies and/or freelancers), or by company with a really really huge project.
+OSGi could allow us to be more dynamic in handling dependencies, but for us, the co$t of the “issue of dependency management of third party libraries” gravitates more around analyzing, reading, testing, experimenting, and being sure the whole system will still work, which are labor-intensive areas in which OSGi does not provide significant savings. Testing frameworks and JUnit provide the value we need here. And regarding dependency management inside our own software, continuous integration and automated testing provides the kind of confidence we need in the “working solution”. I see some value on OSGi here but not enough for the price.
+So there are good things to be had with OSGi. It’s just that once you have invested in solutions for the issues OSGi solves, your existing solutions might be technologically inferior, but they appear as free. OSGi, on the other hand appears with an apparent price of a “steep learning curve”, stone age Java language (some OSGi advocates dare say “in very few cases are the features of java 5 useful”, no comments), and a need for an app-wide migration, which I fear I wont be able to sell to management, given how hard it is to sell them refactoring efforts (for quality and maintainability).
+If I was just comming to the business of software in 2010, OSGi would be my choice. But given what I currently already have, It’s a business proposal thats not that bad, but not good enough for me to bet company money and/or carreer prospect on it.
+please remember that I’m trying to criticize or denigrate from OSGi. I’m just trying to express why guys like me run away scared.
+
+2011-04-06 GUIs suck, CLIs rule
+This is dead on. Human beings invented symbolic language because it's simply more expressive than pointing and grunting. CLIs are superior to GUIs for the same reason.
+
+2011-05-13 It can be a partially bottom-up and partially top-down process
+
+2011-05-26 Also, a basic foundation of usability is that errors are not the user's fault; they are the system's (or designer's) fault for making it too easy to commit the error.
+
+2011-06-24
+My take: The Buyers Aren’t the Users
+The people who buy enterprise software aren’t the people who use enterprise software. That’s where the disconnect begins. And it pulls and pulls and pulls until the user experience is split from the buying experience so severely that the software vendors are building for the buyers, not the users. The experience takes a back seat to the feature list, future promises, and buzz words.
+This is one of the reasons we think enterprise is a dirty word. It’s also why it’s an absolute pleasure to design products for what we call the Fortune 5,000,000.
+The Fortune 5,000,000 are the the small businesses, the side-businessess, the freelancers. The people who buy our products are the people who use our products. If they don’t get value on both the financial side and the productivity side they don’t stick around.
+We have to make the money happy and the people happy. In our market they’re the same person. In the enterprise market they are often different people in different departments in different buildings who sit at different lunch tables.
+In the world of small business software the product — not the salesperson — does the talking. There’s no camouflaging value when the buyer is the user.
+
+2011-07-12   RPC is bad
+Abstract
+
+I personally think that all forms of RPC are way over-hyped, and not actually terribly useful in the majority of situations in which you'd be tempted to use them. I know this is an unusual point of view, and needs justification.
+
+Background
+
+As a broad outline, you can plot different forms of IPC on a graph with one axis being speed, and the other coupling or, it's inverse, portability. Speed and coupling, like space and time complexities in algorithms, can be related, but, IMHO, are largely orthogontal.
+
+How the axis of the graph are related to real-world protocols.
+
+For example, one naive form of IPC that I've seen commonly is for raw memory to be dumped onto a socket or a pipe. This is great for speed, but very bad for coupling (i.e. very non-portable). It might not even work for two different compilers on the same platform, and if you're trying to communicate between two different languages, each program needs to know intimate details about how the other lays things out in memory. Also, naively implemented, with little thought given to minimizing round-trip requests, it often isn't as fast as you'd think. (More on that later).
+
+At the opposite corner in the graph are protocols like SMTP, or even worse, XML over HTTP. SMTP communicates using text messages that have to be parsed. SMTP parsing is pretty simple, although, looking at sendmail, it can get pretty hairy. XML parsing is even more complex. These parsing steps slow things way down. On the other hand, the well defined nature and robust structure of these protocols makes them extremely portable (i.e. low coupling).
+
+So, where does RPC fit into all of this?
+
+In my opinion, CORBA, and other RPC solutions are medium to highly coupled, and medium to low speed. Not as bad on speed as, perhaps, XML, but not all that great either.
+
+Justification
+
+Medium to high coupling
+
+Well, if you think about it, all forms of RPC, including CORBA, require a fairly explicit detailing of the messages to be sent back and forth. You have to specify your function signature pretty exactly, and the other side has to agree with you. Also, the way RPC encourages you to design protocols tends to create protocols in which the messages have a pretty specific meaning. In contrast, the messages in the SMTP or XML protocol have a pretty general meaning, and it's up to the program to interpret what they mean for it. This bumps RPC protocols up on the coupling scale a fair amount, despite the claims of the theorists and marketers.
+
+OTOH, the messages are platform and language independent. It's relatively easy to find a binding for any given language. Usually the code to decode the message from a bytestream and call your function is generated for you. And, the bytestream will be the same if you get your message from a perl program or a C++ program. This bumps it down on the coupling scale from the memory dumping protocols.
+
+Medium to low speed
+
+Marshalling
+
+This one is minor in that almost any protocol that is supposed to be language and platform independent is going to have it. The problem is marshalling. You have to get your data from the format your language keeps it in into your wire format and back again. While this problem is not as computationally intensive as parsing, it still exists.
+
+Overly synchronous
+
+The other is major. The one thing you always want to avoid in any networking protocol is round trip requests. Round trip requests will always be inherently slow, if for no other reason than the speed of light. You never want to wait for your message to be processed, and a reply sent before you send another message. The X protocol works largely because it avoids round-trip requests like the plague. There is a noticeable lag when an X program starts up because the majority of the unavoidable round trip requests (for things like font information and a bunch of window ids and stuff) are made then. Even when the programs are on the same computer, round trip requests force context switches which eat CPU time. In short, they are BAD.
+
+Any RPC oriented protocol encourages you to think of the messages you are sending as function calls. In every widely used programming language, functions calls are synchronous. Your program 'waits' for the result of a function call before continuing. This encourages thinking about your RPC interface in entirely the wrong way. It doesn't make you focus on the messages you're sending, and the inherently asynchronous nature of such things. It makes you focus on the interface as you would a normal class interface, or a subsystem interface. This leads to lots of round-trip requests, which is a major problem.
+
+CORBA generally advocates soloving this problem by making heavy use of threading. But multiple threads have a lot of problems. They just move the descisions about handling asynchronous behavior to the most difficult part of your program to deal with it in, your internal data structures. Not only that, but multiple threads are a big robustness problem. It's difficult to deal with the failure of a single thread of a multi-threaded program in an intelligent way, especially if the job of that thread is intimately intertwined with what another thread is doing.
+
+Also, threads end up taking up a lot of resources. Both obvious ones like context switches and space for processor contexts, and in less obvious ones, like stack space. One program I saw had a thread for every communcations stream, and it needed to deal with over 300 streams at a time. It also needed a stack of 1M for each thread because some function calls ended up being deeply nested. That's at least 300M just for stack space. The program may have had no difficulty dealing with 300 communications streams at once had it not used threads. As it was, it constantly ran out of memory.
+
+Conclusions
+
+In short, CORBA, and other RPC solutions look like a quick and easy answer to a difficult problem, but, measured on the coupling and speed scales, they are medium to highly coupled, and medium to low speed. Not as bad on speed as, perhaps, XML, but not all that great either.
+
+Grand dreams of utopia
+
+I would like to see (and am in the process of creating) a very message oriented tool for building communications protocols. It would concentrate heavily on what data the messages contained, not what the expected behavior of a program receiving the message should be. It would be supported by a communcations subsystem that emphasized the inherently asynchronous nature of IPC, and made it easier to build systems that used that to provide efficient communcations. It would provide auto-generated marshalling and unmarshalling of data, and even a provision for fetching metadata describing unkown messages, much like XML. It would also allow you to easily override the generated functions with your own functions that are tuned to the data you're sending. It would also make it easy to build and layer new protocols on top of existing ones, or transparently extend protocols in such a way that old programs would still work.
+
+As a last note, I would like to say that we've known for years how to handle the inherently asynchronous nature of user interaction. All of our UI libraries are heavily event oriented. Processing is either split up into small discreet chunks that can be handled quickly inside an event handler, or split off into a seperate thread that communicates to the main program mainly through events. We need the same kind of architecture for programs that do IPC.
+
+If anybody is interested in the beginnings of such a system, I have an open source project that I think is still in the 'cathedral' stage. I would like help and input on its development though, and I need help making it easy to port and compile in random environments. If you would like to help, please e-mail me. I call the system the StreamModule system, and it's architecturally related to the idea of UNIX pipes, and the System V STREAMS drivers.

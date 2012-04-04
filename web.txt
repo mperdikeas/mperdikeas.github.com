@@ -1,0 +1,6 @@
+2012-03-09    in Apache Tomcat the binding between URI and Java Servlet is
+                done in the application-specific folder WEB-INF (not globally
+                for the whole of the Tomcat installation). Also, for Catalina
+                to run correctly both the CATALINA_HOME environment variable
+                needs to be set, and the JAVA_HOME. NB: the JAVA_HOME
+                environment variable needs to point to a JDK, not a JRE.

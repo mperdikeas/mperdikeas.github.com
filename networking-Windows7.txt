@@ -1,0 +1,28 @@
+
+****************************************************************
+source: http://blog-rat.blogspot.com/2011/06/forcing-windows-7-to-use-wired-when.html
+You can type the following command at the command prompt for the detail of your network adapter settings [see example]:
+
+netsh int ip show config
+
+Or type the following for the settings of the route table. In this command, the metric column is only for gateway metric. [see example]
+
+route print
+
+To change gateway metric, there are two options. First is to use route change command at the command prompt. For example, 
+
+route change 0.0.0.0 mask 0.0.0.0 192.168.1.1 metric 20 if 13 
+
+where
+
+0.0.0.0 is the target network destination (IP address) found in route table.
+
+mask 0.0.0.0 is the subnet mask associated with the target network destination.
+
+192.168.1.1 is the IP address of the gateway, my router.
+
+metric 20 is setting gateway metric to 20. The network interface with a lower metric takes precedence. In this example, I am assigning 20 to my wired network card, which receives the lowest gateway metric. It enforces Windows 7 to use the wired whenever it is available. Also see KB299540.
+
+if 13 means to apply the changes only to the network interface index equivalent to 13. In this example, 13 is my Intel(R) 82577LM Gigabit Network Connection that can be found in the Interface List section of route print.
+There is no need to log out or reboot. The changes should take effect immediately.
+****************************************************************

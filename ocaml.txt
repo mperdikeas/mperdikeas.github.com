@@ -1,0 +1,23 @@
+****************************************************************
+First, OCaml modules other than the standard library (see Chapter 20
+of the manual) are not loaded in the toplevel. You have to do that
+yourself, either on the command line, or using the #load directive
+interactively.
+
+Second, you want the "nums" library, which includes the Num and
+Big_int modules (see Chapter 22 of the manual).
+
+So you could do either
+    $ ocaml nums.cmxa
+	    Objective Caml version 3.09.1
+
+    # Big_int.unit_big_int;;
+    - : Big_int.big_int = <abstr>
+or:
+    $ ocaml
+	    Objective Caml version 3.09.1
+
+    # #load "nums.cma";;
+    # Big_int.unit_big_int;;
+    - : Big_int.big_int = <abstr>
+****************************************************************
