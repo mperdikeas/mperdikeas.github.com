@@ -134,4 +134,12 @@ One can use the SOCKS protocol. The idea would be to open an SSH tunnel to a rem
 Standard emacs shortcuts such as C-l, C-p and C-r come very handy in bash. C-l clears the screen whereas C-r allows
 easy repetition of previous commands (much better than history or C-p)
 </li>
+<p>
+<li><b><u>how to time a job in bash and redirect all output (incl. error) to /dev/null</b></u><p>
+<pre>
+date ; time find / > /dev/null 2>&1; date
+</pre>
+</li>
+
+
 </ol>
