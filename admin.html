@@ -1,0 +1,21 @@
+<dl>
+<dt><b>starting scripts upon bootup</b></dt>
+<dd>
+There are two ways:
+<p>
+<b>1<sup>st</sup> way. </b> Either:  (a) using /etc/rc.local for things that are supposed to simply be run at startup, and (b) the init.d scripts - and their symlinks under runlevels /etc/rc{3,5}.d - for everything else.
+<p>
+<b>2<sup>nd</sup> way. </b> 
+There's also something without the complexity of startup scripts, which is much easier to use when you want to start/stop your process as if it is a daemon: "supervisor" ( http://supervisord.org/ ):
+<p>
+<pre>
+  [program:yourapp]
+  command=/path/to/app --option1 ... 
+  user=yourapp
+  directory=/apps/yourapp
+</pre>
+<p>
+You add the file to /etc/supervisor/conf.d/, make a "supervisorctl update" and your service is up an running. It's a no-brainer and much easier than juggling rc.d scripts. Crash recovery and optional web interface included.
+
+</dd>
+</dl>
