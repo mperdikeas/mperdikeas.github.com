@@ -1,3 +1,16 @@
+<html>
+<body>
+<ol>
+<li><b><u>how to get the hash of the current commit</u></b> (and just that)</li>
+<p>
+<pre>
+git rev-parse --verify HEAD
+</pre>
+<p> - or simply -
+<pre>
+git rev-parse HEAD
+</pre>
+</ol>
 how to restore a specific file to the branch's image
 
 git checkout -f visualization "13 - COAST Caches/ccaches_protocol_types/src/org/coast/caches/network/types/CacheGetRequest.java"
@@ -55,3 +68,5 @@ Lastly, if you need to find a commit that you "deleted", it is typically present
 
 comment:        
 HEAD~1 or just HEAD^. If you pushed, you should use git revert instead
+</body>
+</html>
