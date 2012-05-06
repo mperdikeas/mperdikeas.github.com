@@ -1,6 +1,5 @@
-<dl>
-<dt><b>starting scripts upon bootup</b></dt>
-<dd>
+<ol>
+<li> <b><u>starting scripts upon bootup</u></b><p>
 There are two ways:
 <p>
 <b>1<sup>st</sup> way. </b> Either:  (a) using /etc/rc.local for things that are supposed to simply be run at startup, and (b) the init.d scripts - and their symlinks under runlevels /etc/rc{3,5}.d - for everything else.
@@ -16,6 +15,44 @@ There's also something without the complexity of startup scripts, which is much 
 </pre>
 <p>
 You add the file to /etc/supervisor/conf.d/, make a "supervisorctl update" and your service is up an running. It's a no-brainer and much easier than juggling rc.d scripts. Crash recovery and optional web interface included.
+</li>
 
-</dd>
-</dl>
+<li><b><u>how to find if Apache is running</u></b><p>
+<pre>
+ps ax | grep httpd | grep -v grep
+</pre>
+</li>
+
+<li><b><u>how to cleanly re-install Apache (Debian)</u></b><p>
+<pre>
+sudo apt-get remove --purge apache2 apache2-utils
+sudo apt-get install apache2
+</pre>
+</li>
+
+<li><b><u>how to find installed packages (Debian)</u></b><p>
+<pre> dpkg --get-selections</pre>
+</li>
+
+<li><b><u>how to find the loci of installed packages (Debian></u></b><p>
+<pre>dpkg -L httpd</pre><p>
+(-L lists all files installed to your system from that package name)
+</li>
+
+<li><b><u>how to find directories in current dir </u></b><p>
+<pre>ls | grep ^d</pre>
+</li>
+
+<li><b><u>find the 10 largest files or directories in a hierarchy</u></b><p>
+<pre>find . -type f -print0 | xargs -0 du -sb | sort -n | tail -10 | cut -f2 | xargs -I{} du -sh {}</pre>
+<p>(for directories just use '-type d' instead of '-type f')
+</li>
+
+<li><b><u>find the largest directories in a hierarchy</u></b><p>
+<pre>du * | sort -n</pre>or..<p>
+<pre>du --max-depth=1 * | sort -n </pre>.. or .. <p>
+<pre>du --max-depth=1 | sort -n</pre> ('*' is really redundant)<p>
+</li>
+
+
+</ol>
