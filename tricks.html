@@ -1,6 +1,12 @@
 <html>
 <body>
 <ol>
+<li><b><u>How to count the number of lines with exactly five spaces</u></b><p>
+five spaces means 6 fields in AWK, so (for file <i>3.ply</i>):
+<pre>
+awk 'NF==6;{}' 3.ply | wc -l
+</pre>
+</li>
 <li> <b><u>How to create files of arbitrary size</u></b><p>
 <pre>
 mperdikeas@mperdikeas ~
