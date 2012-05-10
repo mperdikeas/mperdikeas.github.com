@@ -1,6 +1,12 @@
 <html>
 <body>
 <ol>
+<li><b><u>Search for a class in a set of jar files</u></b><p>
+To search all jars in the current folder and below for class named a.b.c.D do a:
+<pre>
+find . -iname *.jar | while read JARF; do jar tvf $JARF | grep a/b/c/D.class && echo $JARF ; done
+</pre>
+</li>
 <li><b><u>How to count the number of lines with exactly five spaces</u></b><p>
 five spaces means 6 fields in AWK, so (for file <i>3.ply</i>):
 <pre>
