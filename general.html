@@ -1,6 +1,16 @@
 <html>
 <body>
 <ol>
+<li><b><u>change hostname in Ubuntu</u></b><p>
+simply edit /etc/hostname and /etc/hosts (for 127.0.0.1). To flush the previous hostname
+from various applications a reboot may be required.
+</li>
+<li><b><u>setting HTTP proxy in Ubuntu</u></b></p>
+<pre>
+export http_proxy="http://foo.bar:8080"
+</pre>
+subsequent wget requests will redirect to foo.bar:8080
+</li>
 <li> <b><u>package managers</u></b><p>
 apt-get is used in Debian, Ubuntu and rpm in Fedora, Redhat, Suse. apt-get is better.
 <li><b><u>curl</u></b><p>
