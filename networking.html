@@ -1,0 +1,18 @@
+<html>
+<body>
+<ol>
+<li><b><u>How to take a Linux box off the network</u></b></li>
+<p>
+log-in to a console and do:<p>
+<pre>
+sudo ifconfig </pre><p>(to find the link you wish to bring down, usually "eth0")<p><pre>
+sudo ifconfig eth0 down
+</pre>
+do work that has to be executed offline, and then:
+<p><pre>
+sudo ifconfig eth0 up
+</pre>
+</li>
+</ol>
+</body>
+</html>
