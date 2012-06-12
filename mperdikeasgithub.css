@@ -1,0 +1,6 @@
+body > ol > li {
+    color:teal;
+    font-weight:bold;
+    text-decoration:underline;
+    padding-top: 30px
+}

@@ -1,37 +1,43 @@
 <html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+</head>
 <body>
 <ol>
-<li><b><u>change hostname in Ubuntu</u></b><p>
+<li>change hostname in Ubuntu</li>
 simply edit /etc/hostname and /etc/hosts (for 127.0.0.1). To flush the previous hostname
 from various applications a reboot may be required.
-</li>
-<li><b><u>setting HTTP proxy in Ubuntu</u></b></p>
+
+<li>setting HTTP proxy in Ubuntu</li>
 <pre>
 export http_proxy="http://foo.bar:8080"
 </pre>
 subsequent wget requests will redirect to foo.bar:8080
-</li>
-<li> <b><u>package managers</u></b><p>
+<li>package managers</li>
 apt-get is used in Debian, Ubuntu and rpm in Fedora, Redhat, Suse. apt-get is better.
-<li><b><u>curl</u></b><p>
+<li>curl</li>
 curl is a Linux utility that can be used to simulate HTTP GET and HTTP POST requests.
 A simple:<pre>#curl www.in.gr</pre> ...will execute an HTTP GET against www.in.gr.
-<li><b><u>SSE time</u></b><p>
+<li>SSE time</li>
 get time in SSE:<pre>date +%s</pre>
-<li>2012-02-06: Linux print system information (including kernel 32 or 64 bits): uname -a
-2012-02-06: Find if CPU is 32 or 64 bits: grep flacs /proc/cpuinfo ("lm" means long mode CPU - 64 bit CPU)
-2012-02-06: find installed packages:
-                apt-cache search <search-string> - or -
-                dpkg --get-selections | grep <search-string>
-2012-02-06: install packages:
-                apt-get install <package-name>
-2012-02-06: how to find a file named "compile_decoder.sh" in a set of bz2 files:
-     for f in `ls *.bz2` ; do tar -jtvf  $f ; done | grep compile_decoder.sh
-
+<li>Linux print system information</li>
+including kernel 32 or 64 bit:<pre>uname -a</pre>
+<li>Find if CPU is 32 or 64 bits</li>
+<pre>grep flacs /proc/cpuinfo</pre></br> ("lm" means long mode CPU - 64 bit CPU)
+<li>find installed packages</li>
+<pre>
+apt-cache search <search-string> - or -
+dpkg --get-selections | grep <search-string>
+</pre>
+<li>install packages</li>
+<pre>apt-get install <package-name></pre>
+<li>how to find a file named "compile_decoder.sh" in a set of bz2 files</li>
+<pre>for f in `ls *.bz2` ; do tar -jtvf  $f ; done | grep compile_decoder.sh</pre>
+</br>
 ... Actually, the following also works and produces identical output:
-    for f in `ls *.bz2` ; do tar -jtvf $f | grep compile_decoder.sh ; done
-2012-02-09: to find out the release:
-                $ lsb_release -a
+<pre>for f in `ls *.bz2` ; do tar -jtvf $f | grep compile_decoder.sh ; done</pre>
+<li>to find out the release</li>
+<pre>$ lsb_release -a</pre>
 2012-02-13: how to start xserver in Cygwin : 
                 startxwin
             ... and then to redirect X output from the new shell:
