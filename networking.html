@@ -4,6 +4,13 @@
 </head>
 <body>
 <ol>
+<li>How to mount a smbfs file system with read/write permissions</li>
+First, create the mount-point (/media/athina-prj) in the below example.</br>
+Then, obtain your userid and groupid (using <i>id</i>) and then do a:
+<pre>
+sudo mount -t smbfs -o username=SEMANTIX\\mperdikeas,password=mperdikeas,dir_mode=0777,file_mode=0777,uid=mperdikeas,gid=mperdikeas //192.168.0.2/prj /media/athina-prj
+</pre>
+
 <li>How to take a Linux box off the network</li>
 <p>
 log-in to a console and do:<p>
@@ -15,7 +22,6 @@ do work that has to be executed offline, and then:
 <p><pre>
 sudo ifconfig eth0 up
 </pre>
-</li>
 </ol>
 </body>
 </html>
