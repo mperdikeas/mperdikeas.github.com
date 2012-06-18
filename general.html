@@ -4,6 +4,16 @@
 </head>
 <body>
 <ol>
+<li>find the package a binary belongs to in Debian distros</li>
+<p>E.g. find the package for <i>sensors</i>:
+<pre>
+dpkg -S $(which sensors)
+</pre>
+<li>monitor chipset and CPU sensors in Ubuntu</li>
+Use <b>sensors</b> from package <i>lm-sensors</i> as in:
+<pre>
+watch sensors
+</pre>
 <li>change hostname in Ubuntu</li>
 simply edit /etc/hostname and /etc/hosts (for 127.0.0.1). To flush the previous hostname
 from various applications a reboot may be required.
@@ -14,7 +24,8 @@ export http_proxy="http://foo.bar:8080"
 </pre>
 subsequent wget requests will redirect to foo.bar:8080
 <li>package managers</li>
-apt-get is used in Debian, Ubuntu and rpm in Fedora, Redhat, Suse. apt-get is better.
+apt is used in Debian, Ubuntu and rpm in Fedora, Redhat, Suse. apt is better.<p>
+Typical <b>apt</b> commands: apt-get install, apt-cache search, apt-get autoremove, apt-get update.
 <li>curl</li>
 curl is a Linux utility that can be used to simulate HTTP GET and HTTP POST requests.
 A simple:<pre>#curl www.in.gr</pre> ...will execute an HTTP GET against www.in.gr.
