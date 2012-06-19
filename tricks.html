@@ -4,6 +4,12 @@
 </head>
 <body>
 <ol>
+<li>Return just the names of the jar files in a <u>find</u></li>
+The <u>cut</u> utility cannot be used to return only the last field, but
+<u>awk</u> can do the trick:
+<pre>
+find jboss-as-7.1.1.Final/ -iname *.jar | awk -F/ '{print $NF}'
+</pre>
 <li>Search for a class in a set of jar files</li>
 To search all jars in the current folder and below for class named a.b.c.D do a:
 <pre>
