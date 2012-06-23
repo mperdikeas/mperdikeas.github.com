@@ -1,0 +1,21 @@
+<html>
+<body>
+
+The XA-datasource configuration is not so immediate (for me it wasn't  ).
+So please consider this datasource in case you use postgres.
+<textarea rows="16" cols="90" name="xml" readonly>
+<xa-datasource>
+    <jndi-name>open18JbpmDatasource</jndi-name>
+    <use-java-context>false</use-java-context>
+    <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
+    <xa-datasource-property name="ServerName">localhost</xa-datasource-property>
+    <xa-datasource-property name="PortNumber">5432</xa-datasource-property>
+    <xa-datasource-property name="DatabaseName">jbpmOpen18</xa-datasource-property>
+    <xa-datasource-property name="User">jbpm</xa-datasource-property>
+    <xa-datasource-property name="Password">jbpm</xa-datasource-property>
+    <track-connection-by-tx />
+</xa-datasource>
+</textarea>
+
+</body>
+</html>

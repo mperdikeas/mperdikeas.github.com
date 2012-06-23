@@ -22,13 +22,14 @@ Create the directory modules/org/postgresql/main and place postgresql-9.1-901-1.
    </dependencies>
 </module>
  
-</textarea>
+</textarea><p>
 Activate it as "postgresql-driver" with
 <pre> 
     jboss-cli.sh --connect command="/subsystem=datasources/jdbc-driver=postgresql-driver:add(driver-name=postgresql-driver, driver-class-name=org.postgresql.Driver, driver-module-name=org.postgresql"
 </pre>
  
 You may nown use this driver in -ds.xml files by specifying it as "postgresql-driver", eg:
+<p>
 <textarea rows="16" cols="90" name="xml" readonly>
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
@@ -44,7 +45,7 @@ You may nown use this driver in -ds.xml files by specifying it as "postgresql-dr
 </datasources>
 </textarea>
  
- 
+<p> 
 Unlike explicitly naming the jdbc jar in a data-source create command, you can now update PgJDBC without changing all your datasources.
  
 You can put the -ds.xml file in your WEB-INF/ (for war archives) or META-INF (for jar archives) to have it defined as part of the deployment automatically by the server, or you can deploy it via jboss-cli or the deployments/ folder to define it separately from your app. It serves the same function as running a jboss-cli "data-source add" command, but can also be bundled in-archive and is easier to version.
