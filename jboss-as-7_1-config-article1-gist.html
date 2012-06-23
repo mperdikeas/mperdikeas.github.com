@@ -7,7 +7,7 @@ After downloading postgressql driver jar file. just move the postgressql driver 
 Note that you may instead deploy the PostgreSQL JDBC driver as a module. That's the only way you'll be able to use a -ds.xml file to define a datasource, as far as I can tell anyway.
  
 Create the directory modules/org/postgresql/main and place postgresql-9.1-901-1.jdbc4.jar within it. Now create a module.xml file in the same place, with the content:
-<textarea rows="30" cols="90" name="xml" readonly>
+<textarea rows="16" cols="90" name="xml" readonly>
  
 <module xmlns="urn:jboss:module:1.1" name="org.postgresql">
    <!-- Load with jboss-cli command:
@@ -28,8 +28,8 @@ Activate it as "postgresql-driver" with
     jboss-cli.sh --connect command="/subsystem=datasources/jdbc-driver=postgresql-driver:add(driver-name=postgresql-driver, driver-class-name=org.postgresql.Driver, driver-module-name=org.postgresql"
 </pre>
  
-You may now use this driver in -ds.xml files by specifying it as "postgresql-driver", eg:
-<pre>
+You may nown use this driver in -ds.xml files by specifying it as "postgresql-driver", eg:
+<textarea rows="16" cols="90" name="xml" readonly>
 <?xml version="1.0" encoding="UTF-8"?>
 <datasources>
   <datasource jndi-name="java:/datasources/some-ds" enabled="true" use-java-context="true" 
@@ -42,7 +42,7 @@ You may now use this driver in -ds.xml files by specifying it as "postgresql-dri
     </security>
   </datasource>
 </datasources>
-</pre> 
+</textarea>
  
  
 Unlike explicitly naming the jdbc jar in a data-source create command, you can now update PgJDBC without changing all your datasources.
