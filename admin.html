@@ -2,6 +2,11 @@
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
 </head>
 <ol>
+<li>cleanly remove an application</li>
+apt-get remove --purge appname
+apt-get autoremove [appname]
+apt-get clean
+apt-get autoclean
 <li>install DEB packages</li>
 sudo dpkg -i package.deb
 <li>starting scripts upon bootup</li>
