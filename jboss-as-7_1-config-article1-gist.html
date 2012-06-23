@@ -1,0 +1,56 @@
+<html>
+<body>
+After downloading postgressql driver jar file. just move the postgressql driver jar file into Jboss 7 installation directory under setandalone/deployments (jboss-as-web-7.0.0.Final/standalone/deployments).
+<p>
+...
+<p>
+Note that you may instead deploy the PostgreSQL JDBC driver as a module. That's the only way you'll be able to use a -ds.xml file to define a datasource, as far as I can tell anyway.
+ 
+Create the directory modules/org/postgresql/main and place postgresql-9.1-901-1.jdbc4.jar within it. Now create a module.xml file in the same place, with the content:
+<pre>
+ 
+<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
+   <!-- Load with jboss-cli command:
+        /subsystem=datasources/jdbc-driver=postgresql-driver:add(driver-name=postgresql-driver, driver-class-name=org.postgresql.Driver, driver-module-name=org.postgresql)
+   -->
+   <resources>
+     <resource-root path="postgresql-9.1-901-1.jdbc4.jar"/>
+   </resources>
+   <dependencies>
+     <module name="javax.api"/>
+     <module name="javax.transaction.api"/>
+   </dependencies>
+</module>
+ 
+</pre>
+Activate it as "postgresql-driver" with
+<pre> 
+    jboss-cli.sh --connect command="/subsystem=datasources/jdbc-driver=postgresql-driver:add(driver-name=postgresql-driver, driver-class-name=org.postgresql.Driver, driver-module-name=org.postgresql"
+</pre>
+ 
+You may now use this driver in -ds.xml files by specifying it as "postgresql-driver", eg:
+<pre>
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+  <datasource jndi-name="java:/datasources/some-ds" enabled="true" use-java-context="true" 
+        pool-name="some-ds-pool">
+    <connection-url>jdbc:postgresql:somedb</connection-url>
+    <driver>postgresql-driver</driver>
+    <security>
+      <user-name>user</user-name>
+      <password>pass</password>
+    </security>
+  </datasource>
+</datasources>
+</pre> 
+ 
+ 
+Unlike explicitly naming the jdbc jar in a data-source create command, you can now update PgJDBC without changing all your datasources.
+ 
+You can put the -ds.xml file in your WEB-INF/ (for war archives) or META-INF (for jar archives) to have it defined as part of the deployment automatically by the server, or you can deploy it via jboss-cli or the deployments/ folder to define it separately from your app. It serves the same function as running a jboss-cli "data-source add" command, but can also be bundled in-archive and is easier to version.
+<p>
+...
+<p>
+
+</body>
+</html>
