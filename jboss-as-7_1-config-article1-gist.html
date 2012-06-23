@@ -7,7 +7,7 @@ After downloading postgressql driver jar file. just move the postgressql driver 
 Note that you may instead deploy the PostgreSQL JDBC driver as a module. That's the only way you'll be able to use a -ds.xml file to define a datasource, as far as I can tell anyway.
  
 Create the directory modules/org/postgresql/main and place postgresql-9.1-901-1.jdbc4.jar within it. Now create a module.xml file in the same place, with the content:
-<pre>
+<textarea rows="30" cols="90" name="xml" readonly>
  
 <module xmlns="urn:jboss:module:1.1" name="org.postgresql">
    <!-- Load with jboss-cli command:
@@ -22,7 +22,7 @@ Create the directory modules/org/postgresql/main and place postgresql-9.1-901-1.
    </dependencies>
 </module>
  
-</pre>
+</textarea>
 Activate it as "postgresql-driver" with
 <pre> 
     jboss-cli.sh --connect command="/subsystem=datasources/jdbc-driver=postgresql-driver:add(driver-name=postgresql-driver, driver-class-name=org.postgresql.Driver, driver-module-name=org.postgresql"
