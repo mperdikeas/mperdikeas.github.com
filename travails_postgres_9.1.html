@@ -28,6 +28,11 @@
 
         To create the database, after I created a user "hr", I did a:
 <pre>psql -U hr createdb myhr</pre>
+
+Afterwards, one can create a new database (say "masterdet") by connecting
+as user "hr" without having to use the option suggested in the article (masquareding as user "postgres" by running the "createdb" command under a "sudo -u postgres". What I basically did to create a new database was:
+<pre>createdb -U hr -O hr masterdet</pre>
+
         Finally, instead of the:
         <pre>sudo apt-get install postgresql-9.1</pre>
         line, a simpler:
