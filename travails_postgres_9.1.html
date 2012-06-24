@@ -25,6 +25,9 @@
         (apparently these users can authenticate with the "peer" mechanism). But if you chose any other
         name then you indeed have to edit /etc/postgresql/9.1/main/pg_hba.conf file to change the
         "local all all peer" line to "local all all md5". <p>
+
+        To create the database, after I created a user "hr", I did a:
+<pre>psql -U hr createdb myhr</pre>
         Finally, instead of the:
         <pre>sudo apt-get install postgresql-9.1</pre>
         line, a simpler:
