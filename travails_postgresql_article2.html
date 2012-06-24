@@ -1,0 +1,43 @@
+<html
+<body>
+PostgreSQL is an object-relational database system that has the features of traditional commercial database systems with enhancements to be found in next-generation DBMS systems.
+<p>
+<b>Installation</b>
+To install PostgreSQL, run the following command in the command prompt:
+
+<pre>sudo apt-get install postgresql</pre>
+Once the installation is complete, you should configure the PostgreSQL server based on your needs, although the default configuration is viable.<p>
+
+<b>Configuration</b><p>
+By default, connection via TCP/IP is disabled. PostgreSQL supports multiple client authentication methods. By default, IDENT authentication method is used for postgres and local users. Please refer the PostgreSQL Administrator's Guide.<p>
+
+The following discussion assumes that you wish to enable TCP/IP connections and use the MD5 method for client authentication. PostgreSQL configuration files are stored in the /etc/postgresql/<version>/main directory. For example, if you install PostgreSQL 8.4, the configuration files are stored in the /etc/postgresql/8.4/main directory.<p>
+
+    
+To configure ident authentication, add entries to the /etc/postgresql/8.4/main/pg_ident.conf file.<p>
+
+To enable TCP/IP connections, edit the file /etc/postgresql/8.4/main/postgresql.conf<p>
+
+Locate the line #listen_addresses = 'localhost' and change it to:<p>
+
+listen_addresses = 'localhost'<p>
+    
+To allow other computers to connect to your PostgreSQL server replace 'localhost' with the IP Address of your server.<p>
+
+You may also edit all other parameters, if you know what you are doing! For details, refer to the configuration file or to the PostgreSQL documentation.<p>
+
+Now that we can connect to our PostgreSQL server, the next step is to set a password for the postgres user. Run the following command at a terminal prompt to connect to the default PostgreSQL template database:<p>
+
+<pre>sudo -u postgres psql template1</pre><p>
+The above command connects to PostgreSQL database template1 as user postgres. Once you connect to the PostgreSQL server, you will be at a SQL prompt. You can run the following SQL command at the psql prompt to configure the password for the user postgres.<p>
+
+<pre>ALTER USER postgres with encrypted password 'your_password';</pre><p>
+After configuring the password, edit the file /etc/postgresql/8.4/main/pg_hba.conf to use MD5 authentication with the postgres user:<p>
+
+<pre>local   all         postgres                          md5</pre>
+<p>
+Finally, you should restart the PostgreSQL service to initialize the new configuration. From a terminal prompt enter the following to restart PostgreSQL:<p>
+
+<pre>sudo /etc/init.d/postgresql-8.4 restart</pre>
+</body>
+</html>

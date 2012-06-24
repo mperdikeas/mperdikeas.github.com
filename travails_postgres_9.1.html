@@ -1,0 +1,35 @@
+<html>
+    <body>
+        The following articles were useful:
+        <ol>
+            <li>
+               <a href="http://blog.deliciousrobots.com/2011/12/13/get-postgres-working-on-ubuntu-or-linux-mint/" >get Postgres working on Linux</a>&nbsp
+
+               <a href="travails_postgresql_article1.html">copy on VII.2012</a>
+            </li>
+            <li>
+               <a href="https://help.ubuntu.com/10.04/serverguide/postgresql.html" >PostgreSQL installation</a>&nbsp
+
+               <a href="travails_postgresql_article2.html">copy on VII.2012</a>
+            </li>
+        </ol>                         
+        Basically, you just have to follow the instructions on the first article and you're done.
+        The second article is just for additional reference (I didn't have to use any of the commands found there).
+        The only difference are that I used the "-d" switch at the "createuser" command (instead of the
+        "-D" switch), as I wanted my new user to be able to create databases. Also the instructions
+        mention that the user you create with:
+        <pre>
+            sudo -u postgre createdb -D -P someuser
+        </pre>
+        can't connect to the database, which is misleading if the user happens to be a local Linux user
+        (apparently these users can authenticate with the "peer" mechanism). But if you chose any other
+        name then you indeed have to edit /etc/postgresql/9.1/main/pg_hba.conf file to change the
+        "local all all peer" line to "local all all md5". <p>
+        Finally, instead of the:
+        <pre>sudo apt-get install postgresql-9.1</pre>
+        line, a simpler:
+        <pre>sudo apt-get install postgresql</pre>
+        will do (gets the latest).
+    </body>
+</html>
+

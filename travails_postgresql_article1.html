@@ -1,0 +1,57 @@
+<html>
+<body>
+GET POSTGRES WORKING ON UBUNTU OR LINUX MINT<p>
+Posted by postfuturist on 2011-12-13 23:57:38<p>
+Warning: this post may contain profanity. I'm a programmer, I don't like dealing with sysadmin type things.<p>
+
+I love PostgreSQL, the baddest-ass relational database on the planet. For real.<p>
+
+Ugh, but it's super confusing to set up if you are used to just setting up MySQL users with passwords and then connecting to the database with said username and password you set up. Postgres has some odd defaults that make this less than straight forward.<p>
+
+Install PostgreSQL server on your machine:<p>
+
+<pre>
+sudo apt-get install postgresql-9.1
+</pre>
+<p>
+Create a database user, enter "somepass" or whatever you want for the password when it asks (answer no the create roles question):
+<pre>
+sudo -u postgres createuser -D -P someuser
+</pre>
+Create a database owned by that database user you just created:
+
+<pre>sudo -u postgres createdb -O someuser somedb</pre>
+For "fun" let's try to connect to the database with the "psql" interactive postgres shell:
+
+<pre>psql -d somedb -U someuser -W</pre>
+And the payoff:
+<pre>
+Password for user someuser: 
+psql: FATAL:  Peer authentication failed for user "someuser"
+</pre>
+Oops. Your password didn't work, asshole.
+<p>
+Instead, you need to open up this file /etc/postgresql/9.1/main/pg_hba.conf in a text editor (with root privileges, of course) and change this line:
+<pre>
+<b> local   all             all                                     peer</b>
+<p>to this:<p>
+
+<b>local   all             all                                     md5</b>
+<p>
+Now, restart the postgres server:
+
+<pre>sudo service postgresql restart</pre>
+Now you can connect:
+
+<pre>psql -d somedb -U someuser -W</pre>
+And this is what you get:
+<pre>
+Password for user someuser: 
+psql (9.1.1)
+Type "help" for help.
+
+somedb=>
+</pre>
+You're welcome.
+</body>
+</html>
