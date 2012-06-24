@@ -7,9 +7,24 @@
 <a href="http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html">original article</a><p>
 It's a two step process:
 <ol type="i">
-<li>blah blah</li>
-<li>blah blah</li>
+<li>enable client authentication</li>
+Edit file /var/lib/postgresql/9.1/main/pg_hba.conf
+and append the following configuration line to give access to the 192.168.2.0/24
+network:
+<pre>
+host    all             all             192.168.2.0/24          md5
+</pre>
+<li>set the deamon to listen to the network interface</li>
+Edit file /etc/postgresql/9.1/main/postgresql.conf and add the line:
+<pre>
+listen_addresses = '*'
+</pre>
+... to listen to all the network interfaces.
 </ol>
+After the above steps do a:
+<pre>
+sudo /etc/init.d/postgresql restart
+</pre>
 <li>Find Postgresql version</li>
 Connect as an existing user to an existing database and run the "select version()" query, or from the command line:
 <pre>
