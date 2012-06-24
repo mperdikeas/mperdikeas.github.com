@@ -19,7 +19,7 @@
         "-D" switch), as I wanted my new user to be able to create databases. Also the instructions
         mention that the user you create with:
         <pre>
-            sudo -u postgre createdb -D -P someuser
+            sudo -u postgre createuser -D -P someuser
         </pre>
         can't connect to the database, which is misleading if the user happens to be a local Linux user
         (apparently these users can authenticate with the "peer" mechanism). But if you chose any other
