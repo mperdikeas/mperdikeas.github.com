@@ -3,10 +3,12 @@
 </head>
 <ol>
 <li>cleanly remove an application</li>
+<pre>
 apt-get remove --purge appname
 apt-get autoremove [appname]
 apt-get clean
 apt-get autoclean
+</pre>
 <li>install DEB packages</li>
 sudo dpkg -i package.deb
 <li>starting scripts upon bootup</li>
