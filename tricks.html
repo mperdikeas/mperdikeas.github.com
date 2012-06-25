@@ -15,6 +15,10 @@ To search all jars in the current folder and below for class named a.b.c.D do a:
 <pre>
 find . -iname *.jar | while read JARF; do jar tvf $JARF | grep a/b/c/D.class && echo $JARF ; done
 </pre>
+if there is too much output, try:
+<pre>
+find /home/mperdikeas/git-jboss/ -iname *.jar | while read f ; do echo $f && (jar tvf $f | grep a.b.c.D) ; done | grep -B1 ^\
+</pre> ("." instead of "/" works practically as well as it stands for any character).
 
 <li>How to count the number of lines with exactly five spaces</li>
 five spaces means 6 fields in AWK, so (for file <i>3.ply</i>):
