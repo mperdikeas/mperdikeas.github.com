@@ -33,8 +33,10 @@ A simple:<pre>#curl www.in.gr</pre> ...will execute an HTTP GET against www.in.g
 get time in SSE:<pre>date +%s</pre>
 <li>Linux print system information</li>
 including kernel 32 or 64 bit:<pre>uname -a</pre>
+x86_64 GNU/Linux indicates that you've a 64bit Linux kernel running.
+If you use see i386/i486/i586/i686 it is a 32 bit kernel.
 <li>Find if CPU is 32 or 64 bits</li>
-<pre>grep flacs /proc/cpuinfo</pre></br> ("lm" means long mode CPU - 64 bit CPU)
+<pre>grep flags /proc/cpuinfo | grep lm </pre></br> ("lm" means long mode CPU - 64 bit CPU)
 <li>find installed packages</li>
 <pre>
 apt-cache search <search-string> - or -
