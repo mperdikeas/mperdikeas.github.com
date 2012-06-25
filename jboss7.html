@@ -13,19 +13,19 @@ or even to 0.0.0.0 (which binds to all interfaces).
 </ol>
 
 The important section in the above configuration file is the following:
-<pre>
-<interfaces>                                                                                                            
-    <interface name="management">                                                                                       
-        <inet-address value="${jboss.bind.address.management:127.0.0.1}"/>                                              
-    </interface>                                                                                                        
-    <interface name="public">                                                                                           
-        <inet-address value="${jboss.bind.address:127.0.0.1}"/>                                                         
-    </interface>                                                                                                        
-        <interface name="unsecure">                                                                                         
-        <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>                                                
-    </interface>                                                                                                        
-</interfaces>       
-</pre>
+<textarea rows="16" cols="90" name="xml" readonly>
+<interfaces>                                      
+    <interface name="management">
+        <inet-address value="${jboss.bind.address.management:127.0.0.1}"/>
+    </interface>                                              
+    <interface name="public">                     
+        <inet-address value="${jboss.bind.address:127.0.0.1}"/>
+    </interface>                   
+        <interface name="unsecure">
+        <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
+    </interface>                                                
+</interfaces>
+</textarea>
 The various bindings can be enforced (in place of the default 127.0.0.1 values) by defining environment parameters
 upon the invocation of the "/bin/standalone.sh" script. E.g. I've defined a script "jboss-start" as follows:
 <pre>
