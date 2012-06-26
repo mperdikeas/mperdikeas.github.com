@@ -4,6 +4,14 @@
 </head>
 <body>
 <ol>
+<li>Find all XML files with a specific string inside ("login-module") and print the name of the file concerned</li>
+<pre>
+find . -iname \*.xml -exec grep "login-module" '{}' /dev/null \;
+</pre>
+The following simpler version also seems to work:
+<pre>
+find . -iname *.xml -exec grep "login-module" {} /dev/null \;
+</pre>
 <li>Return just the names of the jar files in a <u>find</u></li>
 The <u>cut</u> utility cannot be used to return only the last field, but
 <u>awk</u> can do the trick:
