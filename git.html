@@ -4,6 +4,18 @@
 </head>
 <body>
 <ol>
+<li>move local changes to new branch</li>
+<pre>
+git stash
+git reset --hard
+git clean -xf
+git clean -df
+git branch newBranch
+git checkout newBranch
+git stash pop
+git add . -A -n
+git commit -m "first commit on new branch"
+</pre>
 <li>change most recent git commit message</li>
 <pre>git commit --amend -m "New commit message"</pre>
 <li>concise, yet informative git history</li>
