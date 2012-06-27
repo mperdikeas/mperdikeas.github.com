@@ -4,6 +4,10 @@
 </head>
 <body>
 <ol>
+<li>Find all different file types in a folder hierarchy</li>
+<pre>
+find . -exec file {} \; | awk -F/ '{print $NF}' | awk -F: '{print $NF}' | sort | uniq
+</pre>
 <li>Find all XML files with a specific string inside ("login-module") and print the name of the file concerned</li>
 <pre>
 find . -iname \*.xml -exec grep "login-module" '{}' /dev/null \;
