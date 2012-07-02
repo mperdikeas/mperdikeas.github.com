@@ -29,6 +29,10 @@
         To create the database, after I created a user "hr", I did a:
 <pre>psql -U hr createdb myhr</pre>
 
+Note: if you haven't or don't want to set the line "local all all peer" to "local all all md5", a less intrusive solution is to add the following line:
+<pre>local all hr md5</pre>
+I.e. change the authentication method just for the "hr" user.
+
 Afterwards, one can create a new database (say "masterdet") by connecting
 as user "hr" without having to use the option suggested in the article (masquareding as user "postgres" by running the "createdb" command under a "sudo -u postgres". What I basically did to create a new database was:
 <pre>createdb -U hr -O hr masterdet</pre>
