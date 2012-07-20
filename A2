@@ -1,4 +1,100 @@
-2012-06-26     : handed over to ttsiodras first link with the JBoss AS 7 (JSF+EJB) + MySQL stack
-2012-06-28 1030: ttsiodras came over to ask me whether I can generate links cause he can't test it with the currently
-                 generated Javascript.
-2012-06-28 1045: handed over to ttsiodras second link with the JBoss AS 7 (JSF+EJB) + PostgreSQL stack (and a mail later that day)
+Things that may fail in the TAPKit make:
+[1] need to install xerxes (for XML parsing) but not just any xerxes, rather the 
+    development version (xerxes-dev apt package) that includes the header files.
+[2] the gcc compiler in my Ubuntu machine was newer than the gcc compiler
+    used in ttsiodras' Debian and so enforced stricter checks on certain C++
+    templates (checking the header definition itself, without requiring 
+    instantiation of the template to trigger a syntax check). Ttsiodras fixed
+    that behavior on 2012-07-20.
+[3] it should be noted that in the SVN repository there exist certain *.exe
+    files which represent Windows components locked using the Serbian guy's 
+    program. These are included in the SVN repository because they are needed as
+    part of the final C# Desktop application build but they can't be produced
+    automatically since locking a file using the Serbian guy's solution requires
+    the user to operate a GUI application.
+[4] there is also the issue of our weak locking of the Unix modules.
+[5] Finally, relevant is also the following discussion which references things 
+    that changed circa 2011-12 due to an Israeli sale and some additional custom
+    tasks for Singapore. Discussion took place 2012-07-20.
+----------8<--snip------------
+[16:54:30 EEST] Menelaos Perdikeas: BTW still breaks (did you commit ?)
+[16:54:50 EEST] Thanassis Tsiodras: I've only patched Validator and Converter
+[16:54:57 EEST] Menelaos Perdikeas: In file included from ../TAPValidator/NewGeneration-3.02/tap302_Helpers.cpp:15:0:
+../Common/ConversionUtils.h:20:31: fatal error: ConversionGlobals.h: No such file or directory
+compilation terminated.
+In file included from ../TAPValidator/NewGeneration-3.01/tap301_Helpers.cpp:15:0:
+../Common/ConversionUtils.h:20:31: fatal error: ConversionGlobals.h: No such file or directory
+compilation terminated.
+In file included from ../TAPValidator/NewGeneration-3.04/tap304_Helpers.cpp:15:0:
+../Common/ConversionUtils.h:20:31: fatal error: ConversionGlobals.h: No such file or directory
+compilation terminated.
+In file included from ../TAPValidator/NewGeneration-3.03/tap303_Helpers.cpp:15:0:
+../Common/ConversionUtils.h:20:31: fatal error: ConversionGlobals.h: No such file or directory
+compilation terminated.
+make[2]: *** [objs.unix.debug/Group0_tap302_Helpers.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [objs.unix.debug/Group0_tap301_Helpers.o] Error 1
+make[2]: *** [objs.unix.debug/Group0_tap303_Helpers.o] Error 1
+make[2]: *** [objs.unix.debug/Group0_tap304_Helpers.o] Error 1
+make[2]: Leaving directory `/home/mperdikeas/nrtrde-0201/ASCII2TAP'
+make[1]: *** [unix.debug] Error 1
+make[1]: Leaving directory `/home/mperdikeas/nrtrde-0201/ASCII2TAP'
+make: *** [unix.debug] Error 1
+[16:55:02 EEST] Thanassis Tsiodras: [16:31:36] Thanassis Tsiodras: I have to add -I ../Conversions/src to all Component Makefiles.
+[16:55:12 EEST] Menelaos Perdikeas: (στο make unix.debug)
+[16:55:24 EEST] Thanassis Tsiodras: You undid my patch?
+[16:55:45 EEST] Menelaos Perdikeas: ??
+[16:55:56 EEST] Menelaos Perdikeas: I just did a svn update
+[16:56:09 EEST] Thanassis Tsiodras: make unix.debug under the Validator passes
+[16:56:15 EEST] Thanassis Tsiodras: ditto for converter
+[16:56:28 EEST] Menelaos Perdikeas: l
+[16:56:42 EEST] Thanassis Tsiodras: to build the rest, like I said, I need to ( a ) apply the same patch I did in TAPValidator (svn diff to see it)
+[16:56:58 EEST] Thanassis Tsiodras: and ( B ) to create the "licensed" mysystem.cpp
+[16:57:04 EEST] Menelaos Perdikeas: mperdikeas@mperdikeas:~/nrtrde-0201/Validations#
+$ make unix.debug 
+tar -U -xpf links.tar
+touch links.OK
+make -f Makefile.codegen || exit 1
+make[1]: Entering directory `/home/mperdikeas/nrtrde-0201/Validations'
+cd NewGeneration-3.11/ && make || exit 1
+/bin/sh: 1: cd: can't cd to NewGeneration-3.11/
+make[1]: *** [all] Error 1
+make[1]: Leaving directory `/home/mperdikeas/nrtrde-0201/Validations'
+make: *** [codegen] Error 1
+mperdikeas@mperdikeas:~/nrtrde-0201/Validations#
+$
+[16:57:19 EEST] Thanassis Tsiodras: cd TAPValidator ; make unix.debug
+[16:57:30 EEST] Thanassis Tsiodras: cd Conversions ; make unix.debug
+[16:57:40 EEST] Thanassis Tsiodras: the root-level will never work anymore -
+[16:57:54 EEST] Thanassis Tsiodras: (it used to, in the pre-Israel days)
+[16:58:08 EEST] Thanassis Tsiodras: Now, each package needs the license procedure I described above
+[16:58:21 EEST] Thanassis Tsiodras: (and if it uses Conversion tech, the -I patch...)
+[16:59:06 EEST] Thanassis Tsiodras: e.g. let's build TAP2XML together
+[16:59:12 EEST] Thanassis Tsiodras: go under TAP2XML/licenses
+[16:59:27 EEST] Thanassis Tsiodras: $ cat license.ttsiod 
+00:0c:29:07:8c:1c
+Semantix - Thanassis
+1,2,3,4,9,10,11
+Never
+[16:59:40 EEST] Thanassis Tsiodras: $ cp license.ttsiod license.mperdikeas
+[17:00:11 EEST] Thanassis Tsiodras: $ vi license.mperdikeas (add your MAC address)
+[17:00:19 EEST] Thanassis Tsiodras: $ cat license.mperdikeas
+20:cf:30:ba:28:ed
+Semantix - Thanassis
+1,2,3,4,9,10,11
+Never
+[17:00:36 EEST] Thanassis Tsiodras: (notice that TAP2XML also has support for selecting which versions to work for)
+[17:01:05 EEST] Thanassis Tsiodras: $ cd ../src
+[17:01:19 EEST] Thanassis Tsiodras: $ ./ImplementLicense.py ../licenses/license.mperdikeas 
+$ ls -l mysystem.cpp
+-rw-rw-r-- 1 mperdikeas mperdikeas 1825 Jul 20 17:01 mysystem.cpp
+[17:02:04 EEST] Thanassis Tsiodras: (the "locked" version of mysystem.cpp, that checks for your MAC)
+[17:02:09 EEST] Thanassis Tsiodras: $ cd ..
+[17:02:18 EEST] Thanassis Tsiodras: $ make unix.debug
+[17:02:30 EEST] Thanassis Tsiodras: $ ls -l bin.unix.debug/tap2xml 
+-rwxrwxr-x 1 mperdikeas mperdikeas 10634446 Jul 20 17:02 bin.unix.debug/tap2xml
+[17:03:10 EEST] Thanassis Tsiodras: I know, it needs streamlining.
+[17:03:20 EEST] Thanassis Tsiodras: When another client appears ...
+[17:04:22 EEST] Thanassis Tsiodras: (that's how these things were made - I was doing my day job (ESA), and when a client asked for something, I had the opportunity to fix some things. Same some months later, when another client appeared. etc
+
+---------->8--snap------------
