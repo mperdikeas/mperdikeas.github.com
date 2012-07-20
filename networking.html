@@ -4,6 +4,12 @@
 </head>
 <body>
 <ol>
+<li>copy a tarball with permissions between two different machines (no scp):</li>
+sender:
+<pre>tar cpf - git-jboss/ | nc 172.31.129.12 8877</pre>
+receiver:
+<pre>nc -l -p 8877 | tar xpvf -</pre>
+</li>
 <li>make sure a service is listening at a given port:</li>
 Use <i>nc</i> with the <i>-w</i> option as in (for a timeout of 5 seconds):
 <pre>
