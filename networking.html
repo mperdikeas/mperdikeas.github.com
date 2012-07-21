@@ -4,6 +4,13 @@
 </head>
 <body>
 <ol>
+<li>make sure a service is listening at a given port:</li>
+Use <i>nc</i> with the <i>-w</i> option as in (for a timeout of 5 seconds):
+<pre>
+nc -w 5 94.66.59.15 80
+</pre>
+<li>show local ports and which processes listen on them:</li>
+<pre>sudo lsof -P -i -n
 <li>How to mount a smbfs file system with read/write permissions</li>
 First, create the mount-point (/media/athina-prj) in the below example.</br>
 Then, obtain your userid and groupid (using <i>id</i>) and then do a:
