@@ -5,7 +5,21 @@
                 The WebLogic application server has a problem with JNDI names for datasources in the following form:<p>
                 <pre>java:/xyz</pre><p>
                 ... and prefers datasources to have JNDI names like this:<p>
-                <pre>jdbc/xyz</pre>
+                <pre>jdbc/xyz</pre><p>
+                For instance, instead of:<p>
+                <pre>
+  <datasource jta="true" jndi-name="java:/orders" pool-name="ordersPU" enabled="true" use-ccm="false">
+      <connection-url>jdbc:postgresql://127.0.0.1:5432/orders</connection-url>
+      <driver-class>org.postgresql.Driver</driver-class>
+                (...)
+                </pre><p>
+                ... use the following:<p>
+                <pre>
+  <datasource jta="true" jndi-name="jdbc/orders" pool-name="ordersPU" enabled="true" use-ccm="false">
+      <connection-url>jdbc:postgresql://127.0.0.1:5432/orders</connection-url>
+      <driver-class>org.postgresql.Driver</driver-class>
+                (...)
+                </pre><p>
             </li>
         </ol>                         
     </body>
