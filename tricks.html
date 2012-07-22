@@ -4,6 +4,8 @@
 </head>
 <body>
 <ol>
+<li>Total number of lines in all found files</li>
+<pre>find . -iname \*.java -print0 | wc -l --files0-from</pre>
 <li>Find all different file types in a folder hierarchy</li>
 <pre>
 find . -exec file {} \; | awk -F/ '{print $NF}' | awk -F: '{print $NF}' | sort | uniq
