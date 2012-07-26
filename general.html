@@ -4,6 +4,9 @@
 </head>
 <body>
 <ol>
+<li>piping with xargs</li>
+To rm all java files (you need the -print0 and -0 options to work with filenames containing spaces etc.):
+<pre>find . -iname \*.txt -print0 | xargs -0 rm</pre>
 <li>recursively copy with permissions<li>
 <pre>cp -pr</pre>
 <li>pipe coloured output through less</li>
