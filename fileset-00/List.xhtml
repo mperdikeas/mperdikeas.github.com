@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
+
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:link value="Αρχική" outcome="/index"/>
+            <p:spacer width="20" height="0" />
+            <h:outputText value=">"></h:outputText>
+            <p:spacer width="20" height="0" />
+            <h:outputText value="Πελάτες"/>
+        </ui:define>
+        <h:outputScript library="primefaces" name="jquery/jquery.js" target="head"/>
+        <ui:define name="body">
+            <ui:remove>
+                <f:event listener="#{customerLController.initResultsCommentary}" type="preRenderView" />
+            </ui:remove>
+
+            <p:layout style="min-width:200px;min-height:1000px;" id="layout">
+                <p:layoutUnit position="west" resizable="true" size="150">
+                    Άλλες επιλογές πλοήγησης
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <h:form id="custForm" styleClass="jsfcrud_list_form">
+                        <ui:remove><p:focus context="custForm"/> </ui:remove>
+                        <script type="text/javascript">
+                          function primeFacesId(filterFocus)
+                          {
+                              var original = 'custForm:customersTable:'+filterFocus;
+                              var idToSetFocus = PrimeFaces.escapeClientId(original);
+                              $(idToSetFocus).focus();
+                              var safeValue = $(idToSetFocus).val();
+                              $(idToSetFocus).val("");
+                              $(idToSetFocus).val(safeValue);
+                          }
+                        </script>
+<ui:remove>             <script>
+                            jQuery(document).ready(function() {
+                                primeFacesId();
+                            });
+                        </script>
+</ui:remove>
+                        <h:panelGroup id="messagePanel" layout="block">
+                            <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                        </h:panelGroup>
+                        <p:panelGrid columns="10" style="width: 98%;margin-left: 1%;margin-right: 1%;" id="panelGrid">
+                            <f:facet name="header">
+                                Βασικά Κριτήρια Αναζήτησης
+                            </f:facet>
+                            <h:outputLabel for="surname" value="Επώνυμο:" />
+                            <p:inputText   id="surname-id" value="#{customerLController.surnameDBConstraint}" label="surname" />
+
+                            <h:outputLabel for="name" value="Όνομα:" />
+                            <p:inputText   id="name-id" value="#{customerLController.nameDBConstraint}" label="name" />
+
+                            <h:outputLabel for="age" value="Ηλικία:"/>
+                            <p:inputText   id="age-id" value="#{customerLController.ageDBConstraint}" maxlength="3" size="3" label="age">
+                                <f:converter converterId="gr.neuropublic.neurojsfpilot.converters.AgeToPairOfDates"/>
+                            </p:inputText>
+
+                            <h:outputLabel for="employee" value="Εργαζόμενος:"/>
+                            <pe:triStateCheckbox id="employee-id" value="#{customerLController.employeeDBConstraint}" label="employe">
+                                <f:converter converterId="gr.neuropublic.neurojsfpilot.converters.TriStateCheckboxToBooleanConverter"/>
+                            </pe:triStateCheckbox>
+
+                            <h:outputLabel for="municipalityname" value="Δήμος:" />
+                            <p:autoComplete id="municipalityname-id" value="#{customerLController.municpltDBConstraint}"
+                                            label="municipalityname"  global="false"
+                                            completeMethod="#{customerLController.getMunicipalityNames}"/> 
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Αναζήτηση"
+                                   actionListener="#{customerLController.applyDBConstraintsListener}" update="custDataTable commentary" /> 
+                                                  <ui:remove> <!-- it seems that updating the enclosing p:outputPanel is enough    -->
+                                                              <!-- one does not have to update all enclosed components:(next line) -->
+                                                              <!-- "customersTablePanelGroup custDataTable customersTable" />      --> </ui:remove>
+                                <p:commandButton value="Διαγραφή πεδίων"
+                                   actionListener="#{customerLController.clearDBConstraintsListener}" update="name-id surname-id municipalityname-id age-id employee-id"/>
+                                <div style="text-align:right"><h:outputText id="commentary" escape="false" value="#{customerLController.resultsCommentary}" rendered="#{customerLController.resultsCommentary != null}" styleClass="commentary"/></div>
+                            </f:facet>
+
+                        </p:panelGrid>
+                        <ui:remove><!--p:separator id="separator"  style="height:20px"/-->   <!-- I don't like the separator, it's too loud --></ui:remove>
+                        <p:spacer width="0" height="20"/>
+                        <p:outputPanel id="custDataTable">            
+
+                            <h:panelGroup id="customersTablePanelGroup" rendered="#{not (empty customerLController.items)}">
+                                <p:dataTable var="item" value="#{customerLController.filteredItems}" rowKey="#{item.id}" paginator="true" rows="10"
+                                                selection="#{customerLController.current}" selectionMode="single" id="customersTable"
+                                                style="width: 98%;margin-left: 1%;margin-right: 1%;"
+                                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
+                                                                   {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                                    <f:facet name="header">  
+                                        Πελάτες
+                                    </f:facet>
+                                    <ui:remove>
+                                        <p:column headerText="Επώνυμο" sortBy="#{item.surname}" filterBy="#{item.surname}" id="surname"/>
+                                    </ui:remove>
+                                    <p:column sortBy="#{item.surname}" id="surname">  
+                                        <f:facet name="header">
+                                            Επώνυμο<p/>
+                                            <p:inputText value="#{customerLController.surnameFilterConstraint}"
+                                                         id="surnamefilterfield">
+                                                <ui:remove>
+                                                <p:ajax event="keyup" update=":custForm:custDataTable" listener="#{customerLController.focusSurname}" oncomplete="primeFacesId('surnamefilterfield')"/>
+                                                </ui:remove>
+                                                <p:ajax event="keyup"
+                                                        update=":custForm:custDataTable" 
+                                                        listener="#{customerLController.focusSurname}"
+                                                        oncomplete="primeFacesId('surnamefilterfield')"/>
+                                            </p:inputText>
+                                        </f:facet>
+                                        #{item.surname}
+                                    </p:column>
+            
+                                    <p:column headerText="Ηλικία" sortBy="#{item.age}" filterBy="#{item.age}" id="age" styleClass="age">
+                                        #{item.age}
+                                    </p:column>
+            
+                                    <ui:remove>
+                                        <p:column headerText="Όνομα" sortBy="#{item.name}" filterBy="#{item.name}" id="name">
+                                    </ui:remove>
+                                        <p:column sortBy="#{item.name}" id="name">
+                                        <f:facet name="header">
+                                            Όνομα<p/>
+                                            <p:inputText value="#{customerLController.nameFilterConstraint}"
+                                                         id="namefilterfield">
+                                                <p:ajax event="keyup"
+                                                        update=":custForm:custDataTable" 
+                                                        oncomplete="primeFacesId('namefilterfield)"/>
+                                            </p:inputText>
+                                        </f:facet>
+                                            #{item.name}
+                                        </p:column>
+
+            
+                                    <p:column headerText="Εργαζόμενος" sortBy="#{item.employee}" filterBy="#{item.employeeString}" filterOptions="#{customerLController.employeeOptions}" id="employee">
+                                        <ui:remove><h:outputText value="#{item.employee eq true ? 'ναι' : 'όχι'}" /></ui:remove>
+                                        <p:selectBooleanCheckbox value="#{item.employee}" disabled="true"/>  
+                                    </p:column>
+            
+                                    <p:column headerText="&nbsp;">
+                                        <p:spacer width="20" height="0" />
+                                        <p:commandButton update=":custForm" ajax="false" action="#{customerLController.prepareEdit}" value="Εμφάνιση">
+                                            <f:setPropertyActionListener value="#{item}" target="#{customerLController.current}" />
+                                        </p:commandButton>
+                                        <p:spacer width="20" height="0" />
+                                        <p:commandButton update=":custForm:custDataTable" ajax="false" action="#{customerLController.destroy}" value="Διαγραφή">
+                                            <f:setPropertyActionListener value="#{item}" target="#{customerLController.current}" />                                
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>  
+
+                                <ui:remove>
+                                <!-- removed the following since I am relying in built-in PrimeFaces pagination -->
+                                <!--div style="text-align:left; padding-left:470px">
+                                    <h:outputText value="(σελίδα #{customerLController.pagination.currentPage} από #{customerLController.pagination.numberOfPages})"/>    
+                                </div-->
+                                </ui:remove>
+        
+                            </h:panelGroup>
+                        </p:outputPanel>
+                        <br />
+                        <h:commandButton action="#{customerLController.prepareCreate}" value="Εισαγωγή"/>
+                        <br />
+                        <br />
+                    </h:form>
+                </p:layoutUnit>
+            </p:layout>
+        </ui:define>
+    </ui:composition>
+
+</html>
