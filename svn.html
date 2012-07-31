@@ -19,7 +19,9 @@ followed by a new SVN commit to push the reverted r68 to the tip.
 <p>
 With the manual way, you create a new folder just to checkout the previous
 version you wish to revert to (say r68) and do some file-hacking there.
-Let's call that folder "r68checkoutFolder". So, in the <i>r68checkoutFolder</i>
+Let's call that folder "r68checkoutFolder". This is the source folder
+for most of the below operations. The target folder is the "checkout75" (latest commit
+SVN tip) folder. So, in the <i>r68checkoutFolder</i>
 you do a:
 <pre>
 svn checkout -r 68 https://192.168.0.8/svn/neuro-jsf-pilot/trunk
@@ -28,7 +30,7 @@ Then you remove all metadata svn files using:
 <pre>
 find . -iname .svn | xargs rm -rf
 </pre>
-Now you want to remove all files that were added since r68. So you do a:
+Now you want to remove from the target (latest release folder) all files that were added since r68. So you do a:
 <pre>
 cd /path/to/checkout68 ; find . -type f -exec rm /path/to/checkout75/'{}' \;
 </pre>
@@ -48,7 +50,12 @@ So all that's left is move the remaining files over to r75:
 <pre>
 find . -type f -exec mv '{}' /path/to/checkout75/'{}' ';'
 </pre>
-... and we follow this and close the manual process with a commit.
+At the end of the move it should be the case that the source folder is empty.
+If this is so, we can then follow and close the manual process with a commit
+at the target folder:
+<pre>
+svn commit -m "manually reverted back to r68"
+</pre>
 <li>basic SVN vocabulary</li><p>
 checkout, update, status, info, log, commit, add, rm<p>
 svn revert 'filename' '.' 'foldername' <p>
