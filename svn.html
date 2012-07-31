@@ -4,6 +4,51 @@
 </head>
 <body>
 <ol>
+<li>how to undo SVN commits</li><p>
+Say you wish to go back from commit 75 to commit 68.
+There are two ways:
+<ol>
+<li>use svn merge</li>
+<li>do it manually</li>
+</ol>
+With the <b>svn merge</b> route you do a:
+<pre>
+svn merge -r 75:68
+</pre>
+followed by a new SVN commit to push the reverted r68 to the tip.
+<p>
+With the manual way, you create a new folder just to checkout the previous
+version you wish to revert to (say r68) and do some file-hacking there.
+Let's call that folder "r68checkoutFolder". So, in the <i>r68checkoutFolder</i>
+you do a:
+<pre>
+svn checkout -r 68 https://192.168.0.8/svn/neuro-jsf-pilot/trunk
+</pre>
+Then you remove all metadata svn files using:
+<pre>
+find . -iname .svn | xargs rm -rf
+</pre>
+Now you want to remove all files that were added since r68. So you do a:
+<pre>
+cd /path/to/checkout68 ; find . -type f -exec rm /path/to/checkout75/'{}' \;
+</pre>
+Then you remove all files in r68 that are identical in r75. To do that
+we use the ttsiodras utility <b>cmpDir1andDir2andRemoveSamesFromDir1</b>:
+<pre>
+cmpDir1andDir2andRemoveSamesFromDir1 r68checkoutFolder /path/to/checkout75
+</pre>
+And then remove all empty folders using:
+<pre>
+find . -type d -depth | xargs rmdir
+</pre>
+At this point, what's left in the <i>r68checkoutFolder</i> is the files that
+were modified between revisions 68 and 75. And we are also guaranteed
+that any new files in r75 have been deleted.
+So all that's left is move the remaining files over to r75:
+<pre>
+find . -type f -exec mv '{}' /path/to/checkout75/'{}' ';'
+</pre>
+... and we follow this and close the manual process with a commit.
 <li>basic SVN vocabulary</li><p>
 checkout, update, status, info, log, commit, add, rm<p>
 svn revert 'filename' '.' 'foldername' <p>
