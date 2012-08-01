@@ -1,6 +1,6 @@
 <html>
     <body>
-The following problem arises when one wishes to display a Dialog (&ltp:dialog&gt) from inside a form
+The following problem arises when one wishes to display a dialog UI component (<b>&ltp:dialog&gt</b>) from inside a form
 in order to select a value from a drop-down list or a secondary search screen (from inside the dialog).
 The button to display the Dialog is in many cases a <b>p:commandLink</b> with the "dlgName.show()" value
 set to the onclick attribute. This causes the problem that the parent (hosting) form is resubmitted
@@ -17,8 +17,8 @@ example:
     (...)
 </pre>
 See also <a href="http://stackoverflow.com/questions/11738355/primefaces-display-pdialog-to-fill-in-a-form-field-without-reposting">
-this SO post</a> (where the advice given on using the <i>appendToBody</i> attribute, didn't work.
-
+this SO post</a> (where the advice given on using the <i>appendToBody</i> attribute, didn't work).
+<p>
 Another alternative that also seems to be working is to use an <b>h:outputLink</b> instead of a <b>p:commandLink</b>
 as in the following real-world example:
 <pre>
