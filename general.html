@@ -9,7 +9,7 @@ It may happen that the <b>javac</b> compiler complains for the encoding
 used in a file. Rather than using the -encoding option to <b>javac</b>
 (in the build.xml, use &ltpresetdef&gt to setup defaults for all of your <b>javac</b> invocations and pass -Dfile.encoding=iso-8859-7)
 one can also convert the file manually.
-To find the offending file:
+<p>To find the offending file:
 <pre>
  $ ant  2>&1 | grep unmapp | awk '{print $2}' | sed 's,:.*,,' | sort | uniq
 </pre>
@@ -21,7 +21,7 @@ iconv -f ISO8859-7 -t UTF-8
 <li>piping with xargs</li>
 To rm all java files (you need the -print0 and -0 options to work with filenames containing spaces etc.):
 <pre>find . -iname \*.txt -print0 | xargs -0 rm</pre>
-<li>recursively copy with permissions<li>
+<li>recursively copy with permissions</li>
 <pre>cp -pr</pre>
 <li>pipe coloured output through less</li>
 Use the 'ls -RG' option and make sure the original application (that
