@@ -7,8 +7,8 @@
 <li>how to change a file's encoding from ISO8859-7 to UTF8</li>
 It may happen that the <b>javac</b> compiler complains for the encoding
 used in a file. Rather than using the -encoding option to <b>javac</b>
-(… in the build.xml, use <presetdef> to setup defaults for all of your <javac> invocations and pass -Dfile.encoding=iso-8859-7)<p>
-... one can also convert the file manually.<p>
+(in the build.xml, use <presetdef> to setup defaults for all of your <javac> invocations and pass -Dfile.encoding=iso-8859-7)
+one can also convert the file manually.<p>
 To find the offending file:
 <pre>
  $ ant  2>&1 | grep unmapp | awk '{print $2}' | sed 's,:.*,,' | sort | uniq
