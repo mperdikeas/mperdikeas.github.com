@@ -1,0 +1,61 @@
+STACKTRACE:
+WARN: Could not register a EJB receiver for connection to remote://localhost:4447
+java.lang.RuntimeException: Operation failed with status WAITING
+        at org.jboss.ejb.client.remoting.IoFutureHelper.get(IoFutureHelper.java:93)
+        at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.setupEJBReceivers(ConfigBasedEJBClientContextSelector.java:121        )
+        at org.jboss.ejb.client.remoting.ConfigBasedEJBClientContextSelector.<init>(ConfigBasedEJBClientContextSelector.java:78)
+        at org.jboss.ejb.client.EJBClientContext.<clinit>(EJBClientContext.java:77)
+        at org.jboss.ejb.client.EJBInvocationHandler.doInvoke(EJBInvocationHandler.java:120)
+        at org.jboss.ejb.client.EJBInvocationHandler.invoke(EJBInvocationHandler.java:104)
+        at $Proxy0.sayMessage(Unknown Source)
+        at archetypeEjb3Client.HelloClient.main(HelloClient.java:57)
+
+^Cjava.lang.IllegalStateException: No EJB receiver available for handling [appName:,modulename:hello,distinctname:] combination for invocat        ion context org.jboss.ejb.client.EJBClientInvocationContext@1c7bee2
+        at org.jboss.ejb.client.EJBClientContext.requireEJBReceiver(EJBClientContext.java:584)
+        at org.jboss.ejb.client.ReceiverInterceptor.handleInvocation(ReceiverInterceptor.java:119)
+        at org.jboss.ejb.client.EJBClientInvocationContext.sendRequest(EJBClientInvocationContext.java:181)
+        at org.jboss.ejb.client.EJBInvocationHandler.doInvoke(EJBInvocationHandler.java:136)
+        at org.jboss.ejb.client.EJBInvocationHandler.doInvoke(EJBInvocationHandler.java:121)
+        at org.jboss.ejb.client.EJBInvocationHandler.invoke(EJBInvocationHandler.java:104)
+        at $Proxy0.sayMessage(Unknown Source)
+        at archetypeEjb3Client.HelloClient.main(HelloClient.java:57)
+REASON: JBoss is down
+================================================================
+STACKTRACE:
+INFO: Retrying invocation which failed on node ubuntu with exception:
+javax.ejb.NoSuchEJBException: No such EJB[appname=,modulename=hello,distinctname=,beanname=HelloEJB3Beand]
+        at org.jboss.ejb.client.remoting.NoSuchEJBExceptionResponseHandler.processMessage(NoSuchEJBExceptionResponseHandler.java:64)
+        at org.jboss.ejb.client.remoting.ChannelAssociation$ResponseReceiver.handleMessage(ChannelAssociation.java:395)
+        at org.jboss.remoting3.remote.RemoteConnectionChannel$5.run(RemoteConnectionChannel.java:437)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+        at java.lang.Thread.run(Thread.java:722)
+
+java.lang.IllegalStateException: No EJB receiver available for handling [appName:,modulename:hello,distinctname:] combination for invocation context org.jboss.ejb.client.EJBClientInvocationContext@1a2cda9
+        at org.jboss.ejb.client.EJBClientContext.requireEJBReceiver(EJBClientContext.java:584)
+        at org.jboss.ejb.client.ReceiverInterceptor.handleInvocation(ReceiverInterceptor.java:119)
+        at org.jboss.ejb.client.EJBClientInvocationContext.sendRequest(EJBClientInvocationContext.java:181)
+        at org.jboss.ejb.client.EJBClientInvocationContext.retryRequest(EJBClientInvocationContext.java:206)
+        at org.jboss.ejb.client.EJBReceiverInvocationContext.retryInvocation(EJBReceiverInvocationContext.java:95)
+        at org.jboss.ejb.client.remoting.NoSuchEJBExceptionResponseHandler.processMessage(NoSuchEJBExceptionResponseHandler.java:78)
+        at org.jboss.ejb.client.remoting.ChannelAssociation$ResponseReceiver.handleMessage(ChannelAssociation.java:395)
+        at org.jboss.remoting3.remote.RemoteConnectionChannel$5.run(RemoteConnectionChannel.java:437)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)
+        at java.lang.Thread.run(Thread.java:722)
+        at ...asynchronous invocation...(Unknown Source)
+        at org.jboss.ejb.client.remoting.NoSuchEJBExceptionResponseHandler$ResultProducer.getResult(NoSuchEJBExceptionResponseHandler.java:101)
+        at org.jboss.ejb.client.EJBClientInvocationContext.getResult(EJBClientInvocationContext.java:270)
+        at org.jboss.ejb.client.TransactionInterceptor.handleInvocationResult(TransactionInterceptor.java:47)
+        at org.jboss.ejb.client.EJBClientInvocationContext.getResult(EJBClientInvocationContext.java:272)
+        at org.jboss.ejb.client.ReceiverInterceptor.handleInvocationResult(ReceiverInterceptor.java:132)
+        at org.jboss.ejb.client.EJBClientInvocationContext.getResult(EJBClientInvocationContext.java:260)
+        at org.jboss.ejb.client.EJBClientInvocationContext.awaitResponse(EJBClientInvocationContext.java:399)
+        at org.jboss.ejb.client.EJBInvocationHandler.doInvoke(EJBInvocationHandler.java:140)
+        at org.jboss.ejb.client.EJBInvocationHandler.doInvoke(EJBInvocationHandler.java:121)
+        at org.jboss.ejb.client.EJBInvocationHandler.invoke(EJBInvocationHandler.java:104)
+        at $Proxy0.sayMessage(Unknown Source)
+        at archetypeEjb3Client.HelloClient.main(HelloClient.java:57)
+REASON: Wrong name supplied to JNDI for EJB3 access
+================================================================
+
