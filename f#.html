@@ -1,0 +1,26 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+</head>
+<body>
+<ol>
+<li>F# seq, yield and yield! operators</li>
+<pre>
+open System
+
+let main=
+    seq {
+        for i in 1..10 do
+            yield i
+        let i = [11;12;13;14;15]
+        yield! i
+    }
+
+
+main |> Seq.toList |> List.iter ( fun n -> printfn "%d" n ) ;;
+
+Console.ReadLine() |> ignore ;;
+</pre>
+</ol>
+</body>
+</html>
