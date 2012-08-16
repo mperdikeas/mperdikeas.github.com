@@ -1,4 +1,79 @@
 STACKTRACE:
+18:32:12,741 INFO  [javax.enterprise.resource.webcontainer.jsf.context] (http--172.31.129.29-8888-4) Exception when handling error trying to reset the response.: java.lang.IllegalStateException: Cannot create a session after the response has been committed
+             at org.apache.catalina.connector.Request.doGetSession(Request.java:2636) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.Request.getSession(Request.java:2375) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.RequestFacade.getSession(RequestFacade.java:841) [jbossweb-7.0.13.Final.jar:]
+             at com.sun.faces.context.ExternalContextImpl.getSession(ExternalContextImpl.java:155) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.renderkit.ServerSideStateHelper.writeState(ServerSideStateHelper.java:175) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.renderkit.ResponseStateManagerImpl.writeState(ResponseStateManagerImpl.java:122) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.StateManagerImpl.writeState(StateManagerImpl.java:166) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:225) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:419) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:125) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at javax.faces.application.ViewHandlerWrapper.renderView(ViewHandlerWrapper.java:288) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:121) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:101) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:139) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at javax.faces.webapp.FacesServlet.service(FacesServlet.java:594) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:329) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.weld.servlet.ConversationPropagationFilter.doFilter(ConversationPropagationFilter.java:62) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:280) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:275) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:161) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(WebNonTxEmCloserValve.java:50) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.web.security.SecurityContextAssociationValve.invoke(SecurityContextAssociationValve.java:153) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+             at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:155) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:368) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:877) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:671) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:930) [jbossweb-7.0.13.Final.jar:]
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_03]
+
+18:32:12,748 ERROR [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/users-editing].[Faces Servlet]] (http--172.31.129.29-8888-4) Servlet.service() for servlet Faces Servlet threw exception: java.lang.IllegalStateException: Cannot create a session after the response has been committed
+             at org.apache.catalina.connector.Request.doGetSession(Request.java:2636) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.Request.getSession(Request.java:2375) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.RequestFacade.getSession(RequestFacade.java:841) [jbossweb-7.0.13.Final.jar:]
+             at com.sun.faces.context.ExternalContextImpl.getSession(ExternalContextImpl.java:155) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.renderkit.ServerSideStateHelper.writeState(ServerSideStateHelper.java:175) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.renderkit.ResponseStateManagerImpl.writeState(ResponseStateManagerImpl.java:122) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.StateManagerImpl.writeState(StateManagerImpl.java:166) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.view.WriteBehindStateWriter.flushToWriter(WriteBehindStateWriter.java:225) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.view.FaceletViewHandlingStrategy.renderView(FaceletViewHandlingStrategy.java:419) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.application.view.MultiViewHandler.renderView(MultiViewHandler.java:125) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at javax.faces.application.ViewHandlerWrapper.renderView(ViewHandlerWrapper.java:288) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at com.sun.faces.lifecycle.RenderResponsePhase.execute(RenderResponsePhase.java:121) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:101) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.LifecycleImpl.render(LifecycleImpl.java:139) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at javax.faces.webapp.FacesServlet.service(FacesServlet.java:594) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:329) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.weld.servlet.ConversationPropagationFilter.doFilter(ConversationPropagationFilter.java:62) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:280) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:275) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:161) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(WebNonTxEmCloserValve.java:50) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.web.security.SecurityContextAssociationValve.invoke(SecurityContextAssociationValve.java:153) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+             at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:155) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:368) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:877) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:671) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:930) [jbossweb-7.0.13.Final.jar:]
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_03]
+REASON: see http://stackoverflow.com/questions/8072311/illegalstateexception-cannot-create-a-session-after-the-response-has-been-commi
+CAGE: this bug is living in commit "1007c69c3017be52874b6ed3f464e41432421d5b" of project 'archetypes'
+WORKAROUND: I followed BalusC's workaround #3 in the link above which was to add a context parameter in 
+            in the web.xml file. The solution is shown in the immediately next commit
+            (f01a374d84273c98d15767705da56af4aab7ce71) in the same ('archetypes') project.
+================================================================
+
+STACKTRACE:
 WARN: Could not register a EJB receiver for connection to remote://localhost:4447
 java.lang.RuntimeException: Operation failed with status WAITING
         at org.jboss.ejb.client.remoting.IoFutureHelper.get(IoFutureHelper.java:93)
