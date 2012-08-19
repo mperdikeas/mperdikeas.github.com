@@ -5,7 +5,7 @@
 <li>show USB devices recognized by the kernel</li>
 <pre>lsusb</pre>
 <li>kernel messages</li>
-<per>dmesg</pre>
+<pre>dmesg</pre>
 <li>cleanly remove an application</li>
 <pre>
 apt-get remove --purge [appname]
@@ -14,7 +14,10 @@ apt-get clean
 apt-get autoclean
 </pre>
 <li>install DEB packages</li>
+wget the package (say package.deb) in a tmp folder and then do a:
+<pre>
 sudo dpkg -i package.deb
+</pre>
 <li>starting scripts upon bootup</li>
 There are two ways:
 <p>
