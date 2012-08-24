@@ -6,7 +6,7 @@
 <ol reversed>
 <li>produce a git patch</li>
 I suspect the <i>tags</i> in the following can be any tree-ish objects:
-<pre>0001-configured-hsqldb2.2.9-in-JBoss-AS-7.1.patch</pre>
+<pre>git diff 3266a7e 8deaaf2 > ~/lastchanges.patch</pre>
 <li>git add all files in a directory hierarchy except a particular one</li>
 The following is the 'safe' version (echo):
 <pre>find . ! -type d  ! -iname nosecurity_mvn.zip -exec echo git add {} \;</pre>
