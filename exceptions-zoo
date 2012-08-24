@@ -1,4 +1,28 @@
 STACKTRACE:
+18:06:50,903 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-5) JBAS015876: Starting deployment of "nosecurity.ear"
+18:06:51,115 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) JBAS015876: Starting deployment of "nosecurity-war.war"
+18:06:51,115 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-8) JBAS015876: Starting deployment of "nosecurity-ejb.jar"
+18:06:51,565 INFO  [org.jboss.as.jpa] (MSC service thread 1-1) JBAS011401: Read persistence.xml for jsf005dbPU
+18:06:52,012 INFO  [javax.enterprise.resource.webcontainer.jsf.config] (MSC service thread 1-4) Initializing Mojarra 2.1.7-jbossorg-1 (20120227-1401) for context '/nosecurity'
+18:06:52,558 INFO  [org.hibernate.validator.util.Version] (MSC service thread 1-4) Hibernate Validator 4.2.0.Final
+18:06:52,809 INFO  [org.primefaces.webapp.PostConstructApplicationEventListener] (MSC service thread 1-4) Running on PrimeFaces 3.3.1
+18:06:52,837 INFO  [org.jboss.web] (MSC service thread 1-4) JBAS018210: Registering web context: /nosecurity
+18:06:53,044 INFO  [org.jboss.as.server] (DeploymentScanner-threads - 2) JBAS015870: Deploy of deployment "nosecurity.ear" was rolled back with failure message {"JBAS014771: Services with missing/unavailable dependencies" => ["jboss.data-source.jsf005dbjboss.jdbc-driver.hsqldb-2_2_9Missing[jboss.data-source.jsf005dbjboss.jdbc-driver.hsqldb-2_2_9]"]}
+18:06:53,081 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-6) JBAS010409: Unbound data source [jsf005db]
+18:06:53,123 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-5) JBAS015877: Stopped deployment nosecurity-ejb.jar in 77ms
+18:06:53,133 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-6) JBAS015877: Stopped deployment nosecurity-war.war in 87ms
+18:06:53,137 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-4) JBAS015877: Stopped deployment nosecurity.ear in 94ms
+18:06:53,140 INFO  [org.jboss.as.controller] (DeploymentScanner-threads - 2) JBAS014774: Service status report
+JBAS014775:    New missing/unsatisfied dependencies:
+      service jboss.jdbc-driver.hsqldb-2_2_9 (missing) dependents: [service jboss.data-source.jsf005db] 
+
+18:06:53,142 ERROR [org.jboss.as.server.deployment.scanner] (DeploymentScanner-threads - 1) {"JBAS014653: Composite operation failed and was rolled back. Steps that failed:" => {"Operation step-2" => {"JBAS014771: Services with missing/unavailable dependencies" => ["jboss.data-source.jsf005dbjboss.jdbc-driver.hsqldb-2_2_9Missing[jboss.data-source.jsf005dbjboss.jdbc-driver
+REASON: the hsqldb-ds.xml file bundled in an EAR to be deployed to JBoss AS references a driver "hsqldb-2.2.9" (as in: "<driver>hsqldb-2.2.9</driver>")
+        that's not recognized by JBoss AS (is not configured in its standalone configuration xml file)
+================================================================
+
+
+STACKTRACE:
 18:32:12,741 INFO  [javax.enterprise.resource.webcontainer.jsf.context] (http--172.31.129.29-8888-4) Exception when handling error trying to reset the response.: java.lang.IllegalStateException: Cannot create a session after the response has been committed
              at org.apache.catalina.connector.Request.doGetSession(Request.java:2636) [jbossweb-7.0.13.Final.jar:]
              at org.apache.catalina.connector.Request.getSession(Request.java:2375) [jbossweb-7.0.13.Final.jar:]
