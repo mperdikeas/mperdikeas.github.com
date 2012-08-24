@@ -1,0 +1,97 @@
+[1mdiff --git a/jboss-as-7.1.1.Final/modules/org/hsqldb/main/hsqldb-2.2.9.jar b/jboss-as-7.1.1.Final/modules/org/hsqldb/main/hsqldb-2.2.9.jar[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b51f653[m
+Binary files /dev/null and b/jboss-as-7.1.1.Final/modules/org/hsqldb/main/hsqldb-2.2.9.jar differ
+[1mdiff --git a/jboss-as-7.1.1.Final/modules/org/hsqldb/main/hsqldb-2.2.9.jar.index b/jboss-as-7.1.1.Final/modules/org/hsqldb/main/hsqldb-2.2.9.jar.index[m
+[1mnew file mode 100644[m
+[1mindex 0000000..24a3883[m
+[1m--- /dev/null[m
+[1m+++ b/jboss-as-7.1.1.Final/modules/org/hsqldb/main/hsqldb-2.2.9.jar.index[m
+[36m@@ -0,0 +1,27 @@[m
+[32m+[m
+[32m+[m[32morg/hsqldb/jdbc[m
+[32m+[m[32morg/hsqldb/persist[m
+[32m+[m[32morg/hsqldb[m
+[32m+[m[32morg/hsqldb/auth[m
+[32m+[m[32morg[m
+[32m+[m[32morg/hsqldb/lib/tar/rb[m
+[32m+[m[32morg/hsqldb/scriptio[m
+[32m+[m[32morg/hsqldb/store[m
+[32m+[m[32morg/hsqldb/index[m
+[32m+[m[32morg/hsqldb/types[m
+[32m+[m[32morg/hsqldb/error[m
+[32m+[m[32morg/hsqldb/rowio[m
+[32m+[m[32morg/hsqldb/jdbc/pool[m
+[32m+[m[32morg/hsqldb/server[m
+[32m+[m[32morg/hsqldb/lib[m
+[32m+[m[32morg/hsqldb/lib/tar[m
+[32m+[m[32morg/hsqldb/util[m
+[32m+[m[32morg/hsqldb/rights[m
+[32m+[m[32mMETA-INF[m
+[32m+[m[32morg/hsqldb/result[m
+[32m+[m[32morg/hsqldb/dbinfo[m
+[32m+[m[32morg/hsqldb/lib/java[m
+[32m+[m[32morg/hsqldb/sample[m
+[32m+[m[32mMETA-INF/services[m
+[32m+[m[32morg/hsqldb/navigator[m
+[32m+[m[32morg/hsqldb/resources[m
+[1mdiff --git a/jboss-as-7.1.1.Final/modules/org/hsqldb/main/module.xml b/jboss-as-7.1.1.Final/modules/org/hsqldb/main/module.xml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d5a225d[m
+[1m--- /dev/null[m
+[1m+++ b/jboss-as-7.1.1.Final/modules/org/hsqldb/main/module.xml[m
+[36m@@ -0,0 +1,12 @@[m
+[32m+[m[32m<module xmlns="urn:jboss:module:1.1" name="org.hsqldb">[m
+[32m+[m[32m   <!-- Load with jboss-cli command:[m
+[32m+[m[32m        /subsystem=datasources/jdbc-driver=postgresql-driver:add(driver-name=postgresql-driver, driver-class-name=org.postgresql.Driver, driver-module-name=org.postgresql)[m
+[32m+[m[32m   -->[m
+[32m+[m[32m   <resources>[m
+[32m+[m[32m     <resource-root path="hsqldb-2.2.9.jar"/>[m
+[32m+[m[32m   </resources>[m
+[32m+[m[32m   <dependencies>[m
+[32m+[m[32m     <module name="javax.api"/>[m
+[32m+[m[32m     <module name="javax.transaction.api"/>[m
+[32m+[m[32m   </dependencies>[m
+[32m+[m[32m</module>[m
+[1mdiff --git a/jboss-as-7.1.1.Final/standalone/configuration/standalone.xml b/jboss-as-7.1.1.Final/standalone/configuration/standalone.xml[m
+[1mindex 7d16bf9..d9ab0ab 100644[m
+[1m--- a/jboss-as-7.1.1.Final/standalone/configuration/standalone.xml[m
+[1m+++ b/jboss-as-7.1.1.Final/standalone/configuration/standalone.xml[m
+[36m@@ -113,6 +113,9 @@[m
+                     <driver name="postgresql9.1" module="org.postgresql">[m
+                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>[m
+                     </driver>[m
+[32m+[m[32m                    <driver name="hsqldb-2.2.9-driver" module="org.hsqldb">[m
+[32m+[m[32m                        <xa-datasource-class>org.hsqldb.jdbcDriver</xa-datasource-class>[m
+[32m+[m[32m                    </driver>[m
+                 </drivers>[m
+             </datasources>[m
+         </subsystem>[m
+[1mdiff --git a/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.boot.xml b/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.boot.xml[m
+[1mindex 7d16bf9..d9ab0ab 100644[m
+[1m--- a/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.boot.xml[m
+[1m+++ b/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.boot.xml[m
+[36m@@ -113,6 +113,9 @@[m
+                     <driver name="postgresql9.1" module="org.postgresql">[m
+                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>[m
+                     </driver>[m
+[32m+[m[32m                    <driver name="hsqldb-2.2.9-driver" module="org.hsqldb">[m
+[32m+[m[32m                        <xa-datasource-class>org.hsqldb.jdbcDriver</xa-datasource-class>[m
+[32m+[m[32m                    </driver>[m
+                 </drivers>[m
+             </datasources>[m
+         </subsystem>[m
+[1mdiff --git a/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.last.xml b/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.last.xml[m
+[1mindex 7d16bf9..d9ab0ab 100644[m
+[1m--- a/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.last.xml[m
+[1m+++ b/jboss-as-7.1.1.Final/standalone/configuration/standalone_xml_history/standalone.last.xml[m
+[36m@@ -113,6 +113,9 @@[m
+                     <driver name="postgresql9.1" module="org.postgresql">[m
+                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>[m
+                     </driver>[m
+[32m+[m[32m                    <driver name="hsqldb-2.2.9-driver" module="org.hsqldb">[m
+[32m+[m[32m                        <xa-datasource-class>org.hsqldb.jdbcDriver</xa-datasource-class>[m
+[32m+[m[32m                    </driver>[m
+                 </drivers>[m
+             </datasources>[m
+         </subsystem>[m
