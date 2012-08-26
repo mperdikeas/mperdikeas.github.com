@@ -5,6 +5,7 @@ This is from an email exchange I had on
 https://groups.google.com/forum/#!forum/clojure
 (mail also available in my gmail account on 26.VIII.2012)
 
+<!-- it seems that the 2nd <pre> is a superset of the first
 <pre>
 > I am now using Emacs 24.1.1 in Ubuntu precise and have managed to install
 > Clojure-mode. The next thing I want to do is to use lein repl as my Emacs
@@ -65,6 +66,191 @@ I'd also like to note that
 nrepl.el[https://github.com/kingtim/nrepl.el] and
 swank-clojure[https://github.com/technomancy/swank-clojure] are the
 common ways to get emacs integration.
+</pre>
+-->
+
+
+<pre>
+
+mperdikeas via googlegroups.com 
+1:36 PM (9 hours ago)
+
+to clojure 
+I am now using Emacs 24.1.1 in Ubuntu precise and have managed to install Clojure-mode. The next thing I want to do is to use lein repl as my Emacs REPL (currently I've set inferior-lisp-program to a custom bash script that simply does a java -jar clojure-1.4.0.jar). The reason I've resorted to this approach is that it is not clear to me how to control the Clojure version that lein repl is using. As a result, although I have downloaded clojure-1.4.0.jar and am using that in my custom bash script, lein reports a totally different Clojure, one that's different even from what /usr/bin/clojure is:
+
+mperdikeas@ubuntu:~#
+$ which clojure
+/usr/bin/clojure
+mperdikeas@ubuntu:~#
+$ /usr/bin/clojure
+Clojure 1.1.0
+user=> 
+mperdikeas@ubuntu:~#
+$ lein repl
+REPL started; server listening on localhost port 4840
+user=> (clojure-version)
+"1.2.1"
+user=> 
+mperdikeas@ubuntu:~#
+$ cat ./.emacs.d/clojure/repl.sh 
+java -jar ~/.emacs.d/clojure/clojure-1.4.0.jar
+mperdikeas@ubuntu:~#
+$ ./.emacs.d/clojure/repl.sh
+Clojure 1.4.0
+user=> 
+
+So it seems that I have three different Clojures currently available but I can't configure lein repl to use the latest one. I've read this SO discussion but it seems to cover the case where lein is invoked in a directory containing a project.clj file where the Clojure dependency can be set. However:
+
+[1] I' ve experimented a bit with lein repl and found that I can invoke it in any arbitrary directory. So where does it get the project.clj file in those cases?
+[2] In the .emacs file (according to this helpful article) one is supposed to do a:
+
+    (progn ;; Inferior Lisp                                                                                                                                       
+    (add-hook 'clojure-mode-hook ;; copied from:                                                  
+          (lambda ()
+            (setq inferior-lisp-program "lein repl"))) 
+
+Again, where would lein look for the project.clj file in the above case? And what if I just want to start writing Clojure in an Emacs buffer without having setup a lein project structure? From where would then lein repl get the Clojure version dependency in that case?
+
+
+Nelson Morris nmorris@nelsonmorris.net
+3:55 PM (6 hours ago)
+
+to clojure 
+On Sun, Aug 26, 2012 at 5:36 AM, mperdikeas <mperdikeas@gmail.com> wrote:
+> I am now using Emacs 24.1.1 in Ubuntu precise and have managed to install
+> Clojure-mode. The next thing I want to do is to use lein repl as my Emacs
+> REPL (currently I've set inferior-lisp-program to a custom bash script that
+> simply does a java -jar clojure-1.4.0.jar). The reason I've resorted to this
+> approach is that it is not clear to me how to control the Clojure version
+> that lein repl is using. As a result, although I have downloaded
+> clojure-1.4.0.jar and am using that in my custom bash script, lein reports a
+> totally different Clojure, one that's different even from what
+> /usr/bin/clojure is:
+
+lein is distributed as a standalone jar, which means a version of
+clojure and all other dependencies, is packaged with it.  In addition,
+lein 1.7.1 is compiled against clojure 1.2.1, and would not be able to
+bootstrap using a future version.
+
+> So it seems that I have three different Clojures currently available but I
+> can't configure lein repl to use the latest one. I've read this SO
+> discussion but it seems to cover the case where lein is invoked in a
+> directory containing a project.clj file where the Clojure dependency can be
+> set. However:
+>
+> [1] I' ve experimented a bit with lein repl and found that I can invoke it
+> in any arbitrary directory. So where does it get the project.clj file in
+> those cases?
+> [2] In the .emacs file (according to this helpful article) one is supposed
+> to do a:
+>
+>     (progn ;; Inferior Lisp
+>     (add-hook 'clojure-mode-hook ;; copied from:
+>           (lambda ()
+>             (setq inferior-lisp-program "lein repl")))
+>
+> Again, where would lein look for the project.clj file in the above case? And
+> ....
+> From where would then lein repl get
+> the Clojure version dependency in that case?
+
+There are a set of tasks that do not read any information from the
+project.clj, version, help, and such.  The repl task is allowed to run
+outside a project, but comes with the limitation that the classpath
+the repl uses will be the same as the classpath lein uses.  This means
+for lein 1.7.1 it will use clojure 1.2.1, and for a recent lein
+2.0.0-preview it will use clojure 1.4.0.
+
+When running the repl from a project lein is able to get the
+:dependencies desired, and use only those on the classpath.  This is
+the way to use clojure 1.4.0 w/ lein 1.7.1.
+
+> what if I just want to start writing Clojure in an Emacs buffer without
+> having setup a lein project structure?
+
+Then the limitations above apply.  I know some people when using lein
+1.7.1 keep a project around with :dependencies [[org.clojure/clojure
+"1.4.0"]] and use it when doing quick repl interaction.
+
+I'd also like to note that
+nrepl.el[https://github.com/kingtim/nrepl.el] and
+swank-clojure[https://github.com/technomancy/swank-clojure] are the
+common ways to get emacs integration.
+
+
+Phil Hagelberg phil@hagelb.org via googlegroups.com 
+5:57 PM (4 hours ago)
+
+to clojure 
+It's impossible to do what you're asking, but you can still do what you want.
+
+> This means for lein 1.7.1 it will use clojure 1.2.1, and for a recent
+> lein 2.0.0-preview it will use clojure 1.4.0.
+
+Upgrading to Leiningen 2.x is strongly encouraged and will get you
+access to Clojure 1.4 anywhere. Using it via nrepl.el rather than
+inferior-lisp will give you a much nicer experience.
+
+
+blais google@furius.ca via googlegroups.com 
+8:03 PM (2 hours ago)
+
+to clojure 
+Hi mperdikas.
+I also like to have full control over my dependencies and versions, so I wrote a script that
+- you give it a bunch of directories, and it automatically finds all the jars in them an resolves conflicts by selecting latest versions automatically
+- prints the list of jars (explicitly saying what it does, which jars are included, that is a prerequisite IMO)
+- starts a REPL with either swank or nrep or just a plain one
+Another fun thing is that it's just a single Python script and so it starts fast,
+and it does not fetch anything from the internet, so you won't run into problems working offline.
+I sometimes run "lein deps" to fetch dependencies recursively, and from thereon I use streamlined.
+For production you can save your jars in an svn repo or something, makes it easy to have a controlled deployment.
+Anyway, I realize that's not the most common approach to running Clojure in this community, 
+but I like to drive manual, so that's what I do, and it sound like you do too.
+Find the script here:
+http://furius.ca/pubcode/pub/conf/bin/streamlined.html
+
+
+greg r gsraven@bellsouth.net via googlegroups.com 
+9:08 PM (1 hour ago)
+
+to clojure 
+Hello, I am also using Leiningen in Ubuntu, and I feel your pain.
+One thing I would suggest is to remove anything related to your tool chain which was installed by Ubuntu.
+(except maybe emacs 24.x).
+You clearly have Clojure installed via the usual Ubuntu Software Center or related mechanism.
+Uninstall it!
+
+I would skip directly to version 2 of Leiningen.
+You will find that dependency jars get dropped into the hidden file ~/.m2/repository,
+for example, when you use the "lein install" command that is where they go.
+
+Get clojure mode via the emacs package manager.  Get the latest!
+I got stuck on an old version which caused much confusion.  I still see version 1.7.1
+in the list of packages, whereas I have installed version 1.11.5.  I believe this is
+due to my .emacs file setting package archives for ELPA, gnu, and marmalade, and
+some obsolete stuff still exists and hazardous to the newbie.
+
+I don't have anything related to slime or swank or swank-clojure installed via the
+emacs package manager.  However, I do have lein-swank listed in my ~/.lein/profile.clj
+file.
+
+Another thing to uninstall are any version of slime and swank which were installed
+via the "Ubuntu Software Center".  These caused lots of confusion.  This stuff may
+also be hanging out in your ~/.emacs.d directory.
+
+I installed version 24.x emacs manually.  I'm not familiar with Ubuntu Precise, but perhaps
+that distribution is installing a usable version of emacs.  I had to install a few libraries
+to get it all going, I think some X window related stuff using the Synaptic Package Manager.
+
+M-x clojure-jack-in is the way to fire up a repl running in an emacs buffer.
+
+I've got a working installation, it's easy to use and powerful, but if I said I could start from
+scratch again and make it work in 5 minutes I would be a liar.  I think the best thing to do is a thorough
+housecleaning, start from scratch with version 2 leiningen, emacs 24 and latest clojure-mode.
+
+Good luck!  I'm test driving nrepl next.
+
 </pre>
 </body>
 </html>
