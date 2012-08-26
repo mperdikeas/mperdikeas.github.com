@@ -1,0 +1,70 @@
+<html>
+<body>
+
+This is from an email exchange I had on
+https://groups.google.com/forum/#!forum/clojure
+(mail also available in my gmail account on 26.VIII.2012)
+
+<pre>
+> I am now using Emacs 24.1.1 in Ubuntu precise and have managed to install
+> Clojure-mode. The next thing I want to do is to use lein repl as my Emacs
+> REPL (currently I've set inferior-lisp-program to a custom bash script that
+> simply does a java -jar clojure-1.4.0.jar). The reason I've resorted to this
+> approach is that it is not clear to me how to control the Clojure version
+> that lein repl is using. As a result, although I have downloaded
+> clojure-1.4.0.jar and am using that in my custom bash script, lein reports a
+> totally different Clojure, one that's different even from what
+> /usr/bin/clojure is:
+
+lein is distributed as a standalone jar, which means a version of
+clojure and all other dependencies, is packaged with it.  In addition,
+lein 1.7.1 is compiled against clojure 1.2.1, and would not be able to
+bootstrap using a future version.
+
+> So it seems that I have three different Clojures currently available but I
+> can't configure lein repl to use the latest one. I've read this SO
+> discussion but it seems to cover the case where lein is invoked in a
+> directory containing a project.clj file where the Clojure dependency can be
+> set. However:
+>
+> [1] I' ve experimented a bit with lein repl and found that I can invoke it
+> in any arbitrary directory. So where does it get the project.clj file in
+> those cases?
+> [2] In the .emacs file (according to this helpful article) one is supposed
+> to do a:
+>
+>     (progn ;; Inferior Lisp
+>     (add-hook 'clojure-mode-hook ;; copied from:
+>           (lambda ()
+>             (setq inferior-lisp-program "lein repl")))
+>
+> Again, where would lein look for the project.clj file in the above case? And
+> ....
+> From where would then lein repl get
+> the Clojure version dependency in that case?
+
+There are a set of tasks that do not read any information from the
+project.clj, version, help, and such.  The repl task is allowed to run
+outside a project, but comes with the limitation that the classpath
+the repl uses will be the same as the classpath lein uses.  This means
+for lein 1.7.1 it will use clojure 1.2.1, and for a recent lein
+2.0.0-preview it will use clojure 1.4.0.
+
+When running the repl from a project lein is able to get the
+:dependencies desired, and use only those on the classpath.  This is
+the way to use clojure 1.4.0 w/ lein 1.7.1.
+
+> what if I just want to start writing Clojure in an Emacs buffer without
+> having setup a lein project structure?
+
+Then the limitations above apply.  I know some people when using lein
+1.7.1 keep a project around with :dependencies [[org.clojure/clojure
+"1.4.0"]] and use it when doing quick repl interaction.
+
+I'd also like to note that
+nrepl.el[https://github.com/kingtim/nrepl.el] and
+swank-clojure[https://github.com/technomancy/swank-clojure] are the
+common ways to get emacs integration.
+</pre>
+</body>
+</html>
