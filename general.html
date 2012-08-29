@@ -4,6 +4,37 @@
 </head>
 <body>
 <ol reversed>
+<li>troubleshooting sound problems in Ubuntu</li>
+'Tis a long and sad tale. The gist of the matter (and what worked for me)
+was a combination of purging <b>pulseaudio</b>
+(including locally modified config files in /etc/pulse) and re-installing
+it, (and doing the same for other Ubuntu audio libraries as well).
+Helpfull material:
+<ol>
+<li><a href="https://help.ubuntu.com/community/SoundTroubleshootingProcedure">trouble shooting procedure</a>
+<li><a href="https://docs.google.com/document/d/1iTlJ8BfqXUjaHO__TEdlkvuqB1WLOkGaudngc5SFLMI/edit?pli=1#heading=h.y9t02zg3awt4">
+trouble shooting guide</a>
+</ol>
+Actually, the second was rather more helpful than the first.<p>
+Litmus tests:
+<pre>
+play /usr/share/sounds/alsa/Front_Center.wav
+</pre>
+... and the Skype echo service.<p>
+Another thing to check out for is to make sure that the user
+belongs to the audio group. I.e. do a:
+<pre>
+sudo \emacs -nw /etc/group
+</pre>
+Finally, I also tried this <a href="http://www.linuxquestions.org/questions/linux-hardware-18/default-sound-card-in-ubuntu-564006/"
+guide on setting the default audio card</a> although it didn't have any effect in this
+particular case (maybe the problem wasn't there).
+<li>re-enable the sound icon on Ubuntu precise</li>
+The following incantation worked for me:
+<pre>
+sudo apt-get install indicator-sound
+killall unity-panel-service
+</pre>
 <li>how to change a file's encoding from ISO8859-7 to UTF8</li>
 It may happen that the <b>javac</b> compiler complains for the encoding
 used in a file. Rather than using the -encoding option to <b>javac</b>
