@@ -1,0 +1,16 @@
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+</head>
+<ol reversed>
+<li>how to include the root context in an <b>href</b></li>
+There are at least two ways:
+<ul>
+<li><pre>
+<h:outputLink value="#{facesContext.externalContext.requestContextPath}/GetAllUsers">Get all users</h:outputLink>
+</pre>
+<li><pre>
+<a href="#{request.contextPath}/cacher/ehcache.xhtml">Cache Area</a>
+</pre>
+</ul>
+
+</ol>
