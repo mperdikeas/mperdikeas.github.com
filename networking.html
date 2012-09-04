@@ -4,6 +4,61 @@
 </head>
 <body>
 <ol reversed>
+<li>use <b>nc</b> for HTTP troubleshooting</li>
+First of all use nc.traditional:
+<pre>
+sudo apt-get install netcat-traditional
+</pre>
+Then spawn the <b>nc.traditional</b> binary in a loop
+(that's ok since the socket opens and dies with every request
+according to the stateless character of the HTTP protocol):
+<pre>
+while true ; do nc.traditional -l -p 8085 ; done
+</pre>
+With the above command we've opened a manual HTTP server listening at
+port 8085. One can now point the browser to: localhost:8085/foo
+and we'll see the request on the <b>nc.traditional</b> output.
+What's more, we'll be able to paste a response and see it in the browser.
+Moreover, after the exchange the <b>nc.traditional</b> binary
+won't die but (due to the while true) be available to service 
+the next request coming from the browser. This allows us to test
+the cookie setting behaviour and parameters. E.g. (see the <a href="http://curl.haxx.se/rfc/cookie_spec.html">Netscape spec</a> and <a href="http://stackoverflow.com/questions/12247265/cookie-storing-strategies-and-tabbed-browsing-of-different-jsf-applications-givi">
+this SO discussion</a> for more) we can use this setting to test the cookie behavior when the cookie path attribute is used:
+<ol>
+  <li>launch <b>nc.traditional</b> as described above</li>
+  <li>point the browser to localhost:8085/foo</li>
+  <li>the following HTTP request appears at <b>nc.traditional</b>'s screen</li>
+      <pre>
+GET /foo HTTP/1.1
+Host: localhost:8085
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:15.0) Gecko/20100101 conkeror/1.0pre (Debian-1.0~~pre+git1206072207-~nightly1)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-us,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Cookie: JSESSIONID=891d66f2-29fa-4568-9228-c917c5bf1317
+
+
+      </pre>
+  <li>paste the following response to <b>nc.traditional</b>'s screen:</li>
+      <pre>
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+X-Powered-By: JSF/2.0
+Set-Cookie: JSESSIONID=891d66f2-29fa-4568-9228-c917c5bf1317; Path=/; HttpOnly
+Content-Type: text/html;charset=UTF-8
+Content-Length: 16
+Date: Tue, 04 Sep 2012 12:22:46 GMT
+
+<body>boo</body>
+
+      </pre>
+      (take care with the <b>Content-Length</b> field)
+  <li>setting the <b>path</b> to <b>/</b> means that the cookie will be present in any
+subsequent request, e.g. <b>http://localhost/booboo</b></li>
+  <li>when the cookie path is not set to <b>/</b> the cookie will be present only
+in tail matching requests.</li>
+</ol>
 <li>copy a tarball with permissions between two different machines (no scp):</li>
 sender:
 <pre>tar cpf - git-jboss/ | nc 172.31.129.12 8877</pre>
