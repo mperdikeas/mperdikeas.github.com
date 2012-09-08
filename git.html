@@ -61,57 +61,65 @@ git rev-parse --verify HEAD
 <pre>
 git rev-parse HEAD
 </pre>
-</ol>
-how to restore a specific file to the branch's image
+<li> how to restore a specific file to the branch's image:</li>
+<pre>git checkout -f visualization "13 - COAST Caches/ccaches_protocol_types/src/org/coast/caches/network/types/CacheGetRequest.java"</pre>
 
-git checkout -f visualization "13 - COAST Caches/ccaches_protocol_types/src/org/coast/caches/network/types/CacheGetRequest.java"
-
-ttsiod explained that "visualization" (i.e. the branch name) is a tree-ish
+In the incantation above 'visualization' (i.e. the branch name) is a tree-ish
 object in git. The general signature of git checkout is therefore:
+<pre>
 git checkout <tree-ish> <optional path within the tree-ish>
+</pre>
 
-
-2012-02-06:    overwrite local modifications
-                git checkout .
-
-2012-02-17:    bullet-proof way to reset all the files
-                in the local repository:
+<li>overwrite local working copy modifications:</li>
+                <pre>git checkout .</pre>
+<li>bullet-proof way to reset all the files in the local repository:</li>
+                <pre>
                 $ git clean -d -x -f
-                ... followed by:
                 $ git reset --hard
+                </pre>
                 to just see which files will be deleted
-                by git clean do a:
+                by git clean do a dry-run:
+                <pre>
                 $ git clean -d -x -n
-                (for a dry run)
-2012-02-17:    how to check differences between local 
-                and remote branches:
+                </pre>    
+<li>how to check differences between local and remote branches:</li>
+<pre>
                 $ git diff master origin/master
-2012-03-16:    to avoid having to type:
+</pre>
+<li>to avoid having to type:</li>
+<pre>
                 git add . -A
-                followed by a:
                 git commit -m " .. "
+</pre>
                 do a:
+<pre>
                 git config --global alias.ac '!git add . -A && git commit'
+</pre>
 
-2012-03-19:     how to force git diff to always use color:
+<li>how to force git diff to always use color:</li>
+<pre>
                 git config --global color.diff auto
+</pre>
 
-2012-04-04:     delete a commit that's also been pushed:
-source: http://stackoverflow.com/questions/1338728/how-to-delete-a-git-commit
+<li>delete a commit that's also been pushed:</li>
+<a href="http://stackoverflow.com/questions/1338728/how-to-delete-a-git-commit">source</a>
 Assuming you are sitting on that commit, then this command will wack it...
-
-git reset --hard HEAD~1
+<pre>
+    git reset --hard HEAD~1
+</pre>
 The HEAD~1 means the commit before head.
 
 Or, you could look at the output of git log, find the commit id of the commit you want to back up to, and then do this:
-
-git reset --hard <sha1-commit-id>
-If you already pushed it, you will need to do a force push to get rid of it...
-
-git push origin HEAD --force
+<pre>
+    git reset --hard <sha1-commit-id>
+</pre>
+    If you already pushed it, you will need to do a force push to get rid of it...
+<pre>
+    git push origin HEAD --force
+</pre>
 However, if others may have pulled it, then you would be better off starting a new branch. Because when they pull, it will just merge it into their work, and you will get it pushed back up again.
 
-If you already pushed, it may be better to use git revert, to create a "mirror image" commit that will undo the changes. However, both commits will both be in the log.
+If you already pushed, it may be better to use git revert, to create a <i>"mirror image"</i> commit that will undo the changes. However, both commits will both be in the log.
 
 FYI -- git reset --hard HEAD is great if you want to get rid of WORK IN PROGRESS. It will reset you back to the most recent commit, and erase all the changes in your working tree and index.
 
@@ -119,5 +127,6 @@ Lastly, if you need to find a commit that you "deleted", it is typically present
 
 comment:        
 HEAD~1 or just HEAD^. If you pushed, you should use git revert instead
+</ol>
 </body>
 </html>
