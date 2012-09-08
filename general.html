@@ -97,8 +97,6 @@ If you use see i386/i486/i586/i686 it is a 32 bit kernel.
 apt-cache search <search-string> - or -
 dpkg --get-selections | grep <search-string>
 </pre>
-<li>install packages</li>
-<pre>apt-get install <package-name></pre>
 <li>how to find a file named "compile_decoder.sh" in a set of bz2 files</li>
 <pre>for f in `ls *.bz2` ; do tar -jtvf  $f ; done | grep compile_decoder.sh</pre>
 </br>
@@ -106,16 +104,14 @@ dpkg --get-selections | grep <search-string>
 <pre>for f in `ls *.bz2` ; do tar -jtvf $f | grep compile_decoder.sh ; done</pre>
 <li>to find out the release</li>
 <pre>$ lsb_release -a</pre>
-2012-02-13: how to start xserver in Cygwin : 
-                startxwin
-            ... and then to redirect X output from the new shell:
-                ssh -X mperdikeas@remote.location
-2012-02-14: web page to report your IP address:
-                http://checkip.dyndns.org/
-2012-02-14: tool to examine port usage in Windows: TCPView
-2012-02-17: to reboot a linux machine: $sudo reboot
-2012-02-17: see all processes run by user 'mperdikeas' : $ps -u mperdikeas
-2012-03-05: in order to create a bootable USB drive from an ISO image it
+<li>how to start xserver in Cygwin:<li>
+<pre>startxwin</pre>
+... and then to redirect X output from the new shell:
+<pre>ssh -X mperdikeas@remote.location</pre>
+<li>see all processes run by user 'mperdikeas':<li>
+<pre>$ps -u mperdikeas</pre>
+<li>bootable USB drive from ISO image<li>
+                In order to create a bootable USB drive from an ISO image it
                 is not possible to use dd and perform a binary data copy.
                 Special magic has to be used. Ttsiodras sent me a folder
                 with the necessary magic. Bottom line is that the files
@@ -136,29 +132,32 @@ dpkg --get-selections | grep <search-string>
                 save files, install programs and so on). This option is
                 possible using the "LinuxLive USB Creator 2.8.10.exe"
                 program.
-2012-03-06: to find the Linux kernel release:
-                uname -mrs
-2012-03-06: to find the Linux distro:
-                lsb_release -a
-2012-03-08: how to find if a Linux machine is 32 or 64 bits:
-            uname -m
+<li>to find the Linux kernel release and distro:</li>
+    <pre>
+        uname -mrs
+        lsb_release -a
+    </pre>
+<li>how to find if a Linux machine is 32 or 64 bits:</li>
+    <pre>uname -m</pre>
              - or -
-            cat /proc/cpuinfo
-2012-03-14: how to display recursive size of folders (i.e. including
-                contents):
+    <pre>cat /proc/cpuinfo</pre>
+<li>Print recursive size of folders (i.e. including contents):</li>
+<pre>
                 sudo du - s -m *
+</pre>
                 (because ls -lah only displays the size of the
                 directory file).
-2012-03-14: proper way to copy recursively (including file permissions etc):
-                cp -a /a /b
-2012-03-15: how to find in which package a binary belongs,
-            e.g. the lsb_release binary:
-            dpkg -S $(which lsb_release)
-2012-03-15: how to show the versions of debian apt packages:
-            use the apt_show_versions utility
-2012-03-15: the /etc/apt/sources.list file is not directly related to the 
+<li>proper way to copy recursively (including file permissions etc):</li>
+                <pre>cp -a /a /b</pre>
+                or
+                <pre>cp -pr --preserve=links /a /b</pre>
+<li>how to find in which package a binary belongs, e.g. the lsb_release binary:</li>
+            <pre>dpkg -S $(which lsb_release)</pre>
+<li>to show the versions of debian apt packages use the apt_show_versions utility</li>
+<li>apt things ...<li>
+            The /etc/apt/sources.list file is not directly related to the 
             operations of the:
-                apt-get dist-upgrade command
+                <b>apt-get dist-upgrade</b> command
             the dist-upgrade command always stays in the same Debian version
             but implements the progression: stable->testing->unstable.
             So, for instance from the stable phase it takes two invocations
@@ -166,17 +165,14 @@ dpkg --get-selections | grep <search-string>
             testing phase only one. And you can't go backwards.
             The /etc/apt/sources.list file "simply" provides the URL of
             the repositories for each version.
-2012-03-19: for hex-dump:
-                hexdump -C <filename> ('C' for console output)
-            to edit: hexedit
-
-how to cut the first few lines of a file (in the below example, the 1st one):
-    tail -n +2 "$FILE"
-
-how to remove the last line from a file (in place editing):
-    sed -i '$d' filename
-
-how to remove the last n lines from a file (in the below example n = 2):
-    head -`wc -l thefile | awk '{print ($1-1)}'` thefile
+<li>hex-dump:</li>
+<pre>hexdump -C <filename> ('C' for console output)</pre>
+to edit:<pre>hexedit</pre>
+<li>how to cut the first few lines of a file (in the below example, the 1st one):</li>
+    <pre>tail -n +2 "$FILE"</pre>
+<li>how to remove the last line from a file (in place editing):</li>
+    <pre>sed -i '$d' filename</pre>
+<li>how to remove the last n lines from a file (in the below example n = 2):</li>
+    <pre>head -`wc -l thefile | awk '{print ($1-1)}'` thefile</pre>
 </body>
 </html>
