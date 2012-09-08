@@ -1,9 +1,47 @@
 <html>
 <head>
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <body>
 <ol reversed>
+<li>wireless problems in Ubuntu 12.04 LTS Precise</li>
+Original article <a hred="http://linuxplained.com/how-to-fix-wireless-problems-in-ubuntu-1204-precise-pangolin/">here</a>. Gist is to try one of these:
+    <ul>
+      <li>restart networking after reboot</li>
+      <pre>sudo /etc/init.d/networking restart</pre>
+      <li>disable WiFi card power management</li>
+      <pre>sudo iwconfig wlan0 power off</pre>
+      <pre>sudo iwconfig</pre>
+      (and check for 'Power Management:off' under <b>wlan0</b>
+       to ensure that the power management is turned off).
+      <li>disable the use of Wireless N (at a cost of reduced speed)</li>
+      <pre>sudo rmmod -f iwlagn</pre>
+      <pre>sudo modprobe iwlagn 11n_disable=1</pre>
+      for the change to stick, edit <b>/etc/modprobe.d/iwlagn-disable11n.conf</b>
+      and add the following line:
+      <pre>options iwlagn 11n_disable=1</pre>
+      <li>Disable IPv6 (which is useless btw.)</li>
+      <pre class="keyword">
+echo "#disable ipv6" | sudo tee -a /etc/sysctl.conf 
+echo "net.ipv6.conf.all.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf 
+echo "net.ipv6.conf.default.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf 
+echo "net.ipv6.conf.lo.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
+      </pre>
+    </ul>
+<li>5 Best Linux/Ubuntu compatible USB WiFi cards</li>
+    <ol>
+        <li><a href="http://www.amazon.com/gp/product/B002RCKDEC/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002RCKDEC&#038;linkCode=as2&#038;tag=linuxp-20">AirLink101 AWLL6075 Wireless N Mini USB Adapter</a>
+        </li>
+        <li><a href="http://www.amazon.com/gp/product/B002RM08RE/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002RM08RE&#038;linkCode=as2&#038;tag=linuxp-20">Medialink &#8211; Wireless N USB Adapter &#8211; 802.11n</a>
+        </li>
+        <li><a href="http://www.amazon.com/gp/product/B002UVNW5W/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002UVNW5W&#038;linkCode=as2&#038;tag=linuxp-20">ASUS (USB-N13) Wireless-N USB Adapter</a>
+        </li>
+        <li><a href="http://www.amazon.com/gp/product/B003283M6Q/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B003283M6Q&#038;linkCode=as2&#038;tag=linuxp-20">Panda Mini Wifi (b/g/n) 150Mbps Card</a>
+        </li>
+        <li><a href="http://www.amazon.com/gp/product/B002WBX9C6/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002WBX9C6&#038;linkCode=as2&#038;tag=linuxp-20">TP-Link TL-WN722N 150Mbps High Gain Wireless USB Adapter</a>
+        </li>
+    </ol>
 <li>use <b>nc</b> for HTTP troubleshooting</li>
 First of all use nc.traditional:
 <pre>
