@@ -1,4 +1,63 @@
 STACKTRACE:
+18:20:57,943 ERROR [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host]] (http--172.31.129.29-8280-4) Exception sending request initialized lifecycle event to listener instance of class org.jboss.weld.servlet.WeldListener: java.lang.RuntimeException: JBAS018060: Exception acquiring ownership of 24imBLvqSg+4GVPnt8+Xzv+q
+             at org.jboss.as.web.session.ClusteredSession.acquireSessionOwnership(ClusteredSession.java:528) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.web.session.ClusteredSession.access(ClusteredSession.java:496) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+             at org.apache.catalina.connector.Request.doGetSession(Request.java:2625) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.Request.getSession(Request.java:2375) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.RequestFacade.getSession(RequestFacade.java:841) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.weld.context.beanstore.http.LazySessionBeanStore.getSession(LazySessionBeanStore.java:72) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.jboss.weld.context.beanstore.http.LazySessionBeanStore.<init>(LazySessionBeanStore.java:58) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.jboss.weld.context.http.HttpSessionContextImpl.associate(HttpSessionContextImpl.java:31) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.jboss.weld.context.http.HttpSessionContextImpl.associate(HttpSessionContextImpl.java:16) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.jboss.weld.servlet.WeldListener.requestInitialized(WeldListener.java:134) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:368) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:877) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:671) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:930) [jbossweb-7.0.13.Final.jar:]
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_03]
+Caused by: org.jboss.as.clustering.lock.TimeoutException: JBAS010223: Cannot acquire lock //default-host//users-editing/24imBLvqSg+4GVPnt8+Xzv+q from cluster
+       at org.jboss.as.clustering.lock.SharedLocalYieldingClusterLockManager.lock(SharedLocalYieldingClusterLockManager.java:439)
+       at org.jboss.as.clustering.web.infinispan.DistributedCacheManager.acquireSessionOwnership(DistributedCacheManager.java:372)
+       at org.jboss.as.web.session.ClusteredSession.acquireSessionOwnership(ClusteredSession.java:520) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+       ... 17 more
+REASON: unknown
+================================================================
+
+STACKTRACE:
+15:56:35,049 ERROR [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host].[/users-editing].[Faces Servlet]] (http--172.31.129.29-8280-1) Servlet.service() for servlet Faces Servlet threw exception: javax.faces.application.ViewExpiredException: viewId:/index.xhtml - View /index.xhtml could not be restored.
+             at com.sun.faces.lifecycle.RestoreViewPhase.execute(RestoreViewPhase.java:205) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:101) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.RestoreViewPhase.doPhase(RestoreViewPhase.java:116) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:118) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at javax.faces.webapp.FacesServlet.service(FacesServlet.java:593) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:329) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.weld.servlet.ConversationPropagationFilter.doFilter(ConversationPropagationFilter.java:62) [weld-core-1.1.5.AS71.Final.jar:2012-02-10 15:31]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:280) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:275) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:161) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.modcluster.container.jbossweb.JBossWebContext$RequestListenerValve.event(JBossWebContext.java:67)
+             at org.jboss.modcluster.container.jbossweb.JBossWebContext$RequestListenerValve.invoke(JBossWebContext.java:48)
+             at org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(WebNonTxEmCloserValve.java:50) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.web.security.SecurityContextAssociationValve.invoke(SecurityContextAssociationValve.java:153) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+             at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:155) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:368) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:877) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:671) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:930) [jbossweb-7.0.13.Final.jar:]
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_03]
+REASON: beside the obvious use case I think this exception can arise in clustered environments when the cookie is not set to comprise 
+        both servers. See:
+            http://stackoverflow.com/questions/12247265/cookie-storing-strategies-and-tabbed-browsing-of-different-jsf-applications-givi
+        for more.
+================================================================
+STACKTRACE:
 18:06:50,903 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-5) JBAS015876: Starting deployment of "nosecurity.ear"
 18:06:51,115 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-1) JBAS015876: Starting deployment of "nosecurity-war.war"
 18:06:51,115 INFO  [org.jboss.as.server.deployment] (MSC service thread 1-8) JBAS015876: Starting deployment of "nosecurity-ejb.jar"
@@ -20,8 +79,6 @@ JBAS014775:    New missing/unsatisfied dependencies:
 REASON: the hsqldb-ds.xml file bundled in an EAR to be deployed to JBoss AS references a driver "hsqldb-2.2.9" (as in: "<driver>hsqldb-2.2.9</driver>")
         that's not recognized by JBoss AS (is not configured in its standalone configuration xml file)
 ================================================================
-
-
 STACKTRACE:
 18:32:12,741 INFO  [javax.enterprise.resource.webcontainer.jsf.context] (http--172.31.129.29-8888-4) Exception when handling error trying to reset the response.: java.lang.IllegalStateException: Cannot create a session after the response has been committed
              at org.apache.catalina.connector.Request.doGetSession(Request.java:2636) [jbossweb-7.0.13.Final.jar:]
