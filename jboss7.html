@@ -1,8 +1,18 @@
 <head>
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <body>
-<ol>
+<ol reversed>
+<li>Running multiple JBoss 7 instances on the same machine</li>
+NB: not all the following pieces of advice work in JBoss AS7.<p>
+There are three options (see <a href="http://stackoverflow.com/questions/8715069/jboss-6-may-be-7-4-and-6-too-cluster-in-a-single-laptop">here</a> for more):
+    <ol>
+      <li>manually override all sets of ports on the second instance</li>
+      <li>use the <b>jboss.service.binding.set</b> property as in:
+                <pre>./run.sh -Djboss.service.binding.set=ports-01</pre></li>
+      <li>create another virtual IP address</li>
+    </ol>
 <li>Configuring JBoss 7 AS HTTP port</li>
 you need to modify the following file (in standalone mode):
 <i>/standalone/configuration/standalone.xml</i>
