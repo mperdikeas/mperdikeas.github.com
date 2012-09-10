@@ -17,6 +17,15 @@
 
 <h3>useful links</h3>
 <ol>
+    <li>great (for the very first steps) guide on clustering in JBoss AS7.1.1</li>
+        I followed the instructions given
+        <a href="http://middlewaremagic.com/jboss/?p=1952">here</a> 
+        for the 1st configuration (JBoss AS 7.1.1 instances on the same
+        box) and it worked like a charm. Note that you don't need to 
+        configure the multicast group address on the network - just 
+        give them any multicast group address and the'll find each other.
+        Look for 'Number of cluster members:' on the output - the 
+        second one that comes up should print: '2'.
     <li>
         <a href="http://thewonggei.wordpress.com/2011/06/23/session-and-clustered-java-web-apps/">Session and Clustered Java Web apps</a>
     </li>
