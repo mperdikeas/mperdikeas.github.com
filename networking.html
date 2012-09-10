@@ -15,12 +15,21 @@ You can also ping it from a remote machine and watch the MAC address
 enter that remote machine's <b>arp</b> cache. However it is not currently
 possible to assign a MAC address to that virtual interface that's different
 from the real one.
+<li>How to view multicast groups</li>
+Below are some incantations that work (I haven't correlated amongst them):
+<pre>
+netstat -g
+/sbin/ip maddress list
+ifconfig eth0 | grep MULTICAST
+</pre>
 <li>Multicast groups</li>
 Joining and leaving multicast groups can be done totally at the application layer
 when one opens a socket. Accordingly for software that has this concept (like JBoss AS7
 in 'high availability'/clustering mode), you provide the multicast address at the
 command line, you don't need to set anything administratively in the routing tables
 or elsewhere.
+<p><b>NB:</b>There's no such concept as 'joining a multicast group'. The concept is
+'joining a multicast group on a particular interface'.
 <li>arp</li>
 To see the <b>arp</b> tables (I believe there is some caching and therefore also expiry involved)
 of your local machine do a:
