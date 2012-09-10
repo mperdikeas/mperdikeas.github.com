@@ -1,0 +1,36 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+</head>
+<body>
+<ol reversed>
+<li>VMWare Player virtual machine network settings</li>
+There are three modes:
+    <ul>
+    <li>host-only:</li>
+        in which case it is only visible by the host operating system
+        and not any other node in the network
+    <li>reverse NAT</li>
+    <li>bridged:</li>
+        which is by far the most realistic. Any VMWare virtual machine
+        you configure using the <i>bridged</i> option is exactly the
+        same as another physical machine on the LAN segment (a.k.a the 
+        broadcast domain). These physical machines, even have MAC 
+        addresses and you could configure an <b>DHCP</b> server 
+        to even assign them specific IP addresses based on these MACs.
+        There are totally indistinguishable from other real machines
+        connected on the LAN segment. The name 'bridged' alludes to the
+        fact that VMWare implements something akin to a bridge functionality
+        in that it copies packets on the MAC layer.
+<li>VMWare Player interfaces</li>
+    Upon installing VMWare Player one will notice (with <b>ifconfig</b>)
+    two new interfaces: <b>vmnet1</b> and <b>vmnet8</b>. These are unrelated
+    to any virtual machines created, they come with the installation of VMWare
+    Player. Actually, if you only create virtual machines of the "bridged" type
+    (see above) you'll never use any of these interfaces, as a "bridged" virtual
+    machine has its own, 'real' interface which you can't see of course by doing
+    an <b>ifconfig</b> at the host operating system.
+</ol>
+</body>
+</html>

@@ -5,6 +5,37 @@
 </head>
 <body>
 <ol reversed>
+<li>virtual Ethernet interface</li>
+A virtual IP address is created as simply as:
+<pre>ifconfig eth0:1 172.31.129.121</pre>
+and is only visible on the same machine and (?) LAN segment.
+The above incantation produces an eth1 interface with the
+indicated address. Local servers can then bind on that interface.
+You can also ping it from a remote machine and watch the MAC address
+enter that remote machine's <b>arp</b> cache. However it is not currently
+possible to assign a MAC address to that virtual interface that's different
+from the real one.
+<li>Multicast groups</li>
+Joining and leaving multicast groups can be done totally at the application layer
+when one opens a socket. Accordingly for software that has this concept (like JBoss AS7
+in 'high availability'/clustering mode), you provide the multicast address at the
+command line, you don't need to set anything administratively in the routing tables
+or elsewhere.
+<li>arp</li>
+To see the <b>arp</b> tables (I believe there is some caching and therefore also expiry involved)
+of your local machine do a:
+<pre>sudo arp -a</pre>
+This will show known IP and MAC addresses for the hosts you've send packets to. Surprisingly
+(but perhaps not so since everything is routed and the <b>arp</b> tables only cache values for the
+LAN segment, i.e. the 1st hop towards the router), you'll see very few hosts there. This is the
+output on my machine:
+<pre>
+$ sudo arp -a
+kerio_control.neuropublic.gr (172.31.128.252) at 00:0f:20:32:c5:49 [ether] on eth0
+iasonaslb1.neuropublic.gr (172.31.128.247) at 00:0f:20:32:c5:49 [ether] on eth0
+iasonas.neuropublic.gr (172.31.128.249) at 00:0c:29:48:58:7c [ether] on eth0
+? (172.31.128.140) at 02:bf:ac:1f:80:8e [ether] on eth0
+</pre>
 <li>wireless problems in Ubuntu 12.04 LTS Precise</li>
 Original article <a hred="http://linuxplained.com/how-to-fix-wireless-problems-in-ubuntu-1204-precise-pangolin/">here</a>. Gist is to try one of these:
     <ul>
