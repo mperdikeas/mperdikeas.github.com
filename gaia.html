@@ -14,8 +14,12 @@
     A configuration (/etc/nginx/nginx.conf) file I used to
     implement simple Round-Robin is <a href="nginx.conf">this one</a>.
 </ol>
-<h3>things to keep in mind</h3>
+<h3>things to check / keep in mind</h3>
 <ol>
+    <li>is it possible to configure nginx so that sessions, once assigned are sticky
+        and only use the other server in case of failure?</li>
+        <i>this could presumably help reduce instances of open bug
+        <a href="https://issues.jboss.org/browse/AS7-4260">AS7-4260</a> </i>
     <li>does the container support minimal updating?(see 
     <a href="http://www.ibm.com/developerworks/java/library/j-jtp07294/index.html">here</a> for more)
     </li>

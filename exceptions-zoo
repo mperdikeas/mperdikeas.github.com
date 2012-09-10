@@ -23,7 +23,8 @@ Caused by: org.jboss.as.clustering.lock.TimeoutException: JBAS010223: Cannot acq
        at org.jboss.as.clustering.web.infinispan.DistributedCacheManager.acquireSessionOwnership(DistributedCacheManager.java:372)
        at org.jboss.as.web.session.ClusteredSession.acquireSessionOwnership(ClusteredSession.java:520) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
        ... 17 more
-REASON: unknown
+REASON: unknown. From what I can see at: 'https://issues.jboss.org/browse/AS7-4260' it is still open at the 
+                 time of this writing. This could be a blocking issues.
 ================================================================
 
 STACKTRACE:
