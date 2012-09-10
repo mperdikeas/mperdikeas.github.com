@@ -3,6 +3,18 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <body>
+<h3>travails</h3>
+<ol>
+    <li>nginx</li>
+    install the stable version of nginx by running:
+    <pre>
+        sudo apt-add-repository ppa:nginx/stable
+        sudo apt-get install nginx-full
+    </pre>
+    A configuration (/etc/nginx/nginx.conf) file I used to
+    implement simple Round-Robin is the following:
+    <iframe name="cwindow" style="border width=150 height=150" src="nginx.conf"></iframe>
+</ol>
 <h3>things to keep in mind</h3>
 <ol>
     <li>does the container support minimal updating?(see 
