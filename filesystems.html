@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol>
+<li>Find the UUID of a drive in Ubuntu precise</li>
+To find the drives:
+<pre>sudo fdisk -l </pre>
+and then you do a:
+<pre>sudo blkid /dev/sdb1</pre>
+where, in the above example, /dev/sdb1 is the device we're interested in.
 <li>Deep compare two file hierarchies</li>
 Either use <i>meld</i> or, from command line:
 <pre>
