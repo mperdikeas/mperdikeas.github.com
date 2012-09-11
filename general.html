@@ -5,6 +5,13 @@
 </head>
 <body>
 <ol reversed>
+<li>list open TCP sockets</li>
+<pre>lsof | grep TCP</pre>
+<li>recursively copy remote folder and keep permissions and modes (alternative to <b>scp</b>)</li>
+<pre>ssh mperdikeas@172.31.129.29 'tar cpf - cluster/' | tar xpvf -</pre>
+<li>how to find broken links</li>
+<pre>find -L -type l</pre>
+I.e. find files following links (<b>-L</b>) and report those that remain links (<b>-type l</b>)
 <li>find and kill an app</li>
 Let's say we need to find and kill the Conkeror app:
 <pre>
