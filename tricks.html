@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol>
+<li>more elegant 'ps aux | grep terminal | grep -v grep'</li>
+The following incantation:
+<pre>ps aux | grep '[t]erminal'</pre>
+will return all lines containing <i>terminal</i> which the line you invoked does not.
 <li>Generate import statements out of the classes of a jar</li>
 <pre>
 jar tvf Orders-ejb.jar  | grep entities| cut -c38- | grep -v /$ | sed 's,^,import ,' | sed 's,/,.,g'
