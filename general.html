@@ -5,7 +5,9 @@
 </head>
 <body>
 <ol reversed>
-<list>alternative to <i>diff</i></li>
+<li>cleanse hash table info of the shell as to the location of files</li>
+<pre>hash -r</pre>
+<li>alternative to <i>diff</i></li>
 one can use <b>md5sum</b>
 <li>list open TCP sockets</li>
 <pre>lsof | grep TCP</pre>
@@ -18,6 +20,10 @@ I.e. find files following links (<b>-L</b>) and report those that remain links (
 Let's say we need to find and kill the Conkeror app:
 <pre>
 ps axwww | grep conkeror | grep -v grep
+</pre>
+<p>or, better yet:
+<pre>
+ps axwww | grep 'c[o]nkeror'
 </pre>
 (note: I don't see any difference with the 'axw' flags)<p>
 Once you get the <i>pid</i> a <i>kill -7</i> should normaly suffice.
