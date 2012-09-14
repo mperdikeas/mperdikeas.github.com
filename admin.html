@@ -3,6 +3,14 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>troubleshooting mounting problems</li>
+Things one can do:
+    <ul>
+    <li>cat /proc/partitions</li>
+    <li>sudo fdisk -l /dev/sdc</li>
+    <li>sudo fdisk -l</li>
+    <li>dmesg | tail <i>(after you've plugged in the drive)</i></li>
+    </ul>
 <li>find user id of a user</li>
 <pre>id -u john</pre>
 For more information, includiing group id:
