@@ -10,7 +10,19 @@ Things one can do:
     <li>sudo fdisk -l /dev/sdc</li>
     <li>sudo fdisk -l</li>
     <li>dmesg | tail <i>(after you've plugged in the drive)</i></li>
+    <li>check what the kernel is saying when the USB device gets mounted (leave running while attaching):<li>
+        <pre>sudo tail -f /var/log/syslog</pre>
+    <li>check whether the drive appears in the BIOS</li>
     </ul>
+<p>If an external HDD is not visible even at the output of <b>fdisk -l</b> this means that it
+is not visible, even as a device, which strongly suggests that the USB port itself may have
+been fried. I suppose a fried USB port could be diagnosed by the output of the <b>lsusb</b>
+command.
+<li>mounting NTFS filesystems</li>
+In general, all kernels provide default mount drivers in the kernel. However, for NTFS filesystems
+in particular, the best available mount driver is of type FUSE (Filesystems in USEr space) and
+you can get it with <b>sudo mount ntfs-3g</b>. You then use <b>ntfs-3g</b> instead of <b>mount</b>
+to do the actual mounting.
 <li>find user id of a user</li>
 <pre>id -u john</pre>
 For more information, includiing group id:
