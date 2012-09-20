@@ -4,6 +4,23 @@
 </head>
 <body>
 <ol reversed>
+<li>to build from github</li>
+be sure to have OpenJDK 1.7.0_07 installed:
+    <ol>
+    <li>sudo apt-get remove openjdk-7-jdk</li>
+    <li>sudo apt-get install openjdk-7-jdk</li>
+    </ol>
+After that <b>mvn install</b> (with <b>Maven 3</b>) should build OK without any problems
+(or so the theory goes). It was also successfully built using <b>build.sh</b>
+(not <b>maven</b>) with the following configuration:
+    <ol>
+    <li>java -version</li>
+        java version "1.7.0_02-ea"
+        Java(TM) SE Runtime Environment (build 1.7.0_02-ea-b08)
+        Java HotSpot(TM) Server VM (build 22.0-b06, mixed mode)
+    <li>javac -version</li>
+        javac 1.7.0_02-ea
+    </ol>
 <li>configuring JBoss AS7 clustering</li>
 There's a surprising dearth of material on that subject.
 The only guide I found is given in the 'useful links' section
