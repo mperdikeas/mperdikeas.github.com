@@ -4,7 +4,16 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <body>
-<ol>
+<ol reversed>
+<li>Taking snapshots in a ZFS filesystem</li>
+In a ZFS filesystem there is no need to use the custom script that 
+rotates backups relying on a combination of <b>cp -al</b> and 
+<b>rsync</b>. <b>rsync</b> alone is enough together with a ZFS pool,
+e.g. named 'backups' as in:
+<pre>
+rsync -avx --delete --in-place /whatever /mnt/zfs
+zfs snapshot backups@20120925
+</pre>
 <li>Find the UUID of a drive in Ubuntu precise</li>
 To find the drives:
 <pre>sudo fdisk -l </pre>

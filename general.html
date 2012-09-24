@@ -5,6 +5,15 @@
 </head>
 <body>
 <ol reversed>
+<li>pattern to use when in need to replace broken links in a systematic way:</li>
+<pre>
+find . -iname \*.jar | while read ANS;
+    do DIR=$(dirname "$ANS");
+    cd "$DIR";
+    rm $(basename "$ANS"); 
+    ln -s ../../../../../../../../repo-wide-libs/$(basename "$ANS");
+done
+</pre>
 <li>report total disk usage of directory</li>
 <pre>du -s</pre>
 Also, <b>-b</b> to report bytes and <b>-h</b> for human-readable.
