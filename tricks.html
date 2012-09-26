@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol>
+<li>trace the system calls by an executable</li>
+<pre>strace -f ./NeuroCode.exe Project.xml  2>&1 | less</pre>
+Once in the output of <b>less</b>, you can use a <b>/</b> to search for <b>NeuroCode.exe</b>
+and find the system calls it makes.
 <li>more elegant 'ps aux | grep terminal | grep -v grep'</li>
 The following incantation:
 <pre>ps aux | grep '[t]erminal'</pre>
