@@ -4,8 +4,6 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <body>
-<ol>
-<li>do the two below in Ant</li>
     <![CDATA[
         <java classname ="${project.MainClass.name}" fork="true">                                                                                  
              <classpath refid="run.classpath"/>                                                                                                    
@@ -14,6 +12,8 @@ s above) -->
              <jvmarg value="-Dorg.slf4j.simpleLogger.defaultLogLevel=debug"/>                                                                      
         </java>    
       ]]>
+<ol>
+<li>do the two below in Ant</li>
 <li>configure default log level in slf4j</li>
 <pre>java -Dorg.slf4j.simpleLogger.defaultLogLevel=trace</pre>
 <li>configure log level for a particular class in slf4j</li>
