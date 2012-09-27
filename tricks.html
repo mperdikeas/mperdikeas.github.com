@@ -5,6 +5,16 @@
 </head>
 <body>
 <ol>
+<li>'materialize' soft-links - easy way</li>
+<pre>cp -pr -L --copy-contents</pre>
+<li>'materialize' soft-links - trying to be clever way</li>
+We do it in two steps:
+    <ol>
+    <li>create the directories</li>
+    <pre>cd srcPath && find . -type d -exec mkdir -p /destPath/'{}' ';'</pre>
+    <li>copy the contents - use the <b><i>cat</i></b>trickery to always get the data</li>
+    <pre>cd srcPath && find . ! -type d -exec sh -c 'cat "{}" > /destPath/"{}"' \;</pre>
+    </ol>
 <li>trace the system calls by an executable</li>
 <pre>strace -f ./NeuroCode.exe Project.xml  2>&1 | less</pre>
 Once in the output of <b>less</b>, you can use a <b>/</b> to search for <b>NeuroCode.exe</b>
