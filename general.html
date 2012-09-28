@@ -14,6 +14,8 @@ find . -iname \*.jar | while read ANS;
     ln -s ../../../../../../../../repo-wide-libs/$(basename "$ANS");
 done
 </pre>
+<li>interesting tar incantation</li>
+<pre>tar jcpf archive-name.tar.bz2 www/{folderA,folderB} </pre>
 <li>report total disk usage of directory</li>
 <pre>du -s</pre>
 Also, <b>-b</b> to report bytes and <b>-h</b> for human-readable.
