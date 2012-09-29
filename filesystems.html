@@ -5,6 +5,17 @@
 </head>
 <body>
 <ol reversed>
+<li>procedure to automatically mount a new filesystem in Ubuntu</li>
+    <ol>
+        <li>get the UUID of the device in question:</li>
+        <pre>sudo blkid</pre>
+        <li>get the user and group of the id of the user who'll be the owner of the files
+            on the mounted filesystem using the <b><u>id</u></b> command.
+        </li>
+        <li>add a line at the end of the /etc/fstab file. E.g.</li>
+         <pre>UUID=e6daad35-1f57-4281-8683-a03c20cfc5a3 /media/Elements ext4 defaults,uid=1000,gid=1000,umask=007
+         </pre>
+    </ol>
 <li>Taking snapshots in a ZFS filesystem</li>
 In a ZFS filesystem there is no need to use the custom script that 
 rotates backups relying on a combination of <b>cp -al</b> and 
