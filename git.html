@@ -5,6 +5,14 @@
 </head>
 <body>
 <ol reversed>
+<li>reconnect a detached head</li>
+<pre>
+$ git log -1
+# note the SHA-1 of latest commit
+$ git checkout master
+# reset your branch head to your previously detached commit
+$ git reset --hard [commit-id]
+</pre>
 <li>list tags</li>
 <pre>git tag -l</li>
 <li>checkout remote tip</li>
