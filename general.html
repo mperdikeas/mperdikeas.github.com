@@ -5,6 +5,14 @@
 </head>
 <body>
 <ol reversed>
+<li>how to find process that bind on specific ports</li>
+<pre>sudo netstat -tulpn </pre>
+and then, once you have the PID (e.g. 3903), you can do a:
+    <pre>
+        ls -l /proc/3903/exe
+        ls -l /proc/3903/cwd
+    </pre>
+    to find more about the process.
 <li>pattern to use when in need to replace broken links in a systematic way:</li>
 <pre>
 find . -iname \*.jar | while read ANS;
