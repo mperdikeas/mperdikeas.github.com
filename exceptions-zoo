@@ -1,4 +1,36 @@
 STACKTRACE:
+17:52:15,622 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-7) MSC00001: Failed to start service jboss.deployment.subunit."sso-caching-2.ear"."sso-caching-2-war.war".INSTALL: org.jboss.msc.service.StartException in service jboss.deployment.subunit."sso-caching-2.ear"."sso-caching-2-war.war".INSTALL: Failed to process phase INSTALL of subdeployment "sso-caching-2-war.war" of deployment "sso-caching-2.ear"
+             at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:119) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+             at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+             at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_07]
+             at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_07]
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_07]
+Caused by: org.jboss.msc.service.DuplicateServiceException: Service jboss.pojo."org.jboss.netty.internal.LoggerConfigurator".DESCRIBED is already registered
+       at org.jboss.msc.service.ServiceRegistrationImpl.setInstance(ServiceRegistrationImpl.java:154) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceControllerImpl.startInstallation(ServiceControllerImpl.java:227) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceContainerImpl.install(ServiceContainerImpl.java:560) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceTargetImpl.install(ServiceTargetImpl.java:201) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceControllerImpl$ChildServiceTarget.install(ServiceControllerImpl.java:2228) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceTargetImpl.install(ServiceTargetImpl.java:201) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceControllerImpl$ChildServiceTarget.install(ServiceControllerImpl.java:2228) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceBuilderImpl.install(ServiceBuilderImpl.java:307) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.as.pojo.ParsedKernelDeploymentProcessor.describeBean(ParsedKernelDeploymentProcessor.java:94)
+       at org.jboss.as.pojo.ParsedKernelDeploymentProcessor.deploy(ParsedKernelDeploymentProcessor.java:76)
+       at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:113) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
+       ... 5 more
+REASON: Occured when I deployed two EARs in the same JBoss AS that both contained file jboss-client.jar in the following 
+        location:
+
+        EAR
+         |---- EJB-JAR
+               \--- (..)
+         \---- WAR
+                \--- web/WEB-INF/lib/jboss-client.jar
+ 
+        The solution was to simply remove jboss-client.jar from the deployment.
+================================================================
+STACKTRACE:
 18:20:57,943 ERROR [org.apache.catalina.core.ContainerBase.[jboss.web].[default-host]] (http--172.31.129.29-8280-4) Exception sending request initialized lifecycle event to listener instance of class org.jboss.weld.servlet.WeldListener: java.lang.RuntimeException: JBAS018060: Exception acquiring ownership of 24imBLvqSg+4GVPnt8+Xzv+q
              at org.jboss.as.web.session.ClusteredSession.acquireSessionOwnership(ClusteredSession.java:528) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
              at org.jboss.as.web.session.ClusteredSession.access(ClusteredSession.java:496) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
