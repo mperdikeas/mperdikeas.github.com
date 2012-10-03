@@ -4,6 +4,12 @@
 </head>
 <body>
 <ol>
+<li>how to add ignore files in SVN</li>
+use the <u>setUnversionedToSVNignore.sh</u> script once you're satisfied
+that all the files reported with '?' in the <u>svn status</u> are
+files you want to add to <u>svn:ignore</u>. Then, to commit
+the svn:ignore properties of the folders thusly changed its enough
+to commit the roo folder, or each one of them individually.
 <li>how to undo SVN commits</li><p>
 Say you wish to go back from commit 75 to commit 68.
 There are two ways:
