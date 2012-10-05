@@ -1,4 +1,426 @@
 STACKTRACE:
+10:40:52,226 ERROR [org.jboss.ejb3.invocation] (http--172.31.129.29-8888-3) JBAS014134: EJB Invocation failed on component TransactionGroupFacade for method public abstract void gr.neuropublic.base.IFacade.create(java.lang.Object): javax.ejb.EJBTransactionRolledbackException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.handleInCallerTx(CMTTxInterceptor.java:139) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInCallerTx(CMTTxInterceptor.java:204) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:306) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:190) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:41) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:59) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:50) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:32) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.TCCLInterceptor.processInvocation(TCCLInterceptor.java:45) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:165) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ee.component.ViewDescription$1.processInvocation(ViewDescription.java:173) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ProxyInvocationHandler.invoke(ProxyInvocationHandler.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at gr.neuropublic.gaia.cashflow.facades.ITransactionGroupFacade$ILocal$$$view14.create(Unknown Source) [cashflow-client.jar:]
+             at gr.neuropublic.gaia.cashflow.services.TransactionGroupService.copyTransactionGroups(TransactionGroupService.java:55) [cashflow-ejb.jar:]
+             at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+             at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+             at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+             at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+             at org.jboss.as.ee.component.ManagedReferenceMethodInterceptorFactory$ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptorFactory.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.WeavedInterceptor.processInvocation(WeavedInterceptor.java:53) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:36) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:47) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:21) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:53) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:51) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInOurTx(CMTTxInterceptor.java:228) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:304) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:190) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:41) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:59) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:50) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:32) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.TCCLInterceptor.processInvocation(TCCLInterceptor.java:45) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:165) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ee.component.ViewDescription$1.processInvocation(ViewDescription.java:173) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ProxyInvocationHandler.invoke(ProxyInvocationHandler.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at gr.neuropublic.gaia.cashflow.services.ITransactionGroupService$ILocal$$$view3.copyTransactionGroups(Unknown Source) [cashflow-client.jar:]
+             at gr.neuropublic.gaia.cashflow.backingBeans.TransactionGroupServiceBBean.cpTransactionGroupsFromOtherCF(TransactionGroupServiceBBean.java:25)
+             at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+             at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+             at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+             at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+             at org.apache.el.parser.AstValue.invoke(AstValue.java:262)
+             at org.apache.el.MethodExpressionImpl.invoke(MethodExpressionImpl.java:278)
+             at com.sun.faces.facelets.el.TagMethodExpression.invoke(TagMethodExpression.java:105)
+             at javax.faces.component.MethodBindingMethodExpressionAdapter.invoke(MethodBindingMethodExpressionAdapter.java:88)
+             at com.sun.faces.application.ActionListenerImpl.processAction(ActionListenerImpl.java:102)
+             at javax.faces.component.UICommand.broadcast(UICommand.java:315)
+             at javax.faces.component.UIViewRoot.broadcastEvents(UIViewRoot.java:794)
+             at javax.faces.component.UIViewRoot.processApplication(UIViewRoot.java:1259)
+             at com.sun.faces.lifecycle.InvokeApplicationPhase.execute(InvokeApplicationPhase.java:81)
+             at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:101)
+             at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:118)
+             at javax.faces.webapp.FacesServlet.service(FacesServlet.java:593)
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:329)
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248)
+             at gr.neuropublic.jsf.util.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:22)
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:280)
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248)
+             at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:275)
+             at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:161)
+             at org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(WebNonTxEmCloserValve.java:50) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.web.security.SecurityContextAssociationValve.invoke(SecurityContextAssociationValve.java:153)
+             at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:155)
+             at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+             at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+             at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:368)
+             at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:877)
+             at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:671)
+             at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:930)
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_07]
+Caused by: javax.persistence.EntityExistsException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1333) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1289) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1295) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:859) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.jboss.as.jpa.container.AbstractEntityManager.persist(AbstractEntityManager.java:563) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+       at gr.neuropublic.base.AbstractFacade.create(AbstractFacade.java:19) [cashflow-ejb.jar:]
+       at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+       at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+       at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+       at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+       at org.jboss.as.ee.component.ManagedReferenceMethodInterceptorFactory$ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptorFactory.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.WeavedInterceptor.processInvocation(WeavedInterceptor.java:53) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:36) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:47) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:21) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:53) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:51) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInCallerTx(CMTTxInterceptor.java:202) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       ... 94 more
+
+10:40:52,284 ERROR [org.jboss.ejb3.invocation] (http--172.31.129.29-8888-3) JBAS014134: EJB Invocation failed on component TransactionGroupService for method public abstract void gr.neuropublic.gaia.cashflow.services.ITransactionGroupService.copyTransactionGroups(int,int): javax.ejb.EJBTransactionRolledbackException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.handleInCallerTx(CMTTxInterceptor.java:139) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInCallerTx(CMTTxInterceptor.java:204) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:306) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:190) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:41) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:59) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:50) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:32) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.TCCLInterceptor.processInvocation(TCCLInterceptor.java:45) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:165) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ee.component.ViewDescription$1.processInvocation(ViewDescription.java:173) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ProxyInvocationHandler.invoke(ProxyInvocationHandler.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at gr.neuropublic.gaia.cashflow.facades.ITransactionGroupFacade$ILocal$$$view14.create(Unknown Source) [cashflow-client.jar:]
+             at gr.neuropublic.gaia.cashflow.services.TransactionGroupService.copyTransactionGroups(TransactionGroupService.java:55) [cashflow-ejb.jar:]
+             at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+             at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+             at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+             at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+             at org.jboss.as.ee.component.ManagedReferenceMethodInterceptorFactory$ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptorFactory.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.WeavedInterceptor.processInvocation(WeavedInterceptor.java:53) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:36) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:47) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:21) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:53) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:51) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInOurTx(CMTTxInterceptor.java:228) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:304) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:190) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:41) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:59) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:50) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:32) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.TCCLInterceptor.processInvocation(TCCLInterceptor.java:45) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:165) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.ee.component.ViewDescription$1.processInvocation(ViewDescription.java:173) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+             at org.jboss.as.ee.component.ProxyInvocationHandler.invoke(ProxyInvocationHandler.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+             at gr.neuropublic.gaia.cashflow.services.ITransactionGroupService$ILocal$$$view3.copyTransactionGroups(Unknown Source) [cashflow-client.jar:]
+             at gr.neuropublic.gaia.cashflow.backingBeans.TransactionGroupServiceBBean.cpTransactionGroupsFromOtherCF(TransactionGroupServiceBBean.java:25)
+             at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+             at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+             at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+             at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+             at org.apache.el.parser.AstValue.invoke(AstValue.java:262)
+             at org.apache.el.MethodExpressionImpl.invoke(MethodExpressionImpl.java:278)
+             at com.sun.faces.facelets.el.TagMethodExpression.invoke(TagMethodExpression.java:105)
+             at javax.faces.component.MethodBindingMethodExpressionAdapter.invoke(MethodBindingMethodExpressionAdapter.java:88)
+             at com.sun.faces.application.ActionListenerImpl.processAction(ActionListenerImpl.java:102)
+             at javax.faces.component.UICommand.broadcast(UICommand.java:315)
+             at javax.faces.component.UIViewRoot.broadcastEvents(UIViewRoot.java:794)
+             at javax.faces.component.UIViewRoot.processApplication(UIViewRoot.java:1259)
+             at com.sun.faces.lifecycle.InvokeApplicationPhase.execute(InvokeApplicationPhase.java:81)
+             at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:101)
+             at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:118)
+             at javax.faces.webapp.FacesServlet.service(FacesServlet.java:593)
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:329)
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248)
+             at gr.neuropublic.jsf.util.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:22)
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:280)
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248)
+             at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:275)
+             at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:161)
+             at org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(WebNonTxEmCloserValve.java:50) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.web.security.SecurityContextAssociationValve.invoke(SecurityContextAssociationValve.java:153)
+             at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:155)
+             at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+             at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+             at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:368)
+             at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:877)
+             at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:671)
+             at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:930)
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_07]
+Caused by: javax.persistence.EntityExistsException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1333) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1289) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1295) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:859) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.jboss.as.jpa.container.AbstractEntityManager.persist(AbstractEntityManager.java:563) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+       at gr.neuropublic.base.AbstractFacade.create(AbstractFacade.java:19) [cashflow-ejb.jar:]
+       at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+       at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+       at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+       at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+       at org.jboss.as.ee.component.ManagedReferenceMethodInterceptorFactory$ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptorFactory.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.WeavedInterceptor.processInvocation(WeavedInterceptor.java:53) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:36) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:47) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:21) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:53) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:51) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInCallerTx(CMTTxInterceptor.java:202) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       ... 94 more
+
+10:40:52,322 WARNING [javax.enterprise.resource.webcontainer.jsf.lifecycle] (http--172.31.129.29-8888-3) #{transactionGroupServiceBBean.cpTransactionGroupsFromOtherCF}: javax.ejb.EJBTransactionRolledbackException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]: javax.faces.FacesException: #{transactionGroupServiceBBean.cpTransactionGroupsFromOtherCF}: javax.ejb.EJBTransactionRolledbackException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+             at com.sun.faces.application.ActionListenerImpl.processAction(ActionListenerImpl.java:118) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at javax.faces.component.UICommand.broadcast(UICommand.java:315) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at javax.faces.component.UIViewRoot.broadcastEvents(UIViewRoot.java:794) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at javax.faces.component.UIViewRoot.processApplication(UIViewRoot.java:1259) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at com.sun.faces.lifecycle.InvokeApplicationPhase.execute(InvokeApplicationPhase.java:81) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.Phase.doPhase(Phase.java:101) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at com.sun.faces.lifecycle.LifecycleImpl.execute(LifecycleImpl.java:118) [jsf-impl-2.1.7-jbossorg-2.jar:]
+             at javax.faces.webapp.FacesServlet.service(FacesServlet.java:593) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:329) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at gr.neuropublic.jsf.util.CharacterEncodingFilter.doFilter(CharacterEncodingFilter.java:22) [classes:]
+             at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:280) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:248) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:275) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:161) [jbossweb-7.0.13.Final.jar:]
+             at org.jboss.as.jpa.interceptor.WebNonTxEmCloserValve.invoke(WebNonTxEmCloserValve.java:50) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+             at org.jboss.as.web.security.SecurityContextAssociationValve.invoke(SecurityContextAssociationValve.java:153) [jboss-as-web-7.1.1.Final.jar:7.1.1.Final]
+             at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:155) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:368) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Processor.process(Http11Processor.java:877) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.coyote.http11.Http11Protocol$Http11ConnectionHandler.process(Http11Protocol.java:671) [jbossweb-7.0.13.Final.jar:]
+             at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:930) [jbossweb-7.0.13.Final.jar:]
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_07]
+Caused by: javax.faces.el.EvaluationException: javax.ejb.EJBTransactionRolledbackException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+       at javax.faces.component.MethodBindingMethodExpressionAdapter.invoke(MethodBindingMethodExpressionAdapter.java:102) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+       at com.sun.faces.application.ActionListenerImpl.processAction(ActionListenerImpl.java:102) [jsf-impl-2.1.7-jbossorg-2.jar:]
+       ... 24 more
+Caused by: javax.ejb.EJBTransactionRolledbackException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.handleInCallerTx(CMTTxInterceptor.java:139) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInCallerTx(CMTTxInterceptor.java:204) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:306) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:190) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:41) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:59) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:50) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:32) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.TCCLInterceptor.processInvocation(TCCLInterceptor.java:45) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:165) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.as.ee.component.ViewDescription$1.processInvocation(ViewDescription.java:173) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.ProxyInvocationHandler.invoke(ProxyInvocationHandler.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at gr.neuropublic.gaia.cashflow.facades.ITransactionGroupFacade$ILocal$$$view14.create(Unknown Source) [cashflow-client.jar:]
+       at gr.neuropublic.gaia.cashflow.services.TransactionGroupService.copyTransactionGroups(TransactionGroupService.java:55) [cashflow-ejb.jar:]
+       at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+       at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+       at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+       at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+       at org.jboss.as.ee.component.ManagedReferenceMethodInterceptorFactory$ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptorFactory.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.WeavedInterceptor.processInvocation(WeavedInterceptor.java:53) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:36) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:47) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:21) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:53) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:51) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInOurTx(CMTTxInterceptor.java:228) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.required(CMTTxInterceptor.java:304) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.processInvocation(CMTTxInterceptor.java:190) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.interceptors.CurrentInvocationContextInterceptor.processInvocation(CurrentInvocationContextInterceptor.java:41) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.interceptors.LoggingInterceptor.processInvocation(LoggingInterceptor.java:59) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.NamespaceContextInterceptor.processInvocation(NamespaceContextInterceptor.java:50) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.interceptors.AdditionalSetupInterceptor.processInvocation(AdditionalSetupInterceptor.java:32) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.TCCLInterceptor.processInvocation(TCCLInterceptor.java:45) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.ViewService$View.invoke(ViewService.java:165) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.as.ee.component.ViewDescription$1.processInvocation(ViewDescription.java:173) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.ProxyInvocationHandler.invoke(ProxyInvocationHandler.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at gr.neuropublic.gaia.cashflow.services.ITransactionGroupService$ILocal$$$view3.copyTransactionGroups(Unknown Source) [cashflow-client.jar:]
+       at gr.neuropublic.gaia.cashflow.backingBeans.TransactionGroupServiceBBean.cpTransactionGroupsFromOtherCF(TransactionGroupServiceBBean.java:25) [classes:]
+       at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+       at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+       at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+       at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+       at org.apache.el.parser.AstValue.invoke(AstValue.java:262) [jbossweb-7.0.13.Final.jar:]
+       at org.apache.el.MethodExpressionImpl.invoke(MethodExpressionImpl.java:278) [jbossweb-7.0.13.Final.jar:]
+       at com.sun.faces.facelets.el.TagMethodExpression.invoke(TagMethodExpression.java:105) [jsf-impl-2.1.7-jbossorg-2.jar:]
+       at javax.faces.component.MethodBindingMethodExpressionAdapter.invoke(MethodBindingMethodExpressionAdapter.java:88) [jboss-jsf-api_2.1_spec-2.0.1.Final.jar:2.0.1.Final]
+       ... 25 more
+Caused by: javax.persistence.EntityExistsException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1333) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1289) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1295) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.hibernate.ejb.AbstractEntityManagerImpl.persist(AbstractEntityManagerImpl.java:859) [hibernate-entitymanager-4.0.1.Final.jar:4.0.1.Final]
+       at org.jboss.as.jpa.container.AbstractEntityManager.persist(AbstractEntityManager.java:563) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+       at gr.neuropublic.base.AbstractFacade.create(AbstractFacade.java:19) [cashflow-ejb.jar:]
+       at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) [rt.jar:1.7.0_07]
+       at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57) [rt.jar:1.7.0_07]
+       at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) [rt.jar:1.7.0_07]
+       at java.lang.reflect.Method.invoke(Method.java:601) [rt.jar:1.7.0_07]
+       at org.jboss.as.ee.component.ManagedReferenceMethodInterceptorFactory$ManagedReferenceMethodInterceptor.processInvocation(ManagedReferenceMethodInterceptorFactory.java:72) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.WeavedInterceptor.processInvocation(WeavedInterceptor.java:53) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.UserInterceptorFactory$1.processInvocation(UserInterceptorFactory.java:36) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.jpa.interceptor.SBInvocationInterceptor.processInvocation(SBInvocationInterceptor.java:47) [jboss-as-jpa-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InitialInterceptor.processInvocation(InitialInterceptor.java:21) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.invocation.ChainedInterceptor.processInvocation(ChainedInterceptor.java:61) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ee.component.interceptors.ComponentDispatcherInterceptor.processInvocation(ComponentDispatcherInterceptor.java:53) [jboss-as-ee-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.component.pool.PooledInstanceInterceptor.processInvocation(PooledInstanceInterceptor.java:51) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       at org.jboss.invocation.InterceptorContext.proceed(InterceptorContext.java:288) [jboss-invocation-1.1.1.Final.jar:1.1.1.Final]
+       at org.jboss.as.ejb3.tx.CMTTxInterceptor.invokeInCallerTx(CMTTxInterceptor.java:202) [jboss-as-ejb3-7.1.1.Final.jar:7.1.1.Final]
+       ... 94 more
+REASON:
+
+    I had the following code:
+
+   public void copyTransactionGroups(int caflIdFrom, int caflIdTo) {
+        l.info(String.format("copying groups from cash flow id %d to %d", caflIdFrom, caflIdTo));
+        List <TransactionGroup> allTransactionGroups = em.createNamedQuery("TransactionGroup.findByCaflid")
+            .setParameter("caflId", new CashFlow(caflIdFrom))
+            .getResultList();
+        int i = 0 ;
+        for (TransactionGroup tgA : allTransactionGroups) {
+            l.info("about to copy: "+tgA.toString());
+            TransactionGroup tgB = new TransactionGroup();
+            // int nextSeq  =  JPUtil.getNextSequenceValueForEntity(TransactionGroup.class, em);
+            tgB.setCaflId      (new CashFlow(caflIdTo));
+            tgB.setTrgrParentId(tgA.getTrgrParentId());
+            tgB.setTrgtId      (tgA.getTrgtId());
+            tgB.setName        (tgA.getName());
+            tgB.setPrintOrder  (tgA.getPrintOrder());
+            tgB.setPrintTotal  (tgA.getPrintTotal());
+            tgB.setImportRules (tgA.getImportRules());
+            l.info("about to call create, i = "+(i++));
+            tgFacade.create(tgB);
+        }
+    } 
+
+    with the following definition for the id property:
+
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "trgr_id")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="km_transaction_groups_trgr_id")
+    @SequenceGenerator(name="km_transaction_groups_trgr_id", sequenceName="trgr_id_seq", allocationSize=1)
+    private Integer id;
+
+
+    The problem was that the values in the database TransactionGroup table were loaded using a test script and the keys were
+    assigned hardcodedly (as part of the INSERT statement), thus the sequence was out of order and Hibernate obtained a sequence 
+    number of the key that already existed.
+================================================================
+STACKTRACE:
 17:52:15,622 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-7) MSC00001: Failed to start service jboss.deployment.subunit."sso-caching-2.ear"."sso-caching-2-war.war".INSTALL: org.jboss.msc.service.StartException in service jboss.deployment.subunit."sso-caching-2.ear"."sso-caching-2-war.war".INSTALL: Failed to process phase INSTALL of subdeployment "sso-caching-2-war.war" of deployment "sso-caching-2.ear"
              at org.jboss.as.server.deployment.DeploymentUnitPhaseService.start(DeploymentUnitPhaseService.java:119) [jboss-as-server-7.1.1.Final.jar:7.1.1.Final]
              at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
