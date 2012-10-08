@@ -3,6 +3,24 @@
 </head>
 <body>
 <ol reversed>
+<li>Configure PostgreSQL 9.1 to allow password access to users from a specific subdomain
+(say 173.31.0.0/16, i.e. the 173.31 subdomain)</li>
+<pre>
+sudo-i
+cd /etc/postgresql/9.1/main
+</pre>
+in pg_hba.conf add the following line:
+<pre>
+host all all 172.31.0.0/16 md5
+</pre>
+and in file postgresql.conf, change:
+<pre>
+listen_addresses='localhost'
+</pre>
+to:
+<pre>
+listen_addresses='*'
+</pre>
 <li>Configure PostgreSQL 9.1 to not require password for users</li><p>
 This can be used, e.g. to automate the creation of users by means of a script.
 Basically the following line has to be edited in the pg_hba.conf file:

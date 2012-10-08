@@ -1,0 +1,32 @@
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+</head>
+<body>
+<ol reversed>
+<li>Configure PrimeFaces file upload component</li>
+The default example found in the <a href="http://www.primefaces.org/showcase/ui/fileUploadDnd.jsf">Prime Faces showcase</a> (as accessed X.2012) will not work out of the box. You have to set up the following first:
+    <ol>
+    <li>declare the Prime Faces upload filter in web.xml as follows:</li>
+    <pre>
+      <filter>
+         <filter-name>PrimeFaces FileUpload Filter</filter-name>
+         <filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+      </filter>
+      <filter-mapping>
+         <filter-name>PrimeFaces FileUpload Filter</filter-name>
+         <servlet-name>Faces Servlet</servlet-name>
+      </filter-mapping>
+    </pre>
+    <li>Adding two libraries to your application: Apache commons-file-upload and Apache commons-io.
+        So you need to download them and add them to your WEB-INF/lib path:</li>
+        <ol>
+           <li><a href="http://commons.apache.org/io/">Here</a> you can download Apache Commons io</li>
+           <li><a href="http://commons.apache.org/fileupload/">Here</a> you can download Apache Commons File Upload</li>
+        </ol>
+    </ol>
+    <a href="http://www.mastertheboss.com/primefaces/primefaces-file-upload-example">source</a>.
+    See also my archetypes JSF use case 12.
+</ol>
+
+
+</body>

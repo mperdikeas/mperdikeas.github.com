@@ -4,6 +4,10 @@
 </head>
 <body>
 <ol>
+<li>checking that status of a file (e.g. foo.sh) in SVN</li>
+<pre>svn ls foo.sh</pre>
+<li>getting the .svnignore settings for the current folder</li>
+<pre>svn propget svn:ignore .</pre>
 <li>renaming, moving files / directories and creating directories</li>
 Such operations cannot be done from the shell alone. You'll have to use:
 <pre>
