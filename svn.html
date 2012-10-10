@@ -4,6 +4,18 @@
 </head>
 <body>
 <ol>
+<li>add a number of files in the svn:ignore property</li>
+<pre>svn propedit svn:ignore .</pre>
+<li>add a directory in SVN without recursing</li>
+<pre>svn add --depth=empty &ltdirectory&gt</pre>
+<li>reverting an 'svn add &ltdirectory&gt'</li>
+<pre>svn revert &ltdirectory&gt</pre>
+and sometimes the following is required:
+<pre>svn revert &ltdirectory&gt --depth infinity</pre>
+<li>checking out a particular working directory inside the repo</li>
+<pre>
+svn co https://172.31.128.119/svn/neuro-jsf-pilot/trunk/apps/cashflow
+</pre>
 <li>checking that status of a file (e.g. foo.sh) in SVN</li>
 <pre>svn ls foo.sh</pre>
 <li>getting the .svnignore settings for the current folder</li>
