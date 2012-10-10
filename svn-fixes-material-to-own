@@ -1,0 +1,117 @@
+  389  cd ~/neuro-jsf-pilot-svn-stable/
+  390  l
+  391  cd trunk/
+  392  alias l='ls -alF'
+  393  l
+  394  cd apps/cashflow/
+  395  l
+  396  svn status
+  397  cd webapp/cashflow
+  398  cd cashflow-war/lib
+  399  l
+  400  svn status
+  401  svn ls -l  joda-time-2.1.jar
+  402  svn ls  joda-time-2.1.jar
+  403  svn propget joda-time-2.1.jar
+  404  unset LC_CTYPE
+  405  svn propget joda-time-2.1.jar
+  406  export LC_CTYPE=C
+  407  svn propget joda-time-2.1.jar
+  408  export LC_ALL=C
+  409  svn propget joda-time-2.1.jar
+  410  svn propget .
+  411  svn proplist .
+  412  l
+  413  svn status
+  414  svn revert jboss-el-api_2.2_spec-1.0.0.Final.jar
+  415  svn status
+  416  svn revert primefaces-extensions-0.5.1.jar
+  417  svn status
+  418  svn status > /var/tmp/deleted
+  419  cd ..
+  420  l
+  421  cd ..
+  422  l
+  423  svn status
+  424  svn status | grep -v lib-repo
+  425  svn status | grep -v lib-repo > /var/tmp/movedtofiles
+  426  svn status | grep -v lib-repo
+  427  svn revert $(svn status | grep -v lib-repo | awk '{print $2}')
+  428  cat /var/tmp/movedtofiles 
+  429  cat /var/tmp/movedtofiles  | awk '{print $2}'
+  430  svn revert $(cat /var/tmp/movedtofiles  | awk '{print $2}')
+  431  ls -l 'cashflow-client/lib/joda-time-2.1.jar'
+  432  svn rm $(cat /var/tmp/movedtofiles  | awk '{print $2}')
+  433  svn commit -m "No longer symlink" $(cat /var/tmp/movedtofiles  | awk '{print $2}')
+  434  cat /var/tmp/deleted 
+  435  cat /var/tmp/deleted  | awk '{print $2}'
+  436  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do grep $ANS /var/tmp/movedtofiles ; done
+  437  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do echo cp from $(grep $ANS /var/tmp/movedtofiles | awk '{print $2}') ; done
+  438  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do grep $ANS /var/tmp/movedtofiles | awk '{print $2}' ; done
+  439  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do echo cp  /var/tmp/lib-repo/$ANS $(grep $ANS /var/tmp/movedtofiles | awk '{print $2}') ; done
+  440  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do for j in $(grep $ANS /var/tmp/movedtofiles | awk '{print $2}') ; do echo cp $ANS $j ; done ; done
+  441  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do for j in $(grep $ANS /var/tmp/movedtofiles | awk '{print $2}') ; do echo cp /var/tmp/lib-repo/$ANS $j ; done ; done
+  442  l  lib/mutil.jar
+  443  l lib
+  444  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do for j in $(grep $ANS /var/tmp/movedtofiles | awk '{print $2}') ; do echo cp /var/tmp/lib-repo/$ANS $j ; done ; done
+  445  cat /var/tmp/deleted  | awk '{print $2}' | while read ANS ; do for j in $(grep $ANS /var/tmp/movedtofiles | awk '{print $2}') ; do  cp /var/tmp/lib-repo/$ANS $j ; done ; done
+  446  grep $ANS /var/tmp/movedtofiles | awk '{print $2}'
+  447  cat /var/tmp/movedtofiles | awk '{print $2}'
+  448  svn add $(cat /var/tmp/movedtofiles | awk '{print $2}')
+  449  svn commit -m "From symlinks into files" $(cat /var/tmp/movedtofiles | awk '{print $2}')
+  450  svn commit -m "From symlinks into files" $(cat /var/tmp/movedtofiles | awk '{print $2}' | while read ANS ; do [ -f "$ANS" ] && echo $ANS ; done )
+  451  l
+  452  svn status
+  453  svn commit -m "No longer ref lib" lib-repo
+  454  svn status
+  455  find . -type l
+  456  find . -type l -ls
+  457  cd cashflow-war/lib/
+  458  find /home/mperdikeas/neuro-jsf-pilot-svn-stable/ -type f -name jboss-el-api_2.2_spec-1.0.0.Final.jar
+  459  find /home/mperdikeas/git-jboss -type f -name jboss-el-api_2.2_spec-1.0.0.Final.jar -ls
+  460  svn rm jboss-el-api_2.2_spec-1.0.0.Final.jar
+  461  svn rm primefaces-extensions-0.5.1.jar 
+  462  svn commit -m "No longer symlinks" primefaces-extensions-0.5.1.jar jboss-el-api_2.2_spec-1.0.0.Final.jar
+  463  cp $(find /home/mperdikeas/git-jboss -type f -name jboss-el-api_2.2_spec-1.0.0.Final.jar) .
+  464  cp $(find /home/mperdikeas/git-jboss -type f -name primefaces-extensions-0.5.1.jar) .
+  465  echo cp $(find /home/mperdikeas/neuro-jsf-pilot-svn-stable -type f -name primefaces-extensions-0.5.1.jar | head -1) .
+  466  cp $(find /home/mperdikeas/neuro-jsf-pilot-svn-stable -type f -name primefaces-extensions-0.5.1.jar | head -1) .
+  467  l
+  468  svn status
+  469  svn add primefaces-extensions-0.5.1.jar 
+  470  svn add jboss-el-api_2.2_spec-1.0.0.Final.jar 
+  471  svn commit -m "Now into files" primefaces-extensions-0.5.1.jar jboss-el-api_2.2_spec-1.0.0.Final.jar
+  472  l
+  473  svn status
+  474  cd ..
+  475  l
+  476  cd ..
+  477  l
+  478  ant
+  479  ls
+  480  l
+  481  cp build.properties cashflow-ejb
+  482  cp build.properties cashflow-war/
+  483  cp build.properties cashflow-client/
+  484  ant clean
+  485  ant
+  486  env | grep LANG
+  487  env | grep LC_ALL
+  488  findinjars ~/jar-paradise/ RandomStringUtils
+  489  ~/tools/findinjars ~/jar-paradise/ RandomStringUtils
+  490  ~/tools/findinjars ~/opensource/ RandomStringUtils
+  491  cd ~/
+  492  l
+  493  alias l='ls -alF'
+  494  l
+  495  cd neuro-jsf-pilot-svn-stable/trunk/apps/cashflow/webapp/cashflow/lib-repo/
+  496  svn info
+  497  cd /var/tmp/
+  498  svn co -r 363 https://172.31.128.119/svn/neuro-jsf-pilot/trunk/apps/cashflow/webapp/cashflow/lib-repo
+  499  l lib-repo/
+  500  find / -iname commons-io-2.4.jar
+  501  find ~ -iname commons-io-2.4.jar
+  502  ls lib
+  503  cp /home/mperdikeas/archetypes/jsf/013-00-prime-face-file-downloader/webapp/filedownload-war/web/WEB-INF/lib/commons-io-2.4.jar lib/
+  504  ant
+  505  exit
