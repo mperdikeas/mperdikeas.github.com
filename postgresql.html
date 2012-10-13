@@ -3,6 +3,22 @@
 </head>
 <body>
 <ol reversed>
+<li>typical configuration of PostgreSQL 9.1 I am using:</li>
+In file /etc/postgresql/9.1/main/pg_hba.conf:
+<pre>
+local   all             all                                 trust
+host   all             all   192.168.2.2/24                 md5
+</pre>
+The rationale of <i>local trust</i> being to ensure that I can easily
+add scripts to create users without the hassle of entering
+passwords which is hard to do non-interactively. Remote accesses in
+a specified subnet use <b>md5</b> authentication ofcourse.
+<p>
+And in file /etc/postgresql/9.1/main/postgresql.conf, to enable remote access:
+<pre>listen_addresses = '*'</pre>
+<pre>
+listen_addresses = '*'
+</pre>
 <li>Configure PostgreSQL 9.1 to allow password access to users from a specific subdomain
 (say 173.31.0.0/16, i.e. the 173.31 subdomain)</li>
 <pre>
