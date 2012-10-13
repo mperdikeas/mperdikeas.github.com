@@ -5,6 +5,13 @@
 </head>
 <body>
 <ol reversed>
+<li>find out quickly the amount of memory recognized by the system</li>
+<pre>free -mt</pre>
+<li>find out if the Linux version and/or the hardware support PAE (Physical Address Extension)</li>
+This is determined by searching for the string 'pae' in the output of the following
+programs, for the OS and the hardware, respectively:
+<pre>uname -a | grep pae</pre>
+<pre>grep --color=always -i PAE /proc/cpuinfo</pre>
 <li>show system specs in Ubuntu</li>
 There are many ways:
 <pre>sudo lshw</pre>
