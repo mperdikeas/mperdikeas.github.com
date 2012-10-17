@@ -1,4 +1,81 @@
 STACKTRACE:
+17:19:58,642 ERROR [org.jboss.msc.service.fail] (MSC service thread 1-7) MSC00001: Failed to start service jboss.persistenceunit."cars.ear/cars-ejb.jar#carsPU": org.jboss.msc.service.StartException in service jboss.persistenceunit."cars.ear/cars-ejb.jar#carsPU": Failed to start service
+             at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1767) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+             at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110) [rt.jar:1.7.0_07]
+             at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603) [rt.jar:1.7.0_07]
+             at java.lang.Thread.run(Thread.java:722) [rt.jar:1.7.0_07]
+Caused by: javax.persistence.PersistenceException: [PersistenceUnit: carsPU] Unable to build EntityManagerFactory
+       at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
+       at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:889)
+       at org.hibernate.ejb.HibernatePersistence.createContainerEntityManagerFactory(HibernatePersistence.java:73)
+       at org.jboss.as.jpa.service.PersistenceUnitServiceImpl.createContainerEntityManagerFactory(PersistenceUnitServiceImpl.java:162)
+       at org.jboss.as.jpa.service.PersistenceUnitServiceImpl.start(PersistenceUnitServiceImpl.java:85)
+       at org.jboss.msc.service.ServiceControllerImpl$StartTask.startService(ServiceControllerImpl.java:1811) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       at org.jboss.msc.service.ServiceControllerImpl$StartTask.run(ServiceControllerImpl.java:1746) [jboss-msc-1.0.2.GA.jar:1.0.2.GA]
+       ... 3 more
+Caused by: org.hibernate.loader.MultipleBagFetchException: cannot simultaneously fetch multiple bags
+       at org.hibernate.loader.BasicLoader.postInstantiate(BasicLoader.java:93)
+       at org.hibernate.loader.entity.EntityLoader.<init>(EntityLoader.java:118)
+       at org.hibernate.loader.entity.EntityLoader.<init>(EntityLoader.java:70)
+       at org.hibernate.loader.entity.EntityLoader.<init>(EntityLoader.java:53)
+       at org.hibernate.loader.entity.BatchingEntityLoader.createBatchingEntityLoader(BatchingEntityLoader.java:131)
+       at org.hibernate.persister.entity.AbstractEntityPersister.createEntityLoader(AbstractEntityPersister.java:2323)
+       at org.hibernate.persister.entity.AbstractEntityPersister.createEntityLoader(AbstractEntityPersister.java:2346)
+       at org.hibernate.persister.entity.AbstractEntityPersister.createLoaders(AbstractEntityPersister.java:3612)
+       at org.hibernate.persister.entity.AbstractEntityPersister.postInstantiate(AbstractEntityPersister.java:3598)
+       at org.hibernate.persister.entity.SingleTableEntityPersister.postInstantiate(SingleTableEntityPersister.java:1013)
+       at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:422)
+       at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1737)
+       at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:84)
+       at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:904)
+       ... 9 more
+REASON: This seems to be Hibernate-specific. Hibernate does not like two (2) eagerly-loaded One-To-Many
+        Collections in the same bean. See:
+        http://stackoverflow.com/questions/4334970/hibernate-cannot-simultaneously-fetch-multiple-bags
+SOLUTION: The following worked for me:
+
+Replace
+8<------------------------------------------------
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modelSpec.model", fetch=FetchType.EAGER)
+    private Collection<CarInfo> carInfoCollection;
+
+    public Collection<CarInfo> getCarInfoCollection() { 
+        return carInfoCollection;
+    }
+    public void setCarInfoCollection(Collection<CarInfo> carInfoCollection) {
+        this.carInfoCollection = carInfoCollection;
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modelFactory.model", fetch=FetchType.EAGER)
+    private Collection<CarFactory> carFactoryCollection;
+
+    public Collection<CarFactory> getCarFactoryCollection() { 
+        return carFactoryCollection;
+    }
+------------------ with that: --------------------
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modelSpec.model")
+    private Collection<CarInfo> carInfoCollection;
+
+    public Collection<CarInfo> getCarInfoCollection() { 
+        return carInfoCollection;
+    }
+    public void setCarInfoCollection(Collection<CarInfo> carInfoCollection) {
+        this.carInfoCollection = carInfoCollection;
+    }
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modelFactory.model")
+    private Collection<CarFactory> carFactoryCollection;
+
+    public Collection<CarFactory> getCarFactoryCollection() { 
+        return carFactoryCollection;
+    }
+------------------------------------------------>8
+(after which, of course, your solution ceases to be JPA and becomes Hibernate-specific).
+NOTE: maybe related to STACKTRACE "16:08:36,740"
+================================================================
+STACKTRACE:
 16:08:36,740 SEVERE [javax.enterprise.resource.webcontainer.jsf.application] (http--172.31.129.29-8888-1) Error Rendering View[/cars.xhtml]: org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: entities.Car.carInfoCollection, no session or session was closed
              at org.hibernate.collection.internal.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:393) [hibernate-core-4.0.1.Final.jar:4.0.1.Final]
              at org.hibernate.collection.internal.AbstractPersistentCollection.throwLazyInitializationExceptionIfNotConnected(AbstractPersistentCollection.java:385) [hibernate-core-4.0.1.Final.jar:4.0.1.Final]
@@ -116,6 +193,7 @@ private Collection<CarInfo> carInfoCollection;
 @OneToMany(cascade = CascadeType.ALL, mappedBy = "car", fetch=FetchType.EAGER)
 private Collection<CarInfo> carInfoCollection;
 --------------------
+NOTE: maybe related to STACKTRACE "17:19:58,642"
 ****************************************************************
 STACKTRACE:
 10:40:52,226 ERROR [org.jboss.ejb3.invocation] (http--172.31.129.29-8888-3) JBAS014134: EJB Invocation failed on component TransactionGroupFacade for method public abstract void gr.neuropublic.base.IFacade.create(java.lang.Object): javax.ejb.EJBTransactionRolledbackException: a different object with the same identifier value was already associated with the session: [gr.neuropublic.gaia.cashflow.entities.TransactionGroup#1]
