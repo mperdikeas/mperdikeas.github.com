@@ -5,6 +5,16 @@
 </head>
 <body>
 <ol>
+<li>Thing to notice when trying to find the types of files</li>
+The below code might not working depending on the environment settings,
+e.g. if the grep command outputs special characters (like bold):
+<pre>
+find  . -iname \*.java | grep facade | while read f ; do file $f ; done
+</pre>
+In such, cases do a:
+<pre>
+find  . -iname \*.java | /bin/grep facade | while read f ; do file $f ; done
+</pre>
 <li>'materialize' soft-links - easy way</li>
 <pre>cp -pr -L --copy-contents</pre>
 <li>'materialize' soft-links - trying to be clever way</li>
