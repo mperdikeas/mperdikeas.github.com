@@ -10,6 +10,10 @@
         install it with: <pre>sudo apt-get install python-twill</pre>.
         <b>mechanize</b> and <b>Beautiful Soup</b> (both python libraries)
         are also to be used with <b>twill</b>
+        Actually, it is better if tests are written directly on top of Mechanize
+        as twill is not UTF-compatible and moreover forces you to deal with the 
+        HTML Ids of various elements which can be problematic in JSF-generated code
+        where the testing code may break when a new button is added.
         <li>Clojure-based: <a href="https://github.com/semperos/clj-webdriver">clj-webdriver</a></li>
     </ul>
 <li>database modelling</li>architect liquibase erwin
