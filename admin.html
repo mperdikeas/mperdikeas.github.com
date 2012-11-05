@@ -8,6 +8,11 @@
 $ echo $LANG
 en_US.UTF-8
 </pre>
+<li>how to format a memory stick</li>
+First view drives and partitions:
+<pre>sudo fdisk -l</pre>
+Unmount the drive in question and format it, e.g. in NTFS:
+<pre>sudo mkfs -t ntfs /dev/sdg1</pre>
 <li>find the UUID of a device in Ubuntu</li>
 <pre>sudo blkid</pre>
 <li>updated from unauthenticated sources in Ubuntu</li>
