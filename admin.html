@@ -3,6 +3,18 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>find the package a file, e.g. <i>javac</i> belongs to</li>
+Use the <b>apt-file</b> program:
+<pre>
+sudo apt-get install apt-file
+sudo apt-file update
+apt-file search javac
+</pre>
+Also, to find which <u>installed</u> package a file belongs to
+you can use:
+<pre>dpkg -S <filename></pre>
+Note that this doesn't always work for config files and files in
+<b>/var</b> since those are generated after the package is extracted.
 <li>my LANG setting</li>
 <pre>
 $ echo $LANG
