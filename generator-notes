@@ -1,0 +1,5 @@
+When running the code generator under Mono, it is sometimes
+necessary to remove file: Mono.Security.dll
+from under the 'bin/' directory (in where the CodeGenerator resides).
+Otherwise one receives warnings about a missing 'ctor' method
+and something about security mono
