@@ -1,0 +1,35 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+</head>
+<body>
+<ol>
+<li>how to sent Ajax requests using Mechanize</li>
+Mechanize does not offer the capabilities of a browser like Selenium, so
+although it is possible to set the values of radio/check-boxes and click
+on buttons to submit forms, this is only done in the context of the form.
+This means that if (as is the case in the PrimeFaces framework) there is
+JavaScript code associated with the clicking of a radio button that initiates
+an Ajax Post request, this <b>cannot</b> be reproduced just by clicking on the
+radio button using the interface of Mechanize and one has to write Mechanize
+code to explicitly sent the actual Ajax post request. Here's the code
+(by ttsiodras):
+<pre>
+    def ajaxSetRadioButtonInFieldSet(self, name, index=None, strValue=None):
+        url = self.browser.geturl()
+        req = self.browser.form._switch_click('request', mechanize._request.Request)
+        radioId = self.finder.findFieldsetId(name)
+        self.browser._add_referer_header(req)
+        req.data += "&javax.faces.partial.ajax=true"
+        req.data += "&javax.faces.source=" + radioId.replace(':', '%3A')
+        req.data += "&javax.faces.partial.execute=" + radioId.replace(':', '%3A')
+        req.data += "&javax.faces.behavior.event=valueChange"
+        req.data += "&javax.faces.partial.event=change"
+        res = self.browser.open(req)
+        sys.stdout.write(res.read())
+        self.response = self.browser.back()
+        self.dataChanged()
+</pre>
+
+</ol>
