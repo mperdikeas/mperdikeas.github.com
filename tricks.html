@@ -5,6 +5,8 @@
 </head>
 <body>
 <ol>
+<li>chain logical expressions in bash</li>
+<pre>find . -iname \*.csv -exec sh -c "grep foo {} && echo {}" \;</pre>
 <li>find files and print their absolute path name</li>
 <pre>find  $(pwd) -iname report2.jrxml</pre>
 <li>Thing to notice when trying to find the types of files</li>
