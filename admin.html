@@ -3,6 +3,14 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how to view the shared directories of a samba system</li>
+<pre>
+smbclient -U a_tsiodras -L //172.31.128.250
+</pre>
+<li>how to mount a samba system</li>
+<pre>
+sudo mount -t cifs -o username=a_tsiodras //172.31.128.250/Download /iso2/ 
+</pre>
 <li>find the package a file, e.g. <i>javac</i> belongs to</li>
 Use the <b>apt-file</b> program:
 <pre>
