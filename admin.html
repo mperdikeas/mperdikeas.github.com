@@ -3,10 +3,23 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>enable ssh authentication</li>
+<pre>
+cat .ssh/id_dsa.pub
+(grep with mouse)
+cat >> .ssh/authorized_keys
+</pre>
 <li>how to view the shared directories of a samba system</li>
 <pre>
 smbclient -U a_tsiodras -L //172.31.128.250
 </pre>
+Occassionally, this might give a: 
+<pre>
+session setup failed: NT_STATUS_LOGON_FAILURE
+</pre>
+if the server is not configured to provide a listing of the shared folders.
+In these cases, the only recourse is to know the shared folder names and
+directly mount them as shown on the below item.
 <li>how to mount a samba system</li>
 <pre>
 sudo mount -t cifs -o username=a_tsiodras //172.31.128.250/Download /iso2/ 
