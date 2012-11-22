@@ -2,6 +2,17 @@
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
 </head>
 <ol reversed>
+<li>state saving methods and compression</li>
+In Mojarra (circa 2012) either used state saving to 'server', or,
+if set to client, disable compression, i.e. do a:<p/>
+&ltcontext-param&gt<p/>
+    &ltparam-name&gtjavax.faces.STATE_SAVING_METHOD&lt/param-name&gt<p/>
+        &ltparam-value&gtclient&lt/param-value&gt<p/>
+&lt/context-param&gt<p/>
+&ltcontext-param&gt<p/>
+        &ltparam-name&gtcom.sun.faces.compressViewState&lt/param-name&gt<p/>
+        &ltparam-value&gttrue&lt/param-value&gt<p/>
+&lt/context-param&gt
 <li>difference between 'rendered' and 'visible'</li>
 <b>rendered</b> is server-side whereas <b>visible</b> is client-side.
 <li>how to include the root context in an <b>href</b></li>
