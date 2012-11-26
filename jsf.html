@@ -2,6 +2,15 @@
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
 </head>
 <ol reversed>
+<li>modal pop-ups in JSF and Ajax</li>
+The modality of pop-ups in <b>JSF</b> can be arranged by virtue
+of a <i>'modal'</i> property. However, there appears to be a bug
+and one has to also specify <i>'process=this'</i>. This is strange
+as in the normal case of a modal dialog prompting for a
+'yes'/'no' answer, the <i>'this'</i> doesn't carry any data to
+the server side. I.e. the post only indicates (presumably)
+the <i>actionListener</i> to be called but it doesn't update
+any fields in the backing bean.
 <li>ViewStateExpiredException and JSF saving state</li>
 <i>ViewStateExpiredExceptions</i> can be alleviated with the use
 of JSF client-side state saving.
