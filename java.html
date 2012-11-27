@@ -5,6 +5,17 @@
 </head>
 <body>
 <ol reversed>
+<li>how to solve '<i>unmappable character<i>' problems in '<i>javac<i>'</li>
+The problem is usually solved by adding the following line in the &lt<b>javac</b>&gt
+Ant task invocation:
+<pre>
+&ltcompilerarg line="-encoding utf-8"/&gt
+</pre>
+(see examplary java-se build.xml in archetypes/ant)<p>
+On some occassions I've also used:
+<pre>
+&ltcompilerarg line="-encoding ISO-8859-1"/&gt
+</pre>
 <li>install Oracle Java in Ubuntu</li>
 (<href="http://www.webupd8.org/2012/01/install-oracle-java-jdk-7-in-ubuntu-via.html">source</href>)To install the latest Oracle Java 7 in Ubuntu (supports Ubuntu 12.04, 11.10, 11.04 and 10.04), use the commands below:
 <pre>
