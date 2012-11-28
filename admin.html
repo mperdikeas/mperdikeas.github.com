@@ -3,6 +3,14 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>configure emacs as the default text editor in GNOME</li>
+Open (or touch if it doesn't exist) file:
+<pre>~/.local/share/applications/defaults.list</pre>
+Add or edit the following text:
+<pre>
+[Default Applications]
+text/plain=emacs
+</pre>
 <li>enable ssh authentication</li>
 <pre>
 cat .ssh/id_dsa.pub
