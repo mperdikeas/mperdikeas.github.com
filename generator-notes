@@ -3,3 +3,6 @@ necessary to remove file: Mono.Security.dll
 from under the 'bin/' directory (in where the CodeGenerator resides).
 Otherwise one receives warnings about a missing 'ctor' method
 and something about security mono
+
+* on the 1st tempo, only the .nrw file is needed.
+* on the 2nd tempo, we need to modify and work on the project.xml, environment.xml and *.nrl files
