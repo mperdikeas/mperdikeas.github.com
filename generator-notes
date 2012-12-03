@@ -6,3 +6,13 @@ and something about security mono
 
 * on the 1st tempo, only the .nrw file is needed.
 * on the 2nd tempo, we need to modify and work on the project.xml, environment.xml and *.nrl files
+
+
+================
+On ttsiodras' python utility to find coordinates and produce Jasper report:
+The python utility relies on C++ code (all the source - *.cc files - are included in the repo) for the image processing. The C++ code compiled and bulit normally on my Ubuntu machine requiring no external C++ libraries except the lib-SDL one which I installed with:
+sudo apt-get install libsd-1.2-image          and
+sudo apt-get install libsd-1.2-image-dev
+The C++ code proceeds horizontally and vertically from the point clicked to find the region (so long as the colour is 10% off at most). The horizontal search has a front width of 3 pixels, the vertial of only 1 pixel.
+The main file to use is gui.py which then spawns boxie.exe. Boxie writes its output in the form of "*.data" files. Dialog.py is not a self-contained python executable - it was only implemented as such to allow the program to provide a dialog without having to do it in SDL. The setupGui.py and other setup* python files are for natively compiling the python code to windows (they are invoked using Makefile.python).
+================
