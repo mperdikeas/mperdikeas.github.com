@@ -11,6 +11,25 @@ Add or edit the following text:
 [Default Applications]
 text/plain=emacs
 </pre>
+<li>restore corrupt VM in Ubuntu</li>
+do the following as root (history excrept):
+<pre>
+  348  cd /home/mperdikeas/virtual-machines/vm/
+  349  l
+  350  ls -ltra
+  351  l *lck
+  352  mv *lck /var/tmp/
+  353  ls -ltra
+  354  mv caches/ /var/tmp/
+  355  ls -ltra
+  356  mv *vmem /var/tmp/
+  357  l
+  358  chown root.root *
+  359  l
+  360  chmod 644 *
+  361  l
+  362  vmplayer Windows\ XP\ Professional.vmx
+</pre>
 <li>enable ssh authentication</li>
 <pre>
 cat .ssh/id_dsa.pub
