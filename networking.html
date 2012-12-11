@@ -8,13 +8,16 @@
 <li>use a single outgoing IP address</li>
 When behind a corporate NAT/firewall the packets you sent out 
 (e.g. from you browser) may
-seem to emerge from two different IP addresses. In those cases,
+seem to emerge from two different IP addresses which could
+result in your being evicted. In those cases,
 find a remote system you have access to and open an ssh tunnel to
 it:
 <pre>ssh -L 2095:localhost:2095 root@trusted.remote.system.com</pre>
 You can then point your browser to the address: <b>localhost:2095</b><p/>
 (the above instructions work provided your browser was redirected to
-port 2095 of the remote host to begin with).
+port <i>2095</i> of the remote host to begin with). This will
+stabilize the IP address the remote system sees your packets
+coming from.
 <li>virtual Ethernet interface</li>
 A virtual IP address is created as simply as:
 <pre>ifconfig eth0:1 172.31.129.121</pre>
