@@ -2,6 +2,69 @@
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
 </head>
 <ol reversed>
+<li>pattern for JSF / EJB3 with extended transaction context</li>
+The following is a pattern that seems to avoid detached contexts
+and other JPA-problems.<p>
+Each JSF view is backed by a <b>ViewScoped</b> or <b>RequestScoped</b>
+backing bean. That backing bean accesses (by means of the <b>ManagedProperty</b>
+annotation) a session-scoped JSF-managed bean. The session-scoped JSF-managed
+bean then injects (by means of an <b>@EJB</b> annotation) a <b>stateful EJB3</b>
+bean. This stateful EJB3 bean then injects an <b>EntityManager</b> with
+an extended persistence context (to avoid detachment of the web layer).
+We call that stateful EJB3 bean the <i>service</i>. The <i>service</i>
+actually is a DAO and handles all communication with the database through
+the single injected <b>EntityManager</b> (whether for one or more than
+one tables).<p>
+The basic motivation for this pattern (apart from the extended transaction
+context which was done to avoid detachment in the web layer), is that
+when separate different <b>EntityManagers</b> are injected in the various facades
+the problem arises that these EntityManagers are in fact different and keep
+different caches, also, an object created on one EntityManager cannot be merged
+in a second (again due to the multiple independent EntityManagers that have
+been injected).<p>
+There are two variations of the above pattern solely for organizational purposes:
+<ol>
+    <li>one is to group the various table-specific methods and their implementations
+        in facade-like DAO POJOs. The <i>service</i> EJB3 bean then simply contains
+        dispatchers that rely to the implementations. The only benefit that that
+        brings is to avoid having all the implementations in the same place.
+    </li>
+    <li>a more radical variation is to actually implement the various table DAO facades
+        as proper, stateful EJB3 beans and have them injected in the <i>service</i> EJB3
+        bean. In this patter, the <i>service</i> EJB3 bean acts simply as a place to inject
+        all other EJB3 facades. The JSF-backing beans call a getFacade() method whose implementation
+        ultimately relays to the <i>service</i> EJB3 bean before then can get the actual
+        facades. This only works because, for some magical reason, we noticed that in this case
+        the underlying, delegate, EntityManager object for all facades injected in the <i>service</i> EJB3 bean <u>are the same</u>. Therefore it is a more elegent variation than the variation above
+        but it is also more magical and less clearly understood. It is more elegant because
+        we no longer have to implement relaying methods in the EJB3 <i>service</i> bean and there
+        exist actual DAO facades for all the various tables.
+    </li>
+</ol>
+
+
+<li>extending <b>xhtml</b> views</li>
+Using the:<b>&ltC:Choose&gt</b> tag it is possible to customize and extend
+an automatically generated xhtml view by introducing your own parts.
+The pattern is (refer to the html source for proper formatting cause
+I don't have the time to format it for html right now):
+<pre>
+&ltC:Choose&gt &gtcall on a backingBean method to select case at runtime&lt
+[case 1: default]
+... automatically generated ..
+[case 2: hook for programmer]
+inclusion of an external <b>xhtml</b> file which
+is the one that the programmer modifies
+&lt/C:Choose&gt
+</pre>
+The benefit of the above pattern is that the totality of the xhtml view
+can be overwritten every time it is re-generated and the programmer will
+only modify the external (imported) xhtml file and will also overwrite
+the backing-bean's selector method to select case 2. NRL has an optinal
+annotation that allows that kind of code to be generated for a particular
+component, otherwise no extension facility is emmited (so if a programmer
+is not satisfied with the default emmission he has to modify the NRL and
+re-generate so that the extension facility is emmited).
 <li>modal pop-ups in JSF and Ajax</li>
 The modality of pop-ups in <b>JSF</b> can be arranged by virtue
 of a <i>'modal'</i> property. However, there appears to be a bug
