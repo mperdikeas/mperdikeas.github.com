@@ -3,6 +3,16 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>the two components of the <b>LANG</b> environment variable</li>
+In my machine, at present:
+<pre>
+echo $LANG
+en_US.UTF-8
+</pre>
+The first component of the environment variable specifies the <i>collation</i>
+which dictates: (a) lowercase / uppercase logic, (b) ordering logic, (c) maybe, default
+codepage. The second component is the encoding. <b>LANG</b> should be set to the
+same value as the <b>LC_ALL</b> otherwise some instabilities may be observed.
 <li>on the <b>LANG</b> environment variable</li>
 The <b>LANG</b> environment variable is taken into account by
 the <i>i18n</i> component of <b>libc</b>, and therefore, because
@@ -10,7 +20,7 @@ of that by all tools, interpreters and other libraries that
 interact with the console.<p>
 In my machine it is currently:<p>
 <pre>
-$echo $LANT
+$echo $LANG
 en_US.UTF-8
 </pre>
 As a result everything that's inputed from the keyboard or
