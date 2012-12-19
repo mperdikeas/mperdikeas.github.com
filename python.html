@@ -3,6 +3,16 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>python magic methods</li>
+Article <a href="http://www.rafekettler.com/magicmethods.html">here</a>, PDF
+version in the folder where this page is located.
+<li>great python library: <b>collections</b></li>
+It provides, among others, the <b>defaultdict</b>:
+<pre>
+from collections import defaultdict
+a = defaultdict(int) # int is a lambda that's used to init values (to 0 in this case as that's the default constructor)
+a['foo']+=3
+</pre>
 <li>python unicode function</li>
 how to declare a unicode literal:
 <pre>
@@ -49,8 +59,9 @@ str(u'α')
 <pre>
 str('άλφα')
 </pre>
-A possible explanation could be that the implementation of <b>str</b>
-simply immediately returns its argument if that is of type <i>str</i>.
+This is because the implementation of <b>str</b>
+simply immediately returns its argument if that is of type <i>str</i> 
+(this can be verified with 'help(str)').
 Note that in
 Python, type <i>str</i> is distinct from <i>unicode</i> and there is no
 inheritance relationship as the following commands will show:
