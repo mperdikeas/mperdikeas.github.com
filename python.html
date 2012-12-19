@@ -1,0 +1,52 @@
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+</head>
+<ol reversed>
+<li>python unicode function</li>
+how to declare a unicode literal:
+<pre>
+a = u'ΤΙΜΟΛ
+</pre>
+<li>unicode function</li>
+The unicode function in Python takes as input a string encoded
+in a certain code-page and returns the unicode representation
+of that string. To perform its task it must be given the code page
+as an argument. E.g. for string <i>a</i> being a Greek-encoded 
+text, to convert it to unicode:
+<pre>
+b = unicode(a, 'iso8859-7')
+</pre>
+In both python 2.7 and python 2.5, the function <i>unicode</i>
+will throw an exception (TypeError: decoding Unicode is not supported)
+if handed a string that's already Unicode.
+<li>unicode function</li>
+In Jython, the <i>unicode</i> function won't complain as it 
+expects all Strings handed to it to be unicode to begin with (since
+we're in Java). So, the fact that the
+following code in Jython does not complain
+<u>does not</u>, repeat <u>does not</u> prove that the
+input string is indeed Greek:
+<pre>
+b = unicode(a, 'iso8859-7')
+</pre>
+<li><b>str</b> function in Python</li>
+The <b>str</b> function in Python stringifies its arguments
+which can be of any type. However, it cannot handle Strings that
+contain bytes greater than 128 since these are necessarily
+locale-specific. This doesn't mean that it can't handle Unicode
+strings in general as some Unicode strings can have all their
+bytes below or equal to 128. So the following succeed:
+<pre>
+str('a')
+str(u'a')
+</pre>
+but the following fails:
+<pre>
+str(u'α')
+</pre>
+.. however, the following succeeds:
+<pre>
+str('άλφα')
+</pre>
+</ol>
