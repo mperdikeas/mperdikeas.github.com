@@ -45,8 +45,19 @@ but the following fails:
 <pre>
 str(u'α')
 </pre>
-.. however, the following succeeds:
+.. however, the following also, mysteriously succeeds:
 <pre>
 str('άλφα')
+</pre>
+A possible explanation could be that the implementation of <b>str</b>
+simply immediately returns its argument if that is of type <i>str</i>.
+Note that in
+Python, type <i>str</i> is distinct from <i>unicode</i> and there is no
+inheritance relationship as the following commands will show:
+<pre>
+type (u'a')
+type ('a')
+isinstance(u'a', str)
+isinstance(u'a', unicode)
 </pre>
 </ol>
