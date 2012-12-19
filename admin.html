@@ -3,6 +3,39 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>on the <b>LANG</b> environment variable</li>
+The <b>LANG</b> environment variable is taken into account by
+the <i>i18n</i> component of <b>libc</b>, and therefore, because
+of that by all tools, interpreters and other libraries that
+interact with the console.<p>
+In my machine it is currently:<p>
+<pre>
+$echo $LANT
+en_US.UTF-8
+</pre>
+As a result everything that's inputed from the keyboard or
+output to the keyboard is converted automatically to UTF-8
+(this is analogous to the 'Regional Settings' in Windows machines).<p>
+To experiment do a:
+<pre>
+cat > datatest
+</pre>
+and type-in some Greek characters. The command <i>file</i> on
+my machine then yields:
+<pre>
+file datatest
+datatest: UTF-8 Unicode text
+</pre>
+If the file is converted to a Greek codepage, with:
+<pre>
+iconv -f utf-8 -t iso8859-7 < datatest > greek
+</pre>
+.. <i>file</i> then duly reports:
+<pre>
+file greek
+greek: ISO-8859 text
+</pre>
+.. and <i>cat</i>ing the file produces garbage on the console.
 <li>configure emacs as the default text editor in GNOME</li>
 Open (or touch if it doesn't exist) file:
 <pre>~/.local/share/applications/defaults.list</pre>
