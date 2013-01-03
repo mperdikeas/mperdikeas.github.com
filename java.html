@@ -10,6 +10,8 @@ Often a number of jars are located inside a given folder
 (folder 'repo-wide-libs' in the example below). To construct
 a Java classpath that will include them all, do a:
 <pre>echo repo-wide-libs/*jar | sed 's, ,:,g'</pre>
+Alternatively one can use <b>tr</b> instead of <b>sed</b>:
+<pre>java -cp $(echo lib/*.jar | tr ' ' ':') ..</pre>
 <li>how to solve '<i>unmappable character<i>' problems in '<i>javac<i>'</li>
 The problem is usually solved by adding the following line in the &lt<b>javac</b>&gt
 Ant task invocation:
