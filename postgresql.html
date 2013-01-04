@@ -3,9 +3,20 @@
 </head>
 <body>
 <ol reversed>
-<li>Use of the command-line pg_dump utility:<li>
+<li>useful PostgreSQL functions:</li>
+    <pre>
+        select current_database();
+        select current_schema();
+        select current_user;
+        select extract('epoch' from now());
+         select extract('epoch' from current_timestamp);
+        select now();
+        select current_timestamp;
+    </pre>
+the last two are useful because they reveals the timezone.
+<li>use of the command-line pg_dump utility:</li>
 <pre> pg_dump -h 172.333.444.555 -p 5444 -U username -F p -E UTF8 -C -O -n "schema-name" -v -f dumpfile database-name</pre>
-<li>Precedence in PostgreSQL pg_hba.conf files</li>
+<li>precedence in PostgreSQL pg_hba.conf files</li>
 The general rule of thumb is: <i>Most Specific Rule First</i>
 <li>typical configuration of PostgreSQL 9.1 I am using:</li>
 In file /etc/postgresql/9.1/main/pg_hba.conf:
