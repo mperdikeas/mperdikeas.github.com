@@ -3,6 +3,17 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how to install C modules in python</li>
+It is necessary to first have installed the <b>python-dev</b>
+package.<p>So, for instance the following were the steps I undertook
+to install the Levenshtein python module:
+<pre>
+sudo apt-get install python-dev
+wget http://pylevenshtein.googlecode.com/files/python-Levenshtein-0.10.1.tar.bz2
+tar xvfj python-Levenshtein-0.10.1.tar.bz2
+cd python-Levenshtein-0.10.1
+sudo python setup.py install
+</pre>
 <li>python magic methods</li>
 Article <a href="http://www.rafekettler.com/magicmethods.html">here</a>, PDF
 version in the folder where this page is located.
