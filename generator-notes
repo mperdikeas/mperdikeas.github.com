@@ -1,3 +1,72 @@
+Patterns for sane handling of Entity-Managers, JPA
+in the web tier.
+
+[a] Always use one (1) Entity Manager only. You shouldn't
+have different parts of a form access different Entity
+Managers cause if that happens you may fetch an entity
+in one EM that's not visible to another.
+
+[b] Either rely on Entity Managers with extended stateful
+context and don't maintain web-tier caches or have everthing
+to be detached and maintain web-tier caches.
+
+[c] A nice pattern for master-detail views is to not hang
+the details from the collection of the parent entity but
+rather to issue an independent JPQL query to the database
+based on the parent entity selected. This allows us to 
+have fine-grained logic in the detail query (e.g. an
+application may only wish, for business reasons, to
+display the first ten children or you can have some
+ordering business requirement). Both master and detail
+views should be JPA-lazy of course. This patterns
+effectively means that we don't need any 1-to-many
+relationships in the JPA object model as we won't be
+using the collections at all.
+================
+PrimeFaces filtering: it is better to rely on 
+JPQL to directly filter the rows in the query
+sent to the database.
+================
+CASCADE ALL and CASCADE REMOVE. It seems that 
+CASCADE ALL is not an annotation that can always, safely,
+be handled at the entity model level. It may make more
+sense to configure it at the application level, wherein the
+same entity may be configured to be CASCADE REMOVE in one
+form and not in another. I.e. use some kind of application-level
+CASCADE REMOVE.
+================
+Difference between CASCADE and ORPHAN-REMOVAL in JPA.
+Actually the two have nothing to do with one another.
+"Cascade OP" has the following semantics: if operation "OP"
+is invoked on a parent entity, then invoke the same operation 
+on children entities. Orphan-removal has the following semantics:
+When a child is removed from a collection of the parent, it is
+then considered an 'orphan' and will be removed from the database
+without requiring an explicit JPA removal operation.
+================
+It is recommended that orphan-removal be used only in
+composition relationships. A composition relationship
+is one in which the existence of the child entity has no 
+meaning independent of its parent (typical example: invoice
+and invoice lines). The danger when using orphan-removal
+in a parent-child relationship that doesn't have composition
+semantics is exemplified in the following scenario: Consider
+the relationship municipality-citizen (clearly not one with
+composition semantics). Now consider that we are trying
+to move a citizen C from municipality A to municipality B
+and we are doing this by removing C from A's collection
+before adding him to the collection of B. In such a scenario
+we may risk deleting the citizen. A more subtle and horrific
+bug that can appear is the following: Consider the case
+where orphan-removal is configured in the JPA entity model
+and for some reason in the web layer the parent entity becomes
+detached and the child records are lost (maybe if it's a lazy
+collection). Then when the JPA Entity Manager fetches
+the parent collection from the database and notices the missing
+children in the local collection, it will remove the entities
+in the database! CONCLUSION: orphan removal is considered 
+harmfull.
+================
 When running the code generator under Mono, it is sometimes
 necessary to remove file: Mono.Security.dll
 from under the 'bin/' directory (in where the CodeGenerator resides).
