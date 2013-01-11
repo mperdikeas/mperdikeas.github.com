@@ -4,6 +4,16 @@
 </head>
 <body>
 <ol>
+<li>the dreaded 'blabla/.svn' containing working copy admin are is missing' problem in SVN</li>
+What has worked for me is the following sequence:
+<ol>
+<li><b>svn co</b> in some other location</li>
+<li><b>cp -pr .svn</b> to where it's supposed to go</li>
+<li><i>(not always - depending on the circumstances)</i></li>
+doing a <b>svn rm --force blabla</b>
+</ol>
+The second step gets dir of the <b>'~'</b> SVN status symbol and I can
+then proceed to either remove the offending folder (if that was the intention) or what have you. See also <a href="http://stackoverflow.com/questions/1394076/how-to-fix-containing-working-copy-admin-area-is-missing-in-svn"this SO article</a>
 <li>add a directory <i>foodir</i> to <b>SVN</b> but not its contents:</li>
 <pre>svn add --depth=empty foodir</pre>
 - or -
