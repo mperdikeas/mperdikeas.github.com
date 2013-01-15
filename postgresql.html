@@ -3,6 +3,46 @@
 </head>
 <body>
 <ol reversed>
+<li>how to log SQL statements in PostgreSQL 9.1</li>
+You have to change certain values in file <b>postgres.conf</b> and
+restart the server.<p>
+File <b>postgres.conf</b> is located in: <b>/etc/postgresql/9.1/main/postgresql.conf</b><p>
+Diff of the changes I made is shown below:<p/>
+<pre>
+$ diff /etc/postgresql/9.1/main/postgresql.conf.safe.2012-01-15  /etc/postgresql/9.1/main/postgresql.conf
+276c276
+&lt #log_destination = 'stderr'# Valid values are combinations of
+---
+  &gt log_destination = 'stderr'# Valid values are combinations of
+282c282
+  &lt #logging_collector = off# Enable capturing of stderr and csvlog
+---
+    &gt logging_collector = on# Enable capturing of stderr and csvlog
+288c288
+    &lt #log_directory = 'pg_log'# directory where log files are written,
+---
+      &gt log_directory = 'pg_log'# directory where log files are written,
+290c290
+      &lt #log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'# log file name pattern,
+---
+        &gt log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'# log file name pattern,
+398c398
+        &lt #log_statement = 'none'# none, ddl, mod, all
+---
+          &gt log_statement = 'all'# none, ddl, mod, all
+
+</pre>
+The log directory (value <b>log_directory</b>) is located relative to the <i>data</i> folder of postgresql which is obtained as follows:<p/>
+<pre>
+$ grep -i data /etc/postgresql/9.1/main/postgresql.conf
+# option or PGDATA environment variable, represented here as ConfigDir.
+data_directory = '/var/lib/postgresql/9.1/main'# use data in another directory
+</pre>
+Once the server is restarted, the SQL queries (DDL and/or DML depending on the settings) can be obtained with:<p/>
+<pre>
+sudo -i
+tail -f /var/lib/postgresql/9.1/main/pg_log/postgresql-2013-01-15_182646.log 
+</pre>
 <li>useful PostgreSQL functions:</li>
     <pre>
         select current_database();
