@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol>
+<li>find files and get the 10 most recently modified</li>
+<pre>
+find . -iname *.script -type f -printf '%T@ %p\n' | sort -k 1nr | sed 's/^[^ ]* //' | head -n 10
+</pre>
 <li>to send an email directly using the SMTP protocol:</li>
 <pre>nc mail.semantix.gr 25</pre>
 This method ensures that nothing's stored anywhere.
