@@ -4,7 +4,11 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <body>
-<ol>
+<ol reversed>
+<li>Programmer's grep</li>
+Use the <b>ack</b> utility. It is by default only operating on a 
+white list of files. With the <b>-u</b> option it operates on all
+files except those on the black list (.svn etc).
 <li>find files and get the 10 most recently modified</li>
 <pre>
 find . -iname *.script -type f -printf '%T@ %p\n' | sort -k 1nr | sed 's/^[^ ]* //' | head -n 10
