@@ -1,3 +1,42 @@
+=======================
+How to fetch and run the latest version of the code generator
+
+$ wget http://172.31.128.119/NeuroCode/NeuroCode.tar.gz
+$ tar xvfz [.. etc]
+$ cd 'where the xml file is located'
+$ mono ~/neurocode-deployed/NeuroCode/bin/NeuroCode.exe project.xml 
+Missing method .ctor in assembly /usr/lib/mono/gac/System/4.0.0.0__b77a5c561934e089/System.dll, type Mono.Security.Protocol.Tls.CertificateValidationCallback2
+Missing method .ctor in assembly /usr/lib/mono/gac/System/4.0.0.0__b77a5c561934e089/System.dll, type Mono.Security.Protocol.Tls.CertificateValidationCallback2
+
+oops we forgot to remove Mono.Security.dll (see note [1] at the end of this
+article)
+
+$ find . -iname Mono.Security.dll
+./bin/Mono.Security.dll
+mperdikeas@mperdikeas:~/neurocode-deployed/NeuroCode#
+$ rm $(find . -iname Mono.Security.dll)
+mperdikeas@mperdikeas:~/neurocode-deployed/NeuroCode#
+
+
+and now:
+mperdikeas@mperdikeas:~/neuro-jsf-pilot-svn-stable/trunk/apps/VatRefund#
+$ mono ~/neurocode-deployed/NeuroCode/bin/NeuroCode.exe project.xml 
+
+... and everything's dandy.
+
+
+---NOTES---
+[1]
+On 30/01/2013 03:34 μμ, Menelaos Perdikeas wrote:
+> $ mono ~/neurocode-deployed/NeuroCode/bin/NeuroCode.exe project.xml
+> Missing method .ctor in assembly /usr/lib/mono/gac/System/4.0.0.0__b77a5c561934e089/System.dll, type Mono.Security.Protocol.Tls.CertificateValidationCallback2
+> Missing method .ctor in assembly /usr/lib/mono/gac/System/4.0.0.0__b77a5c561934e089/System.dll, type Mono.Security.Protocol.Tls.CertificateValidationCallback2
+>
+
+Yes - you need to remove the Mono.Security.dll from the folder. It is packaged for Windows users (one of the libraries George uses depends on it) but on our machines we have much later versions of this .dll.
+
+=======================
+
 Patterns for sane handling of Entity-Managers, JPA
 in the web tier.
 
