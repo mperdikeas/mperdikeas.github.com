@@ -5,6 +5,19 @@
 </head>
 <body>
 <ol reversed>
+<li>error:unmappable character for encoding Cp1252</li>
+This is a problem that plagues Windows OS when
+compiling Java sources.
+Setting the following environment properties fixed
+the problem in one occassion:
+<pre>
+ANT_OPTS
+-Dfile.encoding=UTF8
+
+JAVA_TOOL_OPTIONS
+-Dfile.encoding=UTF8
+</pre>
+
 <li>useful bash scriplet to generate Java classpath</li>
 Often a number of jars are located inside a given folder
 (folder 'repo-wide-libs' in the example below). To construct
