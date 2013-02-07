@@ -5,6 +5,19 @@
 </head>
 <body>
 <ol reversed>
+<li>How to copy a file and connect to a remote server to do stuff with it</li>
+<a name="CopyFileConnectRSAndDoStuff"></a>
+<pre>
+#!/bin/bash
+scp VatRefund.ear root@node-testapp1:/var/tmp/ || exit 1
+cat <<OEF | ssh node-testapp1 || exit 1
+cd /opt/jboss/jboss-eap-6.0/bin
+./jboss-cli.sh  --connect controller=123.30.228.54:9999
+undeploy --server-groups=other-server-group VatRefund.ear
+deploy --server-groups=other-server-group /var/tmp/VatRefund.ear
+OEF
+exit 0
+</pre>
 <li>Programmer's grep</li>
 Use the <b>ack</b> utility. It is by default only operating on a 
 white list of files. With the <b>-u</b> option it operates on all
