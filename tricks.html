@@ -5,6 +5,16 @@
 </head>
 <body>
 <ol reversed>
+<li>How to obtain the sha256 of a password</li>
+Say the password is "foo":
+<pre>
+echo -n foo | sha256sum
+</pre>
+The <b>-n</b> is necessary as otherwise echo will also sent the new line character to be SHA256-encoded as part of the password. In cases of salting the usually arrangement is a simple concatenation of the salt followed by the password (in that order so the cracker doesn't have an attack vector). So
+if password is "foo" and salt is "salt":
+<pre>
+echo -n saltfoo | sha256sum
+</pre>
 <li>How to copy a file and connect to a remote server to do stuff with it</li>
 <a name="CopyFileConnectRSAndDoStuff"></a>
 <pre>

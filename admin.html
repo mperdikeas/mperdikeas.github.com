@@ -227,8 +227,14 @@ sudo apt-get install apache2
 
 <li>how to find the loci of installed packages (Debian></li>
 <pre>dpkg -L httpd</pre><p>
-(-L lists all files installed to your system from that package name)
-
+(-L lists all files installed to your system from that package name)</p>
+Note that <b>dpkg</b> lists the files that were <u>fetched</u> as part of the install
+processes. Post-install hooks may create additional files (e.g. pyc files from py
+Python files). This can be seen by comparing the outputs of the following two commands:
+<pre>
+dpkg -L python2.7
+ls -s /usr/lib/python2.7/
+</pre>
 
 <li>how to find directories in current dir </li>
 <pre>ls | grep ^d</pre>
