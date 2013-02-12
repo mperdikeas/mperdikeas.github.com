@@ -3,6 +3,8 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>find sockets bound and listened-to in the local host</li>
+<pre> sudo lsof -P -i -n </pre>
 <li>find the libraries used by a program</li>
 <pre>ldd $(which wget)</pre>
 <li>use the <b>ldd</b> Linux command to find version information
