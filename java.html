@@ -5,6 +5,51 @@
 </head>
 <body>
 <ol reversed>
+<li>UTF8 encoding in Java</li>
+In general problems may occur both in the compile stage (javac) and in the
+execution stage (java). The following flags are pertinent:
+<pre>
+javac -encoding utf-8 X.java // or utf8, UTF-8, UTF8
+java -Dfile.encoding=UTF8 X
+</pre>
+Even the two settings above may not solve the problem if the
+font used by the terminal doesn't contain a rendering for a
+particular character (e.g. the 0x0222 character in the example 
+below).
+<pre>
+public class X {
+    public static void main (String args[]) {
+        System.out.println("\u0222");
+    }
+}
+</pre>
+
+Also, the file.encoding trick may be ok for a small console program
+but maybe not with a server. You may want to use a special
+PrintStream instead. That is because the JVM runtime
+does attempt to find out what
+character encoding the environment outside the JVM uses, and
+apparently in your environment it gets a native character set
+of something else that UTF8.
+
+So, even if you have funky UTF-8 characters in your source,
+Java may be able to print them out in environments with some
+other native character encoding, if that other encoding
+happens to have a code point for the same character glyph.
+
+For example, source code with UTF-8 may contain the byte
+sequence [0xc3, 0xa4], signifying lower-case a-diaeresis
+character glyph. Now, if that source code is compiled
+properly, letting the compiler know that the source is in UTF-8
+character set, and subsequently the code is run in an environment
+with ISO-8859-1 character set, the program will output just
+one byte, 0xE4. Also, if the same code is run in an environment
+configured for plain US-ASCII character set, it will output
+only a question mark (as US-ASCII character set does not have
+a glyph for the a-diaeresis character).
+
+See <a href="http://www.velocityreviews.com/forums/t528998-javac-encoding-problem-and-or-glaring-bug.html">here
+</a> for the full discussion.
 <li>error:unmappable character for encoding Cp1252</li>
 This is a problem that plagues Windows OS when
 compiling Java sources.
