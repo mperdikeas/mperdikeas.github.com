@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>JBoss Application Server configuration directory</li>
+This comes handy for storing JBoss-specific configuration parameters
+that cannot be part of an EAR:
+<pre>
+String serverConfUrl = System.getProperty("jboss.server.config.dir") ;
+</pre>
 <li>UTF8 encoding in Java</li>
 In general problems may occur both in the compile stage (javac) and in the
 execution stage (java). The following flags are pertinent:
