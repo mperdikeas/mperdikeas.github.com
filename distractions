@@ -1,3 +1,6 @@
 2012-03-13
-Theoni and Stelios for SSO failure with Moobla (not mine - the WS played fine)
-Gmamais for failure of usermngmnt WS (not mine - ttsiodras had forgotten to do an svn update) - see email by gmamais around 1600
+Theoni and Stelios for SSO failure with Moobla (not mine - the WS played fine) 1 hour
+Gmamais for failure of usermngmnt WS (not mine - ttsiodras had forgotten to do an svn update) - see email by gmamais around 1600 1 hour
+Everybody for "SSO-failure". invstigated from 1700 till 2215 (close to 7 hours) and wasn't mine
+ at all but was related with the application server clustering / load balancing. #1 and #5 left
+ around 1900.
