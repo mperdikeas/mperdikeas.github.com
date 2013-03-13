@@ -5,6 +5,13 @@
 </head>
 <body>
 <ol reversed>
+<li>Monitor a running JVM</li>
+Use the <b>jvisualvm</b> Oracle program to attach to a running instance of the
+JVM and display various graphs. See below a possible use that tries to attach
+to the JBoss process (running in [s]tandal[one] mode):
+<pre>
+jvisualvm --openpid $(ps aux | grep java | grep tandal | awk '{print $2}'
+</pre>
 <li>JBoss Application Server configuration directory</li>
 This comes handy for storing JBoss-specific configuration parameters
 that cannot be part of an EAR:
