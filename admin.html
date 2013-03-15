@@ -7,11 +7,11 @@
     <ol>
     <li>remove and insert the flash drive and do a:
         <pre>dmesg | tail</pre>
-        to identify the device (/dev/sdc1 in my system)</li>
+        .. to identify the device (/dev/sdc1 in my system)</li>
     <li>confirm with a:
         <pre>df</pre></li>
-    <li><pre>sudo umount /dev/sdc1</pre></li>
-    <li><pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</li>
+    <li>dismount:<pre>sudo umount /dev/sdc1</pre></li>
+    <li>format:<pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</li>
     <li>I've also seen:
         <pre>sudo mkfs -t vfat /dev/sdb1</pre></li>
     </ol>
