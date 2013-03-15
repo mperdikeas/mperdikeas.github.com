@@ -3,6 +3,16 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>format external USB flash drive in Linux</li>
+    <ol>
+    <li>remove and insert the flash drive and do a:
+        <pre>dmesg | tail</pre>
+        to identify the device (/dev/sdc1 in my system)</li>
+    <li>confirm with a:
+        <pre>df</pre></li>
+    <li><pre>sudo umount /dev/sdc1</pre></li>
+    <li><pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</li>
+    </ol>
 <li>find sockets bound and listened-to in the local host</li>
 <pre> sudo lsof -P -i -n </pre>
 <li>find the libraries used by a program</li>
