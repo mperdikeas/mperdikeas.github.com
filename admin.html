@@ -12,6 +12,8 @@
         <pre>df</pre></li>
     <li><pre>sudo umount /dev/sdc1</pre></li>
     <li><pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</li>
+    <li>I've also seen:
+        <pre>sudo mkfs -t vfat /dev/sdb1</pre></li>
     </ol>
 <li>find sockets bound and listened-to in the local host</li>
 <pre> sudo lsof -P -i -n </pre>
