@@ -4,6 +4,20 @@
 </head>
 <body>
 <ol reversed>
+<li>how to package all jars in the EAR's lib</li>
+Jars can be moved to the EAR's lib but sometimes the WAR cannot see certain jars
+needed for the web application. To solve that, one needs to modify the MANIFEST.MF
+of the WAR to include the lib/ folder in the CLASSPATH. Doing so may override
+the default classpath of the JBoss AS7 (or EAP6) though, so there are two solutions:
+(a) either explicitly complement the MANIFEST.MF with the <b>Dependencies</b>
+tag:
+<pre>
+Classpath:lib
+Dependencies:javax.faces.api
+</pre>
+</b>-or-</b>
+(b) 'install' the necessary jars in JBoss using the 'modules' mechanism.
+It is worth noting that this overriding behavior is likely a bug in JBoss.
 <li>how to copy an EAR to a remote JBoss and deploy it</li>
 See : <a href="tricks.html#CopyFileConnectRSAndDoStuff">here</a>
 <li>how to start JBoss AS 7.1.1 in Debug mode in Linux</li>
