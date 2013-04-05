@@ -3,6 +3,19 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>find a package's version<li>
+<pre>dpkg -s postgresql</pre>
+<li>apt-get update -vs- apt-get upgrade -vs- apt-get dist-upgrade</li>
+You should first run <b>update</b>, then <b>upgrade</b>. Neither of them automatically
+runs the other:
+    <ul>
+    <li><b>apt-get update</b> updates the list of available packages and their versions, but it does not install
+                              or upgrade any packages.</li>
+    <li><b>apt-get upgrade</b> actually updates packages you have to newer versions.</li>
+    <li><b>apt-get dist-upgrade</b> in addition to performing the function of upgrade, also intelligenly
+                                    handles changing dependencies with new version of packages and <i>may</i>
+                                    install new packages.</li>
+    </ul>
 <li>list of fonts</li>
 <pre>fc-list</pre>
 <li>format external USB flash drive in Linux</li>

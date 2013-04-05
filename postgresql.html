@@ -67,7 +67,7 @@ tail -f /var/lib/postgresql/9.1/main/pg_log/postgresql-2013-01-15_182646.log
     </pre>
 the last two are useful because they reveals the timezone.
 <li>use of the command-line pg_dump utility:</li>
-<pre> pg_dump -h 172.333.444.555 -p 5444 -U username -F p -E UTF8 -C -O -n "schema-name" -v -f dumpfile database-name</pre>
+<pre> pg_dump &ltdatabase&gt -h 172.333.444.555 -p 5444 -U username -F p -E UTF8 -C -O -n %ltschema-name&gt -v -f dumpfile database-name</pre>
 <li>precedence in PostgreSQL pg_hba.conf files</li>
 The general rule of thumb is: <i>Most Specific Rule First</i>
 <li>typical configuration of PostgreSQL 9.1 I am using:</li>
