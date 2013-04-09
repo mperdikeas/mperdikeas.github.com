@@ -4,6 +4,23 @@
 </head>
 <body>
 <ol reversed>
+<li>see which commits modified which lines of a file</li>
+<pre>svn blame ./path/to/file.java | sort -n</pre>
+<li>procedure to revert to an older revision and then back again</li>
+    <ol>
+    <li>[to revert:] <b>svn update -r 4303</b></li>
+    <li>[to return:] <b>svn revert -R .</b></li>
+    </ol>
+<li>procedure to merge a branch' directory onto the trunk's respective directory</li>
+    <ol>
+    <li>verify that both the trunk and the branch are clean with respect to <b>svn update</b> and <b>svn status</b></li>
+    <li>[in trunk:] <b>svn info | grep ^URL</b></li>
+    <li>[in trunk:] <b>svn merge https://193.93.23.213/svn/repository-a/branches/experimental/full/path/to/folder</b></li>
+    </ol>
+<li>throw away all uncommited changes in working copy:</li>
+<pre>svn revert -R .</pre>
+<li>show differences between a revision (left) and the working copy of a file (right):</li>
+<pre>svn diff -r 4703 ./relative/path/to/filename.cpp</pre>
 <li>helpful SVN log that shows the paths modified in a commit</li>
 <pre>svn log -v | head -30</pre>
 <li>how to merge a specific revision of a file in <b>SVN</b></li>
