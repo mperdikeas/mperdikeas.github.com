@@ -4,6 +4,8 @@
 </head>
 <body>
 <ol reversed>
+<li>delete all unversioned / ignored files in working copy</li>
+<pre>svn status | grep '^?' | awk '{print $2}' | xargs rm -rf</pre>
 <li>see which commits modified which lines of a file</li>
 <pre>svn blame ./path/to/file.java | sort -n</pre>
 <li>procedure to revert to an older revision and then back again</li>
