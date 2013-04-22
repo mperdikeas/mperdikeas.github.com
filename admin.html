@@ -26,7 +26,9 @@ runs the other:
     <li>confirm with a:
         <pre>df</pre></li>
     <li>dismount:<pre>sudo umount /dev/sdc1</pre></li>
-    <li>format:<pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</li>
+    <li>format:<pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</pre>
+    </p>Note, sometimes <b>-n</b>  is not understood and the following works instead:</p>
+                </pre>sudo mkfs.ext3 /dev/sdc1</pre></li>
     <li>I've also seen:
         <pre>sudo mkfs -t vfat /dev/sdb1</pre></li>
     </ol>
