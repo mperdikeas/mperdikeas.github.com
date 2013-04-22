@@ -20,7 +20,7 @@ echo -n saltfoo | sha256sum
 <pre>
 #!/bin/bash
 scp VatRefund.ear root@node-testapp1:/var/tmp/ || exit 1
-cat <<OEF | ssh node-testapp1 || exit 1
+cat &lt;&lt;OEF | ssh node-testapp1 || exit 1
 cd /opt/jboss/jboss-eap-6.0/bin
 ./jboss-cli.sh  --connect controller=123.30.228.54:9999
 undeploy --server-groups=other-server-group VatRefund.ear
