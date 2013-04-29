@@ -3,6 +3,14 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how I transformed a set of java files using the slav-latin encoding (for Czech) to UTF-8</li>
+Two steps:
+    <ol>
+    <li>change the encoding of the files using <b>iconv</b></li>
+    <pre> for x in $(find . -iname \*.java) ; do  iconv  --from-code=ISO-8859-2 --to-code=UTF-8 $x > $x.boo ; done</pre>
+    <li>rename the sources back to Java</li>
+    <pre>for i in $(find . -iname \*.java.boo) ; do mv "$i" "`basename $i .java.boo`.java"; done</pre>
+    </ol>
 <li>find a package's version<li>
 <pre>dpkg -s postgresql</pre>
 <li>apt-get update -vs- apt-get upgrade -vs- apt-get dist-upgrade</li>
