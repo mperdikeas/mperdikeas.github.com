@@ -12,6 +12,8 @@ Two steps:
     <li>change the encoding of the files using <b>iconv</b></li>
     <pre> for x in $(find . -iname \*.java) ; do  iconv  --from-code=ISO-8859-2 --to-code=UTF-8 $x > $x.boo ; done</pre>
     <li>rename the sources back to Java</li>
+    <pre>for i in $(find . -iname \*.java.boo) ; do mv -v $i ${i%.java.boo}.java ; done</pre>
+    NOTE: before the previous I had the following which doesn't work as it does the renames to the local folder:
     <pre>for i in $(find . -iname \*.java.boo) ; do mv "$i" "`basename $i .java.boo`.java"; done</pre>
     </ol>
 <li>find a package's version<li>
