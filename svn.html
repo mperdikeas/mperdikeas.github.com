@@ -4,6 +4,8 @@
 </head>
 <body>
 <ol reversed>
+<li>edit svn:ignore at current dir (to ignore or unignore files)</li>
+<pre>svn propedit svn:ignore .</pre>
 <li>delete all unversioned / ignored files in working copy</li>
 <pre>svn status | grep '^?' | awk '{print $2}' | xargs rm -rf</pre>
 <li>see which commits modified which lines of a file</li>
