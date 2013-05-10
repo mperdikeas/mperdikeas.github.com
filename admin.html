@@ -3,6 +3,22 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>remove existing partitions and format USB hdd for Linux</li>
+First of all do a <b>sudo -i</b>. Then, use two
+commands: <b>fdisk</b> followed by a <b>mkfs.ext3</b>
+First, do a:
+<pre>df- h</pre>
+... to find the device names and the partitions. In my case I had three (3) 
+partitions on the same external USB HDD: <b>/dev/sdg1/</b>, <b>/dev/sdg2</b>
+and <b>/dev/sdg3</b>. I then did a:
+<pre>fdisk /dev/sdg</pre>
+to create a single partition (<b>m</b> to list the available commands, basically
+delete existing partitions, create a new one and then write partition table).
+<p/>
+This was followed by a:
+<pre>mkfs.ext3 /dev/sdg1</pre>
+... on the single partition I created. Finally, to label the drive I did a:
+<pre> sudo e2label /dev/sdg1 150GB-USB-hdd</pre>
 <li>remove BOM from files in Linux</li>
 <pre>tail --bytes=+4 text.txt</pre>
 <li>remote desktop connection in Linux</li>
