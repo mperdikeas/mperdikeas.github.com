@@ -5,6 +5,22 @@
 </head>
 <body>
 <ol reversed>
+<li>install Oracle Java JDK 7 on Ubuntu 12.04 (precise)</li>
+Original article <a href="http://www.magentodeveloperleedsuk.co.uk/installing-oracle-java-jdk-7-on-ubuntu-12-04-step-by-step/">here</a></p>
+    <ol>
+    <li>download the JDK tar.gz and extract it</li>
+    <li>create a new folder:</li>
+    <pre>sudo mkdir -p /usr/lib/jvm/jdk1.7.0</pre>
+    <li>move the extracted contents of the JDK to the new location:</li>
+    <pre>sudo mv <EXTRACTED_FOLDER>/* /usr/lib/jvm/jdk1.7.0/</pre>
+    <li>run the following commands one by one:</li>
+    <pre>
+     sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0/bin/java" 1
+     sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0/bin/javac" 1 
+     sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1
+     sudo update-alternatives --install "/usr/bin/jar" "jar" "/usr/lib/jvm/jdk1.7.0/bin/jar" 1
+    </pre>
+    </ol>
 <li>Monitor a running JVM</li>
 Use the <b>jvisualvm</b> Oracle program to attach to a running instance of the
 JVM and display various graphs. See below a possible use that tries to attach
