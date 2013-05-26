@@ -5,6 +5,16 @@
 </head>
 <body>
 <ol reversed>
+<li>install <b>Apache ivy</b> in Ubunt</li>
+original article <a href="http://superuser.com/questions/452192/how-to-install-ant-ivy">here</a></p>
+After doing an:
+<pre>
+sudo apt-get install ivy
+</pre>
+... the </b>ivy.jar</b> doesn't show up where it's supposed to (/usr/share/ant/lib) but is instead found in folders like /usrshare/doc/ivy and /usr/share/java/. </p>So one has to do a:
+<pre>
+sudo ln -s -T /usr/share/java/ivy.jar /usr/share/ant/lib/ivy.jar
+</pre>
 <li>install Oracle Java JDK 7 on Ubuntu 12.04 (precise)</li>
 Original article <a href="http://www.magentodeveloperleedsuk.co.uk/installing-oracle-java-jdk-7-on-ubuntu-12-04-step-by-step/">here</a></p>
     <ol>
