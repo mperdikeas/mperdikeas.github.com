@@ -3,6 +3,21 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>disabled laptop internal keyboard (e.g. so as to only use the USB keyboard)</li>
+Original article <a href="http://ubuntuforums.org/showthread.php?t=1663298">here</a>.
+Do a:
+<pre>
+xinput --list
+</pre>
+to find the id of the devices connected to the computer.
+Then to disable a device (say the built-in keyboard has id <b>11</b>, do a:
+<pre>
+xinput set-int-prop 11 "Device Enabled" 8 0 
+</pre>
+And to enable it back again, do a:
+<pre>
+xinput set-int-prop 11 "Device Enabled" 8 1
+</pre>
 <li>remove existing partitions and format USB hdd for Linux</li>
 First of all do a <b>sudo -i</b>. Then, use two
 commands: <b>fdisk</b> followed by a <b>mkfs.ext3</b>
