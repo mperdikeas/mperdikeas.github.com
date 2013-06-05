@@ -5,6 +5,18 @@
 </head>
 <body>
 <ol reversed>
+<li>yet another way to install <b>Apache ivy</b> in Ubuntu</li>
+This was discovered by way of experimentation, I am not sure how well advised it is:</p>
+    <ol>
+        <li>download and explode the ivy tarball (apache-ivy-2.2.0-bin.tar.gz)</li>
+        <li>copy the file <b>ivy-2.2.0.jar</b> to where the Ant libs are kept:</li>
+            <pre>sudo cp ivy-2.2.0.jar /usr/share/ant/lib/</pre>
+        <li>run the <b>install</b> target in an Ant project of mine:</li>
+            <pre>cd ~/esavo-reg/playground/ivy/02-install
+                 ant install
+            </pre>
+        <li>you're good to go!</li>
+    </ol>
 <li>install <b>Apache ivy</b> in Ubunt</li>
 original article <a href="http://superuser.com/questions/452192/how-to-install-ant-ivy">here</a></p>
 After doing an:
