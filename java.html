@@ -44,8 +44,14 @@ Original article <a href="http://www.magentodeveloperleedsuk.co.uk/installing-or
      sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0/bin/javaws" 1
      sudo update-alternatives --install "/usr/bin/jar" "jar" "/usr/lib/jvm/jdk1.7.0/bin/jar" 1
      sudo update-alternatives --install "/usr/bin/wsimport" "wsimport" "/usr/lib/jvm/jdk1.7.0/bin/wsimport" 1
+     sudo update-alternatives --install "/usr/bin/xjc" "xjc" "/usr/lib/jvm/jdk1.7.0/bin/xjc" 1
     </pre>
     </ol>
+    <p/><b>2013-06-05 update:<b></p>In an Ubuntu machine that had the OpenJDK JVM already installed (i.e. <b>java</b>
+          but not <b>javac</b>, the first of the above series of instructions failed to change the version of java used
+          (although it produced an exit code of 0). So I had to create the symbolic link myself. The rest of the commands
+          succeeded. Maybe there exists a switch in <b>update-alternatives</b>
+          that allows one to override previous alternatives (if that was the cause of this failure).
 <li>Monitor a running JVM</li>
 Use the <b>jvisualvm</b> Oracle program to attach to a running instance of the
 JVM and display various graphs. See below a possible use that tries to attach
