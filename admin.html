@@ -3,6 +3,23 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>busted package lists in Ubuntu</li>
+When trying to install <b>graphviz</b> (I'm sure it can happen with other packages as well), I got:
+<pre>
+    $ sudo apt-get install graphviz
+    Reading package lists... Error!
+    E: Encountered a section with no Package: header
+    E: Problem with MergeList /var/lib/apt/lists/es.archive.ubuntu.com_ubuntu_dists_precise_main_i18n_Translation-en
+    E: The package lists or status file could not be parsed or opened.
+</pre>
+</p>The following fixes it:
+<pre>
+sudo rm /var/lib/apt/lists/* -vf
+sudo apt-get install update
+</pre>
+After the above two commands <b>sudo apt-get install graphviz</b> succeeds.
+I think doing a <b>sudo apt-get install upgrade</b> wouldn't hurt either
+but I didn't try it in this particular case.
 <li>find which fonts are available</li>
 <pre>fc-list</pre>
 <li>disabled laptop internal keyboard (e.g. so as to only use the USB keyboard)</li>
