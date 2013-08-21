@@ -3,6 +3,11 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>password-aware zip/unzip utility in Ubuntu</li>
+<pre>sudo apt-get install p7zip-full</pre>
+And then:
+<pre>7z x file.zip</pre>
+... which prompts for password.
 <li>busted package lists in Ubuntu</li>
 When trying to install <b>graphviz</b> (I'm sure it can happen with other packages as well), I got:
 <pre>
@@ -15,11 +20,12 @@ When trying to install <b>graphviz</b> (I'm sure it can happen with other packag
 </p>The following fixes it:
 <pre>
 sudo rm /var/lib/apt/lists/* -vf
-sudo apt-get install update
+sudo apt-get update
 </pre>
 After the above two commands <b>sudo apt-get install graphviz</b> succeeds.
 I think doing a <b>sudo apt-get install upgrade</b> wouldn't hurt either
-but I didn't try it in this particular case.
+but I didn't try it in this particular case. I also tried it again in a similar
+situation and was able to <b>sudo apt-get install p7zip-full</b> while it previously failed.
 <li>find which fonts are available</li>
 <pre>fc-list</pre>
 <li>disabled laptop internal keyboard (e.g. so as to only use the USB keyboard)</li>
