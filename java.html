@@ -5,6 +5,11 @@
 </head>
 <body>
 <ol reversed>
+<li>SAX vs DOM parsing in a nutshell</li>
+    <ul><li>The SAX API is a widely accepted and well-working parser that is easy to implement and works especially well with streaming content (e.g. an online XML source). Because it is a read-only API, you would not be able to modify the underlying XML data source. Since it only reads one node at a time, it is very memory-efficient and fast. However, this implies that your application expects the information to be close together and ordered.</li>
+<li>If you want to randomly access the entire document at any point of time, then the DOM approach might be a better choice for you. The DOM API is more complex and harder to implement, but gives you full control over the whole document and lets you modify the data, also. However, it reads the whole XML document into memory, so the DOM API is not suitable for projects with very large XML files.</li>
+    </ul>
+    <a href="http://en.wikibooks.org/wiki/XML_-_Managing_Data_Exchange/Parsing_XML_files">source</a>
 <li>yet another way to install <b>Apache ivy</b> in Ubuntu</li>
 This was discovered by way of experimentation, I am not sure how well advised it is:</p>
     <ol>
