@@ -9,11 +9,11 @@
 <i>The schema document has elementFormDefault set to qualified. As a result, elements conforming to local declarations must use qualified element names in the instance.</i>
 <p>
 The above can be explained as follows:
-
+</p>
 The schema document has <b>elementFormDefault</b> set to <b>qualified</b>. As a result, elements conforming to local declarations are in the target namespace of that schema. Therefore, in the instance document these elements must be qualified either by means of an explicit prefix or through the default namespace (recall that a “qualified” in XSD terminology means simply, belonging to a namespace).
-
+</p>
 The reverse is understood as follows: if a schema document has <b>elementFormDefault</b> set to <b>unqualified</b>, then elements conforming to local declarations are not in a namespace. As such in the schema document, the must be unqualified. This not only means that they should use an explicit prefix, but moreover, that no default namespace should be defined, since if that were the case (i.e. a default namespace was defined) then unprefixed elements would belong to that namespace and so would cease to be unqualified and the instance document would not validate against the schema as the schema intended said elements to be in NO namespace whereas in the instance they would be construed as being in the default namespace (whatever that may be).
-
+</p>
 Therefore the earlier model I had in my mind where I thought that due to the subtleties of <b>elementFormDefault</b> (“qualified” and “unqualified” values) to understand the namespaces to which each element belongs it is not enough to look at an instance document but one also has to look at the schema was WRONG. Looking at the instance document is enough to see the namespaces of each element irrespectively of what may be specified at the schema (in terms of <b>elementFormDefault</b> and <b>targetNamespace</b>). Obviously though, to see whether the instance is valid, one has to look at the schema as well.
 </ol>
 </body>
