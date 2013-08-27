@@ -204,10 +204,9 @@ dpkg --get-selections | grep <search-string>
 </pre>
                 (because ls -lah only displays the size of the
                 directory file).
-<li>proper way to copy recursively (including file permissions etc):</li>
-                <pre>cp -a /a /b</pre>
-                or
-                <pre>cp -pr --preserve=links /a /b</pre>
+<li>proper way to copy recursively directory tree a into b (including file permissions etc):</li>
+                <pre>cp -a a b</pre>
+</p>You don't need anything else and the internal symbolic links are nicely preserved.
 <li>how to find in which package a binary belongs, e.g. the lsb_release binary:</li>
             <pre>dpkg -S $(which lsb_release)</pre>
 <li>to show the versions of debian apt packages use the apt_show_versions utility</li>
