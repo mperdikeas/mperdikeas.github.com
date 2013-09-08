@@ -5,6 +5,22 @@
 </head>
 <body>
 <ol reversed>
+<li>how to install <b>Conkerror</b> in Ubuntu</li>
+Original link <a href="http://www.conkeror.org/InstallationUnix">here</a>.
+Three steps:</p>
+    <ol>
+    <li>instal <b>xulrunner</b></li>
+    </p>follow top answer <a href="http://askubuntu.com/questions/125980/how-do-i-install-xulrunner-in-12-04">here</a>.
+    </p>Note that for some reason the <b><i>sudo sh -c "wget -O- $XURL | tar -xj"</i></b> command didn't
+        work for me and I had to manually download <b>$XURL</b> (in my case it was
+        <a href="https://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/23.0/runtimes/xulrunner-23.0.en-US.linux-i686.tar.bz2">this link</a>), and then do a:
+        </p><pre>sudo cat ~/Downloads/xulrunner-23.0.en-US.linux-i686.tar.bz2 | sudo tar -xj</pre>
+    <li>install <b>Conkeror</b></li>
+    For that, I didn't follow my earlier routine (described <a href="http://superuser.com/questions/434228/installing-conkeror-on-ubuntu-12-04">here</a>), but rather I simply cloned Conkeror's git repository:
+     <pre>git clone http://repo.or.cz/r/conkeror.git</pre> 
+    <li>preapare a <b>conkeror</b> script</li>
+    In my case, that script I prepared (based on instructions found <a href="http://www.conkeror.org/InstallationUnix">here</a> resides in the <b>~tools</b> git repository.
+    </ol>
 <li>how to open up a terminal in any folder of the file browser</li>
 <pre>sudo apt-get install nautilus-open-terminal</pre>
 </p>then, right-clicking on a folder shows option "Open in Terminal" (a log-off / log-in cycle
