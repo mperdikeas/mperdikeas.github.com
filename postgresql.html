@@ -14,6 +14,9 @@ A good report comparing:
 </p> ... is given <a href="http://rostislav-matl.blogspot.com.es/2011/08/fast-inserts-to-postgresql-with-jdbc.html">here</a>.
 Results graph is:</p><img src="inserts-linechart.png">
 </p>My take is that BPIs are good enough without having to venture out onto non-standard CPI-land.
+<br>Caveat: according to <a href="http://stackoverflow.com/questions/12012592/jdbc-insert-multiple-rows">this SO discussion</a>
+auto commit should be set to false for 
+BPI to offer any advantage over SPI (setting auto commit to false is one JDBC's best practices anyway).
 
 <li>location of <b>pg_ctl</b> in Postgresql 9.2</li>
 <pre>/usr/lib/postgresql/9.2/bin/pg_ctl</pre>
