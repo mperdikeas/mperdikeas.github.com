@@ -3,6 +3,18 @@
 </head>
 <body>
 <ol reversed>
+<li>various types of inserts in PostgreSQL</li>
+A good report comparing:
+    <ol type=a>
+    <li>VSI - very silly inserts (executing queries made by concatenated Strings, one-by-one)</li>
+    <li>SPI - stupid prepared inserts (executing queries made by Prepared Inserts one-by-one)</li>
+    <li>BPI - batch prepared inserts (executing queries made by Prepared Inserts in batches)</li>
+    <li>CPI - copy inserts (using the 'properietary' COPY FROM API offered by PostgreSQL driver)</li>
+    </ol>
+</p> ... is given <a href="http://rostislav-matl.blogspot.com.es/2011/08/fast-inserts-to-postgresql-with-jdbc.html">here</a>.
+Results graph is:</p><img src="inserts-linechart.png">
+</p>My take is that BPIs are good enough without having to venture out onto non-standard CPI-land.
+
 <li>location of <b>pg_ctl</b> in Postgresql 9.2</li>
 <pre>/usr/lib/postgresql/9.2/bin/pg_ctl</pre>
 <li>NULL values in foreign key columns</li>
