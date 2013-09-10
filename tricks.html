@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol reversed>
+<li>add a line at the beginning of every text file in a group</li>
+Use <b>sed</b> with <b>for</b> iteration on <b>find</b> results.<br>
+E.g. the following adds package headers in a group of Java files:
+<pre>for f in $(find src/esavo/ingestor/lib/ -type f -iname \*.java) ; sed -i '1ipackage esavo.ingestor.lib;' $f done</pre>
 <li>recursively find the latest modified file in a directory</li>
 Original article in <a href="http://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory">stackoverflow</a>.
 <pre>
