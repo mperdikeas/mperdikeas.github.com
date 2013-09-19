@@ -2,11 +2,43 @@
 In this file I keep wise sayings on software construction
 that can be applicable in deliverables, presentations etc.
 
+****************
+2013-09-19
+On productivity and estimating software schedules.
+The difference in programmer productivity can vary by a factor of 80 - (really it's infinity,
+because some programmers *never* get some code right, so the factor 80 discounts the
+totally failed efforts) - So given a productivity factor you have to normalize it by  a factor
+that depends upon the skill and experience of the programmer.
+
+There are people who claim that they can make models estimating how long a software projects take.
+But even they say that such models have to be tuned, and are only applicable to projects
+which are broadly similar. After you've done almost the same thing half a dozen times
+it might be possible to estimate how long a similar project might take.
+
+The problem is we don't do similar things over and over again. Each new unsolved problem
+is precisely that,  a new unsolved problem.
+
+Most time isn't spent programming anyway -  programmer time is spent:
+
+    a) fixing broken stuff that should not be broken
+    b) trying to figure out what problem the customer actually wants solving
+    c) writing experimental code to test some idea
+    d) googling for some obscure fact that is needed to solve a) or b)
+    e) writing and testing production code
+
+e) is actually pretty easy once a) - d) are fixed. But most measurements of productivity only measure
+lines of code in e) and man hours.
+
+
+****************
+201X-00-00
 It is not usually until you've built and used a version of the program 
 that you understand the issues well enough to get the design right.
 —Brian Kernighan, Rob Pike, The Practice of Programming
 
-2011-03-22 why OSGi sucks
+****************
+2011-03-22
+why OSGi sucks
 It is very very hard to find opinions of what might be “not so great” about OSGi, or reasons that hinder it’s adoption. It’s even harder to find that kind of info from insiders who truly know OSGi by heart.
 Most criticism is received with flames, so most times it isn’t even worth it to comment on critical posts, attracting flamers.
 As a thank you for your article I want to live you this comment from a complete ousider to OSGi, who has been keeping it under watch for 2 years now. Perhaps you might find it somehow useful, o rperhaps you might give me some more insight on the value that I’m missing:
@@ -21,13 +53,20 @@ So there are good things to be had with OSGi. It’s just that once you have inves
 If I was just comming to the business of software in 2010, OSGi would be my choice. But given what I currently already have, It’s a business proposal thats not that bad, but not good enough for me to bet company money and/or carreer prospect on it.
 please remember that I’m trying to criticize or denigrate from OSGi. I’m just trying to express why guys like me run away scared.
 
-2011-04-06 GUIs suck, CLIs rule
+****************
+2011-04-06
+GUIs suck, CLIs rule
 This is dead on. Human beings invented symbolic language because it's simply more expressive than pointing and grunting. CLIs are superior to GUIs for the same reason.
 
-2011-05-13 It can be a partially bottom-up and partially top-down process
+****************
+2011-05-13
+It can be a partially bottom-up and partially top-down process
 
-2011-05-26 Also, a basic foundation of usability is that errors are not the user's fault; they are the system's (or designer's) fault for making it too easy to commit the error.
+****************
+2011-05-26
+Also, a basic foundation of usability is that errors are not the user's fault; they are the system's (or designer's) fault for making it too easy to commit the error.
 
+****************
 2011-06-24
 My take: The Buyers Aren’t the Users
 The people who buy enterprise software aren’t the people who use enterprise software. That’s where the disconnect begins. And it pulls and pulls and pulls until the user experience is split from the buying experience so severely that the software vendors are building for the buyers, not the users. The experience takes a back seat to the feature list, future promises, and buzz words.
@@ -36,6 +75,7 @@ The Fortune 5,000,000 are the the small businesses, the side-businessess, the fr
 We have to make the money happy and the people happy. In our market they’re the same person. In the enterprise market they are often different people in different departments in different buildings who sit at different lunch tables.
 In the world of small business software the product — not the salesperson — does the talking. There’s no camouflaging value when the buyer is the user.
 
+****************
 2011-07-12   RPC is bad
 Abstract
 
