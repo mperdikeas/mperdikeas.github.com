@@ -5,6 +5,13 @@
 </head>
 <body>
 <ol reversed>
+<li>how to find executable and Java version used by Ant</li>
+There are three ways:
+    <ol type="a">
+    <li>I've created script <code>ant_mod</code> in <code>~/tools</code> which echoes the <code>java</code> executable used to spawn <code>ant</code></li>
+    <li>use: <code>ant -verbose</code></li>
+    <li>use: <code>ant -diagnostics | grep java.vm</code></li>
+    </ol>
 <li>install Oracle JDK 7 on Ubuntu 12.04 (precise)</li>
 On 2013-09-19 I followed <a href="http://askubuntu.com/questions/309900/installing-java-7-update-25-on-12-04-lts">these instructions</a>
 and it worked fine. Basically I executed the following steps:<br/>
@@ -13,6 +20,7 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java7-installer
 </pre>
+<br/><b>NB:<b/> following the above, don't forget to update the JAVA_HOME, PATH and CLASSPATH variables, if set in .bashrc.
 <br/>See some bullet points below for an alternative way that also seemed to have worked in the past.
 <li>SAX vs DOM parsing in a nutshell</li>
     <ul><li>The SAX API is a widely accepted and well-working parser that is easy to implement and works especially well with streaming content (e.g. an online XML source). Because it is a read-only API, you would not be able to modify the underlying XML data source. Since it only reads one node at a time, it is very memory-efficient and fast. However, this implies that your application expects the information to be close together and ordered.</li>
