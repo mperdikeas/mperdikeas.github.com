@@ -5,6 +5,29 @@
 </head>
 <body>
 <ol reversed>
+<li>how to indicate the <b>schemaLocation</b> of XSD documents inside an XML instance document</li>
+<a href="http://lists.w3.org/Archives/Public/www-xml-schema-comments/2000JanMar/0011.html">source</a><br/><br/>
+Example:<br/>
+<pre>
+&lt;?xml version="1.0"?&gt;
+&lt;Person xmlns:p="urn:person-schema"
+           xmlns:l="urn:last-name-schema"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="urn:person-schema
+                            urn:person-schema/person-schema.xsd
+                            urn:last-name-schema
+                            urn:last-name-schema/last-name-schema.xsd"&gt;
+    &lt;p:fname&gt;Helen&lt;/p:fname&gt;
+    &lt;l:lname&gt;Jones&lt;/l:lname&gt;
+&lt;/Person&gt;
+</pre>
+<b>NB:</b>The source above is very old and uses the following namespace for the <code>xsi</code> prefix:
+<pre>
+        xmlns:xsi="http://www.w3.org/1999/XMLSchema/instance
+</pre>
+If that is used, my <b>validate</b> utility fails with <i>"Cannot find the declaration of element"</i> apparently
+because that namespace URI is too old. Instead, the <code>http://www.w3.org/2001/XMLSchema-instance</code> URI
+should be used, as shown in the example above.
 <li>elementFormDefault: qualified -vs- unqualified</li>
 <i>The schema document has elementFormDefault set to qualified. As a result, elements conforming to local declarations must use qualified element names in the instance.</i>
 <p>
