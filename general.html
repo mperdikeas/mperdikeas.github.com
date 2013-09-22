@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol reversed>
+<li>compare files in current directory only with those of another directory</li>
+<pre>
+for f in $(find . -maxdepth 1 -type f -iname \*.xsd -o -iname \*.dtd) ; do diff $f schemas-live-2013-09-22_2320/$f ; done
+</pre>
 <li>how to install <b>Conkerror</b> in Ubuntu</li>
 Original link <a href="http://www.conkeror.org/InstallationUnix">here</a>.
 Four steps:</p>
