@@ -102,7 +102,7 @@ jar tvf Orders-ejb.jar  | grep entities| cut -c38- | grep -v /$ | sed 's,^,impor
 (in the above example at the sed command the comma character is used as the separator - this is handier
 than the usual slash character when one has to replaces slashes)
 <li>Total number of lines in all found files</li>
-<pre>find . -iname \*.java -print0 | wc -l --files0-from</pre>
+<pre>find . -iname \*.java -print0 | wc -l --files0-from -</pre>
 <li>Find all different file types in a folder hierarchy</li>
 <pre>
 find . -exec file {} \; | awk -F/ '{print $NF}' | awk -F: '{print $NF}' | sort | uniq
