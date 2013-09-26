@@ -8,6 +8,7 @@
 Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.
 
 <ul>
+    <li><a href="#xml_sucks">XML is bad for distributed systems</a></li>
     <li><a href="#soap_sucks_interop">why SOAP sucks for interoperable systems</a></li>
     <li><a href="#verification_vs_validation">Verification -vs- Validation</a></li>
     <li><a href="#software_schedules">On productivity and estimating software schedules</a></li>
@@ -20,6 +21,18 @@ Wise sayings on software subjects that can be applicable in deliverables, presen
 
 <br/>
 <br/>
+<a name="xml_sucks"/><h2>XML is bad for distributed systems</h2>
+<i>2006-11-17</i>
+<a href="http://www.somebits.com/weblog/tech/bad/whySoapSucks.html">source</a><br/>
+Dumb things about XML for distributed systems</br>
+I've been reading a lot of REST vs SOAP falderall lately and it's getting tiresome. Well, some of it is interesting, like looking at whether Bloglines is REST. Anyway, I thought I'd point out the cowman and the farmer can be friends, at least when we both are discussing the smell of the fertilizer. So, four dumb things about XML as a wire format for distributed systems:
+<ul>
+<li>XML is text. You have to base-10 encode numbers in XML. This is terribly slow and inefficient.</li>
+<li>XML can't handle binary data. There is no reasonable way to embed a 400k image into your XML. Your choices are to base 64 encode it (whee!) or use some wrapper around the XML like MIME.</li>
+<li>XML is awfully wordy. I don't begrudge the meaningful beginning tag names and the pointy brackets, but the meaningful closing tag names are superfluous if all your XML is machine generated.</li>
+<li>XML is complicated. We love XML because it's S-expressions, but it's a lot more too. Entities! PIs (whatever those are). Attributes vs. elements! Three different ways to describe the data model! Awful programming models! It's awfully complicated when what you're trying to do is pass a couple of numbers and a string.</li>
+<li>The roots of XML are SGML, a hand-edited markup language for writing documents. I think it's clever that it's been repurposed for distributed systems, particularly since a human can easily read the packets without translation. And I really like the idea of document-oriented web services (whether SOAP or REST). But it'd sure be nice if the document were more friendly to computer data.</li>
+</ul>
 <a name="soap_sucks_interop"/><h2>Why SOAP sucks for interoperable systems</h2>
 <i>2013-09-27</i>
 <a href="http://www.somebits.com/weblog/tech/bad/whySoapSucks.html">source</a><br/>
