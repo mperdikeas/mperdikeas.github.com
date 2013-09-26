@@ -1,52 +1,81 @@
-2011-02-18
-In this file I keep wise sayings on software construction
-that can be applicable in deliverables, presentations etc.
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+</head>
+<body>
 
-****************
-2013-09-26
+Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.
 
+<ul>
+    <li><a href="#soap_sucks_interop">why SOAP sucks for interoperable systems</a></li>
+    <li><a href="#verification_vs_validation">Verification -vs- Validation</a></li>
+    <li><a href="#software_schedules">On productivity and estimating software schedules</a></li>
+    <li><a href="#pike_on_programming">Pike on programming</a></li>
+    <li><a href="#osgi_sucks">OSGI sucks</a></li>
+    <li><a href="#guis_suck">GUIs sucks</a></li>
+    <li><a href="#bottom_up_down">Bottom-up and top-down</a></li>
+    <li><a href="#rpc_sucks">RPC is bad</a></li>
+<ul>
+
+<br/>
+<br/>
+<a name="soap_sucks_interop"/><h2>Why SOAP sucks for interoperable systems</h2>
+<i>2013-09-27</i>
+<a href="http://www.somebits.com/weblog/tech/bad/whySoapSucks.html">source</a><br/>
+Why SOAP really sucks and is a bad choice for interoperable systems.
+
+The promise of SOAP and WSDL was removing all the plumbing. When you look at SOAP client examples, they're two lines of code. "Generate proxy. RPC to proxy." And for toys, that actually works. But for serious things it doesn't. I don't have the space to explain all the problems right now (if you've seen my talks at O'Reilly conferences, you know), but they boil down to massive interoperability problems. Good lord, you can't even pass a number between languages reliably, much less arrays, or dates, or structures that can be null, or... It just doesn't work. Maybe with enough effort SOAP interop could eventually be made to work. It's not such a problem if you're writing both the client and the server. But if you're publishing a server for others to use? Forget it.
+</p>
+The deeper problem with SOAP is strong typing. WSDL accomplishes its magic via XML Schema and strongly typed messages. But strong typing is a bad choice for loosely coupled distributed systems. The moment you need to change anything, the type signature changes and all the clients that were built to your earlier protocol spec break. And I don't just mean major semantic changes break things, but cosmetic things like accepting a 64 bit int where you use used to only accept 32 bit ints, or making a parameter optional. SOAP, in practice, is incredibly brittle. If you're building a web service for the world to use, you need to make it flexible and loose and a bit sloppy. Strong typing is the wrong choice.
+</p>
+The REST / HTTP+POX services typically assume that the clients will be flexible and can make sense of messages, even if they change a bit. And in practice this seems to work pretty well. My favourite API to use is the Flickr API, and my favourite client for it is 48 lines of code. It supports 100+ Flickr API methods. How? Fast and loose. And it works great.
+</p>
+To be fair, SOAP can be forced to work. Using SOAP didn't really hurt adoption of the APIs I worked on. But it sure didn't help either. So what's the alternative? I'm not sure. Right now I'd probably go the HTTP+POX route while trying to name my resources well enough that the REST guys will invite me to their parties. But XML itself is such a disaster and AJAX is starting to show the cracks in HTTP (like, say, the lack of asynchrony).
+</p>
+<a name="verification_vs_validation"/><h2>Verification -vs- Validation</h2>
+<i>2013-09-26</i><br/>
 Not to mention the fact that unit tests can only help with verification - i.e.
 that you have built the software to expectations and to catch regressions.
 I would say that 90% of the grief I have experienced building applications is
 the validation part - that you are actually building the right thing.
-
-****************
-2013-09-19
-On productivity and estimating software schedules.
+<br/>
+<a name="software_schedules"/>
+<h2>On productivity and estimating software schedules.</h2>
+<i>2013-09-19</i><br/>
 The difference in programmer productivity can vary by a factor of 80 - (really it's infinity,
 because some programmers *never* get some code right, so the factor 80 discounts the
 totally failed efforts) - So given a productivity factor you have to normalize it by  a factor
 that depends upon the skill and experience of the programmer.
-
+<p/>
 There are people who claim that they can make models estimating how long a software projects take.
 But even they say that such models have to be tuned, and are only applicable to projects
 which are broadly similar. After you've done almost the same thing half a dozen times
 it might be possible to estimate how long a similar project might take.
-
+</p>
 The problem is we don't do similar things over and over again. Each new unsolved problem
 is precisely that,  a new unsolved problem.
-
+</p>
 Most time isn't spent programming anyway -  programmer time is spent:
-
-    a) fixing broken stuff that should not be broken
-    b) trying to figure out what problem the customer actually wants solving
-    c) writing experimental code to test some idea
-    d) googling for some obscure fact that is needed to solve a) or b)
-    e) writing and testing production code
-
+    <ol type="a">
+    <li>fixing broken stuff that should not be broken</li>
+    <li>trying to figure out what problem the customer actually wants solving</li>
+    <li>writing experimental code to test some idea</li>
+    <li>googling for some obscure fact that is needed to solve a) or b)</li>
+    <li>writing and testing production code</li>
+    </ol>
+<br/>
 e) is actually pretty easy once a) - d) are fixed. But most measurements of productivity only measure
 lines of code in e) and man hours.
-
-
-****************
-201X-00-00
+<p/>
+<a name="pike_on_programming"/><h2>Pike on programming</h2>
+<i>201X-00-00</i><br/>
 It is not usually until you've built and used a version of the program 
 that you understand the issues well enough to get the design right.
 —Brian Kernighan, Rob Pike, The Practice of Programming
 
-****************
-2011-03-22
-why OSGi sucks
+<a name="osgi_sucks"/><h2>Why OSGI sucks</h2>
+<i>2011-03-22</i><br/>
 It is very very hard to find opinions of what might be “not so great” about OSGi, or reasons that hinder it’s adoption. It’s even harder to find that kind of info from insiders who truly know OSGi by heart.
 Most criticism is received with flames, so most times it isn’t even worth it to comment on critical posts, attracting flamers.
 As a thank you for your article I want to live you this comment from a complete ousider to OSGi, who has been keeping it under watch for 2 years now. Perhaps you might find it somehow useful, o rperhaps you might give me some more insight on the value that I’m missing:
@@ -61,80 +90,65 @@ So there are good things to be had with OSGi. It’s just that once you have inves
 If I was just comming to the business of software in 2010, OSGi would be my choice. But given what I currently already have, It’s a business proposal thats not that bad, but not good enough for me to bet company money and/or carreer prospect on it.
 please remember that I’m trying to criticize or denigrate from OSGi. I’m just trying to express why guys like me run away scared.
 
-****************
-2011-04-06
-GUIs suck, CLIs rule
+<a name="guis_suck"><h2>GUIs suck, CLIs rule</h2>
 This is dead on. Human beings invented symbolic language because it's simply more expressive than pointing and grunting. CLIs are superior to GUIs for the same reason.
 
-****************
-2011-05-13
+<a name="bottom_up_down"><h2>Bottom-up and top-down</h2>
 It can be a partially bottom-up and partially top-down process
 
-****************
-2011-05-26
-Also, a basic foundation of usability is that errors are not the user's fault; they are the system's (or designer's) fault for making it too easy to commit the error.
-
-****************
-2011-06-24
-My take: The Buyers Aren’t the Users
-The people who buy enterprise software aren’t the people who use enterprise software. That’s where the disconnect begins. And it pulls and pulls and pulls until the user experience is split from the buying experience so severely that the software vendors are building for the buyers, not the users. The experience takes a back seat to the feature list, future promises, and buzz words.
-This is one of the reasons we think enterprise is a dirty word. It’s also why it’s an absolute pleasure to design products for what we call the Fortune 5,000,000.
-The Fortune 5,000,000 are the the small businesses, the side-businessess, the freelancers. The people who buy our products are the people who use our products. If they don’t get value on both the financial side and the productivity side they don’t stick around.
-We have to make the money happy and the people happy. In our market they’re the same person. In the enterprise market they are often different people in different departments in different buildings who sit at different lunch tables.
-In the world of small business software the product — not the salesperson — does the talking. There’s no camouflaging value when the buyer is the user.
-
-****************
-2011-07-12   RPC is bad
-Abstract
+<a name="rpc_sucks"><h2>RPC is bad</h2>
+Abstract</br>
 
 I personally think that all forms of RPC are way over-hyped, and not actually terribly useful in the majority of situations in which you'd be tempted to use them. I know this is an unusual point of view, and needs justification.
-
-Background
+</br>
+Background</br>
 
 As a broad outline, you can plot different forms of IPC on a graph with one axis being speed, and the other coupling or, it's inverse, portability. Speed and coupling, like space and time complexities in algorithms, can be related, but, IMHO, are largely orthogontal.
-
+<p/>
 How the axis of the graph are related to real-world protocols.
-
+<p/>
 For example, one naive form of IPC that I've seen commonly is for raw memory to be dumped onto a socket or a pipe. This is great for speed, but very bad for coupling (i.e. very non-portable). It might not even work for two different compilers on the same platform, and if you're trying to communicate between two different languages, each program needs to know intimate details about how the other lays things out in memory. Also, naively implemented, with little thought given to minimizing round-trip requests, it often isn't as fast as you'd think. (More on that later).
-
+<p/>
 At the opposite corner in the graph are protocols like SMTP, or even worse, XML over HTTP. SMTP communicates using text messages that have to be parsed. SMTP parsing is pretty simple, although, looking at sendmail, it can get pretty hairy. XML parsing is even more complex. These parsing steps slow things way down. On the other hand, the well defined nature and robust structure of these protocols makes them extremely portable (i.e. low coupling).
-
+<p/>
 So, where does RPC fit into all of this?
-
+<p/>
 In my opinion, CORBA, and other RPC solutions are medium to highly coupled, and medium to low speed. Not as bad on speed as, perhaps, XML, but not all that great either.
-
+<p/>
 Justification
-
+<p/>
 Medium to high coupling
-
+<p/>
 Well, if you think about it, all forms of RPC, including CORBA, require a fairly explicit detailing of the messages to be sent back and forth. You have to specify your function signature pretty exactly, and the other side has to agree with you. Also, the way RPC encourages you to design protocols tends to create protocols in which the messages have a pretty specific meaning. In contrast, the messages in the SMTP or XML protocol have a pretty general meaning, and it's up to the program to interpret what they mean for it. This bumps RPC protocols up on the coupling scale a fair amount, despite the claims of the theorists and marketers.
-
+<p/>
 OTOH, the messages are platform and language independent. It's relatively easy to find a binding for any given language. Usually the code to decode the message from a bytestream and call your function is generated for you. And, the bytestream will be the same if you get your message from a perl program or a C++ program. This bumps it down on the coupling scale from the memory dumping protocols.
-
+<p/>
 Medium to low speed
-
+<p/>
 Marshalling
-
+<p/>
 This one is minor in that almost any protocol that is supposed to be language and platform independent is going to have it. The problem is marshalling. You have to get your data from the format your language keeps it in into your wire format and back again. While this problem is not as computationally intensive as parsing, it still exists.
-
+<p/>
 Overly synchronous
-
+<p/>
 The other is major. The one thing you always want to avoid in any networking protocol is round trip requests. Round trip requests will always be inherently slow, if for no other reason than the speed of light. You never want to wait for your message to be processed, and a reply sent before you send another message. The X protocol works largely because it avoids round-trip requests like the plague. There is a noticeable lag when an X program starts up because the majority of the unavoidable round trip requests (for things like font information and a bunch of window ids and stuff) are made then. Even when the programs are on the same computer, round trip requests force context switches which eat CPU time. In short, they are BAD.
-
+<p/>
 Any RPC oriented protocol encourages you to think of the messages you are sending as function calls. In every widely used programming language, functions calls are synchronous. Your program 'waits' for the result of a function call before continuing. This encourages thinking about your RPC interface in entirely the wrong way. It doesn't make you focus on the messages you're sending, and the inherently asynchronous nature of such things. It makes you focus on the interface as you would a normal class interface, or a subsystem interface. This leads to lots of round-trip requests, which is a major problem.
-
+<p/>
 CORBA generally advocates soloving this problem by making heavy use of threading. But multiple threads have a lot of problems. They just move the descisions about handling asynchronous behavior to the most difficult part of your program to deal with it in, your internal data structures. Not only that, but multiple threads are a big robustness problem. It's difficult to deal with the failure of a single thread of a multi-threaded program in an intelligent way, especially if the job of that thread is intimately intertwined with what another thread is doing.
-
+<p/>
 Also, threads end up taking up a lot of resources. Both obvious ones like context switches and space for processor contexts, and in less obvious ones, like stack space. One program I saw had a thread for every communcations stream, and it needed to deal with over 300 streams at a time. It also needed a stack of 1M for each thread because some function calls ended up being deeply nested. That's at least 300M just for stack space. The program may have had no difficulty dealing with 300 communications streams at once had it not used threads. As it was, it constantly ran out of memory.
-
+<p/>
 Conclusions
-
+<p/>
 In short, CORBA, and other RPC solutions look like a quick and easy answer to a difficult problem, but, measured on the coupling and speed scales, they are medium to highly coupled, and medium to low speed. Not as bad on speed as, perhaps, XML, but not all that great either.
-
+<p/>
 Grand dreams of utopia
-
+<p/>
 I would like to see (and am in the process of creating) a very message oriented tool for building communications protocols. It would concentrate heavily on what data the messages contained, not what the expected behavior of a program receiving the message should be. It would be supported by a communcations subsystem that emphasized the inherently asynchronous nature of IPC, and made it easier to build systems that used that to provide efficient communcations. It would provide auto-generated marshalling and unmarshalling of data, and even a provision for fetching metadata describing unkown messages, much like XML. It would also allow you to easily override the generated functions with your own functions that are tuned to the data you're sending. It would also make it easy to build and layer new protocols on top of existing ones, or transparently extend protocols in such a way that old programs would still work.
-
+<p/>
 As a last note, I would like to say that we've known for years how to handle the inherently asynchronous nature of user interaction. All of our UI libraries are heavily event oriented. Processing is either split up into small discreet chunks that can be handled quickly inside an event handler, or split off into a seperate thread that communicates to the main program mainly through events. We need the same kind of architecture for programs that do IPC.
-
+<p/>
 If anybody is interested in the beginnings of such a system, I have an open source project that I think is still in the 'cathedral' stage. I would like help and input on its development though, and I need help making it easy to port and compile in random environments. If you would like to help, please e-mail me. I call the system the StreamModule system, and it's architecturally related to the idea of UNIX pipes, and the System V STREAMS drivers.
+</body>
+</html>
