@@ -5,6 +5,8 @@
 </head>
 <body>
 <ol reversed>
+    <li>purpose of &lt;soapAction&gt; attribute in WSDL</li>
+    In the WSDL omitting the <b>soapAction</b> attribute is equivalent to setting soapAction="". It means that the SOAPAction HTTP header will be empty. The WS-I Basic Profile requires that a SOAP envelope inside an HTTP POST request is accompanied by an HTTP SOAPAction header - however it permits the SOAPAction header to be empty. The soapAction attribute simply specifies the content of the SOAPAction HTTP header. The content of the SOAPAction HTTP header is supposed to communicate the "intent" (e.g. operation) of the SOAP envelope, so that proxies and firewalls can act on it without looking into the XML SOAP envelope.
     <li>namespaces for WSDL versions</li>
     <ul>
         <li>WSDL 1.1 &rarr; <a href="http://schemas.xmlsoap.org/wsdl/">http://schemas.xmlsoap.org/wsdl/</a> (<a href="http://www.w3.org/TR/wsdl">source</a>)</li>
