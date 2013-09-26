@@ -3,6 +3,14 @@ In this file I keep wise sayings on software construction
 that can be applicable in deliverables, presentations etc.
 
 ****************
+2013-09-26
+
+Not to mention the fact that unit tests can only help with verification - i.e.
+that you have built the software to expectations and to catch regressions.
+I would say that 90% of the grief I have experienced building applications is
+the validation part - that you are actually building the right thing.
+
+****************
 2013-09-19
 On productivity and estimating software schedules.
 The difference in programmer productivity can vary by a factor of 80 - (really it's infinity,
