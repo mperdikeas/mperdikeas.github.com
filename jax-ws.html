@@ -5,6 +5,8 @@
 </head>
 <body>
 <ol reversed>
+    <li>default SOAP version in <b>JAX-WS</b></li>
+    TODO
     <li>documentation for <b>depends</b> / <b>produces</b> elements in <b>wsimport</b> Ant task</li>
     <a href="https://jax-ws.java.net/2.2.1/docs/wsimportant.html">official documentation</a>
     <a href="http://jimkeeler.blogspot.com.es/2011/08/wsimport-dependsproduces.html">additional documentation</a>
@@ -21,6 +23,79 @@
         <li>SOAP 1.1 &rarr; <a href="http://schemas.xmlsoap.org/soap/envelope/">http://schemas.xmlsoap.org/soap/envelope/</a> (<a href="http://www.w3.org/TR/2000/NOTE-SOAP-20000508/">source</a>)</li>
         <li>SOAP 1.1 &rarr; confusingly, there appears to also be another namespace, but that's probably for an WSDL 1.1 binding to SOAP 1.1: <a href="http://schemas.xmlsoap.org/wsdl/soap/">http://schemas.xmlsoap.org/wsdl/soap/</a></li>
     </ul>
+    <li>actual examples of SOAP envelopes for SOAP 1.1 and SOAP 1.2</li>
+                 <span>
+              <h3>SOAP 1.1</h3>
+              <p>The following is a sample SOAP 1.1 request and response.  The <font class=value>placeholders</font> shown need to be replaced with actual values.</p>
+              <pre>POST /vor10/ristandardservice.asmx HTTP/1.1
+Host: nvo.stsci.edu
+Content-Type: text/xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+SOAPAction: "http://www.ivoa.net/wsdl/RegistrySearch/v1.0#KeywordSearch"
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;KeywordSearch xmlns="http://www.ivoa.net/wsdl/RegistrySearch/v1.0"&gt;
+      &lt;keywords xmlns=""&gt;<font class=value>string</font>&lt;/keywords&gt;
+      &lt;orValues xmlns=""&gt;<font class=value>boolean</font>&lt;/orValues&gt;
+      &lt;from xmlns=""&gt;<font class=value>positiveInteger</font>&lt;/from&gt;
+      &lt;max xmlns=""&gt;<font class=value>positiveInteger</font>&lt;/max&gt;
+      &lt;identifiersOnly xmlns=""&gt;<font class=value>boolean</font>&lt;/identifiersOnly&gt;
+    &lt;/KeywordSearch&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+
+              <pre>HTTP/1.1 200 OK
+Content-Type: text/xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+  &lt;soap:Body&gt;
+    &lt;SearchResponse xmlns="http://www.ivoa.net/wsdl/RegistrySearch/v1.0"&gt;
+      &lt;VOResources from="<font class=value>positiveInteger</font>" numberReturned="<font class=value>positiveInteger</font>" more="<font class=value>boolean</font>" xmlns="http://www.ivoa.net/xml/RegistryInterface/v1.0" /&gt;
+    &lt;/SearchResponse&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+          </span>
+
+          <span>
+              <h3>SOAP 1.2</h3>
+              <p>The following is a sample SOAP 1.2 request and response.  The <font class=value>placeholders</font> shown need to be replaced with actual values.</p>
+
+              <pre>POST /vor10/ristandardservice.asmx HTTP/1.1
+Host: nvo.stsci.edu
+Content-Type: application/soap+xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"&gt;
+  &lt;soap12:Body&gt;
+    &lt;KeywordSearch xmlns="http://www.ivoa.net/wsdl/RegistrySearch/v1.0"&gt;
+      &lt;keywords xmlns=""&gt;<font class=value>string</font>&lt;/keywords&gt;
+      &lt;orValues xmlns=""&gt;<font class=value>boolean</font>&lt;/orValues&gt;
+      &lt;from xmlns=""&gt;<font class=value>positiveInteger</font>&lt;/from&gt;
+      &lt;max xmlns=""&gt;<font class=value>positiveInteger</font>&lt;/max&gt;
+      &lt;identifiersOnly xmlns=""&gt;<font class=value>boolean</font>&lt;/identifiersOnly&gt;
+    &lt;/KeywordSearch&gt;
+  &lt;/soap12:Body&gt;
+&lt;/soap12:Envelope&gt;</pre>
+
+              <pre>HTTP/1.1 200 OK
+Content-Type: application/soap+xml; charset=utf-8
+Content-Length: <font class=value>length</font>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://www.w3.org/2003/05/soap-envelope"&gt;
+  &lt;soap12:Body&gt;
+    &lt;SearchResponse xmlns="http://www.ivoa.net/wsdl/RegistrySearch/v1.0"&gt;
+      &lt;VOResources from="<font class=value>positiveInteger</font>" numberReturned="<font class=value>positiveInteger</font>" more="<font class=value>boolean</font>" xmlns="http://www.ivoa.net/xml/RegistryInterface/v1.0" /&gt;
+    &lt;/SearchResponse&gt;
+  &lt;/soap12:Body&gt;
+&lt;/soap12:Envelope&gt;</pre>
+          </span>
+        <br/>
+
 </ol>
 </body>
 </html>
