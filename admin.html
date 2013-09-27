@@ -3,6 +3,15 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how to diagnose and clear "hangover" HTTP proxy settings in Ubuntu</li>
+<pre>
+$ env | grep -i proxy
+http_proxy=http://localhost:9000/
+UBUNTU_MENUPROXY=libappmenu.so
+$ unset http_proxy
+$ env | grep -i proxy
+UBUNTU_MENUPROXY=libappmenu.so
+</pre>
 <li>find which process is thrasing the hard drive</li>
     <pre>
     $sudo apt-get install iotop
