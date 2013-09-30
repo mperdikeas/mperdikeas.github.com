@@ -3,6 +3,11 @@
 </head>
 <body>
 <ol reversed>
+<li>how to use <b>xpath</b> in where clauses in PostgreSQL</li>
+<b>xpath</b> types cannot be directly compared to string literals, so one has to do a cast, e.g.:
+<pre>
+select count(*) from rr.resourcecontent where cast (xpath('/*/capability/@standardID', content) as text[])='{ivo://ivoa.net/std/ConeSearch}'
+</pre>
 <li>various types of inserts in PostgreSQL</li>
 A good report comparing:
     <ol type=a>
