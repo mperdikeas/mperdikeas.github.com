@@ -8,6 +8,10 @@
 <pre>
 select count(*) from rr.resourcecontent where cast (xpath('/*/capability/@standardID', content) as text[])='{ivo://ivoa.net/std/ConeSearch}'
 </pre>
+- or - (to allow use of PostgreSQL <b>trim</b> function):
+<pre>
+select count(*) from rr.resourcecontent where trim( cast (xpath('/*/capability/@standardID', content) as text))='{ivo://ivoa.net/std/ConeSearch}'
+</pre>
 <li>various types of inserts in PostgreSQL</li>
 A good report comparing:
     <ol type=a>
