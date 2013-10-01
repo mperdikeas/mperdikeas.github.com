@@ -3,15 +3,25 @@
 </head>
 <body>
 <ol reversed>
+<li>how to check if a value appears in an array</li>
+The expression below evals to <b>true</b>
+<pre>
+select 'a' = ANY ('{a , b}'::varchar[])
+</pre>
 <li>how to use <b>xpath</b> in where clauses in PostgreSQL</li>
 <b>xpath</b> types cannot be directly compared to string literals, so one has to do a cast, e.g.:
 <pre>
 select count(*) from rr.resourcecontent where cast (xpath('/*/capability/@standardID', content) as text[])='{ivo://ivoa.net/std/ConeSearch}'
 </pre>
-- or - (to allow use of PostgreSQL <b>trim</b> function):
+- or - <i>(to allow use of PostgreSQL <b>trim</b> function - but only if only one item is returned)</i>:
 <pre>
 select count(*) from rr.resourcecontent where trim( cast (xpath('/*/capability/@standardID', content) as text))='{ivo://ivoa.net/std/ConeSearch}'
 </pre>
+- or - <i>(if an array of values may be returned by the XPath expression)</i>:
+<pre>
+select count(*) from rr.resourcecontent where 'ivo://ivoa.net/std/ConeSearch' = ANY (cast (xpath('/*/capability/@standardID', content) as text[]) )
+</pre>
+(I haven't found a way how to cast to a text array <b>and</b> do a <b>trim()</b> at the same time).
 <li>various types of inserts in PostgreSQL</li>
 A good report comparing:
     <ol type=a>
