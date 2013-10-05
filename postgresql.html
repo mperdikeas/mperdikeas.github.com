@@ -3,6 +3,16 @@
 </head>
 <body>
 <ol reversed>
+<li>how to handle namespace prefixes in <b>xpath</b> queries</li>
+Simple case (1 namespace prefix):
+<pre>
+SELECT ( CAST (xpath('/*/@xsi:type', content, array[array['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS TEXT[]))[1] from rr.resourcecontent
+</pre>
+<br/>More complicated case (2 namespace prefixes):
+<pre>
+SELECT ( CAST (xpath('/ri:Resource/@xsi:type', content, array[array['xsi', 'http://www.w3.org/2001/XMLSchema-instance'],
+                                                              array['ri', 'http://www.ivoa.net/xml/RegistryInterface/v1.0']]) AS TEXT[]))[1] from rr.resourcecontent
+</pre>
 <li>another very useful syntax for doing <b>xpath</b> in PostgreSQL</li>
 Basic idea is that we cast the xpath result to a text array and we take the first element (that's
 when we know that the xpath expression will return a single value only):
