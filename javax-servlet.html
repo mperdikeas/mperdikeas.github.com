@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>Path mappings and extension mappings in sevlets</li>
+In a nuthshell: path mappings take precedence over extension mappings.</br></br>
+A request may match more than one servlet-mapping in a given context. The servlet container uses a straightforward matching procedure to determine the best match. The matching procedure has four simple rules. First, the container prefers an exact path match over a wildcard path match. Second, the container prefers to match the longest pattern. Third, the container prefers path matches over filetype matches. Finally, the pattern "/" always matches any request that no other pattern matches.
+</br></br>See more: <a href="http://www.roguewave.com/portals/0/products/hydraexpress/docs/3.5.0/html/rwsfservletug/4-3.html">here</a>
+                     and
+                    <a href="http://stackoverflow.com/questions/19276717/jetty-servletcontexthandlersetcontextpath-and-how-to-associate-servlets">SO question</a>
 <li>Servlet accessing init parameters</li>
 There's two kinds of inti parameters:<br/>
 <ul>
