@@ -5,13 +5,30 @@
 </head>
 <body>
 <ol reversed>
+<li>how to validate XML files against an XML Schema</li>
+There are three ways:
+    <ul>
+        <li>use the <b>xmllint</b> Linux utility</li>
+        <li>use my <b>validate</b> utility (in my <i>tools</i> github project)</li>
+        <li>use my <b>xsdval</b> utility (also in <i>tools</i> github project)</li>
+    </ul>
+    The third way is the most comprehensive. <br/>Examples may be found in:
+    ~/esavo-reg-II/playground/xsd-validation/ and in particular stages 02, 16, 17 and of course
+    all others as well.
+<li>normative locations of important XSD documents</li>
+    <ul>
+        <li><a href="http://www.w3.org/2001/XMLSchema.xsd">XML Schema XSD</a></li>
+        <li><a href="http://www.w3.org/2001/XMLSchema.dtd">XML Schema DTD</a></li>
+        <li><a href="http://www.w3.org/2001/datatypes.dtd">datatypes DTD</a></li>
+        <li><a href="http://www.w3.org/2001/03/xml.xsd">XML namespace XSD</a></li>
+    </ul>
 <li>on catalogs</li>
 In a nutshell:</br>
 The XML technologies use lots of URLs. While you are in development mode, you might desire to map the URLs to, say, local files. That's what XML catalogs allow you to do, map URLs. And you can do it without impacting your XML documents.</br>
 Useful links:
     <ul>
         <li><a href="http://xerces.apache.org/xml-commons/components/resolver/resolver-article.html">XML Entity and URI Resolvers</a></li> (<a href="XML-Entity-and-URI-Resolvers.pdf">local copy</a>)
-        <li><a href="http://lists.xml.org/archives/xml-dev/201007/msg00079.html">Understanding XML catalogs</li>
+        <li><a href="http://lists.xml.org/archives/xml-dev/201007/msg00079.html">Understanding XML catalogs</a></li>
     </ul>
 <li>how to indicate the <b>schemaLocation</b> of XSD documents inside an XML instance document</li>
 <a href="http://lists.w3.org/Archives/Public/www-xml-schema-comments/2000JanMar/0011.html">source</a><br/><br/>
