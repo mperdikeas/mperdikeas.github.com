@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol reversed>
+<li>redirect standard error to standard out and both to file</li>
+<pre>gksudo software-center > trace 2>&1</pre>
+<b>2>&1</b> means "put the output of channel 2 (<i>stderr</i>) to where channel 1 (<i>stdout</i>) currently goes"
+which is why the redirection to file has to occur before the <i>stderr</i> redirection to <i>stdout</i>.
 <li>add a line at the beginning of every text file in a group</li>
 Use <b>sed</b> with <b>for</b> iteration on <b>find</b> results.<br>
 E.g. the following adds package headers in a group of Java files:
