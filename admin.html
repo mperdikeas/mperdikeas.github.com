@@ -18,8 +18,13 @@ Bottom line:
 sudo rm /var/lib/apt/lists/* -vf
 sudo apt-get update
 </pre>
-<li>add and manage Ubuntu PPAs</li>
-gksudo software-properties-gtk
+<li>add and manage Ubuntu PPAs - <i>command line invocation of graphical tool</i></li>
+<pre>gksudo software-properties-gtk</pre>
+<li>add Ubuntu PPAs - <i>command line only</i></li>
+<pre>
+sudo add-apt-repository ppa:hotot-team
+sudo apt-get update
+</pre>
 <li>run graphical command that needs root</li>
 Use <b>gksudo</b>. It's  primary purpose is to run graphical commands
 that need  root  without the need to run an X terminal emulator.
