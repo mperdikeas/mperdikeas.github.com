@@ -5,6 +5,18 @@
 </head>
 <body>
 <ol reversed>
+<li>how to recursively diff two directories and exclude certain files (e.g. .svn files in case of a subversion repository)</li>
+<pre>diff -r --exclude=.svn dir-a dir-b</pre>
+<li>count the number of "new" keywords in a set of files (per file - not total):</li>
+<pre>grep -c new `find . -name '*.java'`</pre>
+<li>count total number of lines in all Java files</li>
+<pre>wc -l `find . -name '*.java'`</pre>
+<li>record shell commands and their input/output</li>
+<br/>to record:
+<pre>$script session.log</pre>
+<br/>to exit a recording session: <tt>exit</tt>
+<li><tt>seq</tt> program</li>
+<pre>for i in `seq 1 10`; do echo "number is: " $i ; done</pre>
 <li>redirect standard error to standard out and both to file</li>
 <pre>gksudo software-center > trace 2>&1</pre>
 <b>2>&1</b> means "put the output of channel 2 (<i>stderr</i>) to where channel 1 (<i>stdout</i>) currently goes"
@@ -278,7 +290,13 @@ easy repetition of previous commands (much better than history or C-p)
 <pre>
 date ; time find / > /dev/null 2>&1; date
 </pre>
-
+<li>completely purge a package</li>
+<pre>dpkg -P mysql-server</pre>
+<li>to view processes</li>
+<pre>ps auxf</pre>
+('f' stands for 'full')
+<li>print physical directory (ignoring symlinks)</li>
+<pre>pwd -P</pre>
 
 
 </ol>
