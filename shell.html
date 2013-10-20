@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>how to see the alias of a command in the shell</li>
+<pre>
+$ type emacs
+emacs is aliased to `emacs -nw'
+</pre>
+(or the more low tech: <tt>alias | grep emacs</tt>)
 <li>how to recursively diff two directories and exclude certain files (e.g. .svn files in case of a subversion repository)</li>
 <pre>diff -r --exclude=.svn dir-a dir-b</pre>
 <li>count the number of "new" keywords in a set of files (per file - not total):</li>
