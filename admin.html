@@ -3,6 +3,28 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>install bitcoin on Ubuntu</li>
+Add the bitcoin PPA: <tt>ppa:bitcoin/bitcoin</tt> (e.g. using '<tt>gksudo software-properties-gtk</tt>')
+followed by a:
+<pre>
+sudo apt-get update
+sudo apt-get install bitcoin-qt
+</pre>
+and maybe '<tt>sudo apt-get install bitcoind</tt>'
+<li>software center crash problem</li>
+Checkout <a href="http://askubuntu.com/q/361827/89663">this askubuntu.com discussion</a>.
+Bottom line:
+<pre>
+sudo rm /var/lib/apt/lists/* -vf
+sudo apt-get update
+</pre>
+<li>add and manage Ubuntu PPAs - <i>command line invocation of graphical tool</i></li>
+<pre>gksudo software-properties-gtk</pre>
+<li>add Ubuntu PPAs - <i>command line only</i></li>
+<pre>
+sudo add-apt-repository ppa:hotot-team
+sudo apt-get update
+</pre>
 <li>run graphical command that needs root</li>
 Use <b>gksudo</b>. It's  primary purpose is to run graphical commands
 that need  root  without the need to run an X terminal emulator.
