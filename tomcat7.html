@@ -1,0 +1,33 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+</head>
+<body>
+<ol reversed>
+    <li>how to install and setup Tomcat 7 in Ubuntu 12.04</li>
+        <ol>
+        <li>install Tomcat</li>
+<pre>sudo apt-get install tomcat7</pre>
+        <li>verify installation by visiting: <i>localhost:8080</i></li>
+        <b>Tomcat</b> can be stopped, started, restarted using: <pre>sudo /etc/init.d/tomcat7 [start|stop|restart]</pre>
+        <br/>At this point the various important <b>Tomcat</b> directories (CATALINA_HOME and CATALINA_BASE) are specified
+        in the above script (grep for 'CATALINA'). They do not however need to be setup in users' bash environment (see <a href="http://askubuntu.com/q/370080/89663">here</a> for more).
+        <br/>The Tomcat logs when deploying to $CATALINA/webapps (typically '/var/lib/tomcat7/webapps/') can be examined with:
+        <pre>tail -f /var/log/tomcat7/catalina.out</pre>
+        The following may be useful too:<pre>tail -f /var/log/tomcat7/localhost.2013-11-02.log</pre>
+        <li>to access the administrative front-end:</li>
+        <pre>sudo apt-get install tomcat7-admin</pre>
+        ... and then you have to edit file 'tomcat-users.xml':
+        <pre>sudo emacs -nw /var/lib/tomcat7/conf/tomcat-users.xml</pre>
+        ... and add the following:
+        <pre>
+        &ltrole rolename="manager-gui"/&gt
+        &ltrole rolename="admin"/&gt
+        &ltuser username="admin" password="admin" roles="admin,manager-gui"/&gt
+        </pre>
+        ... the admin front-end is then available at <a href="localhost:8080/manager">localhost:8080/manager</a>
+        </ol>
+</ol>
+</body>
+</html>
