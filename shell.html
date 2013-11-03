@@ -17,6 +17,8 @@ emacs is aliased to `emacs -nw'
 <pre>grep -c new `find . -name '*.java'`</pre>
 <li>count total number of lines in all Java files</li>
 <pre>wc -l `find . -name '*.java'`</pre>
+<br/>the following also works (and strangely gives a different result, and requires a CTRL+C at the end):
+<pre>find . -name '*.java' | xargs wc -l</pre>
 <li>record shell commands and their input/output</li>
 <br/>to record:
 <pre>$script session.log</pre>
