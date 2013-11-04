@@ -3,6 +3,16 @@
 </head>
 <body>
 <ol reversed>
+<li>how to drop a database in PostgreSQL</li>
+Three ways:
+    <ol type="i">
+        <li>command line only:</li>
+        <pre>dropdb &ltdatabase name&gt</pre>
+        <li>more refined, once connected as <i>postgres</i> superuser:</li>
+        <pre>DROP DATABASE IF EXISTS &ltdatabase name&gt</pre>
+        <li>the way above from the command line:</li>
+        <pre>psql -U postgres postgres -f &ltfile with the above script&gt</pre>
+    </ol>
 <li>how to handle namespace prefixes in <b>xpath</b> queries</li>
 Simple case (1 namespace prefix):
 <pre>
