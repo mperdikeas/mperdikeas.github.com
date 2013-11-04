@@ -9,7 +9,7 @@ method that relies on the <b>pg_config</b> tool)
     <ol>
         <li>to install <b>pg_config</b> itself I used:</li>
         <code>sudo apt-get install postgresql-server-dev-9.1</code>
-        <li>I then followed the remaining steps according to the guide linked above</li>
+        <li>I then followed the remaining steps according to the guide linked above
             <ol type="i">
                 <li>unpack the pgSphere sources - which I got with: <code>wget http://pgfoundry.org/frs/download.php/2558/pgsphere-1.1.1.tar.gz</code></li>
                 <li>change into the <b>pg_sphere</b> directory and run: <code>make USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config</code></li>
@@ -33,6 +33,10 @@ method that relies on the <b>pg_config</b> tool)
                     </ol>
                 </li>
             </ol>
+        </li>
+        <li>The last part (<i>creating a database with pgSphere</i>) I wasn't able to fully replicate since I couldn't identify the directory: <i><code>POSTGRESQL_INSTALL_PATH/share/contrib</code></i> involved. However i am assuming that all I have to do is simply execute the <b>pg_sphere.sql</b> script into any
+database I have, as basically what <b>pgSphere</b> does is add some spherical types and functions. In my system the script <b>pg_sphere.sql</b> lives in:
+<pre> ~/software-downloads/pgsphere-1.1.1/pg_sphere.sql</pre>
     </ol>
 </ol>
 
