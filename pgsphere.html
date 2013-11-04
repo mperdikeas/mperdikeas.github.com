@@ -1,0 +1,40 @@
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+</head>
+<body>
+<ol reversed>
+<li>how to install <b>pgSphere</b></li>
+I followed the instructions from <a href="http://pgsphere.projects.pgfoundry.org/x44.html">this guide</a> (the second
+method that relies on the <b>pg_config</b> tool)
+    <ol>
+        <li>to install <b>pg_config</b> itself I used:</li>
+        <code>sudo apt-get install postgresql-server-dev-9.1</code>
+        <li>I then followed the remaining steps according to the guide linked above</li>
+            <ol type="i">
+                <li>unpack the pgSphere sources - which I got with: <code>wget http://pgfoundry.org/frs/download.php/2558/pgsphere-1.1.1.tar.gz</code></li>
+                <li>change into the <b>pg_sphere</b> directory and run: <code>make USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config</code></li>
+                <li>install <b>pgSphere</b> with: <code>make USE_PGXS=1 PG_CONFIG=/path/to/pg_config install</code></li>
+                In my case I run:<pre>sudo make USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config install</pre>
+                <li>check the installation. Here the instruction to just run <code>make installcheck</code> proved inadequate.
+                    <ol type="a">
+                        <li>first of all, I had to run:<pre>make USE_PGXS=1 installcheck</pre></li>
+                        <li>when that complained with: <samp>psql: FATAL:  role "mperdikeas" does not exist</samp> (it apparently picks the Linux user),
+                        I had to ... (next steps)
+                        <li>connected as the <b>PostgreSQL</b> superuser with: <code>pgsql -d template1 -U postgres</code></li>
+                        <li>create PostgreSQL user <b>mperdikeas</b> with: <code>CREATE USER mperdikeas WITH PASSWORD '****';</code></li>
+                        <li>then, <i><code>make USE_PGXS=1 installcheck</code></i> failed again with <samp>ERROR:  permission denied to create database</samp>, so I had to ... (next step)</li>
+                        <li>grant the "create database" privilege to user "mperdikeas": <code>ALTER USER mperdikeas CREATEDB;</code></li>
+                        <li>then, <i><code>make USE_PGXS=1 installcheck</code></i> failed yet again with <samp>ERROR:  permission denied to set parameter "lc_messages"</samp> so I had to ... (next step)</li>
+                        <li>grant "superuser" privilege to user "mperdikeas": <code>ALTER USER mperdikeas WITH SUPERUSER;</code></li>
+                        <li>and only then did: <code>make USE_PGXS=1 installcheck</code> succeed. However, 2 of the 11 tests failed</li>
+                        <li>to verify the <b>pgSphere</b> installation, I connected to the <b>contrib_regression</b> database: <code>psql -d contrib_regression -U mperdikeas</code> and executed a: <i><code>select spoint(3.15, 3.15) ;</code></i> which should return something like the following:<samp> (0.0084073464102068 , -0.0084073464102068)
+(1 row)</pre></li>
+
+                    </ol>
+                </li>
+            </ol>
+    </ol>
+</ol>
+
+
+</body>
