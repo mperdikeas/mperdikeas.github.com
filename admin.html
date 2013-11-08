@@ -3,6 +3,10 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how to remove the lingering <b>http_proxy</b> environment setting</li>
+Doing a: <code>export http_proxy=</code> is not enough for Rails (e.g. <b>bundle install</b> keeps failing).
+You should do a: <code>unset http_proxy</code> so that <code>prinenv | grep http_proxy</code> returns no 
+sign of it.
 <li>install bitcoin on Ubuntu</li>
 Add the bitcoin PPA: <tt>ppa:bitcoin/bitcoin</tt> (e.g. using '<tt>gksudo software-properties-gtk</tt>')
 followed by a:
