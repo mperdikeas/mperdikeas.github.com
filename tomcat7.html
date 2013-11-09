@@ -5,6 +5,14 @@
 </head>
 <body>
 <ol reversed>
+    <li>how to make Tomcat 7 in Ubuntu 12.04 use the Oracle JDK and not the open JDK</li>
+    I effected the following change in the file <b><code>/etc/init.d/tomcat7</code></b>:
+    <pre>
+    # mperdikeas change section 2013-11-09-start
+    #JDK_DIRS="/usr/lib/jvm/default-java ${OPENJDKS} /usr/lib/jvm/java-6-openjdk /usr/lib/jvm/java-6-sun"
+    JDK_DIRS="/usr/lib/jvm/java-7-oracle /usr/lib/jvm/default-java ${OPENJDKS} /usr/lib/jvm/java-6-openjdk /usr/lib/jvm/java-6-sun"
+    # mperdikeas change section 2013-11-09-end
+    </pre>
     <li>how to install and setup Tomcat 7 in Ubuntu 12.04</li>
         <ol>
         <li>install Tomcat</li>
