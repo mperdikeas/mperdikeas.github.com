@@ -5,6 +5,17 @@
 </head>
 <body>
 <ol reversed>
+<li>using named pipes in Bash</li>
+<a href="http://www.hollenback.net/NamedPipesInBash">original article</a>
+<pre>diff <(ls) <(ls)</pre>
+Named pipes can be created with <b>mkfifo</b>:
+<pre>
+mkfifo foo
+find ~ > foo &
+tail -f foo
+</pre>
+The difference of the above to creating a file is that the size of a named pipe is 0.
+A named pipe lives on the filesystem and survives a reboot but never holds any data, only metadata.
 <li>how to see the alias of a command in the shell</li>
 <pre>
 $ type emacs
