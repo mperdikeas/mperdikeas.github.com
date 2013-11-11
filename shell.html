@@ -5,6 +5,54 @@
 </head>
 <body>
 <ol reversed>
+<li>how to use <b>diff</b> to generate a patch in a <b>Makefile</b></li>
+<i>this is really a bash topic (see below)</i>.
+Relative SO discussion <a href="http://unix.stackexchange.com/q/100786/24044">here</a>.<br>
+The Makefile run will fail when a command that's executed as part of a recipe returns a non-zero exit code,
+unless the command is preceded with "-" (in which case it ignores the exit code).<br>
+This is exactly what's happenning in the <code>~/playground/patch/Makefile</code>
+Makefile, also shown below:
+<pre>
+patch:
+	-diff -u b a > b2a.patch
+	patch -o b.corrected b < b2a.patch
+	diff a b.corrected
+
+clean:
+	rm -f b2a.patch b.corrected
+</pre>
+
+However, this idiom will ask mask real problems (such as using <b>-dif</b> instead of <b>-diff</b>.
+Therefore the correct way to solve this conundrum (i.e. to not don't ignore the exit value, but also to not fail if it's non-zero)
+is shown in <code>/home/mperdikeas/playground/ant-patch/02/Makefile</code> file, also shown below:
+
+<pre>
+patch: FORCE
+	diff -u src/a/random/path/b b.corrected > b2a.patch; [ $$? -eq 1 ]
+	ant
+	diff src/a/random/path/a src/a/random/path/b.corrected
+
+clean:
+	rm -f b2a.patch src/a/random/path/b.corrected
+
+FORCE:
+</pre>
+
+The ability to use the following syntax: <code>; [ $? -eq 1 ]</code> is plain bash (the double '$' in the
+Makefile is to account for Make's escaping conventions), as is shown in the following bash examples:
+
+<pre>
+$ echo $[3+2]
+5
+$ [ $[3+2] -eq 5 ]
+$ echo $?
+0
+$ [ $[3+2] -eq 6 ]
+$ echo $?
+1
+</pre>
+
+
 <li>using named pipes in Bash</li>
 <a href="http://www.hollenback.net/NamedPipesInBash">original article</a>
 <pre>diff <(ls) <(ls)</pre>
