@@ -5,6 +5,9 @@
 </head>
 <body>
 <ol reversed>
+<li>properly quoting arguments to underlying invocations</li>
+Inside a bash script, always use <code>"$1"</code> to pass an argument to an underlying program
+instead of just <code>$1</code>. See: ~/playground/java/why-I-should-always-quote-arguments for more.
 <li>how to use <b>diff</b> to generate a patch in a <b>Makefile</b></li>
 <i>this is really a bash topic (see below)</i>.
 Relative SO discussion <a href="http://unix.stackexchange.com/q/100786/24044">here</a>.<br>
