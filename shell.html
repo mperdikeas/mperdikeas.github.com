@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol reversed>
+<li>binary diffing on Ubuntu</li>
+Use my <b>~/tools/bincomp</b> tool or the <b>vbindiff</b> or <b>dhex</b> programs.
+<li>how to make a replacement on every line with <b>awk</b></li>
+<code>awk '{gsub("/","."); print}' </code>
 <li>properly quoting arguments to underlying invocations</li>
 Inside a bash script, always use <code>"$1"</code> to pass an argument to an underlying program
 instead of just <code>$1</code>. See: ~/playground/java/why-I-should-always-quote-arguments for more.
