@@ -1,0 +1,45 @@
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+</head>
+<body>
+<ol reversed>
+<li>how to install Freeciv with the default sounds in Ubuntu 12.04</li>
+    <a href="http://linuxg.net/freeciv-2-4-has-been-released-how-to-install-freeciv-2-4-on-ubuntu-13-04-12-04-linux-mint-15-13-and-elementary-os-0-2-luna/">online article</a>
+    <ol style="i">
+    <li>Add the PlayDeb's repository key:</li>
+    <pre>wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -</pre>
+    <li>Add the PlayDeb repository to your system and update the local repo index:</li>
+    <pre>
+echo "deb http://archive.getdeb.net/ubuntu precise-getdeb games" | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
+    </pre>
+    <li>Install FreeCiv 2.4:</li>
+<pre>
+sudo apt-get install freeciv-client-gtc
+sudo apt-get  install freeciv-client-extras
+sudo apt-get  install freeciv-sound-standard
+</pre>
+    </ol>
+<li>how to install additional sounds and music for Freeciv in Ubuntu 12.04</li>
+    <a href="http://freeciv.wikia.com/wiki/Sound_%26_Music">wiki article</a>
+    <ol style="i">
+    <li>get the freesounds zip</li>
+    <pre>wget http://download.gna.org/freeciv/contrib/audio/soundsets/freesounds-1.3.1.zip</pre>
+    <li>unzip it in the freeciv folder</li>
+    <br>To do that find where the standard set of sounds (the "<b>stdsounds</b>" set) are located by doing a:
+    <pre>dpkg -L freeciv-sound-standard</pre>
+    (if you are unsure about the name do a <code>dpkg --get-selections</code> to get a list of installed packages)
+    <br>
+    You have to unzip the freesounds zip in the same folder where the standard sounds are located.
+    <br>In my case that was <b>/usr/share/games/freeciv</b>, so I did a:
+    <pre>
+cd /usr/share/games/freeciv/
+sudo unzip /home/mperdikeas/Downloads/freesounds-1.3.1.zip
+    </pre>
+    <li>set the soundset to "<b>freesounds</b>"</li>
+    That's in the "<b>Game|Options|Local Client</b>" menu and then the "<b>Sound</b>" tab, "<b>soundset</b>" property.
+    </ol>
+</ol>
+
+
+</body>
