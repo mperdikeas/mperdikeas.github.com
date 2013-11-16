@@ -377,7 +377,7 @@ sudo apt-get install apache2
 <li>how to find the source package a binary (e.g. ldapsearch) belongs to</li>
 <pre>dpkg -S ldapsearch</pre>
 
-<li>how to find the loci of installed packages (Debian></li>
+<li>how to find the loci of the files of an installed package (Debian></li>
 <pre>dpkg -L httpd</pre><p>
 (-L lists all files installed to your system from that package name)</p>
 Note that <b>dpkg</b> lists the files that were <u>fetched</u> as part of the install
@@ -387,7 +387,8 @@ Python files). This can be seen by comparing the outputs of the following two co
 dpkg -L python2.7
 ls -s /usr/lib/python2.7/
 </pre>
-
+To find which packages are installed (so you can then do a <code>dpkg -L</code> on them, do a:
+<pre>dpkg --get-selections</pre>
 <li>how to find directories in current dir </li>
 <pre>ls | grep ^d</pre>
 
