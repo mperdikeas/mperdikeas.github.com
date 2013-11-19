@@ -5,6 +5,8 @@
 </head>
 <body>
 <ol reversed>
+<li>how to find from the command line if Java is 64 bit</li>
+<pre>java -d64 -version</pre>
 <li>JAX-WS 2.2.8 RI documentation and wsimport Ant task</li>
 The documentation for the latest (at the time of this writing) JAX-WS RI (GlassFish Metro), including <b>wsimport</b> Ant task is found
 <a href="https://jax-ws.java.net/2.2.8/docs/ch04.html#tools-wsimport">here</a>.
@@ -26,7 +28,7 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 sudo apt-get install oracle-java7-installer
 </pre>
-<br/><b>NB:<b/> following the above, don't forget to update the JAVA_HOME, PATH and CLASSPATH variables, if set in .bashrc.
+<br/><b>NB:</b> following the above, don't forget to update the JAVA_HOME, PATH and CLASSPATH variables, if set in .bashrc.
 <br/>See some bullet points below for an alternative way that also seemed to have worked in the past.
 <li>SAX vs DOM parsing in a nutshell</li>
     <ul><li>The SAX API is a widely accepted and well-working parser that is easy to implement and works especially well with streaming content (e.g. an online XML source). Because it is a read-only API, you would not be able to modify the underlying XML data source. Since it only reads one node at a time, it is very memory-efficient and fast. However, this implies that your application expects the information to be close together and ordered.</li>
