@@ -3,6 +3,32 @@
 </head>
 <body>
 <ol reversed>
+<li>PostgreSQL-specific way to get maximum or minimum values of certain columns for every combination of other columns</li>
+This is using the PostgreSQL-specific <b>DISTINCT ON</b> syntax (an extension on the SQL standard <b>DISTINCT</b> for specific
+columns).
+<br>
+Given the below table:
+<pre>
+CREATE TABLE A (A1 INTEGER, A2 INTEGER, A3 INTEGER);
+
+INSERT INTO A(A1, A2, A3) VALUES (1, 1, 1);
+INSERT INTO A(A1, A2, A3) VALUES (2, 1, 1);
+INSERT INTO A(A1, A2, A3) VALUES (2, 1, 2);
+INSERT INTO A(A1, A2, A3) VALUES (3, 1, 2);
+INSERT INTO A(A1, A2, A3) VALUES (2, 1, 2);
+INSERT INTO A(A1, A2, A3) VALUES (4, 1, 2);
+INSERT INTO A(A1, A2, A3) VALUES (4, 1, 5);
+INSERT INTO A(A1, A2, A3) VALUES (3, 1, 5);
+</pre>
+The following obtains minimum <b>a1</b> values for every combination of <b>a2</b> and <b>a3</b>:
+<pre>
+SELECT DISTINCT ON (a2, a3) a2, a3, a1 FROM A ORDER BY a2, a3, a1
+</pre>
+<br>Whereas the following does the same, for maximum <b>a1</b> values:
+<pre>
+SELECT DISTINCT ON (a2, a3) a2, a3, a1 FROM A ORDER BY a2, a3, a1 DESC
+</pre>
+
 <li>how to drop a database in PostgreSQL</li>
 Three ways:
     <ol type="i">
