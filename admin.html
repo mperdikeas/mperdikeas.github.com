@@ -260,16 +260,19 @@ directly mount them as shown on the below item.
 <pre>
 sudo mount -t cifs -o username=a_tsiodras //172.31.128.250/Download /iso2/ 
 </pre>
-<li>find the package a file, e.g. <i>javac</i> belongs to</li>
+<li>find the (not-installed) package a file, e.g. <i>javac</i> belongs to</li>
 Use the <b>apt-file</b> program:
 <pre>
 sudo apt-get install apt-file
 sudo apt-file update
-apt-file search javac
+apt-file search /usr/bin/mysqldump
 </pre>
+(<a href="http://unix.stackexchange.com/a/6314/24044">SO answer</a>)
+<br>
 Also, to find which <u>installed</u> package a file belongs to
-you can use:
-<pre>dpkg -S <filename></pre>
+you can use, e.g.:
+<pre>dpkg -S /bin/ls</pre>
+<br>
 Note that this doesn't always work for config files and files in
 <b>/var</b> since those are generated after the package is extracted.
 <li>my LANG setting</li>
