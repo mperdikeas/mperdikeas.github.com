@@ -3,6 +3,9 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>find which process is causing "device busy"</li>
+<pre>(sudo) lsof | grep (device name or path to which device is mounted)</pre>
+<a href="http://stackoverflow.com/q/624154/274677">so</a>
 <li>how to remove the lingering <b>http_proxy</b> environment setting</li>
 Doing a: <code>export http_proxy=</code> is not enough for Rails (e.g. <b>bundle install</b> keeps failing).
 You should do a: <code>unset http_proxy</code> so that <code>prinenv | grep http_proxy</code> returns no 
