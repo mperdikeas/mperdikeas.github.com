@@ -3,6 +3,9 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>total size of files satisfying a <u>find</u> criterion</li>
+<pre>du -c $(find . -type f -o -type l -maxdepth 1)</pre>
+<a href="http://unix.stackexchange.com/q/103846/24044">so</a>
 <li>find which process is causing "device busy"</li>
 <pre>(sudo) lsof | grep (device name or path to which device is mounted)</pre>
 <a href="http://stackoverflow.com/q/624154/274677">so</a>
