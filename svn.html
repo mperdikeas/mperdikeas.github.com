@@ -4,6 +4,11 @@
 </head>
 <body>
 <ol reversed>
+<li>un-add files in SVN</li>
+<pre>svn revert --recursive folder_name</pre>
+or
+<pre>svn rm --keep-local folder_name</pre>
+<a href="http://stackoverflow.com/q/2906892/274677">so</a>
 <li>recursively add new ignored patterns in SVN</li>
 See my <b>svn-rec-add-ignore.sh</b> script (in ~/tools).
 <li>recursively set ignored pattern in SVN</li>
