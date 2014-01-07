@@ -4,7 +4,9 @@
 </head>
 <body>
 <ol reversed>
-<li>recursively add new ignored pattern in SVN</li>
+<li>recursively add new ignored patterns in SVN</li>
+See my <b>svn-rec-add-ignore.sh</b> script (in ~/tools).
+<li>recursively set ignored pattern in SVN</li>
 <pre>svn propset --recursive svn:ignore --file /path/to/a/file/with/svn-ignore-rules .</pre>
 <li>show ignored files in a directory</li>
 <pre>svn pg svn:ignore .</pre>
