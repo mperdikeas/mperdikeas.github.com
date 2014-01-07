@@ -4,6 +4,9 @@
 </head>
 <body>
 <ol reversed>
+<li>remove directory from SVN version control (but not local contents)</li>
+<pre>svn rm --keep-local dirname</pre>
+(why one would want to do that is unclear)
 <li>add all unversioned files to SVN</li>
 <pre>svn add --force * --auto-props --parents --depth infinity -q</pre>
 - <a href="http://stackoverflow.com/a/4046862/274677">so</a>, NB: doesn't seem to add dot files, subsumed in my svn-add-all.sh script (in ~/tools)
