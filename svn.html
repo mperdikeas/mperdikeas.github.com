@@ -4,6 +4,10 @@
 </head>
 <body>
 <ol reversed>
+<li>show ignored files in a directory</li>
+<pre>svn pg svn:ignore .</pre>
+or (but that shows all properties, not just svn:ignore):
+<pre>svn proplist -v .</pre>
 <li>remove directory from SVN version control (but not local contents)</li>
 <pre>svn rm --keep-local dirname</pre>
 (why one would want to do that is unclear)
