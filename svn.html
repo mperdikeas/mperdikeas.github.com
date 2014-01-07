@@ -4,6 +4,8 @@
 </head>
 <body>
 <ol reversed>
+<li>recursively add new ignored pattern in SVN</li>
+<pre>svn propset --recursive svn:ignore --file /path/to/a/file/with/svn-ignore-rules .</pre>
 <li>show ignored files in a directory</li>
 <pre>svn pg svn:ignore .</pre>
 or (but that shows all properties, not just svn:ignore):
