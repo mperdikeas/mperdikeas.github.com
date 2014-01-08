@@ -5,6 +5,70 @@
 </head>
 <body>
 <ol reversed>
+<li>git svn mirroring (ESAC use-case)</li>
+The instructions on <a href="">this page</a>
+worked well. Copied below in case the source goes off line:
+<br>
+<b>Create the subversion repository in the usual way, using svnadmin.</b>
+<br>
+<br>
+Once you've got an empty repository to point to (we'll imagine it's at http://svn.example.com/foo), you also need to commit an initial version (I also created a trunk directory in this step, in case we later decide to mirror branches too):
+<br>
+<pre>
+svn co http://svn.example.com/foo
+cd myproj
+svn mkdir trunk
+svn commit -m 'Created trunk directory'
+</pre>
+Once this is done, you can throw away the directory you checked out of subversion.
+<br>
+<br>
+<b>Set up the subversion remote</b>
+<br>
+This step, and subsequent ones, need to be performed on whichever git repository you want to mirror from.
+<p>
+In our case, we have a central repository running on a local installation of Gitorious. This is a bare repository, which makes things a little tricker, as git-svn requires a working copy. To get round this, we create a clone, which we’ll use as an intermediate step in the mirroring process. If you're not mirroring a bare repository, you can omit this step.
+<p>
+The repositories we want to mirror are in ~git/repositories, and we’ve created a directory ~git/repositories/svn-mirror where we'll put the clones. For this example, we'll use a repository called foo/mainline.git.
+<br>
+<b>Create the clone:</b>
+<br>
+<pre>
+git clone ~git/repositories/foo/mainline.git ~git/repositories/svn-mirror/foo
+cd ~git/repositories/svn-mirror/foo
+</pre>
+
+Now add the following to .git/config (with the correct svn URI, of course):
+
+<pre>
+[svn-remote "svn"]
+url = http://svn.example.com/foo/trunk
+fetch = :refs/remotes/git-svn
+</pre>
+
+Now do an initial fetch of the empty subversion remote, and check it out as a new git branch (called svn):
+
+<pre>
+git svn fetch svn
+git checkout -b svn git-svn
+</pre>
+You can now merge in all your commits from master, and push them to subversion. You’ll probably want to go and make a coffee or something while the dcommit runs – if you haven’t used subversion for a while you’ve probably forgotten just how much slower it is than git.
+
+<pre>
+git merge master
+git svn dcommit
+</pre>
+
+To allow pushing to svn from master, rebase master to the svn branch (which can then be deleted):
+
+<pre>
+git checkout master
+git rebase svn
+git branch -d svn
+</pre>
+At this point you should be able to manually update subversion at any time by running <b>git svn dcommit</b> from the master branch.
+
+
 <li>reconnect a detached head</li>
 <pre>
 $ git log -1
