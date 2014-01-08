@@ -5,7 +5,80 @@
 </head>
 <body>
 <ol reversed>
-<li>git svn mirroring (ESAC use-case)</li>
+<li>procedure I used to create an SVN mirror of my git project<a name="particular-svn-mirroring"/></li>
+(based on the <a href="#general-svn-mirroring">general instructions</a>)
+<ol>
+<li>created new repository <i>dummy</i> on <b>github.com</b></li>
+<li>cloned it</li>
+<pre>cd && git clone https://github.com/mperdikeas/dummy.git</pre>
+<li>added a 'foo' file and pushed it</li>
+    <pre>
+    cd dummy && echo "foo" >> foo && git add . -A
+    git commit -m "foo added" && git push
+    </pre>
+<li>created receptor SVN project in server-side SVN</li>
+<pre>cd ~/svn-playground/ && svnadmin create svn-server/dummy/</pre>
+<li>created a 'trunk' directory in receptor SVN project</li>
+<pre>
+    cd ~/svn-playground && mkdir dummy-client && cd dummy-client
+    svn co file:///home/mperdikeas/svn-playground/svn-server/dummy . 
+    svn mkdir trunk && svn commit -m 'created trunk directory'
+</pre>
+<li>configuring git svn mirror (ESAC use-case)</li>
+add the following contents to the <code>~/dummy/.git/config</code> file:
+<pre>
+[svn-remote "svn"]
+    url = file:///home/mperdikeas/svn-playground/svn-server/dummy/trunk
+    fetch = :refs/remotes/git-svn
+</pre>
+<li>Do an initial fetch of the empty subversion remote, and check it out as a new git branch (called svn)</li>
+<pre>
+cd ~/dummy/ && git svn fetch svn
+git checkout -b svn git-svn
+</pre>
+<li>Merge in all your commits from master, and push them to subversion</li>
+<pre>
+git merge master
+git svn dcommit
+</pre>
+<li>check that the mirroring is effected by updating on the SVN repository<li>
+<pre>
+cd ~/svn-playground/dummy-client/ && svn update
+</pre>
+(files '<i>foo</i>' and '<i>README.md</i>' should now be present in the <i>dummy-client</i> (in the <i>trunk</i> repository).
+working copy
+<li>To allow pushing to svn from master, rebase master to the svn branch (which can then be deleted)<li>
+<pre>
+cd ~/dummy && git checkout master
+git rebase svn && git branch -d svn
+</pre>
+<li>verify that you are on branch 'master' and only that branch exists<li>
+<pre>
+cd ~/dummy
+git status
+git branch
+</pre>
+<li>verify the SVN read-only mirroring by removing a file, adding another and pusing the changes</li>
+<pre>
+echo "zoo" >> zoo && rm foo && git add -A && git commit -m "zoo added, foo removed" & git push
+</pre>
+<li>confirm that the changes are not yet visible to the SVN repo</li>
+<pre>
+cd ~/svn-playground/dummy-client/ && svn update
+</pre>
+(nothing should be added)
+<li>push to SVN from the git repo</li>
+<pre>
+cd ~/dummy && git svn dcommit
+</pre>
+<li>view the changes in the SVN repo</li>
+<pre>
+cd ~/svn-playground/dummy-client/ && svn update
+</pre>
+</ol>
+<li>How to do SVN read-only mirroring from a git repo<a name="general-svn-mirroring"></li>
+NB: particularized instructions <a href="#particular-svn-mirroring">here</a>.
+<br>
 The instructions on <a href="">this page</a>
 worked well. Copied below in case the source goes off line:
 <br>
