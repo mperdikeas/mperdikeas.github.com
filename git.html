@@ -5,6 +5,17 @@
 </head>
 <body>
 <ol reversed>
+<li>show files affected by a commit in SVN</li>
+<a href="http://stackoverflow.com/a/424142/274677">so</a><br>
+quick and dirty:
+<pre>
+git diff-tree -r df7fc29
+</pre>
+long and clean:
+<pre>
+git diff-tree --no-commit-id --name-only -r df7fc29
+</pre>
+- consumed in my <i>git-show-files</i> script (in <i>~/tools</i>)
 <li>procedure I used to create an SVN mirror of my git project<a name="particular-svn-mirroring"/></li>
 (based on the <a href="#general-svn-mirroring">general instructions</a>)
 <ol>
