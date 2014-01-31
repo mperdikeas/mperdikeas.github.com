@@ -3,6 +3,46 @@
 </head>
 <body>
 <ol reversed>
+<li>Window functions rock!</li>
+<pre>
+DROP TABLE IF EXISTS test_curation.employee;
+CREATE TABLE test_curation.employee (
+department VARCHAR,
+emp_name VARCHAR,
+salary INTEGER);
+
+INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('SALES', 'MIKE', 3);
+INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('SALES', 'MARJORIE', 5);
+INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('SALES', 'ELIZABETH', 4);
+INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('SALES', 'FLORA', 4);
+INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('DEV', 'THOMAS', 10);
+INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('DEV', 'GEORGE', 2);
+INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('DEV', 'MENELAUS', 1);
+
+-- simple example to demonstrate the use of the window function AVG
+SELECT department, emp_name, AVG(salary) OVER (PARTITION BY department), rank() OVER (PARTITION BY department ORDER BY salary DESC)
+FROM test_curation.employee
+
+-- using the window function rank, observe that both Elizabeth and Flora appear as rank() assigns the same number
+-- in case of ties
+SELECT department, emp_name, salary, avg FROM
+(SELECT department, emp_name, salary, AVG(salary) OVER (PARTITION BY department), rank() OVER (PARTITION BY department ORDER BY salary DESC)
+FROM test_curation.employee) r
+WHERE rank<=2
+
+-- rank() assigns the same number in case of ties() and also leaves gaps right after a tie:
+SELECT department, emp_name, salary, avg FROM
+(SELECT department, emp_name, salary, AVG(salary) OVER (PARTITION BY department), rank() OVER (PARTITION BY department ORDER BY salary DESC)
+FROM test_curation.employee) r
+WHERE rank=3
+
+-- row_number() always assigns different numbers and in case of a tie one row is chosen based on some arbitrary criterion (e.g. actual order fetched maybe?)
+SELECT department, emp_name, salary, avg FROM
+(SELECT department, emp_name, salary, AVG(salary) OVER (PARTITION BY department), row_number() OVER (PARTITION BY department ORDER BY salary DESC)
+FROM test_curation.employee) r
+WHERE row_number<=2
+
+</pre>
 <li>PostgreSQL-specific way to get maximum or minimum values of certain columns for every combination of other columns</li>
 This is using the PostgreSQL-specific <b>DISTINCT ON</b> syntax (an extension on the SQL standard <b>DISTINCT</b> for specific
 columns).
