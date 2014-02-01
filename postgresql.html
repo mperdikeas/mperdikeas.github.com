@@ -3,6 +3,39 @@
 </head>
 <body>
 <ol reversed>
+<li>Window functions (cont.)</li>
+Note that <b>PARTITION</b> is not the function to be used in the <b>OVER</b> clause, <b>ORDER</b> is also available.
+E.g. to produce a salary rank for each employee according to his salary (the rank of '1' being assigned to the
+highest salary), one can do a:
+<pre>
+SELECT emp_name, salary, RANK() OVER (ORDER BY salary DESC) AS sal_pos 
+FROM test_curation.employee
+ORDER BY sal_pos ASC
+</pre>
+
+(contrast the results, with those one gets when using <b>ROW_NUMBER()</b> instead of <b>RANK</b>)
+
+This can allow us to obtain the three highest paid employees, where using the simpler <b>LIMIT</b>
+clause of PostgreSQL would fail because of the tie on the third rank (Elizabeth and Flora).
+The below simple approach shows only one of the two employees with a salary of 4:
+
+<pre>
+SELECT emp_name, salary
+FROM test_curation.employee
+ORDER BY salary DESC
+LIMIT 3
+</pre>
+
+... whereas using the window function <b>RANK()</b> one is able to get both of them:
+
+<pre>
+SELECT x.* FROM (
+SELECT emp_name, salary, rank() OVER (ORDER BY salary DESC) AS sal_pos 
+FROM test_curation.employee
+ORDER BY sal_pos ASC) x
+WHERE x.sal_pos<=3
+</pre>
+
 <li>Window functions rock!</li>
 <pre>
 DROP TABLE IF EXISTS test_curation.employee;
@@ -21,27 +54,26 @@ INSERT INTO test_curation.employee(department, emp_name, salary) VALUES ('DEV', 
 
 -- simple example to demonstrate the use of the window function AVG
 SELECT department, emp_name, AVG(salary) OVER (PARTITION BY department), rank() OVER (PARTITION BY department ORDER BY salary DESC)
-FROM test_curation.employee
+FROM test_curation.employee;
 
 -- using the window function rank, observe that both Elizabeth and Flora appear as rank() assigns the same number
 -- in case of ties
 SELECT department, emp_name, salary, avg FROM
 (SELECT department, emp_name, salary, AVG(salary) OVER (PARTITION BY department), rank() OVER (PARTITION BY department ORDER BY salary DESC)
 FROM test_curation.employee) r
-WHERE rank<=2
+WHERE rank<=2;
 
 -- rank() assigns the same number in case of ties() and also leaves gaps right after a tie:
 SELECT department, emp_name, salary, avg FROM
 (SELECT department, emp_name, salary, AVG(salary) OVER (PARTITION BY department), rank() OVER (PARTITION BY department ORDER BY salary DESC)
 FROM test_curation.employee) r
-WHERE rank=3
+WHERE rank=3;
 
 -- row_number() always assigns different numbers and in case of a tie one row is chosen based on some arbitrary criterion (e.g. actual order fetched maybe?)
 SELECT department, emp_name, salary, avg FROM
 (SELECT department, emp_name, salary, AVG(salary) OVER (PARTITION BY department), row_number() OVER (PARTITION BY department ORDER BY salary DESC)
 FROM test_curation.employee) r
-WHERE row_number<=2
-
+WHERE row_number<=2;
 </pre>
 <li>PostgreSQL-specific way to get maximum or minimum values of certain columns for every combination of other columns</li>
 This is using the PostgreSQL-specific <b>DISTINCT ON</b> syntax (an extension on the SQL standard <b>DISTINCT</b> for specific
