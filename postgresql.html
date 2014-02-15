@@ -35,6 +35,10 @@ FROM test_curation.employee
 ORDER BY sal_pos ASC) x
 WHERE x.sal_pos<=3
 </pre>
+<br/>
+There is also the <b>DENSE_RANK()</b> function which continues counting, in case of ties, 
+from the exactly previous rank (whereas <b>RANK()</b> in case of ties leaves a gap as wide
+as the number of tied elements).
 
 <li>Window functions rock!</li>
 <pre>
