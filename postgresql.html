@@ -3,6 +3,49 @@
 </head>
 <body>
 <ol reversed>
+<li>how to install <b>pgsphere</b></li>
+I followed the instructions from <a href="http://pgsphere.projects.pgfoundry.org">the pgSphere 1.1 project site</a>
+with the following qualifications and log:
+    <ol type="i">
+    <li>downloaded pgSphere sources from <a href="http://pgfoundry.org/projects/pgsphere/">the pgSphere homepage</a></li>
+    <pre>
+    wget http://pgfoundry.org/frs/download.php/2558/pgsphere-1.1.1.tar.gz
+    </pre>
+    <li>I opted for the <i>second way</i> to compile <b>pgSphere</b> (as instructed in <a href="http://pgsphere.projects.pgfoundry.org/x44.html">the installation instructions page</a>), which is the one that does not require the PostgreSQL sources but, instead, the configuration tool <b>pg_config</b></li>
+    <li>since <b>pg_config</b> didn't exist I installed it by executing:
+        <pre>
+sudo apt-cache search postgresql-server-dev
+sudo apt-get install postgresql-server-dev-9.1
+        </pre>
+        Now, <b>pg_config</b> is installed and its location can be got with:<pre>which pg_config</pre> (we use that location below)
+    </li>
+    <li>expand the pgSphere tarball we downloaded and cd into the directory that's created:
+    <pre>
+tar xvfz pgsphere-1.1.1.tar.gz
+cd pgsphere-1.1.1/
+    </pre>
+    </li>
+    <li>follow the installation instructions linked above ("<i>second way</i>"), replacing "/path/to/pg_config" with the actual path</li>
+    <pre>
+make USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config
+sudo make USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config install
+    </pre>
+    <li>when I tried to check the installation as instructed:
+    <br/><br/><i>To check the installation change into the pg_sphere source directory again and run:
+<br/>
+shell> make installcheck
+</i><br/><br/>... I got the following error trace:
+<pre>
+Makefile:29: ../../src/Makefile.global: No such file or directory
+Makefile:30: /contrib/contrib-global.mk: No such file or directory
+make: *** No rule to make target `/contrib/contrib-global.mk'.  Stop.
+</pre>
+    ... but the installation was successful nonetheless because I was able to execute the last step as
+advised in "<i>2.3. Creating a database with pgSphere</i>" of the installation instructions linked above with:
+<pre>
+psql -U postgres -d RegTAP -f ./pg_sphere.sql
+</pre>
+    </ol>
 <li>Window functions (cont.)</li>
 Note that <b>PARTITION</b> is not the function to be used in the <b>OVER</b> clause, <b>ORDER</b> is also available.
 E.g. to produce a salary rank for each employee according to his salary (the rank of '1' being assigned to the
