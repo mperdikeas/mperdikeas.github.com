@@ -5,6 +5,16 @@
 </head>
 <body>
 <ol reversed>
+    <li>java.lang.OutOfMemoryError: Java heap space in Tomcat7 in Ubuntu</li>
+<pre>
+    cd /usr/share/tomcat7/bin/
+</pre>
+    There, make sure the file <b>setenv.sh</b> has the following content (create the file if it doesn't already exist):
+<pre>
+$ cat setenv.sh 
+CATALINA_OPTS="$CATALINA_OPTS -server -Xms256m -Xmx1024m
+</pre>
+    The reasoning is explained in file <b>catalina.sh</b>.
     <li>how to make Tomcat 7 in Ubuntu 12.04 use the Oracle JDK and not the open JDK</li>
     I effected the following change in the file <b><code>/etc/init.d/tomcat7</code></b>:
     <pre>
