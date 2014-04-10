@@ -5,6 +5,14 @@
 </head>
 <body>
 <ol reversed>
+<li>simple solution to quickly profile a Java program</li>
+Use the "random pause" technique with the help of the <b>jstack</b> program.
+So, if the java process id (easily obtained with <b>jps</b>) is 30600, invoking the follow a few (~10) times:
+<pre>
+jstack -l 30600
+</pre>
+... should give you a pretty good idea of where the performance bottleneck is.
+SO posts: <a href="http://stackoverflow.com/q/6846049/274677">here</a> and <a href="http://stackoverflow.com/questions/375913/what-can-i-use-to-profile-c-code-in-linux/378024#378024">here</a>.
 <li>how to see the stack of a frozen Java program if <b>jconsole</b> and <b>jvisualvm</b> don't work
 for some reason.</li>
 StackOverflow question <a href="http://stackoverflow.com/q/22460019/274677">here</a>.
