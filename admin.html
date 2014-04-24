@@ -3,6 +3,14 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>total RAM (and usage / free thereof)</li>
+<pre>
+free -m
+</pre>
+or
+<pre>
+cat /proc/meminfo  | grep MemTotal
+</pre>
 <li>Find what package a file belongs to in Ubuntu/Debian</li>
 <pre>apt-file search filename</pre>
 <br/>or<br/>
