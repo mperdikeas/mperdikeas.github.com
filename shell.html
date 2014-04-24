@@ -108,6 +108,9 @@ E.g. the following adds package headers in a group of Java files:
 <pre>
 for f in $(find src/ -type f -iname \*.java) ; do sed -i '1ipackage _int.esa.esavo.harvesting;' $f ; done
 </pre>
+<li>find files and sort them by modification time</li>
+<pre>find -type f -print0 | xargs -r0 stat -c %y\ %n | sort </pre>
+<a href="http://www.commandlinefu.com/commands/view/5720/find-files-and-list-them-sorted-by-modification-time">source</a>
 <li>recursively find the latest modified file in a directory</li>
 Original article in <a href="http://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory">stackoverflow</a>.
 <pre>
