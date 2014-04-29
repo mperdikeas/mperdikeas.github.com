@@ -3,6 +3,12 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>configuring and saving cron jobs</li>
+The user-level cron files are apparently located in `/var/spool/cron/crontabs` but are meant to be
+edited directly. Instead do a:
+<pre>crontab -e</pre>
+To view (pipe that to save) such files:
+<pre>crontab -l</pre>
 <li>total RAM (and usage / free thereof)</li>
 <pre>
 free -m
