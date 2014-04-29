@@ -4,6 +4,14 @@
 </head>
 <body>
 <ol reversed>
+<li>to add all local files (but not the ignored ones)</li>
+<a href="http://stackoverflow.com/a/837581/274677">source</a>
+<br/>On the Commandline you can't use
+<pre>svn add *</pre>
+This will also add the ignored files, because the command line expands * and therefore svn add believes that you want all files to be added. Therefore use this instead:
+<pre>
+svn add --force .
+</pre>
 <li>un-add files in SVN</li>
 <pre>svn revert --recursive folder_name</pre>
 or
