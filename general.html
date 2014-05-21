@@ -5,8 +5,13 @@
 </head>
 <body>
 <ol reversed>
+<li>command line to convert a PDF file to PNG in Ubuntu</li>
+<pre>
+convert database-high-level.pdf -background White -flatten database-high-level.png
+</pre>
+(the above incantation also replaces the transparent background with white background)
 <li>trim PNG images in Ubuntu</li>
-Use the <b>trim</b> command from the <b>ImageMagick</b> package:
+Use the <b>trim</b> command of the <b>convert</b> program from the <b>ImageMagick</b> package:
 <pre>
 convert input.png -trim output.png
 </pre>
