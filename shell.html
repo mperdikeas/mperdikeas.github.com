@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>total number of lines in files found</li>
+<a href="http://superuser.com/a/260079/138891">source</a>
+<pre>
+find . -iname *.java -print0 | wc -l --files0-from=-
+</pre>
+</pre>
 <li>find files and execute command in local directory</li>
 use the <b>-execdir</b> switch. E.g.: <pre>find . -type d -execdir touch {}/foo \;</pre>
 NB: On why {}/foo is needed, see: <a href="http://unix.stackexchange.com/q/108216/24044">this SO post</a>.
