@@ -1,0 +1,38 @@
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+</head>
+<ol reversed>
+<li>how to install the latest geometry package in Ubuntu</li>
+This is necessary to effectively use mixed A3 and A4 files in a document.
+The below procedure can obviously be followed for other packages as well.
+Sources: basically <a href="http://tex.stackexchange.com/a/39165/52217">SO answer</a>
+and, secondarily, <a href="http://soledadpenades.com/2011/03/29/updating-geometry-in-texlive-ubuntu/">this
+blog post</a> (of which I didn't use the suggested location or the <tt>sudo texhash</tt> command).
+
+<ol type="1">
+    <li>Download the package from <a href="http://www.ctan.org/pkg/geometry">CTAN</a></li>
+    <li>Copy the package in a temporary location, extract it, and compile the <tt>*.dtx</tt> file:
+    <pre>tex geometry.dtx</pre>
+    (the above step should produce <tt>geometry.sty</tt>)
+    <li>Now the question becomes where to put the resultant <tt>*.sty</tt> file and how to
+        let <b>Tex</b> find out about it. For that, I followed the approach of the first source
+        referenced above</li>
+    <pre>
+cd /usr/local/share/texmf/
+sudo mkdir -p tex/latex/footmisc
+cd tex/latex/footmisc
+sudo cp ~/path/to/the/sty/file/geometry.sty .
+cd /usr/local/share/texmf/ ; sudo mktexlsr
+    </pre>
+    <li>At this point, the <tt>ls-R</tt> file should contain the geometry package:</li>
+    <pre>cat ls-R</pre>
+
+A slightly differrent approach would have been to copy the *.dtx (or even the entire package) in the
+<tt>/usr/local/share/texmf</tt> directory tree and compile it there (and not in a temporary location
+like the steps above do)
+</ol>
+
+
+
+</ol>
