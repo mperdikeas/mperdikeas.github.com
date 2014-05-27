@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>convert PDF to PNG high-quality</li>
+The below seems to give good results (<a href="http://stackoverflow.com/q/6605006/274677">source</a>):
+<pre>
+convert -density 300 cds-oai-dc-problem.pdf -trim -quality 100  cds-oai-dc-problem.png
+</pre>
+By passing <b>-trim</b> as an option we also get rid of a subsequent trimming step.
 <li>command line to convert a PDF file to PNG in Ubuntu</li>
 <pre>
 convert database-high-level.pdf -background White -flatten database-high-level.png
