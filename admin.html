@@ -3,6 +3,13 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how to toggle-on and off wired networking</li>
+To see the interfaces:
+<pre>sudo ifconfig</pre>
+To bring down <b>eth0</b>:
+<pre>sudo ifconfig eth0 down</pre>
+To bring it up back again:
+<pre>sudo ifconfig eth0 up</pre>
 <li>configuring and saving cron jobs</li>
 The user-level cron files are apparently located in `/var/spool/cron/crontabs` but are meant to be
 edited directly. Instead do a:
