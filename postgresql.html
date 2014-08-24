@@ -3,6 +3,73 @@
 </head>
 <body>
 <ol reversed>
+<li>Window functions (latest installment)</li>
+New insight into the logic of window functions:
+    <ul>
+        <li>The <b>PARTITION</b> clause defines the window, however some functions by default operate on a concept called the 'frame' which may by, default include less than the full window
+        E.g. see what <a href="http://www.postgresql.org/docs/9.2/static/functions-window.html"> postgreSQL</a> says:
+        <br/><i>
+Note that first_value, last_value, and nth_value consider only the rows within the "window frame", which by default contains the rows from the start of the partition through the last peer of the current row. This is likely to give unhelpful results for last_value and sometimes also nth_value. You can redefine the frame by adding a suitable frame specification (RANGE or ROWS) to the OVER clause. See Section 4.2.8 for more information about frame specifications.
+        </i>
+        <br/>
+        </li>
+        <li>In the same vein:
+            <ul>
+            <li><b>over (order by x)</b></li>
+               is really shortcut for:
+            <li><b>over (order by x rows between unbounded preceding and current row)</b></li>
+               ... and so, sometimes (see example below), the below form is needed:
+             <li><b>over (order by x rows between unbounded preceding and unbounded following</b></li>
+            </ul>
+        </li>
+        <li>helpful site and other links:
+           <ul>
+                <li><a href="http://tapoueh.org/blog/2013/08/20-Window-Functions">3rd-party turotial on window functions</a></li>
+                <li><a href="http://www.postgresql.org/docs/9.1/static/tutorial-window.html">PostgreSQL tutorial</a></li>
+                <li><a href="http://www.postgresql.org/docs/9.2/static/functions-window.html">PostgreSQL window functions</a></li>
+                <li><a href="http://www.postgresql.org/docs/9.2/static/functions-aggregate.html">PostgreSQL aggregate functions</a></li>
+           </ul>
+        </li>
+    </ul>
+    <br/>
+    Some instructive examples follow:
+    <br/>
+    <pre>
+-- order by x means "order by x rows between unbounded preceding and current row
+select x, array_agg(x) over (rows between unbounded preceding and current row) from generate_series(1, 10) AS t(x)
+select x, array_agg(x) over (order by x rows between unbounded preceding and current row) from generate_series(1, 10) AS t(x)
+select x, array_agg(x) over (order by x) from generate_series(1, 10) AS t(x)
+
+select foo.*, first_value(i) over (partition by a order by i desc) from foo
+
+select foo.*, lag(i) over (partition by a order by i asc) from foo
+
+select foo.*, lag(i, 2) over (partition by a order by i asc) from foo
+select foo.*, lag(i, 2, -1) over (partition by a order by i asc) from foo
+
+select x, array_agg(x) over (rows between current row and unbounded following) from generate_series(1, 10) AS t(x)
+select x, array_agg(x) over () from generate_series(1, 10) AS t(x)
+select x, array_agg(x) over (order by x) from generate_series(1, 10) AS t(x)
+
+CREATE TABLE employee_salary(employee VARCHAR, department VARCHAR, salary INTEGER);
+INSERT INTO employee_salary
+VALUES
+('mike', 'sales',  90000),
+('john', 'sales', 130000),
+('paul', 'sales',  70000),
+('anna', 'dev'  ,  20000),
+('peter','dev'  ,  50000)
+
+SELECT employee, salary, department,
+round(AVG(salary) OVER (PARTITION BY department),0) AS average_dept_salary,
+rank() OVER (PARTITION BY department ORDER BY salary DESC) AS salary_rank,
+lead(salary) OVER (PARTITION BY department ORDER BY salary ASC) AS next_higher,
+lag (salary) OVER (PARTITION BY department ORDER BY salary ASC) AS prev_lower,
+first_value(salary) OVER (PARTITION BY department ORDER BY salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS lowest_salary_in_department,
+last_value (salary) OVER (PARTITION BY department ORDER BY salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS highest_salary_in_department
+FROM employee_salary
+    </pre>
+
 <li>how to install <b>pgsphere</b></li>
 I followed the instructions from <a href="http://pgsphere.projects.pgfoundry.org">the pgSphere 1.1 project site</a>
 with the following qualifications and log:
