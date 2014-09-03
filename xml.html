@@ -5,6 +5,35 @@
 </head>
 <body>
 <ol reversed>
+<li>XML prolog</li>
+<a href="http://www.tizag.com/xmlTutorial/xmlprolog.php">source</a>
+The prolog is an optional component of the XML document. If included, the prolog must be appear before the root element. A prolog consists of two parts: the XML declaration and the Document Type Declaration (DTD). Depending on your needs, you can choose to include both, either, or neither of these items in your XML document. The DTD is most oftenly used, so we will discuss its use and purpose first.
+    <ol>
+    <li>referencing an external DTD</li>
+There are two type declarations that may be used to reference an external DTD: PUBLIC and SYSTEM. When creating an XML document under the rules of a publicly distributed DTD, use PUBLIC. Otherwise, use the SYSTEM type declaration.
+
+The example below shows a prolog that would be used for an HTML document that is using an XML prolog. The DTD is publicly available thanks to the W3C.
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+</pre>
+Let's take a look at each piece of this external DTD reference.
+<ul>
+<li><b>!DOCTYPE</b> - Tell the XML processor that this piece of code defines the Document Type Definition</li>
+<li><b>html</b> - Specifies the root element of the XML document. Here our example is an HTML file, which has &lt;html&gt; as the root element. </li>
+<li><b>PUBLIC</b> - Specifies that this a publicly available DTD.</li>
+<li><b>"-//W3C//D..."</b> - The definition of the public document. Describing this is beyond the scope.</li>
+<li><b>"http://www.w3.org/..."</b> - The physical location of the DTD. Notice how this DTD resides on w3's servers.</li>
+</ul>
+
+    <li>the XML declaration</li>
+This is where you define what version of XML you are using. The current version is 1.0, which it has been for quite some time now.
+Check out the <a href="http://www.w3.org/TR/REC-xml/">most recent XML version</a> at w3.org.
+<pre>
+&lt;?xml version="1.0"?&gt;
+</pre>
+The declaration is not absolutely necessary, but should be included anyways
+    </ol>
 <li>how to validate XML files against an XML Schema</li>
 There are three ways:
     <ul>
