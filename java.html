@@ -5,6 +5,34 @@
 </head>
 <body>
 <ol reversed>
+<li>sometimes you just have to use <b>find</b> to invoke a series of <b>Ant</b> files ..</li>
+In those cases the below archetype will prove helpful:
+<pre>
+#!/usr/bin/env bash
+EXPR=/usr/bin/expr
+/bin/false
+START=$(/bin/date +%s)
+RESULT=0
+COUNTER=0
+while IFS= read -r -u3 -d $'\0' file; do
+        echo -n "building $file ..."
+        ant -f "$file" build > "$file.log" 2>&1 &&
+           echo "success" ||
+           { echo "failure" && cat "$file.log" ; RESULT=1 ; break; }
+        COUNTER=$((COUNTER + 1))
+done 3< <(find a b c d -iname build.xml -print0)
+
+END=$(/bin/date +%s)
+DIFF=$($EXPR $END - $START)
+
+if [ $RESULT -eq 0 ]
+then
+    echo "! build successfully concluded for all $COUNTER projects in $DIFF seconds"
+else
+    echo "X build failed after $COUNTER projects"
+fi
+</pre>
+<a href="http://unix.stackexchange.com/a/153973/24044">source</a>
 <li>simple solution to quickly profile a Java program</li>
 Use the "random pause" technique with the help of the <b>jstack</b> program.
 So, if the java process id (easily obtained with <b>jps</b>) is 30600, invoking the follow a few (~10) times:
