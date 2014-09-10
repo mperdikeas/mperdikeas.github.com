@@ -3,6 +3,29 @@
 </head>
 <body>
 <ol reversed>
+<li>Terminology on <i>clusters</i>, <i>catalogs</i>, <i>databases</i> and <i>schemas</i></li>
+<a href="http://stackoverflow.com/a/17943883/274677">source</a>
+<br/>
+A <b>cluster</b> in Postgres is simply a Postgres installation. Cluster here is not meant in the hardware sense of
+multiple computers working together. In Postgres, cluster refers to the fact that you can multiple unrelated databases all up and
+running using the same Postgres server engine. So, in other words, a <b>cluster</b> is a database server.
+<br/>
+So in both Postgres and the SQL Standard we have this containment hierarchy:
+<ul>
+<li>A computer may have one or multiple <b>clusters</b>.</li>
+<li>A database server is a cluster.</li>
+<li>A cluster has <b>catalogs</b>. ( Catalog = <b>Database</b> )</li>
+<li>Catalogs have <b>schemas</b>. (Schema = namespace of tables, and security boundary)</li>
+<li>Schemas have <b>tables</b>.</li>
+<li>Tables have <b>rows</b>.</li>
+<li>Rows have <b>values</b>, defined by columns.</li>
+</ul>
+The drawing below sums it up nicely:
+<br/>
+<img src="postgres-cluster-catalog-schemas.png">
+
+
+
 <li>online SQL playground / sandbox</li>
 <a href="http://sqlfiddle.com/">SQL fiddle</a>
 <li>Window functions (latest installment)</li>
