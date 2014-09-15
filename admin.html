@@ -3,6 +3,26 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>find the Debian version on which your Ubuntu version is based on</li>
+<pre>
+$ cat /etc/debian_version
+wheezy/sid
+</pre>
+(output for my system).<br/>
+Typical correspondances:
+<pre>
+14.10        jessie / sid
+14.04        jessie / sid
+13.10        Wheezy / sid
+13.04        Wheezy / sid
+12.10        Wheezy / sid
+12.04        Wheezy / sid
+11.10        Wheezy / sid
+11.04        Squeeze / sid
+10.10        Squeeze / sid
+10.04        Squeeze / sid
+</pre>
+(<a href="http://askubuntu.com/a/445496/89663">source</a>)
 <li>how to toggle-on and off wired networking</li>
 To see the interfaces:
 <pre>sudo ifconfig</pre>
