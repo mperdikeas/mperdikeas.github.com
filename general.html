@@ -5,6 +5,19 @@
 </head>
 <body>
 <ol reversed>
+<li>how to customize <b>Conkeror</b> with your own default key-bindings</li>
+The instructions I found most useful are <a href="http://conkeror.org/ConkerorRC">here</a>. Also
+<a href="http://conkeror.org/Tips">this page</a> contains examples of using the <code>define_key</code>
+function which I found useful and actually used.
+<br/>
+My own <b>Conkeror</b> customizations are under git in <code>~/environment/.conkerorrc/</code>
+and they of course have to be symlinked from home:
+<pre>
+cd
+ln -s environment/.conkerorrc/
+</pre>
+<br/>
+... in order for <b>Conkeror</b> to pick them up.
 <li>how to install <b>Conkeror</b> in Ubuntu (again, latest approach)</li>
 On 15.IX.2014 I used the following approach to install <b>Conkeror</b>:
 The source was <a href="http://superuser.com/a/434242/138891">this answer</a>
