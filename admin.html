@@ -3,6 +3,74 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>sectors, blocks and pages</li>
+<ul>
+<li>A <b>sector</b> is the smallest addressable unit on a block device. Most
+block devices use 512 byte sectors</li>
+<li>A <b>block</b> is the smallest <u>logically addressable</u> unit; it is an 
+abstraction in the filesystem. As such it is a multiple of sectors. Also,
+the kernel needs the number of sectors in a block to be a power of two (2) and
+also the total block size to be no larger than the <i>page</i> size. Therefore,
+ block sizes are a power-of-two multiple of the sector size and are
+not greater than the page size. Common block sizes are 512 bytes, 1 kilobyte, and 4 kilobytes.</li>
+<li>A <b>page</b> is the granularity level for the kernel's virtual to physical address
+translations. In terms of virtual memory, pages are the smallest unit that matters.
+Most 32-bit architectures have 4KB pages, whereas most 64-bit architectures have 8KB pages.
+</ul>
+More information: <a href="http://www.makelinux.net/books/lkd2/ch13lev1sec1">here</a> and
+<a href="http://www.makelinux.net/books/lkd2/ch11lev1sec1">here</a>.
+<li>How to get sector, block and page sizes</li>
+To get the sector size do a:
+<pre>
+sudo fdisk /dev/sda1 -l
+</pre>
+<br/>
+Block size is an artifact of the filesystem, not the device, to get the block size for
+an <b>ext3</b> or <b>ext4</b> filesystem do a:
+<pre>
+sudo dumpe2fs /dev/sda1 | grep 'Block size'
+</pre>
+More <a href="http://www.linfo.org/get_block_size.html">here</a>.
+<br/>
+The page size is an artifact of the kernel. It can be obtained with:
+<pre>
+getconf PAGESIZE
+</pre>
+<li>tying sector size and block size together in a concrete example</li>
+<pre>
+echo "a"> a && stat a | head -2
+</pre>
+In my system I get the following output:
+<pre>
+  File: `a'
+  Size: 2         Blocks: 8          IO Block: 4096   regular file
+</pre>
+In this example, the <b>stat</b> utility uses the term <i>"blocks"</i> not in the
+sense of file system blocks but rather to mean an arbitrarily-sized unit, in this
+case 512 bytes. So the 2 bytes of file "a" (<i>size</i>) require an entire file-system
+block, which in my system is 4096 (obtained using <code>sudo dumpe2fs /dev/sda1 | grep 'Block size'</code>)
+and so this translates to 8 512-byte "units" or "<i>Blocks</i>" (in the <b>stat</b>'s terminology).
+I.e. some Unix utilities use the term "block" without any reference to the file system block size.
+<br/>
+More <a href="http://unix.stackexchange.com/a/14411/24044">here</a>.
+<li>show file systems, their type and mount points</li>
+<pre>
+df -T
+</pre>
+<li>show the configuration for automatic file system mounting</li>
+<pre>
+cat /etc/fstab
+</pre>
+To find the <b>UUID</b> of a file system check <a href="#find-UUID-of-file-system">this note</a>
+<li>find the <b>UUID</b> of a file system<a name="find-UUID-of-file-system"></li>
+The below two ways seem to work:
+<pre>
+sudo dumpe2fs /dev/sda1 | grep UUID
+</pre>
+<br/>or
+<pre>
+sudo blkid /dev/sda1
+</pre>
 <li>find the Debian version on which your Ubuntu version is based on</li>
 <pre>
 $ cat /etc/debian_version
