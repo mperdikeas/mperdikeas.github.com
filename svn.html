@@ -4,6 +4,15 @@
 </head>
 <body>
 <ol reversed>
+<li>recover deleted files from an SVN repository</li>
+Find the revision on which the file was present with <code>svn log --verbose</code>.
+<br/>
+Then, (assuming the revision was 'r144' and the file 'foo') do a:
+<pre>
+svn up -r 144 foo
+</pre>
+It seems to correctly restore directories too (all files in said directory are restored to
+the state they had as of that revision).
 <li>to add all local files (but not the ignored ones)</li>
 <a href="http://stackoverflow.com/a/837581/274677">source</a>
 <br/>On the Commandline you can't use
