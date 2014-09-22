@@ -360,7 +360,8 @@ tail -f /var/lib/postgresql/9.1/main/pg_log/postgresql-2013-01-15_182646.log
         select current_schema();
         select current_user;
         select extract('epoch' from now());
-         select extract('epoch' from current_timestamp);
+        select extract(epoch from now())::integer
+        select extract('epoch' from current_timestamp);
         select now();
         select current_timestamp;
     </pre>
