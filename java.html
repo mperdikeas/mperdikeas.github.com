@@ -5,6 +5,25 @@
 </head>
 <body>
 <ol reversed>
+<li><a name="ivy-locations">Ivy installation locations</li>
+Ivy is just a <b>jar</b> file. This jar can be placed in two locations depending on whether
+we want to do a system-wide or a user-specific installation:
+<ul>
+    <li>system-wide</li>
+    <pre>
+    $ ls /usr/share/ant/lib/ivy-2.2.0.jar 
+    -rw-r--r-- 1 root root 947592 Jun  5  2013 /usr/share/ant/lib/ivy-2.2.0.jar
+    </pre>
+    <li>user-specific</li>
+    <pre>
+    $ ls ~/.ant/lib/ivy-2.3.0.jar 
+    -rw-r--r-- 1 mperdikeas users 1222059 Jan 10  2013 /home/mperdikeas/.ant/lib/ivy-2.3.0.jar
+    </pre>
+</ul>
+<br/>
+NB. user-specific installation (if present) obviously trumps the system-wide. So, in the above
+case the version of <b>Ivy</b> installed is <i>2.3</i>, not <i>2.2</i>.
+<br/><br/>
 <li>sometimes you just have to use <b>find</b> to invoke a series of <b>Ant</b> files ..</li>
 In those cases the below archetype will prove helpful:
 <pre>
@@ -93,6 +112,8 @@ See some bullet points below for an alternative way that also seemed to have wor
     </ul>
     <a href="http://en.wikibooks.org/wiki/XML_-_Managing_Data_Exchange/Parsing_XML_files">source</a>
 <li>yet another way to install <b>Apache ivy</b> in Ubuntu</li>
+NB: there's other notes on the same subject offering alternative ways. At the very least see <a href="#ivy-locations">this note on Ivy locations</a>. 
+<br/>
 This was discovered by way of experimentation, I am not sure how well advised it is:</p>
     <ol>
         <li>download and explode the ivy tarball (apache-ivy-2.2.0-bin.tar.gz)</li>
@@ -106,6 +127,8 @@ ant install
         <li>you're good to go!</li>
     </ol>
 <li>install <b>Apache ivy</b> in Ubuntu</li>
+NB: there's other notes on the same subject offering alternative ways. At the very least see <a href="#ivy-locations">this note on Ivy locations</a>.
+<br/>
 original article <a href="http://superuser.com/questions/452192/how-to-install-ant-ivy">here</a></p>
 After doing an:
 <pre>

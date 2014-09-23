@@ -3,6 +3,24 @@
 </head>
 <body>
 <ol reversed>
+<li>typical access control configurations</li>
+The rationale is the following:
+<ul>
+    <li>trust all local UNIX-domain sockets (that tools like <b>psql</b> are using to create database and user
+    in the various scripts)</li>
+    <li>configure password-based authentication (md5) for TCP/IP sockets</li>
+</ul>
+<br/>
+E.g. (as found in my SAT machine)
+<pre>
+$ sudo cat /etc/postgresql/9.1/main/pg_hba.conf  | grep -v ^# | uniq
+
+local   all             postgres                                trust
+local   all             all                                     trust
+host    all             all             127.0.0.1/32            md5
+host    all             all             ::1/128                 md5
+
+</pre>
 <li>Terminology on <i>clusters</i>, <i>catalogs</i>, <i>databases</i> and <i>schemas</i></li>
 <a href="http://stackoverflow.com/a/17943883/274677">source</a>
 <br/>
