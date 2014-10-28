@@ -4,6 +4,36 @@
 </head>
 <body>
 <ol reversed>
+<li>dreaded tree conflicts</li>
+A response like the following upon <code>svn status</code> (following a <code>svn update</code>):
+<pre>
+$ svn status
+D     C sval
+      >   local unversioned, incoming add upon update
+</pre>
+... probably indicates a <a href="http://tortoisesvn.net/docs/release/TortoiseSVN_en/tsvn-dug-conflicts.html">tree conflict</a>.
+What has worked for me (assuming the above directory name) is:
+<pre>
+$ svn resolve --accept working sval
+Resolved conflicted state of 'sval
+$ svn revert sval
+Reverted 'sval'
+$ svn status
+$
+</pre>
+(following the advices found <a href="http://tomhennigan.blogspot.com/2012/01/resolve-tree-conflict-svn-local.html">here</a>
+and <a href="http://stackoverflow.com/q/3985504/274677">here<a/>).
+<br/><br/>
+However oftentimes even the above doesn't work and then (after following the above steps) I resorted to executing the following
+sequence of actions:
+<ol>
+<li>deleting the directory locally</li>
+<li>doing a <code>svn co</code> of the problematic directory in some other location</li>
+<li><code>mv</code>-ing the just checked-out directory to where it is supposed to be</li>
+</ol>
+<br/>Of course this wipes any untracked files so better than deleting
+the directory in step #1 above is to just move it out of the way so you can copy back any untracked
+files after step #3.
 <li>recover deleted files from an SVN repository</li>
 Find the revision on which the file was present with <code>svn log --verbose</code>.
 <br/>
