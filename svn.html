@@ -4,6 +4,26 @@
 </head>
 <body>
 <ol reversed>
+<li>message "obstructing working copy was found"</li>
+I've encountered the following message upon <code>svn update</code>:
+<pre>
+$ svn update
+Updating '.':
+Skipped 'ivoa-console-utils/sval' -- An obstructing working copy was found
+At revision 3257.
+Summary of conflicts:
+  Skipped paths: 1
+</pre>
+
+What worked for me was the following (mysterious) recipe:
+<ol>
+<li><code>mv</code> the .svn directory out of the way to some other location in the filesystem (outside of the SVN tree)</li>
+<li>do an <code>svn update</code> and <code>svn status</code> (you should see a bunch of files marked with `D`)</li>
+<li><code>mv</code> the .svn directory back in place</li>
+<li><code>svn update</code> is now (mysteriously) clean.</li>
+</ol>
+I 've logged the recipe as an <a href="http://stackoverflow.com/a/26631135/274677">answer</a> to a relevant <a href="http://stackoverflow.com/q/890440/274677">SO question</a> as well.
+
 <li>dreaded tree conflicts</li>
 A response like the following upon <code>svn status</code> (following a <code>svn update</code>):
 <pre>
