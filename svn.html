@@ -15,14 +15,23 @@ Summary of conflicts:
   Skipped paths: 1
 </pre>
 
-What worked for me was the following (mysterious) recipe:
+Sometimes just doing an <code>svn cleanup</code> seems to work.
+<br><br/>
+Otherwise try the following
+(in conjunction with a cleanup):
 <ol>
 <li><code>mv</code> the .svn directory out of the way to some other location in the filesystem (outside of the SVN tree)</li>
 <li>do an <code>svn update</code> and <code>svn status</code> (you should see a bunch of files marked with `D`)</li>
 <li><code>mv</code> the .svn directory back in place</li>
 <li><code>svn update</code> is now (mysteriously) clean.</li>
 </ol>
-I 've logged the recipe as an <a href="http://stackoverflow.com/a/26631135/274677">answer</a> to a relevant <a href="http://stackoverflow.com/q/890440/274677">SO question</a> as well.
+
+<br><br/>
+Or also try instead of the above silly moving around of directories to <code>svn co</code> the problematic directory somewhere outside the
+SVN tree and then move it in place (after <code>rm</code>-ing the previous directory that existed in its place), again
+in conjunction with <code>svn cleanup</code>.
+<br><br/>
+Yeah, it's a bit ugly I am afraid.
 
 <li>dreaded tree conflicts</li>
 A response like the following upon <code>svn status</code> (following a <code>svn update</code>):
