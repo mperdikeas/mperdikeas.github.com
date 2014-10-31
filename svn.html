@@ -31,7 +31,8 @@ Or also try instead of the above silly moving around of directories to <code>svn
 SVN tree and then move it in place (after <code>rm</code>-ing the previous directory that existed in its place), again
 in conjunction with <code>svn cleanup</code>.
 <br><br/>
-Yeah, it's a bit ugly I am afraid.
+Sprinkle the above instructions liberally with a few <code>svn revert</code> too.
+Yeah, it's a bit ugly and non-deterministic I am afraid.
 
 <li>dreaded tree conflicts</li>
 A response like the following upon <code>svn status</code> (following a <code>svn update</code>):
