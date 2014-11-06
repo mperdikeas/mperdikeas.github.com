@@ -3,6 +3,15 @@
 </head>
 <body>
 <ol reversed>
+<li>using XPath with namespaces in PostgreSQL</li>
+<a href="http://www.postgresql.org/docs/9.1/static/functions-xml.html">PostgreSQL 9.1 docs</a>
+<br/>
+Example (including also a cast):<br/>
+<pre>
+SELECT ivoidlowercase, xpath('@xsi:type', content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']])
+FROM rr.resourcecontent 
+WHERE lower(CAST (xpath('@xsi:type', content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS VARCHAR)) LIKE '%vs:dataservice%'
+</pre>
 <li>typical access control configurations</li>
 The rationale is the following:
 <ul>
