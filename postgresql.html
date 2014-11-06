@@ -3,6 +3,12 @@
 </head>
 <body>
 <ol reversed>
+<li>downloading the results of a SQL query on local filesystem</li>
+<a href="http://stackoverflow.com/a/11870348/274677">source</a><br/>
+Example:<br/>
+<pre>
+psql -d RegTAP -t -A -F"," -c "SELECT pregraft FROM vo_business.harvest_record WHERE recordivoid='ivo://irsa.ipac/Spitzer/Images/SINGS'" > pregraft
+</pre>
 <li>using XPath with namespaces in PostgreSQL</li>
 <a href="http://www.postgresql.org/docs/9.1/static/functions-xml.html">PostgreSQL 9.1 docs</a>
 <br/>
