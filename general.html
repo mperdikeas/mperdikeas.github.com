@@ -5,6 +5,24 @@
 </head>
 <body>
 <ol reversed>
+<li>proper way to encode a string in MD5 using <b>md5sum</b></li>
+Simply doing a:
+<pre>
+echo "password" | md5sum
+</pre>
+... will <b>not</b> work as the shell also insidiously suffixes an end-of-line character.<br/>
+Either of the two ways have to be used instead:
+<pre>
+$ echo -n password | md5sum
+5f4dcc3b5aa765d61d8327deb882cf99  -
+$ printf '%s' "password" | md5sum
+5f4dcc3b5aa765d61d8327deb882cf99  -
+</pre>
+<br/>
+The insidious suffixing of an end-of-line character can be confirmed with the following:
+<pre>
+printf '%s\n' "password" | md5sum
+</pre>
 <li>how to customize <b>Conkeror</b> with your own default key-bindings</li>
 The instructions I found most useful are <a href="http://conkeror.org/ConkerorRC">here</a>. Also
 <a href="http://conkeror.org/Tips">this page</a> contains examples of using the <code>define_key</code>
