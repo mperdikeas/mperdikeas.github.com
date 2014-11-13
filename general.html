@@ -5,6 +5,10 @@
 </head>
 <body>
 <ol reversed>
+<li>infinite loop in bash; and break on problem</li>
+<pre>
+while true; do ./valgraph-harvest-wrongsets-last-30-days-html; if [[ $? != 0 ]]; then break ; fi ; done
+</pre>
 <li>proper way to encode a string in MD5 using <b>md5sum</b></li>
 Simply doing a:
 <pre>
