@@ -101,11 +101,16 @@ To bring down <b>eth0</b>:
 To bring it up back again:
 <pre>sudo ifconfig eth0 up</pre>
 <li>configuring and saving cron jobs</li>
-The user-level cron files are apparently located in `/var/spool/cron/crontabs` but are meant to be
+The user-level cron files are apparently located in `/var/spool/cron/crontabs` but are not meant to be
 edited directly. Instead do a:
 <pre>crontab -e</pre>
 To view (pipe that to save) such files:
 <pre>crontab -l</pre>
+<br/>
+To monitor in real-time CRON jobs:
+<pre>
+tail -f /var/log/syslog | grep CRON
+</pre>
 <li>total RAM (and usage / free thereof)</li>
 <pre>
 free -m
