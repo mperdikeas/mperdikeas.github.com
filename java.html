@@ -5,6 +5,67 @@
 </head>
 <body>
 <ol reversed>
+<li>Ant failing to find Ivy jar</li>
+It appears that <b>Ant 1.7</b> fails to find the Ivy jar if placed in the user-specific location (e.g. <code>~/.ant/lib/ivy-2.3.0.jar</code>).
+<br/>
+E.g. the following <code>build.xml</code> file:
+<pre>
+&lt;project
+    xmlns:ivy="antlib:org.apache.ivy.ant"
+    name="test" default="test-ivy"&gt;
+&lt;target name="test-ivy"&gt;
+    &lt;ivy:settings /&gt;
+&lt;/target&gt;
+&lt;/pre&gt;
+&lt;/project&gt;
+</pre>
+&hellip; fails with
+<pre>
+$ whoami
+voops
+$ ant
+Buildfile: build.xml
+
+test-ivy:
+
+BUILD FAILED
+/home/voops/test/build.xml:7: Problem: failed to create task or type antlib:org.apache.ivy.ant:settings
+Cause: The name is undefined.
+Action: Check the spelling.
+Action: Check that any custom tasks/types have been declared.
+Action: Check that any <presetdef>/<macrodef> declarations have taken place.
+No types or tasks have been defined in this namespace yet
+
+This appears to be an antlib declaration. 
+Action: Check that the implementing library exists in one of:
+        -/usr/share/ant/lib
+        -/home/voops/.ant/lib
+        -a directory added on the command line with the -lib argument
+
+
+Total time: 0 seconds
+</pre>
+<br/>
+In this case, and for <b>Ant 1.7</b>, the problem is solved by adding the following element:
+<pre>
+    &lt;taskdef uri="antlib:org.apache.ivy.ant" resource="org/apache/ivy/ant/antlib.xml" classpath="${user.home}/.ant/lib/ivy-2.3.0.jar"/&gt;
+</pre>
+&hellip; resulting in the following <code>build.xml</code> file that "builds" correctly:
+<pre>
+&lt;project
+    xmlns:ivy="antlib:org.apache.ivy.ant"
+    name="test" default="test-ivy"&gt;
+    &lt;taskdef uri="antlib:org.apache.ivy.ant" resource="org/apache/ivy/ant/antlib.xml" classpath="${user.home}/.ant/lib/ivy-2.3.0.jar"/&gt;
+&lt;target name="test-ivy"&gt;
+    &lt;ivy:settings /&gt;
+&lt;/target&gt;
+&lt;/pre&gt;
+&lt;/project&gt;
+</pre>
+Since <b>Ant</b> is supposed to look in <code>~/.ant/lib</code> for libraries in any case (and the error message indicates as such), it is
+a mystery why the location of the Ivy jar has to be explicitly spelled out. See also my <a href="http://stackoverflow.com/q/26929133/274677">SO question</a>
+on the matter. At any rate, as noted in my question, this problem does not appear with Ant versions <b>1.8.2</b> and <b>1.9.4</b>.
+
 <li><a name="ivy-locations">Ivy installation locations</li>
 Ivy is just a <b>jar</b> file. This jar can be placed in two locations depending on whether
 we want to do a system-wide or a user-specific installation:
