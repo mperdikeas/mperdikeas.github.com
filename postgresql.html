@@ -3,6 +3,13 @@
 </head>
 <body>
 <ol reversed>
+<li>complex XPath example demonstrating namespace-agnostic <i>local-name</i> and testing if a value belong in a list</li>
+<pre>
+SELECT 
+CAST(xpath('//*[local-name()=''capability'' and (@standardID=''ivo://ivoa.net/std/SIA'' or @standardID=''ivo://ivoa.net/std/SSA'')]/@standardID' , content) AS VARCHAR), count(*)
+FROM someschema.sometable
+GROUP BY CAST(xpath('//*[local-name()=''capability'' and (@standardID=''ivo://ivoa.net/std/SIA'' or @standardID=''ivo://ivoa.net/std/SSA'')]/@standardID' , content) AS VARCHAR)
+</pre>
 <li>downloading the results of a SQL query on local filesystem</li>
 <a href="http://stackoverflow.com/a/11870348/274677">source</a><br/>
 Example:<br/>
