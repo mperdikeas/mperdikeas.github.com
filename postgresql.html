@@ -3,7 +3,7 @@
 </head>
 <body>
 <ol reversed>
-<li>complex XPath example demonstrating namespace-agnostic <i>local-name</i> and testing if a value belong in a list</li>
+<li>complex XPath example demonstrating namespace-agnostic <i>local-name</i>, testing if a value belong in a list and need to CAST from XML to VARCHAR</li>
 <pre>
 SELECT 
 CAST(xpath('//*[local-name()=''capability'' and (@standardID=''ivo://ivoa.net/std/SIA'' or @standardID=''ivo://ivoa.net/std/SSA'')]/@standardID' , content) AS VARCHAR), count(*)
