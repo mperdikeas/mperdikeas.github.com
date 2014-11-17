@@ -5,6 +5,91 @@
 </head>
 <body>
 <ol reversed>
+<li>NoRouteToHostException</li>
+It sometimes transpires that, even when socket connections are properly closed, one can still run out of ephemeral ports
+(if a large number of connections are rapidly opened and closed) due to the (otherwise properly closed) sockets remaining
+in the <b>TIME_WAIT</b> state. I've actually encountered this problem when I was opening and closing a great number
+of database connections to the PostgreSQL database (database connections which naturally, under the hood, relied on TCP
+connections).
+<br/>
+<b>NB:</b>This problem occurs even when database or socket connections are properly closed. It is NOT an issue of connection
+leakage!
+<br/>
+The way to monitor for this problem progressively (and watch the population of <b>TIME_WAIT</b> sockets
+grow alarmingly) is via (in Ubuntu):
+<pre>
+netstat -a | grep TIME_WAIT | wc -l
+</pre>
+In my case I was met with an <b>NoRouteToHostException</b> exception (actual trace at the end of this note) when the count
+exceeded 20,000 or so. This is more or less consistent with the available port range in my machine which was reported as:
+<pre>
+$ cat /proc/sys/net/ipv4/ip_local_port_range 
+3276861000
+</pre>
+Apparently the solutions to this problem fall in four categories:
+<ul>
+<li>increase the range of ephemeral ports</li>
+<li>configure the OS to reuse/recycle sockets in TIME_WAIT state</li>
+<pre>
+echo "1" >/proc/sys/net/ipv4/tcp_tw_reuse
+echo "1" >/proc/sys/net/ipv4/tcp_tw_recycle
+</pre>
+<li>change the OS configuration that governs for how many seconds a socket will remain in this state - typically a few hundrend (?)
+<li>change the application logic to reduce the need to rapidly open and close a large number of sockets or DB connections</li>
+</ul>
+<br/>
+The latter was the approach I followed in my case (by implementing an application-level result cache for some values I was fetching
+from the DB).
+<br/><br/>
+Some useful links: <a href="http://stackoverflow.com/q/1572215/274677">SO question</a>, <a href="http://en.wikipedia.org/wiki/Ephemeral_port">Wikipedia
+article on ephemeral ports</a>, <a href="http://www.serverframework.com/asynchronousevents/2011/01/time-wait-and-its-design-implications-for-protocols-and-scalable-servers.html">
+article on TIME_WAIT in the TCP state machine</a>.
+<br/>Actual real-world trace below:
+<pre>
+Exception in thread "main" _int.esa.esavo.common.ShowStopper: org.postgresql.util.PSQLException: The connection attempt failed.
+          at _int.esa.esavo.dbbusiness.Statistics.repoNameFromIvoid(Statistics.java:216)
+          at _int.esa.esavo.dbbusiness.RepoNameFromIvoidTransformer.transform(RepoNameFromIvoidTransformer.java:54)
+          at _int.esa.esavo.dbbusiness.RepoNameFromIvoidTransformer.transform(RepoNameFromIvoidTransformer.java:18)
+          at _int.esa.esavo.consoleutils.valgraph.VALGRAPHStatsPlot.transform2(VALGRAPHStatsPlot.java:419)
+          at _int.esa.esavo.consoleutils.valgraph.VALGRAPHStatsPlot.produce(VALGRAPHStatsPlot.java:255)
+          at _int.esa.esavo.consoleutils.valgraph.VALGRAPHStatsPlot.produce(VALGRAPHStatsPlot.java:180)
+          at _int.esa.esavo.consoleutils.esaknife.MonthlyReports.produceStatisticsByResource(MonthlyReports.java:234)
+          at _int.esa.esavo.consoleutils.esaknife.MonthlyReports.produceStatistics(MonthlyReports.java:194)
+          at _int.esa.esavo.consoleutils.esaknife.MonthlyReports.produceReports(MonthlyReports.java:184)
+          at _int.esa.esavo.consoleutils.esaknife.MonthlyReports.produce(MonthlyReports.java:136)
+          at _int.esa.esavo.consoleutils.esaknife.EsavoSwissKnife.main(EsavoSwissKnife.java:78)
+Caused by: org.postgresql.util.PSQLException: The connection attempt failed.
+       at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:150)
+       at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:66)
+       at org.postgresql.jdbc2.AbstractJdbc2Connection.<init>(AbstractJdbc2Connection.java:125)
+       at org.postgresql.jdbc3.AbstractJdbc3Connection.<init>(AbstractJdbc3Connection.java:30)
+       at org.postgresql.jdbc3g.AbstractJdbc3gConnection.<init>(AbstractJdbc3gConnection.java:22)
+       at org.postgresql.jdbc4.AbstractJdbc4Connection.<init>(AbstractJdbc4Connection.java:30)
+       at org.postgresql.jdbc4.Jdbc4Connection.<init>(Jdbc4Connection.java:24)
+       at org.postgresql.Driver.makeConnection(Driver.java:393)
+       at org.postgresql.Driver.connect(Driver.java:267)
+       at org.apache.commons.dbcp.DriverConnectionFactory.createConnection(DriverConnectionFactory.java:38)
+       at org.apache.commons.dbcp.PoolableConnectionFactory.makeObject(PoolableConnectionFactory.java:582)
+       at org.apache.commons.pool.impl.GenericObjectPool.borrowObject(GenericObjectPool.java:1148)
+       at org.apache.commons.dbcp.PoolingDataSource.getConnection(PoolingDataSource.java:106)
+       at org.apache.commons.dbcp.BasicDataSource.getConnection(BasicDataSource.java:1044)
+       at _int.esa.esavo.dbbusiness.BaseDBFacade.getConnection(BaseDBFacade.java:16)
+       at _int.esa.esavo.dbbusiness.Statistics.repoNameFromIvoid(Statistics.java:172)
+       ... 10 more
+Caused by: java.net.NoRouteToHostException: Cannot assign requested address
+       at java.net.PlainSocketImpl.socketConnect(Native Method)
+       at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:339)
+       at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:200)
+       at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:182)
+       at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+       at java.net.Socket.connect(Socket.java:579)
+       at java.net.Socket.connect(Socket.java:528)
+       at java.net.Socket.<init>(Socket.java:425)
+       at java.net.Socket.<init>(Socket.java:208)
+       at org.postgresql.core.PGStream.<init>(PGStream.java:62)
+       at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:76)
+       ... 25 more
+</pre>
 <li>Ant failing to find Ivy jar</li>
 It appears that <b>Ant 1.7</b> fails to find the Ivy jar if placed in the user-specific location (e.g. <code>~/.ant/lib/ivy-2.3.0.jar</code>).
 <br/>
