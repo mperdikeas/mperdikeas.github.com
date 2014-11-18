@@ -4,6 +4,14 @@
 </head>
 <body>
 <ol reversed>
+<li>get a previous version of a file</li>
+<pre>svn update -r 666 file</pre>
+<br/>&hellip; or to just view it without changing the working copy:
+<pre>svn cat -r 666 file | less</pre>
+<li>do a visual diff between a file and a revision of it</li>
+<pre>svn diff -r 2250 [filename] --diff-cmd meld</pre>
+<li>show which commits changed a specific file</li>
+<pre>svn blame [filename]</pre>
 <li>message "obstructing working copy was found"</li>
 I've encountered the following message upon <code>svn update</code>:
 <pre>
