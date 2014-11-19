@@ -4,6 +4,22 @@
 </head>
 <body>
 <ol reversed>
+<li>how to bring back from the dead an entire directory that has been <i>svn rm</i>ed and <i>svn commit</i>ed</li>
+I accidentaly <code>svn rm</code>ed two directories. I.e. instead of doing the following:
+<pre>
+svn mv dir-a dir-b && svn commit -m "foo"
+</pre>
+&hellip; which was my intention, I mistyped and executed the dreaded:
+<pre>
+svn rm dir-a dir-b && svn commit -m "foo"
+</pre>
+The following command (executed at the root of my entire repository) save the day:
+<pre>
+svn merge -r COMMITTED:PREV .
+</pre>
+(followed by a <code>svn commit</code>).
+<br/>
+<a href="http://stackoverflow.com/a/4527194/274677">source</a>
 <li>get a previous version of a file</li>
 <pre>svn update -r 666 file</pre>
 <br/>&hellip; or to just view it without changing the working copy:
