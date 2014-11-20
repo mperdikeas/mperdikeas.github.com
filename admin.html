@@ -3,6 +3,14 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>determine physical memory<li>
+Either use file <code>/proc/meminfo</code>
+<pre>
+$ cat /proc/meminfo  | grep MemTotal
+MemTotal:        8215280 kB
+</pre>
+&hellip; or use <code>free</code> as in, e.g.:
+<pre>free -m</pre>
 <li>sectors, blocks and pages</li>
 <ul>
 <li>A <b>sector</b> is the smallest addressable unit on a block device. Most
