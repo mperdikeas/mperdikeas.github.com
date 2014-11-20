@@ -3,6 +3,11 @@
 </head>
 <body>
 <ol reversed>
+<li>configuration of logging directory in Postgresql (in Ubuntu 12.04)</li>
+This is where it's done:
+<pre>
+sudo cat /etc/postgresql/9.1/main/postgresql.conf | grep log_directory
+</pre>
 <li>complex XPath example demonstrating namespace-agnostic <i>local-name</i>, testing if a value belongs in a list, and need to CAST from XML to VARCHAR</li>
 <pre>
 SELECT 
