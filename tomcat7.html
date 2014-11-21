@@ -5,6 +5,28 @@
 </head>
 <body>
 <ol reversed>
+<li>how to find exact version of Tomcat that's already installed</li>
+<pre>
+$ whereis tomcat7
+tomcat7: /etc/tomcat7 /usr/share/tomcat7
+</pre>
+<br/>&hellip; then do a:
+<pre>
+$ find /usr/share/tomcat7 | grep catalina.jar
+/usr/share/tomcat7/lib/catalina.jar
+</pre>
+<br/>&hellip; and given the above, finally a:
+<pre>
+$ java -cp /usr/share/tomcat7/lib/catalina.jar org.apache.catalina.util.ServerInfo
+Server version: Apache Tomcat/7.0.26
+Server built:   Apr 1 2013 08:32:04
+Server number:  7.0.26.0
+OS Name:        Linux
+OS Version:     3.2.0-70-generic-pae
+Architecture:   i386
+JVM Version:    1.7.0_60-b19
+JVM Vendor:     Oracle Corporation
+</pre>
     <li>Tomcat7 directories</li>
 <pre>
     /var/lib/tomcat7
