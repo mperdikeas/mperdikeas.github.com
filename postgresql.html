@@ -3,6 +3,19 @@
 </head>
 <body>
 <ol reversed>
+<li>examining (and terminating, if need be) user sessions</li>
+Sometimes you just need to kill a user session (e.g. that may be preventing your from droping and recreating your database).
+Restarting PostgreSQL is one option. A more fine-grained one is to kill the user sessions.
+<br/>
+Start by examining user sessions:
+<pre>SELECT * FROM pg_stat_activity;</pre>
+Cancel the backend process (gentle):
+<pre>SELECT pg_cancel_backend( <procpid> );</pre>
+&hellip; if the above doesn't work (it didn't in my case), try the more forceful:
+<pre>
+SELECT pg_terminate_backend( <procpid> );
+</pre>
+<a href="http://www.devopsderek.com/blog/2012/11/13/list-and-disconnect-postgresql-db-sessions/">source</a>
 <li>configuration of logging directory in Postgresql (in Ubuntu 12.04)</li>
 This is where it's done:
 <pre>
