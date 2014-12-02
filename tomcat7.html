@@ -5,6 +5,83 @@
 </head>
 <body>
 <ol reversed>
+<li>install Tomcat7 in my <tt>home</tt> directory (without <tt>sudo</tt> privileges)</li>
+I followed the instructions <a href="http://tomcat.apache.org/tomcat-7.0-doc/setup.html">here</a>
+(which reference <a href="http://tomcat.apache.org/tomcat-7.0-doc/RUNNING.txt">this file</a>) to 
+install Tomcat7 in my my <tt>home</tt> directory.
+Steps (as recollected):
+<ol>
+<li>download binary (not sources) tarball</li>
+<pre>
+$ mkdir -p ~/downloads && cd ~/downloads
+$ wget http://psg.mtu.edu/pub/apache/tomcat/tomcat-7/v7.0.57/bin/apache-tomcat-7.0.57.tar.gz
+</pre>
+<li>expand the tarball in my home directory</li>
+<pre>
+$ cd
+$ whoami
+voops
+$ cp downloads/apache-tomcat-7.0.57.tar.gz .
+$ tar xvfz apache-tomcat-7.0.57.tar.gz
+</pre>
+<li>check whether CATALINA_HOME is properly set and correctly set it in <tt>.bashrc</tt> otherwise<li>
+<pre>
+$ echo $CATALINA_HOME
+/home/voops/apache-tomcat-7.0.57
+</pre>
+<li>compile and run the <tt>jsvc</tt> tool (?)</li>
+At that point I also followed the instructions to compile and run the <tt>jsvc</tt> to run Tomcat
+as a daemon, but in the end I failed to use the <tt>jsvc</tt> tool as it apparently requires permissions
+I didn't have. Specifically, when running this script I got the following output:
+<pre>
+---%<---------------------------------------------------------
+$ tail -f /home/voops/apache-tomcat-7.0.57/logs/catalina.err 
+Cannot open PID file /var/run/jsvc.pid, PID is 12504
+Service exit with a return value of 255
+Cannot open PID file /var/run/jsvc.pid, PID is 13918
+Service exit with a return value of 255
+Cannot open PID file /var/run/jsvc.pid, PID is 14260
+Service exit with a return value of 255
+Switching umask back to 002 from 077
+Cannot open PID file /var/run/jsvc.pid, PID is 31946
+Service exit with a return value of 255
+--------------------------------------------------------->%---
+</pre>
+... so in the end I am just using scripts $CATALINA_HOME/bin/startup.sh and
+shutdown.sh to start and stop Tomcat (which seem to work just fine regardless)
+and is not clear to me what was the purpose of this script.
+<li>start the Tomcat</li>
+<pre>
+$ $CATALINA_HOME/bin/startup.sh
+Using CATALINA_BASE:   /home/voops/apache-tomcat-7.0.57
+Using CATALINA_HOME:   /home/voops/apache-tomcat-7.0.57
+Using CATALINA_TMPDIR: /home/voops/apache-tomcat-7.0.57/temp
+Using JRE_HOME:        /usr/local/jdk1.7.0_67
+Using CLASSPATH:       /home/voops/apache-tomcat-7.0.57/bin/bootstrap.jar:/home/voops/apache-tomcat-7.0.57/bin/tomcat-juli.jar
+Tomcat started.
+</pre>
+<li>visit the page at 8080 to verify Tomcat is up</li>
+This is the page at localhost:8080
+<li>configure Tomcat admin users</li>
+At that point the manager application cannot be used. To use it you have to edit file <tt>$CATALINA_HOME/conf/tomcat-users.xml</tt>
+so that it has the following contents:
+<pre>
+$ cat /home/voops/apache-tomcat-7.0.57/conf/tomcat-users.xml  | tail -6
+  &lt;!-- below 3 lines added by MP@2014.12.02 --&gt;
+  &lt;role rolename="manager-gui"/&gt;
+  &lt;role rolename="manager"/&gt;
+  &lt;role rolename="admin"/&gt;
+  &lt;user username="admin" password="admin" roles="admin,manager,manager-gui"/&gt;
+&lt;/tomcat-users&gt;
+</pre>
+<li>final note</li>
+I note in passing that the <tt>JAVA_HOME</tt> environment was also correctly set:
+<pre>
+$ echo $JAVA_HOME
+/usr/local/jdk1.7.0_67
+</pre>
+Whether that was really indispensable or not I did not verify.
+</ol>
 <li>how to find exact version of Tomcat that's already installed</li>
 <pre>
 $ whereis tomcat7
