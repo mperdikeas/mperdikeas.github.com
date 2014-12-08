@@ -5,6 +5,24 @@
 </head>
 <body>
 <ol reversed>
+<li>change (recursively) all symlinks in a directory that point to a certain target <i><u>A</u></i>point to another target <u><i>B</i></u></li>
+I used the following script to replace all symlinks to a file `ant-contrib-1.0b3.jar`
+to another file `ant-contrib.jar` (that happened to reside in the same directory
+as the original target - I am not sure whether that was essential to the solution
+below). The script was called from a location where the path <tt>repo-wide-libs/ant-contrib-1.0b3.jar</tt>
+existed and was valid.
+<pre>
+#!/usr/bin/env bash
+for file in $(find . -type l); do
+    if [[ -h "$file" ]]; then
+        echo "file $file is a symlink"
+        if [[ "$(readlink -f "$file")" == "$(realpath repo-wide-libs/ant-contrib-1.0b3.jar)" ]]; then
+            ln -sf "$(dirname "$(readlink "$file")")"/ant-contrib.jar "$(dirname "$file")" && rm -f "$file"
+        fi
+    fi
+done
+</pre>
+<a href="http://unix.stackexchange.com/a/172016/24044">source</a>
 <li>replace a string in a set of files</li>
 <pre>find . -type f -exec sed -i 's/foo/bar/' {} +</pre>
 <a href="http://unix.stackexchange.com/a/112024/24044">source</a>
