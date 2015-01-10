@@ -5,6 +5,11 @@
 </head>
 <body>
 <ol reversed>
+<li>replace a string in a fileset</li>
+The below incantation replaces all instances of <tt>XMLUtils.getString</tt> with <tt>XMLUtils.getStringNew</tt> in all Java files in the current directory (recursively):
+<pre>
+find . -type f -iname \*.java -print0 | xargs -0 sed -i 's/XMLUtils.getString/XMLUtils.getStringNew/g'
+</pre>
 <li>change (recursively) all symlinks in a directory that point to a certain target <i><u>A</u></i>point to another target <u><i>B</i></u></li>
 I used the following script to replace all symlinks to a file `ant-contrib-1.0b3.jar`
 to another file `ant-contrib.jar` (that happened to reside in the same directory
