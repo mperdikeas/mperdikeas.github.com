@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>bind to a port, continuously, and print on standard out whatever gets sent to that port</li>
+Use the <b>Netcat</b> tool (abbreviation: <b>nc</b>) with the <tt>-k</tt> option as in (e.g. to bind
+to port 4444):
+<pre>nc -k -l 4444</pre>
+NB: In my Ubuntu system I've tried the above with the nc from the netcat-openbsd package (not the
+alternative nc is available in the netcat-traditional package).
 <li>see the redicts of a web page</li>
 Use the <b>curl</b> utility with the <b>-I</b> and <b>-L</b> options
 (to show the headers and to follow the redirects, respectively) as follows:
