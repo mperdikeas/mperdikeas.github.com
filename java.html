@@ -218,6 +218,16 @@ There's a number of graphical utilities that allow one to view stacks, profile, 
     <li><b>jvisualvm</b> - ships with Oracle JDK 7</li>
     <li><b>jconsole</b>
     </ul>
+I tend to prefer <b>jvisualvm</b> over <b>jconsole</b> since in addition to the latter's graphs
+it can provide snapshots of number of objects
+created (broken down per class) showing total # of instances and total bytes
+allocated for each class, as shown below:
+<br/>
+<br/>
+<!--img src="jvisualvm.png" alt="jvisualvm snapshot" style="width:304px;height:228px"-->
+<a href="jvisualvm.png"><img src="jvisualvm.png" style="width:304px;height:228px"></a>
+<br/>
+(click to enlarge)
 <li>list JVMs running in the system</li>
 <pre>jps</pre>
 ... to also print the arguments passed to their <b>main</b> method use:
