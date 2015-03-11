@@ -3,6 +3,15 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>alternative to the <a href="#li-REISUB">REISUB</a>reboot<a name="li-deep-terminal"</li>
+It may sometimes be possible to unfreeze a Linux system by using:
+<pre>
+CTRL+ALT+F1
+</pre>
+... to open a terminal (or F2, F3 ... up to F6 for that matter). Then <tt>top</tt>
+or <tt>htop</tt> tools can then be used to identify the offending process (in terms of CPU or memory
+utilization); alternatively some window manager may need to be restarted.
+To return whence you came from use <pre>CTRL+ALT+F7</pre>.
 <li>how to check which libraries (so) are installed</li>
 <pre>ldconfig -p</pre>
 <li>determine physical memory</li>
@@ -135,10 +144,11 @@ cat /proc/meminfo  | grep MemTotal
 <pre>apt-file search /path/to/file</pre>
 <br/>
 <a href="http://superuser.com/a/10999">superuser link</a>
-<li>last thing to try in frozen Ubuntu before hard restart</li>
+<li><a name="li-REISUB"/>last thing to try in frozen Ubuntu before hard restart</li>
 Holding down <b>ALT</b> and <b>Sys Req / Print Screen</b> keys hit the following keys: REISUB.
 Mnemonic: <b>R</b>estart <b>E</b>ven <b>I</b>f <b>S</b>ystem <b>U</b>tterly <b>B</b>roken (or reverse BUSIER - the system
 is busier than usual).<br/>
+See also <a href="#li-deep-terminal">this alternative</a> which is even softer.<br/>
 <a href="http://askubuntu.com/a/36717/89663">Ask Ubuntu link</a>
 
 <li>some random commands entered during networking troubleshooting:</li>
