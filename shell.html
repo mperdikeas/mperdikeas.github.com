@@ -5,6 +5,20 @@
 </head>
 <body>
 <ol reversed>
+<li>named pipes</li>
+Pipes are a special type of file. You interface with these as if they were files (i.e. with Unix redirection, not pipes), but they behave like pipes:
+<pre>
+$ mkfifo npipe
+$ ls npipe 
+prw-r--r-- 1 mperdikeas users 0 Mar 11 14:12 npipe|
+$ echo "boo" > npipe  &
+[1] 22271
+$ cat < npipe 
+boo
+[1]+  Done                    echo "boo" > npipe
+</pre>
+<br/>
+More can be found <a href="http://vincebuffalo.com/2013/08/08/the-mighty-named-pipe.html">here</a>.
 <li>replace a string in a fileset</li>
 The below incantation replaces all instances of <tt>XMLUtils.getString</tt> with <tt>XMLUtils.getStringNew</tt> in all Java files in the current directory (recursively):
 <pre>
