@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>remove the last <i>n</i> characters from a bash line (that makes no use of <tt>awk</tt> or <tt>sed</tt></li>
+<pre>
+echo foobar | rev | cut -c (n+1)- | rev
+</pre>
+<br/>
+<a href="http://unix.stackexchange.com/a/144300/24044">source</a>
 <li>named pipes</li>
 Pipes are a special type of file. You interface with these as if they were files (i.e. with Unix redirection, not pipes), but they behave like pipes:
 <pre>
