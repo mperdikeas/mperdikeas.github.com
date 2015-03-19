@@ -11,6 +11,7 @@ tr "\\n" " "
 </pre>
 <br/>
 <a href="http://stackoverflow.com/a/2764105/274677">source</a>.
+<br/>
 E.g. to prepare a line for emacs to open all Java files containing "<i>fromValue</i>", use:
 <pre>
 findinjava fromValue | sort | awk '{print $1}' | rev | cut -c 2- | rev | tr "\\n" " "
