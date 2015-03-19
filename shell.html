@@ -5,6 +5,16 @@
 </head>
 <body>
 <ol reversed>
+<li>bash join lines</li>
+<pre>
+tr "\\n" " "
+</pre>
+<br/>
+<a href="http://stackoverflow.com/a/2764105/274677">source</a>.
+E.g. to prepare a line for emacs to open all Java files containing "<i>fromValue</i>", use:
+<pre>
+findinjava fromValue | sort | awk '{print $1}' | rev | cut -c 2- | rev | tr "\\n" " "
+</pre>
 <li>remove the last <i>n</i> characters from a bash line (that makes no use of <tt>awk</tt> or <tt>sed</tt></li>
 <pre>
 echo foobar | rev | cut -c (n+1)- | rev
