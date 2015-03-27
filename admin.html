@@ -3,6 +3,14 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>what to do if Ubuntu 12.04 loops on the login screen</li>
+It has occured to me once that Ubuntu 12.04 would keep looping on the login screen
+(while it would still be possible to login as a guest). The solution was to open
+a shell terminal using <code>CTRL+ALT+F1</code>, rename the <code>~/.Xauthority</code>
+and reboot from the terminal using <code>sudo reboot</code> as suggested
+in this <a href="http://askubuntu.com/a/147565/89663">Ask Ubuntu</a> answer.
+Another apparently similar solution (which I haven't tried), is
+<a href="http://askubuntu.com/a/223634/89663">this one</a>.
 <li>alternative to the <a href="#li-REISUB">REISUB</a> reboot<a name="li-deep-terminal"></li>
 It may sometimes be possible to unfreeze a Linux system by using:
 <pre>
