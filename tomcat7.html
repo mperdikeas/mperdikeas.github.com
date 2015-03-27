@@ -5,6 +5,13 @@
 </head>
 <body>
 <ol reversed>
+<li>how to configure the maximum application upload size for Tomcat</li>
+This might be necessary, e.g. if you need more than the default configured value of 60MB.
+    <ol>
+    <li>Go to the <code>web.xml</code> of the manager application (for instance it could be under <code>/tomcat7/webapps/manager/WEB-INF/web.xml</code>)</li>
+    <li>Increase the <tt>&gt;max-file-size&lt;</tt> and <tt>&gt;max-request-size&lt;</tt> found inside the <tt>&gt;multipart-config&lt;</tt> element.
+    </ol>
+    <br/>No restart is necessary.
 <li>install Tomcat7 in my <tt>home</tt> directory (without <tt>sudo</tt> privileges)</li>
 I followed the instructions <a href="http://tomcat.apache.org/tomcat-7.0-doc/setup.html">here</a>
 (which reference <a href="http://tomcat.apache.org/tomcat-7.0-doc/RUNNING.txt">this file</a>) to 
