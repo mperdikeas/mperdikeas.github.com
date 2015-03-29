@@ -3,6 +3,11 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>copy from one hard disk (external or otherwise) onto another</li>
+E.g. to backup the entire home directory:
+<pre>sudo rsync -avxHAWX --numeric-ids --progress ~ /media/wd-ext4-4T-plank/satl28-home/</pre>
+<br/>To copy bulk data from one external disk onto another (and keep the output as well):
+<pre>rsync -avxHAWX --numeric-ids --progress /media/cc171c39-fbb8-4d49-bd0f-84116ab2b11a/ /media/wd-ext4-4T-plank/planck-disk-1/ > ~/rsync.out</pre>
 <li>what to do if Ubuntu 12.04 loops on the login screen</li>
 It has occured to me once that Ubuntu 12.04 would keep looping on the login screen
 (while it would still be possible to login as a guest). The solution was to:
