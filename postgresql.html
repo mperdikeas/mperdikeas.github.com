@@ -28,6 +28,13 @@ This is where it's done:
 <pre>
 sudo cat /etc/postgresql/9.1/main/postgresql.conf | grep log_directory
 </pre>
+<li>yet more complex XPath example</li>
+<pre>
+SELECT
+DISTINCT ivoid, CAST(xpath('//*[local-name()=''capability'' and @xsi:type=''ssa:SimpleSpectralAccess'']/*[local-name()=''testQuery'']' , content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS VARCHAR)
+FROM rr.resourcecontent
+WHERE CAST(xpath('//*[local-name()=''capability'' and @xsi:type=''ssa:SimpleSpectralAccess'']/*[local-name()=''testQuery'']' , content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS VARCHAR)!='{}'
+</pre>
 <li>complex XPath example demonstrating namespace-agnostic <i>local-name</i>, testing if a value belongs in a list, and need to CAST from XML to VARCHAR</li>
 <pre>
 SELECT 
