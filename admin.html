@@ -3,6 +3,25 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how to find the apt package to install for a LaTeX package</li>
+Use the <code>apt-cache</code> command. E.g. for the LaTeX package <i>outlines</i> use:
+<pre>
+apt-cache search outlines | grep -i latex
+</pre>
+<li>how to install TeX Live in Ubuntu</li>
+<pre>
+sudo add-apt-repository ppa:texlive-backports/ppa
+sudo apt-get update
+sudo apt-get install texlive
+</pre>
+<br/>If you already have <i>TexLive</i> and are updating type:
+<pre>
+sudo apt-get upgrade
+</pre>
+<br/>It might also be a good idea to install the TeX Live extras:
+<pre>
+sudo apt-get install texlive-latex-extra
+</pre>
 <li>copy/synchronize from one hard disk (external or otherwise) onto another (with the possibility to resume)</li>
 E.g. to backup the entire home directory:
 <pre>sudo rsync -avxHAWX --numeric-ids --progress ~ /media/wd-ext4-4T-plank/satl28-home/</pre>
