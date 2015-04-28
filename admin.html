@@ -598,13 +598,14 @@ sudo apt-get install apache2
 <pre>dpkg -S ldapsearch</pre>
 
 <li>how to find the loci of the files of an installed package (Debian)</li>
-<b>update</b>
-It seems that the following produce more verbose extensive output (see also <a href="http://askubuntu.com/a/32509/89663">this answer</a>).
+<b>update:</b>
+It seems that the following produce more verbose extensive output (see also <a href="http://askubuntu.com/a/32509/89663">this answer</a>):
 <pre>
 dpkg-query -L &lt;package name&gt;
 apt-file list &lt;package name&gt;
 </pre>
 <pre>dpkg -L httpd</pre><p>
+<i>end of update</i>
 (-L lists all files installed to your system from that package name)</p>
 Note that <b>dpkg</b> lists the files that were <u>fetched</u> as part of the install
 processes. Post-install hooks may create additional files (e.g. pyc files from py
