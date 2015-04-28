@@ -1,0 +1,47 @@
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+</head>
+<ol reversed>
+<li>how to install SonarQube in Ubuntu 12.04 against a PostgreSQL database</li>
+    <ol>
+    <li>get and unzip the tarball where you want SonarQube installed</li>
+    <pre>http://dist.sonar.codehaus.org/sonarqube-4.5.4.zip</pre>
+    <li>configure the jdbc properties in file <code>conf/sonar.properties</code></li>
+    E.g. in my system they read:
+    <pre>
+    sonar.jdbc.username=sonar
+    sonar.jdbc.password=sonar
+    sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonar
+    </pre>
+    <li>create the PostgreSQL catalog (database)</li>
+    We do this by first creating a user (using the <code>createuser</code> script) and then
+    the database. E.g. in my system I did:
+    <pre>
+$ createuser -U postgres sonar -P
+Enter password for new role: 
+Enter it again: 
+Shall the new role be a superuser? (y/n) n
+Shall the new role be allowed to create databases? (y/n) n
+Shall the new role be allowed to create more new roles? (y/n) n
+mperdikeas@menelaus:~/software-downloads/sonarqube-4.5.4#
+$ echo $?
+0
+    </pre>
+    (in the above I entered <i>sonar</i> and <i>sonar</i> as the username and password respectively)
+    After user creation we need to create the database itself:
+    <pre>
+$ psql -U postgres
+psql (9.1.15)
+Type "help" for help.
+
+postgres=# create database sonar with owner sonar encoding 'utf8';
+CREATE DATABASE
+postgres=# \q
+    </pre>
+    </ol>
+<pre>
+
+</pre>
+</pre>
+</ol>
