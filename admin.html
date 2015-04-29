@@ -2,8 +2,8 @@
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
-<ol reversed>
-<li>how to route HTTP traffic through an SSH tunnel</li>
+<ul reversed>
+<li>how to tunnel HTTP traffic over SSH</li>
 <i>(instructions adapted and customized for my environment
 from <a href="http://www.linuxjournal.com/content/ssh-tunneling-poor-techies-vpn">this Linux journal</a> article)</i>
 <br/>
@@ -11,12 +11,12 @@ A typical use case is to circumvent some sort of Kerio-control-like "solution" t
 To implement this solution you need to enjoy administrator privileges to two machines:
 <ol>
     <li>a remote machine hosting an SSH server</li>
-    <li>the local machine (that subject to the HTTP traffic restrictions)</li>
+    <li>the local machine (the one that's subject to the HTTP traffic restrictions)</li>
 </ol>
-
+<br/>
 You then do the following:
 <ol>
-<li>on the remote machine:</li>
+<li><b>on the remote machine:</b></li>
 You may wish to configure the following parameters in the remote machine's <code>/etc/ssh/sshd_config</code> file:
 <pre>
 # Force SSH Protocol 2
@@ -47,7 +47,7 @@ E.g. for Ubuntu:
 <pre>
 sudo /etc/init.d/ssh restart
 </pre>
-<li>on the local machine:</li>
+<li><b>on the local machine:</b></li>
 Open the tunnel in a terminal. E.g. in the following I am using my <i>koding</i> VM:
 <pre>
 ssh -D 5222 mperdikeas@mperdikeas.koding.io -N
