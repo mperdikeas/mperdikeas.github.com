@@ -9,10 +9,10 @@ from <a href="http://www.linuxjournal.com/content/ssh-tunneling-poor-techies-vpn
 <br/>
 A typical use case is to circumvent some sort of Kerio-control-like "solution" that's restricting access to sites.
 To implement this solution you need to enjoy administrator privileges to two machines:
-<ol>
+<ul>
     <li>a remote machine hosting an SSH server</li>
     <li>the local machine (the one that's subject to the HTTP traffic restrictions)</li>
-</ol>
+</ul>
 <br/>
 You then do the following:
 <ol>
@@ -55,6 +55,7 @@ ssh -D 5222 mperdikeas@mperdikeas.koding.io -N
 Once the tunnel is opened, configure your browser to use a <tt>SOCKS</tt> proxy.
 E.g. for the above scenario, I've configured a Socks host at <code>localhost:5222</code>.
 </ol>
+<br/>
 <li>how to find the apt package to install for a LaTeX package</li>
 Use the <code>apt-cache</code> command. E.g. for the LaTeX package <i>outlines</i> use:
 <pre>
