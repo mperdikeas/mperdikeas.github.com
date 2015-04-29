@@ -3,6 +3,58 @@
 <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
 </head>
 <ol reversed>
+<li>how to route HTTP traffic through an SSH tunnel</li>
+<i>(instructions adapted and customized for my environment
+from <a href="http://www.linuxjournal.com/content/ssh-tunneling-poor-techies-vpn">this Linux journal</a> article)</i>
+<br/>
+A typical use case is to circumvent some sort of Kerio-control-like "solution" that's restricting access to sites.
+To implement this solution you need to enjoy administrator privileges to two machines:
+<ol>
+    <li>a remote machine hosting an SSH server</li>
+    <li>the local machine (that subject to the HTTP traffic restrictions)</li>
+</ol>
+
+You then do the following:
+<ol>
+<li>on the remote machine:</li>
+You may wish to configure the following parameters in the remote machine's <code>/etc/ssh/sshd_config</code> file:
+<pre>
+# Force SSH Protocol 2
+Protocol 2
+
+#Turn on Privileged Separation for security
+UsePrivilegeSeparation yes
+
+#Deny root login
+PermitRootLogin no
+
+#Do not allow empty passwords
+PermitEmptyPasswords no
+
+# Forward my X Sessions
+X11Forwarding yes
+X11DisplayOffset 10
+
+# I hate Motd displays
+PrintMotd no
+
+# It's alliivee
+TCPKeepAlive yes
+</pre>
+NB: I am not certain the above configuration changes are necessary.
+Following the above edits, restart the SSH daemon on the remote machine.
+E.g. for Ubuntu:
+<pre>
+sudo /etc/init.d/ssh restart
+</pre>
+<li>on the local machine:</li>
+Open the tunnel in a terminal. E.g. in the following I am using my <i>koding</i> VM:
+<pre>
+ssh -D 5222 mperdikeas@mperdikeas.koding.io -N
+</pre>
+Once the tunnel is opened, configure your browser to use a <tt>SOCKS</tt> proxy.
+E.g. for the above scenario, I've configured a Socks host at <code>localhost:5222</code>.
+</ol>
 <li>how to find the apt package to install for a LaTeX package</li>
 Use the <code>apt-cache</code> command. E.g. for the LaTeX package <i>outlines</i> use:
 <pre>
