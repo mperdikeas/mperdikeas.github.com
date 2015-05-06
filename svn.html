@@ -4,6 +4,23 @@
 </head>
 <body>
 <ol reversed>
+<li>how to display differences between two different revisions of a file in SVN</li>
+The main idea is the following command:
+<pre>
+svn diff --diff-cmd diff -x -uw -r 4050:4054 database/vo-common-dml.sql
+</pre>
+The results can be visually improved by two ways:
+    <ul>
+    <li>by employing the <tt>colordiff</tt> tool:</li>
+    <pre>
+sudo apt-get install colordiff
+svn diff --diff-cmd diff -x -uw -r 4050:4054 database/vo-common-dml.sql | colordiff
+    </pre>
+    <li>by employing the <tt>Meld</tt> application and my <tt>svndiffMELD</tt> script (lives in <tt>~/tools</tt>):</li>
+    <pre>
+svn diff --diff-cmd svndiffMELD -x -uw -r 4050:4054 database/vo-common-dml.sql
+    </pre>
+    </ul>
 <li>SVN undo delete before commit</li>
 <u>before</u> commit:
 <pre>svn revert deletedDirectory-or-file</pre>
