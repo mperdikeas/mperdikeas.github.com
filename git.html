@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li>how to configure git to save password in memory for sometime (when cloning via <tt>https</tt>)</li>
+<pre>
+$ git config --global credential.helper 'cache --timeout=3600'
+# Set the cache to timeout after 1 hour (setting is in seconds)
+</pre>
+<a href="http://stackoverflow.com/a/18554764/274677">source</a>
 <li>console-based tool equivalent to <tt>gitk</tt></li>
 <pre>sudo apt-get install tig</pre>
 E.g. to view history on single file:
