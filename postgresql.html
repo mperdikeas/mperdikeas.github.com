@@ -3,6 +3,43 @@
 </head>
 <body>
 <ol reversed>
+<li>Install PostgreSQL From Its Official Repository in Ubuntu 14.04</li>
+The PostgreSQL Global Development Group (PGDG) maintains an APT repository of PostgreSQL packages for Debian and Ubuntu. The repository provides the PostgreSQL server packages as well as extensions and modules packages for all PostgreSQL versions supported.
+<br/>
+So far, the repository support:
+<ul>
+<li>Debian 6.0 (squeeze), 7.0 (wheezy), and unstable (sid) 64/32 bit (amd64/i386)</li>
+<li>Ubuntu 10.04 (lucid), 12.04 (precise), and 14.04 (trusty) 64/32 bit (amd64/i386)</li>
+<li>PostgreSQL 8.4, 9.0, 9.1, 9.2, 9.3</li>
+<li>Server extensions such as Slony-I, various PL languages, and datatypes</li>
+<li>Applications like pgadmin3, pgbouncer, and pgpool-II</li>
+</ul>
+To get started installing PostgreSQL on Ubuntu 14.04, do the following steps:
+<ol>
+<li>Create and edit the PostgreSQL repository by running the command below:</li>
+<pre>
+sudo emacs -nw /etc/apt/sources.list.d/pgdg.list
+</pre>
+Insert the following line:
+<pre>
+deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
+</pre>
+<li>Download & import the repository key:</li>
+<pre>
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+</pre>
+<li>Update your system:</li>
+<pre>
+sudo apt-get update && sudo apt-get upgrade
+</pre>
+<li>Now you're able to install PostgreSQL via below command:</li>
+<pre>
+sudo apt-get install postgresql-9.3 pgadmin3
+</pre>
+</ol>
+<b>NB:</b> This repository provides <tt>postgresql</tt>, <tt>postgresql-contrib</tt>, and <tt>postgresql-client</tt> meta-packages that depend on the latest <i>postgresql-x.y</i> packages, similar to the ones present in Debian and Ubuntu. Once a new PostgreSQL version is released, these meta-packages will be updated to depend on the new version. If you rather want to stay with a particular PostgreSQL version, you should install specific packages like <tt>postgresql-9.3</tt> instead of <tt>postgresql</tt>.
+<br/>
+<a href="http://ubuntuhandbook.org/index.php/2014/02/install-postgresql-ubuntu-14-04/">source</a>
 <li>how to execute PL/pgSQL blocks, function definitions, transactions in DbVisualizer</li>
 Instead of the <i>Execute</i> or <i>Execute Current</i> options, use the <i>Execute Buffer</i>
 as shown in the screenshot below:
