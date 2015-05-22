@@ -5,6 +5,37 @@
 </head>
 <body>
 <ol reversed>
+<li>how to handle <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors in Tomcat</li>
+<a href="http://www.mkyong.com/tomcat/tomcat-javalangoutofmemoryerror-permgen-space/">source</a><br/>
+From time to time, Tomcat may give <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors.
+E.g. I've seen these errors during startup when trying to deploy a big 100Mb WAR application.
+<br/>
+To eliminate these memory problems the solution is to increase the values of the various JVM options
+that control the memory settings of the JVM which runs Tomcat. The below JVM options appear to be
+the most pertinent for <tt>PermGen</tt> type errors:
+<pre>
+-XX:PermSize&ltsize&gt - Set initial PermGen Size.
+-XX:MaxPermSize&ltsize&gt - Set the maximum PermGen Size.
+</pre>
+
+In my Ubuntu 14.04 system with Tomcat 7.0, the <tt>$CATALINA_HOME/bin/startup.sh</tt> script 
+invokes the <tt>catalina.sh</tt> file which in turns contains the following code:
+<pre>
+if [ -r "$CATALINA_BASE/bin/setenv.sh" ]; then
+    . "$CATALINA_BASE/bin/setenv.sh"
+elif [ -r "$CATALINA_HOME/bin/setenv.sh" ]; then
+    . "$CATALINA_HOME/bin/setenv.sh"
+</pre>
+&hellip; which basically sources the <tt>setenv.sh</tt> file (if such exists).
+<br/>So, what I did was to
+add the following file in my <tt>$CATALINA_HOME/bin</tt> directory:
+<pre>
+$ pwd
+/home/voops/apache-tomcat-7.0.57/bin
+voops@esavo00:~/apache-tomcat-7.0.57/bin#
+$ cat setenv.sh 
+export JAVA_OPTS="-Dfile.encoding=UTF-8 -Xms512m -Xmx2024m -XX:PermSize=128m -XX:MaxPermSize=512m"
+</pre>
 <li>how to identify that Tomcat is running, it's pid and the port it is listening to</li>
 <pre>
 $ netstat -anp | grep 8080 | grep LISTEN
