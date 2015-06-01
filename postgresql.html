@@ -3,6 +3,13 @@
 </head>
 <body>
 <ol reversed>
+<li>During PostgreSQL startup: <tt>could not open file "/etc/ssl/private/ssl-cert-snakeoil.key": Permission denied</tt></li>
+Encountered this problem for PostgreSQL 9.1 on Ubuntu 12.04.<br/>
+The following solution worked for me:
+<pre>
+sudo chown postgres /etc/ssl/private/ssl-cert-snakeoil.key
+sudo chown postgres /etc/ssl/certs/ssl-cert-snakeoil.pem
+</pre>
 <li>Install PostgreSQL From Its Official Repository in Ubuntu 14.04</li>
 The PostgreSQL Global Development Group (PGDG) maintains an APT repository of PostgreSQL packages for Debian and Ubuntu. The repository provides the PostgreSQL server packages as well as extensions and modules packages for all PostgreSQL versions supported.
 <br/>
