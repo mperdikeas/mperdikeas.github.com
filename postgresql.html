@@ -3,6 +3,12 @@
 </head>
 <body>
 <ol reversed>
+<li>how to convert VARCHAR data to XML so that the XPATH function may be used on them</li>
+Use the <tt>XMLPARSE</tt> function:
+<pre>
+SELECT DISTINCT CAST (XPATH('@status',XMLPARSE(CONTENT "content")) AS VARCHAR), isdeleted
+FROM vo_business.hosted_record_version
+</pre>
 <li>During PostgreSQL startup: <tt>could not open file "/etc/ssl/private/ssl-cert-snakeoil.key": Permission denied</tt></li>
 Encountered this problem for PostgreSQL 9.1 on Ubuntu 12.04.<br/>
 The following solution worked for me:
