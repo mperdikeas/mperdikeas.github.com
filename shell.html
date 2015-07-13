@@ -5,6 +5,8 @@
 </head>
 <body>
 <ol reversed>
+<li>extract and print the 35th and 36th byte from a set of files</li>
+<pre>for f in $(find . -iname \*.edds); do printf "%s ==> "  $f && od -j 34 -N 2 -A x -t x1z -v $f | cut -c7-30 | head -1 ; done</pre>
 <li>bash join lines</li>
 <pre>
 tr "\\n" " "
