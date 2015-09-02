@@ -5,6 +5,12 @@
 </head>
 <body>
 <ol reversed>
+<li><a href="#submodules"></a>how to add (clone) an external git repo as a submodule of my repo</li>
+Execute a command like the following from the toplevel of the working tree:
+<pre>
+git submodule add https://github.com/fxbois/web-mode.git .emacs.d/web-mode
+</pre>
+The last argument is the path in which the submodule should reside.
 <li>how to configure git to save password in memory for sometime (when cloning via <tt>https</tt>)</li>
 <pre>
 $ git config --global credential.helper 'cache --timeout=3600'

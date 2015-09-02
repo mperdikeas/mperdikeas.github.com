@@ -5,6 +5,24 @@
 </head>
 <body>
 <ol reversed>
+<li>how to load a module in Emacs and associate it with a file extension</li>
+It is a three-step process:
+    <ol>
+        <li>extend the <tt>load-path</tt> to include the directory where the <tt>*.el</tt> file for the mode lives</li>
+        <li>load the module</li>
+        <li>associate the module with the file extension</li>
+    </ol>
+This is nicely shown in the below excrept from my <tt>.emacs</tt> file:
+<pre>
+(progn
+    (add-to-list 'load-path "~/.emacs.d/web-mode/")
+    (load "web-mode")
+    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+)
+</pre>
+It is advisable that that the <tt>el</tt> file lives in a <a href="git.html#submodules">git submodule</a>.
+<li>how to view the value of a variable in Emacs</li>
+Use the function <code>describe-variable</code> (usually bound to <tt>C-h v</tt>)
 <li>replace tabs / spaces in Emacs</li>
 The way to do it is via <b>M-x tabify</b> or <b>M-x untabify</b>.
 These functions work on the current selection, so to apply them to
