@@ -11,6 +11,9 @@ Execute a command like the following from the toplevel of the working tree:
 git submodule add https://github.com/fxbois/web-mode.git .emacs.d/web-mode
 </pre>
 The last argument is the path in which the submodule should reside.
+NB: obviously people cloning the repo would still have to do:
+    <pre>git submodule update --init --recursive</pre>
+(see <a href="http://stackoverflow.com/a/4438292">how to clone a repo including the submodules</a>).
 <li>how to configure git to save password in memory for sometime (when cloning via <tt>https</tt>)</li>
 <pre>
 $ git config --global credential.helper 'cache --timeout=3600'
@@ -237,6 +240,8 @@ git log --oneline --decorate=full --graph
 git submodule init
 git submodule update
 </pre>
+Apparently <tt>git submodule update --init --recursive</tt> is also an option.
+See for more: <a href="http://stackoverflow.com/a/4438292">how to clone a repo including the submodules</a>).
 <li>how to get the hash of the current commit</u></b> (and just that)</li>
 <p>
 <pre>
