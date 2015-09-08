@@ -11,8 +11,14 @@ Execute a command like the following from the toplevel of the working tree:
 git submodule add https://github.com/fxbois/web-mode.git .emacs.d/web-mode
 </pre>
 The last argument is the path in which the submodule should reside.
-NB: obviously people cloning the repo would still have to do:
+NB: obviously people that have already cloned the repo (prior to the addition of the
+submodule) would still have to do:
     <pre>git submodule update --init --recursive</pre>
+Otherwise (i.e. if the cloning happens <em>after</em> the addition of the submodule it is better
+to just do:
+<pre>
+git clone --recursive git://github.com/some/repo.git
+</pre>
 (see <a href="http://stackoverflow.com/a/4438292">how to clone a repo including the submodules</a>).
 <li>how to configure git to save password in memory for sometime (when cloning via <tt>https</tt>)</li>
 <pre>
