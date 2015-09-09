@@ -7,7 +7,24 @@
 <body>
 <ol reversed>
 <li>test network speed</li>
-The <a href="speedtest.net">speedtest.net</a> web site can be used to test upload and download speed to any geographical region of the world.
+The <a href="http://www.speedtest.net">speedtest.net</a> web site can be used to test upload and download speed to any geographical region of the world.
+<li>how to dump specific bytes of a binary file in a human-readable format</li>
+Use <code>dd</code> and pipe the output to either <code>xxd</code> or <code>hexdump</code>.
+<pre>
+$ dd if=sample-rapid-file ibs=1 skip=164 count=20 2>/dev/null | xxd -b
+0000000: 00000000 00000000 00000000 10111101 00000000 00000000  ......
+0000006: 00000000 00000000 00000000 00000000 00000000 00000001  ......
+000000c: 00000000 00000000 00000000 00000000 00000000 00000000  ......
+0000012: 00000000 00000000                                      ..
+</pre>
+<br/>
+... or:
+<pre>
+$ dd if=sample-rapid-file ibs=1 skip=164 count=20 2>/dev/null | hexdump -C
+00000000  00 00 00 bd 00 00 00 00  00 00 00 01 00 00 00 00  |................|
+00000010  00 00 00 00                                       |....|
+00000014
+</pre>
 <li>how to output the binary representation of a file</li>
 <pre>
 xxd -bp sample.dat | head -3
