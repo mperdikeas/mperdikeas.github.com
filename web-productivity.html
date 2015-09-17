@@ -5,8 +5,50 @@
 <link rel='icon' href='/knowledge-favicon.ico'/>
 </head>
 <body>
-<ul reversed>
-<li>how to use live reload in Ubuntu <b>without</b> a browser plugin</li>
+<ol reversed>
+<li id='pythonic-livereload-alt'>more robust way to use live reload in Ubuntu (<b>requires</b> a browser plugin)</li>
+<strong>NB:</strong> this is an improved way over the <a href='#pythonic-livereload-orig'>original way</a>.
+<p/>
+<a href='https://pypi.python.org/pypi/livereload'>source</a>
+<p/>
+First, you need to install <code>Python LiveReload</code> with:
+<pre>pip install livereload</pre>
+<br/>
+Following successful installation, do not use the <code>livereload</code> utility for starting a server in a directory (that relies on the old method of using a <code>Guardfile</code>), but rather write your own python script and execute it. E.g. the one I have used (placed in the directory of my sources) is:
+<pre>
+cat livereload-server.py
+#!/usr/bin/env python
+from livereload import Server
+server = Server()
+server.watch('*.html', delay=1)
+server.serve(liveport=35729, host='localhost')
+#this script is apparently automatically serving at 5500
+#I am not sure then, what the below line is doing:
+#server.serve(port=1717, host='localhost')
+</pre>
+I then simply run it with:
+<pre>
+./livereload-server.py
+</pre>
+Typical output is:
+<pre>
+[I 150917 18:09:17 server:271] Serving on http://localhost:5500
+[I 150917 18:09:17 handlers:58] Start watching changes
+[I 150917 18:09:17 handlers:60] Start detecting changes
+[I 150917 18:09:18 handlers:131] Browser Connected: http://localhost:5500/foo.html
+[I 150917 18:09:18 handlers:78] Ignore: foo.html
+</pre>
+Notice that a message to the effect that the browser was connected is displayed. This obviously requires installing the LiveReload plugin extension (e.g. in Chrome). I then point my browser to:
+<pre>
+http://localhost:5500/foo.html
+</pre>
+... and can view the changes without the need to manually reload.
+<p/>
+<strong>NB:</strong>Where the port number <tt>5500</tt> is a mystery to me. It does not appear in the script and I don't know how to change it.
+<li id='pythonic-livereload-orig'>how to use live reload in Ubuntu <b>without</b> a browser plugin</li>
+<strong>NB:</strong>I've run into some problems with this approach, I now
+recommend <a href='#pythonic-livereload-alt'>this way</a>.
+<p/>
 <a href='http://stackoverflow.com/a/16758283/274677'>source</a>
 <p/>
 Install LiveReload through python (not Guard):
