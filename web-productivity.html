@@ -1,0 +1,39 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+<link rel='icon' href='/knowledge-favicon.ico'/>
+</head>
+<body>
+<ul reversed>
+<li>how to use live reload in Ubuntu <b>without</b> a browser plugin</li>
+<a href='http://stackoverflow.com/a/16758283/274677'>source</a>
+<p/>
+Install LiveReload through python (not Guard):
+<pre>
+curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python           
+sudo pip install livereload
+sudo apt-get install python-pip
+sudo pip install livereload
+</pre>
+... subsequently, <code>cd</code> to the directory containing the
+files to be monitored and create the following file named <code>Guardfile</code>:
+<pre>
+#!/usr/bin/env python
+from livereload.task import Task
+
+Task.add('*.css')
+Task.add('*.html')
+Task.add('css/*.css')
+</pre>
+... then start LiveReload with (for port 1717):
+<pre>
+livereload -p 1717 .
+</pre>
+Following the above steps that the page is rendered in the following URL:
+<pre>
+http://127.0.0.1:1717/test.html
+</pre>
+</ol>
+</body>
+</html>
