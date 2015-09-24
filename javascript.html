@@ -11,7 +11,11 @@ I have used the approach to install node packages via the <code>npm</code> tool 
 <a href='http://www.sitepoint.com/beginners-guide-node-package-manager/'>here</a>.
 However with this approach, one (at least in Ubuntu 14.04) cannot use the <code>nodejs</code> executable
 but has to use the <code>node</code> one that is available with the <code>nvm</code> tool.
-This is described <a href='https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server'>here</a> in the section "How to Install Using NVM". Then don't forget upon installing a package, e.g. <code>npm prompt</code> to also do <code>nvm link prompt</code>
+This is described <a href='https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server'>here</a> in the section "How to Install Using NVM".
+<strong>NB:</strong>I actually had to use <code>sudo curl .. | sh</code> to install it.
+<br/>
+<br/>
+Then don't forget upon installing a package, e.g. <code>npm prompt</code> to also do <code>nvm link prompt</code>
 (as described in the link above). An example is given in:
 <pre>
 ~/playground/javascript-you-dont-know
