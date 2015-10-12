@@ -1,65 +1,69 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-<ol reversed>
-<li>How to install <b>guard-livereload</b></li>
-What worked for me (in 2015-10) was to follow the instructions from:
-<br/>
-<br/>
-<a href="https://github.com/guard/guard-livereload">the github repo for <b>guard-livereload</b></a>
-<br/>
-<br/>
-I've also created a script to run <b>guard</b> (in <code>~/playground/repo-wide-scripts</code>).
-<br/>
-A sample <code>Guardfile</code> is found in the same location.
-<li id='npm-nvm'>How to use node and install npm packages in home folder</li>
-I have used the approach to install node packages via the <code>npm</code> tool in the home folder as described 
-<a href='http://www.sitepoint.com/beginners-guide-node-package-manager/'>here</a>.
-However with this approach, one (at least in Ubuntu 14.04) cannot use the <code>nodejs</code> executable
-but has to use the <code>node</code> one that is available with the <code>nvm</code> tool.
-This is described <a href='https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server'>here</a> in the section "How to Install Using NVM".
-<strong>NB:</strong>I actually had to use <code>sudo curl .. | sh</code> to install it.
-<br/>
-<br/>
-Then don't forget upon installing a package, e.g. <code>npm prompt</code> to also do <code>nvm link prompt</code>
-(as described in the link above). An example is given in:
-<pre>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li>How to install <b>guard-livereload</b></li>
+      What worked for me (in 2015-10) was to follow the instructions from:
+      <br/>
+      <br/>
+      <a href="https://github.com/guard/guard-livereload">the github repo for <b>guard-livereload</b></a>
+      <br/>
+      <br/>
+      I've also created a script to run <b>guard</b> (in <code>~/playground/repo-wide-scripts</code>).
+      <br/>
+      I the same location I've also created:
+      <ul>
+        <li>A sample <code>Guardfile</code></li>
+        <li>The <code>Gemfile</code> to be used</li>
+      </ul>
+      <li id='npm-nvm'>How to use node and install npm packages in home folder</li>
+      I have used the approach to install node packages via the <code>npm</code> tool in the home folder as described 
+      <a href='http://www.sitepoint.com/beginners-guide-node-package-manager/'>here</a>.
+      However with this approach, one (at least in Ubuntu 14.04) cannot use the <code>nodejs</code> executable
+      but has to use the <code>node</code> one that is available with the <code>nvm</code> tool.
+      This is described <a href='https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server'>here</a> in the section "How to Install Using NVM".
+      <strong>NB:</strong>I actually had to use <code>sudo curl .. | sh</code> to install it.
+      <br/>
+      <br/>
+      Then don't forget upon installing a package, e.g. <code>npm prompt</code> to also do <code>nvm link prompt</code>
+      (as described in the link above). An example is given in:
+      <pre>
 ~/playground/javascript-you-dont-know
-</pre>
+      </pre>
 
-<li>Closures in JavaScript</li>
-Closures in JavaScript can be a bit tricky since scope in JavaScript is function-level, not
-block-level. See <a href="http://stackoverflow.com/q/643542">this SO question</a> and my
-code <a href="https://github.com/mperdikeas/playground/blob/master/javascript-III/001/foo.html">here</a>
-and <a href="https://github.com/mperdikeas/playground/blob/master/javascript-III/002/foo.html">here</a>.
-<li>browserify</li>
-Install it with:
-<pre>sudo npm install -g browserify</pre>
-<li>JavaScript development environment</li>
-<ul>
-<li>IDE</li>Webstorm
-<li>Tools management</li><a href="https://npmjs.org/"?>NPM</a> (Node Packaged Modules)
-<li>Rapid development</li><a href="http://yeoman.io/">Yeoman</a>
-<li>Build tool</li><a href="http://gruntjs.com/">grunt</a>
-<li>Dependency management</li><a href="http://bower.io/">bower</a>
-<li>Unit test</li><a href="http://jasmine.github.io/">Jasmin</a>
-<li>QA code analysis</li><a href="http://www.jshint.com/">jshint</a>
-<li>Test automation</li><a href="http://karma-runner.github.io/">Karma</a>
-<li>Modular</li><a href="http://requirejs.org/">RequireJS</a>
-<li>Framework</li><a href="http://angularjs.org/">AngularJS</a>
-</ul>
-<li>install Node.js for Ubuntu</li>
-On 6.II.2015 I followed <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions">these instructions</a> and they worked on my Ubuntu 12.04 machine.
-<li>JavaScript Event KeyCode Test Page</li>
-<a href="http://www.asquare.net/javascript/tests/KeyCode.html">This</a> is a great resource.
-<li>Function keys for web applications</li>
-Use F2,F3,F4,F6,F8,F9,F10 and F12 only, if you must. The rest cannot always be overriden. See <a href="http://it.toolbox.com/blogs/paytonbyrd/javascript-keyboard-events-matrix-for-function-keys-f1-through-f12-29264">here</a> for more.
-<li>Learning resources</li>
-<a href="http://javascriptissexy.com/how-to-learn-javascript-properly/">How to learn JS properly</li>
-</ol>
-</body>
+      <li>Closures in JavaScript</li>
+      Closures in JavaScript can be a bit tricky since scope in JavaScript is function-level, not
+      block-level. See <a href="http://stackoverflow.com/q/643542">this SO question</a> and my
+      code <a href="https://github.com/mperdikeas/playground/blob/master/javascript-III/001/foo.html">here</a>
+      and <a href="https://github.com/mperdikeas/playground/blob/master/javascript-III/002/foo.html">here</a>.
+      <li>browserify</li>
+      Install it with:
+      <pre>sudo npm install -g browserify</pre>
+      <li>JavaScript development environment</li>
+      <ul>
+        <li>IDE</li>Webstorm
+        <li>Tools management</li><a href="https://npmjs.org/"?>NPM</a> (Node Packaged Modules)
+        <li>Rapid development</li><a href="http://yeoman.io/">Yeoman</a>
+        <li>Build tool</li><a href="http://gruntjs.com/">grunt</a>
+        <li>Dependency management</li><a href="http://bower.io/">bower</a>
+        <li>Unit test</li><a href="http://jasmine.github.io/">Jasmin</a>
+        <li>QA code analysis</li><a href="http://www.jshint.com/">jshint</a>
+        <li>Test automation</li><a href="http://karma-runner.github.io/">Karma</a>
+        <li>Modular</li><a href="http://requirejs.org/">RequireJS</a>
+        <li>Framework</li><a href="http://angularjs.org/">AngularJS</a>
+      </ul>
+      <li>install Node.js for Ubuntu</li>
+      On 6.II.2015 I followed <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions">these instructions</a> and they worked on my Ubuntu 12.04 machine.
+      <li>JavaScript Event KeyCode Test Page</li>
+      <a href="http://www.asquare.net/javascript/tests/KeyCode.html">This</a> is a great resource.
+      <li>Function keys for web applications</li>
+      Use F2,F3,F4,F6,F8,F9,F10 and F12 only, if you must. The rest cannot always be overriden. See <a href="http://it.toolbox.com/blogs/paytonbyrd/javascript-keyboard-events-matrix-for-function-keys-f1-through-f12-29264">here</a> for more.
+      <li>Learning resources</li>
+      <a href="http://javascriptissexy.com/how-to-learn-javascript-properly/">How to learn JS properly</li>
+    </ol>
+  </body>
 </html>
