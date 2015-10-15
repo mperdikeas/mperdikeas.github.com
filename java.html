@@ -6,6 +6,36 @@
 </head>
 <body>
 <ol reversed>
+<li>how to find the 32-bit or 64-bit memory model status of an existing Java process</li>
+<a name="java-process-32-or-65"></a>
+The following command provides a wealth of information provided the PID is known:
+<pre>jinfo</pre>
+<b>NB: </b>if the process was run as a service you need to <code>sudo</code> that.
+<br/>
+So for instance the following can be done:
+<pre>
+$ sudo jinfo 1752 | grep arch.data.model
+Attaching to process ID 1752, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 24.80-b11
+sun.arch.data.model = 32
+</pre>
+<li>how to find whether the <code>java</code> program is the 32 or 64 bit</li>
+<ul>
+<li>if you are inside Java</li>
+<pre>System.getProperty("sun.arch.data.model")</pre>
+<li>outside Java</li>
+<pre>java -d64 -version</pre>
+(will display a message if the version is not 64-bit)
+<pre>java -d32 -version</pre>
+(will display a message if the version is not 32-bit)
+</ul>
+<li>on 32-bit vs. 64-bit with respect to <code>java</code> and <code>javac</code></li>
+Java bytecode is platform independent. So code compiled with either 32 or 64-bit <code>javac</code>
+should play with either 32 or 65-bit <code>java</code>.
+<br/>
+<a href="http://stackoverflow.com/a/783669/274677">source</a>
 <li>NoRouteToHostException</li>
 It sometimes transpires that, even when socket connections are properly closed, one can still run out of ephemeral ports
 (if a large number of connections are rapidly opened and closed) due to the (otherwise properly closed) sockets remaining

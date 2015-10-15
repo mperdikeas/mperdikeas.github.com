@@ -6,6 +6,28 @@
 </head>
 <body>
 <ol reversed>
+<li>How to check the memory settings of a running Tomcat</li>
+Use the <code>jinfo</code> program to attach to Tomcat (given its PID).
+Among other things, the Tomcat's memory model will be diplayed with the following:
+<pre>
+$ sudo jinfo 1752 | grep arch.data.model
+Attaching to process ID 1752, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 24.80-b11
+sun.arch.data.model = 32
+</pre>
+Also, the maximum Heap size configured (alongside other JVM options):
+<pre>
+$ sudo jinfo 1752  | grep -A6 VM\ Flags
+Attaching to process ID 1752, please wait...
+Debugger attached successfully.
+Server compiler detected.
+JVM version is 24.80-b11
+VM Flags:
+
+-Djava.util.logging.config.file=/var/lib/tomcat7/conf/logging.properties -Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.endorsed.dirs=/usr/share/tomcat7/endorsed -Dcatalina.base=/var/lib/tomcat7 -Dcatalina.home=/usr/share/tomcat7 -Djava.io.tmpdir=/tmp/tomcat7-tomcat7-tmp
+</pre>
 <li>how to handle <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors in Tomcat</li>
 <a href="http://www.mkyong.com/tomcat/tomcat-javalangoutofmemoryerror-permgen-space/">source</a><br/>
 From time to time, Tomcat may give <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors.
