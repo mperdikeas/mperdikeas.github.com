@@ -8,7 +8,10 @@
 #+DRAWERS: HIDDEN PROPERTIES STATE DATA FINDINGS PROVENANCE COORDINATES INFO REFERENCE
 #+OPTIONS: d:t
 
-* TODO change password for [mperdikeas@ssh.esavo.esac.int]
+
+* professional
+** TODO ant-template engine to accept parametrized -Xmx
+** TODO change password for [mperdikeas@ssh.esavo.esac.int]
 :INFO:
 Dear Menelaus,
 please access to scils03.net4.lan server with your current user/password.
@@ -29,9 +32,10 @@ LDAP password information update failed: Referral
 Please contact me via my sciops email: [mperdikeas@sciops.esa.int] to let me know how you would like me to communicate the password I'd like to set. If that's not practical, just assign one yourselves and allow me to change it upon login.
 Menelaus.
 :END:
-* TODO check with Ruben to see if enough RAM is available
-* TODO coordinate with Ruben on how to do a release
-* TODO sent email to Pierre, Markus and Tom inviting them to access the report subsystem
-* TODO prepare weather report presentation for Christophe
-* TODO talk to Mavroudis about new project and BIRF reporting requirement
+** TODO check with Ruben to see if enough RAM is available
+** TODO coordinate with Ruben on how to do a release
+** TODO sent email to Pierre, Markus and Tom inviting them to access the report subsystem
+** TODO prepare weather report presentation for Christophe
+** TODO talk to Mavroudis about new project and BIRF reporting requirement
+** TODO test Tomcat heap size
 
