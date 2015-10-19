@@ -1,4 +1,4 @@
-#+STARTUP: overview    
+#+STARTUP: showall
 #+STARTUP: hidestars
 #+STARTUP: logdone
 #+SEQ_TODO: TODO(t) STARTED(s) WAITING(w) | DONE(d) CANCELLED(c) DEFERRED(f)
@@ -34,8 +34,9 @@ Menelaus.
 :END:
 ** TODO check with Ruben to see if enough RAM is available
 ** TODO coordinate with Ruben on how to do a release
-** TODO sent email to Pierre, Markus and Tom inviting them to access the report subsystem
-** TODO prepare weather report presentation for Christophe
+** DONE sent email to Pierre, Markus and Tom inviting them to access the report subsystem
+CLOSED: [2015-10-19 Mon 10:34]
+** STARTED prepare weather report presentation for Christophe
 ** TODO talk to Mavroudis about new project and BIRF reporting requirement
 ** TODO test Tomcat heap size
 
