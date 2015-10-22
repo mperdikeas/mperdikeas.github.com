@@ -32,11 +32,20 @@ LDAP password information update failed: Referral
 Please contact me via my sciops email: [mperdikeas@sciops.esa.int] to let me know how you would like me to communicate the password I'd like to set. If that's not practical, just assign one yourselves and allow me to change it upon login.
 Menelaus.
 :END:
-** TODO check with Ruben to see if enough RAM is available
-** TODO coordinate with Ruben on how to do a release
+** STARTED check with Ruben to see if enough RAM is available
+need to open a ticket on that
+** STARTED coordinate with Ruben on how to do a release
+need to open a ticket on that as well
 ** DONE sent email to Pierre, Markus and Tom inviting them to access the report subsystem
 CLOSED: [2015-10-19 Mon 10:34]
-** STARTED prepare weather report presentation for Christophe
+** DONE prepare weather report presentation for Christophe
+CLOSED: [2015-10-22 Thu 19:59]
 ** TODO talk to Mavroudis about new project and BIRF reporting requirement
 ** TODO test Tomcat heap size
+** TODO prepare CSV format for service cone report data for Christophe
+** TODO get in touch with Janet and ask her to schedule RoR harvesting
 
+** Friday TODOs
+*** TODO return disk to Ramon and inquire and make note on change in format
+*** TODO get new disk from Sanchez (SOHO mission)
+*** TODO consume notes from the RAWDAR meeting
