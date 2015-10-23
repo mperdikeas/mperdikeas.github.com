@@ -12,6 +12,29 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to install a font (e.g. consolas) in Ubuntu</li>
+    <a href="http://www.rushis.com/2013/03/consolas-font-on-ubuntu/">source</a>
+    <br/>
+    This is the procedure that worked for me:
+    <ol>
+      <li>sudo apt-get install font-manager</li>
+      <li>sudo apt-get install cabextract</li>
+      <li>run the script at: <code>~/tools/consolas.sh</code> in a dir where you don't mind the temporary directory <code>temp</code> that will get created</li>
+      <li>double click on the Consolas fonts to install them with the default font manager </li>
+      <li>manually copy the font files to <code>/usr/share/fonts</code></li>
+      One might expect that installing the fonts with the font manager (in the previous step)
+      would work but in my case it didn't and I had to manually copy the fonts:
+      <pre>
+sudo mkdir /usr/share/fonts/truetype/consolas
+sudo cp /home/mperdikeas/tools/temp/CONSOLA*.TTF /usr/share/fonts/truetype/consolas
+      </pre>
+      <li>run the <code>fc-cache</code> thing</li>
+      <pre>sudo fc-cache -fv</pre>
+      <li>launch LibreOffice to verify that the fonts are found</li>
+      <li>reboot</li>
+      Sadly, even after the above step I couldn't select the new fonts in my terminal preferences so I had
+      to log out and reboot.
+    </ol>
     <li>how to use <tt>xrandr</tt> to sent screen output from my laptop to an external monitor</li>
     Sources (most helpful first):
     <ul>
