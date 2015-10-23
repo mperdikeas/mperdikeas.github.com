@@ -46,6 +46,8 @@ CLOSED: [2015-10-22 Thu 19:59]
 ** TODO get in touch with Janet and ask her to schedule RoR harvesting
 
 ** Friday TODOs
-*** TODO return disk to Ramon and inquire and make note on change in format
-*** TODO get new disk from Sanchez (SOHO mission)
-*** TODO consume notes from the RAWDAR meeting
+*** DONE return disk to Ramon and inquire and make note on change in format
+CLOSED: [2015-10-23 Fri 19:55]
+*** DONE get new disk from Sanchez (SOHO mission)
+CLOSED: [2015-10-23 Fri 19:55]
+*** TODO consume notes from the last RAWDAR meeting

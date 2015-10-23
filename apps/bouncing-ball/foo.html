@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <title>bouncing balls (demonstrates how to use speed in pixels per second</title>
+    <script src="color-utils.js"></script>
+  </head>
+  <body>
+    <div id='output'></div>
+    <div id='message1'></div>
+    <div id='message2'></div>
+    <div id='message3'></div>
+    <script src="app.js"></script>
+
+    <input type="button" id="start-sim" value="pause simulation"/>
+    <br/>
+    <!--span>rectangle start-x:             <input type='number' value='30' id='rectX'/></span><br/>
+    <span>rectangle start-y:             <input type='number' value='30' id='rectY'/></span><br/>
+    <span>rectangle width:               <input type='number' value='30' id='rectWidth'/></span><br/>
+    <span>rectangle height:              <input type='number' value='30' id='rectHeight'/></span><br/-->
+    <span>circle radius:                 <input type='number' value='30' id='circleR'/></span><br/>
+    <span>velocity in pixels per second: <input type='number' value='30' id='vel'/></span><br/>
+    <span>simulation frames per second: <input type='number' value='30' id='fps'/></span><br/>
+    <script type='text/javascript'>
+     var utils = {};
+     utilsModule(utils);
+
+     var canvasConfig = (function(width, height) {
+       var rv = {};
+       var randomX = function(_buffer) {
+         var buffer = _buffer || 0;
+         return Math.floor((width-buffer)*Math.random());
+       };
+       var randomY = function(_buffer) {
+         var buffer = _buffer || 0;
+         return Math.floor((height-buffer)*Math.random());
+       };
+       var random = function(_buffer) {
+         var buffer = _buffer || 0;
+         return utils.point2d(randomX(buffer), randomY(buffer));
+       };
+
+       rv.randomX = randomX;
+       rv.randomY = randomY;
+       rv.random = random;
+
+       rv.getWidth = function() {return width;};
+       rv.getHeight = function() {return height;};
+       return rv;
+     })(200,200);
+
+     var output = document.getElementById("output");
+     var canvas = document.createElement("canvas");
+     var logMessage = function (msg, area) {
+       var id = "message"+area.toString();
+       var message = document.getElementById(id);
+       if (message.firstChild) {
+         message.removeChild(message.firstChild);
+       }
+       var p = document.createElement('p');
+       var test = document.createTextNode(msg);
+       p.appendChild(test);
+       message.appendChild(p);
+     };
+     
+     canvas.width = canvasConfig.getWidth();
+     canvas.height = canvasConfig.getHeight();
+
+     var ctx = canvas.getContext('2d');
+     output.appendChild(canvas);
+     var getParameterValue = function(id) {
+       return parseInt(document.getElementById(id).value);
+     };
+     
+     var simulationFactory = function() {
+       var rect = (function() {
+         var rectTopLeftCorner = utils.point2d(0,0);
+
+         //utils.point2d(getParameterValue('rectX', canvasConfig.randomX())
+         //             ,getParameterValue('rectY', canvasConfig.randomY()));
+         var width  = canvasConfig.getWidth();// getParameterValue('rectWidth', canvasConfig.randomX());
+         var height = canvasConfig.getHeight(); // getParameterValue('rectHeight', canvasConfig.randomY());
+         return utils.rectangle(rectTopLeftCorner, rectTopLeftCorner.add(utils.point2d(width, height)));
+       })();
+
+       var circleO = (function() {
+         var circleR = getParameterValue('circleR', 0.5*Math.random()*Math.min(rect.getHeight(), rect.getWidth()));
+         console.log('circle radius calculated as: '+circleR);
+         var circle = utils.circle(circleR);
+         var velocity = utils.point2d.randomPoint().applyMeasure(getParameterValue('vel'));
+         var circleO = utils.circleObject(circle, rect.random(circle.getRadius()), velocity);
+         //         updateVelocityMeasure = function (vmeasure) {
+         //         circleO.setVelocityMeasure(parseInt(document.getElementById('vel').value));
+         //     };
+         return circleO;
+       })();
+
+       var t_prev = (new Date()).getTime();
+       var framesPerSecond = 100;
+       var doAnotherFrame = true;
+       var colorRememberer = (function() {
+         var colorsToRemember = {};
+         var rememberColor = function (color, howLongMS) {
+           var rememberUpTo = (new Date()).getTime()+howLongMS;
+           colorsToRemember[color]=rememberUpTo;
+         }
+         var getMostMemorable = function() {
+           var colorRV     = null;
+           var colorRVWhen = null;
+           for (color in colorsToRemember) {
+             if (!colorsToRemember.hasOwnProperty(color))
+               continue;
+             if (colorRV===null) {
+               colorRV = color;
+               colorRVWhen = colorsToRemember[color];
+             } else if (colorsToRemember[color]>colorRVWhen) {
+               colorRV = color;
+               colorRVWhen = colorsToRemember[color];
+             }
+           }
+           return colorRV;
+         };
+         return {rememberColor: rememberColor, getMostMemorable:getMostMemorable};
+       })();
+       
+       var main = function() {
+         var t_now = (new Date()).getTime();
+         if (doAnotherFrame) {
+           rect.paint(ctx);
+           circleO.paint(ctx, colorRememberer.getMostMemorable()||"blue");
+           var t_elapsed = t_now-t_prev;
+           circleO.updatePosition(t_elapsed);
+           var layOfLand = rect.whereDoesItLayCircle(circleO);
+           if (layOfLand!==rect.layOfLand.IN) {
+             var velocityChangeVector = 
+             (function () {
+               switch (layOfLand) {
+                 case rect.layOfLand.OUT.N: case rect.layOfLand.ON.N: case rect.layOfLand.OUT.S: case rect.layOfLand.ON.S: {
+                   colorRememberer.rememberColor("red", 100);
+                   return utils.point2d(1,-1);
+                 }
+                 case rect.layOfLand.OUT.NE: case rect.layOfLand.ON.NE: case rect.layOfLand.OUT.SE: case rect.layOfLand.ON.SE:
+                 case rect.layOfLand.OUT.SW: case rect.layOfLand.ON.SW: case rect.layOfLand.OUT.NW: case rect.layOfLand.ON.NW: {
+                   colorRememberer.rememberColor("purple", 1000);
+                   return utils.point2d(-1,-1);
+}
+                 case rect.layOfLand.OUT.E: case rect.layOfLand.ON.E: case rect.layOfLand.OUT.W: case rect.layOfLand.ON.W: {
+                   colorRememberer.rememberColor("red", 100);
+                   return utils.point2d(-1,1);
+}
+                 default:
+                   throw 'unrecognized case: ['+insideIndication+']';
+               }})();
+             circleO.mulVelocity(velocityChangeVector);
+           } else
+            colorRememberer.rememberColor("blue", 10);
+           logMessage(t_elapsed+' ms have elapsed since previous refresh.', 1);
+           logMessage('velocity of ball is: '+circleO.getVelocity().toString+' pixels/second', 2);
+           logMessage('Position of ball is: '+circleO.getCenter().toString, 3);
+         };
+         t_prev = t_now;
+         setTimeout(main, 1000/framesPerSecond);
+       };
+       return {rect: rect,
+               circleO: circleO,
+               main: main,
+               setFPS: function(fps) {framesPerSecond=fps;},
+               toggleDoAnotherFrame: function() {
+                 doAnotherFrame = !doAnotherFrame;
+                 if (doAnotherFrame===true)
+                   document.getElementById('start-sim').value = 'pause simulation';
+                 else
+                   document.getElementById('start-sim').value = 'continue simulation';
+               },
+               stop: function() {
+                 doAnotherFrame = false;
+                 }
+       };
+     };
+     var simulation = simulationFactory();
+     var init = function() {
+       ctx.clearRect(0, 0, canvasConfig.getWidth(), canvasConfig.getHeight());
+       simulation.stop();
+       simulation = simulationFactory();
+       simulation.main();
+     };
+     canvas.onclick=init;
+
+     simulation.main();
+     var simulationControlHandler = function() {
+       simulation.toggleDoAnotherFrame();
+     };
+     document.getElementById('start-sim').onclick= simulationControlHandler;
+//     document.getElementById('rectX').oninput = init;
+//     document.getElementById('rectY').oninput = init;
+//     document.getElementById('rectWidth').oninput = init;
+//     document.getElementById('rectHeight').oninput = init;
+     document.getElementById('circleR').oninput = function() {
+       simulation.circleO.setRadius( getParameterValue('circleR'));
+     };
+     document.getElementById('vel').oninput = function() {
+       simulation.circleO.updateVelocityMeasure(getParameterValue('vel'));
+     };
+     document.getElementById('fps').oninput = function() {
+       simulation.setFPS( getParameterValue('fps') );
+     };
+    </script>
+  </body>
+</html>
