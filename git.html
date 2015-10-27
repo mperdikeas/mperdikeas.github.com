@@ -6,6 +6,12 @@
 </head>
 <body>
 <ol reversed>
+<li>How to remove a git submodule</li>
+<a href="http://stackoverflow.com/a/21211232/274677">source</a>
+<pre>
+git rm the_submodule
+rm -rf .git/modules/the_submodule
+</pre>
 <li><a href="#submodules"></a>how to add (clone) an external git repo as a submodule of my repo</li>
 Execute a command like the following from the toplevel of the working tree:
 <pre>
