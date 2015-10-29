@@ -1,0 +1,28 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+<link rel='icon' href='/knowledge-favicon.ico'/>
+</head>
+<body>
+<ol reversed>
+<li>how to install Typescript in Ubuntu 14.04</li>
+Install the command-line Typescript compiler as a Node.js package:
+<pre>
+npm install -g typescript
+</pre>
+But after that you'll have to edit file <code>tsc</code> to use
+<code>nodejs</code> instead of <code>node</code>. To do that
+change the following line at the beginning of <code>tsc</code>
+from:
+<pre>
+#!/usr/bin/env node
+</pre>
+to:
+<pre>
+#!/usr/bin/env nodejs
+</pre>
+<a href="https://iamalivingcontradiction.wordpress.com/2015/03/25/installing-typescript-on-ubuntu-14-04/">source</a>
+</ol>
+</body>
+</html>
