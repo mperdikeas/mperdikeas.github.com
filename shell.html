@@ -6,6 +6,14 @@
 </head>
 <body>
 <ol reversed>
+<li>how to process the output of <code>find</code> when there are spaces in the filenames</li>
+<a href="http://stackoverflow.com/a/7039208/274677">source</a>
+<br/>
+Replace the usual <code>for</code> iteration with a <code>while</code> iteration
+that is line-based as opposed to word-based:
+<pre>
+find . -iname Thundercats\ -\ 10\*  | while read f; do  sudo cp "$f" /media/mperdikeas/thundercats-season-1/; done
+</pre>
 <li>how to put an <code>scp</code> that requires a password in a script file</li>
 Use <code>sshpass</code> as shown below:
 <pre>
