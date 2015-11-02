@@ -42,7 +42,8 @@ CLOSED: [2015-10-19 Mon 10:34]
 CLOSED: [2015-10-22 Thu 19:59]
 ** TODO talk to Mavroudis about new project and BIRF reporting requirement
 ** TODO test Tomcat heap size
-** TODO prepare CSV format for service cone report data for Christophe
+** DONE prepare CSV format for service cone report data for Christophe
+CLOSED: [2015-11-02 Mon 14:17]
 ** TODO get in touch with Janet and ask her to schedule RoR harvesting
 
 ** Friday TODOs
