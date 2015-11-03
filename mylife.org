@@ -8,7 +8,10 @@
 #+DRAWERS: HIDDEN PROPERTIES STATE DATA FINDINGS PROVENANCE COORDINATES INFO REFERENCE
 #+OPTIONS: d:t
 
-
+* private
+** pay 2nd installment for VAT for 2015Q3
+** pay rent November 2015
+** phone Kopana and Roberto and prepare the rent electronic submission
 * professional
 ** TODO ant-template engine to accept parametrized -Xmx
 ** TODO change password for [mperdikeas@ssh.esavo.esac.int]
