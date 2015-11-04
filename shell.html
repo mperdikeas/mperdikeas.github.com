@@ -1,45 +1,56 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-<ol reversed>
-<li>how to process the output of <code>find</code> when there are spaces in the filenames</li>
-<a href="http://stackoverflow.com/a/7039208/274677">source</a>
-<br/>
-Replace the usual <code>for</code> iteration with a <code>while</code> iteration
-that is line-based as opposed to word-based:
-<pre>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li>how to write a script that executes <code>sudo</code> with the password</li>
+      <ol>
+        <li>Create a file:</li>
+        <pre>emacs ~/.easy.install</pre>
+        <li>inside the file invoke <code>sudo</code> with <code>-S</code>:</li>
+        <pre>echo &lt;password&gt; | sudo -S do-your-shit</pre>
+        <li>make the file executable</li>
+        <pre>sudo chmod +x ~/.easy.install</pre>
+        <li>Change the permissions of the file so only root can read and edit it:</li>
+        <pre>sudo chmod 700 ~/.easy.install</pre>
+      </ol>
+        <li>how to process the output of <code>find</code> when there are spaces in the filenames</li>
+        <a href="http://stackoverflow.com/a/7039208/274677">source</a>
+        <br/>
+        Replace the usual <code>for</code> iteration with a <code>while</code> iteration
+        that is line-based as opposed to word-based:
+        <pre>
 find . -iname Thundercats\ -\ 10\*  | while read f; do  sudo cp "$f" /media/mperdikeas/thundercats-season-1/; done
-</pre>
-<li>how to put an <code>scp</code> that requires a password in a script file</li>
-Use <code>sshpass</code> as shown below:
-<pre>
+        </pre>
+        <li>how to put an <code>scp</code> that requires a password in a script file</li>
+        Use <code>sshpass</code> as shown below:
+        <pre>
 sshpass -f $PASS_FILE scp rawdar.zip user@$DEST:~/rawdar.war
-</pre>
-If, after the copy, you also need to <code>ssh</code> to the destination and you further need sudo privilleges,
-<code>sshpass</code> can't supply both passwords, so you need to put the action that requires sudo in 
-a script and execute it. E.g. as shown below:
+        </pre>
+        If, after the copy, you also need to <code>ssh</code> to the destination and you further need sudo privilleges,
+        <code>sshpass</code> can't supply both passwords, so you need to put the action that requires sudo in 
+        a script and execute it. E.g. as shown below:
 
-<pre>
+        <pre>
 sshpass -f $PASS_FILE ssh user@$DEST <<'ENDSSH'
 ./publish-rawdar.sh
 ENDSSH
-</pre>
+        </pre>
 
-... where the script at the <code>ssh</code> destination is:
-<pre>
+        ... where the script at the <code>ssh</code> destination is:
+        <pre>
 user@user-virtual-machine:~$ cat publish-rawdar.sh
 #!/usr/bin/env bash
 readonly ECHO=/bin/echo
 $ECHO  'top-secret-password' | sudo -S cp rawdar.war /var/lib/tomcat7/webapps
 user@user-virtual-machine:~$
-</pre>
+        </pre>
 
-Relevant excrepts from functional file:
-<pre>
+        Relevant excrepts from functional file:
+        <pre>
 #!/usr/bin/env bash
 readonly PASS_FILE=~/esac.neuropublic.pwd
 readonly DEST=172.31.148.22
@@ -48,29 +59,29 @@ sshpass -f $PASS_FILE scp rawdar.zip user@$DEST:~/rawdar.war
 sshpass -f $PASS_FILE ssh user@$DEST <<'ENDSSH'
 ./publish-rawdar.sh
 ENDSSH
-</pre>
-<li>extract and print the 35th and 36th byte from a set of files</li>
-<pre>for f in $(find . -iname \*.edds); do printf "%s ==> "  $f && od -j 34 -N 2 -A x -t x1z -v $f | cut -c7-30 | head -1 ; done</pre>
-<li>bash join lines</li>
-<pre>
+        </pre>
+        <li>extract and print the 35th and 36th byte from a set of files</li>
+        <pre>for f in $(find . -iname \*.edds); do printf "%s ==> "  $f && od -j 34 -N 2 -A x -t x1z -v $f | cut -c7-30 | head -1 ; done</pre>
+        <li>bash join lines</li>
+        <pre>
 tr "\\n" " "
-</pre>
-<br/>
-<a href="http://stackoverflow.com/a/2764105/274677">source</a>.
-<br/>
-E.g. to prepare a line for emacs to open all Java files containing "<i>fromValue</i>", use:
-<pre>
+        </pre>
+        <br/>
+        <a href="http://stackoverflow.com/a/2764105/274677">source</a>.
+        <br/>
+        E.g. to prepare a line for emacs to open all Java files containing "<i>fromValue</i>", use:
+        <pre>
 findinjava fromValue | sort | awk '{print $1}' | rev | cut -c 2- | rev | tr "\\n" " "
-</pre>
-<li>remove the last <i>n</i> characters from a bash line (that makes no use of <tt>awk</tt> or <tt>sed</tt></li>
-<pre>
+        </pre>
+        <li>remove the last <i>n</i> characters from a bash line (that makes no use of <tt>awk</tt> or <tt>sed</tt></li>
+        <pre>
 echo foobar | rev | cut -c (n+1)- | rev
-</pre>
-<br/>
-<a href="http://unix.stackexchange.com/a/144300/24044">source</a>
-<li>named pipes</li>
-Pipes are a special type of file. You interface with these as if they were files (i.e. with Unix redirection, not pipes), but they behave like pipes:
-<pre>
+        </pre>
+        <br/>
+        <a href="http://unix.stackexchange.com/a/144300/24044">source</a>
+        <li>named pipes</li>
+        Pipes are a special type of file. You interface with these as if they were files (i.e. with Unix redirection, not pipes), but they behave like pipes:
+        <pre>
 $ mkfifo npipe
 $ ls npipe 
 prw-r--r-- 1 mperdikeas users 0 Mar 11 14:12 npipe|
@@ -79,21 +90,21 @@ $ echo "boo" > npipe  &
 $ cat < npipe 
 boo
 [1]+  Done                    echo "boo" > npipe
-</pre>
-<br/>
-More can be found <a href="http://vincebuffalo.com/2013/08/08/the-mighty-named-pipe.html">here</a>.
-<li>replace a string in a fileset</li>
-The below incantation replaces all instances of <tt>XMLUtils.getString</tt> with <tt>XMLUtils.getStringNew</tt> in all Java files in the current directory (recursively):
-<pre>
+        </pre>
+        <br/>
+        More can be found <a href="http://vincebuffalo.com/2013/08/08/the-mighty-named-pipe.html">here</a>.
+        <li>replace a string in a fileset</li>
+        The below incantation replaces all instances of <tt>XMLUtils.getString</tt> with <tt>XMLUtils.getStringNew</tt> in all Java files in the current directory (recursively):
+        <pre>
 find . -type f -iname \*.java -print0 | xargs -0 sed -i 's/XMLUtils.getString/XMLUtils.getStringNew/g'
-</pre>
-<li>change (recursively) all symlinks in a directory that point to a certain target <i><u>A</u></i>point to another target <u><i>B</i></u></li>
-I used the following script to replace all symlinks to a file `ant-contrib-1.0b3.jar`
-to another file `ant-contrib.jar` (that happened to reside in the same directory
-as the original target - I am not sure whether that was essential to the solution
-below). The script was called from a location where the path <tt>repo-wide-libs/ant-contrib-1.0b3.jar</tt>
-existed and was valid.
-<pre>
+        </pre>
+        <li>change (recursively) all symlinks in a directory that point to a certain target <i><u>A</u></i>point to another target <u><i>B</i></u></li>
+        I used the following script to replace all symlinks to a file `ant-contrib-1.0b3.jar`
+        to another file `ant-contrib.jar` (that happened to reside in the same directory
+        as the original target - I am not sure whether that was essential to the solution
+        below). The script was called from a location where the path <tt>repo-wide-libs/ant-contrib-1.0b3.jar</tt>
+        existed and was valid.
+        <pre>
 #!/usr/bin/env bash
 for file in $(find . -type l); do
     if [[ -h "$file" ]]; then
@@ -103,48 +114,48 @@ for file in $(find . -type l); do
         fi
     fi
 done
-</pre>
-<a href="http://unix.stackexchange.com/a/172016/24044">source</a>
-<li>replace a string in a set of files</li>
-<pre>find . -type f -exec sed -i 's/foo/bar/' {} +</pre>
-<a href="http://unix.stackexchange.com/a/112024/24044">source</a>
-To correctly escape the string passed to `sed` use my `sedescape` function (lives in .bashrc).
-<li>the ultimate <u><i>screen</i></u> re-attach command</li>
-<a href="http://aperiodic.net/screen/quick_reference">source</a>
-<pre>
+        </pre>
+        <a href="http://unix.stackexchange.com/a/172016/24044">source</a>
+        <li>replace a string in a set of files</li>
+        <pre>find . -type f -exec sed -i 's/foo/bar/' {} +</pre>
+        <a href="http://unix.stackexchange.com/a/112024/24044">source</a>
+        To correctly escape the string passed to `sed` use my `sedescape` function (lives in .bashrc).
+        <li>the ultimate <u><i>screen</i></u> re-attach command</li>
+        <a href="http://aperiodic.net/screen/quick_reference">source</a>
+        <pre>
 screen -dRR
-</pre>
-<br><br/>
-The above attaches to a screen session. If the session is attached elsewhere, detaches that other display. If no session exists, creates one.
-If multiple sessions exist, uses the first one.)
-<li>total number of lines in files found</li>
-<a href="http://superuser.com/a/260079/138891">source</a>
-<pre>
+        </pre>
+        <br><br/>
+        The above attaches to a screen session. If the session is attached elsewhere, detaches that other display. If no session exists, creates one.
+        If multiple sessions exist, uses the first one.)
+        <li>total number of lines in files found</li>
+        <a href="http://superuser.com/a/260079/138891">source</a>
+        <pre>
 find . -iname *.java -print0 | wc -l --files0-from=-
-</pre>
-</pre>
-<li>find files and execute command in local directory</li>
-use the <b>-execdir</b> switch. E.g.: <pre>find . -type d -execdir touch {}/foo \;</pre>
-NB: On why {}/foo is needed, see: <a href="http://unix.stackexchange.com/q/108216/24044">this SO post</a>.
-<li>total size of directory</li>
-<pre>du -ch .</pre>
-<li>how to <b>scp</b> directory with spaces in its filename</li>
-<pre>scp -rp 'mperdikeas@192.168.2.2:~/"mperd-digital camera images"' /home/mperdikeas/</pre>
-<li>binary diffing on Ubuntu</li>
-Use my <b>~/tools/bincomp</b> tool or the <b>vbindiff</b> or <b>dhex</b> programs.
-<li>how to make a replacement on every line with <b>awk</b></li>
-<code>awk '{gsub("/","."); print}' </code>
-<li>properly quoting arguments to underlying invocations</li>
-Inside a bash script, always use <code>"$1"</code> to pass an argument to an underlying program
-instead of just <code>$1</code>. See: ~/playground/java/why-I-should-always-quote-arguments for more.
-<li>how to use <b>diff</b> to generate a patch in a <b>Makefile</b></li>
-<i>this is really a bash topic (see below)</i>.
-Relative SO discussion <a href="http://unix.stackexchange.com/q/100786/24044">here</a>.<br>
-The Makefile run will fail when a command that's executed as part of a recipe returns a non-zero exit code,
-unless the command is preceded with "-" (in which case it ignores the exit code).<br>
-This is exactly what's happenning in the <code>~/playground/patch/Makefile</code>
-Makefile, also shown below:
-<pre>
+        </pre>
+        </pre>
+        <li>find files and execute command in local directory</li>
+        use the <b>-execdir</b> switch. E.g.: <pre>find . -type d -execdir touch {}/foo \;</pre>
+        NB: On why {}/foo is needed, see: <a href="http://unix.stackexchange.com/q/108216/24044">this SO post</a>.
+        <li>total size of directory</li>
+        <pre>du -ch .</pre>
+        <li>how to <b>scp</b> directory with spaces in its filename</li>
+        <pre>scp -rp 'mperdikeas@192.168.2.2:~/"mperd-digital camera images"' /home/mperdikeas/</pre>
+        <li>binary diffing on Ubuntu</li>
+        Use my <b>~/tools/bincomp</b> tool or the <b>vbindiff</b> or <b>dhex</b> programs.
+        <li>how to make a replacement on every line with <b>awk</b></li>
+        <code>awk '{gsub("/","."); print}' </code>
+        <li>properly quoting arguments to underlying invocations</li>
+        Inside a bash script, always use <code>"$1"</code> to pass an argument to an underlying program
+        instead of just <code>$1</code>. See: ~/playground/java/why-I-should-always-quote-arguments for more.
+        <li>how to use <b>diff</b> to generate a patch in a <b>Makefile</b></li>
+        <i>this is really a bash topic (see below)</i>.
+        Relative SO discussion <a href="http://unix.stackexchange.com/q/100786/24044">here</a>.<br>
+        The Makefile run will fail when a command that's executed as part of a recipe returns a non-zero exit code,
+        unless the command is preceded with "-" (in which case it ignores the exit code).<br>
+        This is exactly what's happenning in the <code>~/playground/patch/Makefile</code>
+        Makefile, also shown below:
+        <pre>
 patch:
 	-diff -u b a > b2a.patch
 	patch -o b.corrected b < b2a.patch
@@ -152,13 +163,13 @@ patch:
 
 clean:
 	rm -f b2a.patch b.corrected
-</pre>
+        </pre>
 
-However, this idiom will ask mask real problems (such as using <b>-dif</b> instead of <b>-diff</b>.
-Therefore the correct way to solve this conundrum (i.e. to not don't ignore the exit value, but also to not fail if it's non-zero)
-is shown in <code>/home/mperdikeas/playground/ant-patch/02/Makefile</code> file, also shown below:
+        However, this idiom will ask mask real problems (such as using <b>-dif</b> instead of <b>-diff</b>.
+        Therefore the correct way to solve this conundrum (i.e. to not don't ignore the exit value, but also to not fail if it's non-zero)
+        is shown in <code>/home/mperdikeas/playground/ant-patch/02/Makefile</code> file, also shown below:
 
-<pre>
+        <pre>
 patch: FORCE
 	diff -u src/a/random/path/b b.corrected > b2a.patch; [ $$? -eq 1 ]
 	ant
@@ -168,12 +179,12 @@ clean:
 	rm -f b2a.patch src/a/random/path/b.corrected
 
 FORCE:
-</pre>
+        </pre>
 
-The ability to use the following syntax: <code>; [ $? -eq 1 ]</code> is plain bash (the double '$' in the
-Makefile is to account for Make's escaping conventions), as is shown in the following bash examples:
+        The ability to use the following syntax: <code>; [ $? -eq 1 ]</code> is plain bash (the double '$' in the
+        Makefile is to account for Make's escaping conventions), as is shown in the following bash examples:
 
-<pre>
+        <pre>
 $ echo $[3+2]
 5
 $ [ $[3+2] -eq 5 ]
@@ -182,73 +193,73 @@ $ echo $?
 $ [ $[3+2] -eq 6 ]
 $ echo $?
 1
-</pre>
+        </pre>
 
 
-<li>using named pipes in Bash</li>
-<a href="http://www.hollenback.net/NamedPipesInBash">original article</a>
-<pre>diff <(ls) <(ls)</pre>
-Named pipes can be created with <b>mkfifo</b>:
-<pre>
+        <li>using named pipes in Bash</li>
+        <a href="http://www.hollenback.net/NamedPipesInBash">original article</a>
+        <pre>diff <(ls) <(ls)</pre>
+        Named pipes can be created with <b>mkfifo</b>:
+        <pre>
 mkfifo foo
 find ~ > foo &
 tail -f foo
-</pre>
-The difference of the above to creating a file is that the size of a named pipe is 0.
-A named pipe lives on the filesystem and survives a reboot but never holds any data, only metadata.
-<li>how to see the alias of a command in the shell</li>
-<pre>
+        </pre>
+        The difference of the above to creating a file is that the size of a named pipe is 0.
+        A named pipe lives on the filesystem and survives a reboot but never holds any data, only metadata.
+        <li>how to see the alias of a command in the shell</li>
+        <pre>
 $ type emacs
 emacs is aliased to `emacs -nw'
-</pre>
-(or the more low tech: <tt>alias | grep emacs</tt>)
-<li>how to recursively diff two directories and exclude certain files (e.g. .svn files in case of a subversion repository)</li>
-<pre>diff -r --exclude=.svn dir-a dir-b</pre>
-<li>count the number of "new" keywords in a set of files (per file - not total):</li>
-<pre>grep -c new `find . -name '*.java'`</pre>
-<li>count total number of lines in all Java files</li>
-<pre>wc -l `find . -name '*.java'`</pre>
-<br/>the following also works (and strangely gives a different result, and requires a CTRL+C at the end):
-<pre>find . -name '*.java' | xargs wc -l</pre>
-<li>record shell commands and their input/output</li>
-<br/>to record:
-<pre>$script session.log</pre>
-<br/>to exit a recording session: <tt>exit</tt>
-<li><tt>seq</tt> program</li>
-<pre>for i in `seq 1 10`; do echo "number is: " $i ; done</pre>
-<li>redirect standard error to standard out and both to file</li>
-<pre>gksudo software-center > trace 2>&1</pre>
-<b>2>&1</b> means "put the output of channel 2 (<i>stderr</i>) to where channel 1 (<i>stdout</i>) currently goes"
-which is why the redirection to file has to occur before the <i>stderr</i> redirection to <i>stdout</i>.
-<li>add a line at the beginning of every text file in a group</li>
-Use <b>sed</b> with <b>for</b> iteration on <b>find</b> results.<br>
-E.g. the following adds package headers in a group of Java files:
-<pre>
+        </pre>
+        (or the more low tech: <tt>alias | grep emacs</tt>)
+        <li>how to recursively diff two directories and exclude certain files (e.g. .svn files in case of a subversion repository)</li>
+        <pre>diff -r --exclude=.svn dir-a dir-b</pre>
+        <li>count the number of "new" keywords in a set of files (per file - not total):</li>
+        <pre>grep -c new `find . -name '*.java'`</pre>
+        <li>count total number of lines in all Java files</li>
+        <pre>wc -l `find . -name '*.java'`</pre>
+        <br/>the following also works (and strangely gives a different result, and requires a CTRL+C at the end):
+        <pre>find . -name '*.java' | xargs wc -l</pre>
+        <li>record shell commands and their input/output</li>
+        <br/>to record:
+        <pre>$script session.log</pre>
+        <br/>to exit a recording session: <tt>exit</tt>
+        <li><tt>seq</tt> program</li>
+        <pre>for i in `seq 1 10`; do echo "number is: " $i ; done</pre>
+        <li>redirect standard error to standard out and both to file</li>
+        <pre>gksudo software-center > trace 2>&1</pre>
+        <b>2>&1</b> means "put the output of channel 2 (<i>stderr</i>) to where channel 1 (<i>stdout</i>) currently goes"
+        which is why the redirection to file has to occur before the <i>stderr</i> redirection to <i>stdout</i>.
+        <li>add a line at the beginning of every text file in a group</li>
+        Use <b>sed</b> with <b>for</b> iteration on <b>find</b> results.<br>
+        E.g. the following adds package headers in a group of Java files:
+        <pre>
 for f in $(find src/ -type f -iname \*.java) ; do sed -i '1ipackage _int.esa.esavo.harvesting;' $f ; done
-</pre>
-<li>find files and sort them by modification time</li>
-<pre>find -type f -print0 | xargs -r0 stat -c %y\ %n | sort </pre>
-<a href="http://www.commandlinefu.com/commands/view/5720/find-files-and-list-them-sorted-by-modification-time">source</a>
-<li>recursively find the latest modified file in a directory</li>
-Original article in <a href="http://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory">stackoverflow</a>.
-<pre>
+        </pre>
+        <li>find files and sort them by modification time</li>
+        <pre>find -type f -print0 | xargs -r0 stat -c %y\ %n | sort </pre>
+        <a href="http://www.commandlinefu.com/commands/view/5720/find-files-and-list-them-sorted-by-modification-time">source</a>
+        <li>recursively find the latest modified file in a directory</li>
+        Original article in <a href="http://stackoverflow.com/questions/4561895/how-to-recursively-find-the-latest-modified-file-in-a-directory">stackoverflow</a>.
+        <pre>
 find . -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d" "
-</pre>
-<li>ask <b>diff</b> to ignore lines starting with Java single-line comments</li>
-<pre>diff --ignore-matching-lines='^//' Foo.java</pre>
-<li>How to obtain the sha256 of a password</li>
-Say the password is "foo":
-<pre>
+        </pre>
+        <li>ask <b>diff</b> to ignore lines starting with Java single-line comments</li>
+        <pre>diff --ignore-matching-lines='^//' Foo.java</pre>
+        <li>How to obtain the sha256 of a password</li>
+        Say the password is "foo":
+        <pre>
 echo -n foo | sha256sum
-</pre>
-The <b>-n</b> is necessary as otherwise echo will also sent the new line character to be SHA256-encoded as part of the password. In cases of salting the usually arrangement is a simple concatenation of the salt followed by the password (in that order so the cracker doesn't have an attack vector). So
-if password is "foo" and salt is "salt":
-<pre>
+        </pre>
+        The <b>-n</b> is necessary as otherwise echo will also sent the new line character to be SHA256-encoded as part of the password. In cases of salting the usually arrangement is a simple concatenation of the salt followed by the password (in that order so the cracker doesn't have an attack vector). So
+        if password is "foo" and salt is "salt":
+        <pre>
 echo -n saltfoo | sha256sum
-</pre>
-<li>How to copy a file and connect to a remote server to do stuff with it</li>
-<a name="CopyFileConnectRSAndDoStuff"></a>
-<pre>
+        </pre>
+        <li>How to copy a file and connect to a remote server to do stuff with it</li>
+        <a name="CopyFileConnectRSAndDoStuff"></a>
+        <pre>
 #!/bin/bash
 scp VatRefund.ear root@node-testapp1:/var/tmp/ || exit 1
 cat &lt;&lt;OEF | ssh node-testapp1 || exit 1
@@ -258,105 +269,105 @@ undeploy --server-groups=other-server-group VatRefund.ear
 deploy --server-groups=other-server-group /var/tmp/VatRefund.ear
 OEF
 exit 0
-</pre>
-<li>Programmer's grep</li>
-Use the <b>ack</b> utility. It is by default only operating on a 
-white list of files. With the <b>-u</b> option it operates on all
-files except those on the black list (.svn etc).
-<li>find files and get the 10 most recently modified</li>
-<pre>
+        </pre>
+        <li>Programmer's grep</li>
+        Use the <b>ack</b> utility. It is by default only operating on a 
+        white list of files. With the <b>-u</b> option it operates on all
+        files except those on the black list (.svn etc).
+        <li>find files and get the 10 most recently modified</li>
+        <pre>
 find . -iname *.script -type f -printf '%T@ %p\n' | sort -k 1nr | sed 's/^[^ ]* //' | head -n 10
-</pre>
-<li>to send an email directly using the SMTP protocol:</li>
-<pre>nc mail.semantix.gr 25</pre>
-This method ensures that nothing's stored anywhere.
-<li>to easily navigate folder hierarchies in Bash:</li>
-<pre>sudo apt-get install autojump</pre>
-<li>to record some task in Bash</li>
-Use <b>script</b> followed by CTRL+D to stop recording (the output is 
-written in file 'typescript')
-<li>how to ensure that no # appears in ini files except as the first character</li>
-<i> this cost me several hours with a shiro.ini cookie path I had set
-where the comment (or so I thought) was interpreted as part of the path</i>
-<pre>
+        </pre>
+        <li>to send an email directly using the SMTP protocol:</li>
+        <pre>nc mail.semantix.gr 25</pre>
+        This method ensures that nothing's stored anywhere.
+        <li>to easily navigate folder hierarchies in Bash:</li>
+        <pre>sudo apt-get install autojump</pre>
+        <li>to record some task in Bash</li>
+        Use <b>script</b> followed by CTRL+D to stop recording (the output is 
+        written in file 'typescript')
+        <li>how to ensure that no # appears in ini files except as the first character</li>
+        <i> this cost me several hours with a shiro.ini cookie path I had set
+          where the comment (or so I thought) was interpreted as part of the path</i>
+        <pre>
 find . -iname \*.ini -exec grep '^[^#].*#' /dev/null '{}' ';' 
-</pre>
-<li>chain logical expressions in bash</li>
-<pre>find . -iname \*.csv -exec sh -c "grep foo {} && echo {}" \;</pre>
-<li>find files and print their absolute path name</li>
-<pre>find  $(pwd) -iname report2.jrxml</pre>
-<li>Thing to notice when trying to find the types of files</li>
-The below code might not working depending on the environment settings,
-e.g. if the grep command outputs special characters (like bold):
-<pre>
+        </pre>
+        <li>chain logical expressions in bash</li>
+        <pre>find . -iname \*.csv -exec sh -c "grep foo {} && echo {}" \;</pre>
+        <li>find files and print their absolute path name</li>
+        <pre>find  $(pwd) -iname report2.jrxml</pre>
+        <li>Thing to notice when trying to find the types of files</li>
+        The below code might not working depending on the environment settings,
+        e.g. if the grep command outputs special characters (like bold):
+        <pre>
 find  . -iname \*.java | grep facade | while read f ; do file $f ; done
-</pre>
-In such, cases do a:
-<pre>
+        </pre>
+        In such, cases do a:
+        <pre>
 find  . -iname \*.java | /bin/grep facade | while read f ; do file $f ; done
-</pre>
-<li>'materialize' soft-links - easy way</li>
-<pre>cp -pr -L --copy-contents</pre>
-<li>'materialize' soft-links - trying to be clever way</li>
-We do it in two steps:
-    <ol>
-    <li>create the directories</li>
-    <pre>cd srcPath && find . -type d -exec mkdir -p /destPath/'{}' ';'</pre>
-    <li>copy the contents - use the <b><i>cat</i></b>trickery to always get the data</li>
-    <pre>cd srcPath && find . ! -type d -exec sh -c 'cat "{}" > /destPath/"{}"' \;</pre>
-    </ol>
-<li>trace the system calls by an executable</li>
-<pre>strace -f ./NeuroCode.exe Project.xml  2>&1 | less</pre>
-Once in the output of <b>less</b>, you can use a <b>/</b> to search for <b>NeuroCode.exe</b>
-and find the system calls it makes.
-<li>more elegant 'ps aux | grep terminal | grep -v grep'</li>
-The following incantation:
-<pre>ps aux | grep '[t]erminal'</pre>
-will return all lines containing <i>terminal</i> which the line you invoked does not.
-<li>Generate import statements out of the classes of a jar</li>
-<pre>
+        </pre>
+        <li>'materialize' soft-links - easy way</li>
+        <pre>cp -pr -L --copy-contents</pre>
+        <li>'materialize' soft-links - trying to be clever way</li>
+        We do it in two steps:
+        <ol>
+          <li>create the directories</li>
+          <pre>cd srcPath && find . -type d -exec mkdir -p /destPath/'{}' ';'</pre>
+          <li>copy the contents - use the <b><i>cat</i></b>trickery to always get the data</li>
+          <pre>cd srcPath && find . ! -type d -exec sh -c 'cat "{}" > /destPath/"{}"' \;</pre>
+        </ol>
+        <li>trace the system calls by an executable</li>
+        <pre>strace -f ./NeuroCode.exe Project.xml  2>&1 | less</pre>
+        Once in the output of <b>less</b>, you can use a <b>/</b> to search for <b>NeuroCode.exe</b>
+        and find the system calls it makes.
+        <li>more elegant 'ps aux | grep terminal | grep -v grep'</li>
+        The following incantation:
+        <pre>ps aux | grep '[t]erminal'</pre>
+        will return all lines containing <i>terminal</i> which the line you invoked does not.
+        <li>Generate import statements out of the classes of a jar</li>
+        <pre>
 jar tvf Orders-ejb.jar  | grep entities| cut -c38- | grep -v /$ | sed 's,^,import ,' | sed 's,/,.,g'
-</pre>
-(in the above example at the sed command the comma character is used as the separator - this is handier
-than the usual slash character when one has to replaces slashes)
-<li>Total number of lines in all found files</li>
-<pre>find . -iname \*.java -print0 | wc -l --files0-from -</pre>
-<li>Find all different file types in a folder hierarchy</li>
-<pre>
+        </pre>
+        (in the above example at the sed command the comma character is used as the separator - this is handier
+        than the usual slash character when one has to replaces slashes)
+        <li>Total number of lines in all found files</li>
+        <pre>find . -iname \*.java -print0 | wc -l --files0-from -</pre>
+        <li>Find all different file types in a folder hierarchy</li>
+        <pre>
 find . -exec file {} \; | awk -F/ '{print $NF}' | awk -F: '{print $NF}' | sort | uniq
-</pre>
-<li>Find all XML files with a specific string inside ("login-module") and print the name of the file concerned</li>
-<pre>
+        </pre>
+        <li>Find all XML files with a specific string inside ("login-module") and print the name of the file concerned</li>
+        <pre>
 find . -iname \*.xml -exec grep "login-module" '{}' /dev/null \;
-</pre>
-The following simpler version also seems to work:
-<pre>
+        </pre>
+        The following simpler version also seems to work:
+        <pre>
 find . -iname *.xml -exec grep "login-module" {} /dev/null \;
-</pre>
-<li>Return just the names of the jar files in a <u>find</u></li>
-The <u>cut</u> utility cannot be used to return only the last field, but
-<u>awk</u> can do the trick:
-<pre>
+        </pre>
+        <li>Return just the names of the jar files in a <u>find</u></li>
+        The <u>cut</u> utility cannot be used to return only the last field, but
+        <u>awk</u> can do the trick:
+        <pre>
 find jboss-as-7.1.1.Final/ -iname *.jar | awk -F/ '{print $NF}'
-</pre>
-<li>Search for a class in a set of jar files</li>
-To search all jars in the current folder and below for class named a.b.c.D do a:
-<pre>
+        </pre>
+        <li>Search for a class in a set of jar files</li>
+        To search all jars in the current folder and below for class named a.b.c.D do a:
+        <pre>
 find . -iname *.jar | while read JARF; do jar tvf $JARF | grep a/b/c/D.class && echo $JARF ; done
-</pre>
-if there is too much output, try:
-<pre>
+        </pre>
+        if there is too much output, try:
+        <pre>
 find /home/mperdikeas/git-jboss/ -iname *.jar | while read f ; do echo $f && (jar tvf $f | grep a.b.c.D) ; done | grep -B1 ^\
-</pre> ("." instead of "/" works practically as well as it stands for any character).
+        </pre> ("." instead of "/" works practically as well as it stands for any character).
 
-<li>How to count the number of lines with exactly five spaces</li>
-five spaces means 6 fields in AWK, so (for file <i>3.ply</i>):
-<pre>
+        <li>How to count the number of lines with exactly five spaces</li>
+        five spaces means 6 fields in AWK, so (for file <i>3.ply</i>):
+        <pre>
 awk 'NF==6;{}' 3.ply | wc -l
-</pre>
+        </pre>
 
-<li>How to create files of arbitrary size</li>
-<pre>
+        <li>How to create files of arbitrary size</li>
+        <pre>
 mperdikeas@mperdikeas ~
 $ dd if=/dev/zero of=a_file_of_3MBs bs=1M count=3
 3+0 records in
@@ -368,57 +379,57 @@ $ dd if=/dev/zero of=a_file_of_1453bytes bs=1 count=1453
 1453+0 records in
 1453+0 records out
 1453 bytes (1.5 kB) copied, 0.0184214 s, 78.9 kB/s
-</pre>
+        </pre>
 
 
-<li>How to copy trees </li>
-How to copy a whole tree to another location in the same network.
-example copy folder "wa-integration" and its tree to the /c/BW location.
+        <li>How to copy trees </li>
+        How to copy a whole tree to another location in the same network.
+        example copy folder "wa-integration" and its tree to the /c/BW location.
 
-<pre>
+        <pre>
 tar cf - wa-integration/ | (cd /c/BW/ ; tar xvf - )
-</pre>
+        </pre>
 
 
-<li>How to count files</li>
-How to recursively count all "normal" files in a directory
-<pre>
+        <li>How to count files</li>
+        How to recursively count all "normal" files in a directory
+        <pre>
 find directory_name -type f | wc -l
-</pre>
+        </pre>
 
 
 
-<li>How to grep in a large number of files</li>
-<pre>
+        <li>How to grep in a large number of files</li>
+        <pre>
 for i in `find ./sample/`; do grep -H "sample string" $i; done
-</pre>
+        </pre>
 
 
-<li>How to use curl to test GET, POST, etc.</li>
+        <li>How to use curl to test GET, POST, etc.</li>
 
-GET:
-<pre>curl -HAccept:text/plain http://example.com/base</pre>
+        GET:
+        <pre>curl -HAccept:text/plain http://example.com/base</pre>
 
-PUT:
-<pre>curl -XPUT -HContent-type:text/plain --data "stuff:morestuff" http://example.com/base?param=val</pre>
+        PUT:
+        <pre>curl -XPUT -HContent-type:text/plain --data "stuff:morestuff" http://example.com/base?param=val</pre>
 
-DELETE:
-<pre>curl -XDELETE http://example.com/base/user/123</pre>
+        DELETE:
+        <pre>curl -XDELETE http://example.com/base/user/123</pre>
 
-POST:
-<pre>curl -d "param1=value1&param2=value2" http://example.com/base/</pre>
-<p>
-Another curl tip: To send a POST request whose data is
-not in application/x-www-urlencoded format, use
-the --data-binary option instead of --data.
-
-
-<li>How to use cut to only retain find's output from the 73rd column onwards</li>
-<pre>find folderToSearch/ | cut -c 73-</pre>
+        POST:
+        <pre>curl -d "param1=value1&param2=value2" http://example.com/base/</pre>
+        <p>
+          Another curl tip: To send a POST request whose data is
+          not in application/x-www-urlencoded format, use
+          the --data-binary option instead of --data.
 
 
-<li>Magic</li>
-<pre>
+          <li>How to use cut to only retain find's output from the 73rd column onwards</li>
+          <pre>find folderToSearch/ | cut -c 73-</pre>
+
+
+          <li>Magic</li>
+          <pre>
 $ cat nice.sh
 tr -cs A-Za-z '\n' |
 	tr A-Z a-z |
@@ -426,79 +437,79 @@ tr -cs A-Za-z '\n' |
 	uniq -c |
 	sort -rn |
 	sed ${1}q
-</pre>
-What it does:
-<ul>
-<li>Make one-word lines by transliterating the complement (-c) of the alphabet into newlines (note the quoted newline), and squeezing out (-s) multiple newlines.
-<li>Transliterate upper case to lower case.
-<li>Sort to bring identical words together.
-<li>Replace each run of duplicate words with a single representative and include a count (-c).
-<li>Sort in reverse (-r) numeric (-n) order.
-<li>Pass through the stream editor; quit (q) after printing the number of lines designated by the script's first argument.
-</ul>
-<p>
-Given the above script the following text:<p>
-<i>
-   "Tests a distributed system made up of two LEON boards connected with the spacewire, 
-    and each one of them having a local FPGA component. The code is clear; the bug reports on Mantis"
-</i><p>
-becomes (when piped with: echo "(the above text)" | nice.sh 5) :
-<pre>
+          </pre>
+          What it does:
+          <ul>
+            <li>Make one-word lines by transliterating the complement (-c) of the alphabet into newlines (note the quoted newline), and squeezing out (-s) multiple newlines.
+              <li>Transliterate upper case to lower case.
+                <li>Sort to bring identical words together.
+                  <li>Replace each run of duplicate words with a single representative and include a count (-c).
+                    <li>Sort in reverse (-r) numeric (-n) order.
+                      <li>Pass through the stream editor; quit (q) after printing the number of lines designated by the script's first argument.
+          </ul>
+          <p>
+            Given the above script the following text:<p>
+            <i>
+              "Tests a distributed system made up of two LEON boards connected with the spacewire, 
+              and each one of them having a local FPGA component. The code is clear; the bug reports on Mantis"
+            </i><p>
+              becomes (when piped with: echo "(the above text)" | nice.sh 5) :
+              <pre>
       3 the
       2 of
       2 a
       1 with
       1 up
-</pre>
-</li>
-<li>How not to lose tty context</li>
-A utility that allows you to save all tty context and re-connect and recover everything in case of a connection lost (e.g. ssh) is screen. Invoked with "screen". Reconnect with "screen -r". To detach from the screen type "ctrl-a d". The screen deamon is visible with "ps auex".
+              </pre>
+                      </li>
+                      <li>How not to lose tty context</li>
+                      A utility that allows you to save all tty context and re-connect and recover everything in case of a connection lost (e.g. ssh) is screen. Invoked with "screen". Reconnect with "screen -r". To detach from the screen type "ctrl-a d". The screen deamon is visible with "ps auex".
 
 
-<li>The scp utility to download / upload files from remote server (no FTP)</li>
-To download recursively a whole folder from remote directory:
-<pre>scp -r mperdikeas@elrond:~/TAPKIT/Conversions/Genesis/sources-auto /cygdrive/c/fromElrond</pre>
-To upload single file to remote directory:
-<pre>scp buildSpecification.py mperdikeas@elrond:~/TAPKIT/Conversions/Genesis/python</pre>
+                      <li>The scp utility to download / upload files from remote server (no FTP)</li>
+                      To download recursively a whole folder from remote directory:
+                      <pre>scp -r mperdikeas@elrond:~/TAPKIT/Conversions/Genesis/sources-auto /cygdrive/c/fromElrond</pre>
+                      To upload single file to remote directory:
+                      <pre>scp buildSpecification.py mperdikeas@elrond:~/TAPKIT/Conversions/Genesis/python</pre>
 
-scp can be setup to not prompt for password using ssh-keygen and appending the public key to the remote host(s)'s
- ~/.ssh/authorized_keys file (for the respective user).
+                      scp can be setup to not prompt for password using ssh-keygen and appending the public key to the remote host(s)'s
+                      ~/.ssh/authorized_keys file (for the respective user).
 
-<p>
-<li>diff alternative in Linux</li>
-Use the vimdiff utility (navigation to next / previous difference with [c and ]c
+                      <p>
+                        <li>diff alternative in Linux</li>
+                        Use the vimdiff utility (navigation to next / previous difference with [c and ]c
 
 
-<li>How to browse the web from a different IP address:</li>
-One can use the SOCKS protocol. The idea would be to open an SSH tunnel to a remote machine and then configure the browser to use the local machine as SOCKS host. The browser would then encapsulate all HTTP traffic into a SOCKS packet and send it through the tunnel to the remote SSH server which will also decapsulate the SOCKS protocol. So, the resolution of the domain name at the HTTP GET will be done at the remote server. Instructions for Firefox:
-<ol>
-<li>open cygwin shell in local machine and at the prompt enter:
-    ssh -D 9987 root@tapeditor.com
-<li>it will typically output something about an RSA fingerprint at which point you type yes
-<li>you are prompted for password (enter it)
-<li>you are now in the remote host and the tunnel is operational.
-<li>fire Mozilla Firefox
-<li>find the Firefox's proxy config page (tools->options->Network->Settings) and setup a Manual proxy configuration with SOCKS Host the local machine (enter "localhost", port 9987 (the one used in step [1] - it can be any port) and SOCKS version v5.
-<li>if you now visit www.whatismyipaddress.com you see the (usually public static IP address) of the other end of the tunnel.
-<li>you can now browse the web using that public IP address (so long as the tunnel opened in step [4] remains open).
-</ol>
-</li>
-<p>
-<li>emacs shortcuts in bash</li>
-Standard emacs shortcuts such as C-l, C-p and C-r come very handy in bash. C-l clears the screen whereas C-r allows
-easy repetition of previous commands (much better than history or C-p)
-<p>
-<li>how to time a job in bash and redirect all output (incl. error) to /dev/null</li>
-<pre>
+                        <li>How to browse the web from a different IP address:</li>
+                        One can use the SOCKS protocol. The idea would be to open an SSH tunnel to a remote machine and then configure the browser to use the local machine as SOCKS host. The browser would then encapsulate all HTTP traffic into a SOCKS packet and send it through the tunnel to the remote SSH server which will also decapsulate the SOCKS protocol. So, the resolution of the domain name at the HTTP GET will be done at the remote server. Instructions for Firefox:
+                        <ol>
+                          <li>open cygwin shell in local machine and at the prompt enter:
+                            ssh -D 9987 root@tapeditor.com
+                            <li>it will typically output something about an RSA fingerprint at which point you type yes
+                              <li>you are prompted for password (enter it)
+                                <li>you are now in the remote host and the tunnel is operational.
+                                  <li>fire Mozilla Firefox
+                                    <li>find the Firefox's proxy config page (tools->options->Network->Settings) and setup a Manual proxy configuration with SOCKS Host the local machine (enter "localhost", port 9987 (the one used in step [1] - it can be any port) and SOCKS version v5.
+                                      <li>if you now visit www.whatismyipaddress.com you see the (usually public static IP address) of the other end of the tunnel.
+                                        <li>you can now browse the web using that public IP address (so long as the tunnel opened in step [4] remains open).
+                        </ol>
+                                        </li>
+                                        <p>
+                                          <li>emacs shortcuts in bash</li>
+                                          Standard emacs shortcuts such as C-l, C-p and C-r come very handy in bash. C-l clears the screen whereas C-r allows
+                                          easy repetition of previous commands (much better than history or C-p)
+                                          <p>
+                                            <li>how to time a job in bash and redirect all output (incl. error) to /dev/null</li>
+                                            <pre>
 date ; time find / > /dev/null 2>&1; date
-</pre>
-<li>completely purge a package</li>
-<pre>dpkg -P mysql-server</pre>
-<li>to view processes</li>
-<pre>ps auxf</pre>
-('f' stands for 'full')
-<li>print physical directory (ignoring symlinks)</li>
-<pre>pwd -P</pre>
+                                            </pre>
+                                            <li>completely purge a package</li>
+                                            <pre>dpkg -P mysql-server</pre>
+                                            <li>to view processes</li>
+                                            <pre>ps auxf</pre>
+                                            ('f' stands for 'full')
+                                            <li>print physical directory (ignoring symlinks)</li>
+                                            <pre>pwd -P</pre>
 
 
-</ol>
+    </ol>
