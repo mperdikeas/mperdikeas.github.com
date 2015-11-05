@@ -6,7 +6,7 @@
   </head>
   <body>
     <ol reversed>
-      <li>How to install <b>guard-livereload</b></li>
+      <li id='how-to-install-guard-livereload'>How to install <b>guard-livereload</b></li>
       What worked for me (in 2015-10) was to follow the instructions from:
       <br/>
       <br/>
@@ -20,6 +20,14 @@
         <li>A sample <code>Guardfile</code></li>
         <li>The <code>Gemfile</code> to be used</li>
       </ul>
+      Basically what needs now be done (in a new project, new machine) is:
+      <ol>
+        <li><code>sudo gem install guard-livereload</code></li>
+        <li><code>sudo apt-get install bundler</code></li>
+        <li><code>ln -s ~/playground/repo-wide-scripts/Gemfile</code></li>
+        <li><code>ln -s ~/playground/repo-wide-scripts/Guardfile</code></li>
+        <li><code>ln -s ~/playground/repo-wide-scripts/run-guard</code></li>
+      </ol>
       <li id='npm-nvm'>How to use node and install npm packages in home folder</li>
       I have used the approach to install node packages via the <code>npm</code> tool in the home folder as described 
       <a href='http://www.sitepoint.com/beginners-guide-node-package-manager/'>here</a>.
