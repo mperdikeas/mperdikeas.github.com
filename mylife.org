@@ -10,11 +10,11 @@
 
 * private
 ** pay 2nd installment for VAT for 2015Q3
-** pay rent November 2015
-** phone Kopana and Roberto and prepare the rent electronic submission
+** STARTED phone Kopana and Roberto and prepare the rent electronic submission
+** TODO ask my parents about energy rating inspection and whether it is necessary
 * professional
 ** TODO ant-template engine to accept parametrized -Xmx
-** TODO change password for [mperdikeas@ssh.esavo.esac.int]
+** STARTED change password for [mperdikeas@ssh.esavo.esac.int]
 :INFO:
 Dear Menelaus,
 please access to scils03.net4.lan server with your current user/password.
@@ -35,23 +35,13 @@ LDAP password information update failed: Referral
 Please contact me via my sciops email: [mperdikeas@sciops.esa.int] to let me know how you would like me to communicate the password I'd like to set. If that's not practical, just assign one yourselves and allow me to change it upon login.
 Menelaus.
 :END:
+I tried to access the host indicated but am unable to and I am not able to log
+a CSG ticket either at this time (2015-11-06)
 ** STARTED check with Ruben to see if enough RAM is available
 need to open a ticket on that
 ** STARTED coordinate with Ruben on how to do a release
 need to open a ticket on that as well
-** DONE sent email to Pierre, Markus and Tom inviting them to access the report subsystem
-CLOSED: [2015-10-19 Mon 10:34]
-** DONE prepare weather report presentation for Christophe
-CLOSED: [2015-10-22 Thu 19:59]
-** TODO talk to Mavroudis about new project and BIRF reporting requirement
+** STARTED talk to Mavroudis about new project and BIRF reporting requirement
 ** TODO test Tomcat heap size
-** DONE prepare CSV format for service cone report data for Christophe
-CLOSED: [2015-11-02 Mon 14:17]
 ** TODO get in touch with Janet and ask her to schedule RoR harvesting
-
-** Friday TODOs
-*** DONE return disk to Ramon and inquire and make note on change in format
-CLOSED: [2015-10-23 Fri 19:55]
-*** DONE get new disk from Sanchez (SOHO mission)
-CLOSED: [2015-10-23 Fri 19:55]
-*** TODO consume notes from the last RAWDAR meeting
+** TODO consume notes from the last RAWDAR meeting that took place during my recent ESAC mission
