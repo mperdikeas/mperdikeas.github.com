@@ -6,6 +6,30 @@
   </head>
   <body>
     <ol reversed>
+      <li>how to execute a command when one ore more files change</li>
+      <a href="http://superuser.com/q/181517/138891">source</a>
+      <br/>
+      There's two ways:
+      <ul>
+        <li>using "my" script 
+        <a href="https://github.com/mperdikeas/tools/blob/master/sleep-until-modified.sh"><code>tools/sleep-until-modified.sh</code></a>
+        In the following manner, e.g. to invoke <code>make</code> when a LaTeX file changes:
+        <pre>
+while sleep-until-modified.sh my-awesome-document.tex ; do make ; done
+        </pre>
+        <strong>NB:</strong>Unfortunately, the above way does *not* work for more than one file.
+        So, use the second method if practicable:
+        <li>using the Pythonic <code>when-changed</code> utility</li>
+        Install with:
+        <pre>
+sudo pip install when-changed
+        </pre>
+        Use like:
+        <pre>
+when-changed esa-sre-gedais-sc-0001.tex *.input -c make
+        </pre>
+        Notice that, using this method, more than one file can be tracked.
+      </ul>
       <li>how to write a script that executes <code>sudo</code> with the password</li>
       <ol>
         <li>Create a file:</li>
@@ -17,40 +41,40 @@
         <li>Change the permissions of the file so only root can read and edit it:</li>
         <pre>sudo chmod 700 ~/.easy.install</pre>
       </ol>
-        <li>how to process the output of <code>find</code> when there are spaces in the filenames</li>
-        <a href="http://stackoverflow.com/a/7039208/274677">source</a>
-        <br/>
-        Replace the usual <code>for</code> iteration with a <code>while</code> iteration
-        that is line-based as opposed to word-based:
-        <pre>
+      <li>how to process the output of <code>find</code> when there are spaces in the filenames</li>
+      <a href="http://stackoverflow.com/a/7039208/274677">source</a>
+      <br/>
+      Replace the usual <code>for</code> iteration with a <code>while</code> iteration
+      that is line-based as opposed to word-based:
+      <pre>
 find . -iname Thundercats\ -\ 10\*  | while read f; do  sudo cp "$f" /media/mperdikeas/thundercats-season-1/; done
-        </pre>
-        <li>how to put an <code>scp</code> that requires a password in a script file</li>
-        Use <code>sshpass</code> as shown below:
-        <pre>
+      </pre>
+      <li>how to put an <code>scp</code> that requires a password in a script file</li>
+      Use <code>sshpass</code> as shown below:
+      <pre>
 sshpass -f $PASS_FILE scp rawdar.zip user@$DEST:~/rawdar.war
-        </pre>
-        If, after the copy, you also need to <code>ssh</code> to the destination and you further need sudo privilleges,
-        <code>sshpass</code> can't supply both passwords, so you need to put the action that requires sudo in 
-        a script and execute it. E.g. as shown below:
+      </pre>
+      If, after the copy, you also need to <code>ssh</code> to the destination and you further need sudo privilleges,
+      <code>sshpass</code> can't supply both passwords, so you need to put the action that requires sudo in 
+      a script and execute it. E.g. as shown below:
 
-        <pre>
+      <pre>
 sshpass -f $PASS_FILE ssh user@$DEST <<'ENDSSH'
 ./publish-rawdar.sh
 ENDSSH
-        </pre>
+      </pre>
 
-        ... where the script at the <code>ssh</code> destination is:
-        <pre>
+      ... where the script at the <code>ssh</code> destination is:
+      <pre>
 user@user-virtual-machine:~$ cat publish-rawdar.sh
 #!/usr/bin/env bash
 readonly ECHO=/bin/echo
 $ECHO  'top-secret-password' | sudo -S cp rawdar.war /var/lib/tomcat7/webapps
 user@user-virtual-machine:~$
-        </pre>
+      </pre>
 
-        Relevant excrepts from functional file:
-        <pre>
+      Relevant excrepts from functional file:
+      <pre>
 #!/usr/bin/env bash
 readonly PASS_FILE=~/esac.neuropublic.pwd
 readonly DEST=172.31.148.22
@@ -59,29 +83,29 @@ sshpass -f $PASS_FILE scp rawdar.zip user@$DEST:~/rawdar.war
 sshpass -f $PASS_FILE ssh user@$DEST <<'ENDSSH'
 ./publish-rawdar.sh
 ENDSSH
-        </pre>
-        <li>extract and print the 35th and 36th byte from a set of files</li>
-        <pre>for f in $(find . -iname \*.edds); do printf "%s ==> "  $f && od -j 34 -N 2 -A x -t x1z -v $f | cut -c7-30 | head -1 ; done</pre>
-        <li>bash join lines</li>
-        <pre>
+      </pre>
+      <li>extract and print the 35th and 36th byte from a set of files</li>
+      <pre>for f in $(find . -iname \*.edds); do printf "%s ==> "  $f && od -j 34 -N 2 -A x -t x1z -v $f | cut -c7-30 | head -1 ; done</pre>
+      <li>bash join lines</li>
+      <pre>
 tr "\\n" " "
-        </pre>
-        <br/>
-        <a href="http://stackoverflow.com/a/2764105/274677">source</a>.
-        <br/>
-        E.g. to prepare a line for emacs to open all Java files containing "<i>fromValue</i>", use:
-        <pre>
+      </pre>
+      <br/>
+      <a href="http://stackoverflow.com/a/2764105/274677">source</a>.
+      <br/>
+      E.g. to prepare a line for emacs to open all Java files containing "<i>fromValue</i>", use:
+      <pre>
 findinjava fromValue | sort | awk '{print $1}' | rev | cut -c 2- | rev | tr "\\n" " "
-        </pre>
-        <li>remove the last <i>n</i> characters from a bash line (that makes no use of <tt>awk</tt> or <tt>sed</tt></li>
-        <pre>
+      </pre>
+      <li>remove the last <i>n</i> characters from a bash line (that makes no use of <tt>awk</tt> or <tt>sed</tt></li>
+      <pre>
 echo foobar | rev | cut -c (n+1)- | rev
-        </pre>
-        <br/>
-        <a href="http://unix.stackexchange.com/a/144300/24044">source</a>
-        <li>named pipes</li>
-        Pipes are a special type of file. You interface with these as if they were files (i.e. with Unix redirection, not pipes), but they behave like pipes:
-        <pre>
+      </pre>
+      <br/>
+      <a href="http://unix.stackexchange.com/a/144300/24044">source</a>
+      <li>named pipes</li>
+      Pipes are a special type of file. You interface with these as if they were files (i.e. with Unix redirection, not pipes), but they behave like pipes:
+      <pre>
 $ mkfifo npipe
 $ ls npipe 
 prw-r--r-- 1 mperdikeas users 0 Mar 11 14:12 npipe|
@@ -90,21 +114,21 @@ $ echo "boo" > npipe  &
 $ cat < npipe 
 boo
 [1]+  Done                    echo "boo" > npipe
-        </pre>
-        <br/>
-        More can be found <a href="http://vincebuffalo.com/2013/08/08/the-mighty-named-pipe.html">here</a>.
-        <li>replace a string in a fileset</li>
-        The below incantation replaces all instances of <tt>XMLUtils.getString</tt> with <tt>XMLUtils.getStringNew</tt> in all Java files in the current directory (recursively):
-        <pre>
+      </pre>
+      <br/>
+      More can be found <a href="http://vincebuffalo.com/2013/08/08/the-mighty-named-pipe.html">here</a>.
+      <li>replace a string in a fileset</li>
+      The below incantation replaces all instances of <tt>XMLUtils.getString</tt> with <tt>XMLUtils.getStringNew</tt> in all Java files in the current directory (recursively):
+      <pre>
 find . -type f -iname \*.java -print0 | xargs -0 sed -i 's/XMLUtils.getString/XMLUtils.getStringNew/g'
-        </pre>
-        <li>change (recursively) all symlinks in a directory that point to a certain target <i><u>A</u></i>point to another target <u><i>B</i></u></li>
-        I used the following script to replace all symlinks to a file `ant-contrib-1.0b3.jar`
-        to another file `ant-contrib.jar` (that happened to reside in the same directory
-        as the original target - I am not sure whether that was essential to the solution
-        below). The script was called from a location where the path <tt>repo-wide-libs/ant-contrib-1.0b3.jar</tt>
-        existed and was valid.
-        <pre>
+      </pre>
+      <li>change (recursively) all symlinks in a directory that point to a certain target <i><u>A</u></i>point to another target <u><i>B</i></u></li>
+      I used the following script to replace all symlinks to a file `ant-contrib-1.0b3.jar`
+      to another file `ant-contrib.jar` (that happened to reside in the same directory
+      as the original target - I am not sure whether that was essential to the solution
+      below). The script was called from a location where the path <tt>repo-wide-libs/ant-contrib-1.0b3.jar</tt>
+      existed and was valid.
+      <pre>
 #!/usr/bin/env bash
 for file in $(find . -type l); do
     if [[ -h "$file" ]]; then
@@ -114,25 +138,25 @@ for file in $(find . -type l); do
         fi
     fi
 done
-        </pre>
-        <a href="http://unix.stackexchange.com/a/172016/24044">source</a>
-        <li>replace a string in a set of files</li>
-        <pre>find . -type f -exec sed -i 's/foo/bar/' {} +</pre>
-        <a href="http://unix.stackexchange.com/a/112024/24044">source</a>
-        To correctly escape the string passed to `sed` use my `sedescape` function (lives in .bashrc).
-        <li>the ultimate <u><i>screen</i></u> re-attach command</li>
-        <a href="http://aperiodic.net/screen/quick_reference">source</a>
-        <pre>
+      </pre>
+      <a href="http://unix.stackexchange.com/a/172016/24044">source</a>
+      <li>replace a string in a set of files</li>
+      <pre>find . -type f -exec sed -i 's/foo/bar/' {} +</pre>
+      <a href="http://unix.stackexchange.com/a/112024/24044">source</a>
+      To correctly escape the string passed to `sed` use my `sedescape` function (lives in .bashrc).
+      <li>the ultimate <u><i>screen</i></u> re-attach command</li>
+      <a href="http://aperiodic.net/screen/quick_reference">source</a>
+      <pre>
 screen -dRR
-        </pre>
-        <br><br/>
-        The above attaches to a screen session. If the session is attached elsewhere, detaches that other display. If no session exists, creates one.
-        If multiple sessions exist, uses the first one.)
-        <li>total number of lines in files found</li>
-        <a href="http://superuser.com/a/260079/138891">source</a>
-        <pre>
+      </pre>
+      <br><br/>
+      The above attaches to a screen session. If the session is attached elsewhere, detaches that other display. If no session exists, creates one.
+      If multiple sessions exist, uses the first one.)
+      <li>total number of lines in files found</li>
+      <a href="http://superuser.com/a/260079/138891">source</a>
+      <pre>
 find . -iname *.java -print0 | wc -l --files0-from=-
-        </pre>
+      </pre>
         </pre>
         <li>find files and execute command in local directory</li>
         use the <b>-execdir</b> switch. E.g.: <pre>find . -type d -execdir touch {}/foo \;</pre>
