@@ -121,6 +121,14 @@ Disk identifier: 0xa29ef612
    Device Boot      Start         End      Blocks   Id  System
 /dev/sdb1               1  3906963455  1953481727+  ee  GPT
         </pre>
+        <li>if the disk is labelled, lists disks by label</li>
+        <pre>
+$ ls /dev/disk/by-label/
+total 0
+drwxr-xr-x 2 root root  60 Nov 16 10:34 ./
+drwxr-xr-x 6 root root 120 Nov 16 10:34 ../
+lrwxrwxrwx 1 root root   9 Nov 16 10:34 transc-usb-disk -> ../../sdb
+        </pre>
       </ol>
       <li>verify that the device name we identified is indeed not mounted</li>
       <pre class="console">
