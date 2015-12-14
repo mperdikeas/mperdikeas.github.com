@@ -1,24 +1,43 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-<ol reversed>
-<li>How to check the memory settings of a running Tomcat</li>
-Use the <code>jinfo</code> program to attach to Tomcat (given its PID).
-Among other things, the Tomcat's memory model will be diplayed with the following:
-<pre>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li>difference between <tt>CATALINA_HOME</tt> and <tt>CATALINA_BASE</tt></li>
+      sources: <a href="http://stackoverflow.com/a/29398713/274677">SO</a>, <a href="https://tomcat.apache.org/tomcat-7.0-doc/introduction.html">Apache Tomcat 7 documentation</a>
+      <br/>
+      If you're running multiple instances, then you need both variables, otherwise only <tt>CATALINA_HOME</tt>
+      (<tt>CATALINA_HOME</tt> then assumes the same value as <tt>CATALINA_BASE</tt>).
+      <br/>In other words: <tt>CATALINA_HOME</tt> is required and <tt>CATALINA_BASE</tt> is optional.
+      <ul>
+        <li><tt>CATALINA_HOME</tt> represents the root of your Tomcat installation.</li>
+        <li><tt>CATALINA_BASE</tt> represents the location of the Tomcat active configuration (which could 
+          differ among users)</li>
+      </ul>
+      <br/>
+      Typical values in my system:
+      <dl>
+        <dt><tt>CATALINA_HOME</tt></dt>
+        <dd>/usr/share/tomcat7</dd>
+        <dt><tt>CATALINA_BASE</tt></dt>
+        <dd>/var/lib/tomcat7/</dd>
+      </dl>
+      <li>How to check the memory settings of a running Tomcat</li>
+      Use the <code>jinfo</code> program to attach to Tomcat (given its PID).
+      Among other things, the Tomcat's memory model will be diplayed with the following:
+      <pre>
 $ sudo jinfo 1752 | grep arch.data.model
 Attaching to process ID 1752, please wait...
 Debugger attached successfully.
 Server compiler detected.
 JVM version is 24.80-b11
 sun.arch.data.model = 32
-</pre>
-Also, the maximum Heap size configured (alongside other JVM options):
-<pre>
+      </pre>
+      Also, the maximum Heap size configured (alongside other JVM options):
+      <pre>
 $ sudo jinfo 1752  | grep -A6 VM\ Flags
 Attaching to process ID 1752, please wait...
 Debugger attached successfully.
@@ -27,86 +46,86 @@ JVM version is 24.80-b11
 VM Flags:
 
 -Djava.util.logging.config.file=/var/lib/tomcat7/conf/logging.properties -Djava.awt.headless=true -Xmx128m -XX:+UseConcMarkSweepGC -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.endorsed.dirs=/usr/share/tomcat7/endorsed -Dcatalina.base=/var/lib/tomcat7 -Dcatalina.home=/usr/share/tomcat7 -Djava.io.tmpdir=/tmp/tomcat7-tomcat7-tmp
-</pre>
-<li>how to handle <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors in Tomcat</li>
-<a href="http://www.mkyong.com/tomcat/tomcat-javalangoutofmemoryerror-permgen-space/">source</a><br/>
-From time to time, Tomcat may give <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors.
-E.g. I've seen these errors during startup when trying to deploy a big 100Mb WAR application.
-<br/>
-To eliminate these memory problems the solution is to increase the values of the various JVM options
-that control the memory settings of the JVM which runs Tomcat. The below JVM options appear to be
-the most pertinent for <tt>PermGen</tt> type errors:
-<pre>
+      </pre>
+      <li>how to handle <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors in Tomcat</li>
+      <a href="http://www.mkyong.com/tomcat/tomcat-javalangoutofmemoryerror-permgen-space/">source</a><br/>
+      From time to time, Tomcat may give <tt>java.lang.OutOfMemoryError: PermGen space</tt> errors.
+      E.g. I've seen these errors during startup when trying to deploy a big 100Mb WAR application.
+      <br/>
+      To eliminate these memory problems the solution is to increase the values of the various JVM options
+      that control the memory settings of the JVM which runs Tomcat. The below JVM options appear to be
+      the most pertinent for <tt>PermGen</tt> type errors:
+      <pre>
 -XX:PermSize&ltsize&gt - Set initial PermGen Size.
 -XX:MaxPermSize&ltsize&gt - Set the maximum PermGen Size.
-</pre>
+      </pre>
 
-In my Ubuntu 14.04 system with Tomcat 7.0, the <tt>$CATALINA_HOME/bin/startup.sh</tt> script 
-invokes the <tt>catalina.sh</tt> file which in turns contains the following code:
-<pre>
+      In my Ubuntu 14.04 system with Tomcat 7.0, the <tt>$CATALINA_HOME/bin/startup.sh</tt> script 
+      invokes the <tt>catalina.sh</tt> file which in turns contains the following code:
+      <pre>
 if [ -r "$CATALINA_BASE/bin/setenv.sh" ]; then
     . "$CATALINA_BASE/bin/setenv.sh"
 elif [ -r "$CATALINA_HOME/bin/setenv.sh" ]; then
     . "$CATALINA_HOME/bin/setenv.sh"
-</pre>
-&hellip; which basically sources the <tt>setenv.sh</tt> file (if such exists).
-<br/>So, what I did was to
-add the following file in my <tt>$CATALINA_HOME/bin</tt> directory:
-<pre>
+      </pre>
+      &hellip; which basically sources the <tt>setenv.sh</tt> file (if such exists).
+      <br/>So, what I did was to
+      add the following file in my <tt>$CATALINA_HOME/bin</tt> directory:
+      <pre>
 $ pwd
 /home/voops/apache-tomcat-7.0.57/bin
 voops@esavo00:~/apache-tomcat-7.0.57/bin#
 $ cat setenv.sh 
 export JAVA_OPTS="-Dfile.encoding=UTF-8 -Xms512m -Xmx2024m -XX:PermSize=128m -XX:MaxPermSize=512m"
-</pre>
-<li>how to identify that Tomcat is running, it's pid and the port it is listening to</li>
-<pre>
+      </pre>
+      <li>how to identify that Tomcat is running, it's pid and the port it is listening to</li>
+      <pre>
 $ netstat -anp | grep 8080 | grep LISTEN
 (Not all processes could be identified, non-owned process info
  will not be shown, you would have to be root to see it all.)
 tcp        0      0 0.0.0.0:8080                0.0.0.0:*                   LISTEN      26123/java 
-</pre>
-Additional confirmation of the pid:
-<pre>
+      </pre>
+      Additional confirmation of the pid:
+      <pre>
 $ ps -ef | grep tomcat | grep -v grep
 voops    26123     1  3 12:49 pts/0    00:00:16 /usr/local/jdk1.7.0_67/bin/java -Djava.util.logging.config.file=/home/voops/apache-tomcat-7.0.57/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.endorsed.dirs=/home/voops/apache-tomcat-7.0.57/endorsed -classpath /home/voops/apache-tomcat-7.0.57/bin/bootstrap.jar:/home/voops/apache-tomcat-7.0.57/bin/tomcat-juli.jar -Dcatalina.base=/home/voops/apache-tomcat-7.0.57 -Dcatalina.home=/home/voops/apache-tomcat-7.0.57 -Djava.io.tmpdir=/home/voops/apache-tomcat-7.0.57/temp org.apache.catalina.startup.Bootstrap start
-</pre>
-<li>how to configure the maximum application upload size for Tomcat</li>
-This might be necessary, e.g. if you need more than the default configured value of 50.
-    <ol>
-    <li>Go to the <code>web.xml</code> of the manager application (for instance it could be under <code>/tomcat7/webapps/manager/WEB-INF/web.xml</code>)</li>
-    <li>Increase the <tt>&lt;max-file-size&gt;</tt> and <tt>&lt;max-request-size&gt;</tt> found inside the <tt>&lt;multipart-config&gt;</tt> element.
-    </ol>
-    <br/>No restart is necessary.
-<li>install Tomcat7 in my <tt>home</tt> directory (without <tt>sudo</tt> privileges)</li>
-I followed the instructions <a href="http://tomcat.apache.org/tomcat-7.0-doc/setup.html">here</a>
-(which reference <a href="http://tomcat.apache.org/tomcat-7.0-doc/RUNNING.txt">this file</a>) to 
-install Tomcat7 in my my <tt>home</tt> directory.
-Steps (as recollected):
-<ol>
-<li>download binary (not sources) tarball</li>
-<pre>
+      </pre>
+      <li>how to configure the maximum application upload size for Tomcat</li>
+      This might be necessary, e.g. if you need more than the default configured value of 50.
+      <ol>
+        <li>Go to the <code>web.xml</code> of the manager application (for instance it could be under <code>/tomcat7/webapps/manager/WEB-INF/web.xml</code>)</li>
+        <li>Increase the <tt>&lt;max-file-size&gt;</tt> and <tt>&lt;max-request-size&gt;</tt> found inside the <tt>&lt;multipart-config&gt;</tt> element.
+      </ol>
+      <br/>No restart is necessary.
+      <li>install Tomcat7 in my <tt>home</tt> directory (without <tt>sudo</tt> privileges)</li>
+      I followed the instructions <a href="http://tomcat.apache.org/tomcat-7.0-doc/setup.html">here</a>
+      (which reference <a href="http://tomcat.apache.org/tomcat-7.0-doc/RUNNING.txt">this file</a>) to 
+      install Tomcat7 in my my <tt>home</tt> directory.
+      Steps (as recollected):
+      <ol>
+        <li>download binary (not sources) tarball</li>
+        <pre>
 $ mkdir -p ~/downloads && cd ~/downloads
 $ wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.57/bin/apache-tomcat-7.0.57.tar.gz
-</pre>
-<li>expand the tarball in my home directory</li>
-<pre>
+        </pre>
+        <li>expand the tarball in my home directory</li>
+        <pre>
 $ cd
 $ whoami
 voops
 $ cp downloads/apache-tomcat-7.0.57.tar.gz .
 $ tar xvfz apache-tomcat-7.0.57.tar.gz
-</pre>
-<li>check whether CATALINA_HOME is properly set and correctly set it in <tt>.bashrc</tt> otherwise<li>
-<pre>
+        </pre>
+        <li>check whether CATALINA_HOME is properly set and correctly set it in <tt>.bashrc</tt> otherwise<li>
+          <pre>
 $ echo $CATALINA_HOME
 /home/voops/apache-tomcat-7.0.57
-</pre>
-<li>compile and run the <tt>jsvc</tt> tool (?)</li>
-At that point I also followed the instructions to compile and run the <tt>jsvc</tt> to run Tomcat
-as a daemon, but in the end I failed to use the <tt>jsvc</tt> tool as it apparently requires permissions
-I didn't have. Specifically, when running this script I got the following output:
-<pre>
+          </pre>
+          <li>compile and run the <tt>jsvc</tt> tool (?)</li>
+          At that point I also followed the instructions to compile and run the <tt>jsvc</tt> to run Tomcat
+          as a daemon, but in the end I failed to use the <tt>jsvc</tt> tool as it apparently requires permissions
+          I didn't have. Specifically, when running this script I got the following output:
+          <pre>
 ---%<---------------------------------------------------------
 $ tail -f /home/voops/apache-tomcat-7.0.57/logs/catalina.err 
 Cannot open PID file /var/run/jsvc.pid, PID is 12504
@@ -119,12 +138,12 @@ Switching umask back to 002 from 077
 Cannot open PID file /var/run/jsvc.pid, PID is 31946
 Service exit with a return value of 255
 --------------------------------------------------------->%---
-</pre>
-... so in the end I am just using scripts <tt>$CATALINA_HOME/bin/startup.sh</tt> and
-<tt>shutdown.sh</tt> to start and stop Tomcat (which seem to work just fine regardless)
-and is not clear to me what was the purpose of this script.
-<li>start the Tomcat</li>
-<pre>
+          </pre>
+          ... so in the end I am just using scripts <tt>$CATALINA_HOME/bin/startup.sh</tt> and
+          <tt>shutdown.sh</tt> to start and stop Tomcat (which seem to work just fine regardless)
+          and is not clear to me what was the purpose of this script.
+          <li>start the Tomcat</li>
+          <pre>
 $ $CATALINA_HOME/bin/startup.sh
 Using CATALINA_BASE:   /home/voops/apache-tomcat-7.0.57
 Using CATALINA_HOME:   /home/voops/apache-tomcat-7.0.57
@@ -132,13 +151,13 @@ Using CATALINA_TMPDIR: /home/voops/apache-tomcat-7.0.57/temp
 Using JRE_HOME:        /usr/local/jdk1.7.0_67
 Using CLASSPATH:       /home/voops/apache-tomcat-7.0.57/bin/bootstrap.jar:/home/voops/apache-tomcat-7.0.57/bin/tomcat-juli.jar
 Tomcat started.
-</pre>
-<li>visit the page at 8080 to verify Tomcat is up</li>
-This is the page at localhost:8080
-<li>configure Tomcat admin users</li>
-At that point the manager application cannot be used. To use it you have to edit file <tt>$CATALINA_HOME/conf/tomcat-users.xml</tt>
-so that it has the following contents:
-<pre>
+          </pre>
+          <li>visit the page at 8080 to verify Tomcat is up</li>
+          This is the page at localhost:8080
+          <li>configure Tomcat admin users</li>
+          At that point the manager application cannot be used. To use it you have to edit file <tt>$CATALINA_HOME/conf/tomcat-users.xml</tt>
+          so that it has the following contents:
+          <pre>
 $ cat /home/voops/apache-tomcat-7.0.57/conf/tomcat-users.xml  | tail -6
   &lt;!-- below 3 lines added by MP@2014.12.02 --&gt;
   &lt;role rolename="manager-gui"/&gt;
@@ -146,27 +165,27 @@ $ cat /home/voops/apache-tomcat-7.0.57/conf/tomcat-users.xml  | tail -6
   &lt;role rolename="admin"/&gt;
   &lt;user username="admin" password="admin" roles="admin,manager,manager-gui"/&gt;
 &lt;/tomcat-users&gt;
-</pre>
-<li>final note</li>
-I note in passing that the <tt>JAVA_HOME</tt> environment was also correctly set:
-<pre>
+          </pre>
+          <li>final note</li>
+          I note in passing that the <tt>JAVA_HOME</tt> environment was also correctly set:
+          <pre>
 $ echo $JAVA_HOME
 /usr/local/jdk1.7.0_67
-</pre>
-Whether that was really indispensable or not I did not verify.
-</ol>
-<li>how to find exact version of Tomcat that's already installed</li>
-<pre>
+          </pre>
+          Whether that was really indispensable or not I did not verify.
+      </ol>
+      <li>how to find exact version of Tomcat that's already installed</li>
+      <pre>
 $ whereis tomcat7
 tomcat7: /etc/tomcat7 /usr/share/tomcat7
-</pre>
-<br/>&hellip; then do a:
-<pre>
+      </pre>
+      <br/>&hellip; then do a:
+      <pre>
 $ find /usr/share/tomcat7 | grep catalina.jar
 /usr/share/tomcat7/lib/catalina.jar
-</pre>
-<br/>&hellip; and given the above, finally a:
-<pre>
+      </pre>
+      <br/>&hellip; and given the above, finally a:
+      <pre>
 $ java -cp /usr/share/tomcat7/lib/catalina.jar org.apache.catalina.util.ServerInfo
 Server version: Apache Tomcat/7.0.26
 Server built:   Apr 1 2013 08:32:04
@@ -176,37 +195,37 @@ OS Version:     3.2.0-70-generic-pae
 Architecture:   i386
 JVM Version:    1.7.0_60-b19
 JVM Vendor:     Oracle Corporation
-</pre>
-    <li>Tomcat7 directories</li>
-<pre>
+      </pre>
+      <li>Tomcat7 directories</li>
+      <pre>
     /var/lib/tomcat7
     /usr/share/tomcat7
     /etc/tomcat7
-</pre>
-    <li>java.lang.OutOfMemoryError: Java heap space in Tomcat7 in Ubuntu</li>
-<pre>
+      </pre>
+      <li>java.lang.OutOfMemoryError: Java heap space in Tomcat7 in Ubuntu</li>
+      <pre>
     cd /usr/share/tomcat7/bin/
-</pre>
-    There, make sure the file <b>setenv.sh</b> has the following content (create the file if it doesn't already exist):
-<pre>
+      </pre>
+      There, make sure the file <b>setenv.sh</b> has the following content (create the file if it doesn't already exist):
+      <pre>
 $ cat setenv.sh 
 CATALINA_OPTS="$CATALINA_OPTS -server -Xms256m -Xmx1024m
-</pre>
-    The reasoning is explained in file <b>catalina.sh</b>.
-    <li>how to make Tomcat 7 in Ubuntu 12.04 use the Oracle JDK and not the open JDK</li>
-    I effected the following change in the file <b><code>/etc/init.d/tomcat7</code></b>:
-    <pre>
+      </pre>
+      The reasoning is explained in file <b>catalina.sh</b>.
+      <li>how to make Tomcat 7 in Ubuntu 12.04 use the Oracle JDK and not the open JDK</li>
+      I effected the following change in the file <b><code>/etc/init.d/tomcat7</code></b>:
+      <pre>
     # mperdikeas change section 2013-11-09-start
     #JDK_DIRS="/usr/lib/jvm/default-java ${OPENJDKS} /usr/lib/jvm/java-6-openjdk /usr/lib/jvm/java-6-sun"
     JDK_DIRS="/usr/lib/jvm/java-7-oracle /usr/lib/jvm/default-java ${OPENJDKS} /usr/lib/jvm/java-6-openjdk /usr/lib/jvm/java-6-sun"
     # mperdikeas change section 2013-11-09-end
-    </pre>
-    <br>You have, of course, to also make sure that the Oracle 7 JDK is installed in Ubuntu by following
-    <a href="java.html#install-oracle7-ubuntu-12.04">these instructions</a>.
-    <li>how to install and setup Tomcat 7 in Ubuntu 12.04</li>
-        <ol>
+      </pre>
+      <br>You have, of course, to also make sure that the Oracle 7 JDK is installed in Ubuntu by following
+      <a href="java.html#install-oracle7-ubuntu-12.04">these instructions</a>.
+      <li>how to install and setup Tomcat 7 in Ubuntu 12.04</li>
+      <ol>
         <li>install Tomcat</li>
-<pre>sudo apt-get install tomcat7</pre>
+        <pre>sudo apt-get install tomcat7</pre>
         <li>verify installation by visiting: <i>localhost:8080</i></li>
         <b>Tomcat</b> can be stopped, started, restarted using: <pre>sudo /etc/init.d/tomcat7 [start|stop|restart]</pre>
         <br/>At this point the various important <b>Tomcat</b> directories (CATALINA_HOME and CATALINA_BASE) are specified
@@ -225,7 +244,7 @@ CATALINA_OPTS="$CATALINA_OPTS -server -Xms256m -Xmx1024m
         &ltuser username="admin" password="admin" roles="admin,manager-gui"/&gt
         </pre>
         ... the admin front-end is then available at <a href="localhost:8080/manager">localhost:8080/manager</a>
-        </ol>
-</ol>
-</body>
+      </ol>
+    </ol>
+  </body>
 </html>
