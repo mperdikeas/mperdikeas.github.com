@@ -14,12 +14,20 @@
       <pre>SELECT * FROM pg_stat_statements ORDER BY total_time DESC </pre>
     </ul>
     <li>sample configuration files used</li>
-     <dl>
+    <dl>
       <dt><strong>postgresql.conf</strong></dt>
       <dd>
         <ol>
           <li>PostgreSQL 9.3 in Ubuntu 14.04 (NP desktop)</dt></li>
           Residing in: <a href="postgres9_3-NP-desktop-postgresql.conf">/etc/postgresql/9.3/main/postgresql.conf</a>
+          <br/>
+          <strong>NB:</strong> not to be confused with the <tt>postgresql.conf.sample</tt> file
+          residing in:
+          <br/>
+          <tt>/usr/share/postgresql</tt>
+          <br/>
+          ... of which I had made a copy named <tt>postgresql.conf</tt> that led to the confusion reported in
+          <a href="http://dba.stackexchange.com/q/124852/34332">this StackOverflow post</a>.
         </ol>
       </dd>
       <dt><strong>pg_hba.conf</strong></dt>
@@ -451,31 +459,31 @@ select count(*) from rr.resourcecontent where 'ivo://ivoa.net/std/ConeSearch' = 
       </ol>
       </p> ... is given <a href="http://rostislav-matl.blogspot.com.es/2011/08/fast-inserts-to-postgresql-with-jdbc.html">here</a>.
       Results graph is:</p><img src="inserts-linechart.png">
-    </p>My take is that BPIs are good enough without having to venture out onto non-standard CPI-land.
-    <br>Caveat: according to <a href="http://stackoverflow.com/questions/12012592/jdbc-insert-multiple-rows">this SO discussion</a>
-    auto commit should be set to false for 
-    BPI to offer any advantage over SPI (setting auto commit to false is one JDBC's best practices anyway).
+      </p>My take is that BPIs are good enough without having to venture out onto non-standard CPI-land.
+      <br>Caveat: according to <a href="http://stackoverflow.com/questions/12012592/jdbc-insert-multiple-rows">this SO discussion</a>
+      auto commit should be set to false for 
+      BPI to offer any advantage over SPI (setting auto commit to false is one JDBC's best practices anyway).
 
-    <li>location of <b>pg_ctl</b> in Postgresql 9.2</li>
-    <pre>/usr/lib/postgresql/9.2/bin/pg_ctl</pre>
-    <li>NULL values in foreign key columns</li>
-    The following holds true at least in PostgreSQL 9.2:</p>
-    <a href="http://www.postgresql.org/message-id/200611200942.kAK9gwaK029065@wwwmaster.postgresql.org">source</a>
-    A FOREIGN KEY constraint does not have to be linked only to a PRIMARY KEY
-    constraint in another table; it can also be defined to reference the columns
-    of a UNIQUE constraint in another table. A FOREIGN KEY constraint can
-    contain null values; however, if any column of a composite FOREIGN KEY
-    constraint contains null values, verification of all values that make up the
-    FOREIGN KEY constraint is skipped. To make sure that all values of a
-    composite FOREIGN KEY constraint are verified, specify NOT NULL on all the
-    participating columns.
-    <li>how to log SQL statements in PostgreSQL 9.1</li>
-    <i>(see also <a href="http://stackoverflow.com/questions/722221/how-to-log-postgres-sql-queries">this SO discussion</a>)</i><p>
-      You have to change certain values in file <b>postgres.conf</b> and
-      restart the server.<p>
-      File <b>postgres.conf</b> is located in: <b>/etc/postgresql/9.1/main/postgresql.conf</b><p>
-      Diff of the changes I made is shown below:<p/>
-      <pre>
+      <li>location of <b>pg_ctl</b> in Postgresql 9.2</li>
+      <pre>/usr/lib/postgresql/9.2/bin/pg_ctl</pre>
+      <li>NULL values in foreign key columns</li>
+      The following holds true at least in PostgreSQL 9.2:</p>
+      <a href="http://www.postgresql.org/message-id/200611200942.kAK9gwaK029065@wwwmaster.postgresql.org">source</a>
+      A FOREIGN KEY constraint does not have to be linked only to a PRIMARY KEY
+      constraint in another table; it can also be defined to reference the columns
+      of a UNIQUE constraint in another table. A FOREIGN KEY constraint can
+      contain null values; however, if any column of a composite FOREIGN KEY
+      constraint contains null values, verification of all values that make up the
+      FOREIGN KEY constraint is skipped. To make sure that all values of a
+      composite FOREIGN KEY constraint are verified, specify NOT NULL on all the
+      participating columns.
+      <li>how to log SQL statements in PostgreSQL 9.1</li>
+      <i>(see also <a href="http://stackoverflow.com/questions/722221/how-to-log-postgres-sql-queries">this SO discussion</a>)</i><p>
+        You have to change certain values in file <b>postgres.conf</b> and
+        restart the server.<p>
+        File <b>postgres.conf</b> is located in: <b>/etc/postgresql/9.1/main/postgresql.conf</b><p>
+        Diff of the changes I made is shown below:<p/>
+        <pre>
 $ diff /etc/postgresql/9.1/main/postgresql.conf.safe.2012-01-15  /etc/postgresql/9.1/main/postgresql.conf
 276c276
 &lt #log_destination = 'stderr'# Valid values are combinations of
@@ -498,20 +506,20 @@ $ diff /etc/postgresql/9.1/main/postgresql.conf.safe.2012-01-15  /etc/postgresql
 ---
           &gt log_statement = 'all'# none, ddl, mod, all
 
-      </pre>
-      The log directory (value <b>log_directory</b>) is located relative to the <i>data</i> folder of postgresql which is obtained as follows:<p/>
-      <pre>
+        </pre>
+        The log directory (value <b>log_directory</b>) is located relative to the <i>data</i> folder of postgresql which is obtained as follows:<p/>
+        <pre>
 $ grep -i data /etc/postgresql/9.1/main/postgresql.conf
 # option or PGDATA environment variable, represented here as ConfigDir.
 data_directory = '/var/lib/postgresql/9.1/main'# use data in another directory
-      </pre>
-      Once the server is restarted, the SQL queries (DDL and/or DML depending on the settings) can be obtained with:<p/>
-      <pre>
+        </pre>
+        Once the server is restarted, the SQL queries (DDL and/or DML depending on the settings) can be obtained with:<p/>
+        <pre>
 sudo -i
 tail -f /var/lib/postgresql/9.1/main/pg_log/postgresql-2013-01-15_182646.log 
-      </pre>
-      <li>useful PostgreSQL functions:</li>
-      <pre>
+        </pre>
+        <li>useful PostgreSQL functions:</li>
+        <pre>
         select current_database();
         select current_schema();
         select current_user;
@@ -520,83 +528,83 @@ tail -f /var/lib/postgresql/9.1/main/pg_log/postgresql-2013-01-15_182646.log
         select extract('epoch' from current_timestamp);
         select now();
         select current_timestamp;
-      </pre>
-      the last two are useful because they reveals the timezone.
-      <li>use of the command-line pg_dump utility:</li>
-      <pre> pg_dump &ltdatabase&gt -h 172.333.444.555 -p 5444 -U username -F p -E UTF8 -C -O -n %ltschema-name&gt -v -f dumpfile database-name</pre>
-      <li>precedence in PostgreSQL pg_hba.conf files</li>
-      The general rule of thumb is: <i>Most Specific Rule First</i>
-      <li>typical configuration of PostgreSQL 9.1 I am using:</li>
-      In file /etc/postgresql/9.1/main/pg_hba.conf:
-      <pre>
+        </pre>
+        the last two are useful because they reveals the timezone.
+        <li>use of the command-line pg_dump utility:</li>
+        <pre> pg_dump &ltdatabase&gt -h 172.333.444.555 -p 5444 -U username -F p -E UTF8 -C -O -n %ltschema-name&gt -v -f dumpfile database-name</pre>
+        <li>precedence in PostgreSQL pg_hba.conf files</li>
+        The general rule of thumb is: <i>Most Specific Rule First</i>
+        <li>typical configuration of PostgreSQL 9.1 I am using:</li>
+        In file /etc/postgresql/9.1/main/pg_hba.conf:
+        <pre>
 local   all             all                                 trust
 host   all             all   192.168.2.2/24                 md5
-      </pre>
-      The rationale of <i>local trust</i> being to ensure that I can easily
-      add scripts to create users without the hassle of entering
-      passwords which is hard to do non-interactively. Remote accesses in
-      a specified subnet use <b>md5</b> authentication ofcourse.
-      <p>
-        And in file /etc/postgresql/9.1/main/postgresql.conf, to enable remote access:
-        <pre>listen_addresses = '*'</pre>
-        <pre>
-listen_addresses = '*'
         </pre>
-        <li>Configure PostgreSQL 9.1 to allow password access to users from a specific subdomain
-          (say 173.31.0.0/16, i.e. the 173.31 subdomain)</li>
-        <pre>
+        The rationale of <i>local trust</i> being to ensure that I can easily
+        add scripts to create users without the hassle of entering
+        passwords which is hard to do non-interactively. Remote accesses in
+        a specified subnet use <b>md5</b> authentication ofcourse.
+        <p>
+          And in file /etc/postgresql/9.1/main/postgresql.conf, to enable remote access:
+          <pre>listen_addresses = '*'</pre>
+          <pre>
+listen_addresses = '*'
+          </pre>
+          <li>Configure PostgreSQL 9.1 to allow password access to users from a specific subdomain
+            (say 173.31.0.0/16, i.e. the 173.31 subdomain)</li>
+          <pre>
 sudo-i
 cd /etc/postgresql/9.1/main
-        </pre>
-        in pg_hba.conf add the following line:
-        <pre>
-host all all 172.31.0.0/16 md5
-        </pre>
-        and in file postgresql.conf, change:
-        <pre>
-listen_addresses='localhost'
-        </pre>
-        to:
-        <pre>
-listen_addresses='*'
-        </pre>
-        <li>Configure PostgreSQL 9.1 to not require password for users</li><p>
-          This can be used, e.g. to automate the creation of users by means of a script.
-          Basically the following line has to be edited in the pg_hba.conf file:
-          <pre>
-local   all              all                                trust
           </pre>
-          For full reproducibility here's the full <a href="postgresql.html.folder/pg_hba.conf.html">pg_hba.conf</a> and the
-          <a href="postgresql.html.folder/postgresql.conf.html">postgresql.conf</a> configuration files.
-          (the second doesn't play any part in this solution and is just provided for completeness
-          purposes).
-          <li>Configure PostgreSQL 9.1 to accept remote connections</li><p>
-            <a href="http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html">original article</a><p>
-              It's a two step process:
-              <ol type="i">
-                <li>enable client authentication</li>
-                Edit file /etc/postgresql/9.1/main/pg_hba.conf
-                and append the following configuration line to give access to the 192.168.2.0/24
-                network:
-                <pre>
+          in pg_hba.conf add the following line:
+          <pre>
+host all all 172.31.0.0/16 md5
+          </pre>
+          and in file postgresql.conf, change:
+          <pre>
+listen_addresses='localhost'
+          </pre>
+          to:
+          <pre>
+listen_addresses='*'
+          </pre>
+          <li>Configure PostgreSQL 9.1 to not require password for users</li><p>
+            This can be used, e.g. to automate the creation of users by means of a script.
+            Basically the following line has to be edited in the pg_hba.conf file:
+            <pre>
+local   all              all                                trust
+            </pre>
+            For full reproducibility here's the full <a href="postgresql.html.folder/pg_hba.conf.html">pg_hba.conf</a> and the
+            <a href="postgresql.html.folder/postgresql.conf.html">postgresql.conf</a> configuration files.
+            (the second doesn't play any part in this solution and is just provided for completeness
+            purposes).
+            <li>Configure PostgreSQL 9.1 to accept remote connections</li><p>
+              <a href="http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html">original article</a><p>
+                It's a two step process:
+                <ol type="i">
+                  <li>enable client authentication</li>
+                  Edit file /etc/postgresql/9.1/main/pg_hba.conf
+                  and append the following configuration line to give access to the 192.168.2.0/24
+                  network:
+                  <pre>
 host    all             all             192.168.2.0/24          md5
-                </pre>
-                <li>set the deamon to listen to the network interface</li>
-                Edit file /etc/postgresql/9.1/main/postgresql.conf and add the line:
-                <pre>
+                  </pre>
+                  <li>set the deamon to listen to the network interface</li>
+                  Edit file /etc/postgresql/9.1/main/postgresql.conf and add the line:
+                  <pre>
 listen_addresses = '*'
-                </pre>
-                ... to listen to all the network interfaces.
-              </ol>
-              After the above steps do a:
-              <pre>
+                  </pre>
+                  ... to listen to all the network interfaces.
+                </ol>
+                After the above steps do a:
+                <pre>
 sudo /etc/init.d/postgresql restart
-              </pre>
-              <li>Find Postgresql version</li>
-              Connect as an existing user to an existing database and run the "select version()" query, or from the command line:
-              <pre>
+                </pre>
+                <li>Find Postgresql version</li>
+                Connect as an existing user to an existing database and run the "select version()" query, or from the command line:
+                <pre>
 psql -Uhr -d ab -c 'select version()'
-              </pre>
+                </pre>
   </ol>
 
 
