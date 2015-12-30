@@ -1,130 +1,156 @@
 <head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link rel='icon' href='/knowledge-favicon.ico'/>
+  <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
 </head>
 <body>
-<ol reversed>
-<li>awesome PostgreSQL CLI client with auto-completion and syntax highlighting</li>
-Source: <a href="https://github.com/dbcli/pgcli">https://github.com/dbcli/pgcli</a>
-<pre>
+  <ol reversed>
+    <li>how to query PostgreSQL for currently executing queries</li>
+    <ul>
+      <li>Using the <tt>pg_stat_activity</tt> table</li>
+      This method requires no installation (but I've never managed to extract much useful information from it):
+      <pre>SELECT * FROM pg_stat_activity</pre>
+      <li>Using the <tt>pg_stat_statements</tt> table</li>
+      This method requires the installation of some additional libraries as described <a href="http://dba.stackexchange.com/q/124054/34332">in this dba.stackexchange post</a> but offers more useful information:
+      <pre>SELECT * FROM pg_stat_statements ORDER BY total_time DESC </pre>
+    </ul>
+    <li>sample configuration files used</li>
+     <dl>
+      <dt><strong>postgresql.conf</strong></dt>
+      <dd>
+        <ol>
+          <li>PostgreSQL 9.3 in Ubuntu 14.04 (NP desktop)</dt></li>
+          Residing in: <a href="postgres9_3-NP-desktop-postgresql.conf">/etc/postgresql/9.3/main/postgresql.conf</a>
+        </ol>
+      </dd>
+      <dt><strong>pg_hba.conf</strong></dt>
+      <dd>
+        <ol>
+          <li>PostgreSQL 9.3 in Ubuntu 14.04 (NP desktop)</dt></li>
+          Residing in: <a href="postgres9_3-NP-desktop-pg_hba.conf">/etc/postgresql/9.3/main/pg_hba.conf</a>
+        </ol>
+      </dd>      
+    </dl>
+    <li>awesome PostgreSQL CLI client with auto-completion and syntax highlighting</li>
+    Source: <a href="https://github.com/dbcli/pgcli">https://github.com/dbcli/pgcli</a>
+    <pre>
 sudo apt-get install python-pip
 sudo apt-get install python-dev libpq-dev libevent-dev
 sudo pip install pgcli
-</pre>
-<li>how to convert VARCHAR data to XML so that the XPATH function may be used on them</li>
-Use the <tt>XMLPARSE</tt> function:
-<pre>
+    </pre>
+    <li>how to convert VARCHAR data to XML so that the XPATH function may be used on them</li>
+    Use the <tt>XMLPARSE</tt> function:
+    <pre>
 SELECT DISTINCT CAST (XPATH('@status',XMLPARSE(CONTENT "content")) AS VARCHAR), isdeleted
 FROM vo_business.hosted_record_version
-</pre>
-<li>During PostgreSQL startup: <tt>could not open file "/etc/ssl/private/ssl-cert-snakeoil.key": Permission denied</tt></li>
-Encountered this problem for PostgreSQL 9.1 on Ubuntu 12.04.<br/>
-The following solution worked for me:
-<pre>
+    </pre>
+    <li>During PostgreSQL startup: <tt>could not open file "/etc/ssl/private/ssl-cert-snakeoil.key": Permission denied</tt></li>
+    Encountered this problem for PostgreSQL 9.1 on Ubuntu 12.04.<br/>
+    The following solution worked for me:
+    <pre>
 sudo chown postgres /etc/ssl/private/ssl-cert-snakeoil.key
 sudo chown postgres /etc/ssl/certs/ssl-cert-snakeoil.pem
-</pre>
-<li>Install PostgreSQL From Its Official Repository in Ubuntu 14.04</li>
-The PostgreSQL Global Development Group (PGDG) maintains an APT repository of PostgreSQL packages for Debian and Ubuntu. The repository provides the PostgreSQL server packages as well as extensions and modules packages for all PostgreSQL versions supported.
-<br/>
-So far, the repository support:
-<ul>
-<li>Debian 6.0 (squeeze), 7.0 (wheezy), and unstable (sid) 64/32 bit (amd64/i386)</li>
-<li>Ubuntu 10.04 (lucid), 12.04 (precise), and 14.04 (trusty) 64/32 bit (amd64/i386)</li>
-<li>PostgreSQL 8.4, 9.0, 9.1, 9.2, 9.3</li>
-<li>Server extensions such as Slony-I, various PL languages, and datatypes</li>
-<li>Applications like pgadmin3, pgbouncer, and pgpool-II</li>
-</ul>
-To get started installing PostgreSQL on Ubuntu 14.04, do the following steps:
-<ol>
-<li>Create and edit the PostgreSQL repository by running the command below:</li>
-<pre>
+    </pre>
+    <li>Install PostgreSQL From Its Official Repository in Ubuntu 14.04</li>
+    The PostgreSQL Global Development Group (PGDG) maintains an APT repository of PostgreSQL packages for Debian and Ubuntu. The repository provides the PostgreSQL server packages as well as extensions and modules packages for all PostgreSQL versions supported.
+    <br/>
+    So far, the repository support:
+    <ul>
+      <li>Debian 6.0 (squeeze), 7.0 (wheezy), and unstable (sid) 64/32 bit (amd64/i386)</li>
+      <li>Ubuntu 10.04 (lucid), 12.04 (precise), and 14.04 (trusty) 64/32 bit (amd64/i386)</li>
+      <li>PostgreSQL 8.4, 9.0, 9.1, 9.2, 9.3</li>
+      <li>Server extensions such as Slony-I, various PL languages, and datatypes</li>
+      <li>Applications like pgadmin3, pgbouncer, and pgpool-II</li>
+    </ul>
+    To get started installing PostgreSQL on Ubuntu 14.04, do the following steps:
+    <ol>
+      <li>Create and edit the PostgreSQL repository by running the command below:</li>
+      <pre>
 sudo emacs -nw /etc/apt/sources.list.d/pgdg.list
-</pre>
-Insert the following line:
-<pre>
+      </pre>
+      Insert the following line:
+      <pre>
 deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
-</pre>
-<li>Download & import the repository key:</li>
-<pre>
+      </pre>
+      <li>Download & import the repository key:</li>
+      <pre>
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-</pre>
-<li>Update your system:</li>
-<pre>
+      </pre>
+      <li>Update your system:</li>
+      <pre>
 sudo apt-get update && sudo apt-get upgrade
-</pre>
-<li>Now you're able to install PostgreSQL via below command:</li>
-<pre>
+      </pre>
+      <li>Now you're able to install PostgreSQL via below command:</li>
+      <pre>
 sudo apt-get install postgresql-9.3 pgadmin3
-</pre>
-</ol>
-<b>NB:</b> This repository provides <tt>postgresql</tt>, <tt>postgresql-contrib</tt>, and <tt>postgresql-client</tt> meta-packages that depend on the latest <i>postgresql-x.y</i> packages, similar to the ones present in Debian and Ubuntu. Once a new PostgreSQL version is released, these meta-packages will be updated to depend on the new version. If you rather want to stay with a particular PostgreSQL version, you should install specific packages like <tt>postgresql-9.3</tt> instead of <tt>postgresql</tt>.
-<br/>
-<a href="http://ubuntuhandbook.org/index.php/2014/02/install-postgresql-ubuntu-14-04/">source</a>
-<li>how to execute PL/pgSQL blocks, function definitions, transactions in DbVisualizer</li>
-Instead of the <i>Execute</i> or <i>Execute Current</i> options, use the <i>Execute Buffer</i>
-as shown in the screenshot below:
-<br/>
-<a href="dbvis-execute-buffer.png">
-<img height="200px" width="300px" src="dbvis-execute-buffer.png"/>
-</a>.
-<li>examining (and terminating, if need be) user sessions</li>
-Sometimes you just need to kill a user session (e.g. that may be preventing your from droping and recreating your database).
-Restarting PostgreSQL is one option. A more fine-grained one is to kill the user sessions.
-<br/>
-Start by examining user sessions:
-<pre>SELECT * FROM pg_stat_activity;</pre>
-Cancel the backend process (gentle):
-<pre>SELECT pg_cancel_backend( <procpid> );</pre>
-&hellip; if the above doesn't work (it didn't in my case), try the more forceful:
-<pre>
+      </pre>
+    </ol>
+    <b>NB:</b> This repository provides <tt>postgresql</tt>, <tt>postgresql-contrib</tt>, and <tt>postgresql-client</tt> meta-packages that depend on the latest <i>postgresql-x.y</i> packages, similar to the ones present in Debian and Ubuntu. Once a new PostgreSQL version is released, these meta-packages will be updated to depend on the new version. If you rather want to stay with a particular PostgreSQL version, you should install specific packages like <tt>postgresql-9.3</tt> instead of <tt>postgresql</tt>.
+    <br/>
+    <a href="http://ubuntuhandbook.org/index.php/2014/02/install-postgresql-ubuntu-14-04/">source</a>
+    <li>how to execute PL/pgSQL blocks, function definitions, transactions in DbVisualizer</li>
+    Instead of the <i>Execute</i> or <i>Execute Current</i> options, use the <i>Execute Buffer</i>
+    as shown in the screenshot below:
+    <br/>
+    <a href="dbvis-execute-buffer.png">
+      <img height="200px" width="300px" src="dbvis-execute-buffer.png"/>
+    </a>.
+    <li>examining (and terminating, if need be) user sessions</li>
+    Sometimes you just need to kill a user session (e.g. that may be preventing your from droping and recreating your database).
+    Restarting PostgreSQL is one option. A more fine-grained one is to kill the user sessions.
+    <br/>
+    Start by examining user sessions:
+    <pre>SELECT * FROM pg_stat_activity;</pre>
+    Cancel the backend process (gentle):
+    <pre>SELECT pg_cancel_backend( <procpid> );</pre>
+      &hellip; if the above doesn't work (it didn't in my case), try the more forceful:
+      <pre>
 SELECT pg_terminate_backend( <procpid> );
-</pre>
-<a href="http://www.devopsderek.com/blog/2012/11/13/list-and-disconnect-postgresql-db-sessions/">source</a>
-<li>configuration of logging directory in Postgresql (in Ubuntu 12.04)</li>
-This is where it's done:
-<pre>
+      </pre>
+      <a href="http://www.devopsderek.com/blog/2012/11/13/list-and-disconnect-postgresql-db-sessions/">source</a>
+      <li>configuration of logging directory in Postgresql (in Ubuntu 12.04)</li>
+      This is where it's done:
+      <pre>
 sudo cat /etc/postgresql/9.1/main/postgresql.conf | grep log_directory
-</pre>
-<li>yet more complex XPath example</li>
-<pre>
+      </pre>
+      <li>yet more complex XPath example</li>
+      <pre>
 SELECT
 DISTINCT ivoid, CAST(xpath('//*[local-name()=''capability'' and @xsi:type=''ssa:SimpleSpectralAccess'']/*[local-name()=''testQuery'']' , content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS VARCHAR)
 FROM rr.resourcecontent
 WHERE CAST(xpath('//*[local-name()=''capability'' and @xsi:type=''ssa:SimpleSpectralAccess'']/*[local-name()=''testQuery'']' , content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS VARCHAR)!='{}'
-</pre>
-<li>complex XPath example demonstrating namespace-agnostic <i>local-name</i>, testing if a value belongs in a list, and need to CAST from XML to VARCHAR</li>
-<pre>
+      </pre>
+      <li>complex XPath example demonstrating namespace-agnostic <i>local-name</i>, testing if a value belongs in a list, and need to CAST from XML to VARCHAR</li>
+      <pre>
 SELECT 
 CAST(xpath('//*[local-name()=''capability'' and (@standardID=''ivo://ivoa.net/std/SIA'' or @standardID=''ivo://ivoa.net/std/SSA'')]/@standardID' , content) AS VARCHAR), count(*)
 FROM someschema.sometable
 GROUP BY CAST(xpath('//*[local-name()=''capability'' and (@standardID=''ivo://ivoa.net/std/SIA'' or @standardID=''ivo://ivoa.net/std/SSA'')]/@standardID' , content) AS VARCHAR)
-</pre>
-<li>downloading the results of a SQL query on local filesystem</li>
-<a href="http://stackoverflow.com/a/11870348/274677">source</a><br/>
-Example:<br/>
-<pre>
+      </pre>
+      <li>downloading the results of a SQL query on local filesystem</li>
+      <a href="http://stackoverflow.com/a/11870348/274677">source</a><br/>
+      Example:<br/>
+      <pre>
 psql -d RegTAP -t -A -F"," -c "SELECT pregraft FROM vo_business.harvest_record WHERE recordivoid='ivo://irsa.ipac/Spitzer/Images/SINGS'" > pregraft
-</pre>
-<li>using XPath with namespaces in PostgreSQL</li>
-<a href="http://www.postgresql.org/docs/9.1/static/functions-xml.html">PostgreSQL 9.1 docs</a>
-<br/>
-Example (including also a cast):<br/>
-<pre>
+      </pre>
+      <li>using XPath with namespaces in PostgreSQL</li>
+      <a href="http://www.postgresql.org/docs/9.1/static/functions-xml.html">PostgreSQL 9.1 docs</a>
+      <br/>
+      Example (including also a cast):<br/>
+      <pre>
 SELECT ivoidlowercase, xpath('@xsi:type', content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']])
 FROM rr.resourcecontent 
 WHERE lower(CAST (xpath('@xsi:type', content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS VARCHAR)) LIKE '%vs:dataservice%'
-</pre>
-<li>typical access control configurations</li>
-The rationale is the following:
-<ul>
-    <li>trust all local UNIX-domain sockets (that tools like <b>psql</b> are using to create database and user
-    in the various scripts)</li>
-    <li>configure password-based authentication (md5) for TCP/IP sockets</li>
-</ul>
-<br/>
-E.g. (as found in my SAT machine)
-<pre>
+      </pre>
+      <li>typical access control configurations</li>
+      The rationale is the following:
+      <ul>
+        <li>trust all local UNIX-domain sockets (that tools like <b>psql</b> are using to create database and user
+          in the various scripts)</li>
+        <li>configure password-based authentication (md5) for TCP/IP sockets</li>
+      </ul>
+      <br/>
+      E.g. (as found in my SAT machine)
+      <pre>
 $ sudo cat /etc/postgresql/9.1/main/pg_hba.conf  | grep -v ^# | uniq
 
 local   all             postgres                                trust
@@ -132,64 +158,64 @@ local   all             all                                     trust
 host    all             all             127.0.0.1/32            md5
 host    all             all             ::1/128                 md5
 
-</pre>
-<li>Terminology on <i>clusters</i>, <i>catalogs</i>, <i>databases</i> and <i>schemas</i></li>
-<a href="http://stackoverflow.com/a/17943883/274677">source</a>
-<br/>
-A <b>cluster</b> in Postgres is simply a Postgres installation. Cluster here is not meant in the hardware sense of
-multiple computers working together. In Postgres, cluster refers to the fact that you can multiple unrelated databases all up and
-running using the same Postgres server engine. So, in other words, a <b>cluster</b> is a database server.
-<br/>
-So in both Postgres and the SQL Standard we have this containment hierarchy:
-<ul>
-<li>A computer may have one or multiple <b>clusters</b>.</li>
-<li>A database server is a cluster.</li>
-<li>A cluster has <b>catalogs</b>. ( Catalog = <b>Database</b> )</li>
-<li>Catalogs have <b>schemas</b>. (Schema = namespace of tables, and security boundary)</li>
-<li>Schemas have <b>tables</b>.</li>
-<li>Tables have <b>rows</b>.</li>
-<li>Rows have <b>values</b>, defined by columns.</li>
-</ul>
-The drawing below sums it up nicely:
-<br/>
-<img src="postgres-cluster-catalog-schemas.png">
+      </pre>
+      <li>Terminology on <i>clusters</i>, <i>catalogs</i>, <i>databases</i> and <i>schemas</i></li>
+      <a href="http://stackoverflow.com/a/17943883/274677">source</a>
+      <br/>
+      A <b>cluster</b> in Postgres is simply a Postgres installation. Cluster here is not meant in the hardware sense of
+      multiple computers working together. In Postgres, cluster refers to the fact that you can multiple unrelated databases all up and
+      running using the same Postgres server engine. So, in other words, a <b>cluster</b> is a database server.
+      <br/>
+      So in both Postgres and the SQL Standard we have this containment hierarchy:
+      <ul>
+        <li>A computer may have one or multiple <b>clusters</b>.</li>
+        <li>A database server is a cluster.</li>
+        <li>A cluster has <b>catalogs</b>. ( Catalog = <b>Database</b> )</li>
+        <li>Catalogs have <b>schemas</b>. (Schema = namespace of tables, and security boundary)</li>
+        <li>Schemas have <b>tables</b>.</li>
+        <li>Tables have <b>rows</b>.</li>
+        <li>Rows have <b>values</b>, defined by columns.</li>
+      </ul>
+      The drawing below sums it up nicely:
+      <br/>
+      <img src="postgres-cluster-catalog-schemas.png">
 
 
 
-<li>online SQL playground / sandbox</li>
-<a href="http://sqlfiddle.com/">SQL fiddle</a>
-<li>Window functions (latest installment)</li>
-New insight into the logic of window functions:
-    <ul>
+      <li>online SQL playground / sandbox</li>
+      <a href="http://sqlfiddle.com/">SQL fiddle</a>
+      <li>Window functions (latest installment)</li>
+      New insight into the logic of window functions:
+      <ul>
         <li>The <b>PARTITION</b> clause defines the window, however some functions by default operate on a concept called the 'frame' which may by, default include less than the full window
-        E.g. see what <a href="http://www.postgresql.org/docs/9.2/static/functions-window.html"> postgreSQL</a> says:
-        <br/><i>
-Note that first_value, last_value, and nth_value consider only the rows within the "window frame", which by default contains the rows from the start of the partition through the last peer of the current row. This is likely to give unhelpful results for last_value and sometimes also nth_value. You can redefine the frame by adding a suitable frame specification (RANGE or ROWS) to the OVER clause. See Section 4.2.8 for more information about frame specifications.
-        </i>
-        <br/>
+          E.g. see what <a href="http://www.postgresql.org/docs/9.2/static/functions-window.html"> postgreSQL</a> says:
+          <br/><i>
+            Note that first_value, last_value, and nth_value consider only the rows within the "window frame", which by default contains the rows from the start of the partition through the last peer of the current row. This is likely to give unhelpful results for last_value and sometimes also nth_value. You can redefine the frame by adding a suitable frame specification (RANGE or ROWS) to the OVER clause. See Section 4.2.8 for more information about frame specifications.
+          </i>
+          <br/>
         </li>
         <li>In the same vein:
-            <ul>
+          <ul>
             <li><b>over (order by x)</b></li>
-               is really shortcut for:
+            is really shortcut for:
             <li><b>over (order by x rows between unbounded preceding and current row)</b></li>
-               ... and so, sometimes (see example below), the below form is needed:
-             <li><b>over (order by x rows between unbounded preceding and unbounded following</b></li>
-            </ul>
+            ... and so, sometimes (see example below), the below form is needed:
+            <li><b>over (order by x rows between unbounded preceding and unbounded following</b></li>
+          </ul>
         </li>
         <li>helpful site and other links:
-           <ul>
-                <li><a href="http://tapoueh.org/blog/2013/08/20-Window-Functions">3rd-party turotial on window functions</a></li>
-                <li><a href="http://www.postgresql.org/docs/9.1/static/tutorial-window.html">PostgreSQL tutorial</a></li>
-                <li><a href="http://www.postgresql.org/docs/9.2/static/functions-window.html">PostgreSQL window functions</a></li>
-                <li><a href="http://www.postgresql.org/docs/9.2/static/functions-aggregate.html">PostgreSQL aggregate functions</a></li>
-           </ul>
+          <ul>
+            <li><a href="http://tapoueh.org/blog/2013/08/20-Window-Functions">3rd-party turotial on window functions</a></li>
+            <li><a href="http://www.postgresql.org/docs/9.1/static/tutorial-window.html">PostgreSQL tutorial</a></li>
+            <li><a href="http://www.postgresql.org/docs/9.2/static/functions-window.html">PostgreSQL window functions</a></li>
+            <li><a href="http://www.postgresql.org/docs/9.2/static/functions-aggregate.html">PostgreSQL aggregate functions</a></li>
+          </ul>
         </li>
-    </ul>
-    <br/>
-    Some instructive examples follow:
-    <br/>
-    <pre>
+      </ul>
+      <br/>
+      Some instructive examples follow:
+      <br/>
+      <pre>
 -- order by x means "order by x rows between unbounded preceding and current row
 select x, array_agg(x) over (rows between unbounded preceding and current row) from generate_series(1, 10) AS t(x)
 select x, array_agg(x) over (order by x rows between unbounded preceding and current row) from generate_series(1, 10) AS t(x)
@@ -223,90 +249,90 @@ lag (salary) OVER (PARTITION BY department ORDER BY salary ASC) AS prev_lower,
 first_value(salary) OVER (PARTITION BY department ORDER BY salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS lowest_salary_in_department,
 last_value (salary) OVER (PARTITION BY department ORDER BY salary ASC ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS highest_salary_in_department
 FROM employee_salary
-    </pre>
+      </pre>
 
-<li>how to install <b>pgsphere</b></li>
-I followed the instructions from <a href="http://pgsphere.projects.pgfoundry.org">the pgSphere 1.1 project site</a>
-with the following qualifications and log:
-    <ol type="i">
-    <li>downloaded pgSphere sources from <a href="http://pgfoundry.org/projects/pgsphere/">the pgSphere homepage</a></li>
-    <pre>
-    wget http://pgfoundry.org/frs/download.php/2558/pgsphere-1.1.1.tar.gz
-    </pre>
-    <li>I opted for the <i>second way</i> to compile <b>pgSphere</b> (as instructed in <a href="http://pgsphere.projects.pgfoundry.org/x44.html">the installation instructions page</a>), which is the one that does not require the PostgreSQL sources but, instead, the configuration tool <b>pg_config</b></li>
-    <li>since <b>pg_config</b> didn't exist I installed it by executing:
+      <li>how to install <b>pgsphere</b></li>
+      I followed the instructions from <a href="http://pgsphere.projects.pgfoundry.org">the pgSphere 1.1 project site</a>
+      with the following qualifications and log:
+      <ol type="i">
+        <li>downloaded pgSphere sources from <a href="http://pgfoundry.org/projects/pgsphere/">the pgSphere homepage</a></li>
         <pre>
+    wget http://pgfoundry.org/frs/download.php/2558/pgsphere-1.1.1.tar.gz
+        </pre>
+        <li>I opted for the <i>second way</i> to compile <b>pgSphere</b> (as instructed in <a href="http://pgsphere.projects.pgfoundry.org/x44.html">the installation instructions page</a>), which is the one that does not require the PostgreSQL sources but, instead, the configuration tool <b>pg_config</b></li>
+        <li>since <b>pg_config</b> didn't exist I installed it by executing:
+          <pre>
 sudo apt-cache search postgresql-server-dev
 sudo apt-get install postgresql-server-dev-9.1
-        </pre>
-        Now, <b>pg_config</b> is installed and its location can be got with:<pre>which pg_config</pre> (we use that location below)
-    </li>
-    <li>expand the pgSphere tarball we downloaded and cd into the directory that's created:
-    <pre>
+          </pre>
+          Now, <b>pg_config</b> is installed and its location can be got with:<pre>which pg_config</pre> (we use that location below)
+        </li>
+        <li>expand the pgSphere tarball we downloaded and cd into the directory that's created:
+          <pre>
 tar xvfz pgsphere-1.1.1.tar.gz
 cd pgsphere-1.1.1/
-    </pre>
-    </li>
-    <li>follow the installation instructions linked above ("<i>second way</i>"), replacing "/path/to/pg_config" with the actual path</li>
-    <pre>
+          </pre>
+        </li>
+        <li>follow the installation instructions linked above ("<i>second way</i>"), replacing "/path/to/pg_config" with the actual path</li>
+        <pre>
 make USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config
 sudo make USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config install
-    </pre>
-    <li>when I tried to check the installation as instructed:
-    <br/><br/><i>To check the installation change into the pg_sphere source directory again and run:
-<br/>
-shell> make installcheck
-</i><br/><br/>... I got the following error trace:
-<pre>
+        </pre>
+        <li>when I tried to check the installation as instructed:
+          <br/><br/><i>To check the installation change into the pg_sphere source directory again and run:
+            <br/>
+            shell> make installcheck
+          </i><br/><br/>... I got the following error trace:
+          <pre>
 Makefile:29: ../../src/Makefile.global: No such file or directory
 Makefile:30: /contrib/contrib-global.mk: No such file or directory
 make: *** No rule to make target `/contrib/contrib-global.mk'.  Stop.
-</pre>
-    ... but the installation was successful nonetheless because I was able to execute the last step as
-advised in "<i>2.3. Creating a database with pgSphere</i>" of the installation instructions linked above with:
-<pre>
+          </pre>
+          ... but the installation was successful nonetheless because I was able to execute the last step as
+          advised in "<i>2.3. Creating a database with pgSphere</i>" of the installation instructions linked above with:
+          <pre>
 psql -U postgres -d RegTAP -f ./pg_sphere.sql
-</pre>
-    </ol>
-<li>Window functions (cont.)</li>
-Note that <b>PARTITION</b> is not the function to be used in the <b>OVER</b> clause, <b>ORDER</b> is also available.
-E.g. to produce a salary rank for each employee according to his salary (the rank of '1' being assigned to the
-highest salary), one can do a:
-<pre>
+          </pre>
+      </ol>
+      <li>Window functions (cont.)</li>
+      Note that <b>PARTITION</b> is not the function to be used in the <b>OVER</b> clause, <b>ORDER</b> is also available.
+      E.g. to produce a salary rank for each employee according to his salary (the rank of '1' being assigned to the
+      highest salary), one can do a:
+      <pre>
 SELECT emp_name, salary, RANK() OVER (ORDER BY salary DESC) AS sal_pos 
 FROM test_curation.employee
 ORDER BY sal_pos ASC
-</pre>
+      </pre>
 
-(contrast the results, with those one gets when using <b>ROW_NUMBER()</b> instead of <b>RANK</b>)
+      (contrast the results, with those one gets when using <b>ROW_NUMBER()</b> instead of <b>RANK</b>)
 
-This can allow us to obtain the three highest paid employees, where using the simpler <b>LIMIT</b>
-clause of PostgreSQL would fail because of the tie on the third rank (Elizabeth and Flora).
-The below simple approach shows only one of the two employees with a salary of 4:
+      This can allow us to obtain the three highest paid employees, where using the simpler <b>LIMIT</b>
+      clause of PostgreSQL would fail because of the tie on the third rank (Elizabeth and Flora).
+      The below simple approach shows only one of the two employees with a salary of 4:
 
-<pre>
+      <pre>
 SELECT emp_name, salary
 FROM test_curation.employee
 ORDER BY salary DESC
 LIMIT 3
-</pre>
+      </pre>
 
-... whereas using the window function <b>RANK()</b> one is able to get both of them:
+      ... whereas using the window function <b>RANK()</b> one is able to get both of them:
 
-<pre>
+      <pre>
 SELECT x.* FROM (
 SELECT emp_name, salary, rank() OVER (ORDER BY salary DESC) AS sal_pos 
 FROM test_curation.employee
 ORDER BY sal_pos ASC) x
 WHERE x.sal_pos<=3
-</pre>
-<br/>
-There is also the <b>DENSE_RANK()</b> function which continues counting, in case of ties, 
-from the exactly previous rank (whereas <b>RANK()</b> in case of ties leaves a gap as wide
-as the number of tied elements).
+      </pre>
+      <br/>
+      There is also the <b>DENSE_RANK()</b> function which continues counting, in case of ties, 
+      from the exactly previous rank (whereas <b>RANK()</b> in case of ties leaves a gap as wide
+      as the number of tied elements).
 
-<li>Window functions rock!</li>
-<pre>
+      <li>Window functions rock!</li>
+      <pre>
 DROP TABLE IF EXISTS test_curation.employee;
 CREATE TABLE test_curation.employee (
 department VARCHAR,
@@ -343,13 +369,13 @@ SELECT department, emp_name, salary, avg FROM
 (SELECT department, emp_name, salary, AVG(salary) OVER (PARTITION BY department), row_number() OVER (PARTITION BY department ORDER BY salary DESC)
 FROM test_curation.employee) r
 WHERE row_number<=2;
-</pre>
-<li>PostgreSQL-specific way to get maximum or minimum values of certain columns for every combination of other columns</li>
-This is using the PostgreSQL-specific <b>DISTINCT ON</b> syntax (an extension on the SQL standard <b>DISTINCT</b> for specific
-columns).
-<br>
-Given the below table:
-<pre>
+      </pre>
+      <li>PostgreSQL-specific way to get maximum or minimum values of certain columns for every combination of other columns</li>
+      This is using the PostgreSQL-specific <b>DISTINCT ON</b> syntax (an extension on the SQL standard <b>DISTINCT</b> for specific
+      columns).
+      <br>
+      Given the below table:
+      <pre>
 CREATE TABLE A (A1 INTEGER, A2 INTEGER, A3 INTEGER);
 
 INSERT INTO A(A1, A2, A3) VALUES (1, 1, 1);
@@ -360,96 +386,96 @@ INSERT INTO A(A1, A2, A3) VALUES (2, 1, 2);
 INSERT INTO A(A1, A2, A3) VALUES (4, 1, 2);
 INSERT INTO A(A1, A2, A3) VALUES (4, 1, 5);
 INSERT INTO A(A1, A2, A3) VALUES (3, 1, 5);
-</pre>
-The following obtains minimum <b>a1</b> values for every combination of <b>a2</b> and <b>a3</b>:
-<pre>
+      </pre>
+      The following obtains minimum <b>a1</b> values for every combination of <b>a2</b> and <b>a3</b>:
+      <pre>
 SELECT DISTINCT ON (a2, a3) a2, a3, a1 FROM A ORDER BY a2, a3, a1
-</pre>
-<br>Whereas the following does the same, for maximum <b>a1</b> values:
-<pre>
+      </pre>
+      <br>Whereas the following does the same, for maximum <b>a1</b> values:
+      <pre>
 SELECT DISTINCT ON (a2, a3) a2, a3, a1 FROM A ORDER BY a2, a3, a1 DESC
-</pre>
+      </pre>
 
-<li>how to drop a database in PostgreSQL</li>
-Three ways:
-    <ol type="i">
+      <li>how to drop a database in PostgreSQL</li>
+      Three ways:
+      <ol type="i">
         <li>command line only:</li>
         <pre>dropdb &ltdatabase name&gt</pre>
         <li>more refined, once connected as <i>postgres</i> superuser:</li>
         <pre>DROP DATABASE IF EXISTS &ltdatabase name&gt</pre>
         <li>the way above from the command line:</li>
         <pre>psql -U postgres postgres -f &ltfile with the above script&gt</pre>
-    </ol>
-<li>how to handle namespace prefixes in <b>xpath</b> queries</li>
-Simple case (1 namespace prefix):
-<pre>
+      </ol>
+      <li>how to handle namespace prefixes in <b>xpath</b> queries</li>
+      Simple case (1 namespace prefix):
+      <pre>
 SELECT ( CAST (xpath('/*/@xsi:type', content, array[array['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS TEXT[]))[1] from rr.resourcecontent
-</pre>
-<br/>More complicated case (2 namespace prefixes):
-<pre>
+      </pre>
+      <br/>More complicated case (2 namespace prefixes):
+      <pre>
 SELECT ( CAST (xpath('/ri:Resource/@xsi:type', content, array[array['xsi', 'http://www.w3.org/2001/XMLSchema-instance'],
                                                               array['ri', 'http://www.ivoa.net/xml/RegistryInterface/v1.0']]) AS TEXT[]))[1] from rr.resourcecontent
-</pre>
-<li>another very useful syntax for doing <b>xpath</b> in PostgreSQL</li>
-Basic idea is that we cast the xpath result to a text array and we take the first element (that's
-when we know that the xpath expression will return a single value only):
-<pre>
+      </pre>
+      <li>another very useful syntax for doing <b>xpath</b> in PostgreSQL</li>
+      Basic idea is that we cast the xpath result to a text array and we take the first element (that's
+      when we know that the xpath expression will return a single value only):
+      <pre>
 SELECT ( CAST (xpath('/*/identifier', content) AS TEXT[]))[1] from rr.resourcecontent
-</pre>
-<li>how to check if a value appears in an array</li>
-The expression below evals to <b>true</b>
-<pre>
+      </pre>
+      <li>how to check if a value appears in an array</li>
+      The expression below evals to <b>true</b>
+      <pre>
 select 'a' = ANY ('{a , b}'::varchar[])
-</pre>
-<li>how to use <b>xpath</b> in where clauses in PostgreSQL</li>
-<b>xpath</b> types cannot be directly compared to string literals, so one has to do a cast, e.g.:
-<pre>
+      </pre>
+      <li>how to use <b>xpath</b> in where clauses in PostgreSQL</li>
+      <b>xpath</b> types cannot be directly compared to string literals, so one has to do a cast, e.g.:
+      <pre>
 select count(*) from rr.resourcecontent where cast (xpath('/*/capability/@standardID', content) as text[])='{ivo://ivoa.net/std/ConeSearch}'
-</pre>
-- or - <i>(to allow use of PostgreSQL <b>trim</b> function - but only if only one item is returned)</i>:
-<pre>
+      </pre>
+      - or - <i>(to allow use of PostgreSQL <b>trim</b> function - but only if only one item is returned)</i>:
+      <pre>
 select count(*) from rr.resourcecontent where trim( cast (xpath('/*/capability/@standardID', content) as text))='{ivo://ivoa.net/std/ConeSearch}'
-</pre>
-- or - <i>(if an array of values may be returned by the XPath expression)</i>:
-<pre>
+      </pre>
+      - or - <i>(if an array of values may be returned by the XPath expression)</i>:
+      <pre>
 select count(*) from rr.resourcecontent where 'ivo://ivoa.net/std/ConeSearch' = ANY (cast (xpath('/*/capability/@standardID', content) as text[]) )
-</pre>
-(I haven't found a way how to cast to a text array <b>and</b> do a <b>trim()</b> at the same time).
-<li>various types of inserts in PostgreSQL</li>
-A good report comparing:
-    <ol type=a>
-    <li>VSI - very silly inserts (executing queries made by concatenated Strings, one-by-one)</li>
-    <li>SPI - stupid prepared inserts (executing queries made by Prepared Inserts one-by-one)</li>
-    <li>BPI - batch prepared inserts (executing queries made by Prepared Inserts in batches)</li>
-    <li>CPI - copy inserts (using the 'properietary' COPY FROM API offered by PostgreSQL driver)</li>
-    </ol>
-</p> ... is given <a href="http://rostislav-matl.blogspot.com.es/2011/08/fast-inserts-to-postgresql-with-jdbc.html">here</a>.
-Results graph is:</p><img src="inserts-linechart.png">
-</p>My take is that BPIs are good enough without having to venture out onto non-standard CPI-land.
-<br>Caveat: according to <a href="http://stackoverflow.com/questions/12012592/jdbc-insert-multiple-rows">this SO discussion</a>
-auto commit should be set to false for 
-BPI to offer any advantage over SPI (setting auto commit to false is one JDBC's best practices anyway).
+      </pre>
+      (I haven't found a way how to cast to a text array <b>and</b> do a <b>trim()</b> at the same time).
+      <li>various types of inserts in PostgreSQL</li>
+      A good report comparing:
+      <ol type=a>
+        <li>VSI - very silly inserts (executing queries made by concatenated Strings, one-by-one)</li>
+        <li>SPI - stupid prepared inserts (executing queries made by Prepared Inserts one-by-one)</li>
+        <li>BPI - batch prepared inserts (executing queries made by Prepared Inserts in batches)</li>
+        <li>CPI - copy inserts (using the 'properietary' COPY FROM API offered by PostgreSQL driver)</li>
+      </ol>
+      </p> ... is given <a href="http://rostislav-matl.blogspot.com.es/2011/08/fast-inserts-to-postgresql-with-jdbc.html">here</a>.
+      Results graph is:</p><img src="inserts-linechart.png">
+    </p>My take is that BPIs are good enough without having to venture out onto non-standard CPI-land.
+    <br>Caveat: according to <a href="http://stackoverflow.com/questions/12012592/jdbc-insert-multiple-rows">this SO discussion</a>
+    auto commit should be set to false for 
+    BPI to offer any advantage over SPI (setting auto commit to false is one JDBC's best practices anyway).
 
-<li>location of <b>pg_ctl</b> in Postgresql 9.2</li>
-<pre>/usr/lib/postgresql/9.2/bin/pg_ctl</pre>
-<li>NULL values in foreign key columns</li>
-The following holds true at least in PostgreSQL 9.2:</p>
-<a href="http://www.postgresql.org/message-id/200611200942.kAK9gwaK029065@wwwmaster.postgresql.org">source</a>
-A FOREIGN KEY constraint does not have to be linked only to a PRIMARY KEY
-constraint in another table; it can also be defined to reference the columns
-of a UNIQUE constraint in another table. A FOREIGN KEY constraint can
-contain null values; however, if any column of a composite FOREIGN KEY
-constraint contains null values, verification of all values that make up the
-FOREIGN KEY constraint is skipped. To make sure that all values of a
-composite FOREIGN KEY constraint are verified, specify NOT NULL on all the
-participating columns.
-<li>how to log SQL statements in PostgreSQL 9.1</li>
-<i>(see also <a href="http://stackoverflow.com/questions/722221/how-to-log-postgres-sql-queries">this SO discussion</a>)</i><p>
-You have to change certain values in file <b>postgres.conf</b> and
-restart the server.<p>
-File <b>postgres.conf</b> is located in: <b>/etc/postgresql/9.1/main/postgresql.conf</b><p>
-Diff of the changes I made is shown below:<p/>
-<pre>
+    <li>location of <b>pg_ctl</b> in Postgresql 9.2</li>
+    <pre>/usr/lib/postgresql/9.2/bin/pg_ctl</pre>
+    <li>NULL values in foreign key columns</li>
+    The following holds true at least in PostgreSQL 9.2:</p>
+    <a href="http://www.postgresql.org/message-id/200611200942.kAK9gwaK029065@wwwmaster.postgresql.org">source</a>
+    A FOREIGN KEY constraint does not have to be linked only to a PRIMARY KEY
+    constraint in another table; it can also be defined to reference the columns
+    of a UNIQUE constraint in another table. A FOREIGN KEY constraint can
+    contain null values; however, if any column of a composite FOREIGN KEY
+    constraint contains null values, verification of all values that make up the
+    FOREIGN KEY constraint is skipped. To make sure that all values of a
+    composite FOREIGN KEY constraint are verified, specify NOT NULL on all the
+    participating columns.
+    <li>how to log SQL statements in PostgreSQL 9.1</li>
+    <i>(see also <a href="http://stackoverflow.com/questions/722221/how-to-log-postgres-sql-queries">this SO discussion</a>)</i><p>
+      You have to change certain values in file <b>postgres.conf</b> and
+      restart the server.<p>
+      File <b>postgres.conf</b> is located in: <b>/etc/postgresql/9.1/main/postgresql.conf</b><p>
+      Diff of the changes I made is shown below:<p/>
+      <pre>
 $ diff /etc/postgresql/9.1/main/postgresql.conf.safe.2012-01-15  /etc/postgresql/9.1/main/postgresql.conf
 276c276
 &lt #log_destination = 'stderr'# Valid values are combinations of
@@ -472,20 +498,20 @@ $ diff /etc/postgresql/9.1/main/postgresql.conf.safe.2012-01-15  /etc/postgresql
 ---
           &gt log_statement = 'all'# none, ddl, mod, all
 
-</pre>
-The log directory (value <b>log_directory</b>) is located relative to the <i>data</i> folder of postgresql which is obtained as follows:<p/>
-<pre>
+      </pre>
+      The log directory (value <b>log_directory</b>) is located relative to the <i>data</i> folder of postgresql which is obtained as follows:<p/>
+      <pre>
 $ grep -i data /etc/postgresql/9.1/main/postgresql.conf
 # option or PGDATA environment variable, represented here as ConfigDir.
 data_directory = '/var/lib/postgresql/9.1/main'# use data in another directory
-</pre>
-Once the server is restarted, the SQL queries (DDL and/or DML depending on the settings) can be obtained with:<p/>
-<pre>
+      </pre>
+      Once the server is restarted, the SQL queries (DDL and/or DML depending on the settings) can be obtained with:<p/>
+      <pre>
 sudo -i
 tail -f /var/lib/postgresql/9.1/main/pg_log/postgresql-2013-01-15_182646.log 
-</pre>
-<li>useful PostgreSQL functions:</li>
-    <pre>
+      </pre>
+      <li>useful PostgreSQL functions:</li>
+      <pre>
         select current_database();
         select current_schema();
         select current_user;
@@ -494,84 +520,84 @@ tail -f /var/lib/postgresql/9.1/main/pg_log/postgresql-2013-01-15_182646.log
         select extract('epoch' from current_timestamp);
         select now();
         select current_timestamp;
-    </pre>
-the last two are useful because they reveals the timezone.
-<li>use of the command-line pg_dump utility:</li>
-<pre> pg_dump &ltdatabase&gt -h 172.333.444.555 -p 5444 -U username -F p -E UTF8 -C -O -n %ltschema-name&gt -v -f dumpfile database-name</pre>
-<li>precedence in PostgreSQL pg_hba.conf files</li>
-The general rule of thumb is: <i>Most Specific Rule First</i>
-<li>typical configuration of PostgreSQL 9.1 I am using:</li>
-In file /etc/postgresql/9.1/main/pg_hba.conf:
-<pre>
+      </pre>
+      the last two are useful because they reveals the timezone.
+      <li>use of the command-line pg_dump utility:</li>
+      <pre> pg_dump &ltdatabase&gt -h 172.333.444.555 -p 5444 -U username -F p -E UTF8 -C -O -n %ltschema-name&gt -v -f dumpfile database-name</pre>
+      <li>precedence in PostgreSQL pg_hba.conf files</li>
+      The general rule of thumb is: <i>Most Specific Rule First</i>
+      <li>typical configuration of PostgreSQL 9.1 I am using:</li>
+      In file /etc/postgresql/9.1/main/pg_hba.conf:
+      <pre>
 local   all             all                                 trust
 host   all             all   192.168.2.2/24                 md5
-</pre>
-The rationale of <i>local trust</i> being to ensure that I can easily
-add scripts to create users without the hassle of entering
-passwords which is hard to do non-interactively. Remote accesses in
-a specified subnet use <b>md5</b> authentication ofcourse.
-<p>
-And in file /etc/postgresql/9.1/main/postgresql.conf, to enable remote access:
-<pre>listen_addresses = '*'</pre>
-<pre>
+      </pre>
+      The rationale of <i>local trust</i> being to ensure that I can easily
+      add scripts to create users without the hassle of entering
+      passwords which is hard to do non-interactively. Remote accesses in
+      a specified subnet use <b>md5</b> authentication ofcourse.
+      <p>
+        And in file /etc/postgresql/9.1/main/postgresql.conf, to enable remote access:
+        <pre>listen_addresses = '*'</pre>
+        <pre>
 listen_addresses = '*'
-</pre>
-<li>Configure PostgreSQL 9.1 to allow password access to users from a specific subdomain
-(say 173.31.0.0/16, i.e. the 173.31 subdomain)</li>
-<pre>
+        </pre>
+        <li>Configure PostgreSQL 9.1 to allow password access to users from a specific subdomain
+          (say 173.31.0.0/16, i.e. the 173.31 subdomain)</li>
+        <pre>
 sudo-i
 cd /etc/postgresql/9.1/main
-</pre>
-in pg_hba.conf add the following line:
-<pre>
+        </pre>
+        in pg_hba.conf add the following line:
+        <pre>
 host all all 172.31.0.0/16 md5
-</pre>
-and in file postgresql.conf, change:
-<pre>
+        </pre>
+        and in file postgresql.conf, change:
+        <pre>
 listen_addresses='localhost'
-</pre>
-to:
-<pre>
+        </pre>
+        to:
+        <pre>
 listen_addresses='*'
-</pre>
-<li>Configure PostgreSQL 9.1 to not require password for users</li><p>
-This can be used, e.g. to automate the creation of users by means of a script.
-Basically the following line has to be edited in the pg_hba.conf file:
-<pre>
+        </pre>
+        <li>Configure PostgreSQL 9.1 to not require password for users</li><p>
+          This can be used, e.g. to automate the creation of users by means of a script.
+          Basically the following line has to be edited in the pg_hba.conf file:
+          <pre>
 local   all              all                                trust
-</pre>
-For full reproducibility here's the full <a href="postgresql.html.folder/pg_hba.conf.html">pg_hba.conf</a> and the
-<a href="postgresql.html.folder/postgresql.conf.html">postgresql.conf</a> configuration files.
-(the second doesn't play any part in this solution and is just provided for completeness
-purposes).
-<li>Configure PostgreSQL 9.1 to accept remote connections</li><p>
-<a href="http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html">original article</a><p>
-It's a two step process:
-<ol type="i">
-<li>enable client authentication</li>
-Edit file /etc/postgresql/9.1/main/pg_hba.conf
-and append the following configuration line to give access to the 192.168.2.0/24
-network:
-<pre>
+          </pre>
+          For full reproducibility here's the full <a href="postgresql.html.folder/pg_hba.conf.html">pg_hba.conf</a> and the
+          <a href="postgresql.html.folder/postgresql.conf.html">postgresql.conf</a> configuration files.
+          (the second doesn't play any part in this solution and is just provided for completeness
+          purposes).
+          <li>Configure PostgreSQL 9.1 to accept remote connections</li><p>
+            <a href="http://www.cyberciti.biz/tips/postgres-allow-remote-access-tcp-connection.html">original article</a><p>
+              It's a two step process:
+              <ol type="i">
+                <li>enable client authentication</li>
+                Edit file /etc/postgresql/9.1/main/pg_hba.conf
+                and append the following configuration line to give access to the 192.168.2.0/24
+                network:
+                <pre>
 host    all             all             192.168.2.0/24          md5
-</pre>
-<li>set the deamon to listen to the network interface</li>
-Edit file /etc/postgresql/9.1/main/postgresql.conf and add the line:
-<pre>
+                </pre>
+                <li>set the deamon to listen to the network interface</li>
+                Edit file /etc/postgresql/9.1/main/postgresql.conf and add the line:
+                <pre>
 listen_addresses = '*'
-</pre>
-... to listen to all the network interfaces.
-</ol>
-After the above steps do a:
-<pre>
+                </pre>
+                ... to listen to all the network interfaces.
+              </ol>
+              After the above steps do a:
+              <pre>
 sudo /etc/init.d/postgresql restart
-</pre>
-<li>Find Postgresql version</li>
-Connect as an existing user to an existing database and run the "select version()" query, or from the command line:
-<pre>
+              </pre>
+              <li>Find Postgresql version</li>
+              Connect as an existing user to an existing database and run the "select version()" query, or from the command line:
+              <pre>
 psql -Uhr -d ab -c 'select version()'
-</pre>
-</ol>
+              </pre>
+  </ol>
 
 
 </body>
