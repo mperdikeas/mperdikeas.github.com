@@ -4,6 +4,36 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to configure retention of unresponsive TCP connections in PostgreSQL</li>
+    I've used the following settings:
+    <pre>
+#tcp_keepalives_idle = 0                # TCP_KEEPIDLE, in seconds;
+                                        # 0 selects the system default
+tcp_keepalives_idle = 200               # TCP_KEEPIDLE, in seconds;
+#tcp_keepalives_interval = 0            # TCP_KEEPINTVL, in seconds;
+                                        # 0 selects the system default
+tcp_keepalives_interval = 30            # TCP_KEEPINTVL, in seconds;
+#tcp_keepalives_count = 0               # TCP_KEEPCNT;
+                                        # 0 selects the system default
+tcp_keepalives_count = 10               # TCP_KEEPCNT;
+
+    </pre>
+    ...in this file: <tt>/postgresDB/data-9.1.14/postgresql.conf</tt> at
+    the new EuroVO registry PostgreSQL cluster.
+    <br/>
+    Sources:
+    <br/>
+<a href='http://stackoverflow.com/a/2186617/274677'>SO</a>, <a href='http://www.gnugk.org/keepalive.html'>GNU Gatekeeper keepalive page</a>
+    <li>how to kill non-responsive PostgreSQL queries</li>
+    <pre>
+    select pg_terminate_backend(procpid)
+    from pg_stat_activity
+    where usename = 'yourusername'
+     and current_query = '&lt;IDLE&gt;'
+     and query_start < current_timestamp - interval '5 minutes'
+     ;
+    </pre>
+    <a href='http://serverfault.com/a/577722/139074'>source</a>
     <li>how to query PostgreSQL for currently executing queries</li>
     <ul>
       <li>Using the <tt>pg_stat_activity</tt> table</li>
