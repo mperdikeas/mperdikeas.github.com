@@ -12,6 +12,24 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to find the PID of the process listening to the 8080 port</li>
+    <i>NB: the above uses extra flags to get around the fact that the 8080 port
+      is shown aliased to <b>http_alt</b> in the default options of both
+      <code>netstat</code> and <code>lsof</code></i>
+    <br/>
+    <a href='http://unix.stackexchange.com/a/256722/24044'>source</a>
+    <br/>
+    There's two methods:
+    <dl>
+      <dt>using <code>netstat</code></dt>
+      <dd>
+        <pre>sudo netstat -pan | grep 8080</pre>
+      </dd>
+      <dt>using <code>lsof</code></dt>
+      <dd>
+        <pre>sudo lsof -P | grep 8080</pre>
+      </dd>
+    </dl>
     <li>utility of <code>hash</code> in the shell</li>
     <a href="http://emacs.stackexchange.com/q/18126/4003">source a</a><br/>
     <a href="http://unix.stackexchange.com/a/86017/24044">source b</a><br/>
