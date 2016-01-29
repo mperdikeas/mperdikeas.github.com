@@ -9,39 +9,7 @@
 #+OPTIONS: d:t
 
 * private
-** pay 2nd installment for VAT for 2015Q3
-** STARTED phone Kopana and Roberto and prepare the rent electronic submission
-** TODO ask my parents about energy rating inspection and whether it is necessary
+
 * professional
 ** TODO ant-template engine to accept parametrized -Xmx
-** STARTED change password for [mperdikeas@ssh.esavo.esac.int]
-:INFO:
-Dear Menelaus,
-please access to scils03.net4.lan server with your current user/password.
-In this server you can change your password.
-If you need further assistance, please contact us.
-Regards
-Rafa
-CSG
-
-SAT operations  
-
-Posted On: 05 Oct 2015 02:31 PM
-Kindly change the password for user [mperdikeas] at the [ssh.esac.esa.int] machine.
-I tried myself but got:
-
-LDAP password information update failed: Referral
-
-Please contact me via my sciops email: [mperdikeas@sciops.esa.int] to let me know how you would like me to communicate the password I'd like to set. If that's not practical, just assign one yourselves and allow me to change it upon login.
-Menelaus.
-:END:
-I tried to access the host indicated but am unable to and I am not able to log
-a CSG ticket either at this time (2015-11-06)
-** STARTED check with Ruben to see if enough RAM is available
-need to open a ticket on that
-** STARTED coordinate with Ruben on how to do a release
-need to open a ticket on that as well
-** STARTED talk to Mavroudis about new project and BIRF reporting requirement
-** TODO test Tomcat heap size
-** TODO get in touch with Janet and ask her to schedule RoR harvesting
-** TODO consume notes from the last RAWDAR meeting that took place during my recent ESAC mission
+** TODO install MS Office 2003 under Wine in Beorn
