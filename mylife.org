@@ -13,3 +13,6 @@
 * professional
 ** TODO ant-template engine to accept parametrized -Xmx
 ** TODO install MS Office 2003 under Wine in Beorn
+** TODO extend my database creation script to automatically check for reserved names
+using a direct connection to the database to obtain table and column metadata and
+then compare such metadata against a list of reserved names
