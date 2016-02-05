@@ -8,7 +8,8 @@
 
 Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.
 
-<ul>
+  <ul>
+    <li><a href="#data-flow-analysis-for-domain">Data flow analysis as a tool for understanding a domain</a></li>
     <li><a href="#xml_sucks">XML is bad for distributed systems</a></li>
     <li><a href="#soap_sucks_interop">why SOAP sucks for interoperable systems</a></li>
     <li><a href="#verification_vs_validation">Verification -vs- Validation</a></li>
@@ -18,10 +19,16 @@ Wise sayings on software subjects that can be applicable in deliverables, presen
     <li><a href="#guis_suck">GUIs sucks</a></li>
     <li><a href="#bottom_up_down">Bottom-up and top-down</a></li>
     <li><a href="#rpc_sucks">RPC is bad</a></li>
-<ul>
+  </ul>
+<br/>
+<br/>
 
-<br/>
-<br/>
+<a name="data-flow-analysis-for-domain"><h2>Data Flow Analysis as a tool in understanding a domain</h2>
+  <i>2016-02-05</i>
+  <a href="https://news.ycombinator.com/item?id=11032296">source</a>
+  <br/>
+Data-flow analysis was a method that was swept away (somewhat unfairly) on the grounds of being too procedural and not OO. One of its key tenets was that once you had discovered the essential flows and interactions, you should discard the problem-space partitioning that helped you find the graph, and use the graph to partition the solution space (which might well result in the same partitioning, but not always.)
+
 <a name="xml_sucks"/><h2>XML is bad for distributed systems</h2>
 <i>2006-11-17</i>
 <a href="http://www.somebits.com/weblog/tech/bad/whySoapSucks.html">source</a><br/>
@@ -166,3 +173,4 @@ As a last note, I would like to say that we've known for years how to handle the
 If anybody is interested in the beginnings of such a system, I have an open source project that I think is still in the 'cathedral' stage. I would like help and input on its development though, and I need help making it easy to port and compile in random environments. If you would like to help, please e-mail me. I call the system the StreamModule system, and it's architecturally related to the idea of UNIX pipes, and the System V STREAMS drivers.
 </body>
 </html>
+
