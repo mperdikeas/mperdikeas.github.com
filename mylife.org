@@ -11,6 +11,8 @@
 * private
 
 * professional
+** TODO implement graphical front-end for the RADACER overview app
+** TODO buy USB hub
 ** TODO ant-template engine to accept parametrized -Xmx
 ** TODO install MS Office 2003 under Wine in Beorn
 ** TODO extend my database creation script to automatically check for reserved names
