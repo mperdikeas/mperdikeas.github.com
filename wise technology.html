@@ -9,6 +9,7 @@
 Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.
 
   <ul>
+    <li><a href="#logging-strategy">Logging strategy</a></li>
     <li><a href="#data-flow-analysis-for-domain">Data flow analysis as a tool for understanding a domain</a></li>
     <li><a href="#xml_sucks">XML is bad for distributed systems</a></li>
     <li><a href="#soap_sucks_interop">why SOAP sucks for interoperable systems</a></li>
@@ -23,7 +24,19 @@ Wise sayings on software subjects that can be applicable in deliverables, presen
 <br/>
 <br/>
 
-<a name="data-flow-analysis-for-domain"><h2>Data Flow Analysis as a tool in understanding a domain</h2>
+<a name="logging-strategy"/><h2>Logging strategy</h2>
+  <i>2016-02-08</i>
+  <a href="https://news.ycombinator.com/item?id=11054973">source</a>
+  <br/>
+  <dl>
+<dt>DEBUG</dt><dd>Log everything important with DEBUG level (but it shouldn't be too much, don't log 10MB data for each HTTP request).</dd>
+  </dl>
+  <dt>INFO</dt><dd>Log everything that happens in the system at a "higher" level with INFO level (like "add record with text {}").</dd>
+  <dt>WARN</dt><dd> Log everything unusual with WARN level (like user validation failed). Log every unexpected but recoverable (application can serve other requests) error with ERROR level.</dd>
+  <dt>FATAL</dt><dd>Log unrecoverable error with FATAL level and shutdown application. Works fine for me.</dd>
+  <dt>TRACE</dt><dd>And TRACE level just for debug, it's usually turned off, so it might produce any amounts of data.</dd>
+
+<a name="data-flow-analysis-for-domain"/><h2>Data Flow Analysis as a tool in understanding a domain</h2>
   <i>2016-02-05</i>
   <a href="https://news.ycombinator.com/item?id=11032296">source</a>
   <br/>
