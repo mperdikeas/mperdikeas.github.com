@@ -6,6 +6,38 @@
   </head>
   <body>
     <ol reversed>
+      <li>How to keep the size of the Catalina logs under control</li>
+      There's two things one has to do:
+      <ol>
+        <li>Schedule a Cron job to delete old files in the Catalina log directory</li>
+        E.g. put the following script in a file:
+        <pre>
+#/bin/env bash
+find ~/apache-tomcat-7.0.57/logs -mtime +7 -print0 | xargs -r -0 rm -rf
+        </pre>
+        ... and schedule it from Cron.
+        <br/>
+        However, the above will not help you if the <tt>catalina.out</tt> file keeps growing
+        since the above script will be unable to delete it.
+        <br/>
+        For that you have to...
+        <li>Rotate the <tt>catalina.out</tt> file</li>
+        To rotate the <tt>catalina.out</tt> file one has to change the <tt>catalina.sh</tt>
+        file to send the output not to a single file (<tt>catalina.out</tt>) but rather to pipe
+        it through a problem like <tt>rotatelogs</tt>.
+        <br/>
+        For instance, the below screenshot shows the differences between the:<br/>
+        <ul>
+          <li><a href="./catalina.sh.for-rotatings-logs/catalina-orig.sh0">original</a> (left)</li> and the ...
+          <li><a href="./catalina.sh.for-rotatings-logs/catalina-mod.sh0">modified</a> (right)</li>
+        </ul>
+         <tt>catalina.sh</tt> script that supports the rotation of the <tt>catalina.out</tt>
+        file:
+        <br/>
+        <a href="./catalina.sh.for-rotatings-logs/meld-screenshot.png">
+          <img height="200px" width="300px" src="./catalina.sh.for-rotatings-logs/meld-screenshot.png">
+        </a>.
+      </ol>
       <li>location of <tt>tomcat-users.xml</tt> file (that is used to set the admin password)</li>
       In the Beorn machine the file is found in:
       <pre>
