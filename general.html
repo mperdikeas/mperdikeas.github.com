@@ -1,394 +1,396 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-<ol reversed>
-<li>test network speed</li>
-The <a href="http://www.speedtest.net">speedtest.net</a> web site can be used to test upload and download speed to any geographical region of the world.
-<li>how to dump specific bytes of a binary file in a human-readable format</li>
-Use <code>dd</code> and pipe the output to either <code>xxd</code> or <code>hexdump</code>.
-<pre>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li>how to test what a site looks like from various other world-wide locations</li>
+      Use <a href="http://geopeeker.com">geopeeker.com</a>.
+      <li>test network speed</li>
+      The <a href="http://www.speedtest.net">speedtest.net</a> web site can be used to test upload and download speed to any geographical region of the world.
+      <li>how to dump specific bytes of a binary file in a human-readable format</li>
+      Use <code>dd</code> and pipe the output to either <code>xxd</code> or <code>hexdump</code>.
+      <pre>
 $ dd if=sample-rapid-file ibs=1 skip=164 count=20 2>/dev/null | xxd -b
 0000000: 00000000 00000000 00000000 10111101 00000000 00000000  ......
 0000006: 00000000 00000000 00000000 00000000 00000000 00000001  ......
 000000c: 00000000 00000000 00000000 00000000 00000000 00000000  ......
 0000012: 00000000 00000000                                      ..
-</pre>
-<br/>
-... or:
-<pre>
+      </pre>
+      <br/>
+      ... or:
+      <pre>
 $ dd if=sample-rapid-file ibs=1 skip=164 count=20 2>/dev/null | hexdump -C
 00000000  00 00 00 bd 00 00 00 00  00 00 00 01 00 00 00 00  |................|
 00000010  00 00 00 00                                       |....|
 00000014
-</pre>
-<li>how to output the binary representation of a file</li>
-<pre>
+      </pre>
+      <li>how to output the binary representation of a file</li>
+      <pre>
 xxd -bp sample.dat | head -3
-</pre>
-<li>capture a window with a fused delay of 10 seconds</li>
-This is useful when wanting to also capture a context popup menu (e.g. as typically launched
-by a right mouse click).
-<pre>$ gnome-screenshot -w -d 10</pre>
-<li>Hex editor for the shell</li>
-Emacs has the <tt>hexl-mode</tt> for hexadecimal viewing/editing.
-<li>infinite loop in bash; and break on problem</li>
-<pre>
+      </pre>
+      <li>capture a window with a fused delay of 10 seconds</li>
+      This is useful when wanting to also capture a context popup menu (e.g. as typically launched
+      by a right mouse click).
+      <pre>$ gnome-screenshot -w -d 10</pre>
+      <li>Hex editor for the shell</li>
+      Emacs has the <tt>hexl-mode</tt> for hexadecimal viewing/editing.
+      <li>infinite loop in bash; and break on problem</li>
+      <pre>
 while true; do ./valgraph-harvest-wrongsets-last-30-days-html; if [[ $? != 0 ]]; then break ; fi ; done
-</pre>
-<li>proper way to encode a string in MD5 using <b>md5sum</b></li>
-Simply doing a:
-<pre>
+      </pre>
+      <li>proper way to encode a string in MD5 using <b>md5sum</b></li>
+      Simply doing a:
+      <pre>
 echo "password" | md5sum
-</pre>
-... will <b>not</b> work as the shell also insidiously suffixes an end-of-line character.<br/>
-Either of the two ways have to be used instead:
-<pre>
+      </pre>
+      ... will <b>not</b> work as the shell also insidiously suffixes an end-of-line character.<br/>
+      Either of the two ways have to be used instead:
+      <pre>
 $ echo -n password | md5sum
 5f4dcc3b5aa765d61d8327deb882cf99  -
 $ printf '%s' "password" | md5sum
 5f4dcc3b5aa765d61d8327deb882cf99  -
-</pre>
-<br/>
-The insidious suffixing of an end-of-line character can be confirmed with the following:
-<pre>
+      </pre>
+      <br/>
+      The insidious suffixing of an end-of-line character can be confirmed with the following:
+      <pre>
 printf '%s\n' "password" | md5sum
-</pre>
-<li>how to customize <b>Conkeror</b> with your own default key-bindings</li>
-The instructions I found most useful are <a href="http://conkeror.org/ConkerorRC">here</a>. Also
-<a href="http://conkeror.org/Tips">this page</a> contains examples of using the <code>define_key</code>
-function which I found useful and actually used.
-<br/>
-My own <b>Conkeror</b> customizations are under git in <code>~/environment/.conkerorrc/</code>
-and they of course have to be symlinked from home:
-<pre>
+      </pre>
+      <li>how to customize <b>Conkeror</b> with your own default key-bindings</li>
+      The instructions I found most useful are <a href="http://conkeror.org/ConkerorRC">here</a>. Also
+      <a href="http://conkeror.org/Tips">this page</a> contains examples of using the <code>define_key</code>
+      function which I found useful and actually used.
+      <br/>
+      My own <b>Conkeror</b> customizations are under git in <code>~/environment/.conkerorrc/</code>
+      and they of course have to be symlinked from home:
+      <pre>
 cd
 ln -s environment/.conkerorrc/
-</pre>
-<br/>
-... in order for <b>Conkeror</b> to pick them up.
-<li>how to install <b>Conkeror</b> in Ubuntu (again, latest approach)</li>
-On 15.IX.2014 I used the following approach to install <b>Conkeror</b>:
-The source was <a href="http://superuser.com/a/434242/138891">this answer</a>
-<li>install the apt repository for Nightly built Conkeror Debian Pakcages</li>
-<a href="http://noone.org/conkeror-nightly-debs/">source</a>
-<br/>
-Add the following lines to your /etc/apt/sources.list (for Wheezy as in my system
-that's what <code>cat /etc/debian_version</code> shows):
-<pre>
+      </pre>
+      <br/>
+      ... in order for <b>Conkeror</b> to pick them up.
+      <li>how to install <b>Conkeror</b> in Ubuntu (again, latest approach)</li>
+      On 15.IX.2014 I used the following approach to install <b>Conkeror</b>:
+      The source was <a href="http://superuser.com/a/434242/138891">this answer</a>
+      <li>install the apt repository for Nightly built Conkeror Debian Pakcages</li>
+      <a href="http://noone.org/conkeror-nightly-debs/">source</a>
+      <br/>
+      Add the following lines to your /etc/apt/sources.list (for Wheezy as in my system
+      that's what <code>cat /etc/debian_version</code> shows):
+      <pre>
 deb     http://noone.org/conkeror-nightly-debs wheezy main
 deb-src http://noone.org/conkeror-nightly-debs wheezy main
-</pre>
-<br/>
-Then add the latest key to your APT key ring without verfication, just execute the following as root:
-<br/>
-<pre>
+      </pre>
+      <br/>
+      Then add the latest key to your APT key ring without verfication, just execute the following as root:
+      <br/>
+      <pre>
 apt-key adv --keyserver pgp.uni-mainz.de --recv-keys 0F84088E
-</pre>
-<li>Install the conkeror packages</li>
-<a href="http://conkeror.org/InstallationDebian#Ubuntu_Lucid_and_Maverick">source</a>
-<pre>
+      </pre>
+      <li>Install the conkeror packages</li>
+      <a href="http://conkeror.org/InstallationDebian#Ubuntu_Lucid_and_Maverick">source</a>
+      <pre>
 sudo apt-get udpate
 sudo apt-get install conkeror conkeror-spawn-process-helper
-</pre>
-<li>finally, rely on the (already existing by now) <i>conkeror</i> script and Dash integration
-using <b>alacarte</b> as described in the alternative instructions (used in the past)
-<a href="#how-to-install-conkeror-a">below</a>
-<li>convert PDF to PNG high-quality</li>
-The below seems to give good results (<a href="http://stackoverflow.com/q/6605006/274677">source</a>):
-<pre>
+      </pre>
+      <li>finally, rely on the (already existing by now) <i>conkeror</i> script and Dash integration
+        using <b>alacarte</b> as described in the alternative instructions (used in the past)
+        <a href="#how-to-install-conkeror-a">below</a>
+        <li>convert PDF to PNG high-quality</li>
+        The below seems to give good results (<a href="http://stackoverflow.com/q/6605006/274677">source</a>):
+        <pre>
 convert -density 300 cds-oai-dc-problem.pdf -trim -quality 100  cds-oai-dc-problem.png
-</pre>
-By passing <b>-trim</b> as an option we also get rid of a subsequent trimming step.
-<li>command line to convert a PDF file to PNG in Ubuntu</li>
-<pre>
+        </pre>
+        By passing <b>-trim</b> as an option we also get rid of a subsequent trimming step.
+        <li>command line to convert a PDF file to PNG in Ubuntu</li>
+        <pre>
 convert database-high-level.pdf -background White -flatten database-high-level.png
-</pre>
-(the above incantation also replaces the transparent background with white background)
-<li>trim PNG images in Ubuntu</li>
-Use the <b>trim</b> command of the <b>convert</b> program from the <b>ImageMagick</b> package:
-<pre>
+        </pre>
+        (the above incantation also replaces the transparent background with white background)
+        <li>trim PNG images in Ubuntu</li>
+        Use the <b>trim</b> command of the <b>convert</b> program from the <b>ImageMagick</b> package:
+        <pre>
 convert input.png -trim output.png
-</pre>
-<li>meld alternative (that also supports comparisons among more than 2 files)</li>
-<pre>sudo apt-get install diffuse</pre>
-<li>install DbVisualizer 9.1 in Ubuntu</li>
-In the past I had some successes with the <i>Linux x86 setup installer</i> you can get
-from <a href="http://www.dbvis.com/download/">here</a>, but today I failed repeatedly to
-get it to properly install using that script, so in the end I just downloaded the UNIX tar.gz
-archive (from the same location), exploded it locally and then added <b>dbvis</b> on the 
-launchpad Dash using <a href="https://apps.ubuntu.com/cat/applications/alacarte/">alacarte</a>.
-I then searched my gmail for the <b>dbvis.license</b> key I have.
-<li>add an arbitrary application to the Ubuntu Dash overlay of the launchpad</li>
-Use <b>alacarte</b>. Info <a href="http://askubuntu.com/questions/67753/how-do-i-add-an-application-to-the-dash">here</a>.
-<li>compare files in current directory only with those of another directory</li>
-<b>way 1</b><br/>
-The below way uses the <i>snapshot_dir</i> as the reference directory, so if a file is missing there it is not compared.
-<pre>
+        </pre>
+        <li>meld alternative (that also supports comparisons among more than 2 files)</li>
+        <pre>sudo apt-get install diffuse</pre>
+        <li>install DbVisualizer 9.1 in Ubuntu</li>
+        In the past I had some successes with the <i>Linux x86 setup installer</i> you can get
+        from <a href="http://www.dbvis.com/download/">here</a>, but today I failed repeatedly to
+        get it to properly install using that script, so in the end I just downloaded the UNIX tar.gz
+        archive (from the same location), exploded it locally and then added <b>dbvis</b> on the 
+        launchpad Dash using <a href="https://apps.ubuntu.com/cat/applications/alacarte/">alacarte</a>.
+        I then searched my gmail for the <b>dbvis.license</b> key I have.
+        <li>add an arbitrary application to the Ubuntu Dash overlay of the launchpad</li>
+        Use <b>alacarte</b>. Info <a href="http://askubuntu.com/questions/67753/how-do-i-add-an-application-to-the-dash">here</a>.
+        <li>compare files in current directory only with those of another directory</li>
+        <b>way 1</b><br/>
+        The below way uses the <i>snapshot_dir</i> as the reference directory, so if a file is missing there it is not compared.
+        <pre>
     for f in $(find snapshot_dir -maxdepth 1 -type f -iname \*.xsd -o -iname \*.dtd) ; do diff `basename $f` $f ; done
-</pre>
-<br/>
-<b>way 2</b><br/>
-The below way uses the <i>local_dir</i> as the reference directory, so if a file is missing there is is not compared.
-<pre>
+        </pre>
+        <br/>
+        <b>way 2</b><br/>
+        The below way uses the <i>local_dir</i> as the reference directory, so if a file is missing there is is not compared.
+        <pre>
     for f in $(find . -maxdepth 1 -type f -iname \*.xsd -o -iname \*.dtd) ; do diff $f snapshot_dir/$f ; done
-</pre>
-I suppose the most rigorous check is combining both ways in a single script.
-<li>how to install <b>Conkeror</b> in Ubuntu<a name="how-to-install-conkeror-a"></a> </li>
-Original link <a href="http://www.conkeror.org/InstallationUnix">here</a>.
-Four steps:</p>
-    <ol>
-    <li>instal <b>xulrunner</b></li>
-    </p>follow top answer <a href="http://askubuntu.com/questions/125980/how-do-i-install-xulrunner-in-12-04">here</a>.
-    </p>Note that for some reason the <b><i>sudo sh -c "wget -O- $XURL | tar -xj"</i></b> command didn't
-        work for me and I had to manually download <b>$XURL</b> (in my case it was
-        <a href="https://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/23.0/runtimes/xulrunner-23.0.en-US.linux-i686.tar.bz2">this link</a>), and then do a:
-        </p><pre>sudo cat ~/Downloads/xulrunner-23.0.en-US.linux-i686.tar.bz2 | sudo tar -xj</pre>
-    <li>install <b>Conkeror</b></li>
-    For that, I didn't follow my earlier routine (described <a href="http://superuser.com/questions/434228/installing-conkeror-on-ubuntu-12-04">here</a>), but rather I simply cloned Conkeror's git repository:
-     <pre>git clone http://repo.or.cz/r/conkeror.git</pre> 
-    <li>preapare a <b>conkeror</b> script</li>
-    In my case, that script I prepared (based on instructions found <a href="http://www.conkeror.org/InstallationUnix">here</a> resides in the <b>~tools</b> git repository.
-    <li>add the script to the Dash using <b>alacarte</b></li>
-    Instructions <a href="http://askubuntu.com/questions/67753/how-do-i-add-an-application-to-the-dash">here<a/>.
-    </ol>
-</p>
-<li>how to open up a terminal in any folder of the file browser</li>
-<pre>sudo apt-get install nautilus-open-terminal</pre>
-</p>then, right-clicking on a folder shows option "Open in Terminal" (a log-off / log-in cycle
-may be necessary)
-<li>how to install <b>bd</b> (quickly go back to a specfic parent directory)</li>
-Original link: <a href="https://github.com/vigneshwaranr/bd">here</a>.
-</p>
-(I 've downloaded it at ~/tools, so I it's not on /usr/bin/bd)
-<li>get diff (esp. a recursive one) to produce <b>very</b> summarized output</li>
-Pipe the output of diff to <b>diffstat</b>
-<li>find out quickly the amount of memory recognized by the system</li>
-<pre>free -mt</pre>
-<li>find out if the Linux version and/or the hardware support PAE (Physical Address Extension)</li>
-This is determined by searching for the string 'pae' in the output of the following
-programs, for the OS and the hardware, respectively:
-<pre>uname -a | grep pae</pre>
-<pre>grep --color=always -i PAE /proc/cpuinfo</pre>
-<li>show system specs in Ubuntu</li>
-There are many ways:
-<pre>sudo lshw</pre>
-<pre>sudo lshw -html > myspecs.html</pre>
-<pre>sysinfo</pre>
-<pre>htop</pre>
-<li>how to find which process binds on specific ports</li>
-<pre>sudo netstat -tulpn </pre>
-and then, once you have the PID (e.g. 3903), you can do a:
-    <pre>
+        </pre>
+        I suppose the most rigorous check is combining both ways in a single script.
+        <li>how to install <b>Conkeror</b> in Ubuntu<a name="how-to-install-conkeror-a"></a> </li>
+        Original link <a href="http://www.conkeror.org/InstallationUnix">here</a>.
+        Four steps:</p>
+      <ol>
+        <li>instal <b>xulrunner</b></li>
+      </p>follow top answer <a href="http://askubuntu.com/questions/125980/how-do-i-install-xulrunner-in-12-04">here</a>.
+      </p>Note that for some reason the <b><i>sudo sh -c "wget -O- $XURL | tar -xj"</i></b> command didn't
+      work for me and I had to manually download <b>$XURL</b> (in my case it was
+      <a href="https://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/23.0/runtimes/xulrunner-23.0.en-US.linux-i686.tar.bz2">this link</a>), and then do a:
+      </p><pre>sudo cat ~/Downloads/xulrunner-23.0.en-US.linux-i686.tar.bz2 | sudo tar -xj</pre>
+      <li>install <b>Conkeror</b></li>
+      For that, I didn't follow my earlier routine (described <a href="http://superuser.com/questions/434228/installing-conkeror-on-ubuntu-12-04">here</a>), but rather I simply cloned Conkeror's git repository:
+      <pre>git clone http://repo.or.cz/r/conkeror.git</pre> 
+      <li>preapare a <b>conkeror</b> script</li>
+      In my case, that script I prepared (based on instructions found <a href="http://www.conkeror.org/InstallationUnix">here</a> resides in the <b>~tools</b> git repository.
+      <li>add the script to the Dash using <b>alacarte</b></li>
+      Instructions <a href="http://askubuntu.com/questions/67753/how-do-i-add-an-application-to-the-dash">here<a/>.
+      </ol>
+      </p>
+      <li>how to open up a terminal in any folder of the file browser</li>
+      <pre>sudo apt-get install nautilus-open-terminal</pre>
+      </p>then, right-clicking on a folder shows option "Open in Terminal" (a log-off / log-in cycle
+      may be necessary)
+      <li>how to install <b>bd</b> (quickly go back to a specfic parent directory)</li>
+      Original link: <a href="https://github.com/vigneshwaranr/bd">here</a>.
+      </p>
+      (I 've downloaded it at ~/tools, so I it's not on /usr/bin/bd)
+      <li>get diff (esp. a recursive one) to produce <b>very</b> summarized output</li>
+      Pipe the output of diff to <b>diffstat</b>
+      <li>find out quickly the amount of memory recognized by the system</li>
+      <pre>free -mt</pre>
+      <li>find out if the Linux version and/or the hardware support PAE (Physical Address Extension)</li>
+      This is determined by searching for the string 'pae' in the output of the following
+      programs, for the OS and the hardware, respectively:
+      <pre>uname -a | grep pae</pre>
+      <pre>grep --color=always -i PAE /proc/cpuinfo</pre>
+      <li>show system specs in Ubuntu</li>
+      There are many ways:
+      <pre>sudo lshw</pre>
+      <pre>sudo lshw -html > myspecs.html</pre>
+      <pre>sysinfo</pre>
+      <pre>htop</pre>
+      <li>how to find which process binds on specific ports</li>
+      <pre>sudo netstat -tulpn </pre>
+      and then, once you have the PID (e.g. 3903), you can do a:
+      <pre>
         ls -l /proc/3903/exe
         cat /proc/3903/cmdline
         ls -l /proc/3903/cwd </pre>
-    ... to find more about the process.
-<li>pattern to use when in need to replace broken links in a systematic way:</li>
-<pre>
+      ... to find more about the process.
+      <li>pattern to use when in need to replace broken links in a systematic way:</li>
+      <pre>
 find . -iname \*.jar | while read ANS;
     do DIR=$(dirname "$ANS");
     cd "$DIR";
     rm $(basename "$ANS"); 
     ln -s ../../../../../../../../repo-wide-libs/$(basename "$ANS");
 done
-</pre>
-<li>interesting tar incantation</li>
-<pre>tar jcpf archive-name.tar.bz2 www/{folderA,folderB} </pre>
-<li>report total disk usage of directory</li>
-<pre>du -s</pre>
-Also, <b>-b</b> to report bytes and <b>-h</b> for human-readable.
-<li>cleanse hash table info of the shell as to the location of executables</li>
-<pre>hash -r</pre>
-<li>alternative to <i>diff</i></li>
-one can use <b>md5sum</b>
-<li>list open TCP sockets</li>
-<pre>lsof | grep TCP</pre>
-<li>recursively copy remote folder and keep permissions and modes (alternative to <b>scp</b>)</li>
-<pre>ssh mperdikeas@172.31.129.29 'tar cpf - cluster/' | tar xpvf -</pre>
-<li>how to find broken links</li>
-<pre>find -L -type l</pre>
-I.e. find files following links (<b>-L</b>) and report those that remain links (<b>-type l</b>)
-<li>find and kill an app</li>
-Let's say we need to find and kill the Conkeror app:
-<pre>
+      </pre>
+      <li>interesting tar incantation</li>
+      <pre>tar jcpf archive-name.tar.bz2 www/{folderA,folderB} </pre>
+      <li>report total disk usage of directory</li>
+      <pre>du -s</pre>
+      Also, <b>-b</b> to report bytes and <b>-h</b> for human-readable.
+      <li>cleanse hash table info of the shell as to the location of executables</li>
+      <pre>hash -r</pre>
+      <li>alternative to <i>diff</i></li>
+      one can use <b>md5sum</b>
+      <li>list open TCP sockets</li>
+      <pre>lsof | grep TCP</pre>
+      <li>recursively copy remote folder and keep permissions and modes (alternative to <b>scp</b>)</li>
+      <pre>ssh mperdikeas@172.31.129.29 'tar cpf - cluster/' | tar xpvf -</pre>
+      <li>how to find broken links</li>
+      <pre>find -L -type l</pre>
+      I.e. find files following links (<b>-L</b>) and report those that remain links (<b>-type l</b>)
+      <li>find and kill an app</li>
+      Let's say we need to find and kill the Conkeror app:
+      <pre>
 ps axwww | grep conkeror | grep -v grep
-</pre>
-<p>or, better yet:
-<pre>
+      </pre>
+      <p>or, better yet:
+        <pre>
 ps axwww | grep 'c[o]nkeror'
-</pre>
-(note: I don't see any difference with the 'axw' flags)<p>
-Once you get the <i>pid</i> a <i>kill -7</i> should normaly suffice.
-<li>troubleshooting sound problems in Ubuntu</li>
-'Tis a long and sad tale. The gist of the matter (and what worked for me)
-was a combination of purging <b>pulseaudio</b>
-(including locally modified config files in /etc/pulse) and re-installing
-it, (and doing the same for other Ubuntu audio libraries as well).
-Helpfull material:
-<ol>
-<li><a href="https://help.ubuntu.com/community/SoundTroubleshootingProcedure">trouble shooting procedure</a>
-<li><a href="https://docs.google.com/document/d/1iTlJ8BfqXUjaHO__TEdlkvuqB1WLOkGaudngc5SFLMI/edit?pli=1#heading=h.y9t02zg3awt4">
-trouble shooting guide</a>
-</ol>
-Actually, the second was rather more helpful than the first.<p>
-Litmus tests:
-<pre>
+        </pre>
+        (note: I don't see any difference with the 'axw' flags)<p>
+          Once you get the <i>pid</i> a <i>kill -7</i> should normaly suffice.
+          <li>troubleshooting sound problems in Ubuntu</li>
+          'Tis a long and sad tale. The gist of the matter (and what worked for me)
+          was a combination of purging <b>pulseaudio</b>
+          (including locally modified config files in /etc/pulse) and re-installing
+          it, (and doing the same for other Ubuntu audio libraries as well).
+          Helpfull material:
+          <ol>
+            <li><a href="https://help.ubuntu.com/community/SoundTroubleshootingProcedure">trouble shooting procedure</a>
+              <li><a href="https://docs.google.com/document/d/1iTlJ8BfqXUjaHO__TEdlkvuqB1WLOkGaudngc5SFLMI/edit?pli=1#heading=h.y9t02zg3awt4">
+                trouble shooting guide</a>
+          </ol>
+          Actually, the second was rather more helpful than the first.<p>
+            Litmus tests:
+            <pre>
 play /usr/share/sounds/alsa/Front_Center.wav
-</pre>
-... and the Skype echo service.<p>
-Another thing to check out for is to make sure that the user
-belongs to the audio group. I.e. do a:
-<pre>
+            </pre>
+            ... and the Skype echo service.<p>
+              Another thing to check out for is to make sure that the user
+              belongs to the audio group. I.e. do a:
+              <pre>
 sudo \emacs -nw /etc/group
-</pre>
-Finally, I also tried <a href="http://www.linuxquestions.org/questions/linux-hardware-18/default-sound-card-in-ubuntu-564006/">this</href>
-guide on setting the default audio card</a> although it didn't have any effect in this
-particular case (maybe the problem wasn't there).
-<li>re-enable the sound icon on Ubuntu precise</li>
-The following incantation worked for me:
-<pre>
+              </pre>
+              Finally, I also tried <a href="http://www.linuxquestions.org/questions/linux-hardware-18/default-sound-card-in-ubuntu-564006/">this</href>
+                guide on setting the default audio card</a> although it didn't have any effect in this
+              particular case (maybe the problem wasn't there).
+              <li>re-enable the sound icon on Ubuntu precise</li>
+              The following incantation worked for me:
+              <pre>
 sudo apt-get install indicator-sound
 killall unity-panel-service
-</pre>
-<li>how to change a file's encoding from ISO8859-7 to UTF8</li>
-It may happen that the <b>javac</b> compiler complains for the encoding
-used in a file. Rather than using the -encoding option to <b>javac</b>
-(in the build.xml, use &ltpresetdef&gt to setup defaults for all of your <b>javac</b> invocations and pass -Dfile.encoding=iso-8859-7)
-one can also convert the file manually.
-<p>To find the offending file:
-<pre>
+              </pre>
+              <li>how to change a file's encoding from ISO8859-7 to UTF8</li>
+              It may happen that the <b>javac</b> compiler complains for the encoding
+              used in a file. Rather than using the -encoding option to <b>javac</b>
+              (in the build.xml, use &ltpresetdef&gt to setup defaults for all of your <b>javac</b> invocations and pass -Dfile.encoding=iso-8859-7)
+              one can also convert the file manually.
+              <p>To find the offending file:
+                <pre>
  $ ant  2>&1 | grep unmapp | awk '{print $2}' | sed 's,:.*,,' | sort | uniq
-</pre>
-convert it with iconv:
-<pre>
+                </pre>
+                convert it with iconv:
+                <pre>
 iconv -f ISO8859-7 -t UTF-8 
-</pre>
-(you may also have to export LANG=en_US.UTF-8)
-<li>piping with xargs</li>
-To rm all java files (you need the -print0 and -0 options to work with filenames containing spaces etc.):
-<pre>find . -iname \*.txt -print0 | xargs -0 rm</pre>
-<li>pipe coloured output through less</li>
-Use the 'ls -RG' option and make sure the original application (that
-generates the colour-coded output) is set to --color=always if such option
-exists.
-<li>find the package a binary belongs to in Debian distros</li>
-<p>E.g. find the package for <i>sensors</i>:
-<pre>
+                </pre>
+                (you may also have to export LANG=en_US.UTF-8)
+                <li>piping with xargs</li>
+                To rm all java files (you need the -print0 and -0 options to work with filenames containing spaces etc.):
+                <pre>find . -iname \*.txt -print0 | xargs -0 rm</pre>
+                <li>pipe coloured output through less</li>
+                Use the 'ls -RG' option and make sure the original application (that
+                generates the colour-coded output) is set to --color=always if such option
+                exists.
+                <li>find the package a binary belongs to in Debian distros</li>
+                <p>E.g. find the package for <i>sensors</i>:
+                  <pre>
 dpkg -S $(which sensors)
-</pre>
-<li>monitor chipset and CPU sensors in Ubuntu</li>
-Use <b>sensors</b> from package <i>lm-sensors</i> as in:
-<pre>
+                  </pre>
+                  <li>monitor chipset and CPU sensors in Ubuntu</li>
+                  Use <b>sensors</b> from package <i>lm-sensors</i> as in:
+                  <pre>
 watch sensors
-</pre>
-<li>change hostname in Ubuntu</li>
-simply edit /etc/hostname and /etc/hosts (for 127.0.0.1). To flush the previous hostname
-from various applications a reboot may be required.
+                  </pre>
+                  <li>change hostname in Ubuntu</li>
+                  simply edit /etc/hostname and /etc/hosts (for 127.0.0.1). To flush the previous hostname
+                  from various applications a reboot may be required.
 
-<li>setting HTTP proxy in Ubuntu</li>
-<pre>
+                  <li>setting HTTP proxy in Ubuntu</li>
+                  <pre>
 export http_proxy="http://foo.bar:8080"
-</pre>
-subsequent wget requests will redirect to foo.bar:8080
-<li>package managers</li>
-apt is used in Debian, Ubuntu and rpm in Fedora, Redhat, Suse. apt is better.<p>
-Typical <b>apt</b> commands: apt-get install, apt-cache search, apt-get autoremove, apt-get update.
-<li>curl</li>
-curl is a Linux utility that can be used to simulate HTTP GET and HTTP POST requests.
-A simple:<pre>#curl www.in.gr</pre> ...will execute an HTTP GET against www.in.gr.
-<li>SSE time</li>
-get time in SSE:<pre>date +%s</pre>
-<li>Linux print system information</li>
-including kernel 32 or 64 bit:<pre>uname -a</pre>
-x86_64 GNU/Linux indicates that you've a 64bit Linux kernel running.
-If you use see i386/i486/i586/i686 it is a 32 bit kernel.
-<li>Find if CPU is 32 or 64 bits</li>
-<pre>grep ^flags /proc/cpuinfo | uniq | grep lm</pre></br> ("lm" means long mode CPU - 64 bit CPU)
-<li>find installed packages</li>
-<pre>
+                  </pre>
+                  subsequent wget requests will redirect to foo.bar:8080
+                  <li>package managers</li>
+                  apt is used in Debian, Ubuntu and rpm in Fedora, Redhat, Suse. apt is better.<p>
+                    Typical <b>apt</b> commands: apt-get install, apt-cache search, apt-get autoremove, apt-get update.
+                    <li>curl</li>
+                    curl is a Linux utility that can be used to simulate HTTP GET and HTTP POST requests.
+                    A simple:<pre>#curl www.in.gr</pre> ...will execute an HTTP GET against www.in.gr.
+                    <li>SSE time</li>
+                    get time in SSE:<pre>date +%s</pre>
+                    <li>Linux print system information</li>
+                    including kernel 32 or 64 bit:<pre>uname -a</pre>
+                    x86_64 GNU/Linux indicates that you've a 64bit Linux kernel running.
+                    If you use see i386/i486/i586/i686 it is a 32 bit kernel.
+                    <li>Find if CPU is 32 or 64 bits</li>
+                    <pre>grep ^flags /proc/cpuinfo | uniq | grep lm</pre></br> ("lm" means long mode CPU - 64 bit CPU)
+                    <li>find installed packages</li>
+                    <pre>
 apt-cache search <search-string> - or -
-dpkg --get-selections | grep <search-string>
-</pre>
-<li>how to find a file named "compile_decoder.sh" in a set of bz2 files</li>
-<pre>for f in `ls *.bz2` ; do tar -jtvf  $f ; done | grep compile_decoder.sh</pre>
-</br>
-... Actually, the following also works and produces identical output:
-<pre>for f in `ls *.bz2` ; do tar -jtvf $f | grep compile_decoder.sh ; done</pre>
-<li>to find out the release</li>
-<pre>$ lsb_release -a</pre>
-<li>how to start xserver in Cygwin:<li>
-<pre>startxwin</pre>
-... and then to redirect X output from the new shell:
-<pre>ssh -X mperdikeas@remote.location</pre>
-<li>see all processes run by user 'mperdikeas':<li>
-<pre>$ps -u mperdikeas</pre>
-<li>bootable USB drive from ISO image</li>
-                In order to create a bootable USB drive from an ISO image it
-                is not possible to use dd and perform a binary data copy.
-                Special magic has to be used. Ttsiodras sent me a folder
-                with the necessary magic. Bottom line is that the files
-                in the ISO image are actually copied and that special bits
-                are set in the flash drive's filesystem to denote the
-                partition as bootable. See folder CreateUSBstickFromISO.
-                However I was not able to make it work; the USB flash
-                drive was formated and created but I wasn't ablt to 
-                boot it. In the end I just burned a CD. BTW the following
-                page:
-                http://www.ubuntu.com/download/ubuntu/download
-                created detailed instructions on how to create a USB
-                flash drive and suggests another solution ("Pen Drive
-                Linux's USB Installer").
+                      dpkg --get-selections | grep <search-string>
+                    </pre>
+                    <li>how to find a file named "compile_decoder.sh" in a set of bz2 files</li>
+                    <pre>for f in `ls *.bz2` ; do tar -jtvf  $f ; done | grep compile_decoder.sh</pre>
+      </br>
+      ... Actually, the following also works and produces identical output:
+      <pre>for f in `ls *.bz2` ; do tar -jtvf $f | grep compile_decoder.sh ; done</pre>
+      <li>to find out the release</li>
+      <pre>$ lsb_release -a</pre>
+      <li>how to start xserver in Cygwin:<li>
+        <pre>startxwin</pre>
+        ... and then to redirect X output from the new shell:
+        <pre>ssh -X mperdikeas@remote.location</pre>
+        <li>see all processes run by user 'mperdikeas':<li>
+          <pre>$ps -u mperdikeas</pre>
+          <li>bootable USB drive from ISO image</li>
+          In order to create a bootable USB drive from an ISO image it
+          is not possible to use dd and perform a binary data copy.
+          Special magic has to be used. Ttsiodras sent me a folder
+          with the necessary magic. Bottom line is that the files
+          in the ISO image are actually copied and that special bits
+          are set in the flash drive's filesystem to denote the
+          partition as bootable. See folder CreateUSBstickFromISO.
+          However I was not able to make it work; the USB flash
+          drive was formated and created but I wasn't ablt to 
+          boot it. In the end I just burned a CD. BTW the following
+          page:
+          http://www.ubuntu.com/download/ubuntu/download
+          created detailed instructions on how to create a USB
+          flash drive and suggests another solution ("Pen Drive
+          Linux's USB Installer").
 
-                There is also another option which is to create a Live Linux
-                USB stick or even a persistent one (with the ability to
-                save files, install programs and so on). This option is
-                possible using the "LinuxLive USB Creator 2.8.10.exe"
-                program.
-<li>to find the Linux kernel release and distro:</li>
-    <pre>
+          There is also another option which is to create a Live Linux
+          USB stick or even a persistent one (with the ability to
+          save files, install programs and so on). This option is
+          possible using the "LinuxLive USB Creator 2.8.10.exe"
+          program.
+          <li>to find the Linux kernel release and distro:</li>
+          <pre>
         uname -mrs
         lsb_release -a
-    </pre>
-<li>how to find if a Linux machine is 32 or 64 bits:</li>
-    <pre>uname -m</pre>
-             - or -
-    <pre>cat /proc/cpuinfo</pre>
-<li>Print recursive size of folders (i.e. including contents):</li>
-<pre>
+          </pre>
+          <li>how to find if a Linux machine is 32 or 64 bits:</li>
+          <pre>uname -m</pre>
+          - or -
+          <pre>cat /proc/cpuinfo</pre>
+          <li>Print recursive size of folders (i.e. including contents):</li>
+          <pre>
                 sudo du - s -m *
-</pre>
-                (because ls -lah only displays the size of the
-                directory file).
-<li>proper way to copy recursively directory tree a into b (including file permissions etc):</li>
-                <pre>cp -a a b</pre>
-</p>You don't need anything else and the internal symbolic links are nicely preserved.
-<li>how to find in which package a binary belongs, e.g. the lsb_release binary:</li>
-            <pre>dpkg -S $(which lsb_release)</pre>
-<li>to show the versions of debian apt packages use the apt_show_versions utility</li>
-<li>apt things ...</li>
-            The /etc/apt/sources.list file is not directly related to the 
-            operations of the:
-                <b>apt-get dist-upgrade</b> command
-            the dist-upgrade command always stays in the same Debian version
-            but implements the progression: stable->testing->unstable.
-            So, for instance from the stable phase it takes two invocations
-            of the dist-upgrade to reach the unstable phase; from the
-            testing phase only one. And you can't go backwards.
-            The /etc/apt/sources.list file "simply" provides the URL of
-            the repositories for each version.
-<li>hex-dump:</li>
-<pre>hexdump -C <filename> ('C' for console output)</pre>
-to edit:<pre>hexedit</pre>
-<li>how to cut the first few lines of a file (in the below example, the 1st one):</li>
-    <pre>tail -n +2 "$FILE"</pre>
-<li>how to remove the last line from a file (in place editing):</li>
-    <pre>sed -i '$d' filename</pre>
-<li>how to remove the last n lines from a file (in the below example n = 2):</li>
-    <pre>head -`wc -l thefile | awk '{print ($1-1)}'` thefile</pre>
-</ol>
-</body>
+          </pre>
+          (because ls -lah only displays the size of the
+          directory file).
+          <li>proper way to copy recursively directory tree a into b (including file permissions etc):</li>
+          <pre>cp -a a b</pre>
+                  </p>You don't need anything else and the internal symbolic links are nicely preserved.
+                  <li>how to find in which package a binary belongs, e.g. the lsb_release binary:</li>
+                  <pre>dpkg -S $(which lsb_release)</pre>
+                  <li>to show the versions of debian apt packages use the apt_show_versions utility</li>
+                  <li>apt things ...</li>
+                  The /etc/apt/sources.list file is not directly related to the 
+                  operations of the:
+                  <b>apt-get dist-upgrade</b> command
+                  the dist-upgrade command always stays in the same Debian version
+                  but implements the progression: stable->testing->unstable.
+                  So, for instance from the stable phase it takes two invocations
+                  of the dist-upgrade to reach the unstable phase; from the
+                  testing phase only one. And you can't go backwards.
+                  The /etc/apt/sources.list file "simply" provides the URL of
+                  the repositories for each version.
+                  <li>hex-dump:</li>
+                  <pre>hexdump -C <filename> ('C' for console output)</pre>
+                    to edit:<pre>hexedit</pre>
+                    <li>how to cut the first few lines of a file (in the below example, the 1st one):</li>
+                    <pre>tail -n +2 "$FILE"</pre>
+                    <li>how to remove the last line from a file (in place editing):</li>
+                    <pre>sed -i '$d' filename</pre>
+                    <li>how to remove the last n lines from a file (in the below example n = 2):</li>
+                    <pre>head -`wc -l thefile | awk '{print ($1-1)}'` thefile</pre>
+    </ol>
+  </body>
 </html>
