@@ -522,6 +522,7 @@ xinput set-int-prop 11 "Device Enabled" 8 0
 xinput set-int-prop 11 "Device Enabled" 8 1
       </pre>
       <li>remove existing partitions and format USB hdd for Linux</li>
+      <a href="http://www.quentinhuys.com/extharddrive.html">source</a><br/>
       First of all do a <b>sudo -i</b>. Then, use two
       commands: <b>fdisk</b> followed by a <b>mkfs.ext3</b>
       First, do a:
@@ -547,7 +548,13 @@ xinput set-int-prop 11 "Device Enabled" 8 1
       You may not be able to write to this disk as normal user as root may own it,
       but just doing <tt>chown user:user /media/volume-name</tt> will do the trick.
       <br/>
-      <a href="http://www.quentinhuys.com/extharddrive.html">source</a>
+      <b>NB 3</b>
+      It is important that the <tt>fdisk</tt> is performed on the entire device (as in <tt>fdisk /dev/sdg</tt>)
+      but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <tt>mkfs.ext3 .. /dev/sdg1</tt>).<br/>
+      Doing the <tt>mkfs.ext3</tt> on the entire
+      device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
+      to find the file system type.
+
       <li>remove BOM from files in Linux</li>
       <pre>tail --bytes=+4 text.txt</pre>
       <li>remote desktop connection in Linux</li>
