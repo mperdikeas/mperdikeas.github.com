@@ -1,0 +1,236 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Cies Resume/CV
+% LaTeX Template
+% Version 1.1 (20/7/14)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Cies Breijs (cies@kde.nl)
+% https://github.com/cies/resume with extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt,a4paper]{article} % Font size (10-12pt) and paper size (a4paper, letterpaper, legalpaper, etc)
+
+\include{structure} % Include structure.tex which contains packages and document layout definitions
+
+\hyphenation{Some-long-word} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
+
+\begin{document} 
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\maintitle{Menelaus Perdikeas}{December 24, 1974}  % Your name and date of birth or subtitle
+
+\noindent\href{mailto:mperdikeas@gmail.com}{mperdikeas@gmail.com}\bull % Your email address
+%\textsmaller{+}30 (210) 5322914\bull
+perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype username
+\href{http://mperdikeas.github.com}{mperdikeas.github.com}\\ % Your URL
+11, Dimitras st.\bull Ag. Paraskeuh, 15342\bull Athens\bull Greece % Your address
+
+\spacedhrule{0.9em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+
+%----------------------------------------------------------------------------------------
+%	SUMMARY SECTION
+%----------------------------------------------------------------------------------------
+
+\roottitle{Summary} % Root section title
+
+\vspace{-1.3em} % Reduce whitespace after the Summary heading and the two-column content
+
+\begin{multicols}{2}  % Start a two-column layout
+  \noindent
+  %\textit{A summary of your interests, achievements, history, topic of study or any other short summary of your professional life.}\\\\
+  I have been coding in Java since version JDK 1.1 came out in 1997. Over the years I have written more than 200
+  LoC in Java and have explored a wide array of technologies and frameworks in the landscape. 
+  I am a proficient Emacs user (with an Emacs setup that I've honed over the years for maximum productivity)
+  I like to live as close to the command line as possible
+  and have no need of an IDE to hold my hand or ``help'' me in any way (though I can of course also use an IDE
+  if required). I am a full stack Java engineer and have worked professionally in practically the entire
+  stack from front-facing web services, rich client applications, server-side Java code all the way to the back-end relational
+  database. I am also typically involved in devops stuff as well. That is, in addition to writing the code I also
+  write the build system (Ant / Ivy), test cases, coding standards compliance checking, code coverage,
+  integration testing, shel-scripting, etc.
+  The browser is the only part of the stack where I haven't worked in a professionally capacity
+  though I have ample experience in JavaScript in my playground projects and am currently exploring ReactJS in my
+  free time.
+
+\end{multicols}
+
+\spacedhrule{0.5em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+
+%----------------------------------------------------------------------------------------
+%	EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+
+\roottitle{Experience} % Top level section
+
+\headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
+    {\href{http://www.esac.com}{ESAC} (through \href{http://www.neuropublic.gr}{Neuropublic})}
+{\textsc{ESAC, Madrid, Spain}} {
+
+\headedsubsection % Job title entry for the current employer
+{Software Architect and Lead Coder}
+{March '13 -- June '15}
+{\bodytext{I was the software architect and the sole coder for the
+    \href{registry2.euro-vo.org}{new EuroVO Registry system}
+  which is scheduled to replace the \href{registry.euro-vo.org}{existing EuroVO Registry system}.
+
+  I worked for two years in ESAC, Madrid with no company supervision
+  and designed and implemented the entire system from scratch with the exception of some parts
+  of the front-end web-based GUI.
+  Among others, I designed and implemented:
+  \begin{itemize}
+  \item the \href{http://www.openarchives.org/pmh/}{OAI-PMH} harvesting functionality. I couldn't find a reliable 3rd party OAI-PMH library
+    so I implemented the entire protocol from scratch. \textbf{\emph{Technologies:}} Java, XPath 2.0 (Saxon), REST (Jersey), HTTP, JDBC
+  \item the \href{http://www.ivoa.net/documents/RegTAP/}{RegTAP} functionality and interface. I came into the project with \textbf{zero} domain-specific
+    knowledge and I managed to implement the second, globally, RegTAP search interface and make material
+    contributions to the RegTAP specification itself to the effect that I was recognized as a co-author of the spec. \textbf{\emph{Technologies:}} Java, XPath 2.0 (Saxon), REST (Jersey), JDBC
+  \item the \href{http://www.ivoa.net/documents/RegistryInterface/20091104/REC-RegistryInterface-1.0.pdf}{IVOA RI1} Search interface. This is SOAP interface, definined in WSDL (i.e. following a top-down approach). 
+    Due to the complexity of the XSDs used by the IVOA community I ran into problems with the automatic stub
+    generation by tools like wsimport (which I have documented and raised against). So I decided to implement
+    my own wsimport-like tool that reads WSDL and generates Java code (stubs and skeletons) to perform SOAP calls. Technologies: Java, SOAP (Jersey), XSD, template-based code generation with \href{http://www.stringtemplate.org/.}{String Template}
+    \item the report, email notifications and visual plots generation subsystem. Technologies: Java
+    \item the entire database schema for PostgreSQL. I wrote the DDL statements for the entire database which comprises 102 tables in 4 schemas and was responsible for the installation, fine-tuning, index creation, performance optimization, etc of the PostgreSQL database.
+    \item I also handled all devops aspects including: authoring the entire build system based on Ant and Ivy, writing test cases (JUnit), code
+  \end{itemize}
+
+}}
+
+}
+
+%------------------------------------------------
+
+\headedsection
+{\href{http://www.neuropublic.com}{Neuropublic S.A.}}
+{\textsc{Piraeus, Grece}
+
+
+\headedsubsection % Job title entry for the current employer
+{Software Engineer}
+{Nov '09 -- Dec '09}
+{\bodytext{Dharma Publishing, the worlds largest Buddhist publisher, is a non-profit, all-volunteer organization that helps to preserve Tibetan Buddhism and culture. I build them a \href{http://www.dharmapublishing.com}{web store}, and moved the infrastructure of all their web media to a nearly zero maintenance setup that they can maintain themselves.}}
+}
+
+%------------------------------------------------
+
+\headedsection
+{\href{www.semantix.gr}{SEMANTIX}}
+{\textsc{Athens, Greece}
+
+\headedsubsection % Job title entry for the current employer
+{Software Engineer}
+{Dec '03 -- present}
+{\bodytext{KTurtle is an educational programming environment that simplifies learning the basics of programming. At early age I learned programming using \acr{MSX-LOGO}, by creating KTurtle I want to ensure future generation's access to a similar piece of software. I was honored when KTurtle got admitted to \acr{KDE} in 2003.}}
+}
+
+%------------------------------------------------
+
+
+%------------------------------------------------
+
+\begin{center}
+%\textit{Please refer to \href{http://www.linkedin.com/in/ciesbreijs}{my Linkedin profile} for the complete list of work experiences along with recommendations.}
+\end{center}
+
+%------------------------------------------------
+
+\spacedhrule{-0.2em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\roottitle{Education} % Top level section
+
+\headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
+{Erasmus University Rotterdam}
+{\textsc{Rotterdam, The Netherlands}} {
+
+\headedsubsection % Job title entry for the current employer
+{Bachelor degree in Computer Science \& Economics}
+{2004 -- 2007}
+{\bodytext{Focussed on the economics of open source, rapid application development (\acr{RAD}) and the semantic web technology stack (\acr{RDF}/\acr{RDFS}, \acr{OWL} and \acr{SPARQL}).}}
+}
+
+%------------------------------------------------
+
+\headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
+{Technical University Delft}
+{\textsc{Delft, The Netherlands}} {
+
+\headedsubsection % Job title entry for the current employer
+{Industrial Design Engineering \textnormal{(discontinued)}}
+{2001 -- 2002} {}
+}
+
+%------------------------------------------------
+
+\headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
+{Libanon Lyceum}
+{\textsc{Rotterdam, The Netherlands}} {
+
+\headedsubsection % Job title entry for the current employer
+{\acr{VWO} \textnormal{(pre-university secondary education)}}
+{1994 -- 2000} {}
+}
+
+\spacedhrule{0.5em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+
+%----------------------------------------------------------------------------------------
+%	SKILLS SECTION
+%----------------------------------------------------------------------------------------
+
+\roottitle{Skills} % Top level section
+
+\inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
+{Technical specialties:}
+{Software design and implementation, with(in) a team. I love Ruby/Python/Java/C++ and flirt regularly with Haskell. Solid knowledge of web technologies:\ \acr{HTML+CSS}, \acr{XML}, \acr{RDF}, \acr{REST}, \acr{SOAP} and JavaScript (mainly jQuery). Linux administration skills:\ bash, Apache, My\acr{SQL}, Postgres\acr{SQL}, virtualization/cloud (Open\acr{VZ}, \acr{VM}ware, \acr{KVM}, Xen and \acr{EC}2), datacenter automation (Puppet and Chef), continuous integration (Hudson/Jenkins).}
+
+%------------------------------------------------
+
+\inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
+{Natural languages:}
+{Dutch \textit{(mother tongue)}, English \textit{(full professional proficiency)}, German \textit{(limited working proficiency)}, French \textit{(elementary proficiency)} and Mandarin Chinese \textit{(beginner)}.}
+
+\spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES SECTION
+%----------------------------------------------------------------------------------------
+
+\roottitle{References} % Top level section
+
+  \inlineheadsection
+      {Christophe Arviset}
+      {asdfasdfasdf}
+  \inlineheadsection
+      {Markus Demleitner}
+      {asdfasdfasdf}
+
+\spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+%----------------------------------------------------------------------------------------
+%	INTERESTS SECTION
+%----------------------------------------------------------------------------------------
+
+\roottitle{Interests} % Top level section
+
+\inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
+{Non-exhaustive:}
+{obsessively optimizing my environment, setup and workflow, Emacs, JavaScript, ReactJS, Linux, org-mode, i3 window manager, \LaTeX; historical reading}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
