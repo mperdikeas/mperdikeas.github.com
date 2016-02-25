@@ -12,6 +12,12 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to find the PID of a process by its window</li>
+    Run the following in a terminal:
+    <pre>
+      xprop | grep -i pid
+    </pre>
+    Then take the pointer and click on the window you're interested in.
     <li>how to find the PID of the process listening to the 8080 port</li>
     <i>NB: the above uses extra flags to get around the fact that the 8080 port
       is shown aliased to <b>http_alt</b> in the default options of both
@@ -868,3 +874,4 @@ ls -s /usr/lib/python2.7/
   </ol>
 </body>
 </html>
+
