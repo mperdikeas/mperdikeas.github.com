@@ -26,6 +26,7 @@
 
 \hyphenation{Some-long-word} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
 
+\newcommand{\technologies}[0]{\textbf{\textit{Technologies:}}}
 \begin{document} 
 
 %----------------------------------------------------------------------------------------
@@ -79,32 +80,47 @@ perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype username
 
 \headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
     {\href{http://www.esac.com}{ESAC} (through \href{http://www.neuropublic.gr}{Neuropublic})}
-{\textsc{ESAC, Madrid, Spain}} {
+{\textsc{European Space Agency / ESAC, Madrid, Spain}} {
 
 \headedsubsection % Job title entry for the current employer
 {Software Architect and Lead Coder}
 {March '13 -- June '15}
 {\bodytext{I was the software architect and the sole coder for the
     \href{registry2.euro-vo.org}{new EuroVO Registry system}
-  which is scheduled to replace the \href{registry.euro-vo.org}{existing EuroVO Registry system}.
+    which is scheduled to replace the \href{registry.euro-vo.org}{existing EuroVO Registry system} which has been
+    serving the global \href{http://www.ivoa.net/}{IVOA} community for the last ten (10) years.
 
-  I worked for two years in ESAC, Madrid with no company supervision
+  I worked for two years with people from the \href{http://www.sciops.esa.int/index.php?project=SAT}{Science
+    Archives Team at ESAC}, with no company supervision
   and designed and implemented the entire system from scratch with the exception of some parts
   of the front-end web-based GUI.
   Among others, I designed and implemented:
   \begin{itemize}
   \item the \href{http://www.openarchives.org/pmh/}{OAI-PMH} harvesting functionality. I couldn't find a reliable 3rd party OAI-PMH library
-    so I implemented the entire protocol from scratch. \textbf{\emph{Technologies:}} Java, XPath 2.0 (Saxon), REST (Jersey), HTTP, JDBC
+    so I implemented the entire protocol from scratch.\\
+    \technologies{} Java, XPath 2.0 (Saxon), XSLT, REST (Jersey), HTTP
   \item the \href{http://www.ivoa.net/documents/RegTAP/}{RegTAP} functionality and interface. I came into the project with \textbf{zero} domain-specific
     knowledge and I managed to implement the second, globally, RegTAP search interface and make material
-    contributions to the RegTAP specification itself to the effect that I was recognized as a co-author of the spec. \textbf{\emph{Technologies:}} Java, XPath 2.0 (Saxon), REST (Jersey), JDBC
+    contributions to the RegTAP specification itself to the effect that I was recognized as a co-author of the spec.\\
+    \technologies{} Java, XPath 2.0 (Saxon), REST (Jersey), JDBC
   \item the \href{http://www.ivoa.net/documents/RegistryInterface/20091104/REC-RegistryInterface-1.0.pdf}{IVOA RI1} Search interface. This is SOAP interface, definined in WSDL (i.e. following a top-down approach). 
     Due to the complexity of the XSDs used by the IVOA community I ran into problems with the automatic stub
     generation by tools like wsimport (which I have documented and raised against). So I decided to implement
-    my own wsimport-like tool that reads WSDL and generates Java code (stubs and skeletons) to perform SOAP calls. Technologies: Java, SOAP (Jersey), XSD, template-based code generation with \href{http://www.stringtemplate.org/.}{String Template}
-    \item the report, email notifications and visual plots generation subsystem. Technologies: Java
-    \item the entire database schema for PostgreSQL. I wrote the DDL statements for the entire database which comprises 102 tables in 4 schemas and was responsible for the installation, fine-tuning, index creation, performance optimization, etc of the PostgreSQL database.
-    \item I also handled all devops aspects including: authoring the entire build system based on Ant and Ivy, writing test cases (JUnit), code
+    my own wsimport-like tool that reads WSDL and generates Java code (stubs and skeletons) to perform SOAP calls.\\
+    \technologies{} Java, SOAP (Jersey), XSD, template-based code generation with \href{http://www.stringtemplate.org/.}{String Template}
+  \item the \href{https://en.wikipedia.org/wiki/XML_Schema_(W3C)}{XML XSD schema-validation}
+    and the IVOA validation of the various services.
+    \\
+    \technologies{} Java, XML, XSD, XPath 2.0 (Saxon), HTTP.
+  \item the report, email notifications and visual plots generation subsystem.
+    \\
+    \technologies{}: Java, JFreeChart
+    \item the entire database schema for PostgreSQL. I wrote the DDL statements for the entire database which comprises 102 tables in 4 schemas and was responsible for the installation, fine-tuning, index creation, performance optimization, etc of the PostgreSQL database. I also wrote the entire DB-facing \href{https://en.wikipedia.org/wiki/Database_abstraction_layer}{DAO} code.\\
+      \technologies{} PostgreSQL 9.2, JDBC.
+    \item I also handled all DevOps aspects including: authoring the entire build system based on
+      Ant and \href{http://ant.apache.org/ivy/}{Ivy}, writing test cases (JUnit), coding standards checking with \href{http://checkstyle.sourceforge.net/}{Checkstyle}, source code analyzers with
+      \href{https://pmd.github.io/}{PMD} and \href{http://findbugs.sourceforge.net/}{FindBugs},
+      code coverage with \href{http://cobertura.github.io/cobertura/}{Cobertura}, etc.
   \end{itemize}
 
 }}
@@ -120,8 +136,36 @@ perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype username
 
 \headedsubsection % Job title entry for the current employer
 {Software Engineer}
-{Nov '09 -- Dec '09}
-{\bodytext{Dharma Publishing, the worlds largest Buddhist publisher, is a non-profit, all-volunteer organization that helps to preserve Tibetan Buddhism and culture. I build them a \href{http://www.dharmapublishing.com}{web store}, and moved the infrastructure of all their web media to a nearly zero maintenance setup that they can maintain themselves.}}
+{June '12 -- March '13}
+{\bodytext{
+    I worked as a software engineer in the company's flagship \href{https://www.neuropublic.gr/en/component/k2/gaia-epicheirein}{GAIA} series of cloud-based services.
+    \\
+    Among the things I did:
+    \begin{itemize}
+    \item designed and developed all the server-side code for an expert system that advises farmers
+      on the subsidies they are entitled to apply for. I devised a formal way to capture the legal requirements
+      for each subsidy in the form of \href{https://en.wikipedia.org/wiki/S-expression}{Lisp S-expressions}.
+      Essentially each subsidy ministerial decision is
+      transformed into a Lisp-like \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL}.
+      Then the system reads from the database the profile of each user (age, income, past subsidies, location
+      and size of fields, crops, animal capital) and dynamically evaluates them against all possible subsidies.
+      The system finally informs the user which subsidies (s)he can apply for and also creates
+      a visual diagram that explains to the users why the failed to qualify for certain subsidies.
+      S-expressions were used in order to allow for dynamic evaluation and also because the company wanted
+      the DSL for each ministerial decision to be created by business people. So S-expression were chosen
+      as Lisp has no other syntax except the opening and closing parenthesis.\\
+      \technologies{} \href{https://clojure.org/}{Clojure} (for
+      the dynamic evaluation of the S-expressions), dynamic evaluation of Clojure code from Java,
+      \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{DOT} (for visualizing
+      subsidies criteria logic using graphs), \href{https://en.wikipedia.org/wiki/IText}{iText} for creating
+      PDF reports, \href{http://www.stringtemplate.org/}{StringTemplate}, JDBC.
+    \item designed and developed the authentication / authorization database and implemented all back-end Java
+      code to integrate Apache Shiro into our JSF pages and deliver an elaborate RBAC authentication solution
+      for all GAIA applications.\\
+      \technologies{} \href{http://shiro.apache.org/}{Apache Shiro}, PostgreSQL, JDBC.
+
+    \end{itemize}
+}}
 }
 
 %------------------------------------------------
