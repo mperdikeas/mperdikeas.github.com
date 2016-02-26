@@ -27,13 +27,15 @@
 \hyphenation{Some-long-word} % Specify custom hyphenation points in words with dashes where you would like hyphenation to occur, or alternatively, don't put any dashes in a word to stop hyphenation altogether
 
 \newcommand{\technologies}[0]{\textbf{\textit{Technologies:}}}
+\newcommand{\ts}{\textsuperscript}
 \begin{document} 
 
 %----------------------------------------------------------------------------------------
 %	NAME AND CONTACT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\maintitle{Menelaus Perdikeas}{December 24, 1974}  % Your name and date of birth or subtitle
+\maintitle{Menelaus Perdikeas}{%December 24, 1974
+}  % Your name and date of birth or subtitle
 
 \noindent\href{mailto:mperdikeas@gmail.com}{mperdikeas@gmail.com}\bull % Your email address
 %\textsmaller{+}30 (210) 5322914\bull
@@ -54,16 +56,16 @@ perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype username
 \begin{multicols}{2}  % Start a two-column layout
   \noindent
   %\textit{A summary of your interests, achievements, history, topic of study or any other short summary of your professional life.}\\\\
-  I have been coding in Java since version JDK 1.1 came out in 1997. Over the years I have written more than 200K
+  I have been coding in Java since version JDK 1.1 came out in 1997. Over the years I have written more than 300K
   LoC in Java and have explored a wide array of technologies and frameworks in the landscape. 
   I am a proficient Emacs user (with an Emacs setup that I've honed over the years for maximum productivity)
-  I like to live as close to the command line as possible
-  and have no need of an IDE to hold my hand or ``help'' me in any way (though I can of course also use an IDE
+  and I like to live as close to the command line as possible
+  (though I can of course also use an IDE
   if required). I am a full stack Java engineer and have worked professionally in practically the entire
   stack from front-facing web services, rich client applications, server-side Java code all the way to the back-end relational
-  database. I am also typically involved in devops stuff as well. That is, in addition to writing the code I also
-  write the build system (Ant / Ivy), test cases, coding standards compliance checking, code coverage,
-  integration testing, shel-scripting, etc.
+  database. I am also typically involved in devops stuff as well. That is, in addition to writing the code I can
+  handle the build system (Ant / Ivy), test cases, coding standards compliance checking, code coverage,
+  integration testing, shell-scripting, etc.
   The browser is the only part of the stack where I haven't worked in a professionally capacity
   though I have ample experience in JavaScript in my playground projects and am currently exploring ReactJS in my
   free time.
@@ -249,10 +251,12 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
     a syntax and a semantical point of view so
     the transformation is a complex business logic procedure. Since there are more than 7 different TAP3
     versions and conversion had to take place between any arbitrary pair (both upwards and downwards) there was
-    a large number of conversion routines to be written. I defined a meta-language used to describe the logic
+    a large number of conversion routines to be written. I defined a
+    \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL} used to describe the logic
     behind these conversions (essentially transformation algorithms on huge ASN.1 trees) and built a Python
     script that automatically generated C++ code implementing these transformations. In total I was able to
-    reduce tens of thousands of lines of C++ code into as little as 700 “meta-language” conversion rules
+    reduce tens of thousands of lines of C++ code into as little as 700 conversion rules expressed in the
+    above DSL
     (plus the Python script code generator).
     \\
     \technologies{} ASN.1, C++, Python
@@ -309,7 +313,10 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 {\bodytext{NTUA is the oldest and most prestigious technical university in Greece.
     I was awarded a Ph.D. for resarch into applying modern (at that time) software technologies
     in telecommunications networks. During that period of time I worked mostly with C++ and Java and developed
-    code using distributed technologies like CORBA, RMI; code interacting with telecom switch equipment, developed specialized video streaming applications in C++, etc. During that period of time I published more than 14 papers (3 in international refereed journals including IEEE) and the rest in international conferences. Publications
+    code using distributed technologies like CORBA, RMI; Java applets, code interacting with telecom switch
+    equipment, developed specialized video streaming applications in C++, etc.
+    During that period of time I also published about
+    a dozen papers (3 in international refereed journals including IEEE, the rest in conferences). Publications
     list provided at the end.
     }}
 }
@@ -324,7 +331,8 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 {\bodytext{
     CEID is the oldest university department in Greece focusing exclusively in computer and software engineering
     and awarding an engineering diploma after 5 years of studies.
-    I entered 1st in rank after a nationwide competitive examination and finished 2nd in rank (class size ~150).
+    I entered 1\ts{st} in rank after a nationwide competitive examination and finished 2\ts{nd} in rank
+    (class size \textasciitilde{150}).
     Coded various applications in technologies like Pascal, Lisp, C and Java.
     }}
 }
@@ -383,9 +391,34 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 %----------------------------------------------------------------------------------------
 
 \roottitle{Publications} % Top level section
+\paragraph{Books}
+
+  \begin{description}
+  \item[2001] Co-author of the 
+    \href{http://onlinelibrary.wiley.com/doi/10.1002/0471219282.eot257/full}{``Distributed Intelligent Network''} article in the
+    \href{http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0471369721.html}{``Encyclopedia of Telecommunications''} published by Wiley.
+  \item[2000] Co-author in \href{http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0471623792.html}{``Object Oriented Software Technologies in Telecommunications: from theory to practice''}, edited by I.Venieris, F.Zizza, T. Magedanz. Published by John Wiley \& Sons LTD, Chichester, UK, April 2000.
+  \item[1999] M. K. Perdikeas, O. I. Pyrovolakis, F. G. Chatzipapadopoulos and I. S. Venieris, ``Service Design in Distributed Intelligent Networks'' in ``On the Way to the Information Society – A Retrospective View on 5 Years of ACTS IS\&N Research'' Baltzer press, 1999.
+  \end{description}
+  \paragraph{Peer reviewed Papers in Interntational Journals}
+  \begin{description}
+  \item[2001] M.K. Perdikeas and I.S. Venieris,  ``Parlay-based Service Engineering in a Converged Internet-PSTN Environment'' \href{http://www.sciencedirect.com/science/journal/13891286}{Computer Networks (Elsevier)},
+    vol. 35, Issue 5, April 2001, pp. 565-578
+  \item[2000]F. G. Chatzipapadopoulos, M. K. Perdikeas and I. S. Venieris, ``Mobile Agent and CORBA Technologies in the Broadband Intelligent Network'', \href{http://www.comsoc.org/commag}{IEEE Communications Magazine.}, Vol. 38, Issue 6, pp. 116-124
+    \item[1999] M.K. Perdikeas, F.G. Chatzipapadopoulos, I.S. Venieris and G. Marino, ``Mobile Agent Standards and Available Platforms'', \href{http://www.sciencedirect.com/science/journal/13891286}{Computer Networks}, vol. 31, Issue 19, August 1999, pp. 1999-2016
+  \end{description}
+\paragraph{Papers in Interntational Conferences, Workshops etc.}
+(most of them peer-reviewed)
 \begin{description}
-\item[foo]foo
-\item[boo]boo
+\item[2014] Christophe Arviset, Menelaus Perdikeas et al., ``The Euro-VO Registry, re-engineering the back-end'' in the \href{http://www.adass2014.org/announcements_en.php}{24th annual conference on Astronomical Data Analysis Software and Systems}, Calgary---Canada
+\item[2011] Theodore Zahariadis, Menelaos Perdikeas, Fotis Chatzipapadopoulos, Javier Lucio Ruiz Andino,
+  Maria Angeles Barba Rodriguez: Middleware for energy aware appliances
+  2nd Workshop on eeBuildings Data Models, Sofia Antipolis---France
+\item[2010] Menelaos Perdikeas, Theodore Zahariadis, and Pierre Plaza: The BeyWatch Conceptual Model for Demand-Side Management, E-Energy conference, October 14-15, Athens---Greece
+
+\item \ldots and nine (9) others in previous years including IEEE and \href{http://www.icin.co.uk/}{ICIN}
+  conferences.
+  
 \end{description}
 
 \spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
