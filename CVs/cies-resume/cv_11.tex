@@ -54,7 +54,7 @@ perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype username
 \begin{multicols}{2}  % Start a two-column layout
   \noindent
   %\textit{A summary of your interests, achievements, history, topic of study or any other short summary of your professional life.}\\\\
-  I have been coding in Java since version JDK 1.1 came out in 1997. Over the years I have written more than 200
+  I have been coding in Java since version JDK 1.1 came out in 1997. Over the years I have written more than 200K
   LoC in Java and have explored a wide array of technologies and frameworks in the landscape. 
   I am a proficient Emacs user (with an Emacs setup that I've honed over the years for maximum productivity)
   I like to live as close to the command line as possible
@@ -267,12 +267,11 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
     peripheral systems which will survive the migration to the new billing system.
     I was responsible for the integration code which was implemented in
     C++ and Java (for higher-level demons) and which undertook to sustain the information flow between the
-    new billing system and the existing legacy systems which were not replaced. Since no modifications were
-    permitted in the legacy systems, the new billing system had to be wrapped in a façade allowing it to
-    project the interface of the old billing system towards the legacy systems. In this way the legacy systems
-    would continue to operate unaltered and under the illusion that they are still interacting with the old
-    billing system. I was also involved with the design of a massive ``mediating'' staging database of more
-    than 400 tables and 40,000 lines of \href{https://en.wikipedia.org/wiki/PL/SQL|{PL-SQL} code
+    new billing system and legacy systems which were not going to be replaced. Since no modifications were
+    permitted in the legacy systems, the new billing system had to be wrapped in a fa\c{c}ade allowing it to
+    expose the same interface towards the legacy systems.
+    I was also involved with the design of a massive ``mediating'' staging database of more
+    than 400 tables and 40,000 lines of \href{https://en.wikipedia.org/wiki/PL/SQL}{PL-SQL} code
     (a large percentage of which I implemented myself).
     Finally I had small exposure with \href{https://en.wikipedia.org/wiki/Portal_Software}{Portal Infranet} programming.
     \\
@@ -301,36 +300,35 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 \roottitle{Education} % Top level section
 
 \headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
-{Erasmus University Rotterdam}
-{\textsc{Rotterdam, The Netherlands}} {
+{National Technical University of Athens}
+{\textsc{Athens, Greece}} {
 
 \headedsubsection % Job title entry for the current employer
-{Bachelor degree in Computer Science \& Economics}
-{2004 -- 2007}
-{\bodytext{Focussed on the economics of open source, rapid application development (\acr{RAD}) and the semantic web technology stack (\acr{RDF}/\acr{RDFS}, \acr{OWL} and \acr{SPARQL}).}}
+{Ph.D. from the Department of Electrical and Computer Engineering}
+{1997 -- 2001}
+{\bodytext{NTUA is the oldest and most prestigious technical university in Greece.
+    I was awarded a Ph.D. for resarch into applying modern (at that time) software technologies
+    in telecommunications networks. During that period of time I worked mostly with C++ and Java and developed
+    code using distributed technologies like CORBA, RMI; code interacting with telecom switch equipment, developed specialized video streaming applications in C++, etc. During that period of time I published more than 14 papers (3 in international refereed journals including IEEE) and the rest in international conferences. Publications
+    list provided at the end.
+    }}
 }
-
-%------------------------------------------------
 
 \headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
-{Technical University Delft}
-{\textsc{Delft, The Netherlands}} {
+{Technical University of Patras}
+{\textsc{Patras, Greece}} {
 
 \headedsubsection % Job title entry for the current employer
-{Industrial Design Engineering \textnormal{(discontinued)}}
-{2001 -- 2002} {}
+{Diploma from the Computer Engineering and Informatics Department}
+{1992 -- 1997}
+{\bodytext{
+    CEID is the oldest university department in Greece focusing exclusively in computer and software engineering
+    and awarding an engineering diploma after 5 years of studies.
+    I entered 1st in rank after a nationwide competitive examination and finished 2nd in rank (class size ~150).
+    Coded various applications in technologies like Pascal, Lisp, C and Java.
+    }}
 }
 
-%------------------------------------------------
-
-\headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
-{Libanon Lyceum}
-{\textsc{Rotterdam, The Netherlands}} {
-
-\headedsubsection % Job title entry for the current employer
-{\acr{VWO} \textnormal{(pre-university secondary education)}}
-{1994 -- 2000} {}
-}
 
 \spacedhrule{0.5em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
 
@@ -342,13 +340,21 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 
 \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
 {Technical specialties:}
-{Software design and implementation, with(in) a team. I love Ruby/Python/Java/C++ and flirt regularly with Haskell. Solid knowledge of web technologies:\ \acr{HTML+CSS}, \acr{XML}, \acr{RDF}, \acr{REST}, \acr{SOAP} and JavaScript (mainly jQuery). Linux administration skills:\ bash, Apache, My\acr{SQL}, Postgres\acr{SQL}, virtualization/cloud (Open\acr{VZ}, \acr{VM}ware, \acr{KVM}, Xen and \acr{EC}2), datacenter automation (Puppet and Chef), continuous integration (Hudson/Jenkins).}
+{Software design and implementation, alone or in a team. I am a professional Java coder but also love
+  and have written various applications and toy projects in Clojure,  JavaScript and OCaml. I am
+  also proficient in shell-scripting (bash) and casually write one-liners piping together Linux
+  utilities and commands daily.
+  Solid knowledge of the following technologies: Java 7, JDBC, \acr{XML}, \acr{XPath}, \acr{XSD}, \acr{REST}, \acr{SOAP}, Relational
+  Databases and \acr{PostgreSQL}, bare-bones JavaScript.
+  Linux administration skills:\ bash, Apache Tomcat,
+  Postgres\acr{SQL}}
 
+\inlineheadsection{}{}
 %------------------------------------------------
 
 \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
 {Natural languages:}
-{Dutch \textit{(mother tongue)}, English \textit{(full professional proficiency)}, German \textit{(limited working proficiency)}, French \textit{(elementary proficiency)} and Mandarin Chinese \textit{(beginner)}.}
+{Greek \textit{(mother tongue)}, English \textit{(full professional proficiency: Cambridge Certificate of Proficiency in English, Grade A)}, Spanish \textit{(elementary)}}
 
 \spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
 
@@ -359,13 +365,31 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 \roottitle{References} % Top level section
 
   \inlineheadsection
-      {Christophe Arviset}
-      {asdfasdfasdf}
+      {\href{mailto:Christophe.Arviset@esa.int}{Christophe ARVISET}}
+      {Head of the \href{http://www.cosmos.esa.int/web/esdc}{Science Archives Unit}, \href{http://www.esa.int/About\_Us/ESACESAC}{ESAC}}
+
+      \inlineheadsection{}{}
+
   \inlineheadsection
-      {Markus Demleitner}
-      {asdfasdfasdf}
+      {\href{mailto:i_koufoudakis@c-gaia.gr}{Yannis KOUFOUDAKIS}}
+      {Managing Director, \href{https://www.c-gaia.gr/}{GAIA}.
+        \\ GAIA is a 50 MEuro turnover company running the informational systems handling
+        practically all EU-agricultural subsidies in Greece.}
 
 \spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES SECTION
+%----------------------------------------------------------------------------------------
+
+\roottitle{Publications} % Top level section
+\begin{description}
+\item[foo]foo
+\item[boo]boo
+\end{description}
+
+\spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
+
 %----------------------------------------------------------------------------------------
 %	INTERESTS SECTION
 %----------------------------------------------------------------------------------------
@@ -374,7 +398,7 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 
 \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
 {Non-exhaustive:}
-{obsessively optimizing my environment, setup and workflow, Emacs, JavaScript, ReactJS, Linux, org-mode, i3 window manager, \LaTeX; historical reading}
+{optimizing my environment, setup and workflow; Emacs, JavaScript, ReactJS, Linux, i3 window manager, \LaTeX; historical reading, Chess, boardgames.}
 
 %----------------------------------------------------------------------------------------
 
