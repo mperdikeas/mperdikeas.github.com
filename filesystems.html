@@ -1,45 +1,113 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-<ol reversed>
-<li>procedure to automatically mount a new filesystem in Ubuntu</li>
-    <ol>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li>how to mount a new disk</li>
+      <ol>
+        <li>Recognize the new device</li>
+        This can be done in two ways:
+        <ol type=a>
+          <li>using the <code>lsblk</code> program</li>
+          In the typical output of this program:
+          <br/>
+          <img src="lsblk.png"/>
+          <br/>
+          ... it is easy to see which devices are mounted (i.e. don't have a <code>MOUNTPOINT</code> value. E.g. in the example above that's the device <code>sdb</code>.
+          <li>using <code>sudo fdisk -l</code></li>
+          This option shows <b>all</b> disks but does <b>not</b> show which ones are not mounted (but that may be guessed):
+          <pre class="console">
+$ sudo fdisk -l
+
+Disk /dev/sda: 250.1 GB, 250059350016 bytes
+255 heads, 63 sectors/track, 30401 cylinders, total 488397168 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x0007fe8d
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1   *        2048   482142207   241070080   83  Linux
+/dev/sda2       482144254   488396799     3126273    5  Extended
+/dev/sda5       482144256   488396799     3126272   82  Linux swap / Solaris
+
+WARNING: GPT (GUID Partition Table) detected on '/dev/sdb'! The util fdisk doesn't support GPT. Use GNU Parted.
+
+
+Disk /dev/sdb: 2000.4 GB, 2000365289472 bytes
+255 heads, 63 sectors/track, 243197 cylinders, total 3906963456 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0xa29ef612
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1               1  3906963455  1953481727+  ee  GPT
+          </pre>
+          <li>if the disk is labelled, lists disks by label</li>
+          <pre>
+$ ls /dev/disk/by-label/
+total 0
+drwxr-xr-x 2 root root  60 Nov 16 10:34 ./
+drwxr-xr-x 6 root root 120 Nov 16 10:34 ../
+lrwxrwxrwx 1 root root   9 Nov 16 10:34 transc-usb-disk -> ../../sdb
+          </pre>
+        </ol>
+        <li>verify that the device name we identified is indeed not mounted</li>
+        <pre class="console">
+$mount | grep sdb
+$
+        </pre>
+        <li>identify the file-system of that device</li>
+        <pre class="console">
+sudo lshw  | grep -A20 -B30  sdb
+(... output ommited)
+        </pre>
+        <li>mount said device with the correct filesystem type (as discovered in the previous step)</li>
+        <i>create before doing that, the directory corresponding to the mount point - in our case <code>/media/usb-disk</code></i>
+        <pre class="console">
+ sudo mount -t ext3 /dev/sdb2 /media/usb-disk
+        </pre>
+        
+    </li>
+      </ol>
+      <li>procedure to automatically mount a new filesystem in Ubuntu</li>
+      <ol>
         <li>get the UUID of the device in question:</li>
         <pre>sudo blkid</pre>
         <li>get the user and group of the id of the user who'll be the owner of the files
-            on the mounted filesystem using the <b><u>id</u></b> command.
+          on the mounted filesystem using the <b><u>id</u></b> command.
         </li>
         <li>add a line at the end of the /etc/fstab file. E.g.</li>
-         <pre>UUID=e6daad35-1f57-4281-8683-a03c20cfc5a3 /media/Elements ext4 defaults,uid=1000,gid=1000,umask=007
-         </pre>
-    </ol>
-<li>Taking snapshots in a ZFS filesystem</li>
-In a ZFS filesystem there is no need to use the custom script that 
-rotates backups relying on a combination of <b>cp -al</b> and 
-<b>rsync</b>. <b>rsync</b> alone is enough together with a ZFS pool,
-e.g. named 'backups' as in:
-<pre>
+        <pre>UUID=e6daad35-1f57-4281-8683-a03c20cfc5a3 /media/Elements ext4 defaults,uid=1000,gid=1000,umask=007
+        </pre>
+      </ol>
+      <li>Taking snapshots in a ZFS filesystem</li>
+      In a ZFS filesystem there is no need to use the custom script that 
+      rotates backups relying on a combination of <b>cp -al</b> and 
+      <b>rsync</b>. <b>rsync</b> alone is enough together with a ZFS pool,
+      e.g. named 'backups' as in:
+      <pre>
 rsync -avx --delete --in-place /whatever /mnt/zfs
 zfs snapshot backups@20120925
-</pre>
-<li>Find the UUID of a drive in Ubuntu precise</li>
-To find the drives:
-<pre>sudo fdisk -l </pre>
-and then you do a:
-<pre>sudo blkid /dev/sdb1</pre>
-where, in the above example, /dev/sdb1 is the device we're interested in.
-<li>Deep compare two file hierarchies</li>
-Either use <i>meld</i> or, from command line:
-<pre>
+      </pre>
+      <li>Find the UUID of a drive in Ubuntu precise</li>
+      To find the drives:
+      <pre>sudo fdisk -l </pre>
+      and then you do a:
+      <pre>sudo blkid /dev/sdb1</pre>
+      where, in the above example, /dev/sdb1 is the device we're interested in.
+      <li>Deep compare two file hierarchies</li>
+      Either use <i>meld</i> or, from command line:
+      <pre>
 diff -qr a b | sort
-</pre>
-<li>How to find mounted file systems and mount a new one</li>
-The following history shows how to do it:
-<pre>
+      </pre>
+      <li>How to find mounted file systems and mount a new one</li>
+      The following history shows how to do it:
+      <pre>
  757  fdisk -l
  758  sudo fdisk -l
  759  clear
@@ -48,8 +116,8 @@ The following history shows how to do it:
  762  sudo mount /dev/sdb1 /media/Elements/
  763  df
  764  df -h
-</pre>
+      </pre>
 
-</ol>
-</body>
+    </ol>
+  </body>
 </html>

@@ -14,8 +14,7 @@ This means that if (as is the case in the PrimeFaces framework) there is
 JavaScript code associated with the clicking of a radio button that initiates
 an Ajax Post request, this <b>cannot</b> be reproduced just by clicking on the
 radio button using the interface of Mechanize and one has to write Mechanize
-code to explicitly sent the actual Ajax post request. Here's the code
-(by ttsiodras):
+code to explicitly sent the actual Ajax post request. Here's some sample code:
 <pre>
     def ajaxSetRadioButtonInFieldSet(self, name, index=None, strValue=None):
         url = self.browser.geturl()

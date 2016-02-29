@@ -44,8 +44,36 @@ There are two variations of the above pattern solely for organizational purposes
         exist actual DAO facades for all the various tables.
     </li>
 </ol>
+<li>JSF client-side state management</li>
+Original file = <a href="web.xml.patch.for.client-side.state.mgmt">here</a>
+<p>
+Contents:
+<pre>
+Index: Orders-war/web/WEB-INF/web.xml
+===================================================================
+--- Orders-war/web/WEB-INF/web.xml	(revision 62)
++++ Orders-war/web/WEB-INF/web.xml	(working copy)
+@@ -9,6 +9,10 @@
+         <param-name>primefaces.THEME</param-name>
+         <param-value>#{themeSwitcherBean.current}</param-value>
+     </context-param>
++    <context-param>
++        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
++        <param-value>client</param-value>
++    </context-param>
+     <welcome-file-list>
+         <welcome-file>/index.xhtml</welcome-file>
+     </welcome-file-list>
 
-
+</pre>
+<li>backing-bean / JavaScript communication</li>
+The way to implement backing bean / JavaScript communication is demonstrated in
+this <a href="fileset-00/List.xhtml">view</a> and <a href="fileset-00/CustomerLController.java">backing bean</a> pair.
+<p>
+Examine constructs <b><i>focusSurname</i></b>,  <b><i>p:ajax event="keyup"</i></b> and <b><i>script</i></b>.
+<p>
+Another way is to hardcode in the <b><i>script</b></i> definition in the .xhtml page access to the backing-beans properties
+using EL and at runtime, these are replaced by the actual values in the client-side code.
 <li>extending <b>xhtml</b> views</li>
 Using the:<b>&ltC:Choose&gt</b> tag it is possible to customize and extend
 an automatically generated xhtml view by introducing your own parts.

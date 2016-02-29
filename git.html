@@ -1,237 +1,239 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-<ol reversed>
-<li>How to remove a git submodule</li>
-<a href="http://stackoverflow.com/a/21211232/274677">source</a>
-<pre>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li>How to remove a git submodule</li>
+      <a href="http://stackoverflow.com/a/21211232/274677">source</a>
+      <pre>
 git rm the_submodule
 rm -rf .git/modules/the_submodule
-</pre>
-<li><a href="#submodules"></a>how to add (clone) an external git repo as a submodule of my repo</li>
-Execute a command like the following from the toplevel of the working tree:
-<pre>
+      </pre>
+      <li><a href="#submodules"></a>how to add (clone) an external git repo as a submodule of my repo</li>
+      Execute a command like the following from the toplevel of the working tree:
+      <pre>
 git submodule add https://github.com/fxbois/web-mode.git .emacs.d/web-mode
-</pre>
-The last argument is the path in which the submodule should reside.
-NB: obviously people that have already cloned the repo (prior to the addition of the
-submodule) would still have to do:
-    <pre>git submodule update --init --recursive</pre>
-Otherwise (i.e. if the cloning happens <em>after</em> the addition of the submodule it is better
-to just do:
-<pre>
+      </pre>
+      The last argument is the path in which the submodule should reside.
+      NB: obviously people that have already cloned the repo (prior to the addition of the
+      submodule) would still have to do:
+      <pre>git submodule update --init --recursive</pre>
+      Otherwise (i.e. if the cloning happens <em>after</em> the addition of the submodule it is better
+      to just do:
+      <pre>
 git clone --recursive git://github.com/some/repo.git
-</pre>
-(see <a href="http://stackoverflow.com/a/4438292">how to clone a repo including the submodules</a>).
-<li>how to configure git to save password in memory for sometime (when cloning via <tt>https</tt>)</li>
-<pre>
+      </pre>
+      (see <a href="http://stackoverflow.com/a/4438292">how to clone a repo including the submodules</a>).
+      <li>how to configure git to save password in memory for sometime (when cloning via <tt>https</tt>)</li>
+      <pre>
 $ git config --global credential.helper 'cache --timeout=3600'
 # Set the cache to timeout after 1 hour (setting is in seconds)
-</pre>
-<a href="http://stackoverflow.com/a/18554764/274677">source</a>
-<li>console-based tool equivalent to <tt>gitk</tt></li>
-<pre>sudo apt-get install tig</pre>
-E.g. to view history on single file:
-<pre>tig [filename]</pre>
-<li>undo commit before push</li>
-The following has worked for me once:
-<pre>
+      </pre>
+      <a href="http://stackoverflow.com/a/18554764/274677">source</a>
+      <li>console-based tool equivalent to <tt>gitk</tt></li>
+      <pre>sudo apt-get install tig</pre>
+      E.g. to view history on single file:
+      <pre>tig [filename]</pre>
+      <li>undo commit before push</li>
+      The following has worked for me once:
+      <pre>
 git reset --hard HEAD~1
-</pre>
-<a href="http://stackoverflow.com/a/6866485/274677">source</a>.
-<li>git workflow using 'rebase'</li>
-<a href="http://blogs.atlassian.com/2014/01/simple-git-workflow-simple/">original article</a>
-<a href="https://news.ycombinator.com/item?id=7036628">hacker news discussion</a>
-<li>show files affected by a commit in SVN</li>
-<a href="http://stackoverflow.com/a/424142/274677">so</a><br>
-quick and dirty:
-<pre>
+      </pre>
+      <a href="http://stackoverflow.com/a/6866485/274677">source</a>.
+      <li><a href="git list remote branches.htm">git list remote commits</a></li>
+      <li><a href="git-delete-pushed-commits.htm">git delete pushed commits (SO)</a></li>
+      <li>git workflow using 'rebase'</li>
+      <a href="http://blogs.atlassian.com/2014/01/simple-git-workflow-simple/">original article</a>
+      <a href="https://news.ycombinator.com/item?id=7036628">hacker news discussion</a>
+      <li>show files affected by a commit in SVN</li>
+      <a href="http://stackoverflow.com/a/424142/274677">so</a><br>
+      quick and dirty:
+      <pre>
 git diff-tree -r df7fc29
-</pre>
-long and clean:
-<pre>
+      </pre>
+      long and clean:
+      <pre>
 git diff-tree --no-commit-id --name-only -r df7fc29
-</pre>
-- consumed in my <i>git-show-files</i> script (in <i>~/tools</i>)
-<li>procedure I used to create an SVN mirror of my git project<a name="particular-svn-mirroring"/></li>
-(based on the <a href="#general-svn-mirroring">general instructions</a>)
-<ol>
-<li>created new repository <i>dummy</i> on <b>github.com</b></li>
-<li>cloned it</li>
-<pre>cd && git clone https://github.com/mperdikeas/dummy.git</pre>
-<li>added a 'foo' file and pushed it</li>
-    <pre>
+      </pre>
+      - consumed in my <i>git-show-files</i> script (in <i>~/tools</i>)
+      <li>procedure I used to create an SVN mirror of my git project<a name="particular-svn-mirroring"/></li>
+      (based on the <a href="#general-svn-mirroring">general instructions</a>)
+      <ol>
+        <li>created new repository <i>dummy</i> on <b>github.com</b></li>
+        <li>cloned it</li>
+        <pre>cd && git clone https://github.com/mperdikeas/dummy.git</pre>
+        <li>added a 'foo' file and pushed it</li>
+        <pre>
     cd dummy && echo "foo" >> foo && git add . -A
     git commit -m "foo added" && git push
-    </pre>
-<li>created receptor SVN project in server-side SVN</li>
-<pre>cd ~/svn-playground/ && svnadmin create svn-server/dummy/</pre>
-<li>created a 'trunk' directory in receptor SVN project</li>
-<pre>
+        </pre>
+        <li>created receptor SVN project in server-side SVN</li>
+        <pre>cd ~/svn-playground/ && svnadmin create svn-server/dummy/</pre>
+        <li>created a 'trunk' directory in receptor SVN project</li>
+        <pre>
     cd ~/svn-playground && mkdir dummy-client && cd dummy-client
     svn co file:///home/mperdikeas/svn-playground/svn-server/dummy . 
     svn mkdir trunk && svn commit -m 'created trunk directory'
-</pre>
-<li>configuring git svn mirror (ESAC use-case)</li>
-add the following contents to the <code>~/dummy/.git/config</code> file:
-<pre>
+        </pre>
+        <li>configuring git svn mirror (ESAC use-case)</li>
+        add the following contents to the <code>~/dummy/.git/config</code> file:
+        <pre>
 [svn-remote "svn"]
     url = file:///home/mperdikeas/svn-playground/svn-server/dummy/trunk
     fetch = :refs/remotes/git-svn
-</pre>
-<li>Do an initial fetch of the empty subversion remote, and check it out as a new git branch (called svn)</li>
-<pre>
+        </pre>
+        <li>Do an initial fetch of the empty subversion remote, and check it out as a new git branch (called svn)</li>
+        <pre>
 cd ~/dummy/ && git svn fetch svn
 git checkout -b svn git-svn
-</pre>
-<li>Merge in all your commits from master, and push them to subversion</li>
-<pre>
+        </pre>
+        <li>Merge in all your commits from master, and push them to subversion</li>
+        <pre>
 git merge master
 git svn dcommit
-</pre>
-<li>check that the mirroring is effected by updating on the SVN repository<li>
-<pre>
+        </pre>
+        <li>check that the mirroring is effected by updating on the SVN repository<li>
+          <pre>
 cd ~/svn-playground/dummy-client/ && svn update
-</pre>
-(files '<i>foo</i>' and '<i>README.md</i>' should now be present in the <i>dummy-client</i> (in the <i>trunk</i> repository).
-working copy
-<li>To allow pushing to svn from master, rebase master to the svn branch (which can then be deleted)<li>
-<pre>
+          </pre>
+          (files '<i>foo</i>' and '<i>README.md</i>' should now be present in the <i>dummy-client</i> (in the <i>trunk</i> repository).
+          working copy
+          <li>To allow pushing to svn from master, rebase master to the svn branch (which can then be deleted)<li>
+            <pre>
 cd ~/dummy && git checkout master
 git rebase svn && git branch -d svn
-</pre>
-<li>verify that you are on branch 'master' and only that branch exists<li>
-<pre>
+            </pre>
+            <li>verify that you are on branch 'master' and only that branch exists<li>
+              <pre>
 cd ~/dummy
 git status
 git branch
-</pre>
-<li>verify the SVN read-only mirroring by removing a file, adding another and pusing the changes</li>
-<pre>
+              </pre>
+              <li>verify the SVN read-only mirroring by removing a file, adding another and pusing the changes</li>
+              <pre>
 echo "zoo" >> zoo && rm foo && git add -A && git commit -m "zoo added, foo removed" & git push
-</pre>
-<li>confirm that the changes are not yet visible to the SVN repo</li>
-<pre>
+              </pre>
+              <li>confirm that the changes are not yet visible to the SVN repo</li>
+              <pre>
 cd ~/svn-playground/dummy-client/ && svn update
-</pre>
-(nothing should be added)
-<li>push to SVN from the git repo</li>
-<pre>
+              </pre>
+              (nothing should be added)
+              <li>push to SVN from the git repo</li>
+              <pre>
 cd ~/dummy && git svn dcommit
-</pre>
-<li>view the changes in the SVN repo</li>
-<pre>
+              </pre>
+              <li>view the changes in the SVN repo</li>
+              <pre>
 cd ~/svn-playground/dummy-client/ && svn update
-</pre>
-</ol>
-<li>How to do SVN read-only mirroring from a git repo<a name="general-svn-mirroring"></li>
-NB: particularized instructions <a href="#particular-svn-mirroring">here</a>.
-<br>
-The instructions on <a href="http://www.kerrybuckley.org/2009/10/06/maintaining-a-read-only-svn-mirror-of-a-git-repository/">this page</a>
-worked well. Copied below in case the source goes off line:
-<br>
-<b>Create the subversion repository in the usual way, using svnadmin.</b>
-<br>
-<br>
-Once you've got an empty repository to point to (we'll imagine it's at http://svn.example.com/foo), you also need to commit an initial version (I also created a trunk directory in this step, in case we later decide to mirror branches too):
-<br>
-<pre>
+              </pre>
+      </ol>
+      <li>How to do SVN read-only mirroring from a git repo<a name="general-svn-mirroring"></li>
+        NB: particularized instructions <a href="#particular-svn-mirroring">here</a>.
+        <br>
+        The instructions on <a href="http://www.kerrybuckley.org/2009/10/06/maintaining-a-read-only-svn-mirror-of-a-git-repository/">this page</a>
+        worked well. Copied below in case the source goes off line:
+        <br>
+        <b>Create the subversion repository in the usual way, using svnadmin.</b>
+        <br>
+        <br>
+        Once you've got an empty repository to point to (we'll imagine it's at http://svn.example.com/foo), you also need to commit an initial version (I also created a trunk directory in this step, in case we later decide to mirror branches too):
+        <br>
+        <pre>
 svn co http://svn.example.com/foo
 cd myproj
 svn mkdir trunk
 svn commit -m 'Created trunk directory'
-</pre>
-Once this is done, you can throw away the directory you checked out of subversion.
-<br>
-<br>
-<b>Set up the subversion remote</b>
-<br>
-This step, and subsequent ones, need to be performed on whichever git repository you want to mirror from.
-<p>
-In our case, we have a central repository running on a local installation of Gitorious. This is a bare repository, which makes things a little tricker, as git-svn requires a working copy. To get round this, we create a clone, which we’ll use as an intermediate step in the mirroring process. If you're not mirroring a bare repository, you can omit this step.
-<p>
-The repositories we want to mirror are in ~git/repositories, and we’ve created a directory ~git/repositories/svn-mirror where we'll put the clones. For this example, we'll use a repository called foo/mainline.git.
-<br>
-<b>Create the clone:</b>
-<br>
-<pre>
+        </pre>
+        Once this is done, you can throw away the directory you checked out of subversion.
+        <br>
+        <br>
+        <b>Set up the subversion remote</b>
+        <br>
+        This step, and subsequent ones, need to be performed on whichever git repository you want to mirror from.
+        <p>
+          In our case, we have a central repository running on a local installation of Gitorious. This is a bare repository, which makes things a little tricker, as git-svn requires a working copy. To get round this, we create a clone, which we’ll use as an intermediate step in the mirroring process. If you're not mirroring a bare repository, you can omit this step.
+          <p>
+            The repositories we want to mirror are in ~git/repositories, and we’ve created a directory ~git/repositories/svn-mirror where we'll put the clones. For this example, we'll use a repository called foo/mainline.git.
+            <br>
+            <b>Create the clone:</b>
+            <br>
+            <pre>
 git clone ~git/repositories/foo/mainline.git ~git/repositories/svn-mirror/foo
 cd ~git/repositories/svn-mirror/foo
-</pre>
+            </pre>
 
-Now add the following to .git/config (with the correct svn URI, of course):
+            Now add the following to .git/config (with the correct svn URI, of course):
 
-<pre>
+            <pre>
 [svn-remote "svn"]
 url = http://svn.example.com/foo/trunk
 fetch = :refs/remotes/git-svn
-</pre>
+            </pre>
 
-Now do an initial fetch of the empty subversion remote, and check it out as a new git branch (called svn):
+            Now do an initial fetch of the empty subversion remote, and check it out as a new git branch (called svn):
 
-<pre>
+            <pre>
 git svn fetch svn
 git checkout -b svn git-svn
-</pre>
-You can now merge in all your commits from master, and push them to subversion. You’ll probably want to go and make a coffee or something while the dcommit runs – if you haven’t used subversion for a while you’ve probably forgotten just how much slower it is than git.
+            </pre>
+            You can now merge in all your commits from master, and push them to subversion. You’ll probably want to go and make a coffee or something while the dcommit runs – if you haven’t used subversion for a while you’ve probably forgotten just how much slower it is than git.
 
-<pre>
+            <pre>
 git merge master
 git svn dcommit
-</pre>
+            </pre>
 
-To allow pushing to svn from master, rebase master to the svn branch (which can then be deleted):
+            To allow pushing to svn from master, rebase master to the svn branch (which can then be deleted):
 
-<pre>
+            <pre>
 git checkout master
 git rebase svn
 git branch -d svn
-</pre>
-At this point you should be able to manually update subversion at any time by running <b>git svn dcommit</b> from the master branch.
+            </pre>
+            At this point you should be able to manually update subversion at any time by running <b>git svn dcommit</b> from the master branch.
 
 
-<li>reconnect a detached head</li>
-<pre>
+            <li>reconnect a detached head</li>
+            <pre>
 $ git log -1
 # note the SHA-1 of latest commit
 $ git checkout master
 # reset your branch head to your previously detached commit
 $ git reset --hard [commit-id]
-</pre>
-<li>list tags</li>
-<pre>git tag -l</pre>
-<li>checkout remote tip</li>
-<pre>git checkout origin/HEAD</pre>
-<li>show remote tags</li>
-<pre>git ls-remote --tags</pre>
-<li>produce a git patch</li>
-There are two ways:
-    <ul>
-        <li>using <b>git-format-patch</b>:</li>
-        <pre> git format-patch 3266a7e </pre>
-        (in the above example all changes between identified commit and the tip of the branch will be reported)
-        <li>using <b>git-diff</b>:</li>
-        I suspect the <i>tags</i> in the following can be any tree-ish objects:
-        <pre>git diff 3266a7e 8deaaf2 > ~/lastchanges.patch</pre>
-    </ul>
-The <b>git-format-patch</b> method produces cleaner output.
-<li>git add all files in a directory hierarchy except a particular one</li>
-The following is the 'safe' version (echo):
-<pre>find . ! -type d  ! -iname nosecurity_mvn.zip -exec echo git add {} \;</pre>
-<li>examine tree-ish objects (such as commits)</li>
-<pre>git ls-tree</pre> <p>or..<p>
-<pre>git-ls-tree</pre><p>
-This, and many other commands are available at /usr/lib/git-core
-<li>show git tags including messages of annotated tags</li>
-<pre>git tag -l -n1</pre>
-<li>useful git log alias (to show tags among others)</li>
-git config --global alias.lgb "log --graph --oneline --color --decorate"
-<li>move local changes to new branch</li>
-<pre>
+            </pre>
+            <li>list tags</li>
+            <pre>git tag -l</pre>
+            <li>checkout remote tip</li>
+            <pre>git checkout origin/HEAD</pre>
+            <li>show remote tags</li>
+            <pre>git ls-remote --tags</pre>
+            <li>produce a git patch</li>
+            There are two ways:
+            <ul>
+              <li>using <b>git-format-patch</b>:</li>
+              <pre> git format-patch 3266a7e </pre>
+              (in the above example all changes between identified commit and the tip of the branch will be reported)
+              <li>using <b>git-diff</b>:</li>
+              I suspect the <i>tags</i> in the following can be any tree-ish objects:
+              <pre>git diff 3266a7e 8deaaf2 > ~/lastchanges.patch</pre>
+            </ul>
+            The <b>git-format-patch</b> method produces cleaner output.
+            <li>git add all files in a directory hierarchy except a particular one</li>
+            The following is the 'safe' version (echo):
+            <pre>find . ! -type d  ! -iname nosecurity_mvn.zip -exec echo git add {} \;</pre>
+            <li>examine tree-ish objects (such as commits)</li>
+            <pre>git ls-tree</pre> <p>or..<p>
+              <pre>git-ls-tree</pre><p>
+                This, and many other commands are available at /usr/lib/git-core
+                <li>show git tags including messages of annotated tags</li>
+                <pre>git tag -l -n1</pre>
+                <li>useful git log alias (to show tags among others)</li>
+                git config --global alias.lgb "log --graph --oneline --color --decorate"
+                <li>move local changes to new branch</li>
+                <pre>
 git stash
 git reset --hard
 git clean -xf
@@ -241,95 +243,95 @@ git checkout newBranch
 git stash pop
 git add . -A -n
 git commit -m "first commit on new branch"
-</pre>
-<li>change most recent git commit message</li>
-<pre>git commit --amend -m "New commit message"</pre>
-<li>concise, yet informative git history</li>
-<p><pre>
+                </pre>
+                <li>change most recent git commit message</li>
+                <pre>git commit --amend -m "New commit message"</pre>
+                <li>concise, yet informative git history</li>
+                <p><pre>
 git log --oneline --decorate=full --graph
-</pre>
-<li>how to init and fetch data for git submodules</li>
-<p><pre>
+                </pre>
+                <li>how to init and fetch data for git submodules</li>
+                <p><pre>
 git submodule init
 git submodule update
-</pre>
-Apparently <tt>git submodule update --init --recursive</tt> is also an option.
-See for more: <a href="http://stackoverflow.com/a/4438292">how to clone a repo including the submodules</a>).
-<li>how to get the hash of the current commit</u></b> (and just that)</li>
-<p>
-<pre>
+                </pre>
+                Apparently <tt>git submodule update --init --recursive</tt> is also an option.
+                See for more: <a href="http://stackoverflow.com/a/4438292">how to clone a repo including the submodules</a>).
+                <li>how to get the hash of the current commit</u></b> (and just that)</li>
+                <p>
+                  <pre>
 git rev-parse --verify HEAD
-</pre>
-<p> - or simply -
-<pre>
+                  </pre>
+                  <p> - or simply -
+                    <pre>
 git rev-parse HEAD
-</pre>
-<li> how to restore a specific file to the branch's image:</li>
-<pre>git checkout -f visualization "13 - COAST Caches/ccaches_protocol_types/src/org/coast/caches/network/types/CacheGetRequest.java"</pre>
+                    </pre>
+                    <li> how to restore a specific file to the branch's image:</li>
+                    <pre>git checkout -f visualization "13 - COAST Caches/ccaches_protocol_types/src/org/coast/caches/network/types/CacheGetRequest.java"</pre>
 
-In the incantation above 'visualization' (i.e. the branch name) is a tree-ish
-object in git. The general signature of git checkout is therefore:
-<pre>
+                    In the incantation above 'visualization' (i.e. the branch name) is a tree-ish
+                    object in git. The general signature of git checkout is therefore:
+                    <pre>
 git checkout <tree-ish> <optional path within the tree-ish>
-</pre>
+                    </pre>
 
-<li>overwrite local working copy modifications:</li>
-                <pre>git checkout .</pre>
-<li>bullet-proof way to reset all the files in the local repository:</li>
-                <pre>
+                    <li>overwrite local working copy modifications:</li>
+                    <pre>git checkout .</pre>
+                    <li>bullet-proof way to reset all the files in the local repository:</li>
+                    <pre>
                 $ git clean -d -x -f
                 $ git reset --hard
-                </pre>
-                to just see which files will be deleted
-                by git clean do a dry-run:
-                <pre>
+                    </pre>
+                    to just see which files will be deleted
+                    by git clean do a dry-run:
+                    <pre>
                 $ git clean -d -x -n
-                </pre>    
-<li>how to check differences between local and remote branches:</li>
-<pre>
+                    </pre>    
+                    <li>how to check differences between local and remote branches:</li>
+                    <pre>
                 $ git diff master origin/master
-</pre>
-<li>to avoid having to type:</li>
-<pre>
+                    </pre>
+                    <li>to avoid having to type:</li>
+                    <pre>
                 git add . -A
                 git commit -m " .. "
-</pre>
-                do a:
-<pre>
+                    </pre>
+                    do a:
+                    <pre>
                 git config --global alias.ac '!git add . -A && git commit'
-</pre>
+                    </pre>
 
-<li>how to force git diff to always use color:</li>
-<pre>
+                    <li>how to force git diff to always use color:</li>
+                    <pre>
                 git config --global color.diff auto
-</pre>
+                    </pre>
 
-<li>delete a commit that's also been pushed:</li>
-<a href="http://stackoverflow.com/questions/1338728/how-to-delete-a-git-commit">source</a>
-Assuming you are sitting on that commit, then this command will wack it...
-<pre>
+                    <li>delete a commit that's also been pushed:</li>
+                    <a href="http://stackoverflow.com/questions/1338728/how-to-delete-a-git-commit">source</a>
+                    Assuming you are sitting on that commit, then this command will wack it...
+                    <pre>
     git reset --hard HEAD~1
-</pre>
-The HEAD~1 means the commit before head.
+                    </pre>
+                    The HEAD~1 means the commit before head.
 
-Or, you could look at the output of git log, find the commit id of the commit you want to back up to, and then do this:
-<pre>
+                    Or, you could look at the output of git log, find the commit id of the commit you want to back up to, and then do this:
+                    <pre>
     git reset --hard <sha1-commit-id>
-</pre>
-    If you already pushed it, you will need to do a force push to get rid of it...
-<pre>
+                    </pre>
+                    If you already pushed it, you will need to do a force push to get rid of it...
+                    <pre>
     git push origin HEAD --force
-</pre>
-However, if others may have pulled it, then you would be better off starting a new branch. Because when they pull, it will just merge it into their work, and you will get it pushed back up again.
+                    </pre>
+                    However, if others may have pulled it, then you would be better off starting a new branch. Because when they pull, it will just merge it into their work, and you will get it pushed back up again.
 
-If you already pushed, it may be better to use git revert, to create a <i>"mirror image"</i> commit that will undo the changes. However, both commits will both be in the log.
+                    If you already pushed, it may be better to use git revert, to create a <i>"mirror image"</i> commit that will undo the changes. However, both commits will both be in the log.
 
-FYI -- git reset --hard HEAD is great if you want to get rid of WORK IN PROGRESS. It will reset you back to the most recent commit, and erase all the changes in your working tree and index.
+                    FYI -- git reset --hard HEAD is great if you want to get rid of WORK IN PROGRESS. It will reset you back to the most recent commit, and erase all the changes in your working tree and index.
 
-Lastly, if you need to find a commit that you "deleted", it is typically present in git reflog unless you have garbage collected your repository.
+                    Lastly, if you need to find a commit that you "deleted", it is typically present in git reflog unless you have garbage collected your repository.
 
-comment:        
-HEAD~1 or just HEAD^. If you pushed, you should use git revert instead
-</ol>
-</body>
+                    comment:        
+                    HEAD~1 or just HEAD^. If you pushed, you should use git revert instead
+    </ol>
+  </body>
 </html>
