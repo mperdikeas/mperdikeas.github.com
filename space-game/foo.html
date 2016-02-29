@@ -1,0 +1,517 @@
+<!doctype html>
+<html>
+  <head>
+    <title>space cadet</title>
+    <link rel='icon' href='favicon.ico'/>
+    <script src='utils.js'></script>
+    <script src='utils-client.js'></script>
+    <style>
+     div {
+       box-sizing: border-box; /* see: http://stackoverflow.com/a/34751139/274677 */
+     }
+    </style>
+    <script src='planes.js'></script>
+    <script src='keycodes.js'></script>
+    <script src='messageBoard.js'></script>
+    <script src='enemyDims.js'></script>
+    <script src='sprite.js'></script>
+    <script src='bar.js'></script>
+    <script src='enemy-generator.js'></script>
+    <script type='text/javascript'>
+     var clientUtils = mjb44.createClientUtilsLibrary();
+     var utils       = mjb44.createUtilsLibrary();
+     var keyLibrary  = mjb44.createKeyCodes();
+     const FPS = 40;
+     const TOTAL_LOOPS = undefined;
+     var galacticProvider;
+     var solarProvider;
+     var battleGround;
+     var messageBoard;
+     var goodGuy;
+     var controller = 
+     (function() {
+       var mayProceedV = true;
+       return {
+         mayProceed: function mayProceed() {
+           return mayProceedV;
+         },
+         stop: function stop () {
+           mayProceedV = false;
+         },
+         start: function start() {
+           mayProceedV = true;
+         }
+       };
+     })();
+   
+       var gameConfig = {
+       MAX_ENEMY_SPEED: 6
+     };
+     
+     function init() {
+       setupCanvases();
+       galacticProvider  = new PatternProvider(canvas(XX_PLANE_ID), 'galactic-background.png');
+       solarProvider     = new PatternProvider(canvas(XX_PLANE_ID), 'solar-system-background.png');
+       galacticScroller  = new ScrollingLayer(canvas(GALAXY_PLANE_ID), galacticProvider.get(), 1);
+       solarScroller     = new ScrollingLayer(canvas(SOLAR_SYSTEM_PLANE_ID), solarProvider.get(), 2);
+       initializeBattlePlane(canvas(BATTLE_PLANE_ID));
+       messageBoard      = new MessageBoard(canvas(MESSAGE_PLANE_ID));
+       clientUtils.invokeInLoop(loop    , 1000/FPS, TOTAL_LOOPS, controller);
+     }
+
+     function endGame() {
+       controller.stop();
+       setTimeout(finalScreen, 500);
+     }
+     
+     function finalScreen() {
+       const cnv = canvas(MESSAGE_PLANE_ID);
+       const ctx = cnv.getContext('2d');
+       const MSG = 'You have failed in your mission.\n'+
+                   '\n'+
+                   'The galaxy is subjugated to a degenerate race\n'+
+                   'of vicious, inbred, cannibalistic, mutant bunnies\n'+
+                   'with genocidal tendencies and lamentable\n'+
+                   'table manners.';
+
+       const OFFSET = {x: 30, y: 80};
+
+       (function mistyCurtain() {
+         var alpha = 0.6;
+         ctx.save();
+         ctx.fillStyle = 'rgba(0, 0, 0 , '+alpha+')';
+         ctx.fillRect(0, 0, cnv.width, cnv.height);
+         ctx.restore();
+         })();
+
+       (function printMainText() {
+         var alpha = 1;
+         ctx.save();
+         ctx.fillStyle   = 'rgba(255, 255, 255, '+alpha+')';
+         ctx.strokeStyle = 'rgba(0  , 255, 255, '+alpha+')';
+         ctx.lineWidth = 1;
+         ctx.font = 'bold 30px Helvetica';
+         clientUtils.printTextMultiLine(ctx, MSG, OFFSET.x, OFFSET.y, {fill: true, stroke: true});
+         ctx.restore();
+       })();
+
+       const BUTTON = {offset: 190,
+                       width: 300,
+                       height: 40};
+       (function printSoftButton() {
+         var alpha = 1;
+         ctx.save();
+         ctx.strokeStyle = 'white';
+         ctx.ljjjrineWidth = 2;
+         ctx.fillStyle = 'rgba(0, 200, 0, '+alpha+')';
+         ctx.fillRect  (OFFSET.x, OFFSET.y+BUTTON.offset, BUTTON.width, BUTTON.height);
+         ctx.strokeRect(OFFSET.x, OFFSET.y+BUTTON.offset, BUTTON.width, BUTTON.height);
+         ctx.font = 'normal 28px Helvetica';
+         ctx.fillStyle = 'rgba(255, 255, 255, '+alpha+')';
+         ctx.fillText('Give me another shot!', OFFSET.x+10, OFFSET.y+220);
+         ctx.restore();
+         })();
+
+       cnv.addEventListener('click'
+                          , function handleSoftButton(e) {
+                            const softButton = {
+                              topLeft: {x: OFFSET.x
+                                      , y:OFFSET.y+BUTTON.offset},
+                              bottomRight: {x: OFFSET.x+BUTTON.width
+                                          , y:OFFSET.y+BUTTON.offset+BUTTON.height}
+                            };                            
+                            if (utils.pointInRectangle(
+                              {x: e.clientX, y: e.clientY}
+                              , {
+                                x1: softButton.topLeft.x
+                               , x2: softButton.bottomRight.x
+                               , y1: softButton.topLeft.y
+                               , y2: softButton.bottomRight.y
+                              })) {
+                                controller.start();
+                                clientUtils.invokeInLoop(loop    , 1000/FPS, TOTAL_LOOPS, controller);
+                                cnv.removeEventListener('click', handleSoftButton, false);
+                                }
+                          }
+                          , false);
+     }
+     
+     function loop () {
+       doDeepSpaceBackground();
+       galacticScroller.scroll();
+       solarScroller.scroll();
+       doBattlePlane();
+       doMessagePlane({ammo: goodGuy.ammunition});
+     }
+     
+     function setupCanvases() {
+       get('div').setAttribute('style', 'position: absolute; top: 0px; left: 0px; width: '
+                                       +window.innerWidth+'px; height:'
+                                       +window.innerHeight+'px; border: 1px solid #ff0000');
+       var canvases = clientUtils.evaluateXPath(document, "/html/body/div[@id='div']/canvas");
+       for (var i = 0 ; i < canvases.length ; i++) {
+         canvases[i].width  = get('div').clientWidth;
+         canvases[i].height = get('div').clientHeight;
+       }
+     }
+
+     var PatternProvider = function(canvas, imageName) {
+       this.image = new Image();
+       this.init(canvas, imageName);
+     };
+
+     PatternProvider.prototype.init = function (canvas, imageName) {
+       var imageFromPattern = function (pattern) {
+         var cx = canvas.getContext('2d');
+         cx.clearRect(0, 0, canvas.width, canvas.height);
+         cx.fillStyle = pattern;
+         cx.fillRect(0, 0, canvas.width, canvas.height);
+         this.image.src = canvas.toDataURL();
+       };
+       imageFromPattern.call(this, '#ff00bb');
+       
+       var patternImage = new Image();
+       patternImage.src = imageName;
+       patternImage.onload = utils.bind(function() {
+         var cx = canvas.getContext('2d');
+         var pattern = cx.createPattern(patternImage, 'repeat');
+         imageFromPattern.call(this, pattern);
+       }, this);
+     };
+
+     PatternProvider.prototype.get = function(){
+       return this.image;
+     };
+
+
+     var ScrollingLayer = function(canvas, img, speed) {
+       this.canvas = canvas;
+       this.img = img;
+       this.speed = speed;
+       this.i = 0;
+     };
+     
+     ScrollingLayer.prototype.scroll = function scroll () {
+       if (this.i>this.img.height)
+         this.i=0;
+       var cx = this.canvas.getContext('2d');
+       cx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+       cx.drawImage(this.img, 0, this.i+=this.speed);
+       cx.drawImage(this.img, 0, this.i-this.img.height);
+     };
+     
+
+     function doDeepSpaceBackground() {
+       var p = new Plane(DEEP_SPACE_PLANE_ID);
+       p.ctx.clearRect(0, 0, p.canvas.width, p.canvas.height);
+       p.ctx.fillStyle = '#221122';
+       p.ctx.fillRect(0, 0, p.canvas.width, p.canvas.height);
+     }
+
+     var BattleGround = function(cnv, spaceship) {
+       this.spaceship = spaceship;
+       this.enemyGenerator = new EnemyGenerator(cnv, 2000);
+       this.friendlyRockets = [];
+       this.enemies         = [];
+       this.enemiesKilled   = 0;
+     };
+
+     BattleGround.prototype.launchFriendlyRocket = function(x,y) {
+       if (this.spaceship.ammunition>0) {
+         this.friendlyRockets.push({x:x, y:y});
+         this.spaceship.ammunition--;
+       }
+     }
+
+
+     BattleGround.prototype.live = function(canvas) {
+       function liveRockets(friendlyRockets) {
+         var i = friendlyRockets.length;
+         while (i--) {
+           friendlyRockets[i].y -= 30;
+           if (friendlyRockets[i].y < 0)
+             friendlyRockets.splice(i, 1);
+         }
+       }
+       liveRockets(this.friendlyRockets);
+       var newEnemy = this.enemyGenerator.generateNewEnemy();
+       if (newEnemy!=null)
+         this.enemies.push(newEnemy);
+       var i = this.enemies.length;
+       while (i--) {
+         this.enemies[i].fly();
+         if (this.enemies[i].y>canvas.height) {
+           this.enemies.splice(i, 1);
+           this.spaceship.initiateDestructionSequence();
+           endGame();
+         }
+       }
+
+
+       var rocketsToDie = [];
+       var enemiesToDie = [];
+       for (var i = 0 ; i < this.friendlyRockets.length ; i++) {
+         for (var j = 0 ; j < this.enemies.length ; j++) {
+           if (rocketsToDie.indexOf(i)!=-1)
+             continue;
+           if (enemiesToDie.indexOf(j)!=-1)
+             continue;
+           var rocket = this.friendlyRockets[i];
+           var enemy  = this.enemies[j];
+           if (utils.pointInRectangle(rocket
+                                    , {x1: enemy.x
+                                     , x2: enemy.x+enemy.projectedWidth
+                                     , y1: enemy.y
+                                     , y2: enemy.y+enemy.projectedHeight   })) {
+                                       rocketsToDie.push(i);
+                                       enemy.sufferDamage(10);
+                                       if (enemy.health<0) {
+                                         enemiesToDie.push(j);
+                                         this.enemiesKilled++;
+                                       }
+           }
+         }
+       }
+       (function(){
+         var i = this.enemies.length;
+         while (i--) {
+           if (enemiesToDie.indexOf(i)!=-1) {
+             this.enemies[i].initiateDestructionSequence();
+             this.enemies.splice(i, 1);
+           }
+         }
+       }).call(this);
+       (function(){
+         var i = this.friendlyRockets.length;
+         while (i--) {
+           if (rocketsToDie.indexOf(i)!=-1) {
+             this.friendlyRockets.splice(i, 1);
+           }
+         }
+       }).call(this);       
+     };
+
+     BattleGround.prototype.render = function(canvas) {
+       function renderRockets(canvas, friendlyRockets) {
+           const ROCKET_LENGTH = 10;
+           for (var i = 0 ; i < friendlyRockets.length; i++) {
+           var rocket = friendlyRockets[i];
+           var ctx = canvas.getContext('2d');
+           ctx.strokeStyle='#ff0000';
+           ctx.lineWidth=3 ;
+           ctx.beginPath();
+           ctx.moveTo(rocket.x, rocket.y);
+           ctx.lineTo(rocket.x, rocket.y+ROCKET_LENGTH);
+           ctx.stroke();
+         }
+       }
+       renderRockets(canvas, this.friendlyRockets);
+       for (var i = 0 ; i < this.enemies.length ; i++)
+         this. enemies[i].allRender();
+     };
+
+     function doBattlePlane() {
+       var cnv = canvas(BATTLE_PLANE_ID);
+       var cx = cnv.getContext('2d');
+       cx.clearRect(0, 0, cnv.width, cnv.height);
+       battleGround.live(cnv);
+       goodGuy.fly();
+       goodGuy.render();
+       battleGround.render(cnv);
+     }
+
+     var Spaceship = function(canvas, battleGround, x, y) {
+       Sprite.apply(this, [canvas.getContext('2d'), 'spaceship.png', x, y, 0.25, 0.25]);
+       this.battleGround = battleGround;
+       this.ammunition = 1000;
+     }
+     Spaceship.prototype = Object.create(Sprite.prototype);
+     Spaceship.__proto__ = Sprite;
+     Object.defineProperty(Spaceship.prototype, 'constructor', {value: Spaceship, enumerable: false, configurable: false});
+
+     Spaceship.prototype.fly = function() {
+       if (typeof cursorX != 'undefined')
+         this.x = cursorX;
+     }
+
+     Spaceship.prototype.notify = function (keyCode) {
+       if (keyCode === keyLibrary.keyCharToCode.Space) {
+         battleGround.launchFriendlyRocket(this.x+this.projectedWidth/2, this.y);
+       }
+     };
+
+     Spaceship.prototype.initiateDestructionSequence = function() {initiateDestructionSequence.apply(this, [{x:10, y:40}])};     
+
+
+     var Enemy = function(canvas, x, y, health, speed) {
+       var dim = enemyDims.randomDim();
+       Sprite.apply(this, [canvas.getContext('2d'), 'ships-flipped.png'
+                         , x
+                         , y
+                         , 0.5
+                         , 0.5
+                         , dim]);
+       this.health = health;
+       this.speed = speed;
+       this.bar = new Bar(canvas.getContext('2d')
+                        , this
+                        , {x: 0, y: -10});
+     }
+     Enemy.prototype = Object.create(Sprite.prototype);
+     Enemy.__proto__ = Sprite;
+     Object.defineProperty(Enemy.prototype
+                         , 'constructor'
+                         , {value: Enemy
+                          , enumerable: false
+                           , configurable: true});
+     Enemy.prototype.fly = function() {
+       this.y += this.speed;
+     };
+     Enemy.prototype.allRender = function () {
+       this.render();
+       this.bar.render();
+     };
+     Enemy.prototype.sufferDamage = function (damage) {
+       this.health -= damage;
+     }
+
+
+     function initiateDestructionSequence (offset) {
+       if (typeof offset === 'undefined')
+         offset = {x: 0, y:0};
+       var self = this;
+       var alpha = 1.0;
+       var flamesImage = new Image();
+       flamesImage.src = 'flames.png';
+       var flamesOpacity = [1, 0.7, 1, 0.9, 0.5, 0.9, 0.5];
+       var flamesIdx = 0;
+       var destructionSequence = function() {
+         self.cx.save();
+
+         self.cx.globalAlpha = alpha;
+         self.cx.drawImage(self.image, 0, 0, self.image.width, self.image.height, self.x, self.y, this.width, this.height);
+         alpha -= 0.05;
+
+         self.cx.globalAlpha = flamesOpacity[(flamesIdx++) % flamesOpacity.length];
+         self.cx.drawImage(flamesImage
+                         , 0
+                         , 0
+                         , flamesImage.width
+                         , flamesImage.height
+                         , self.x-flamesImage.width/5  + offset.x
+                         , self.y-flamesImage.height/2 + offset.y
+                         , flamesImage.width
+                         , flamesImage.height);
+         self.cx.restore();
+
+         
+         if (alpha>0)
+           window.requestAnimationFrame(destructionSequence);
+       }
+       destructionSequence();
+     }
+
+     Enemy.prototype.initiateDestructionSequence = function() {
+       initiateDestructionSequence.apply(this)
+     };
+
+
+           
+     
+     function initializeBattlePlane(cnv) {
+       goodGuy = new Spaceship(cnv, battleGround, cnv.width/2, cnv.height-75);
+       battleGround = new BattleGround(cnv, goodGuy);
+       var spaceShipKeys = (function() {
+         return [keyLibrary.keyCharToCode.Space];
+       })();
+       keyHub.registerInterest(spaceShipKeys, goodGuy);
+     }
+
+     const MSG_EVERY = 10;
+     var nextMessageAt = MSG_EVERY;
+     function doMessagePlane(stats) {
+       function printStatistics(canvas, stats) {
+         var cx = canvas.getContext('2d');
+         cx.fillStyle = 'rgba(255, 255, 255, 10)';
+         cx.font = 'normal 15px Helvetica';
+         cx.fillText('ammo:'+stats.ammo, 10, 20);
+       }
+       var cnv = canvas(MESSAGE_PLANE_ID);
+       var cx = cnv.getContext('2d');
+       cx.clearRect(0, 0, cnv.width, cnv.height);
+       printStatistics(cnv, stats);
+       if ((battleGround.enemiesKilled>=nextMessageAt) && (battleGround.enemiesKilled % MSG_EVERY === 0)) {
+         messageBoard.addMessage(battleGround.enemiesKilled+' enemy spacecraft annihilated');
+         nextMessageAt += MSG_EVERY;
+       }
+     };
+
+
+     var keyHub = new
+     ((function(){
+       var KeyHub = function() {
+         this.keysToListeners = [];
+       };
+       KeyHub.prototype.registerInterest = function(_key, _listener) {
+         if ((utils.objectIsArray(_key)) && (utils.objectIsArray(_listener)))
+           throw new Error('not both can be arrays');
+         var keys, listeners;
+         if (!utils.objectIsArray(_key))
+           keys = [_key];
+         else
+           keys = _key;
+         if (!utils.objectIsArray(_listener))
+           listeners = [_listener];
+         else
+           listeners = _listener;
+         for (var i = 0 ; i < keys.length ; i++) {
+           for (var j = 0 ; j < listeners.length; j++) { // this only works because we are assured that not both are really arrays
+             var key = keys[i];
+             var listener = listeners[j];
+             if (this.keysToListeners.indexOf(key)===-1)
+               this.keysToListeners[key] = [];
+             var existingListeners = this.keysToListeners[key];
+             if (existingListeners.indexOf(listener)===-1)
+               existingListeners.push(listener);
+           }
+         }
+       }
+       KeyHub.prototype.notify = function (key) {
+         var listenersForKey = this.keysToListeners[key];
+         if (typeof listenersForKey === 'undefined')
+           listenersForKey = [];
+         for (var i = 0 ; i < listenersForKey.length ; i++) {
+           listenersForKey[i].notify(key);
+         }
+       }
+       return KeyHub;
+     })())();
+
+
+     window.onload=init;
+     window.onkeydown = function(e) {
+       console.log   (e.keyCode);
+       keyHub.notify(e.keyCode);
+     };
+     var cursorX;
+     var cursorY;
+     document.onmousemove = function(e){
+       cursorX = e.pageX;
+       cursorY = e.pageY;
+     }
+    </script>
+  </head>
+  <body>
+    <!--  style='position: absolute; left: 20px; top: 30px;'> -->
+    <div id='div'>
+      <canvas id='canvasXX' style='position: absolute; z-index: 0'></canvas>
+      <canvas id='canvas10' style='position: absolute; z-index:10'></canvas>
+      <canvas id='canvas20' style='position: absolute; z-index:20'></canvas>
+      <canvas id='canvas30' style='position: absolute; z-index:30'></canvas>
+      <canvas id='canvas40' style='position: absolute; z-index:40'></canvas>
+      <canvas id='canvas50' style='position: absolute; z-index:50'></canvas>
+      <canvas id='canvas60' style='position: absolute; z-index:60'></canvas>
+    </div>
+  </body>
+</html>
+
