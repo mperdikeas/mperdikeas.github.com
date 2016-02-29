@@ -6,6 +6,47 @@
   </head>
   <body>
     <ol reversed>
+      <li>How to deal with <tt>BasicDataSourceFactory</tt> class not found</li>
+      This is the exception:
+      <br/><br/>
+      <tt>message javax.naming.NamingException: Could not load resource factory class [Root exception is
+        java.lang.ClassNotFoundException: org.apache.commons.dbcp.BasicDataSourceFactory]</tt>
+      <br/><br/>
+      The root cause of the exception is that in the <tt>context.xml</tt> file, the <tt>Resource</tt> is defined
+      to use the Apache-provided factory class:
+<pre>
+    &lt;Resource name="jdbc/postgres/silly-test-database"
+              auth="Container"
+              type="javax.sql.DataSource"
+              driverClassName="org.postgresql.Driver"
+              url="jdbc:postgresql://localhost:5432/radoverview"
+              username="radoverview-user" password="radoverview-user-pass"
+              factory="org.apache.commons.dbcp.BasicDataSourceFactory" 
+              maxActive="2" maxIdle="0" maxWait="-1"/&gt;
+</pre>
+Whereas the default DataSource factory in Tomcat7 is <pre>org.apache.tomcat.dbcp.dbcp.BasicDataSourceFactory</pre>
+and is sometimes distributed in the <tt>tomcat-dbcp.jar</tt>. E.g.:
+
+<pre>
+radacer@radacer ~]$ jar tvf apache-tomcat-7.0.68/lib/tomcat-dbcp.jar | grep -i BasicDataSourceFactory
+8176 Mon Feb 08 22:27:06 EET 2016 org/apache/tomcat/dbcp/dbcp/BasicDataSourceFactory.class
+</pre>
+      To solve this problem it is necessary that either:
+    <dl>
+      <dt><b>a couple of jars are copied in the "commons" lib location</b></dt>
+      <dd>
+        In this solution, the library is eventually placed in the common Tomcat7 directory that is
+        shared by all webapps running on the Tomcat server.
+        E.g., the following worked on 2016-02-29 in Tomcat7:
+        <pre>
+scp /usr/share/tomcat7/lib/commons-dbcp.jar  radacer@172.17.12.56:~/apache-tomcat-7.0.68/lib/
+scp /usr/share/tomcat7/lib/commons-pool.jar  radacer@172.17.12.56:~/apache-tomcat-7.0.68/lib/
+        </pre>
+        (in the above example, Tomcat7 was installed in user space in the target machine).
+      </dd>
+      <dt>Or ... <br/><b>... the dependency is placed in the <tt>WEB-INF/lib</tt></b> directory of the WAR</dt><dd></dd>
+    </dl>
+      
       <li>How to keep the size of the Catalina logs under control</li>
       There's two things one has to do:
       <ol>

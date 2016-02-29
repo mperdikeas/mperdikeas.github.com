@@ -1,4 +1,4 @@
-DOCUMENT=cv_11.tex
+DOCUMENT=cv-mperdikeas.tex
 .PHONY: all clean
 all:
 	pdflatex -interaction=nonstopmode $(DOCUMENT)
