@@ -50,8 +50,8 @@
      
      function init() {
        setupCanvases();
-       galacticProvider  = new PatternProvider(canvas(XX_PLANE_ID), 'galactic-background.png');
-       solarProvider     = new PatternProvider(canvas(XX_PLANE_ID), 'solar-system-background.png');
+       galacticProvider  = new PatternProvider(canvas(XX_PLANE_ID), 'space-game/galactic-background.png');
+       solarProvider     = new PatternProvider(canvas(XX_PLANE_ID), 'space-game/solar-system-background.png');
        galacticScroller  = new ScrollingLayer(canvas(GALAXY_PLANE_ID), galacticProvider.get(), 1);
        solarScroller     = new ScrollingLayer(canvas(SOLAR_SYSTEM_PLANE_ID), solarProvider.get(), 2);
        initializeBattlePlane(canvas(BATTLE_PLANE_ID));
