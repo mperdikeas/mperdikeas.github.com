@@ -6,6 +6,35 @@
   </head>
   <body>
     <ol reversed>
+      <li>How to deal with the dreaded <tt>SEVERE: Error filterStart</tt> log entry in Tomcat</li>
+      The problem with this error is that in the default configuration of Tomcat, this is all you see.
+      No additional information, nada.
+      <br/>
+      I was able to get a proper stack trace and solve my particular problem by changing the <tt>logging.properties</tt>
+      file of my Tomcat installation.
+      <br/>
+      In my Ubuntu 14.04 system said file was located at:
+      <br/>
+      <tt>/var/lib/tomcat7/conf/logging.properties</tt>
+      <br/>
+      I basically had to effect two orthogonal changes:
+      <ul>
+        <li>changing the logging level from <tt>INFO</tt> to <tt>FINE</tt></li>
+        <li>adding a second logger to send stuff to STDERR</li>
+      </ul>
+      <br/>
+      Here are the changes:
+      <pre>
+$ diff /var/lib/tomcat7/conf/logging.properties /var/lib/tomcat7/conf/logging.properties.orig
+41,42c41,42
+< org.apache.catalina.core.ContainerBase.[Catalina].[localhost].level = FINE
+< org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers = 2localhost.org.apache.juli.FileHandler, java.util.logging.ConsoleHandler
+---
+> org.apache.catalina.core.ContainerBase.[Catalina].[localhost].level = INFO
+> org.apache.catalina.core.ContainerBase.[Catalina].[localhost].handlers = 2localhost.org.apache.juli.FileHandler
+      </pre>
+      And here are the <a href="tomcat7.html.files/logging.properties.orig">original</a> and the
+      <a href="tomcat7.html.files/logging.properties">modified</a> <tt>logging.properties</tt> files.
       <li>How to deal with <tt>BasicDataSourceFactory</tt> class not found</li>
       This is the exception:
       <br/><br/>
