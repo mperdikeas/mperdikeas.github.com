@@ -100,11 +100,11 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
   \begin{itemize}
   \item the \href{http://www.openarchives.org/pmh/}{OAI-PMH} harvesting functionality. I couldn't find a reliable 3rd party OAI-PMH library
     so I implemented the entire protocol from scratch.\\
-    \technologies{} Java, XPath 2.0 (Saxon), XSLT, REST (Jersey), HTTP
+    \technologies{} Java, XPath 2.0 (Saxon), XSLT, REST (Jersey), HTTP, Tomcat 7
   \item the \href{http://www.ivoa.net/documents/RegTAP/}{RegTAP} functionality and interface. I came into the project with \textbf{zero} domain-specific
     knowledge and I managed to implement the second, globally, RegTAP search interface and make material
     contributions to the RegTAP specification itself to the effect that I was recognized as a co-author of the spec.\\
-    \technologies{} Java, XPath 2.0 (Saxon), REST (Jersey), JDBC
+    \technologies{} Java, XPath 2.0 (Saxon), REST (Jersey), JDBC, Tomcat 7
   \item the \href{http://www.ivoa.net/documents/RegistryInterface/20091104/REC-RegistryInterface-1.0.pdf}{IVOA RI1} Search interface. This is a \href{https://en.wikipedia.org/wiki/SOAP}{SOAP interface}, definined in WSDL (i.e. following a top-down approach). 
     Due to the complexity of the XSDs used by the IVOA community I ran into problems with the automatic stub
     generation by tools like \href{https://docs.oracle.com/javase/6/docs/technotes/tools/share/xjc.html}{XJC} (which I have documented in \href{http://stackoverflow.com/q/17265960/274677}{SO} and raised
@@ -120,7 +120,7 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
     \technologies{} Java, \href{http://www.jfree.org/jfreechart/}{JFreeChart}
     \item the entire database schema for PostgreSQL. I wrote the DDL statements for the entire database which comprises 102 tables in 4 schemas and was responsible for the installation, fine-tuning, index creation, performance optimization, etc of the PostgreSQL database. Wrote the entire DB-facing \href{https://en.wikipedia.org/wiki/Database_abstraction_layer}{DAO} code in Java.\\
       \technologies{} PostgreSQL 9.2, JDBC.
-    \item Finally, I also handled all DevOps aspects including: authoring the entire build system based on
+    \item Finally, I also handled all DevOps aspects including: installing and configuring Apache Tomcat7 and the PostgreSQL cluster, authoring the entire build system based on
       Ant and \href{http://ant.apache.org/ivy/}{Ivy}, writing test cases (JUnit), coding standards checking with \href{http://checkstyle.sourceforge.net/}{Checkstyle}, source code analyzers with
       \href{https://pmd.github.io/}{PMD} and \href{http://findbugs.sourceforge.net/}{FindBugs},
       code coverage with \href{http://cobertura.github.io/cobertura/}{Cobertura}, etc.
