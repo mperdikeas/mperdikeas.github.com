@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+  <body>
+    <p>Node.js makes it possible to write applications in JavaScript on the server. It's built on the V8 JavaScript runtime and written in C++ — so it's fast. Originally, it was intended as a server environment for applications, but developers started using it to create tools to aid them in local task automation. Since then, a whole new ecosystem of Node based tools (such as <a href="http://gruntjs.com/">Grunt</a> and <a href="http://gulpjs.com/">Gulp</a>) has evolved to transform the face of front-end development .</p>
+    <p>To make use of these tools (or packages) in Node.js we need to be able to install and manage them in a useful way. This is where npm, the node package manager, comes in. It installs the packages you want to use and provides a useful interface to work with them. But before we can start using npm, we first have to install Node.js on our system.</p>
+    <h2 id="installing-nodejs">Installing Node.js</h2>
+    <div class='ArticleBox u-inline'><h3 class='ArticleBox_header t-bg'>
+      <span class='ArticleBox_icon fa fa-pencil'></span> More from this author
+    </h3><div class='ArticleBox_content'><ul class='ArticleBox_list t-list'><li><a href='http://www.sitepoint.com/guide-to-npm-as-a-build-tool/?utm_source=sitepoint&amp;utm_medium=relatedinline&amp;utm_term=javascript&amp;utm_campaign=relatedauthor'>Give Grunt the Boot! A Guide to Using npm as a Build Tool</a></li></ul></div></div>
+    <p>Head to the Node.js <a href="http://nodejs.org/download/">download page</a> and grab the version you need. There are Windows and Mac installers available, as well as pre-compiled Linux binaries and source code. For Linux, you can also install Node via the package manager, <a href="https://github.com/joyent/node/wiki/installing-node.js-via-package-manager">as is outlined here</a>.</p>
+    <p>To verify that your installation was successful let's give Node's REPL a try.</p>
+    <pre><code class='language-'>$ node
+
+&gt; console.log('Node is running');
+
+Node is running
+
+&gt; .help
+
+.break Sometimes you get stuck, this gets you out
+
+.clear Alias for .break
+
+.exit  Exit the repl
+
+.help  Show repl options
+
+.load  Load JS from a file into the REPL session
+
+.save  Save all evaluated commands in this REPL session to a file
+
+&gt; .exit</code></pre>
+    <p>The Node.js installation worked, so we can now focus our attention on npm, which was included in the install.</p>
+    <pre><code class='language-'>$ npm -v
+
+1.4.28</code></pre>
+    <h2 id="node-packaged-modules">Node Packaged Modules</h2>
+    <p>npm can install packages in local or global mode. In local mode it installs the package in a <code>node_modules</code> folder in your parent working directory. This location is owned by the current user. Global packages are installed in <code>{prefix}/lib/node_modules/</code> which is owned by root (where <code>{prefix}</code> is usually  <code>/usr/</code> or  <code>/usr/local</code>).  This means you would have to use <code>sudo</code> to install packages globally, which could cause permission errors when resolving third-party dependencies, as well as being a security concern. Lets change that:</p>
+
+    <h2 id="changing-the-location-of-global-packages">Changing the Location of Global Packages</h2>
+    <p>Let's see what output <code>npm config</code> gives us.</p>
+    <pre><code class='language-'>$ npm config list
+
+; cli configs
+
+registry = &quot;https://registry.npmjs.org/&quot;
+
+user-agent = &quot;npm/2.6.0 node/v0.10.36 linux x64&quot;
+
+; node bin location = /usr/local/bin/node
+
+; cwd = /home/sitepoint
+
+; HOME = /home/sitepoint
+
+; 'npm config ls -l' to show all defaults.</code></pre>
+    <p>This gives us information about our install. For now it's important to get the current global location.</p>
+    <pre><code class='language-'>$ npm config get prefix
+
+/usr/local</code></pre>
+    <p>This is the prefix we want to change, so as to install global packages in our home directory. To do that create a new directory in your home folder. </p>
+    <pre><code class='language-'>$ cd &amp;&amp; mkdir .node_modules_global
+
+$ npm config set prefix=$HOME/.node_modules_global</code></pre>
+    <p>With this simple configuration change, we have altered the location to which global Node packages are installed. This also creates a <code>.npmrc</code> file in our home directory.</p>
+    <pre><code class='language-'>$ npm config get prefix
+
+/home/sitepoint/.node_modules_global
+
+$ cat .npmrc
+
+prefix=/home/sitepoint/.node_modules_global</code></pre>
+    <p>We still have npm installed in a location owned by root. But because we changed our global package location we can take advantage of that. We need to install npm again, but this time in the new user-owned location. This will also install the latest version of npm.</p>
+    <pre><code class='language-'>$ npm install npm --global
+
+npm@2.6.0 /home/sitepoint/.node_modules_global/lib/node_modules/npm</code></pre>
+    <p>Finally, we need to add <code>.node_modules_global/bin</code>  to our <code>$PATH</code> environment variable, so that we can run global packages from the command line. Do this by appending the following line to your <code>.profile</code> or <code>.bash_profile</code> and restarting your terminal.</p>
+    <pre><code class='language-'>export PATH=&quot;$HOME/.node_modules_global/bin:$PATH&quot;</code></pre>
+    <p>Now our <code>.node_modules_global/bin</code> will be found first and the correct version of npm will be used.</p>
+    <pre><code class='language-'>$ which npm
+
+/home/sitepoint/.node_modules_global/bin/npm
+
+$ npm -v
+
+2.6.0</code></pre>
+    <h2 id="installing-packages-in-global-mode">Installing Packages in Global Mode</h2>
+    <p>At the moment we only have one package installed globally — that is the npm package itself. So let's change that and install UglifyJS (a JavaScript minification tool). We use the <code>--global</code> flag, but this can be abbreviated to <code>-g</code>.</p>
+    <pre><code class='language-'>$ npm install uglify-js --global
+
+uglify-js@2.4.16 node_modules/uglify-js
+
+├── uglify-to-browserify@1.0.2
+
+├── async@0.2.10
+
+├── optimist@0.3.7 (wordwrap@0.0.2)
+
+└── source-map@0.1.34 (amdefine@0.1.0)</code></pre>
+    <p>As you can see from the output, four additional packages that are installed &#8211; these are uglify-js's dependencies. </p>
+    <h2 id="listing-global-packages">Listing Global Packages</h2>
+    <p>We can list the global packages we have installed with the <code>npm list</code> command.</p>
+    <pre><code class='language-'>$ npm list --global
+
+├─┬ npm@2.6.0
+│ ├── abbrev@1.0.5
+│ ├── ansi@0.3.0
+....................
+
+└─┬ uglify-js@2.4.16
+  ├── async@0.2.10
+  ├─┬ optimist@0.3.7
+  │ └── wordwrap@0.0.2
+  ├─┬ source-map@0.1.34
+  │ └── amdefine@0.1.0
+  └── uglify-to-browserify@1.0.2</code></pre>
+    <p>The output however, is rather verbose. We can change that with the <code>--depth=0</code> option.</p>
+    <pre><code class='language-'>$ npm list -g --depth=0
+
+├── npm@2.1.11
+└── uglify-js@2.4.16</code></pre>
+    <p>That's better — just the packages we have installed along with their version numbers.</p>
+    <p>At this point you can parse JavaScript files in the terminal with uglifyjs. For example the following command would minify <code>example.js</code> into <code>example.min.js</code>:</p>
+    <pre><code class='language-'>$ uglifyjs example.js -o example.min.js</code></pre>
+    <h2 id="installing-packages-in-local-mode">Installing Packages in Local Mode</h2>
+    <p>Installing packages in local mode is done without the <code>--global</code> flag. The package will be installed in your parent working directory in a <code>node_modules</code> folder. Let's create a project folder in our home directory:</p>
+    <pre><code class='language-'>$ mkdir ~/project &amp;&amp; cd ~/project
+
+$ npm install underscore
+
+underscore@1.8.2 node_modules/underscore
+
+$ ls
+
+node_modules
+
+$ ls node_modules
+
+underscore</code></pre>
+    <h2 id="listing-local-packages">Listing Local Packages</h2>
+    <p>Just like global packages we can list local packages with the <code>npm list</code> command.</p>
+    <pre><code class='language-'>$ npm list
+
+/home/sitepoint/project
+└── underscore@1.8.2</code></pre>
+    <p>As you can see we are able to install local packages wherever we want. This also means that we can create another directory and install a different version of underscore. </p>
+    <h2 id="uninstalling-local-packages">Uninstalling Local Packages</h2>
+    <p>npm is a package manager so it must be able to delete a package. Let's assume that the current underscore package is causing us compatibility problems. We can delete the package and install an older version, like so:</p>
+    <pre><code class='language-'>$ npm uninstall underscore
+
+unbuild underscore@1.8.2
+
+$ npm list
+
+/home/sitepoint/project
+└── (empty)</code></pre>
+    <h2 id="installing-a-specific-version-of-a-package">Installing a Specific Version of a Package</h2>
+    <p>We can now install the underscore package in the version we want. We do that by using the @ sign to append a version number.</p>
+    <pre><code class='language-'>$ npm install underscore@1.7.0
+
+underscore@1.7.0 node_modules/underscore
+
+$ npm list
+
+/home/sitepoint/project
+└── underscore@1.7.0</code></pre>
+    <h2 id="updating-a-package">Updating a Package</h2>
+    <p>The latest version of underscore fixed the bug we had earlier and we want to update our package to that version.</p>
+    <pre><code class='language-'>$ npm update underscore
+
+underscore@1.8.2 node_modules/underscore
+
+$ npm list
+
+/home/sitepoint/project
+└── underscore@1.8.2</code></pre>
+    <h2 id="searching-for-packages">Searching for Packages</h2>
+    <p>We&#8217;ve used the <code>mkdir</code> command a couple of times in this tutorial. Is there a node package that does the same?</p>
+    <pre><code class='language-'>$ npm search mkdir
+
+npm WARN Building the local index for the first time, please be patient
+
+mkdirp</code></pre>
+    <p>There is. Let's install it.</p>
+    <pre><code class='language-'>$ npm install mkdirp
+
+mkdirp@0.5.0 node_modules/mkdirp
+└── minimist@0.0.8</code></pre>
+    <p>Now create a file <code>mkdir.js</code>:</p>
+    <pre><code class='language-javascript'>var mkdirp = require('mkdirp');
+
+mkdirp('foo', function (err) {
+
+    if (err) console.error(err)
+
+    else console.log('Directory created!')
+
+});</code></pre>
+    <p>And run it from the terminal: </p>
+    <pre><code class='language-'>$ node. mkdir.js
+
+Directory created!</code></pre>
+    <h2 id="managing-the-cache">Managing the Cache</h2>
+    <p>When npm installs a package it keeps a copy, so the next time you want to install that package, it doesn't need to hit the network. The copies are cached in the <code>.npm</code> directory in your home path.</p>
+    <pre><code class='language-'>$ ls ~/.npm
+
+npm  registry.npmjs.org  underscore ...</code></pre>
+    <p>This directory will get cluttered with old packages over time, so it's useful to clean it up occasionally.</p>
+    <pre><code class='language-'>$ npm cache clean</code></pre>
+    <h2 id="managing-dependencies">Managing Dependencies</h2>
+    <p>At the moment we only have two packages installed in our project directory, but that can grow very quickly. Installing dependencies by hand is unwieldy, so we can use a <code>package.json</code> file in our project directory to manage them instead. This can be created with the command <code>npm init</code></p>
+    <pre><code class='language-'>$ npm init
+
+This utility will walk you through creating a package.json file.
+
+Press ^C at any time to quit.
+
+name: (project) demo
+
+version: (1.0.0)
+
+description: Demo of package.json
+
+entry point: (main.js)
+
+test command:
+
+git repository:
+
+keywords:
+
+author: Sitepoint
+
+license: (ISC)</code></pre>
+    <p>This creates the following file in our project root:</p>
+    <pre><code class='language-javascript'>{
+
+  &quot;name&quot;: &quot;demo&quot;,
+
+  &quot;version&quot;: &quot;1.0.0&quot;,
+
+  &quot;description&quot;: &quot;Demo package.json&quot;,
+
+  &quot;main&quot;: &quot;main.js&quot;,
+
+  &quot;dependencies&quot;: {
+
+    &quot;mkdirp&quot;: &quot;^0.5.0&quot;,
+
+    &quot;underscore&quot;: &quot;^1.8.2&quot;
+
+  },
+
+  &quot;devDependencies&quot;: {},
+
+  &quot;scripts&quot;: {
+
+    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;
+
+  },
+
+  &quot;author&quot;: &quot;Sitepoint&quot;,
+
+  &quot;license&quot;: &quot;ISC&quot;
+
+}</code></pre>
+    <p>You can also add <code>private: true</code> to prevent accidental publication of private repositories as well as suppressing any warnings generated when running <code>npm install</code>. Let's create a new directory and use our <code>package.json</code> file to install our dependencies.</p>
+    <pre><code class='language-'>$ mkdir ~/demo &amp;&amp; cd ~/demo
+
+$ cp ~/project/package.json ~/demo
+
+$ npm install
+
+$ npm list
+
+demo@1.0.0 /home/sitepoint/demo
+
+├─┬ mkdirp@0.5.0
+│ └── minimist@0.0.8
+└── underscore@1.8.2</code></pre>
+    <p>That showed how easily we can install the packages we need in another directory based on our <code>package.json</code> file. But how do we keep it up to date when we install new packages? Well, we can use the <code>--save</code> flag.</p>
+    <pre><code class='language-'>$ npm install request --save
+
+$ npm list --depth=0
+
+demo@1.0.0 /home/sitepoint/demo
+
+├── mkdirp@0.5.0
+├── request@2.53.0
+└── underscore@1.8.2</code></pre>
+    <p>And our <code>package.json</code> has also been updated:</p>
+    <pre><code class='language-javascript'>&quot;dependencies&quot;: {
+
+  &quot;mkdirp&quot;: &quot;^0.5.0&quot;,
+
+  &quot;request&quot;: &quot;^2.53.0&quot;,
+
+  &quot;underscore&quot;: &quot;^1.8.2&quot;
+
+}</code></pre>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>In this tutorial, I have covered the basics of working with npm. I have demonstrated how to install Node.js from the project's download page, how to alter the location of global packages (so we can avoid using <code>sudo</code>) and how to install packages in local and global mode. I also covered deleting, updating and installing a certain version of a package, as well as managing a project's dependencies. </p>
+    <p>Are you using npm in your projects? There are thousands of packages on the <a href="https://www.npmjs.com/">npm registry</a> and with <a href="http://blog.npmjs.org/post/111475741445/publishing-your-jquery-plugin-to-npm-the-quick">announcement that jQuery plugins should be published there too</a>, this number will only keep growing. Which ones couldn't you live without?</p>
+      </div>
+  </body>
+</html>
