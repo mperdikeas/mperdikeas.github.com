@@ -6,6 +6,35 @@
   </head>
   <body>
     <ol reversed>
+      <li id='install-npm-3-in-Ubuntu'>How to install <tt>npm</tt> 3 in Ubuntu</li>
+      The following has worked for me in Ubuntu 14.04:
+      <br/>
+      <pre>
+sudo npm install npm@3 -g
+$ npm -version
+3.8.0
+      </pre>
+      <li id='install-node-4-in-Ubuntu'>How to install Node.js 4 in Ubuntu</li>
+      <a href='http://askubuntu.com/a/682514/89663'>source</a>
+      <br/>
+      The following process worked for me on Ubuntu 14.04 and allowed me to install Node.js v4.3.2:
+      <br/>
+      In a sudo shell:
+      <pre>
+apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280
+apt-add-repository 'deb https://deb.nodesource.com/node_4.x precise main'
+apt-get update
+apt-get install nodejs
+      </pre>
+      <br/>
+      <b>NB:</b>I also have <tt>node</tt> symlinked via "alternatives" to <tt>nodejs</tt>:
+      <br/>
+      <pre>
+$ ls /usr/bin/node
+lrwxrwxrwx 1 root root 22 Mar  7 10:23 /usr/bin/node -> /etc/alternatives/node*
+$ ls /etc/alternatives/node
+lrwxrwxrwx 1 root root 15 Mar  7 10:23 /etc/alternatives/node -> /usr/bin/nodejs*
+      </pre>
       <li id='how-to-install-guard-livereload'>How to install <b>guard-livereload</b></li>
       On 2016-02-20 the following procedure (<a href="http://www.thelacunablog.com/install-livereload-ubuntu.html">source</a>) worked for me:
       <ol type="1">
@@ -71,23 +100,23 @@
       <ul>
         <li>IDE</li>Webstorm
         <li>Tools management</li><a href="https://npmjs.org/"?>NPM</a> (Node Packaged Modules)
-                                                              <li>Rapid development</li><a href="http://yeoman.io/">Yeoman</a>
-                                                              <li>Build tool</li><a href="http://gruntjs.com/">grunt</a>
-                                                              <li>Dependency management</li><a href="http://bower.io/">bower</a>
-                                                              <li>Unit test</li><a href="http://jasmine.github.io/">Jasmin</a>
-                                                              <li>QA code analysis</li><a href="http://www.jshint.com/">jshint</a>
-                                                              <li>Test automation</li><a href="http://karma-runner.github.io/">Karma</a>
-                                                              <li>Modular</li><a href="http://requirejs.org/">RequireJS</a>
-                                                              <li>Framework</li><a href="http://angularjs.org/">AngularJS</a>
-                                                              </ul>
-                                                              <li>install Node.js for Ubuntu</li>
-                                                              On 6.II.2015 I followed <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions">these instructions</a> and they worked on my Ubuntu 12.04 machine.
-                                                              <li>JavaScript Event KeyCode Test Page</li>
-                                                              <a href="http://www.asquare.net/javascript/tests/KeyCode.html">This</a> is a great resource.
-                                                              <li>Function keys for web applications</li>
-                                                              Use F2,F3,F4,F6,F8,F9,F10 and F12 only, if you must. The rest cannot always be overriden. See <a href="http://it.toolbox.com/blogs/paytonbyrd/javascript-keyboard-events-matrix-for-function-keys-f1-through-f12-29264">here</a> for more.
-                                                              <li>Learning resources</li>
-                                                              <a href="http://javascriptissexy.com/how-to-learn-javascript-properly/">How to learn JS properly</li>
-                                                              </ol>
-                                                              </body>
-                                                              </html>
+        <li>Rapid development</li><a href="http://yeoman.io/">Yeoman</a>
+        <li>Build tool</li><a href="http://gruntjs.com/">grunt</a>
+        <li>Dependency management</li><a href="http://bower.io/">bower</a>
+        <li>Unit test</li><a href="http://jasmine.github.io/">Jasmin</a>
+        <li>QA code analysis</li><a href="http://www.jshint.com/">jshint</a>
+        <li>Test automation</li><a href="http://karma-runner.github.io/">Karma</a>
+        <li>Modular</li><a href="http://requirejs.org/">RequireJS</a>
+        <li>Framework</li><a href="http://angularjs.org/">AngularJS</a>
+      </ul>
+      <li>install Node.js for Ubuntu</li>
+      On 6.II.2015 I followed <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions">these instructions</a> and they worked on my Ubuntu 12.04 machine.
+      <li>JavaScript Event KeyCode Test Page</li>
+      <a href="http://www.asquare.net/javascript/tests/KeyCode.html">This</a> is a great resource.
+      <li>Function keys for web applications</li>
+      Use F2,F3,F4,F6,F8,F9,F10 and F12 only, if you must. The rest cannot always be overriden. See <a href="http://it.toolbox.com/blogs/paytonbyrd/javascript-keyboard-events-matrix-for-function-keys-f1-through-f12-29264">here</a> for more.
+      <li>Learning resources</li>
+      <a href="http://javascriptissexy.com/how-to-learn-javascript-properly/">How to learn JS properly</li>
+    </ol>
+  </body>
+</html>

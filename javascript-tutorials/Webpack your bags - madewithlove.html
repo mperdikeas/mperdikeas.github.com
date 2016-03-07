@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://blog.madewithlove.be/post/webpack-your-bags/ -->
+<html class="wf-proximanova-n4-active wf-proximanova-n3-active wf-proximanova-n6-active wf-proximanova-i3-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Webpack your bags - madewithlove</title>
+  <meta name="description" content="Learn how to leverage Webpack to bundle your applications efficiently">
+  <link rel="stylesheet" href="./Webpack your bags - madewithlove_files/main.css">
+  <link rel="stylesheet" href="./Webpack your bags - madewithlove_files/madewithlove-styles.min.css">
+  <link rel="canonical" href="./Webpack your bags - madewithlove_files/Webpack your bags - madewithlove.html">
+  <link rel="alternate" type="application/atom+xml" title="madewithlove blog" href="http://blog.madewithlove.be/feed.xml">
+  <!-- favicons -->
+  <link rel="shortcut icon" type="image/png" href="./Webpack your bags - madewithlove_files/favicon.png">
+  <link rel="apple-touch-icon" href="./Webpack your bags - madewithlove_files/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="./Webpack your bags - madewithlove_files/favicon.png">
+  <script async="" src="./Webpack your bags - madewithlove_files/analytics.js"></script><script src="./Webpack your bags - madewithlove_files/gmx5gab.js"></script><style type="text/css"></style>
+  <style type="text/css">.tk-proxima-nova{font-family:"proxima-nova",sans-serif;}</style><link rel="stylesheet" href="./Webpack your bags - madewithlove_files/l" media="all"><script>try{Typekit.load();}catch(e){}</script>
+  <!-- twitter cards -->
+  
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@madewithlove">
+    
+    <meta name="twitter:creator" content="@anahkiasen">
+    
+    <meta name="twitter:title" content="Webpack your bags">
+    <meta name="twitter:description" content="Learn how to leverage Webpack to bundle your applications efficiently">
+    
+      <meta name="twitter:image" content="http://blog.madewithlove.be/assets/twitter-card-default.png">
+    
+  
+<script src="./Webpack your bags - madewithlove_files/embed.js" data-timestamp="1457341542144"></script><script src="./Webpack your bags - madewithlove_files/alfie.f51946af45e0b561c60f768335c9eb79.js" async="" charset="UTF-8"></script><style type="text/css">  #type-ahead-box {    position: fixed;    top: 0;    right: 0;    margin: 0;    text-align: left;    z-index: 2147483647;    color: #000;    border-bottom: 1px solid #ccc;    border-bottom: 1px solid rgba(0,0,0,0.3);    padding: 4px 8px;    opacity: 0.9;    float: right;    clear: both;    overflow: hidden;    font-size: 18px;    font-family: Arial, Verdana, Georgia, Serif;    white-space: pre-wrap;    min-width: 60px;    outline: 0;    -webkit-box-shadow: 0px 2px 8px rgba(0,0,0,0.2);    -moz-box-shadow: 0px 2px 8px rgba(0,0,0,0.3);  }    #type-ahead-box small {    letter-spacing: -0.12em;    color: #444;  }</style></head>
+
+
+  <body>
+
+    <header class="site-header">
+  <div class="header-wrapper">
+    <h1 class="branding">
+      <a href="http://madewithlove.be/">
+        <img src="./Webpack your bags - madewithlove_files/logo.svg" alt="madewithlove logo"><span>made<strong>with</strong>love</span>
+      </a>
+    </h1>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="http://madewithlove.be/work">work</a>
+            </li>
+            <li>
+                <a href="http://madewithlove.be/culture">culture</a>
+            </li>
+            <li>
+                <a href="http://madewithlove.be/about">about</a>
+            </li>
+            <li class="active">
+                <a href="http://blog.madewithlove.be/">blog</a>
+            </li>
+        </ul>
+    </nav>
+  </div>
+</header>
+
+
+    <main class="blog-post">
+  <header>
+    <h1>Webpack your bags</h1>
+    <p class="meta">
+      October 16, 2015
+      
+        by
+        
+          <a href="https://twitter.com/anahkiasen">Maxime Fabre</a>
+        
+      </p>
+  </header>
+
+  <article>
+    <p><img src="./Webpack your bags - madewithlove_files/what-is-webpack.png" alt=""></p>
+
+<h1 id="webpack-your-bags">Webpack your bags</h1>
+<p>By now you’ve probably heard about this new cool tool on the block called <strong>Webpack</strong>. If you haven’t looked that much into it you’re probably a bit confused by some people calling it a build tool <em>à la</em> <strong>Gulp</strong> and other people calling it a bundler like <strong>Browserify</strong>. If on the other hand you <em>have</em> looked into it you’re probably still confused because the homepage presents Webpack as both.</p>
+
+<p>To be honest, at first the blur around “what Webpack is” frustrated me, and I closed the tab. After all <em>I already had a build system</em>, and was perfectly happy with it. And if you follow closely the very fast Javascript scene, like me, you’ve probably been burnt in the past by jumping on the bandwagon too soon. Having now a bit more experience with it I felt I should write this article for those still on the fence to explain more clearly what Webpack is, and more importantly what is so great about it that it deserves so much attention.</p>
+
+<h2 id="what-is-webpack">What is Webpack?</h2>
+<p>Right off the bat let’s answer the question posed by the introduction: is Webpack a build system or a module bundler? Well, it’s both– and by this I don’t mean that it <em>does</em> both I mean that it <em>combines</em> both. Webpack doesn’t build your assets, and then separately bundle your modules, it considers your assets <em>to be modules themselves</em>.</p>
+
+<p>What this means more precisely is that instead of building all your Sass files, and optimizing all your images, and including them on one side, then bundling all your modules, and including them on your page on another, you have this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">stylesheet</span> <span class="nx">from</span> <span class="s1">'styles/my-styles.scss'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">logo</span> <span class="nx">from</span> <span class="s1">'img/my-logo.svg'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">someTemplate</span> <span class="nx">from</span> <span class="s1">'html/some-template.html'</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">stylesheet</span><span class="p">);</span> <span class="c1">// "body{font-size:12px}"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">logo</span><span class="p">);</span> <span class="c1">// "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5[...]"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">someTemplate</span><span class="p">)</span> <span class="c1">// "&lt;html&gt;&lt;body&gt;&lt;h1&gt;Hello&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;"</span>
+</code></pre>
+</div>
+
+<p>All your assets are considered modules themselves, that can be imported, modified, manipulated, and that ultimately can be packed into your final bundle.</p>
+
+<p>In order for this to work, you register <strong>loaders</strong> in your Webpack configuration. Loaders are small plugins that basically say “When you encounter this kind of file, do this with it”. Some examples of loaders:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+  <span class="c1">// When you import a .ts file, parse it with Typescript</span>
+  <span class="nl">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">ts/</span><span class="p">,</span>
+  <span class="nx">loader</span><span class="err">:</span> <span class="s1">'typescript'</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="c1">// When you encounter images, compress them with image-webpack (wrapper around imagemin)</span>
+  <span class="c1">// and then inline them as data64 URLs</span>
+  <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|jpg|svg</span><span class="se">)</span><span class="sr">/</span><span class="p">,</span>
+  <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span><span class="s1">'url'</span><span class="p">,</span> <span class="s1">'image-webpack'</span><span class="p">],</span>
+<span class="p">},</span>
+<span class="p">{</span>
+  <span class="c1">// When you encounter SCSS files, parse them with node-sass, then pass autoprefixer on them</span>
+  <span class="c1">// then return the results as a string of CSS</span>
+  <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">scss/</span><span class="p">,</span>
+  <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span><span class="s1">'css'</span><span class="p">,</span> <span class="s1">'autoprefixer'</span><span class="p">,</span> <span class="s1">'sass'</span><span class="p">],</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Ultimately at the end of the food chain all loaders return strings. This allows Webpack to wrap them into Javascript modules. Per example once your Sass file is done being transformed by the loaders, it may internally look something like that:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">export</span> <span class="k">default</span> <span class="s1">'body{font-size:12px}'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p><img src="./Webpack your bags - madewithlove_files/iK7sL6Z.gif" alt=""></p>
+
+<h2 id="why-on-earth-would-you-do-that">Why on earth would you do that?</h2>
+<p>Once you understand what Webpack does that’s most likely the second question that will come to mind: what possible benefits could this approach have? “Images and CSS? In my JS? What the hell man?”. Well consider this: for a long while we’ve been taught and trained to concatenate all the things into one single file; to be very preserving about our HTTP requests, yada yada.</p>
+
+<p>This has led to one big downside which is that most people nowadays bundle <em>all their assets</em> into one single <code class="highlighter-rouge">app.js</code> file that is then included in all the pages. Which means most of the time on any given page you’re loading a ton of assets that aren’t required. And if you aren’t doing that, then you’re most likely including assets by hand on certain pages but not on others, which leads to a big mess of dependency trees to maintain and keep track of: on which pages is this dependency needed already? Which pages do the stylesheets A and B affect?</p>
+
+<p>Neither approaches are right, nor wrong. Consider Webpack a middleground– it’s not just a build system or a bundler, it’s a <em>wicked smart</em> module packing system. Once properly configured, it’ll <em>know more about your stack</em> then even you do, and it’ll know better than you how to best optimize it.</p>
+
+<h2 id="lets-build-a-small-app-together">Let’s build a small app together</h2>
+<p>In order for you to more easily understand the benefits of Webpack we’ll build a <em>very</em> small app and bundle the assets with it. For this tutorial I recommend running Node 4 and NPM 3 as the flat dependency tree will avoid a good bunch of headaches when working with Webpack. If you don’t have NPM 3 yet, you can install it through <code class="highlighter-rouge">npm install npm@3 -g</code>.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>node --version
+v4.1.2
+<span class="gp">$ </span>npm --version
+3.3.6
+</code></pre>
+</div>
+
+<p>I also recommend you add <code class="highlighter-rouge">node_modules/.bin</code> to your PATH variable to avoid having to type <code class="highlighter-rouge">node_modules/.bin/webpack</code> every time. All examples after this won’t show the <code class="highlighter-rouge">node_modules/.bin</code> part of the commands I’ll run.</p>
+
+<h3 id="basic-bootstrapping">Basic bootstrapping</h3>
+<p>Let’s start by creating our project and installing Webpack, we’ll also pull in jQuery to demonstrate some things later on.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm init
+<span class="gp">$ </span>npm install jquery --save
+<span class="gp">$ </span>npm install webpack --save-dev
+</code></pre>
+</div>
+
+<p>Now let’s create our app’s entry point, in plain ES5 for now:</p>
+
+<p><strong>src/index.js</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>And let’s create our Webpack configuration, in a <code class="highlighter-rouge">webpack.config.js</code> file. Webpack configuration is just Javascript, and needs to export an object:</p>
+
+<p><strong>webpack.config.js</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span>  <span class="s1">'./src'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">path</span><span class="p">:</span>     <span class="s1">'builds'</span><span class="p">,</span>
+        <span class="na">filename</span><span class="p">:</span> <span class="s1">'bundle.js'</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>Here, <code class="highlighter-rouge">entry</code> tells Webpack which files are the <em>entry points</em> of your application. Those are your main files, that sit at the top of your dependency tree. Then we tell it to compile our bundle in the <code class="highlighter-rouge">builds</code> directory under the name <code class="highlighter-rouge">bundle.js</code>. So let’s setup our index HTML accordingly:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>My title<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;a&gt;</span>Click me<span class="nt">&lt;/a&gt;</span>
+
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"builds/bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+
+<p>Let’s run Wepack, and if everything went right we should get a message telling us it compiled our <code class="highlighter-rouge">bundle.js</code> properly:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ webpack
+Hash: 65ea4aab7f0755f7fc8e
+Version: webpack 1.12.2
+Time: 350ms
+    Asset    Size  Chunks             Chunk Names
+bundle.js  257 kB       0  [emitted]  main
+   [0] ./src/index.js 53 bytes {0} [built]
+    + 1 hidden modules
+</code></pre>
+</div>
+
+<p>Here you can see Webpack tells you your <code class="highlighter-rouge">bundle.js</code> contains our entry point (<code class="highlighter-rouge">index.js</code>) as well as one hidden module. This is jQuery, by default Webpack hides modules that are not yours. To see all the modules compiled by Webpack, we can pass the <code class="highlighter-rouge">--display-modules</code> flag:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ webpack --display-modules
+bundle.js  257 kB       0  [emitted]  main
+   [0] ./src/index.js 53 bytes {0} [built]
+   [1] ./~/jquery/dist/jquery.js 248 kB {0} [built]
+</code></pre>
+</div>
+
+<p>You can also run <code class="highlighter-rouge">webpack --watch</code> to make it automatically watch for changes to your files and recompile as needed.</p>
+
+<h3 id="setting-up-our-first-loader">Setting up our first loader</h3>
+<p>Now remember how we talked about Webpack being able to import CSS and HTML and all kinds of things? Where does that fit in? Well if you’re in tune with the large movement towards Web Components these past few years (Angular 2, Vue, React, Polymer, X-Tag, etc.) you’ve probably heard about the idea that your app – instead of being one interconnected monolithic piece of UI – would be more maintainable as a set of small reusable self-contained pieces of UI: web components (I’m simplifying here, but you get the idea). Now in order for components to be truly self-contained, they need to pack all their requirements within themselves. Imagine a button component: it has some HTML sure, but also some JS to make it interact with things, and probably also some styles. It would be nice if all of those would only be loaded when needed, right? Only when we import the Button component, would we get all its related assets.</p>
+
+<p>Let’s write our button; first-off, as most of you are I assume now more accustomed to ES2015 we’ll add our first loader: Babel. To install a loader in Webpack you do two things: <code class="highlighter-rouge">npm install {whatever}-loader</code>, and add it to the <code class="highlighter-rouge">module.loaders</code> part of your Webpack configuration, so let’s do that. Here we want babel, so:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install babel-loader --save-dev
+</code></pre>
+</div>
+
+<p>And update our configuration: what do we want? We want Babel to run on all files that end in <code class="highlighter-rouge">.js</code>, <strong>but</strong> as Webpack traverses all dependencies we want to avoid Babel running on third-party code like jQuery, so we can filter this a bit more. Loaders can have both an <code class="highlighter-rouge">include</code> or an <code class="highlighter-rouge">exclude</code> rule. It can be a string, a regex, a callback, whatever you want. In our case, we want Babel to only run on <em>our</em> files, so we’ll <code class="highlighter-rouge">include</code> only our source directory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span>  <span class="s1">'./src'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">path</span><span class="p">:</span>     <span class="s1">'builds'</span><span class="p">,</span>
+        <span class="na">filename</span><span class="p">:</span> <span class="s1">'bundle.js'</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="na">test</span><span class="p">:</span>   <span class="sr">/</span><span class="se">\.</span><span class="sr">js/</span><span class="p">,</span>
+                <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel'</span><span class="p">,</span>
+                <span class="na">include</span><span class="p">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/src'</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>We can now rewrite our little <code class="highlighter-rouge">index.js</code> in ES6 since we pulled in Babel. All examples from now on will be in ES6.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s1">'jquery'</span><span class="p">;</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">'Hello'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<h3 id="writing-a-small-component">Writing a small component</h3>
+<p>Let’s now write a small Button component, it’ll have some SCSS styles, an HTML template, and some behavior. So we’ll install the things we need. First of all we’ll need Mustache which is a very lightweight templating package, but we’ll also need loaders for Sass and HTML files. Also, as results are piped from one loader to another, we’ll need a CSS loader to handle the results of the Sass loader. Now, once we have our CSS, there are multiple ways to handle them, for now we’ll use a loader called the <code class="highlighter-rouge">style-loader</code> which takes a piece of CSS and injects it into the page dynamically.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install mustache --save
+<span class="gp">$ </span>npm install css-loader style-loader html-loader sass-loader node-sass --save-dev
+</code></pre>
+</div>
+
+<p>Now in order to tell Webpack to “pipe” things from one loader to another we simply pass a series of loaders, from right to left, separated by a <code class="highlighter-rouge">!</code>. Alternatively you can use an array by using the <code class="highlighter-rouge">loaders</code> attribute instead of <code class="highlighter-rouge">loader</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="nl">test</span><span class="p">:</span>    <span class="sr">/</span><span class="se">\.</span><span class="sr">js/</span><span class="p">,</span>
+    <span class="nx">loader</span><span class="err">:</span>  <span class="s1">'babel'</span><span class="p">,</span>
+    <span class="nx">include</span><span class="err">:</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">'/src'</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="na">test</span><span class="p">:</span>   <span class="sr">/</span><span class="se">\.</span><span class="sr">scss/</span><span class="p">,</span>
+    <span class="na">loader</span><span class="p">:</span> <span class="s1">'style!css!sass'</span><span class="p">,</span>
+    <span class="c1">// Or</span>
+    <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span><span class="s1">'style'</span><span class="p">,</span> <span class="s1">'css'</span><span class="p">,</span> <span class="s1">'sass'</span><span class="p">],</span>
+<span class="p">},</span>
+<span class="p">{</span>
+    <span class="na">test</span><span class="p">:</span>   <span class="sr">/</span><span class="se">\.</span><span class="sr">html/</span><span class="p">,</span>
+    <span class="na">loader</span><span class="p">:</span> <span class="s1">'html'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Now that we have our loaders in place, let’s write our button:</p>
+
+<p><strong>src/Components/Button.scss</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nc">.button</span> <span class="p">{</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="no">tomato</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>src/Components/Button.html</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"button"</span> <span class="na">href=</span><span class="s">"{{link}}"</span><span class="nt">&gt;</span>{{text}}<span class="nt">&lt;/a&gt;</span>
+
+</code></pre>
+</div>
+
+<p><strong>src/Components/Button.js</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s1">'jquery'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">template</span> <span class="nx">from</span> <span class="s1">'./Button.html'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Mustache</span> <span class="nx">from</span> <span class="s1">'mustache'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">'./Button.scss'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">Button</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">link</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">link</span> <span class="o">=</span> <span class="nx">link</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">onClick</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">link</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">render</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">node</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+
+        <span class="c1">// Render our button</span>
+        <span class="nx">$</span><span class="p">(</span><span class="nx">node</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span>
+            <span class="nx">Mustache</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="p">})</span>
+        <span class="p">);</span>
+
+        <span class="c1">// Attach our listeners</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">'.button'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">onClick</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">));</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Your <code class="highlighter-rouge">Button.js</code> is now 100% self-contained and whenever imported, in whichever context it’ll run, it’ll have all the tools in hands to be used and rendered properly. Now we just need to render (very dirtily) our Button on our page:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">Button</span> <span class="nx">from</span> <span class="s1">'./Components/Button'</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Button</span><span class="p">(</span><span class="s1">'google.com'</span><span class="p">);</span>
+<span class="nx">button</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>Let’s try to run Webpack and refresh our page, you should now see our disgusting button in action.</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/8Ov1x2P.png" alt=""></p>
+
+<p>You’ve now learned how to setup loaders and how to define the dependencies of each part of your app. This may look like it doesn’t matter much now, but let’s push our example further.</p>
+
+<h3 id="code-splitting">Code splitting</h3>
+<p>This example is fine and everything, but maybe we don’t always need our button. Maybe on some pages there won’t be an <code class="highlighter-rouge">a</code> to render the button on, and in these cases, we’d like to not import all the Button styles, and templates, and Mustache and everything, correct? That’s when code splitting comes into play. Code splitting is Webpack’s answer to this problematic of “Monolithic bundle” vs “Unmaintainable manual imports”. It’s the idea that you define, in your code, “split points”: areas of your code that could be easily split off into a separate file and then loaded on-demand. The syntax is very simple:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s1">'jquery'</span><span class="p">;</span>
+
+<span class="c1">// This is a split point</span>
+<span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// All the code in here, and everything that is imported</span>
+  <span class="c1">// will be in a separate file</span>
+  <span class="kr">const</span> <span class="nx">library</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'some-big-library'</span><span class="p">);</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s1">'foo'</span><span class="p">).</span><span class="nx">click</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">library</span><span class="p">.</span><span class="nx">doSomething</span><span class="p">());</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>Everything in the <code class="highlighter-rouge">require.ensure</code> callback would be split into a <em>chunk</em> – a separate bundle that Webpack will load only when needed, through an AJAX request. That means we would basically have this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>bundle.js
+|- jquery.js
+|- index.js // our main file
+chunk1.js
+|- some-big-libray.js
+|- index-chunk.js // the code in the callback
+</code></pre>
+</div>
+
+<p>And you don’t have to import or load <code class="highlighter-rouge">chunk1.js</code> anywhere. Webpack will load it on-demand, only when it is needed. That means you can wrap chunks of your code with various pieces of logic, which is what we’ll do in our example. We only want our Button component when we have a link on the page:</p>
+
+<p><strong>src/index.js</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'a'</span><span class="p">).</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">Button</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./Components/Button'</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Button</span><span class="p">(</span><span class="s1">'google.com'</span><span class="p">);</span>
+
+        <span class="nx">button</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Webpack’s output should now be different, accordingly. Let’s run it with the <code class="highlighter-rouge">--display-chunks</code> flag to see what modules are in which chunks:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ webpack --display-modules --display-chunks
+Hash: 432341dc518c06c9d8da
+Version: webpack 1.12.2
+Time: 952ms
+      Asset     Size  Chunks             Chunk Names
+  bundle.js  3.88 kB       0  [emitted]  main
+1.bundle.js   287 kB       1  [emitted]
+chunk    {0} bundle.js (main) 294 bytes [rendered]
+    [0] ./src/index.js 294 bytes {0} [built]
+chunk    {1} 1.bundle.js 278 kB {0} [rendered]
+    [1] ./src/Components/Button.js 2.02 kB {1} [built]
+    [2] ./~/jquery/dist/jquery.js 248 kB {1} [built]
+    [3] ./src/Components/Button.html 72 bytes {1} [built]
+    [4] ./~/mustache/mustache.js 19.3 kB {1} [built]
+    [5] ./src/Components/Button.scss 1.05 kB {1} [built]
+    [6] ./~/css-loader!./~/sass-loader!./src/Components/Button.scss 212 bytes {1} [built]
+    [7] ./~/css-loader/lib/css-base.js 1.51 kB {1} [built]
+    [8] ./~/style-loader/addStyles.js 6.09 kB {1} [built]
+</code></pre>
+</div>
+
+<p>As you can see, our entry point (<code class="highlighter-rouge">bundle.js</code>) now only contains some Webpack logic, and everything else (jQuery, Mustache, Button) is in the <code class="highlighter-rouge">1.bundle.js</code> chunk and will only be loaded if we have an anchor on the page. Now in order for Webpack to know where to find the chunks when loading them with AJAX, we have to add a little line to our configuration:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">path</span><span class="err">:</span>       <span class="s1">'builds'</span><span class="p">,</span>
+<span class="nx">filename</span><span class="err">:</span>   <span class="s1">'bundle.js'</span><span class="p">,</span>
+<span class="nx">publicPath</span><span class="err">:</span> <span class="s1">'builds/'</span><span class="p">,</span>
+</code></pre>
+</div>
+
+<p>The <code class="highlighter-rouge">output.publicPath</code> option tells Webpack where to find built assets <em>from the point of view of the page</em> (so in our case in /builds/). If we visit our page now we’ll see that everything is still working, but more importantly we’ll see that, since we had an anchor on the page, Webpack properly loaded our chunk:</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/rPvIRiB.png" alt=""></p>
+
+<p>If we didn’t have an anchor on our page, only <code class="highlighter-rouge">bundle.js</code> would have been loaded. This allows you to intelligently split off heavy logic in your application and only let each page require what it truly needs. Note also that we can name our split points so that instead of <code class="highlighter-rouge">1.bundle.js</code> we have more meaningful chunk names. You can do so by passing a third argument to <code class="highlighter-rouge">require.ensure</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">Button</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./Components/Button'</span><span class="p">);</span>
+    <span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Button</span><span class="p">(</span><span class="s1">'google.com'</span><span class="p">);</span>
+
+    <span class="nx">button</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+<span class="p">},</span> <span class="s1">'button'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>Would generate <code class="highlighter-rouge">button.bundle.js</code> instead of <code class="highlighter-rouge">1.bundle.js</code>.</p>
+
+<h3 id="adding-a-second-component">Adding a second component</h3>
+<p>Now this is pretty cool and all but let’s add a second component to see if it works:</p>
+
+<p><strong>src/Components/Header.scss</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nc">.header</span> <span class="err">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">3rem</span><span class="err">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p><strong>src/Components/Header.html</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+<span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"header"</span><span class="nt">&gt;</span>{{text}}<span class="nt">&lt;/header&gt;</span>
+
+</code></pre>
+</div>
+
+<p><strong>src/Components/Header.js</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s1">'jquery'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Mustache</span> <span class="nx">from</span> <span class="s1">'mustache'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">template</span> <span class="nx">from</span> <span class="s1">'./Header.html'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">'./Header.scss'</span><span class="p">;</span>
+
+<span class="kr">export</span> <span class="k">default</span> <span class="kr">class</span> <span class="nx">Header</span> <span class="p">{</span>
+    <span class="nx">render</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">node</span><span class="p">).</span><span class="nx">text</span><span class="p">();</span>
+
+        <span class="nx">$</span><span class="p">(</span><span class="nx">node</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span>
+            <span class="nx">Mustache</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="p">{</span><span class="nx">text</span><span class="p">})</span>
+        <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>And let’s render it in our application:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// If we have an anchor, render the Button component on it</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'a'</span><span class="p">).</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">Button</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./Components/Button'</span><span class="p">);</span>
+        <span class="kr">const</span> <span class="nx">button</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Button</span><span class="p">(</span><span class="s1">'google.com'</span><span class="p">);</span>
+
+        <span class="nx">button</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// If we have a title, render the Header component on it</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">).</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">require</span><span class="p">.</span><span class="nx">ensure</span><span class="p">([],</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./Components/Header'</span><span class="p">);</span>
+
+        <span class="k">new</span> <span class="nx">Header</span><span class="p">().</span><span class="nx">render</span><span class="p">(</span><span class="s1">'h1'</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Now if you look at the output Webpack with the <code class="highlighter-rouge">--display-chunks --display-modules</code> flags:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ webpack --display-modules --display-chunks
+Hash: 1d1634f6b452523fb30d
+Version: webpack 1.12.2
+Time: 2744ms
+      Asset     Size  Chunks             Chunk Names
+  bundle.js  4.14 kB       0  [emitted]  main
+1.bundle.js   287 kB       1  [emitted]
+2.bundle.js   287 kB       2  [emitted]
+chunk    {0} bundle.js (main) 534 bytes [rendered]
+    [0] ./src/index.js 534 bytes {0} [built]
+chunk    {1} 1.bundle.js 278 kB {0} [rendered]
+    [1] ./src/Components/Button.js 2.02 kB {1} [built]
+    [2] ./~/jquery/dist/jquery.js 248 kB {1} {2} [built]
+    [3] ./src/Components/Button.html 72 bytes {1} [built]
+    [4] ./~/mustache/mustache.js 19.3 kB {1} {2} [built]
+    [5] ./src/Components/Button.scss 1.05 kB {1} [built]
+    [6] ./~/css-loader!./~/sass-loader!./src/Components/Button.scss 212 bytes {1} [built]
+    [7] ./~/css-loader/lib/css-base.js 1.51 kB {1} {2} [built]
+    [8] ./~/style-loader/addStyles.js 6.09 kB {1} {2} [built]
+chunk    {2} 2.bundle.js 277 kB {0} [rendered]
+    [2] ./~/jquery/dist/jquery.js 248 kB {1} {2} [built]
+    [4] ./~/mustache/mustache.js 19.3 kB {1} {2} [built]
+    [7] ./~/css-loader/lib/css-base.js 1.51 kB {1} {2} [built]
+    [8] ./~/style-loader/addStyles.js 6.09 kB {1} {2} [built]
+    [9] ./src/Components/Header.js 1.69 kB {2} [built]
+   [10] ./src/Components/Header.html 64 bytes {2} [built]
+   [11] ./src/Components/Header.scss 1.05 kB {2} [built]
+   [12] ./~/css-loader!./~/sass-loader!./src/Components/Header.scss 192 bytes {2} [built]
+</code></pre>
+</div>
+
+<p>You may see a rather major issue: both our components need jQuery and Mustache, which means these dependencies are getting duplicated in our chunks, which is not what we want. By default Webpack will perform very little optimizations. But it packs in a lot of firepower to help you turn things around, in the form of <em>plugins</em>.</p>
+
+<p>Plugins differ from loaders in the sense that instead of only executing on a certain set of files, and being more of a “pipe”, they execute on <em>all</em> files and perform more advanced actions, that aren’t necessarily related to transformations. Webpack comes will a handful of plugins to perform all various kinds of optimizations. The one that interests us in this case is the <strong>CommonChunksPlugin</strong>: it analyzes your chunks for recurring dependencies, and extracts them somewhere else. It can be a completely separate file (like <code class="highlighter-rouge">vendor.js</code>) or it can be your main file.</p>
+
+<p>In our case we’d like to move common dependencies to our entry file because, if all pages need jQuery and Mustache, we might as well move it up. So let’s update our configuration:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">webpack</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span>   <span class="s1">'./src'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span>  <span class="p">{</span>
+      <span class="c1">// ...</span>
+    <span class="p">},</span>
+    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span>
+        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>
+            <span class="na">name</span><span class="p">:</span>      <span class="s1">'main'</span><span class="p">,</span> <span class="c1">// Move dependencies to our main file</span>
+            <span class="na">children</span><span class="p">:</span>  <span class="kc">true</span><span class="p">,</span> <span class="c1">// Look for common dependencies in all children,</span>
+            <span class="na">minChunks</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">// How many times a dependency must come up before being extracted</span>
+        <span class="p">}),</span>
+    <span class="p">],</span>
+    <span class="na">module</span><span class="p">:</span>  <span class="p">{</span>
+      <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>If we run Webpack again, we can see it’s looking much better. Here <code class="highlighter-rouge">main</code> is the name of the default chunk.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>chunk    {0} bundle.js (main) 275 kB [rendered]
+    [0] ./src/index.js 534 bytes {0} [built]
+    [2] ./~/jquery/dist/jquery.js 248 kB {0} [built]
+    [4] ./~/mustache/mustache.js 19.3 kB {0} [built]
+    [7] ./~/css-loader/lib/css-base.js 1.51 kB {0} [built]
+    [8] ./~/style-loader/addStyles.js 6.09 kB {0} [built]
+chunk    {1} 1.bundle.js 3.36 kB {0} [rendered]
+    [1] ./src/Components/Button.js 2.02 kB {1} [built]
+    [3] ./src/Components/Button.html 72 bytes {1} [built]
+    [5] ./src/Components/Button.scss 1.05 kB {1} [built]
+    [6] ./~/css-loader!./~/sass-loader!./src/Components/Button.scss 212 bytes {1} [built]
+chunk    {2} 2.bundle.js 3 kB {0} [rendered]
+    [9] ./src/Components/Header.js 1.69 kB {2} [built]
+   [10] ./src/Components/Header.html 64 bytes {2} [built]
+   [11] ./src/Components/Header.scss 1.05 kB {2} [built]
+   [12] ./~/css-loader!./~/sass-loader!./src/Components/Header.scss 192 bytes {2} [built]
+</code></pre>
+</div>
+
+<p>If we specified per example <code class="highlighter-rouge">name: 'vendor'</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span>      <span class="s1">'vendor'</span><span class="p">,</span>
+    <span class="na">children</span><span class="p">:</span>  <span class="kc">true</span><span class="p">,</span>
+    <span class="na">minChunks</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">}),</span>
+</code></pre>
+</div>
+
+<p>Since that chunk doesn’t exist yet, Webpack would have created a <code class="highlighter-rouge">builds/vendor.js</code> that we would have then manually imported in our HTML:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"builds/vendor.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"builds/bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>You can also make common dependencies be loaded asynchronously by not providing a common chunk name and instead specifying <code class="highlighter-rouge">async: true</code>. Webpack has a lot of these powerful intelligent optimizations. I can’t possibly name them all but as an exercise let’s try to create a <em>production</em> version of our application.</p>
+
+<h3 id="to-production-and-beyond">To production and beyond</h3>
+<p>Ok first of all, we’re going to add several plugins to our configuration, but we only want to load them when <code class="highlighter-rouge">NODE_ENV</code> equals <code class="highlighter-rouge">production</code> so let’s add some logic for that in our configuration. Since it’s just a JS file, that’s easy to do:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">webpack</span>    <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">production</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">===</span> <span class="s1">'production'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">plugins</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>
+        <span class="na">name</span><span class="p">:</span>      <span class="s1">'main'</span><span class="p">,</span> <span class="c1">// Move dependencies to our main file</span>
+        <span class="na">children</span><span class="p">:</span>  <span class="kc">true</span><span class="p">,</span> <span class="c1">// Look for common dependencies in all children,</span>
+        <span class="na">minChunks</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">// How many times a dependency must come up before being extracted</span>
+    <span class="p">}),</span>
+<span class="p">];</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">production</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">plugins</span> <span class="o">=</span> <span class="nx">plugins</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span>
+       <span class="c1">// Production plugins go here</span>
+    <span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span>   <span class="s1">'./src'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span>  <span class="p">{</span>
+        <span class="na">path</span><span class="p">:</span>       <span class="s1">'builds'</span><span class="p">,</span>
+        <span class="na">filename</span><span class="p">:</span>   <span class="s1">'bundle.js'</span><span class="p">,</span>
+        <span class="na">publicPath</span><span class="p">:</span> <span class="s1">'builds/'</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">plugins</span><span class="p">:</span> <span class="nx">plugins</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>Now second, Webpack also has several settings that we can switch off in production:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">debug</span><span class="p">:</span>   <span class="o">!</span><span class="nx">production</span><span class="p">,</span>
+    <span class="na">devtool</span><span class="p">:</span> <span class="nx">production</span> <span class="p">?</span> <span class="kc">false</span> <span class="p">:</span> <span class="s1">'eval'</span><span class="p">,</span>
+</code></pre>
+</div>
+
+<p>The first setting switches loaders to and from <code class="highlighter-rouge">debug</code> mode, which means they won’t pack-in more code to let you more easily debug things in local. The second is about sourcemaps generation. Webpack has <a href="http://webpack.github.io/docs/configuration.html#devtool">several ways</a> to render <a href="http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">sourcemaps</a>, <code class="highlighter-rouge">eval</code> is just the best one in local. In production we may not really care about sourcemaps so we disable them. Now let’s add our production plugins:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">production</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">plugins</span> <span class="o">=</span> <span class="nx">plugins</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span>
+
+        <span class="c1">// This plugin looks for similar chunks and files</span>
+        <span class="c1">// and merges them for better caching by the user</span>
+        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">DedupePlugin</span><span class="p">(),</span>
+
+        <span class="c1">// This plugins optimizes chunks and modules by</span>
+        <span class="c1">// how much they are used in your app</span>
+        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">OccurenceOrderPlugin</span><span class="p">(),</span>
+
+        <span class="c1">// This plugin prevents Webpack from creating chunks</span>
+        <span class="c1">// that would be too small to be worth loading separately</span>
+        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">MinChunkSizePlugin</span><span class="p">({</span>
+            <span class="na">minChunkSize</span><span class="p">:</span> <span class="mi">51200</span><span class="p">,</span> <span class="c1">// ~50kb</span>
+        <span class="p">}),</span>
+
+        <span class="c1">// This plugin minifies all the Javascript code of the final bundle</span>
+        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">UglifyJsPlugin</span><span class="p">({</span>
+            <span class="na">mangle</span><span class="p">:</span>   <span class="kc">true</span><span class="p">,</span>
+            <span class="na">compress</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">warnings</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span> <span class="c1">// Suppress uglification warnings</span>
+            <span class="p">},</span>
+        <span class="p">}),</span>
+
+        <span class="c1">// This plugins defines various variables that we can set to false</span>
+        <span class="c1">// in production to avoid code related to them from being compiled</span>
+        <span class="c1">// in our final bundle</span>
+        <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">DefinePlugin</span><span class="p">({</span>
+            <span class="na">__SERVER__</span><span class="p">:</span>      <span class="o">!</span><span class="nx">production</span><span class="p">,</span>
+            <span class="na">__DEVELOPMENT__</span><span class="p">:</span> <span class="o">!</span><span class="nx">production</span><span class="p">,</span>
+            <span class="na">__DEVTOOLS__</span><span class="p">:</span>    <span class="o">!</span><span class="nx">production</span><span class="p">,</span>
+            <span class="s1">'process.env'</span><span class="p">:</span>   <span class="p">{</span>
+                <span class="nl">BABEL_ENV</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span><span class="p">),</span>
+            <span class="p">},</span>
+        <span class="p">}),</span>
+
+    <span class="p">]);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>That’s the ones I use most but Webpack offers a lot more plugins you can use to fine-tune your modules and chunks. There are also several user-contributed plugins that can be found on NPM and that accomplish various things. Links to available plugins can be found at the end of this article.</p>
+
+<p>Now another aspect of production assets is ideally you’d like your assets to be versioned. Now remember when we set <code class="highlighter-rouge">output.filename</code> to <code class="highlighter-rouge">bundle.js</code>? Well there are several variables you can actually use in that option, one of which is <code class="highlighter-rouge">[hash]</code> and corresponds to a hash of the contents of the final bundle, so let’s change our code. We also want our chunks to be versioned so we’ll add an <code class="highlighter-rouge">output.chunkFilename</code> which accomplishes the same things:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">output</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">path</span><span class="p">:</span>          <span class="s1">'builds'</span><span class="p">,</span>
+    <span class="nx">filename</span><span class="err">:</span>      <span class="nx">production</span> <span class="p">?</span> <span class="s1">'[name]-[hash].js'</span> <span class="p">:</span> <span class="s1">'bundle.js'</span><span class="p">,</span>
+    <span class="nx">chunkFilename</span><span class="err">:</span> <span class="s1">'[name]-[chunkhash].js'</span><span class="p">,</span>
+    <span class="nx">publicPath</span><span class="err">:</span>    <span class="s1">'builds/'</span><span class="p">,</span>
+<span class="p">},</span>
+</code></pre>
+</div>
+
+<p>As we don’t really have a way to dynamically retrieve the name of the compiled bundle in our simplistic app, we’ll only version assets in production, for the example. We may also want to clean up our builds folder before a production build (to save some space) so let’s install a third-party plugin that does just that:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install clean-webpack-plugin --save-dev
+</code></pre>
+</div>
+
+<p>And add it to our configuration:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">webpack</span>     <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">CleanPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'clean-webpack-plugin'</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">production</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">plugins</span> <span class="o">=</span> <span class="nx">plugins</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span>
+
+        <span class="c1">// Cleanup the builds/ folder before</span>
+        <span class="c1">// compiling our final assets</span>
+        <span class="k">new</span> <span class="nx">CleanPlugin</span><span class="p">(</span><span class="s1">'builds'</span><span class="p">),</span>
+</code></pre>
+</div>
+
+<p>Ok, we have already done some nifty optimizations, let’s compare the results:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ webpack
+                bundle.js   314 kB       0  [emitted]  main
+1-21660ec268fe9de7776c.js  4.46 kB       1  [emitted]
+2-fcc95abf34773e79afda.js  4.15 kB       2  [emitted]
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>$ NODE_ENV=production webpack
+main-937cc23ccbf192c9edd6.js  97.2 kB       0  [emitted]  main
+</code></pre>
+</div>
+
+<p>So what has Webpack done: first of all since our example is very lightweight, our two async chunks weren’t worth the HTTP request so Webpack merged them back up to the entry point. Second everything was properly minified. We went from a total of 3 HTTP requests for 322kb to a single HTTP request for 97kb.</p>
+
+<blockquote>
+  <p>But wasn’t the point of Webpack to stem away for one big ass JS file?</p>
+</blockquote>
+
+<p>Yes, yes it is, but this only happened because our app is very small. Now consider this: you didn’t have to think about what to merge, when or where. If your chunks suddenly start having more dependencies, the chunk will be moved to an async chunk instead of being merged; and if these chunks start looking too similar to be worth loading separately, they would be merged, etc. You just setup the rules, and from then on, Webpack will automatically optimize your application in the best way possible. No manual labor, no thinking about what dependencies go where or are needed where, everything is <em>automatic</em>.</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/lLzUqLS.gif" alt=""></p>
+
+<p>You may have noticed I didn’t setup anything to minify our HTML and CSS, that’s because the <code class="highlighter-rouge">css-loader</code> and <code class="highlighter-rouge">html-loader</code> already take care of that by default if the <code class="highlighter-rouge">debug</code> option we mentioned earlier is <code class="highlighter-rouge">false</code>. This is also the reason why Uglify is a separate plugin: because there is no <code class="highlighter-rouge">js-loader</code> in Webpack, since Webpack itself <em>is</em> the JS loader.</p>
+
+<h3 id="extraction">Extraction</h3>
+<p>Ok now as you may have noticed, since the beginning of this tutorial our styles have been injected live into the webpage which causes a FOUAP (Flash of Ugly Ass Page). Now wouldn’t it be nice if we could just, pipe all the styles that Webpack has gathered in the current build to a final CSS file? Sure we can, let’s call in some help from an external plugin:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install extract-text-webpack-plugin --save-dev
+</code></pre>
+</div>
+
+<p>What this plugin does is exactly what I just said: gather a certain type of content from your final bundle, and pipe it elsewhere, most common use case being for CSS. So let’s set it up:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">webpack</span>    <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">CleanPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'clean-webpack-plugin'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ExtractPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'extract-text-webpack-plugin'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">production</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">===</span> <span class="s1">'production'</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">plugins</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="k">new</span> <span class="nx">ExtractPlugin</span><span class="p">(</span><span class="s1">'bundle.css'</span><span class="p">),</span> <span class="c1">// &lt;=== where should content be piped</span>
+    <span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>
+        <span class="na">name</span><span class="p">:</span>      <span class="s1">'main'</span><span class="p">,</span> <span class="c1">// Move dependencies to our main file</span>
+        <span class="na">children</span><span class="p">:</span>  <span class="kc">true</span><span class="p">,</span> <span class="c1">// Look for common dependencies in all children,</span>
+        <span class="na">minChunks</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="c1">// How many times a dependency must come up before being extracted</span>
+    <span class="p">}),</span>
+<span class="p">];</span>
+
+<span class="c1">// ...</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="na">plugins</span><span class="p">:</span> <span class="nx">plugins</span><span class="p">,</span>
+    <span class="na">module</span><span class="p">:</span>  <span class="p">{</span>
+        <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="na">test</span><span class="p">:</span>   <span class="sr">/</span><span class="se">\.</span><span class="sr">scss/</span><span class="p">,</span>
+                <span class="na">loader</span><span class="p">:</span> <span class="nx">ExtractPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">(</span><span class="s1">'style'</span><span class="p">,</span> <span class="s1">'css!sass'</span><span class="p">),</span>
+            <span class="p">},</span>
+            <span class="c1">// ...</span>
+        <span class="p">],</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>Now the <code class="highlighter-rouge">extract</code> method takes two arguments: first is what to do with the extracted contents when we’re in a chunk (<code class="highlighter-rouge">'style'</code>), second is what to do when we’re in a main file (<code class="highlighter-rouge">'css!sass'</code>). Now if we’re in a chunk, we can’t just magically append our CSS to the generated one so we use the <code class="highlighter-rouge">style</code> loader here as before, but for all the styles that are found in the main file, pipe them to a <code class="highlighter-rouge">builds/bundle.css</code> file. Let’s test it out, let’s add a small main stylesheet for our application:</p>
+
+<p><strong>src/styles.scss</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="nf">darken</span><span class="p">(</span><span class="no">white</span><span class="o">,</span> <span class="m">0</span><span class="mi">.2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>src/index.js</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="s1">'./styles.scss'</span><span class="p">;</span>
+
+<span class="c1">// Rest of our file</span>
+</code></pre>
+</div>
+
+<p>Let’s run Webpack and sure enough we now have a <code class="highlighter-rouge">bundle.css</code> file that we can import in our HTML:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>webpack
+                bundle.js    305 kB       0  <span class="o">[</span>emitted]  main
+1-551ae2634fda70fd8502.js    4.5 kB       1  <span class="o">[</span>emitted]
+2-999713ac2cd9c7cf079b.js   4.17 kB       2  <span class="o">[</span>emitted]
+               bundle.css  59 bytes       0  <span class="o">[</span>emitted]  main
+</code></pre>
+</div>
+
+<p>If you’d like to also extract the styles of the chunks, you can pass the <code class="highlighter-rouge">ExtractTextPlugin('bundle.css', {allChunks: true})</code> option. Do note that you can also use variables here in your filename, so if you wanted a versioned stylesheet you’d just do <code class="highlighter-rouge">ExtractTextPlugin('[name]-[hash].css')</code> same as for the Javascript file.</p>
+
+<h3 id="images-all-the-people">Images all the people</h3>
+<p>Now this is good for all our Javascript files but one topic we haven’t talked about much is concrete assets: images, fonts, etc. How do those work in the context of Webpack and how can we best optimize them? Let’s take a picture from the web that we’ll use as our page background because I’ve seen people doing it on <a href="https://www.google.com/search?q=Geocities&tbm=isch">Geocities</a> and it looks so cool:</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/cib8Joh.jpg" alt=""></p>
+
+<p>Let’s save this image in <code class="highlighter-rouge">img/puppy.jpg</code>, and update our Sass file accordingly:</p>
+
+<p><strong>src/styles.scss</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">font-family</span><span class="p">:</span> <span class="nb">sans-serif</span><span class="p">;</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="nf">darken</span><span class="p">(</span><span class="no">white</span><span class="o">,</span> <span class="m">0</span><span class="mi">.2</span><span class="p">);</span>
+    <span class="nl">background-image</span><span class="p">:</span> <span class="sx">url('../img/puppy.jpg')</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Now if you do this, Webpack will legitimately tell you “What the fuck do I do with a JPG”, because we have no loader for it. There are two native loaders we can use to handle concrete assets: the <code class="highlighter-rouge">file-loader</code> and the <code class="highlighter-rouge">url-loader</code>:
+- The first one will just return a URL to the asset without any particular change, allowing you in the process to version the file (this is the default behavior).
+- The second one will inline the asset to a <code class="highlighter-rouge">data:image/jpeg;base64</code> URL</p>
+
+<p>In reality it’s not black and white: if your background is a 2Mb image you don’t want to inline that and it would be preferable to load it separately. If on the other hand it’s a small icon of 2kb it’s better to inline it and spare the HTTP request, so let’s setup both:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install url-loader file-loader --save-dev
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="nl">test</span><span class="p">:</span>   <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|gif|jpe</span><span class="se">?</span><span class="sr">g|svg</span><span class="se">)</span><span class="sr">$/i</span><span class="p">,</span>
+    <span class="nx">loader</span><span class="err">:</span> <span class="s1">'url?limit=10000'</span><span class="p">,</span>
+<span class="p">},</span>
+</code></pre>
+</div>
+
+<p>Here, we’re passing a <code class="highlighter-rouge">limit</code> query parameter to the <code class="highlighter-rouge">url-loader</code> which tells it: if the asset is smaller than 10kb inline it, else, fallback to the <code class="highlighter-rouge">file-loader</code> and reference it. That syntax is called a query string, you use it to configure loaders, alternatively you can also configure loaders through an object:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="nl">test</span><span class="p">:</span>   <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|gif|jpe</span><span class="se">?</span><span class="sr">g|svg</span><span class="se">)</span><span class="sr">$/i</span><span class="p">,</span>
+    <span class="nx">loader</span><span class="err">:</span> <span class="s1">'url'</span><span class="p">,</span>
+    <span class="nx">query</span><span class="err">:</span> <span class="p">{</span>
+      <span class="nl">limit</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Ok let’s give it a shot:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>bundle.js   305 kB       0  [emitted]  main
+1-1fe73fd41910a5765b83.js  2.97 kB       1  [emitted]
+2-ba23c7bf6cb5039edbee.js  2.58 kB       2  [emitted]
+bundle.css  3.46 kB       0  [emitted]  main
+</code></pre>
+</div>
+
+<p>As we can see there is no mention of a JPG because our puppy image is smaller than the configured size, it has been inlined. Which means if we visit our page we can bask in the gloriousness of our puppies overlords.</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/OZRTy7f.png" alt=""></p>
+
+<p>This is <em>very</em> powerful because it means Webpack will now intelligently optimize any concrete assets found depending on the ratio of size/HTTP requests. There are a good load of loaders you can pipe to push things even further, most common one being <a href="https://github.com/tcoopman/image-webpack-loader">image-loader</a> which will pass <code class="highlighter-rouge">imagemin</code> on all images before bundling them. It even has a <code class="highlighter-rouge">?bypassOnDebug</code> query parameter which allows you to only do that on production. There are a lot of plugins like that, I encourage you to take a look at the list at the end of this article.</p>
+
+<h3 id="well-do-it-live-dammit">We’ll do it live dammit</h3>
+<p>Now that our production build is taken care of, let’s focus more on our local development. You may have noticed one big hole so far that usually comes up when mentioning build tools: live reloading: LiveReload, BrowserSync, whatever your cup of tea is. But having the whole page refresh that’s for suckers, let’s take it one step further with what is called <em>hot module replacement</em> or <em>hot reload</em>. It’s the idea that, since Webpack knows exactly the position of each module in our dependency tree, a change in it can be represented by simply <em>patching</em> that part of the tree with the new file. More clearly: your changes appear live on your screen without the page reloading.</p>
+
+<p>In order for HMR to be used, we need a server from which the hot assets will be served. Webpack comes with a <code class="highlighter-rouge">dev-server</code> we can leverage for that, so let’s install it:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install webpack-dev-server --save-dev
+</code></pre>
+</div>
+
+<p>Now to run the dev server, nothing simpler, just run the following command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>webpack-dev-server --inline --hot
+</code></pre>
+</div>
+
+<p>The first flag tells Webpack to inline the HMR logic into the page (instead of presenting the page in an iframe) and the second enables HMR. Now let’s visit the web-server at <code class="highlighter-rouge">http://localhost:8080/webpack-dev-server/</code>. You’ll see your usual page, but now try to modify one of the Sass files and, magic:</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/s2xXiWT.gif" alt=""></p>
+
+<p>You can use the webpack-dev-server as your own local server. If you plan to always use it for HMR, you can say so in your configuration:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">output</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">path</span><span class="p">:</span>          <span class="s1">'builds'</span><span class="p">,</span>
+    <span class="nx">filename</span><span class="err">:</span>      <span class="nx">production</span> <span class="p">?</span> <span class="s1">'[name]-[hash].js'</span> <span class="p">:</span> <span class="s1">'bundle.js'</span><span class="p">,</span>
+    <span class="nx">chunkFilename</span><span class="err">:</span> <span class="s1">'[name]-[chunkhash].js'</span><span class="p">,</span>
+    <span class="nx">publicPath</span><span class="err">:</span>    <span class="s1">'builds/'</span><span class="p">,</span>
+<span class="p">},</span>
+<span class="nx">devServer</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">hot</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">},</span>
+</code></pre>
+</div>
+
+<p>Now whenever we run <code class="highlighter-rouge">webpack-dev-server</code> it’ll already be in HMR mode. Note that we used <code class="highlighter-rouge">webpack-dev-server</code> here to serve the hot assets but you can use several other options, like an Express server. Webpack provides a middleware that you can use to plug in HMR capabilities to other servers.</p>
+
+<h3 id="get-clean-or-die-lintin">Get clean or die lintin’</h3>
+<p>If you’ve been following this tutorial closely you may have noticed something weird: why are loaders nested in <code class="highlighter-rouge">module.loaders</code> but plugins are not? That’s because there are other things you can put into <code class="highlighter-rouge">module</code> of course! Webpack doesn’t just have loaders, it also has pre-loaders and post-loaders: loaders that are executed on the code before or after our main loaders. Let’s take an example: I’m sure the code I wrote for this article is horrendous, so let’s apply ESLint to our code before we transform it:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install eslint eslint-loader babel-eslint --save-dev
+</code></pre>
+</div>
+
+<p>And let’s create a minimalistic <code class="highlighter-rouge">.eslintrc</code> file that I know will fail:</p>
+
+<p><strong>.eslintrc</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="s">parser</span><span class="pi">:</span> <span class="s1">'</span><span class="s">babel-eslint'</span>
+<span class="s">rules</span><span class="pi">:</span>
+  <span class="s">quotes</span><span class="pi">:</span> <span class="s">2</span>
+</code></pre>
+</div>
+
+<p>Now to add our pre-loader, we simply use the same syntax as before, but in <code class="highlighter-rouge">module.preLoaders</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="err">:</span>  <span class="p">{</span>
+    <span class="nl">preLoaders</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js/</span><span class="p">,</span>
+            <span class="na">loader</span><span class="p">:</span> <span class="s1">'eslint'</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+</code></pre>
+</div>
+
+<p>And now if we run Webpack, sure enough it fails:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>webpack
+Hash: 33cc307122f0a9608812
+Version: webpack 1.12.2
+Time: 1307ms
+                    Asset      Size  Chunks             Chunk Names
+                bundle.js    305 kB       0  <span class="o">[</span>emitted]  main
+1-551ae2634fda70fd8502.js    4.5 kB       1  <span class="o">[</span>emitted]
+2-999713ac2cd9c7cf079b.js   4.17 kB       2  <span class="o">[</span>emitted]
+               bundle.css  59 bytes       0  <span class="o">[</span>emitted]  main
+    + 15 hidden modules
+
+ERROR <span class="k">in</span> ./src/index.js
+
+/Users/anahkiasen/Sites/webpack/src/index.js
+   1:8   error  Strings must use doublequote  quotes
+   4:31  error  Strings must use doublequote  quotes
+   6:32  error  Strings must use doublequote  quotes
+   7:35  error  Strings must use doublequote  quotes
+   9:23  error  Strings must use doublequote  quotes
+  14:31  error  Strings must use doublequote  quotes
+  16:32  error  Strings must use doublequote  quotes
+  18:29  error  Strings must use doublequote  quotes
+</code></pre>
+</div>
+
+<p>Let’s take another example of pre-loader: for every component we currently import its stylesheet of the same name, and its template of the same name. Let’s use a pre-loader to automatically load any files bearing the same name as a module:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install baggage-loader --save-dev
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="nl">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">js/</span><span class="p">,</span>
+    <span class="nx">loader</span><span class="err">:</span> <span class="s1">'baggage?[file].html=template&amp;[file].scss'</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This tells Webpack: if you encounter an HTML file of the same name, import it as <code class="highlighter-rouge">template</code>, and also import any Sass file of the same name. We can now change our components from this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s1">'jquery'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">template</span> <span class="nx">from</span> <span class="s1">'./Button.html'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Mustache</span> <span class="nx">from</span> <span class="s1">'mustache'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">'./Button.scss'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>To this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">$</span> <span class="nx">from</span> <span class="s1">'jquery'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Mustache</span> <span class="nx">from</span> <span class="s1">'mustache'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>As you can see pre-loaders can be pretty powerful, same goes for post-loaders. Take a look at the list of available loaders at the end of this article and you’ll surely find a lot of use cases in it.</p>
+
+<h3 id="would-you-like-to-know-more">Would you like to know more?</h3>
+<p>Currently our application is rather small, but as it starts getting bigger it might be useful to be able to get more insights on what our actual dependency tree is. What we might be doing right or wrong, what are the bottlenecks of our application, etc. Now internally, Webpack knows all these things, but you have to ask him politely to show you what it knows. You can do so by generating a <em>profile file</em> by running the following command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>webpack --profile --json &gt; stats.json
+</code></pre>
+</div>
+
+<p>The first flag tells Webpack to generate a profile file, the second one to generate it in JSON, and finally we’re piping all this output to a JSON file. Now there are multiple websites to analyze these profile files, but Webpack provides an official one to decypher this information. So go to <a href="http://webpack.github.io/analyse/">Webpack Analyze</a> and import your JSON file there. Now go into the <strong>Modules</strong> tab and you should see a visual representation of your dependency tree:</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/H2cs3d9.png" alt=""></p>
+
+<p>The redder a dot is, the more it is problematic regarding your final bundle. In our case it’s marking jQuery as problematic because it’s the heaviest of all our modules. Take a look into all the tabs, look around, you won’t learn much on our minimal application but this tool is a very important one to gain insight into your tree and final bundle. Now as I said, other services offer insight into your profile file, another one I like is <a href="http://chrisbateman.github.io/webpack-visualizer/">Webpack Visualizer</a> which spins up a doughnut chart of what takes up space in your bundle, which of course in our case:</p>
+
+<p><img src="./Webpack your bags - madewithlove_files/MUQkNKR.png" alt=""></p>
+
+<h2 id="thats-all-folks">That’s all folks</h2>
+<p>Now I know that in my case, Webpack has completely replaced Grunt or Gulp: most of what I used them for is now handled by it, and for the rest I just use NPM scripts. Per example one common task we had in the past was converting our API documentation to HTML with Aglio, this can easily be done like so:</p>
+
+<p><strong>package.json</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"build"</span><span class="p">:</span><span class="w"> </span><span class="s2">"webpack"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"build:api"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aglio -i docs/api/index.apib -o docs/api/index.html"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>If however you have more complex tasks in your Gulp stack that are unrelated to bundling or assets, Webpack plays <em>very</em> nicely with other build systems. Per example here is how to integrate Webpack in Gulp:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">gulp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gulp'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">gutil</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'gutil'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">webpack</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./webpack.config'</span><span class="p">);</span>
+
+<span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">webpack</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">stats</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nx">gutil</span><span class="p">.</span><span class="nx">PluginError</span><span class="p">(</span><span class="s1">'webpack'</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+    <span class="nx">gutil</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'[webpack]'</span><span class="p">,</span> <span class="nx">stats</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span>
+
+    <span class="nx">callback</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>And that’s pretty much it, since Webpack also has a Node API, it can easily be used in other build systems, and in any case you’ll find wrappers for it hanging a bit everywhere.</p>
+
+<p>Anyway, I think that’s a good enough bird’s eye view of what Webpack can do for you. You may think we have covered a lot in this article, but we have only <em>scratched the surface</em>: multiple entry points, prefetching, context replacement, etc. Webpack is an impressively powerful tool, which of course comes at the cost of a more opaque configuration syntax than your traditional build tool, I won’t deny it. But once you know how to tame it, it’ll purr the sweet sound of performance right into your ear. I used it on several projects, and it offers so much power of optimization and automation that I can’t honestly picture myself going back to banging my head on what assets is needed where or when.</p>
+
+<h2 id="resources">Resources</h2>
+<ul>
+  <li><a href="https://webpack.github.io/">Webpack documentation</a></li>
+  <li><a href="http://webpack.github.io/docs/list-of-loaders.html">List of loaders</a></li>
+  <li><a href="http://webpack.github.io/docs/list-of-plugins.html">List of plugins</a></li>
+  <li><a href="https://github.com/madewithlove/webpack-article/commits/master">Sources for this article</a></li>
+  <li><a href="https://github.com/madewithlove/webpack-config">Our Webpack configuration package</a></li>
+</ul>
+
+
+    <div class="blog-post__comments">
+      <h2>Comments</h2>
+      <div id="disqus_thread"><iframe id="dsq-app2" name="dsq-app2" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="./Webpack your bags - madewithlove_files/saved_resource.html" style="width: 1px !important; min-width: 100% !important; border: none !important; overflow: hidden !important; height: 1785px !important;" horizontalscrolling="no" verticalscrolling="no"></iframe><iframe id="indicator-north" name="indicator-north" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 684px !important; border: none !important; overflow: hidden !important; top: 0px !important; min-width: 684px !important; max-width: 684px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important;"></iframe><iframe id="indicator-south" name="indicator-south" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" style="width: 684px !important; border: none !important; overflow: hidden !important; bottom: 0px !important; min-width: 684px !important; max-width: 684px !important; position: fixed !important; z-index: 2147483646 !important; height: 29px !important; min-height: 29px !important; max-height: 29px !important; display: none !important;"></iframe></div>
+<script>
+    var disqus_config = function () {
+        this.page.url = "http://blog.madewithlove.be/post/webpack-your-bags/";
+        this.page.identifier = "/post/webpack-your-bags";
+    };
+
+    function downloadJSAtOnload() {
+        var d = document, s = d.createElement('script');
+        s.src = '//mwl-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    }
+
+    if (window.addEventListener) {
+        window.addEventListener('load', downloadJSAtOnload, false);
+    } else if (window.attachEvent) {
+        window.attachEvent('onload', downloadJSAtOnload);
+    } else {
+        window.onload = downloadJSAtOnload;
+    }
+</script>
+
+    </div>
+  <aside class="social-media-links"><ul><li class="share-twitter"><a href="https://twitter.com/intent/tweet?text=Webpack%20your%20bags&url=http%3A%2F%2Fblog.madewithlove.be%2Fpost%2Fwebpack-your-bags%2F&via=madewithlove">Tweet this blogpost</a></li><li class="share-facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fblog.madewithlove.be%2Fpost%2Fwebpack-your-bags%2F">Post on Facebook</a></li><li class="share-buffer"><a href="http://bufferapp.com/add" data-text="Webpack your bags" data-url="http://blog.madewithlove.be/post/webpack-your-bags/" data-count="horizontal" data-via="madewithlove" data-activate-src="https://d389zggrogs7qo.cloudfront.net/js/button.js" class="buffer-add-button click-to-activate">Add to Buffer</a></li><li class="share-pocket"><a href="https://getpocket.com/save?url=http%3A%2F%2Fblog.madewithlove.be%2Fpost%2Fwebpack-your-bags%2F&title=Webpack%20your%20bags">Add to Pocket</a></li></ul></aside></article>
+</main>
+
+
+    <footer class="site-footer blog-footer">
+  <div class="contact">
+    <div>
+      <p>Subscribe <a href="http://blog.madewithlove.be/feed.xml">via RSS</a>.</p>
+      <p>Search the <a href="http://blog.madewithlove.be/archive/">full archive</a>.</p>
+      <p>Follow us on Twitter: <a href="https://twitter.com/madewithlove">@madewithlove</a>.</p>
+      <p>Want to work for us? We have <a href="http://madewithlove.be/jobs">job openings</a>.</p>
+    </div>
+    <div>
+      <p>
+        Content is published under the <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons BY-SA</a> license.
+        More info and the source material <a href="https://github.com/madewithlove/blog">can be found on GitHub</a>.
+      </p>
+    </div>
+  </div>
+  <p class="copyright">© 2016 madewithlove</p>
+</footer>
+
+
+    <script src="./Webpack your bags - madewithlove_files/social.js"></script>
+    <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-58380511-1', 'auto');
+	ga('send', 'pageview');
+</script>
+
+  
+
+
+<img src="./Webpack your bags - madewithlove_files/favicon.png" style="display: none;"></body><tabox id="type-ahead-box" style="display: none; background-color: rgb(255, 255, 85);">o <small>(339 of 2222)</small></tabox></html>
