@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link type="text/css" rel="stylesheet" href="final-code-wavetheory-lightbox.css">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li id='install-npm-3-in-Ubuntu'>How to install <tt>npm</tt> 3 in Ubuntu</li>
+      The following has worked for me in Ubuntu 14.04 and 12.04:
+      <br/>
+      <pre>
+sudo npm install npm@3 -g
+$ npm -version
+3.8.0
+      </pre>
+      <li id='install-node-4-in-Ubuntu'>How to install Node.js 4 in Ubuntu</li>
+      <a href='http://askubuntu.com/a/682514/89663'>source</a>
+      <br/>
+      The following process worked for me on Ubuntu 14.04 and 12.04 and allowed me to install Node.js v4.3.2:
+      <br/>
+      In a sudo shell:
+      <pre>
+apt-key adv --keyserver keyserver.ubuntu.com --recv 68576280
+apt-add-repository 'deb https://deb.nodesource.com/node_4.x precise main'
+apt-get update
+apt-get install nodejs
+      </pre>
+      <br/>
+      <b>NB:</b>I also have <tt>node</tt> symlinked via "alternatives" to <tt>nodejs</tt>:
+      <br/>
+      <pre>
+$ ls /usr/bin/node
+lrwxrwxrwx 1 root root 22 Mar  7 10:23 /usr/bin/node -> /etc/alternatives/node*
+$ ls /etc/alternatives/node
+lrwxrwxrwx 1 root root 15 Mar  7 10:23 /etc/alternatives/node -> /usr/bin/nodejs*
+      </pre>
+      <li id='how-to-install-guard-livereload'>How to install <b>guard-livereload</b></li>
+      On 2016-02-20 the following procedure (<a href="http://www.thelacunablog.com/install-livereload-ubuntu.html">source</a>) worked for me:
+      <ol type="1">
+        <li>sudo apt-get install ruby-dev</li>
+        <li>sudo gem install rdoc -V</li>
+        <li>sudo gem install guard -V</li>
+        <li>sudo gem install guard-livereload -V</li>
+      </ol>
+      <br/>
+      I think actually step 4 was the only necessary step.
+      <br/>
+      I then created the symlinks mentioned in
+      <a href="#how-to-install-guard-livereload">this post below</a>.
+      <li id='how-to-install-guard-livereload'>How to install <b>guard-livereload</b></li>
+      What worked for me (in 2015-10) was to follow the instructions from:
+      <br/>
+      <br/>
+      <a href="https://github.com/guard/guard-livereload">the github repo for <b>guard-livereload</b></a>
+      <br/>
+      <br/>
+      I've also created a script to run <b>guard</b> (in <code>~/playground/repo-wide-scripts</code>).
+      <br/>
+      I the same location I've also created:
+      <ul>
+        <li>A sample <code>Guardfile</code></li>
+        <li>The <code>Gemfile</code> to be used</li>
+      </ul>
+      Basically what needs now be done (in a new project, new machine) is:
+      <ol>
+        <li><code>sudo gem install guard-livereload</code></li>
+        <li><code>sudo apt-get install bundler</code></li>
+        <li><code>ln -s ~/playground/repo-wide-scripts/Gemfile</code></li>
+        <li><code>ln -s ~/playground/repo-wide-scripts/Guardfile</code></li>
+        <li><code>ln -s ~/playground/repo-wide-scripts/run-guard</code></li>
+      </ol>
+      <br/>
+      An example of this properly setup and working well is found in my <a href="https://github.com/mperdikeas/playground/tree/master/javascript-canvas/004-bouncing-ball-physics">bouncing ball project</a> (file <code>run-guard</code> which ultimately
+      links to <a href="https://github.com/mperdikeas/playground/blob/master/repo-wide-scripts/run-guard">this script</a>).
+      <li>how to install <tt>npm</tt> and configure it to install global packages in your home directory</li>
+      <a href='http://www.sitepoint.com/beginners-guide-node-package-manager/'>This</a> is a
+      great guide in how to setup <tt>npm</tt> for your local environment (and how to
+      configure <tt>global</tt> to point to your home directory instead).
+      <br/>
+      I've made a copy of the document in case the original resource goes
+      offline <a href='beginners-guide-node-package-manager.html'>here</a>      <li id='npm-nvm'><b><i>NB: Deprecated</b></i>  How to use node and install npm packages in home folder</li>
+      I have used the approach to install node packages via the <code>npm</code> tool in the home folder as described 
+      <a href='http://www.sitepoint.com/beginners-guide-node-package-manager/'>here</a>.
+      However with this approach, one (at least in Ubuntu 14.04) cannot use the <code>nodejs</code> executable
+      but has to use the <code>node</code> one that is available with the <code>nvm</code> tool.
+      This is described <a href='https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server'>here</a> in the section "How to Install Using NVM".
+      <strong>NB:</strong>I actually had to use <code>sudo curl .. | sh</code> to install it.
+      <br/>
+      <br/>
+      Then don't forget upon installing a package, e.g. <code>npm prompt</code> to also do <code>nvm link prompt</code>
+      (as described in the link above). An example is given in:
+      <pre>
+        ~/playground/javascript-you-dont-know
+      </pre>
+      <li><i><b>NB: Deprecated (?)</b></i> install Node.js for Ubuntu</li>
+      On 6.II.2015 I followed <a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#debian-and-ubuntu-based-linux-distributions">these instructions</a> and they worked on my Ubuntu 12.04 machine.
+    </ol>
+  </body>
+</html>
