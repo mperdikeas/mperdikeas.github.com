@@ -3,6 +3,7 @@
   <head>
     <title>space cadet</title>
     <link rel='icon' href='favicon.ico'/>
+    <script src='howler.min.js'></script>
     <script src='utils.js'></script>
     <script src='utils-client.js'></script>
     <style>
@@ -56,6 +57,8 @@
        solarScroller     = new ScrollingLayer(canvas(SOLAR_SYSTEM_PLANE_ID), solarProvider.get(), 2);
        initializeBattlePlane(canvas(BATTLE_PLANE_ID));
        messageBoard      = new MessageBoard(canvas(MESSAGE_PLANE_ID));
+       messageBoard.addMessage('Spacebar to shoot');
+       messageBoard.addMessage('Dont allow any enemy ships to run past you');
        clientUtils.invokeInLoop(loop    , 1000/FPS, TOTAL_LOOPS, controller);
      }
 
@@ -210,7 +213,7 @@
 
      var BattleGround = function(cnv, spaceship) {
        this.spaceship = spaceship;
-       this.enemyGenerator = new EnemyGenerator(cnv, 2000);
+       this.enemyGenerator = new EnemyGenerator(cnv, 4000);
        this.friendlyRockets = [];
        this.enemies         = [];
        this.enemiesKilled   = 0;
@@ -218,6 +221,11 @@
 
      BattleGround.prototype.launchFriendlyRocket = function(x,y) {
        if (this.spaceship.ammunition>0) {
+
+         (new Howl({urls: ['laser.wav'],
+           volume: 0.1
+         })).play();
+         
          this.friendlyRockets.push({x:x, y:y});
          this.spaceship.ammunition--;
        }
@@ -266,6 +274,9 @@
                                        rocketsToDie.push(i);
                                        enemy.sufferDamage(10);
                                        if (enemy.health<0) {
+                                         (new Howl({urls: ['grenade-explosion.wav'],
+                                                    volume: 0.6
+                                         })).play();
                                          enemiesToDie.push(j);
                                          this.enemiesKilled++;
                                        }
