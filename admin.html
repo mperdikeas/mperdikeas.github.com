@@ -12,6 +12,38 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to fix the screen resolution problem with VirtualBox in Ubuntu 14.04 64bit</li>
+    <a href='http://askubuntu.com/a/591195/89663'>source</a>
+    <br/>
+    The following worked for me:
+    <ul>
+      <li>install Virtual Box 5</li>
+      For the 64-bit version of Ubuntu 14.04 be sure to download the amd deb file and then do:
+      <pre>sudo dpkg -i path/to/deb-file.deb</pre>
+      <li>install these in the <b>Host</b> operating system</li>
+      <pre>
+sudo apt-get install virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11
+      </pre>
+      <li>install these in the <b>Guest</b> system</li>
+      <pre>
+sudo apt-get install dkms
+sudo apt-get install build-essential module-assistant
+sudo m-a prepare
+      </pre>
+      <li>install the Insert Guest Additions CD Image</li>
+      In case you have no top menu in the Guest system, it's because you're in scale mode which causes it to be hidden. In that case, press:
+      <code> Host+C</code> to toggle scale mode (where <code>Host</code> is <code>Right Control</code> by default)
+      <br/><br/>
+      In the Guest system, go to the top menu, and click Devices->Insert Guest Additions CD Image. This should mount the CD image.
+      <br/><br/>
+      In my case, Autostart worked, and the installation started with a prompt. If it doesn't autostart, you can do the following
+      <pre>
+cd /media/&lt;username&gt;/VBOXADDITIONS_4.3.10_93012
+sudo ./VBoxLinuxAdditions.run
+      </pre>
+      Just be sure to replace &lt;username&gt; by the logged in user's username.
+      <li>reboot the <b>guest</b> system</li>
+    </ul>
     <li>how to mount an ISO file</li>
     <a href='http://askubuntu.com/a/193632/89663'>source</a>
     <pre>

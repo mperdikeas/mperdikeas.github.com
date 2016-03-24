@@ -6,6 +6,14 @@
   </head>
   <body>
     <ol reversed>
+      <li id='print-sources-core-packages'>Ask node to print the sources of function in core packages</li>
+<pre>
+$ node
+> fs = require('fs');
+> fs.writeFileSync('fs.js', fs.toString())
+> fs.writeFileSync('fs.readFileSync.js', fs.readFileSync.toString())
+[Ctrl-C][Ctrl-C]
+</pre>
       <li id='install-npm-3-in-Ubuntu'>How to install <tt>npm</tt> 3 in Ubuntu</li>
       The following has worked for me in Ubuntu 14.04 and 12.04:
       <br/>

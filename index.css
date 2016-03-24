@@ -1,0 +1,7 @@
+ul.horizontal-list>li {
+    display: inline;
+}
+
+body {
+    background-color: #ffeeff;
+}
