@@ -6,6 +6,14 @@
   </head>
   <body>
     <ol reversed>
+      <li>backticks (`) vs. $()</li>
+      The grave (`) was the original syntax and should not be used any more unless you want your scripts to run in old Bourne shells. Otherwise simply use:
+      <ul>
+        <li><code>${variable}</code> for variables</li>
+        <li><code>$((expression))</code> for arithmetic expressions</li>
+        <li><code>$(command)</code> for command output substitution</li>
+      </ul>
+
       <li>how to execute a command when one ore more files change</li>
       Sources:
       <ul>
