@@ -6,6 +6,19 @@
   </head>
   <body>
     <ol reversed>
+      <li id='include-javascript-file-traditionally'>Include a JavaScript file in the "traditional" sense</li>
+      <a href='http://stackoverflow.com/a/5809968/274677'>source</a>
+      <br/>
+      Notes:
+      <ul>
+        <li>won't work with <tt>"use strict"</tt></li>
+        <li>useful for "quick and dirty" using JS libs designed for client-side into a node.js app</li>
+      </ul>
+      <pre>
+var fs = require('fs');
+// file is included here:
+eval(fs.readFileSync('file-to-include.js')+'');
+      </pre>
       <li id='print-sources-core-packages'>Ask node to print the sources of function in core packages</li>
 <pre>
 $ node
