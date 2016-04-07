@@ -12,6 +12,21 @@
 </head>
 <body>
   <ol reversed>
+    <li>setting default programs based on mime types in Ubuntu (from the command line)</li>
+    I followed the advice found <a href='http://askubuntu.com/a/289339/89663'>here</a> in order to change the default
+    program associated with PDF files from <tt>evince</tt> to <tt>okular</tt>.
+    <br/>
+    <br/>
+    However, changing the file <code>/usr/share/gnome/applications/defaults.list</code> (which is a symlink to
+    <code>/etc/gnome/defaults.list</code>) didn't work for me.
+    <br/>
+    <br/>
+    Instead, I had to change the file <code>/usr/share/applications/defaults.list</code> (which is different and not symlinked
+    to the above):
+    <pre>
+$ sudo cat /usr/share/applications/defaults.list | grep okular
+application/pdf=okular.desktop
+   </pre>
     <li>how to fix the screen resolution problem with VirtualBox in Ubuntu 14.04 64bit</li>
     <a href='http://askubuntu.com/a/591195/89663'>source</a>
     <br/>
