@@ -1,0 +1,1443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<HTML>
+  <HEAD>
+    <TITLE>Semper Ubi Sub Ubi - Things They Don't Teach You In School</TITLE>
+    <META http-equiv="content-type" content= "text/html; charset=utf-8">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@jschauma">
+    <meta name="twitter:creator" content="@jschauma">
+    <meta name="twitter:url" content="https://www.netmeister.org/blog/semper-ubi-sub-ubi.html">
+    <meta name="twitter:title" content="Things They Don't Teach You In School">
+    <meta name="twitter:description" content="'Always wear underwear' and other practical advice for Computer Science students.">
+    <meta name="twitter:image:src" content="https://www.netmeister.org/blog/semper-ubi/slide01.png">
+
+    <LINK rev="made" href="mailto:jschauma@netmeister.org">
+    <link rel="alternate" type="application/rss+xml" title="Signs of Triviality" href="https://www.netmeister.org/blog/rss.xml">
+    <link rel="stylesheet" type="text/css" href="blog.css">
+    <script type="text/javascript">
+     function toggleVisibility(divID) {
+       var item = document.getElementById(divID);
+       if (item) {
+         item.className=(item.className=='hidden')?'unhidden':'hidden';
+       }
+     }
+
+    </script>
+  </HEAD>
+
+  <BODY>
+    <H1>Signs of Triviality</H1>
+    <em>Opinions, mostly my own, on the importance of being and other things. </em>
+    <HR WIDTH="100%" SIZE=2 ALIGN="CENTER" NOSHADE>
+    <small>
+      [<a href="../index.html">homepage</a>]&nbsp;[<a href="index.html">index</a>]&nbsp;[<a href="mailto:jschauma@netmeister.org">jschauma@netmeister.org</a>]&nbsp;[<a href="https://twitter.com/#!/jschauma">@jschauma</a>]&nbsp;[<a href="rss.xml">RSS</a>]
+    </small>
+    <HR WIDTH="100%" SIZE=2 ALIGN="CENTER" NOSHADE>
+    <h2>Semper Ubi Sub Ubi - Things They Don't Teach You In School</h2>
+    <table border="0" width="75%">
+      <tr>
+        <td>
+          <p><small>March 14th, 2016</small></p>
+
+          <p><small>I was asked to give a talk at the <a
+                                                          href="https://www.stevens.edu/schaefer-school-engineering-science/departments/computer-science">Stevens
+            Institute of Technology Computer Science</a> Club on the topic of things
+            that are not taught in school, but which CS students should know.  I <a
+                                                                                     href="https://twitter.com/jschauma/status/707345194212069381">asked
+            around</a> a bit and got a lot of really interesting and useful feedback,
+            leading to a long laundry list of possible topics.  In the interest of
+            time, I had to cut out a whole lot and still ended up with over 90 minutes
+            of material.  The end result is below.</small></p>
+
+          <p><small>The slides for this talk are also available <a
+                                                                    href="semper-ubi/semper-ubi-sub-ubi.pdf">here</a> as well as <a
+                                                                                                                                     href="http://www.slideshare.net/jschauma/semper-ubi-sub-ubi-things-they-dont-teach-you-in-school">on
+            slideshare</a>.
+          </small> </p>
+
+          <hr width="75%">
+
+          <p><center><img src="semper-ubi/slide01.png" alt="Semper Ubi Sub Subi...
+                                                            and other advice."></center></p>
+
+          <p>This is going to be long, and it will cover a lot
+            of ground, and it will be completely subjective and it
+            will be incomplete.  A lot of this will also be
+            obvious.  Or perhaps only obvious in <a
+                                                     href="https://en.wikipedia.org/wiki/Hindsight_bias">hindsight</a>,
+            because of course once you hear it, or you've
+            experienced it, it's trivial to say that you've known
+            this all along.</p>
+
+          <p>I will try to focus on things that I believe they
+            do not teach you or do not stress enough in your
+            education.  Some of these things used to be taught
+            here at Stevens; some of these things they have
+            started to teach.  Some of them they won't ever teach,
+            because they do not fit into the academic goals of a
+            CS curriculum nor the general concept of a university
+            level education.</p>
+
+          <p><center><a
+                         href="https://twitter.com/jschauma/status/708428158018723840"><img
+                                                                                           src="semper-ubi/slide02.png" border="0" alt="Venn Diagram: Programming !=
+                                                                                                                                        Computer Science"></a></center></p>
+
+          <p>There is a <a
+                            href="https://twitter.com/jschauma/status/707776312765763584">discrepancy
+            between what the industry requires or expects from
+            academia, and what schools and universities
+            provide</a>.  There are some things that universities
+            are not prepared or willing to teach students simply
+            because it does not fall within their mission, and
+            whether or not that is Right and Good is a topic for
+            another day.  The industry, on the other hand, makes
+            the mistake of expecting universities to churn out
+            "programmers", ready to join the big machine and crank
+            out code.  But programming is but one aspect of all
+            the many things that relate to "Computer Science".</p>
+
+          <p>The list of things I'll talk about is necessarily
+            incomplete.  I also cannot possibly actually teach you
+            all the Things They Don't Teach You In School.  But I
+            can at least tell you what some of them are, so that
+            you can begin to research them, to focus on them, to
+            find out more, so that at least now you know some of
+            the things you don't know.</p>
+
+          <p><center><img src="semper-ubi/slide03.png" alt="Know your Unknowns."></center></p>
+
+          <p>And that is already one of the main lessons: Know
+            your Unknowns.  Know what you don't know.  Now I'd be
+            the last person to look favorably upon <a
+                                                       href="http://opinionator.blogs.nytimes.com/tag/the-certainty-of-donald-rumsfeld/">Donald
+            Rumsfeld</a>, but unfortunately it is his name that
+            has become associated with this concept:</p>
+
+          <p><blockquote><em>
+            "There are known knowns; there are things we know we know. We also know
+            there are known unknowns; that is to say we know there are some things we
+            do not know. But there are also unknown unknowns - the ones we don't
+            know we don't know."</em></blockquote></p>
+
+          <p>Or, perhaps phrased as the <a
+                                            href="https://en.wikipedia.org/wiki/Socratic_paradox">Socratic
+            paradox</a>: <em>I know that I know
+            nothing</em>.</p>
+
+          <p>This is actually important and not as confusing as
+            it may sound.  And it has some interesting
+            implications on your confidence.  You may have heard
+            of the terms "<a
+                              href="https://en.wikipedia.org/wiki/Dunning%E2%80%93Kruger_effect">Dunning-Kruger
+            effect</a>" and "<a
+                                 href="https://en.wikipedia.org/wiki/Impostor_syndrome">impostor
+            syndrome</a>", which are basically two sides of the
+            same coin:</p>
+
+          <p><center><img src="semper-ubi/slide04.png" alt="Venn Diagram: Knowns and Unknowns"></center></p>
+
+          <p>The fallacy here is that the more you know, the
+            more you are aware of all the things you don't know,
+            thus losing confidence and feeling like you know so
+            much less than you actually do.</p>
+
+          <p>Undergrads -- by and large, anyway -- know that
+            they don't know much.  Once they graduate, however,
+            something weird happens: with this degree in hand,
+            they feel like they know a whole lot.  Why, they even
+            implemented Huffman compression once!  They've written
+            literally hundreds of lines of Java and even some C++,
+            so yeah, they're "expert" or at least "strong"
+            programmers.  Right?</p>
+
+          <p><center><img src="semper-ubi/slide05.png" alt="Venn Diagram: Dunning-Kruger Effect"></center></p>
+
+          <p>At this point, the ratio of the things they know
+            they don't know versus the things they actually know
+            is small.  I.e., they think they know more than they
+            don't know, thus developing strong confidence in their
+            abilities.</p>
+
+          <p><center><img src="semper-ubi/slide06.png" alt="Venn Diagram: Impostor Syndrome"></center></p>
+
+          <p>As time goes by and you learn more and more, you
+            also learn that there are a <em>lot</em> more things
+            out there that you don't know.  So even though the set
+            of things you do know has increased, the
+            <em>ratio</em> of the things you know you don't know
+            versus those you do know has shifted.  As a result,
+            you feel like you know (comparatively) less.</p>
+
+          <p>We could have a full talk on just this one syndrome,
+            but suffice it to say that it's important to have a
+            reasonably realistic understanding of what you know
+            and what you don't know.</p>
+
+          <p>Dunning-Kruger and Impostor Syndrome are entirely
+            fascinating and have profound impact on how you
+            approach your work, your peers.  Which gets me to my
+            next point:</p>
+
+          <p><center><img src="semper-ubi/slide07.png" alt="Computering, at its heart, is a people problem."></center></p>
+
+          <p>Everything you do in this field ultimately boils
+            down to solving people problems, to understanding
+            human beings and their motivations.  Somehow people in
+            the tech world pretend that they can decouple the
+            human component from the technical requirements or the
+            general problem space, and that never works out.</p>
+
+          <p>We'll get back to this underlying concept
+            throughout today's talk.</p>
+
+          <p><center><img src="semper-ubi/slide08.png" alt="A Concept is Stronger than a Fact."></center></p>
+
+          <p>The reason that you attend college or any higher
+            education is not to learn individual skills.  You are
+            here to learn <em>concepts</em>.  To learn how to
+            learn.  You do not get a CS degree to become a
+            programmer -- you can learn how to program yourself,
+            in less than 24 hours, no less.  (<a
+                                                  href="http://www.norvig.com/21-days.html">Right?</a>)
+
+            <p><center><img src="semper-ubi/slide09.png" alt="Copying/Pasting from StackOverflow; Googling your Homework for Dummies"></center></p>
+
+            <p>Yes, this is how programming is done, by and large.
+              But note that what happens in the so-called "real
+              world" is not a good idea in school: by doing this,
+              you are defeating the point of the exercise.</p>
+
+            <p>One part of the exercise is for you to <em>do the
+              work</em>.  When we ask you to write a program to sort
+              an input set, then we are doing that not because we need a
+              program to sort an input set.  We are giving the
+              assignment so that you write it, so that you get the
+              experience of implementing the algorithm.  Copy and
+              paste driven development will rob you of this, the
+              main objective of the assignment.</p>
+
+            <p>You may have heard that it takes <a
+                                                    href="http://problogservice.com/2012/03/15/what-malcolm-gladwell-really-said-about-the-10000-hour-rule/">around
+              10K hours to become an expert</a> in just about
+              anything.  So you better get a head start:</p>
+
+            <p><center><img src="semper-ubi/slide10.png" alt="You need practical experience."></center></p>
+
+            <p>If you want to get a job in that so-called real
+              world, you better have some programming experience to
+              show for.  Academia will teach you concepts, which are
+              important, but the overwhelming majority of jobs out
+              there do not require an in-depth understanding of
+              Computer Science and instead focus more on practical
+              programming experience.</p>
+
+            <p>It's true that understanding the CS concepts we're
+              teaching you here at Stevens will make you a better
+              programmer (if that's what you want to do), but the
+              theory is <em>necessary, not sufficient</em>, to becoming a
+              <em>good</em> programmer, a <em>good</em> software
+              engineer, or whatever it is you end up doing with this
+              degree.</p>
+
+            <p>There are some things you can only learn by doing;
+              some lessons you cannot learn in the abstract.</p>
+
+            <p><center><img src="semper-ubi/slide11.png" alt="You don't fully understand a problem until you try to solve it yourself."></center></p>
+
+            <p>In CS, you learn about Operating System concepts
+              such as virtual memory or filesystems, or perhaps
+              distributed computing algorithms and things like the
+              <a
+                  href="https://en.wikipedia.org/wiki/Dining_philosophers_problem">Dining
+                Philosophers</a> or the <a
+                                            href="https://en.wikipedia.org/wiki/Thundering_herd_problem">Thundering
+                Herd</a> problem.  But unless you have experienced
+              them, you do not fully <em>understand</em> them.
+              Unless you have actually implemented a web server or
+              an http client, you do not understand all the details
+              of HTTP.</p>
+
+            <p>This also means that the first time you try to
+              solve a problem, you necessarily are going to produce
+              a a flawed, incomplete solution.  As you implement
+              your tool or program or algorithm, you are learning
+              the many details that weren't even on your horizon
+              when you began, so your solution is necessarily...
+              crappy.  Throw it out!</p>
+
+            <p><center><img src="semper-ubi/slide12.png" alt="Prototype... then toss it!"></center></p>
+
+            <p>Be aware that your first solution is nothing but a
+              prototype.  A first attempt at solving the problem,
+              used to outline the general solution and exploring the
+              problem space.  If you're fine with that, then it'll
+              be easy to junk it and begin work on the actual
+              solution.</p>
+
+            <p>(Sidenote: beware "<a
+                                      href="https://en.wikipedia.org/wiki/Second-system_effect">Second
+              System Effect</a>" and feature creep.)</p>
+
+            <p>You know why prototypes are so hard?  On the one
+              hand, we are unwilling to throw away what we worked so
+              hard on.  Imagine: you spent all this time in writing
+              a program that does what you think is necessary, and
+              you learned all the intricate details of the problem
+              at hand, and now you're supposed to just throw all
+              that away?</p>
+
+            <p>But if you do that, you are not actually throwing
+              away all that much.  You can much more easily build a
+              new version once you've done it the first time.  Have
+              you ever worked hard on a homework assignment and
+              then accidentally deleted all or a big chunk of your
+              work?  Sure, it's frustrating, but what took you maybe
+              a week to write the first time will take you only a
+              few hours the second time, because now you much
+              better understand the problem space.</p>
+
+            <p>So don't be afraid to throw away your prototype and
+              begin work anew.  Otherwise, your risk that your
+              prototype, intended to be a temporary fix, becomes a
+              permanent solution.</p>
+
+            <p><center><a
+                           href="https://twitter.com/jschauma/status/450441590302318592"><img
+                                                                                             src="semper-ubi/slide13.png"
+                                                                                             alt="There's nothing as permanent as a temporary
+                                                                                                  solution."
+                                                                                             border="0"></a></center></p>
+
+            <p>One area where this quickly becomes problematic is
+              when you never intended the program in question to be
+              the be-all-end-all solution.  You just wanted to fix
+              something real quick.  Maybe you were paged in the
+              middle of the night and you wanted to just solve the
+              immediate problem and go back to bed and tomorrow
+              morning you'll fix it the "right way", right?</P>
+
+            <p>There is nothing more permanent than a temporary
+              solution.  Once you have put in place a "quick fix",
+              you are going to forget about solving the problem the
+              right way; something else will come up to distract
+              you, something more important (because your quick fix
+              works, and so this particular part of your world is
+              not on fire any more), or somebody else has already
+              built something that depends on your "quick fix"'s
+              particular behaviour.</p>
+
+            <p><center><img src="semper-ubi/slide14.png" alt="Perfect is the Enemy of the Good."></center></p>
+
+            <p>You may have heard this before:  if you keep trying
+              to build the perfect system, to address all use cases,
+              to meet all requirements, you'll never ship your
+              product.  It will never be finished.</p>
+
+            <p><center><img src="semper-ubi/slide15.png" alt="Worse is Better."></center></p>
+
+            <p>"<a
+                    href="http://dreamsongs.com/WorseIsBetter.html">Worse
+              is Better</a>" (also called the "New Jersey style") is
+              an important essay on software development that
+              everybody in this field should have read.  It's main
+              point is that software does not primarily need to be
+              "correct" to be "better".  Quality does not increase
+              with functionality, and it is often preferable to focus
+              on delivering a "worse" product (fewer features,
+              incomplete implementation, possibly even inconsistent
+              design) that is simpler.  (There are some parallels
+              here to the idea of the "minimum viable product".)</p>
+
+            <p>Worse is better, but there's an interesting corollary:</p>
+
+            <p><center><img src="semper-ubi/slide16.png" alt="'Good enough' is often the enemy of 'actually good'."></center></p>
+
+            <p>If you have a solution that kind of "stops the
+              bleeding"; that allows you to focus on something else;
+              that takes away the urgency of the problem, then you
+              are much less likely to come back to address the core
+              problem.</p>
+
+            <p>A lot of software development, programming,
+              operations etc. is done in a firefighting mode.  If
+              what you have "kind of" works, then few people will
+              see the necessity to go back and redo the work, to do
+              it the right way.</p>
+
+            <p>So even if it may seem paradoxical, sometimes it's
+              better to object to a solution that addresses the
+              immediate needs (ie the "quick fix", the temporary
+              solution) in favor of solving the whole problem in the
+              correct way.</p>
+
+            <p>One trick to balance "worse is better" and "perfect
+              is the enemy of the good" is to focus on
+              <em>Simplicity</em>.</p>
+
+            <p><center><img src="semper-ubi/slide17.png" alt="Simplify."></center></p>
+
+            <p>Simpler code has fewer bugs.  Simpler code is more
+              readable.  Simpler programs are easier to understand,
+              easier to use.  This is important in how you design
+              your programs or APIs as well as how you write
+              them.</p>
+
+            <p>The software you write should do one thing and do
+              that thing well.</p>
+
+            <p><center><img src="semper-ubi/slide18.png" alt="The UNIX Philosophy."></center></p>
+
+            <p>Follow the <a
+                              href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix
+              philosophy</a>.  In Unix, your tools interface with
+              one another via text streams going through stdin and
+              stdout.  This is a simple interface, and an example of
+              "Worse is Better" -- designing pipes as passing
+              objects would require a complex design and reduce the
+              flexibility of those implementing new tools you
+              haven't conceived of.</p>
+
+            <p>Which of course gets me to another major point:</p>
+
+            <p><center><img src="semper-ubi/slide19.png" alt="Know Unix. Embrace the command-line."></center></p>
+
+            <p>You need to be familiar with Unix.  Not just
+              familiar, actually comfortable using it.  The
+              overwhelming majority of all internet services,
+              including the core internet infrastructure, all run on
+              Unix.</p>
+
+            <p>(Side note: <a href="what-unix.html">Linux !=
+              Unix</a>)</p>
+
+            <p>You need to be able to operate in the Unix
+              environment and use all the tools: <tt>sed</tt>,
+              <tt>awk</tt>, <tt>grep</tt>, <tt>sort</tt>,
+              <tt>uniq</tt>, and everything in between.  These tools
+              and their semantics permeate all the development tools
+              used in software engineering, in operations, in other
+              applications.</p>
+
+            <p>Here at Stevens, you can <a
+                                            href="https://www.cs.stevens.edu/~jschauma/615/linux-lab.html">get
+              an account on linux-lab.cs.stevens-tech.edu</a>; if
+              you use a Mac, live in the terminal; install NetBSD or
+              Linux on your laptop.  Don't use it as another
+              platform to use occasionally; use it as your main,
+              your only OS.</p>
+
+            <p><center><img src="semper-ubi/editor.gif" alt="Know your $EDITOR."></center></p>
+
+            <p><em>Know your editor.</em>  You can pick any one
+              you like, but you need to know at least the basics of
+              <tt>vi(1)</tt>.  Don't pick a trivial text editor for
+              actual work.  Know your editor.  Be efficient in how
+              to use it to write code.</p>
+
+            <p>Know about online references, automatic lookup of
+              function definitions, tags files, and moving around
+              your file without using a mouse.</p>
+
+            <p>Your editor is powerful.  You spend the majority of
+              your day in your editor, you should be efficient in
+              using it.  Invest the time to follow a tutorial.</p>
+
+            <p><center><img src="semper-ubi/slide21.png" alt="Know how to use a debugger."></center></p>
+
+            <p>When you write code, make sure you understand how
+              to best debug your code.  Most people do printf-based
+              debugging: you write some code, you run it, it fails,
+              you open the editor again and add a
+              "<tt>printf('Here.\n');</tt>" statement, compile it
+              again, run it again, and then repeat.</p>
+
+            <p>This is terribly inefficient.  Instead, <a
+                                                           href="http://heather.cs.ucdavis.edu/~matloff/UnixAndC/CLanguage/Debug.html">learn
+              to use a debugger</a> that allows you to inspect your
+              program (either while it's running or after it has
+              already failed by way of a core file) without having
+              to modify it.</p>
+
+            <p>Debugging code is difficult.  You will spend
+              significantly more time debugging code -- yours and
+              other people's -- than writing code.  So you should be
+              good at it!  Debugging consists of the process of
+              slowly, painstakingly, discovering what of the many
+              things you thought were true are not.  Computers are
+              great: they do exactly what you tell them to.  They do
+              not do what you <em>think</em> you told them to,
+              however.  So you need to figure out what you
+              <em>thought</em> was the case versus what you told the
+              computer.</p>
+
+            <p>To do this efficiently, you should have a
+              hypothesis for any problem you encounter.  Do not
+              blindly poke around and hope to find the bug: have a
+              theory of what you think is the case, verify whether
+              or not that is true, repeat.</p>
+
+            <p>Often times the first step in debugging is figuring
+              out just where exactly in the code the bug takes
+              place.  Divide and conquer is a very effective way to
+              find your bug.  Don't randomly look here or there, but
+              make specific, educated guesses that eliminate
+              specific possibilities so you don't have to waste your
+              time on chasing down dead ends.</p>
+
+            <p><center><img src="semper-ubi/slide22.png" alt="Meet your new friends, the Straces: dtrace(1), ktrace(1), strace(1)."></center></p>
+
+            <p>Know how to trace the execution of a program.</p>
+
+            <p>Sometimes you need to debug the behaviour of a
+              program you either do not have the code for, or where
+              diving into the code base is just not likely to be
+              efficient.  You should be able to trace the
+              execution of any program to track down,for example,
+              which files are opened in which order.  You may be
+              able to use a debugger for this, too, by attaching to
+              a running process, but you also want to be familiar
+              with the various 'trace' tools (<tt>strace(1)</tt> on
+              Linux, <tt>dtrace(1)</tt> on Solaris/FreeBSD/OS X,
+              <tt>ktrace(1)</tt> on NetBSD, ...). They are your
+              friends.</p>
+
+            <p><center><a
+                           href="http://mcfunley.com/choose-boring-technology"><img
+                                                                                   src="semper-ubi/slide23.png" alt="Use boring
+                                                                                                                     technology." border="0"></a></center></p>
+
+            <p>In school and in your personal projects, it's fun
+              and exciting to try out new languages, new frameworks,
+              new libraries.  When you want to build a reliable
+              product or infrastructure, however, "exciting" is
+              very much the opposite of what you want.  Use the most
+              <a
+                  href="http://mcfunley.com/choose-boring-technology">boring
+                technology</a>.  Use what you already know by heart.
+              More importantly:</p>
+
+            <p><center><img src="semper-ubi/slide24.png" alt="Write boring code."></center></p>
+
+            <p>Don't try to be clever.  Clever code is complex,
+              often complicated.  Clever code is hard to debug, and
+              often has unexpected consequences.  Even if you are
+              really proud about having written code that looks
+              like:</p>
+
+            <p><blockquote><tt>print foo.join(map(lambda x: f(x), g(y)))</tt></blockquote></p>
+
+            <p>This becomes hard to debug or understand just a few
+              minutes after you've closed the file.</p>
+
+            <p>Good code is not clever.  Good code does not make
+              the reader go "wait, what? Huh.  Oh, hmm, maybe.  I
+              guess that's cool.  But what if...".</p>
+
+            <p>Good code is easy to understand, simple.
+              Simplify!  <a
+                             href="http://www.lisaspangenberg.com/writing/murder-your-darlings/">Murder
+              your darlings.</a></p>
+
+            <p><center><img src="semper-ubi/slide25.png" alt="echo 'import this' | python"></center></p>
+
+            <p>There's some really good advice in here.  It
+              applies to all programming, not just python.  Make
+              sure you understand the reasons behind them.</p>
+
+            <p><center><img src="semper-ubi/slide26.png" alt="Readability counts."></center></p>
+
+            <p>Write code that is easy to read.  Readability is
+              important because other people will have to read your
+              code.  That includes your own future self.  A few days
+              after you've written your code, you will no longer
+              fully remember <em>why</em> you wrote what you
+              wrote.</p>
+
+            <p>You can increase readability using a few simple
+              rules, some of which you've probably heard before.
+              Building software is tricky, and it requires you to be
+              able to keep in your mind a full mental model of
+              whatever functionality you are currently implementing.
+              You should break your code into distinct chunks that
+              are self-contained and not too complex.</p>
+
+            <p><center><img src="semper-ubi/slide27.png" alt="Rules of thumb for refactoring."></center></p>
+
+            <p>A good rule of thumb is that if your code does not
+              fit into a few screenfulls of your editor, it's too
+              complex and should be refactored.</p>
+
+            <p>By the way, that is why it's useful to use a
+              standardized terminal window, instead of a giant,
+              vertical full screen window on a 30inch monitor.</p>
+
+            <p>Another sign that it's time to refactor is when
+              your code falls off the side of the editor window
+              because you are indented so far to the right that you
+              can't get a function name in.</p>
+
+            <p>And renaming your functions and variables to
+              single-characters does not count.  That's a terrible
+              idea.</p>
+
+            <p><center><img src="semper-ubi/slide28.png" alt="You are not charged per character."></center></p>
+
+            <p>Your code should be easy to read and
+              <em>descriptive</em>.  You are not charged per
+              character, so don't use single-character variables or
+              variables where you removed the vowels.  Why do
+              programmers hate vowels so much?</p>
+
+            <p>Name your functions after the actions they perform
+              and the return type they have.  Be consistent in
+              naming conventions for your variables.</p>
+
+            <p>Once you begin giving your functions descriptive
+              names, you also more easily discover when you are
+              stuffing too much functionality into a single function
+              when it should instead be multiple smaller functions.
+              Whenever your function name contains the word "and",
+              you probably want to break it into two separate
+              functions.</p>
+
+            <p><center><a
+                           href="https://twitter.com/jschauma/status/513775435185147904"><img
+                                                                                             src="semper-ubi/slide29.png"
+                                                                                             alt="(Most) comments considered harmful."
+                                                                                             border="0"></a></center></p>
+
+            <p>This is tough for CS students.  In most classes
+              they are told that they should comment all their code
+              all the time.  But that's not actually a good thing,
+              because it leads to things like:</p>
+
+            <p><center><img src="semper-ubi/slide30.png" alt="x = x + 2;"></center></p>
+
+            <p>Sure, it's superfluous, but why is this bad?  Well,
+              for one thing, comments and code are two different
+              languages that our brain needs to switch back and
+              forth between when we read code.  This requires
+              context switches and is difficult.  Building a mental
+              model of what a given piece of code does is difficult
+              if you get disrupted by unnecessary and distracting
+              comments.</p>
+
+            <p>But a more important aspect is that code and
+              comments all too easily diverge over time.  Suppose
+              you encounter a bug in the code and realize it should
+              actually be incremented by 4, not 2.  You know what
+              happens next?</p>
+
+            <p><center><img src="semper-ubi/slide31.png" alt="x = x + 4;"></center></p>
+
+            <p>People forget to update comments all the time.  Now
+              suppose you later come across this piece of code.
+              You'd be inclined to believe that there's a bug here,
+              since clearly x should be incremented by 2, not by 4.
+              And so you go and change it back.</p>
+
+            <p><center><img src="semper-ubi/slide32.png" alt="Comments should explain the why, not the what."></center></p>
+
+            <p>Comments are useful when they describe <em>why</em>
+              the code is necessary, not <em>what it does</em>.  If
+              you write your code in a descriptive manner with
+              clear function and variable names, then it'll be easy
+              for anybody who is familiar with the problem space and
+              the programming language to understand what it
+              does.</p>
+
+            <p>So write your code such that it is self-explanatory
+              and does not require any comments, except to explain
+              the <em>why</em>.</p>
+
+            <p>Writing comments where useful and clear, readable
+              code is a major help to those debugging your code
+              later.  The more you help them understand what you're
+              doing and why, the better.  Writing code is only one
+              aspect of this.</p>
+
+            <p><center><img src="semper-ubi/slide33.png" alt="Write the Fine Manual"></center></p>
+
+            <p>All your programs should come with adequate
+              documentation.  This should include a description of
+              what the program does and how to use it.  Write an
+              actual manual page -- it's not very difficult, but it
+              helps you define your program.</p>
+
+            <p>(I actually start out by writing the manual page
+              for any of the tools I write, because that helps me
+              figure out how I anticipate the tool to be used, what
+              the user interface is like, what users want to do with
+              the tool etc.)</p>
+
+            <p><center><img src="semper-ubi/slide34.png" alt="Copy and edit a manual page. It's just markup."></center></p>
+
+            <p>Manual pages are written in one of the 'roff'
+              dialects.  This is just another markup language.  The
+              easiest way to write a manual page is to copy an
+              existing one and change it.</p>
+
+            <p><center><img src="semper-ubi/slide35.png" alt="Write the Fine Test Suit"></center></p>
+
+            <p>I mentioned that you should simplify your code such
+              that each program, tool, function does one thing and
+              one thing only.  This also allows you to test your
+              code in an automated fashion.  For every bit of new
+              functionality, you begin by thinking about how you can
+              test the code to verify it actually does what you
+              think it should do.  Then you write the test.  Only
+              after you have a test do you begin writing code that
+              performs the functionality.</p>
+
+            <p>By following <a
+                                href="http://www.nilkanth.com/2007/06/08/three-monkeys-of-test-driven-development/">this
+              method</a>, you are accumulating an increasingly
+              complete test suite, which allows you to verify that
+              after you have added new functionality that you didn't
+              break anything else.  This can then later be included
+              in more sophisticated frameworks to assert correctness
+              of code in larger projects.</p>
+
+            <p><center><img src="semper-ubi/slide36.png" alt="Write Meaningful Error Messages"></center></p>
+
+            <p>There is no need to write "Success." after your
+              tool did what it was asked to do.  Similarly, there is
+              no good use in saying "Error!" when you encountered a
+              problem.  Just saying "Error!" does not help the
+              user.</p>
+
+            <p>Instead, you should make sure to provide precise,
+              meaningful error messages.  Most programming languages
+              provide you with library functions to do that for you
+              (see <tt>perror(3)/strerror(3)</tt>).  Be descriptive
+              in what went wrong and what the cause of the error
+              was.</p>
+
+            <p>Having your programs generate meaningful error
+              messages helps in debugging them.  It helps
+              <em>others</em> debug them, which then allows them to
+              write a bug report.</p>
+
+            <p><center><img src="semper-ubi/slide37.png" alt="Learn to write a bug report."></center></p>
+
+            <p>Bug reports are great, when you're a developer,
+              because they tell you about a problem in your software
+              that you can fix for your users.  Unfortunately, it
+              can be really difficult to reproduce a given
+              problem.  Developers usually spend more time trying to
+              reproduce the problem than they are in fixing the
+              actual bug.</p>
+
+            <p>A <a
+                     href="http://infiniteundo.com/post/36678096413/how-to-write-a-bug-report">good
+              bug report</a> includes all the <em>relevant</em>
+              information (such as software version, OS, libraries),
+              what the user tried to do, what they <em>expected</em>
+              to happen, what actually happened, and what the
+              <em>exact</em> error was.</p>
+
+            <p>When generating an error report, do not
+              handwavingly say "and then my internet broke", or
+              "then it said something about not being able to read
+              some file somewhere", but be specific.  Copy the exact
+              error from the command.  Tell the developers what you
+              tried to do to fix the problem.</p>
+
+            <p>The best part about writing a thorough and accurate
+              bug report is that you most likely find that you did
+              something wrong, or you find out what the problem was.
+              You end up better understanding what you're doing,
+              which is, generally speaking, a good thing.</p>
+
+            <p><center><img src="semper-ubi/slide38.png" alt="Try to understand what you're doing."></center></p>
+
+            <p>When you write code, it's all too easy to search on
+              the internet for a solution, to find some code on
+              StackOverflow or elsewhere and to just copy and paste
+              it.  When you do that, make sure that you actually
+              understand what the code in question does, why it
+              works and why it was written the way it was
+              written.</p>
+
+            <p>Don't fix bugs and ship a new version without
+              actually understanding why the bug fix works, what was
+              wrong before, and what possible edge conditions the
+              new code may or may not account for.</p>
+
+            <p><center><img src="semper-ubi/slide39.png" alt="Copy/Paste for Dummies"></center></p>
+
+            <p>Remember also that most of the answers given on
+              StackOverflow or the Internet in general are likely
+              given by people like you.  Your impostor syndrome
+              makes you think everybody else knows what they're
+              talking about; their Dunning-Kruger makes them think
+              they're experts.  So be careful about what you copy
+              and paste.</p>
+
+            <p><center><a
+                           href="https://twitter.com/jschauma/status/529105327053344768"><img
+                                                                                             src="semper-ubi/slide40.png" alt="Sufficiently
+                                                                                                                               advanced cheating is indistinguishable from learning."
+                                                                                             border="0"></a></center></p>
+
+            <p>Now lazy cheating -- such as copying things from
+              StackOverflow -- is terrible, and will get your
+              professor upset and annoyed.  (And upset and/or
+              annoyed professors do not give good grades.) So if you
+              plan on cheating, you better do it well.  Just
+              googling and handing in somebody else's code is dumb;
+              you don't learn anything, and if you're able to find
+              the code on the internet to hand in, so will your
+              professor.</p>
+
+            <p>Now if, on the other hand, you find the code you
+              want, and you rewrite it such that it fits in nicely
+              with your framework, uses your coding style, naming
+              convention, includes your own comments etc., then
+              you'll likely have actually (accidentally) learned
+              something.</p>
+
+            <p><center><img src="semper-ubi/slide41.png" alt="Software development is a social activity."></center></p>
+
+            <p>Contrary to the common stereotype, software
+              development is an intensely social activity.  You very
+              rarely are hacking away all by yourself to produce a
+              final product.  You almost always work in a team,
+              together with several other individuals and
+              interacting with dozens or hundreds of people
+              throughout the development cycle.</p>
+
+            <p>This requires you to be able to communicate
+              efficiently with all your colleagues.  One method of
+              communicating is via code -- I covered that above,
+              with regards to producing clear, readable code; by
+              providing good documentation; by writing high quality
+              bug reports.</p>
+
+            <p>But you need to discuss your code more immediately
+              with your peers.  You need to be able to write pull
+              requests, or to provide code reviews and design
+              feedback.  You need to understand the expectations of
+              your users and communicate with them about your
+              release cycle and bug fixes.</p>
+
+            <p>A lot of this happens not in synchronous
+              face-to-face encounters, which may make it more
+              difficult for some people to communicate effectively.
+              You need to learn how to:</p>
+
+            <p><ul>
+              <li>communicate in synchronous online chat (IRC, Hipchat, Slack, ...)</li>
+              <li>communicate via video conferencing (Skype, Google Hangouts, ...) even
+                with poor connections</li>
+              <li>communicate asynchronously via email</li>
+            </ul></p>
+
+            <p><center><a
+                           href="http://www.phdcomics.com/comics.php?f=1795"><img
+                                                                                 src="semper-ubi/slide42.png"
+                                                                                 alt="How to write an email."
+                                                                                 border="0"></a></center></p>
+
+            <p>Seriously, it appears that students do not know how to write an email.</p>
+
+            <p>An email should:</p>
+
+            <p><ul>
+              <li>contain a greeting, unless you reply to a previous mail</li>
+              <li>contain full, grammatically correct sentences using proper spelling</li>
+              <li>be <a href="the-art-of-plain-text.html">plain text</a>; "my replies are in blue" does not work</li>
+              <li>be well-formatted and readable</li>
+              <li>use paragraph and line breaks</li>
+              <li>only <a href="/news/learn2quote.html">quote what is needed</a></li>
+            </ul></p>
+
+            <p><center><a
+                           href="https://twitter.com/slightlylate/status/699694554320998400"><img
+                                                                                                 src="semper-ubi/slide43.png"
+                                                                                                 alt="The internet does not forget. Anything. Ever."
+                                                                                                 border="0"></a></center></p>
+
+            <p>You should be aware that emails that you write to
+              one person are forwarded or quoted in mails to
+              somebody else.  Messages on your online chat platform
+              are likely logged (and may be read back in a future <a
+                                                                      href="http://fusion.net/story/278532/gawker-hulk-hogan-sex-tape-trial-chat-transcripts/">court
+              case</a>).  Websites and comments on forums are
+              archived and available even after the site in question
+              has long gone belly-up.
+
+              <p><center><img src="semper-ubi/slide44.png" alt="Other people are also people."></center></p>
+
+              <p>When you are communicating with other people, it's
+                easy to forget the most obvious thing about other
+                people: namely, that they are, in fact, people.  You
+                should treat them as such.</p>
+
+              <p>Contrary to what it may seem to you, nobody gets up
+                in the morning and plans on making other people's
+                lives miserable.  Nobody.  Well, except for Donald
+                Trump.  Fuck that guy.  What a dick.</p>
+
+              <p><center><img src="semper-ubi/slide45.png" alt="Wil says: Don't be a dick."></center></p>
+
+              <p>Don't be a dick.  People generally <a
+                                                        href="https://twitter.com/anildash/status/458678972621291520">mean
+                well</a>.</p>
+
+              <p>When you get into arguments with your users, your
+                peers, other programmers, and people you've never met
+                in real life; when you begin to exchange arguments via
+                email, or you begin the <a
+                                            href="https://twitter.com/jschauma/status/656990859582402560">passive-aggressive
+                ticket closing-re-opening game</a>, remind yourself
+                that other people probably have their own reasons for
+                how they act, and that those reasons may well make
+                sense to them.</p>
+
+              <p>You are likely missing some information and you do
+                not fully understand what their priorities are.  <a
+                                                                     href="https://twitter.com/jschauma/status/677855966923251712">Everybody
+                else's job is more complicated than you
+                think.</a></p>
+
+              <p>This is especially difficult when you are dealing
+                with mistakes -- your own, and other people's.</p>
+
+              <p><center><img src="semper-ubi/slide46.png" alt="Own your mistakes."></center></p>
+
+              <p>You should always stand by your mistakes.  They're
+                one of the most effective (although not necessarily
+                most efficient) ways to really learn something.  Do
+                not try to deflect blame if a mistake was yours.
+                Take responsibility, seek to understand the decision
+                making process that lead you to the mistake you made,
+                and learn from it.</p>
+
+              <p>People will respect you <em>more</em>, not less, if
+                you own your mistakes.  Everybody makes them!
+                Becoming defensive and trying to blame the library,
+                the process, other people, or the universe at large is
+                not going to play out well in your favor.</p>
+
+              <p>Plus, spectacular errors give you some <a
+                                                            href="spectacular-file-system-confusion.html">interesting
+                stories</a> to tell years later.</p>
+
+              <p><center><img src="semper-ubi/slide47.png" alt="You break it, you own it."></center></p>
+
+              <p>One part of owning your mistakes is that if you
+                break something, you have to fix it, right?  If you
+                issue a pull request to add a feature or to fix one
+                thing, but that happens to break something else, then
+                yes, it's your responsibility to fix that.</p>
+
+              <p>Now here's an interesting corollary I've
+                observed:</p>
+
+              <p><center><img src="semper-ubi/slide48.png" alt="You fix it, you own it."></center></p>
+
+              <p>Every organization has heaps and heaps of stale,
+                broken, legacy code.  Code that nobody wants to touch,
+                nobody wants to maintain, or sometimes even just code
+                that is no longer interesting, "exciting" to the
+                developers (see above re being boring!).</p>
+
+              <p>Now you come along and you find a problem.  You
+                discover a bug.  You dig in, you find the cause, you
+                fix it.  "Pull requests welcome!" they said.</p>
+
+              <p>Well, guess what?  You are now the proud new owner
+                of the entire code base.  Any future issues will be
+                brought to you, because "you touched it last", or
+                because you're the only one who still understands it,
+                or you're the only one who cared enough to fix
+                it.</p>
+
+              <p>No, the lesson here is not "don't fix other
+                people's stuff".  There is no real lesson here.  Just
+                something you should be aware of.</p>
+
+              <p><center><a
+                             href="https://twitter.com/jschauma/status/328865659536687105"><img
+                                                                                               src="semper-ubi/slide49.png"
+                                                                                               alt="Software maintenance is 75% of total cost of
+                                                                                                    ownership. Operational support is the remaining 75%."
+                                                                                               border="0"></a></center></p>
+
+              <p>Studies have shown that 75% of the total cost of
+                ownership of a given piece of software is not the
+                initial development, but the <a
+                                                 href="https://en.wikipedia.org/wiki/Software_maintenance">ongoing
+                maintenance</a>.  Your code isn't finished when you
+                release your product.  That's when it begins its
+                life!</p>
+
+              <p>And you're not done there.  You need to make sure
+                you understand how your product is deployed,
+                configured, monitored, upgraded, etc.</p>
+
+              <p>Which is why it's so important that your code is
+                simple, readable, and has good documentation...</p>
+
+              <p><center><img src="semper-ubi/slide50.png" alt="Participate in Open Source."></center></p>
+
+              <p>This is important in helping you learn all of the
+                above:  You should practice programming as much as you
+                can, but it's not useful to just sit and hack all by
+                yourself.  Software development is a social process,
+                and you need to learn to collaborate.  You need to be
+                able to collaborate with different people from
+                different backgrounds with different
+                capabilities.</p>
+
+              <p>Participating in Open Source helps you learn all
+                that.  And you don't need to be a top-notch programmer
+                to help and have an impact: almost all open source
+                projects need people to help with documentation,
+                with testing, with infrastructure maintenance, website
+                administration, ...</p>
+
+              <p>Join a community of a product you use a lot.  Join
+                their mailing lists, hang out on their IRC channels,
+                write bug reports, submit patches.</p>
+
+              <p>Open Source projects are communities.  Different
+                communities have different styles of communication,
+                different values.  Pick your communities carefully.
+                The people you surround yourself with influence you,
+                especially when you agree on everything!</p>
+
+              <p><center><img src="semper-ubi/slide51.png" alt="Mind your filter bubbles."></center></p>
+
+              <p>This is perhaps more important nowadays than it was
+                even a few years ago.  Social media allows you to
+                interact entirely with people who agree with you.  And
+                every signal you get reinforces your own opinions.
+                All of a sudden, you only see content that confirms
+                what you already believe, which makes it impossible
+                for you to build diverse and balanced opinions.</p>
+
+              <p>This effect is called the '<a
+                                                href="https://en.wikipedia.org/wiki/Filter_bubble">filter
+                bubble</a>'.  You should carefully be aware of this
+                effect and actively seek out opposing opinions and
+                articles on things that are not already within your
+                own area of interest.</p>
+
+              <p>Filter bubbles exist on social media, but also in
+                real life.  People tend to get together based on their
+                interests, but if the groups you're joining are too
+                homogeneous, then it's maybe time to seek out
+                diversity.</p>
+
+              <p><center><img src="semper-ubi/slide52.png" alt="Seek diversity."></center></p>
+
+              <p>If you're in a particularly homogeneous community --
+                say, a Computer Science club at a college or
+                university -- ask yourself why it is so homogeneous.
+                Are there fewer women because the subject matter is
+                simply something that women don't understand or have
+                no interest in?  Are there few people of color because
+                even though they might be interested, they might not
+                feel comfortable as the only outsider in a homogeneous
+                community?</p>
+
+              <p>Does your open source project welcome people from all
+                backgrounds or do they buy into the meritocracy myth
+                while simultaneously disparaging or dismissing
+                contributions from people who are not just like
+                them?</p>
+
+              <p>Who here is a feminist? (Two, three hands go up,
+                timidly.)</p>
+
+              <p>Wait, let me ask another way around: who here thinks
+                that all people, regardless of gender, have the same
+                rights and should be treated equally? (All hands go
+                up.)</p>
+
+              <p>Congratulations, you are all feminists.</p>
+
+              <p>Again, open source projects can teach you valuable
+                lessons and expose you to a lot of diversity, but it
+                can also tighten your filter bubble.  Be aware of
+                these factors.  And remember: the internet doesn't
+                forget.  How you engage others here is strictly "on
+                the record".</p>
+
+              <p><center><img src="semper-ubi/slide53.png" alt="GitHub is (not) your resume."></center></p>
+
+              <p>Open Source participation is an important part of
+                your resume.  Employers are looking at your
+                contributions, your participation in the Open Source
+                world, too!  GitHub may not replace your resume
+                (there are <a
+                               href="https://blog.jcoglan.com/2013/11/15/why-github-is-not-your-cv/">a
+                number of fallacies</a> here), but if you have code
+                you've written, patches you've submitted or any
+                other contribution in the open, we will look at that.
+                It helps us a lot more than knowing that you took Data
+                Structures and Algorithms I in your Spring
+                semester.</p>
+
+              <p>Having contributed to a large open source project,
+                being an active member of a thriving community speaks
+                volumes about your ability to communicate with others,
+                and it will be looked upon favorably when
+                interviewing.</p>
+
+              <p>Talking about interviewing, here's something that's
+                useful to know:</p>
+
+              <p><center><img src="semper-ubi/slide54.png" alt="Interviewing is bullshit."></center></p>
+
+              <p>The skills to pass an interview are not the same
+                skill as those needed to do the job.  Nobody knows how
+                to do it well.  Most of the time it's just a
+                needlessly adversarial face-off where the interview
+                panel shows you how much more they know about
+                computering than you do.</p>
+
+              <p>Many people have tried to fix the interview
+                process, but you still see meaningless brain teasers,
+                and ad-hoc white board programming and questions about
+                algorithmic complexity, and then you get passed over
+                for not being a "culture fit".</p>
+
+              <p>(Yes, there's another, much longer rant brewing here.)</p>
+
+              <p>There's plenty of good advice out there on how to
+                perform better in interviews, but I think one of the
+                most important aspects is to make a good first
+                impression.  People -- consciously or subconsciously
+                -- will make a hire/no-hire decision within the first
+                ten minutes of your conversation.  The remainder is a
+                waste; if they don't like you, they won't get
+                persuaded otherwise just because you wrote a
+                reasonable implementation of Huffman compression on
+                the whiteboard.</p>
+
+              <p>So be sure to make a positive, enthusiastic,
+                friendly, polite, competent first impression.  Back up
+                your resume with the Open Source experience you
+                have.</p>
+
+              <p>Ok, so let's suppose you passed the test and get a job
+                offer.  Here comes the next wave of bullshit: salary
+                negotiations.</p>
+
+              <p><center><img src="semper-ubi/slide55.png" alt="Salary negotiation is bullshit."></center></p>
+
+              <p>The company will ask you for your salary history
+                when making an offer.  Now as a new graduate, you may
+                not have a salary history, but they will still ask you
+                to come up with a number.  That's bullshit.  Resists,
+                push back.  Let them name a number first.</p>
+
+              <p>In order to understand what salary you can
+                negotiate, you need to <a
+                                           href="http://valerieaurora.org/howto_salary/">know
+                what you're worth</a>.  Glassdoor can help, to some
+                degree, but you also should get feedback from your
+                peers, colleagues, mentors, your open source buddies
+                to know the average salary for somebody in your
+                position with your experience and skills in the given
+                job.</p>
+
+              <p>This is difficult -- especially for <a
+                                                         href="http://www.offerletter.io/blog/2014/11/01/avoiding-negotiation-pitfalls-for-new-grads/">new
+                graduates</a> -- because often times people are not
+                comfortable sharing how much they make.  Especially
+                once you're in a job, people like you to not talk
+                about this with your colleagues, but that just fosters
+                the imbalance between employer and employee.  Salary
+                transparency empowers employers and leads to fairer
+                wages, especially for minorities.</p>
+
+              <p><center><img src="semper-ubi/slide56.png" alt="Know what you're worth."></center></p>
+
+              <p>There are plenty of articles everywhere on how to
+                better negotiate your salary, but keep in mind:</p>
+
+              <p><center><img src="semper-ubi/slide57.png" alt="Your first salary defines future salaries for this career path."></center></p>
+
+              <p>As long as you reveal your salary history in future
+                job interviews, that is.  The next company will offer
+                you $currentSalary + 20% if you're lucky.</p>
+
+              <p>On the other hand, your career path need not be
+                written in stone:</p>
+
+              <p><center><img src="semper-ubi/slide58.png" alt="Your first job does not define your career, but it may pigeon-hole you."></center></p>
+
+              <p>One of the great things in this field is that you
+                can switch careers fairly easily.  You can be a
+                frontend developer becoming a backend developer
+                becoming a systems architect turning information
+                security professional turning project manager turning
+                CTO and anything in between.</p>
+
+              <p>But every job you pick along the way will pigeon-hole
+                you.  The better you get at one thing, the easier it
+                will be to continue doing that one thing.  This is a
+                bit of the same effect as the filter bubble I
+                mentioned earlier.  Switching career paths is
+                difficult, but certainly possible.  The broader your
+                interests and expertise, the easier that is for you.
+                Seek diversity.</p>
+
+              <p><center><img src="semper-ubi/slide59.png" alt="There is no such thing as multi-tasking."></center></p>
+
+              <p>Don't fool yourself into thinking you can
+                multitask.  You can't listen to a talk, or watch a TV
+                program <em>and</em> get meaningful work done.</p>
+
+              <p>Anything that requires concentration requires your
+                full attention.</p>
+
+              <p>Sure, there are some things that don't require your
+                full attention, but ideally you'd try to eliminate
+                most of those.</p>
+
+              <p><center><img src="semper-ubi/slide60.png" alt="Eliminate distractions."></center></p>
+
+              <p>You want to get work done?  Disable your email, log
+                out of Facebook and Twitter.  Turn off the internet
+                altogether.  (Some of my most productive hours are on
+                a plane, when nobody bothers me, I don't have any
+                distractions, and <a
+                                      href="https://twitter.com/jschauma/status/709394430806118401">there's
+                no internet</a>.)</p>
+
+              <p>Working more hours does not mean more work gets done.</p>
+
+              <p>On a good day, you get about 3 to 4 hours of actual
+                work done.  If you're lucky.  The rest of the time is
+                spent "doing email" or attending meetings.  Those are
+                distractions.  Cut them down as much as you can.</p>
+
+              <p><center><img src="semper-ubi/slide61.png" alt="Deleting code is better than writing code."></center></p>
+
+              <p>Don't write a single line of code that you don't
+                need.  You're likely just adding new bugs, unneeded
+                complexity.  Simplify.</p>
+
+              <p><center><img src="semper-ubi/slide62.png" alt="Validate your input."></center></p>
+
+              <p>The majority of security problems in your
+                applications stem from not properly validated input.
+                See '<a href="https://xkcd.com/327/">Little Bobby
+                Tables</a>'.</p>
+
+              <p>Never accept or pass input from the user (including
+                other programs) without asserting that it's
+                well-formatted and valid.</p>
+
+              <p>Input validation cannot be done by creating a list
+                of things that you do not want to accept -- you will
+                never catch all the edge cases.  You need to
+                explicitly whitelist the patterns you want to
+                accept, reject anything else.</p>
+
+              <p><center><img src="semper-ubi/slide63.png" alt="'Security' can't be added."></center></p>
+
+              <p>All your programs need to have security added in the
+                beginning.  Include your security team in the planning
+                phase, when you begin to figure out what you want to
+                do.</p>
+
+              <p>You cannot ship a product and then later on rub some
+                crypto on it to make it "secure".  Regularly talk to
+                your security team.  (If you're on the security team:
+                regularly talk to your developers.)</p>
+
+              <p><center><img src="semper-ubi/slide64.png" alt="Both your network and your endpoints are compromised."></center></p>
+
+              <p><center><img src="semper-ubi/slide65.png" alt="Always use UTC."></center></p>
+
+              <p>Time is <a
+                             href="http://infiniteundo.com/post/25326999628/falsehoods-programmers-believe-about-time">an
+                illusion</a>.  Sometimes an hour doesn't exist (two
+                nights ago), sometimes an hour repeats.  Sometimes a
+                minute has 61 seconds. Timezones shift.  Days
+                disappear.</p>
+
+              <p>At any but the most minimal scale will you operate
+                across multiple timezones, most likely across
+                different countries.  Event correlation and
+                understanding what happened when becomes a mess when
+                some events are logged in Pacific Time, some in GMT,
+                and some in Indian time, but you are sitting in New
+                York.</p>
+
+              <p>Times are represented differently in different
+                languages.  Use the <a
+                                        href="https://www.w3.org/TR/NOTE-datetime">W3CDTF
+                format</a>, use a 24 hour clock.</p>
+
+              <p><center><a href="https://www.xkcd.com/1597/"><img
+                                                                  src="semper-ubi/slide66.png"
+                                                                  alt="Know how to use revision control."
+                                                                  border="0"></a></center></p>
+
+              <p>Know how to use revision control.  Nobody knows how
+                git works.  That's ok.  But you need to know enough to
+                be able to work with other people, with different
+                teams, to understand the basics of branching and
+                merging code.  These concepts apply to more than just
+                git.</p>
+
+              <p><center><a
+                             href="https://en.wikipedia.org/wiki/Fallacies_of_distributed_computing"><img
+                                                                                                         src="semper-ubi/slide67.png"
+                                                                                                         alt="Understand the fallacies of distributed
+                                                                                                              computing."
+                                                                                                         border="0"></a></center></p>
+
+              <p>(See also: <a
+                                href="https://www.somethingsimilar.com/2013/01/14/notes-on-distributed-systems-for-young-bloods/">Notes
+                on Distributed Systems for Young Bloods</a>)</p>
+
+              <p><center><img src="semper-ubi/slide68.png" alt="The Internet is Awesome. You should know how it works."></center></p>
+
+              <p>Understand how IP addresses are allocated, how
+                top-level domains are created and maintained, how
+                peering points work, as well as the limitations
+                imposed by physical laws.</P>
+
+              <p>(If you're interested, you can join us tonight for
+                my <a
+                       href="https://www.cs.stevens.edu/~jschauma/615/slides/lecture06.pdf">lecture
+                on networking</a> in my SysAdmin class, where we cover
+                a fair bit of how the internet works.)</p>
+
+              <p><center><img src="semper-ubi/slide69.png" alt="Understand the DNS."></center></p>
+
+              <p>When things break down and nothing seems to make
+                sense, the core problem almost always is hidden
+                somewhere in the DNS.  You need to really understand
+                how this works.  And please <a
+                                                href="https://twitter.com/jschauma/status/627115108838318080">don't
+                monkey around with /etc/hosts</a> -- you're just going
+                to make your life miserable and incur hours of
+                troubleshooting and debugging when you forget what you
+                added there.</p>
+
+              <p><center><img src="semper-ubi/slide70.png" alt="Know tcpdump(1)."></center></p>
+
+              <p>You can troubleshoot applications and debug code all
+                you like -- sometimes, you need to be able to observe
+                exactly what's going on on the network.  Wireshark and
+                other tools are nice, but you should be able to read
+                a <tt>pcap(3)</tt> file without those.</p>
+
+              <p><center><img src="semper-ubi/slide71.png" alt="Understand the OSI stack."></center></p>
+
+              <p>You should understand the OSI stack and know which
+                layer you're operating on.</p>
+
+              <p><center><img src="semper-ubi/slide72.png" alt="You can help make the internet awesomer."></center></p>
+
+              <p>The internet is awesome.  It doesn't have a central
+                controlling body, but there is the <a
+                                                       href="https://ietf.org/">Internet Engineering Task
+                Force</a> (IETF), which oversees and steers the
+                development of the standards and protocols.</p>
+
+              <p>Just like the various Open Source projects, this is an
+                open community and you can be part of it.  You can
+                help keep the internet open and you can help make it
+                awesomer.  You can join the open mailing lists of some
+                of the working groups and just observe how policy is
+                made, how standards are developed, and you can then
+                partake and help move the Internet forward.</p>
+
+              <p><center><img src="semper-ubi/slide73.png" alt="You _should_ help make the internet awesomer."></center></p>
+
+              <p>You are privileged.  You are fortunate enough to be
+                able to afford this education, to learn how the
+                internet works, to learn how to write software, and
+                you are in a privileged position compared to the
+                overwhelming majority of people.</p>
+
+              <p>With this privilege comes the responsibility to
+                ensure that the data of your users is kept safe, that
+                secure standards are developed for the betterment of
+                society, to ensure <a
+                                       href="primum-non-nocere.html">our community acts
+                in the public interest</a>.</p>
+
+              <p>By the way, there are two more layers to the OSI stack which most
+                schools do not (adequately) cover:
+
+                <p><center><a
+                               href="https://twitter.com/jschauma/status/690968793003212801"><img
+                                                                                                 src="semper-ubi/slide74.png"
+                                                                                                 alt="You are always operating on layer 9."
+                                                                                                 border="0"></a></center></p>
+
+                <p>This is important to understand.  No matter what
+                  you do, your work is political.  There are
+                  inter-office politics, politics between industry
+                  competitors, between governments and industry, between
+                  governments and governments, and no matter how much
+                  you tell yourself that you're just here to solve a
+                  technical problem, it will impact your work.</p>
+
+                <p>For this reason, you should also have an interest in
+                  and follow regional, national, and international
+                  politics.  You cannot stick your head in the sand and
+                  pretend it doesn't affect you.  Especially not
+                  today.</p>
+
+                <p><center><img src="semper-ubi/slide75.png" alt="Final common sense."></center></p>
+
+                <p>And finally, some common sense.  Wash your
+                  hands.</p>
+
+                <p><ul>
+                  <li>Don't do drugs.</li>
+                  <li>Use an ad-blocker.</li>
+                  <li>Stay in school.</li>
+                  <li>Disable Flash.</li>
+                  <li>Anonymity is important. (<a href="speak-up.html">Speak up!</a>)</li>
+                  <li>Yes means yes.</li>
+                  <li>Don't get phished.</li>
+                  <li>Black lives matter.</li>
+                  <li>Use a password manager. (I happen to like <a
+                                                                    href="https://agilebits.com/onepassword">1Password</a>.)</li>
+                  <li><a href="http://www.chicagotribune.com/news/columnists/chi-schmich-sunscreen-column-column.html">Wear sunscreen.</a></li>
+                </ul></p>
+
+                <p> Also: don't upload your passwords or ssh keys to
+                  GitHub, please.</p>
+
+                <p>Thanks!</p>
+
+                <p><small>March 14th, 2016</small></p>
+
+                <hr width="75%">
+
+                <p><small>Related:</small></p>
+
+                <ul>
+                  <li><small><a href="what-unix.html">Unix? What Unix? This is Linux!</a></small></li>
+                  <li><small><a href="the-art-of-plain-text.html">The Art of Plain Text</a></small></li>
+                  <li><small><a href="spectacular-file-system-confusion.html">Spectacular File System Confusion</a></small></li>
+                  <li><small><a href="primum-non-nocere.html">Primum non nocere - Ethical Obligations in Internet Operations</a></small></li>
+                  <li><small><a href="speak-up.html">Speak up!</a></small></li>
+                </ul>
+
+        </td>
+      </tr>
+    </table>
+    <HR WIDTH="100%" SIZE=2 ALIGN="CENTER" NOSHADE>
+    <small>
+      [<a href="industry-vs-academia.html">Industry vs. Academia</a>]&nbsp;[<a href="index.html">Index</a>]&nbsp;[<a href="moving-the-needle.html">Moving the Needle</a>]
+    </small>
+    <HR WIDTH="100%" SIZE=2 ALIGN="CENTER" NOSHADE>
+</body>
