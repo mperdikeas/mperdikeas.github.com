@@ -8,6 +8,13 @@
     <ol reversed>
       <li id='how-to-publish-in-npm'>How to publish something in <b>npm</b></li>
       <a href='https://quickleft.com/blog/creating-and-publishing-a-node-js-module/'>nice article</a>
+      <br/>
+      <b>NB</b>: to be able to perform the test regarding the local-global installation you'd have to first setup <tt>Node</tt> to search that location as well (see <a href='#node-local-global'>this note</a>).
+      <li id='node-local-global'>How to instruct <b>Node</b> to search for packages in the "local-global" location</li>
+      Put the following in your <tt>.bashrc</tt>:
+      <pre>
+    export NODE_PATH=$NODE_PATH:~/.node_modules_global/lib/node_modules
+      </pre>
       <li id='include-javascript-file-traditionally'>Include a JavaScript file in the "traditional" sense</li>
       <a href='http://stackoverflow.com/a/5809968/274677'>source</a>
       <br/>
