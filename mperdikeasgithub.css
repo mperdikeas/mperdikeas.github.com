@@ -4,3 +4,18 @@ body > ol > li {
     text-decoration:underline;
     padding-top: 30px
 }
+
+body {
+    background: #ffffff;
+}
+
+pre {
+    background: #000000;
+    color: #ffffff;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+blockquote {
+    font-style: italic;
+}

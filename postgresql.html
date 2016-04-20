@@ -4,6 +4,77 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to create superuser "<b>postgres</b>" if none exists when the PostgreSQL is built from sources</li>
+    <a href='#typical-access-control-configurations'>relevant note</a>
+    <br/>
+    On 2016-04-20 I faced the following situation: a colleague built and configured a PostgreSQL 9.4 cluster
+    on my home directory and apparently no superuser 'postgres' was created. The steps the colleague executed
+    were the bold ones from the following:
+    <ol>
+      <li><b>      ./configure</b></li>
+      <li><b>      make</b></li>
+      <li><b>      su</b></li>
+      <li><b>      make install</b></li>
+      <li>      adduser postgres</li>
+      <li><b>      mkdir /usr/local/pgsql/data</b></li>
+      <li>      chown postgres /usr/local/pgsql/data</li>
+      <li>      su - postgres</li>
+      <li><b>      /usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data</b></li>
+      <li>      /usr/local/pgsql/bin/postgres -D /usr/local/pgsql/data >logfile 2>&1 &</li>
+      <li>      /usr/local/pgsql/bin/createdb test</li>
+      <li>      /usr/local/pgsql/bin/psql test</li>
+    </ol>
+    <br/>
+    Except for the fact that the path was not <tt>/usr/local/pgsql</tt>, but rather <tt>~/postgresql-9.4.5</tt>.
+    <br/>
+    <br/>Also, the command at item #10 is just to start the database cluster server. Instead I could start the server
+    myself with the following:
+    <pre>./postgres-9.4.5/bin/postgres -D ./postgres-9.4.5/data/</pre>
+
+    The main problem that there was no superuser which I could use to connect to the PostgreSQL cluster (using <tt>psql</tt>)
+    and from there on to create my own project-specific database and user.
+    <br/><br/>
+    To that end, I created a user <tt>postgres</tt> as follows:
+    <pre>createuser --interactive postgres</pre>
+
+    <br/>... and proceed to answer "yes" to the question whether the user ought to be a superuser.
+    <br/>
+    <br/>
+    I then changed <tt>~/postgres-9.4.5/data/pg_hba.conf</tt>
+      to contain:
+      <pre>
+# "local" is for Unix domain socket connections only
+local   all             all                                     trust
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+
+</pre>
+<br/>... and then connected as user <tt>postgres</tt> and changed its password to:
+<pre>
+$ which psql
+~/postgres9/bin/psql
+rawdar@radacerd:~#
+$ psql -U postgres
+psql (9.4.5)
+Type "help" for help.
+
+postgres=# alter user postgres password 'secret';
+</pre>
+<br/>... even though that was not strictly necessary as I was only connecting as user <tt>postgres</tt>
+using <tt>psql</tt> which uses Unix domain sockets and thus falls under the <tt>trust</tt> model.
+<br/><br/>
+Following the above I was able to run my subsequent (domain-specific) scripts that created the project
+user and its database (and which rely on <tt>psql</tt> access with the superuser <tt>postgres</tt>).
+<br/><br/>
+What I understood from the above is that when PostgreSQL 9.4 is created in the home directory of an arbitrary
+user there's nothing special about the <tt>postgres</tt> user, any superuser who can create additional roles
+and databases will do.
+<br/>
+<br/>
+Note in the above connection that <tt>postgres</tt> is a user of the PostgreSQL cluster
+(or, more correctly, a <tt>role</tt>) and not a Unix/Linux system user.
     <li>how to configure retention of unresponsive TCP connections in PostgreSQL</li>
     I've used the following settings:
     <pre>
@@ -179,7 +250,7 @@ SELECT ivoidlowercase, xpath('@xsi:type', content, ARRAY[ARRAY['xsi', 'http://ww
 FROM rr.resourcecontent 
 WHERE lower(CAST (xpath('@xsi:type', content, ARRAY[ARRAY['xsi', 'http://www.w3.org/2001/XMLSchema-instance']]) AS VARCHAR)) LIKE '%vs:dataservice%'
       </pre>
-      <li>typical access control configurations</li>
+      <li id='typical-access-control-configurations'>typical access control configurations</li>
       The rationale is the following:
       <ul>
         <li>trust all local UNIX-domain sockets (that tools like <b>psql</b> are using to create database and user
