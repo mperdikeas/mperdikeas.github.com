@@ -229,9 +229,16 @@ ps axwww | grep 'c[o]nkeror'
           was a combination of purging <b>pulseaudio</b>
           (including locally modified config files in /etc/pulse) and re-installing
           it, (and doing the same for other Ubuntu audio libraries as well).
-          Helpfull material:
+          Helpful material:
           <ol>
             <li><a href="https://help.ubuntu.com/community/SoundTroubleshootingProcedure">trouble shooting procedure</a>
+              <br/>
+              I followed the above guide on 2016-04-21 on my 12.04 LTS machine and what did the trick was <b>Step 6</b>
+              where I am asked to install and use <tt>pavucontrol</tt>:
+              <pre>
+sudo apt-get install pavucontrol
+pavucontrol
+              </pre>
               <li><a href="https://docs.google.com/document/d/1iTlJ8BfqXUjaHO__TEdlkvuqB1WLOkGaudngc5SFLMI/edit?pli=1#heading=h.y9t02zg3awt4">
                 trouble shooting guide</a>
           </ol>
