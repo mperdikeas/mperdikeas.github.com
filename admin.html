@@ -11,6 +11,37 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to compute sector size of a block device</li>
+    <ol>
+      <li>find the device you are interested in</li>
+      <pre>
+$ mount | grep \ /\
+/dev/sda1 on / type ext4 (rw,errors=remount-ro)
+      </pre>
+      <li>find the size of the block device in bytes</li>
+      <pre>
+$ sudo blockdev --getsize64 /dev/sda1
+246855761920
+      </pre>
+      <b>NB:</b> this should return a value that's in reasonable agreement with the output of:
+      <pre>df -h .</pre>
+      <li>find the size of the block device in sectors</li>
+      <pre>
+$ sudo blockdev --getsize /dev/sda1
+482140160
+      </pre>
+      <li>divide</li>
+      <pre>
+$ python
+Python 2.7.3 (default, Jun 22 2015, 19:43:34)
+[GCC 4.6.3] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 246855761920 / 482140160.0
+512.0
+>>> quit()
+      </pre>
+      <br/>Hence, sector size is 512 bytes.
+    </ol>
     <li>setting default programs based on mime types in Ubuntu (from the command line)</li>
     I followed the advice found <a href='http://askubuntu.com/a/289339/89663'>here</a> in order to change the default
     program associated with PDF files from <tt>evince</tt> to <tt>okular</tt>.
