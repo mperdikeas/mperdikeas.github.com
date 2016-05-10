@@ -3,6 +3,8 @@ DOCUMENT=cv-mperdikeas.tex
 all:
 	pdflatex -interaction=nonstopmode $(DOCUMENT)
 	pdflatex -interaction=nonstopmode $(DOCUMENT)
+spell-check:
+	aspell -t -c $(DOCUMENT)
 clean:
 	rm -f *.pdf
 	rm -f *.log
