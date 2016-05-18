@@ -11,6 +11,22 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to enable 64-bit Window versions in virtualbox under Ubuntu 14.04 64bit</li>
+    I had the strange situation on 2016-05-18 that even though my Ubuntu machine was
+    64-bit both in terms of CPU architecture and in terms of OS:
+    <pre>
+$ uname -a
+Linux beorn 3.16.0-48-generic #64~14.04.1-Ubuntu SMP Thu Aug 20 23:03:57 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux
+mperdikeas@beorn:~#
+$ arch
+x86_64
+    </pre>
+    ... the <a href='https://www.virtualbox.org/'>virtualbox</a> program only allowed me to install 32-bit
+    versions of Windows (even though I had installed the 64-bit version of <i>virtualbox</i>).
+    <p>
+      The solution was to enter the BIOS and enable the following option:<br/>
+      advanced &rarr; CPU configuration &rarr; secure virtual machine mode
+    </p>
     <li>how to compute sector size of a block device</li>
     <ol>
       <li>find the device you are interested in</li>
