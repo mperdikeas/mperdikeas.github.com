@@ -150,12 +150,12 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
     \item designed and developed all the server-side code for an expert system that advises farmers
       on the subsidies they are entitled to apply for. I devised a formal way to capture the legal requirements
       for each subsidy in the form of \href{https://en.wikipedia.org/wiki/S-expression}{Lisp S-expressions}.
-      Essentially each subsidy ministerial decision is
+      Essentially, each subsidy ministerial decision is
       transformed into a Lisp-like \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL}.
       Then the system reads from the database the profile of each user (age, income, past subsidies, location
       and size of fields, crops, animal capital) and dynamically evaluates them against all possible subsidies.
       The system finally informs the user which subsidies (s)he can apply for and also creates
-      a visual diagram that explains to the users why the failed to qualify for certain subsidies.
+      a visual diagram that explains to the users why they failed to qualify for certain subsidies.
       S-expressions were used in order to allow for dynamic evaluation and also because the company wanted
       the DSL for each ministerial decision to be created by business people. So S-expression were chosen
       as Lisp has no other syntax except the opening and closing parenthesis.\\
