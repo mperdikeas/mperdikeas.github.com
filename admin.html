@@ -11,6 +11,26 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to mount any system that's accessible via ssh</li>
+    <a href="http://unix.stackexchange.com/a/59695/24044">source</a><br/>
+    Use <a href="https://github.com/libfuse/sshfs">sshfs</a>.
+    <br/>
+    E.g. the following worked for me:
+    <pre>
+    $ sudo apt-get install sshfs
+    $ mkdir /media/local-radacer-repository/
+    $ sudo sshfs -o allow_other radacer@172.17.12.56:/data /media/local-radacer-repository
+radacer@172.17.12.56's password:
+    $ ls /media/local-radacer-repository/
+    total 28
+    drwxrwxrwx 1  500  500  4096 Feb 19 12:59 ./
+    drwxrwxrwx 7 root root  4096 May 19 15:39 ../
+    drwx------ 1  500  500 16384 Feb 17 17:27 lost+found/
+    drwxrwxr-x 1  500  500  4096 Feb 19 13:02 RADACER/
+    $ echo "to unmount:"
+    to unmount:
+    $ sudo fusermount -u /media/local-radacer-repository
+    </pre>
     <li>how to enable 64-bit Window versions in virtualbox under Ubuntu 14.04 64bit</li>
     I had the strange situation on 2016-05-18 that even though my Ubuntu machine was
     64-bit both in terms of CPU architecture and in terms of OS:
