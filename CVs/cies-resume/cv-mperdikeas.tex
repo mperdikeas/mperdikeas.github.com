@@ -90,8 +90,8 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
 {Software Architect and Lead Programmer}
 {March '13 -- January '16}
 {\bodytext{I was the software architect and the sole coder for the
-    \href{registry2.euro-vo.org}{new EuroVO Registry system}
-    which is scheduled to replace the \href{registry.euro-vo.org}{existing EuroVO Registry system} which has been
+    \href{registry.euro-vo.org}{new EuroVO Registry system}
+    which is scheduled to replace the \href{registry.euro-vo.org}{existing EuroVO Registry system} that had been
     serving the global \href{http://www.ivoa.net/}{IVOA} community for the last ten (10) years.
 
   I worked for three years with people from the \href{http://www.sciops.esa.int/index.php?project=SAT}{Science
@@ -110,7 +110,7 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
   \item the \href{http://www.ivoa.net/documents/RegistryInterface/20091104/REC-RegistryInterface-1.0.pdf}{IVOA RI1} Search interface. This is a \href{https://en.wikipedia.org/wiki/SOAP}{SOAP interface}, defined in WSDL (i.e. following a top-down approach). 
     Due to the complexity of the XSDs used by the IVOA community I ran into problems with the automatic stub
     generation by tools like \href{https://docs.oracle.com/javase/6/docs/technotes/tools/share/xjc.html}{XJC} (which I have documented in \href{http://stackoverflow.com/q/17265960/274677}{SO} and raised
-    against the tools \href{https://java.net/jira/browse/JAXB-965}{JIRA}). So I decided to implement
+    against the tool's \href{https://java.net/jira/browse/JAXB-965}{JIRA}). So I decided to implement
     my own \href{https://docs.oracle.com/javase/6/docs/technotes/tools/share/wsimport.html}{wsimport}-like tool that reads WSDL and generates Java code (stubs and skeletons) to perform SOAP calls.\\
     \technologies{} Java, SOAP (Jersey), XSD, template-based code generation with \href{http://www.stringtemplate.org/.}{String Template}
   \item the \href{https://en.wikipedia.org/wiki/XML_Schema_(W3C)}{XML XSD schema-validation}
@@ -151,18 +151,18 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
       on the subsidies they are entitled to apply for. I devised a formal way to capture the legal requirements
       for each subsidy in the form of \href{https://en.wikipedia.org/wiki/S-expression}{Lisp S-expressions}.
       Essentially, each subsidy ministerial decision is
-      transformed into a Lisp-like \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL}.
+      modelled as a declarative, Lisp-like \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL}.
       Then the system reads from the database the profile of each user (age, income, past subsidies, location
       and size of fields, crops, animal capital) and dynamically evaluates them against all possible subsidies.
       The system finally informs the user which subsidies (s)he can apply for and also creates
       a visual diagram that explains to the users why they failed to qualify for certain subsidies.
       S-expressions were used in order to allow for dynamic evaluation and also because the company wanted
-      the DSL for each ministerial decision to be created by business people. So S-expression were chosen
+      the DSL logic / script to be created by business people. So S-expression were chosen
       as Lisp has no other syntax except the opening and closing parenthesis.\\
       \technologies{} \href{https://clojure.org/}{Clojure} (for
       the dynamic evaluation of the S-expressions), dynamic evaluation of Clojure code from Java,
       \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{DOT} (for visualizing
-      subsidies criteria logic using graphs), \href{https://en.wikipedia.org/wiki/IText}{iText} for creating
+      criteria logic using graphs), \href{https://en.wikipedia.org/wiki/IText}{iText} for creating
       PDF reports, \href{http://www.stringtemplate.org/}{StringTemplate}, JDBC.
     \item designed and developed the authentication / authorization database and implemented all back-end Java
       code to integrate Apache Shiro into our \href{http://www.javaserverfaces.org/}{JSF} pages and deliver an elaborate RBAC authentication solution
@@ -191,14 +191,14 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
     with network routers (something \textit{like} a content delivery network).
     Some of the things I did:
     \begin{itemize}
-    \item designed and implemented the cache communication protocol on top of TCP and custom HTTP proxies
-      in Java that transparently take advantage of the caches. Also, for demonstration purposes coded
+    \item designed and implemented: (a) the cache communication protocol on top of TCP and (b) custom HTTP proxies
+      in Java that transparently take advantage of the caches. Also, for demonstration purposes, coded
       a few pages for video streaming solutions.
       \\ \technologies{} Java TCP networking, HTML, integration with video streaming / playback.
     \item designed and implemented a rich client overview and monitoring application that visualizes
       the utilization and available capacity of all network caches, plots graphs over time and allows
       an operator to dynamically interact with them by issuing commands or writing Python scripts
-      in a console-like prompt.
+      (to automate common administrative logic) in a console-like prompt.
       \\ \technologies Java (networking), Java Swing, Jython (for the dynamic console)
     \end{itemize}
 }}
@@ -253,10 +253,10 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
     different \href{https://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One}{ASN.1} grammars both from
     a syntax and a semantics point of view so
     the transformation is a complex business logic procedure. Since there are more than 7 different \href{http://what-when-how.com/roaming-in-wireless-networks/transferred-account-procedures-billing-and-settlement/}{TAP3}
-    versions and conversion had to take place between any arbitrary pair (both upwards and downwards) there was
+    versions and conversion had to take place between any arbitrary pair there was
     a large number of conversion routines to be written. I defined a
     \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL} used to describe the logic
-    behind these conversions (essentially transformation algorithms on huge ASN.1 trees) and built a Python
+    behind these conversions (essentially transformation algorithms on deeply nested ASN.1 trees) and built a Python
     script that automatically generated C++ code implementing these transformations. In total I was able to
     reduce tens of thousands of lines of C++ code into as little as 700 conversion rules expressed in the
     above DSL
@@ -266,24 +266,25 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 }}
 
 \headedsubsection % Job title entry for the current employer
-{Software Engineer at projects ATLAS}
+{Software Engineer at project ATLAS}
 {2002 -- 2004}
 {\bodytext{
-    Part of the engineering team that was tasked to implement the new Vodafone Greece billing system.
+    I was part of the engineering team that was tasked to implement the new Vodafone Greece billing system.
     Data (customer, subscriber, bills and
     calls information) migration to the new billing system and integration with over a dozen legacy
-    peripheral systems which will survive the migration to the new billing system.
+    peripheral systems which were scheduled to survive the migration to the new billing system.
     I was responsible for the integration code which was implemented in
-    C++ and Java (for higher-level demons) and which undertook to sustain the information flow between the
+    C++ and Java (for higher-level daemons) and which undertook to sustain the information flow between the
     new billing system and legacy systems which were not going to be replaced. Since no modifications were
     permitted in the legacy systems, the new billing system had to be wrapped in a fa\c{c}ade allowing it to
     expose the same interface towards the legacy systems.
     I was also involved with the design of a massive ``mediating'' staging database of more
     than 400 tables and 40,000 lines of \href{https://en.wikipedia.org/wiki/PL/SQL}{PL-SQL} code
     (a large percentage of which I implemented myself).
-    Finally I had small exposure with \href{https://en.wikipedia.org/wiki/Portal_Software}{Portal Infranet} programming.
+    Finally I had small exposure with \href{https://en.wikipedia.org/wiki/Portal_Software}{Portal Infranet} programming
+    (now \href{http://www.orafaq.com/wiki/BRM}{Oracle Billing and Revenue Management}).
     \\
-    \technologies{} Java, Oracle, PL-SQL, C++
+    \technologies{} Java, Oracle, PL-SQL, C++, C
 }}
 
 \headedsubsection % Job title entry for the current employer
@@ -341,7 +342,7 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 {\textsc{Patras, Greece}} {
 
 \headedsubsection % Job title entry for the current employer
-{Diploma from the Computer Engineering and Informatics Department}
+{Five-year Engineering Diploma from the Computer Engineering and Informatics Department}
 {1992 -- 1997}
 {\bodytext{
     CEID is the oldest university department in Greece focusing exclusively in computer and software engineering
