@@ -33,7 +33,22 @@ Technology in the following thematic area as decided by the School's General Ass
 The aforesaid successfully defended his dissertation on 15/06/2001 in front of the legally mandated
 commitee of seven (7) members.
 
-The original Ph.D. diploma is numbered: 1438.
+Mr. Menelaos Perdikeas successfully concluded all courses forseen by the school's regulation for
+postgraduate studies:
+
+
+Subject                                        |         Grade
+---------------------------------------------------------------------------
+Object Oriented methods of Software Development|         10 [ out of 10 ]
+Object Oriented Databases                      |         10 [ out of 10 ]
+Network Programming                            |         10 [ out of 10 ]
+Service Design in Multimedia Networking        |         10 [ out of 10 ]
+Traffic Theory in Telecommunications           |          9 [ out of 10 ]
+ATM Broadband Networks                         |         10 [ out of 10 ]
+
+Grade Point Average: 9.83 (Excellent)
+
+The original Ph.D diploma is numbered: 1438.
 
 This certificate is provided for all uses.
 
@@ -41,4 +56,4 @@ Athens, 19/05/2016
 
 The Dean of the School
 Dimitrios Tsanakis
-(signature)
+(stamp & signature)
