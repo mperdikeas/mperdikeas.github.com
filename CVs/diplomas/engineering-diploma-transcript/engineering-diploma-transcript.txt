@@ -1,0 +1,127 @@
+U N I V E R S I T Y    O F    P A T R A S
+S C H O O L    O F    E N G I N E E R I N G
+DEPARTMENT OF COMPUTER ENGINEERING AND INFORMATICS
+
+STUDENT TRANSCRIPT
+
+Surname      : PERDIKEAS
+Name         : Menelaos
+Father's name: Konstantinos
+Mother's name: Maria-Zaxaro
+
+Birth location: Athens, Year of Birth: 1974
+Student registry number: 1382
+Academic year of first inscription: 1992-1993
+Date of first inscription         : 22-8-1992
+Semester of first inscription     : 1
+
+Method of enrollment: nation-wide exams
+Score               : 6225
+Rank                : 1st
+High School grade   : 19 1/7
+
+Duration of studies at the department is TEN semesters.
+
+Course Name                            | Grade [max: 10]
+------------------------------------------------------
+
+1st SEMESTER
+Computer Systems I                     |        10.0
+Structured Programming & Pascal        |         9.5
+Digital Logic - Gates I                |        10.0
+Mathematical Analysis I                |         9.0
+Physics I                              |         8.0
+English I                              |         9.0
+Intr. to theory of circuit design      |        10.0
+
+2nd SEMESTER
+Computer Systems II                    |         9.5
+Digital Logic - Gates II               |        10.0
+Arithmetic Methods & FORTRAN           |         8.5
+Mathematical Analysis II               |        10.0
+Physics II                             |         7.0
+English II                             |         8.5
+Programming Laboratory in Assembly     |         9.0
+Laboratory of Logic gate design        |        10.0
+
+3rd SEMESTER
+Computer Architecture                  |         7.5
+Basic Electronics                      |        10.0
+Data Structures                        |         8.5
+Linear Algebra                         |        10.0
+Principles of Computer Languages       |         9.5
+English III                            |        10.0
+Laboratory of Basic Electronics        |        10.0
+Mathematical Analysis III              |         9.0
+
+4th SEMESTER
+Probability Theory                     |        10.0
+Intr. to algorithm design & implement. |        10.0
+Modern Programming Languages           |         8.0
+Discrete Mathematics I                 |        10.0
+Digital Electronics                    |        10.0
+English IV                             |         9.0
+Lab. of Digital Electronics            |         9.0
+Lab. of Computer Architecture          |         9.5
+
+5th SEMESTER
+Microcontrollers I                     |         8.0
+Finite Automata and Formal Languages   |         9.5
+Operating Systems I                    |         9.5
+Discrete Mathematics II                |        10.0
+Intr. to linear systems theory         |        10.0
+Lab. of microcontrollers I             |        10.0
+
+6th SEMESTER
+Microcontrollers II                    |         9.0
+Introduction to compilers              |         9.0                   
+Operating Systems II                   |        10.0
+Digital Signal Processing              |         9.0
+Intr. to Political Economy             |        10.0
+Lab. of Operating Systems              |        10.0
+Lab. of Microcontrollers II            |        10.0
+Theoretical Calculation                |         9.5
+
+7th SEMESTER
+Digital Telecommunications             |         9.5
+Databases I                            |         9.5
+Laboratory of Databases I              |         9.5
+Art. Intelligence & Expert Systems     |         9.0
+Parallel Systems                       |         9.5
+Distributed Systems I                  |         8.5
+Telematics and New Services            |        10.0
+
+8th SEMESTER
+Computer Networks I                    |         8.5
+Laboratory of Computer Networks I      |         9.5
+Databases II                           |         9.0
+Adv. Data Structures & Graphics        |         9.0
+Telematics and New Services II         |         9.5
+Distributed Systems II                 |         9.5
+
+9th SEMESTER
+Computer Networks II                   |         7.5
+Laboratory of Computer Networks II     |         9.5
+Design of Software Systems             |         9.0
+Business Administration                |         9.0
+Advanced Architecture Topics           |         9.5
+Methods of Production Design           |         9.5
+Advanced Parallel Systems              |         9.0
+
+10th SEMESTER
+Graduation Thesis: "On demand delivery |
+of hypermedia/multimedia               |
+content over high-speed networks"      |        10.0
+
+
+Graduated: 1st July 1997
+Diploma Grade: Excellent - 9.44
+Gave the graduates oath: July 22nd 1997
+
+The Head of the Department
+(signature)
+
+The Secretary of the Department
+(signature)
+
+

@@ -1,0 +1,3 @@
+This file was produced with the following incantation:
+
+    gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=diploma-transcript-greek.pdf diploma-transcript-greek-full-size.pdf
