@@ -5,6 +5,15 @@
   </head>
   <body>
     <ol reversed>
+      <li>how to merge multiple jpg files into a pdf file</li>
+Use <code>convert</code> (<a href="http://askubuntu.com/q/246647/89663">source</a>) to, e.g. do a:<br/>
+      <pre>convert diploma-transcript-greek-pg1-col.jpg diploma-transcript-greek-pg2-col.jpg diploma-transcript-greek-full-size.pdf</pre>
+      Following the conversion you may wish to <a href="#how-to-compress-a-pdf-file">compress the resultant PDF file</a>.
+      <li id='how-to-compress-a-pdf-file'>how to compress a PDF file</li>
+      <a href="http://askubuntu.com/a/256449/89663">source</a>
+      <br/>
+      <pre>gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf input.pdf</pre>
+      If the <code>/screen</code> option results in too low quality, try <code>/ebook</code> instead.
       <li>how to test what a site looks like from various other world-wide locations</li>
       Use <a href="http://geopeeker.com">geopeeker.com</a>.
       <li>test network speed</li>
