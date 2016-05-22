@@ -1,0 +1,13 @@
+;; This buffer is for notes you don't want to save, and for Lisp evaluation.
+;; If you want to create a file, visit that file with C-x C-f,
+;; then enter the text in that file's own buffer.
+
+Calendar Years
+
+2009: (+ 29500  8367) 37867
+2010: (+ 28000  7600) 35600
+2011: (+ 36500     0) 36500
+2012: (+ 63300     0) 63300
+2013: (+ 85900  5500) 91400
+2014: (+ 90125  6000) 96125
+
