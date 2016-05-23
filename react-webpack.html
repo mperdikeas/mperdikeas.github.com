@@ -1,0 +1,26 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link rel='icon' href='/knowledge-favicon.ico'/>
+</head>
+<body>
+<ol reversed>
+    <li>how to solve CORS (Cross-Origin Resource Sharing) issues with webpack</li>
+<p>
+    It is often the case when doing development in Webpack that you
+    have your, e.g. React JXS code running in the webpack development server
+    (the one you typically launch with <code>npm run dev</code>) and you need
+    that front-end code to access via Ajax some back-end services, e.g. some
+    JAX-RS module deployed in a Tomcat container.
+</p>
+<p>
+  In those cases, one runs into <a href='https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS'>CORS</a> issues.
+  To solve the problem you have to enable CORS on the <b>backend</b> module as described
+  in <a href='jax-rs.html#jersey-1.9-cors'>this note</a>.
+  </p>
+  I have created an <a href="https://github.com/mperdikeas/archetypes/tree/master/jax-rs/004-jaxrs-example-with-CORS-and-a-frontend-webpack-app-in-dev-server">archetype project</a> to exemplify the full chain, from a React front-end application running
+  in webpack development server to a back-end JAX-RS module deployed in a Tomcat container.
+
+</ol>
+</body>
+</html>
