@@ -6,12 +6,31 @@
 <body>
   <ol reversed>
     <li>ReactJS state versus properties</li>
+    <p>
     There are many resources on the subject that one can google about. For the benefit
     of my future self I've put together a small example in my <a href='https://github.com/mperdikeas/playground/tree/master/javascript/react/my-projects/03-fliping-tiles'>playground github repo</a> that shows how to properly 
     use <i>state</i>. Bottom line is that <i>state</i> lives in the parent components and flows
     down into the child components as <i>properties</i>. Also, <i>state</i> is not set upon
     component initialization. The proper way to set <i>state</i> is with the <code>setState</code> method
     so that React can automatically call <code>render</code> on the component whose state was altered.
+    </p>
+    <p>
+      Moreover the following guidelines are useful:
+      <ul>
+        <li>a component should only change its <b>own</b> state but never its own <i>props</i> </li>
+        <li>instead, a component <b>sets</b> the <i>props</i> of its children</li>
+        <li>it is an antipattern to use <i>props</i> to generate the state in <code>getInitialState</code>
+          unless it is done only for seeding (in which case prefix the properties name with <tt>initial</tt>
+          to make the intention clear).
+          <br/>E.g.:
+          <dl>
+            <dt>props:</dt><dd>initialCount</dd>
+            <dt>state:</dt><dd>count</dd>
+          </dl>
+         </ul>
+         See <a href='https://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html'>here</a> for
+         more on the subject.
+    </p>
     <li>how to solve CORS (Cross-Origin Resource Sharing) issues with webpack</li>
 <p>
     It is often the case when doing development in Webpack that you
