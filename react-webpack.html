@@ -4,7 +4,14 @@
 <link rel='icon' href='/knowledge-favicon.ico'/>
 </head>
 <body>
-<ol reversed>
+  <ol reversed>
+    <li>ReactJS state versus properties</li>
+    There are many resources on the subject that one can google about. For the benefit
+    of my future self I've put together a small example in my <a href='https://github.com/mperdikeas/playground/tree/master/javascript/react/my-projects/03-fliping-tiles'>playground github repo</a> that shows how to properly 
+    use <i>state</i>. Bottom line is that <i>state</i> lives in the parent components and flows
+    down into the child components as <i>properties</i>. Also, <i>state</i> is not set upon
+    component initialization. The proper way to set <i>state</i> is with the <code>setState</code> method
+    so that React can automatically call <code>render</code> on the component whose state was altered.
     <li>how to solve CORS (Cross-Origin Resource Sharing) issues with webpack</li>
 <p>
     It is often the case when doing development in Webpack that you
