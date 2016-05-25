@@ -5,6 +5,72 @@
   </head>
   <body>
     <ol reversed>
+      <li>how to obtain binary data from JavaScript</li>
+      <p>
+        I had a REST Jersey application deployed in Tomcate that emitted binary data.
+        E.g. something along the following lines:
+        </p>
+        <pre>
+    @Path("/file/{i}")
+    @GET
+    @Produces({"application/octet-stream"})
+    public Response getFile(@PathParam("i") int i) throws Exception {
+        System.out.printf("Requesting the content of file with i = %d\n", i);
+        ...
+        </pre>
+        <p>
+        I then wanted a React app (but really could have been vanilla
+        JavaScript) to invoke that REST service and obtain the file data
+        (which could have been either text or binary).
+        </p>
+        <p>
+          The first problem to solve is <a href='https://en.wikipedia.org/wiki/Cross-origin_resource_sharing'>CORS</a>. For that see:
+          <a href='./react-webpack.html#webpack-cors'>this note of mine</a>.
+        </p>
+        <p>
+          Following that I have tested the following code to work well with both text and binary files:
+          <pre>
+    const URL = `http://localhost:8080/radacer-oaipmh/jax-rs/oaipmh/file/${this.props.iDB}`;
+    console.log(`doing Ajax on ${URL}`);
+    var oReq = new XMLHttpRequest();
+    oReq.open("GET", URL, true);
+    oReq.responseType = "arraybuffer";
+    oReq.onload = function (oEvent) {
+        var arrayBuffer = oReq.response;
+        if (arrayBuffer) {
+            var byteArray = new Uint8Array(arrayBuffer);
+            if (false) {
+                for (var i = 0; i < byteArray.byteLength; i++) {
+                    // do something with each byte in the array
+                    console.log(byteArray[i]);
+                }
+            }
+            const blob = new Blob([byteArray], {type: "application/octet-stream"});
+            saveAs(blob, this.props.fname);
+            
+        }
+    }.bind(this);
+    oReq.send(null);
+          </pre>
+        </p>
+        <p>
+          Note that the code above also saves the binary file locally
+          but obviously once you got the bytes you can do pretty much
+          whatever you like.
+        </p>
+        <p>
+          Since this is from a webpack application I install the necessary
+          support for the <a href='https://www.npmjs.com/package/filesaver.js-npm'>filesaver.js-npm</a> module with:
+          <pre>
+     npm i -S filesaver.js-npm
+          </pre>
+        </p>
+        <p>
+          And then, from JavaScript:
+          <pre>
+    import {saveAs}   from 'filesaver.js-npm';
+          </pre>
+        </p>
       <li>JavaScript Event KeyCode Test Page</li>
       <a href="http://www.asquare.net/javascript/tests/KeyCode.html">This</a> is a great resource.
       <li>Function keys for web applications</li>
