@@ -4,6 +4,66 @@
 </head>
 <body>
   <ol reversed>
+    <li>how to write recursive SQL WITH queries</li>
+    <p>Today I implemented the following SSCCE to dig recursive WITH queries:</p>
+    <p>A simple schema to represent trees featuring two kinds of nodes:
+      <ul>
+        <li>"proper" nodes</li>
+        <li>leaf nodes, which can hang under any "proper" node (including internal ones)</li>
+      </ul>
+      &hellip; would be the following:
+      <pre>
+    DROP TABLE IF EXISTS leaf;
+    DROP TABLE IF EXISTS node;
+
+    CREATE TABLE node (
+        i         INTEGER NOT NULL,
+        parent    INTEGER     NULL
+    );
+    ALTER TABLE node ADD PRIMARY KEY(i);
+
+    CREATE TABLE leaf (
+        i         SERIAL,
+        leafName  VARCHAR NOT NULL,
+        underNode INTEGER NOT NULL);
+    ALTER TABLE leaf ADD PRIMARY KEY (i);
+    ALTER TABLE leaf ADD FOREIGN KEY (underNode) REFERENCES node(i);
+      </pre>
+    </p>
+    <p>One can imagine the above schema to be populated with the below test data:
+      <pre>
+    INSERT INTO node VALUES
+    (1, NULL), (2, NULL), (3, 1), (5, 1), (7, 1), (4, 2), (6, 2);
+
+    INSERT INTO leaf(leafName, underNode) VALUES
+    ('leaf under 1', 1), ('leaf under 2', 2), ('leaf under 3', 3), ('leaf under 5', 5), ('leaf under 7', 7);
+      </pre>
+    </p>
+    <p>Given the above, the following query fetches the names of all leaves hanging under the 'subtree'
+      of node with key #1:
+      <pre>
+    WITH RECURSIVE NODES_IN_SUBTREE (i) AS (
+        VALUES (1)
+        UNION ALL SELECT a.i FROM NODES_IN_SUBTREE INNER JOIN node a
+        ON a.parent = NODES_IN_SUBTREE.i
+    )
+    SELECT leafName FROM leaf
+    WHERE underNode IN (SELECT i FROM NODES_IN_SUBTREE);
+      </pre>
+    </p>
+    <p>
+      And the following query fetches all leaves that live under the 'subtrees' of all nodes who are children
+      of the root of the tree (therefore, effectively fetches <b>all</b> leaves in the tree):
+      <pre>
+    WITH RECURSIVE NODES_IN_SUBTREE (i) AS (
+        (SELECT i FROM node WHERE parent IS NULL)
+        UNION ALL SELECT a.i FROM NODES_IN_SUBTREE INNER JOIN node a
+        ON a.parent = NODES_IN_SUBTREE.i
+    )
+    SELECT leafName FROM leaf
+    WHERE underNode IN (SELECT i FROM NODES_IN_SUBTREE);
+      </pre>
+    </p>
     <li>how to create superuser "<b>postgres</b>" if none exists when the PostgreSQL is built from sources</li>
     <a href='#typical-access-control-configurations'>relevant note</a>
     <br/>
