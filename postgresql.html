@@ -6,12 +6,16 @@
   <ol reversed>
     <li>how to write recursive SQL WITH queries</li>
     <p>Today I implemented the following SSCCE to dig recursive WITH queries:</p>
-    <p>A simple schema to represent trees featuring two kinds of nodes:
+    <p>Let's first define a simple schema to represent trees so we can motivate
+      a use case of recursive queries.<br/>
+      We can imagine having two tables to represent two kinds of nodes:
       <ul>
         <li>"proper" nodes</li>
         <li>leaf nodes, which can hang under any "proper" node (including internal ones)</li>
       </ul>
-      &hellip; would be the following:
+    </p>
+    <p>
+      A possible approach would be the following:
       <pre>
     DROP TABLE IF EXISTS leaf;
     DROP TABLE IF EXISTS node;
@@ -52,7 +56,7 @@
       </pre>
     </p>
     <p>
-      And the following query fetches all leaves that live under the 'subtrees' of all nodes who are children
+      &hellip; and the following query fetches all leaves that live under the 'subtrees' of all nodes who are children
       of the root of the tree (therefore, effectively fetches <b>all</b> leaves in the tree):
       <pre>
     WITH RECURSIVE NODES_IN_SUBTREE (i) AS (
