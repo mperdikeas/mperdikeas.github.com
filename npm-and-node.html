@@ -6,11 +6,45 @@
   <body>
     <ol reversed>
       <li id='how-to-publish-in-npm'>How to publish something in <b>npm</b></li>
-      <a href='https://quickleft.com/blog/creating-and-publishing-a-node-js-module/'>nice article</a>
-      <br/>
-      <a href='npm-and-node.resources/how-to-publish-to-npm.html'>copy (in case the original goes offline)</a>.
-      <br/>
-      <b>NB</b>: to be able to perform the test regarding the local-global installation you'd have to first setup <tt>Node</tt> to search that location as well (see <a href='#node-local-global'>this note</a>).
+      <p>
+        <a href='https://quickleft.com/blog/creating-and-publishing-a-node-js-module/'>nice article</a>
+        <br/>
+        <a href='npm-and-node.resources/how-to-publish-to-npm.html'>copy (in case the original goes offline)</a>.
+      </p>
+      <p>
+      Examples of two npm modules I've successfully published and used using the above guides:
+      <ul>
+        <li><a href='https://github.com/mperdikeas/js-object-properties'>js-object-properties</a></li>
+        <li><a href='https://github.com/mperdikeas/faker-datastore'>faker-datastore</a></li>
+      </ul>
+      </p>
+      <h3>gotchas</h3>
+        <p>
+          <ul>
+            <li>to be able to perform the test regarding the local-global installation you'd have to first setup <tt>Node</tt> to search that location as well (see <a href='#node-local-global'>this note</a>).</li>
+            <li>Before you publish to <b>npm</b> you should test your package by means of publishing locally
+              and then requiring it from another directory (from the REPL). This is explained in the guide
+              linked above and the local publishing command is correctly given as:
+              <pre>
+npm publish -g
+               </pre>
+               <br/>
+               However, after the initial local publishing you will invariably encounter bugs that you will have to
+               fix (locally again). After each fix you should remember to update the version in <tt>package.json</tt>
+               and then do (from the root of your project):
+               <pre>
+npm run build
+npm publsh -g
+npm update -g &lt;your-package-name&gt;
+               </pre>
+               After the above, do a:
+               <pre>
+npm ls -g | grep &lt;your-package-name&gt;
+               </pre>
+                &hellip; to ensure that your package has been updated in the global (local) repository.
+            </li>
+          </ul>
+        </p>
       <li id='node-local-global'>How to instruct <b>Node</b> to search for packages in the "local-global" location</li>
       Put the following in your <tt>.bashrc</tt>:
       <pre>
