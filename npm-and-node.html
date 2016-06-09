@@ -24,24 +24,57 @@
             <li>to be able to perform the test regarding the local-global installation you'd have to first setup <tt>Node</tt> to search that location as well (see <a href='#node-local-global'>this note</a>).</li>
             <li>Before you publish to <b>npm</b> you should test your package by means of publishing locally
               and then requiring it from another directory (from the REPL). This is explained in the guide
-              linked above and the local publishing command is correctly given as:
+              linked above and the local global installation command is correctly given as:
               <pre>
-npm publish -g
+npm install . -g
                </pre>
-               <br/>
-               However, after the initial local publishing you will invariably encounter bugs that you will have to
-               fix (locally again). After each fix you should remember to update the version in <tt>package.json</tt>
-               and then do (from the root of your project):
+               <p>
+                 However, after the initial local global installation you will invariably encounter bugs that you will have to
+                 fix (locally again). After each fix you should do (from the root of your project):
+                 <pre>
+npm run build && npm install . -g
+                 </pre>
+               </p>
+               <p>
+                 During these (local) iterations (that don't get published to the public <b>npm</b> repository) you
+                 don't need to update the version in <tt>package.json</tt>.
+               </p>
+               <p>
+                 To test, simply <tt>cd</tt> to some other dir, open a repl (<tt>node</tt> or <tt>nodejs</tt>)
+                 and <tt>require</tt> your package to test its newly added functionality.
+               </p>
+               <p>
+                 At the end of a number of such iterations you are now able to publish to <b>npm</b>.
+                 Before you do that however, remember to update the version in <tt>package.json</tt>
+                 respecting <a href='http://semver.org/'>semver</a>.<br/>
+                 Once this is done do:
+<pre>
+npm publish
+</pre>
+               </p>
+               <p>
+                 However, even if you do forget to update <tt>package.json</tt> <b>npm</b> will baulk with an informative
+                 message, so no worries there.
+               </p>
+
+               <p>
+                 Afterwards, you are able to install your package from everywhere by name (rather than, e.g. having to
+                 point at a Github URL):
+                 <pre>
+npm install &lt;your-package-name&gt;
+                 </pre>
+               </p>
+               You may also have to do a:
                <pre>
-npm run build
-npm publsh -g
 npm update -g &lt;your-package-name&gt;
                </pre>
-               After the above, do a:
+               &hellip; to ensure that your package has been updated in the global (local) repository (though if you've already
+               installed it locally with <code>npm install . -g</code> you may not see any difference. At any rate you can
+               use the following command to find the locally available version of your package:
                <pre>
 npm ls -g | grep &lt;your-package-name&gt;
                </pre>
-                &hellip; to ensure that your package has been updated in the global (local) repository.
+               <p>               
             </li>
           </ul>
         </p>

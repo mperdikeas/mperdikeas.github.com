@@ -19,3 +19,8 @@ pre {
 blockquote {
     font-style: italic;
 }
+
+code {
+    background: slategrey;
+    color: white;
+}
