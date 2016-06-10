@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='../knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <h1>How to setup Mocha in Node to work with ECMAScript 2016 using Babel</h1>
+    <p>
+    I got the main pointers from <a href='http://stackoverflow.com/q/9722407/274677'>this SO question</a>,
+    <a href='http://jamesknelson.com/testing-in-es6-with-mocha-and-babel-6/'>this blog post</a>,
+    and <a href='https://mochajs.org/'>the official Mocha documentation</a> (which however does
+    not deal explicitly with <em>Babel</em> and <em>ECMAScript2016</em>. <a href='http://fredkschott.com/post/2014/05/nodejs-testing-essentials/'>This post</a> was also marginally useful.
+    </p>
+    <p>
+      Main points:
+      <ul>
+        <li>install Mocha (for development only) locally, not globally (i.e. don't use the accursed <code>-g</code> option) with:
+          <pre>
+npm --D mocha
+          </pre>
+        </li>
+        <li>ensure you have the Babel polyfill properly installed</li>
+        <li>make a <tt>test</tt> directory and place your testing code there.
+        At the top of your code do a:
+        <pre>
+import 'babel-polyfill';
+        </pre>
+        </li>
+        <li>Add the following in your <code>scripts</code> tag in your <code>package.json</code> file:
+          <pre>
+"test": "mocha --compilers js:babel-core/register"
+          </pre>
+        </li>
+      </ul>
+    </p>
+    <p>Refer to my <a href='https://github.com/mperdikeas/js-object-properties'>obj-properties</a> module code for
+      a working testing setup.
+    </p>
+  </body>
+</html>
