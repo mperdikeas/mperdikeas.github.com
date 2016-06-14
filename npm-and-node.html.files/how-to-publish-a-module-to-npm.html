@@ -19,7 +19,17 @@
     <h3>gotchas</h3>
     <p>
       <ul>
-        <li>to be able to perform the test regarding the local-global installation you'd have to first setup <tt>Node</tt> to search that location as well (see <a href='#node-local-global'>this note</a>).</li>
+        <li>
+          <p>
+          If you follow the structure of my modules mentioned above be sure to change the <code>main</code> attribute in <code>package.json</code> from:<br/><br/>
+            <code>"index.js"</code>
+            <br/><br/>&hellip; to:<br/><br/>
+            <code>"lib/index.js"</code>
+          </p>
+          <p>Failure to do so will result in "cannot find package" messages
+            when the module is required.</p>
+        </li>
+        <li>to be able to perform the test regarding the local-global installation you'd have to first setup <tt>Node</tt> to search that location as well (see <a href='../npm-and-node.html#node-local-global'>this note</a>).</li>
         <li id='local-global-testing'>Before you publish to <b>npm</b> you should test your package by means of publishing locally
           and then requiring it from another directory (from the REPL). This is explained in the guide
           linked above and the local global installation command is correctly given as:
