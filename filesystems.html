@@ -60,11 +60,13 @@ lrwxrwxrwx 1 root root   9 Nov 16 10:34 transc-usb-disk -> ../../sdb
 $mount | grep sdb
 $
         </pre>
-        <li>identify the file-system of that device</li>
+        <li>identify the file-system of that device
         <pre class="console">
 sudo lshw  | grep -A20 -B30  sdb
 (... output ommited)
         </pre>
+        &hellip; if the above produces output that's not very helpful try using <code>sudo blkid</code> (see <a href='http://unix.stackexchange.com/a/53552/24044'>here</a> for more)
+        </li>
         <li>mount said device with the correct filesystem type (as discovered in the previous step)</li>
         <i>create before doing that, the directory corresponding to the mount point - in our case <code>/media/usb-disk</code></i>
         <pre class="console">
