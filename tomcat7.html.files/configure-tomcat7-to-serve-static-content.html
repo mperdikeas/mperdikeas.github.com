@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <h1 style='font: 60%;'>how to configure Tomcat7 to serve static content</h1>
+    <p>
+    You need to add the following line (mutatis mutandis):
+    <pre>
+&lt;Context docBase="/var/lib/tomcat7/webapps/oaipmh" path="/oaipmh"/&gt;
+    </pre>
+    &hellip; in the <code>server.xml</code> Tomcat7 that, e.g., in my system
+    lives in: <code>/var/lib/tomcat7/conf/server.xml</code>.
+    </p>
+    <p>
+      E.g., in my system:
+<pre>
+$ cat /var/lib/tomcat7/conf/server.xml | tail -20
+      &lt;Host name="localhost"  appBase="webapps"
+        unpackWARs="true" autoDeploy="true"&gt;
+
+        &lt;!-- SingleSignOn valve, share authentication between web applications
+             Documentation at: /docs/config/valve.html --&gt;
+        &lt;!--
+             &lt;Valve className="org.apache.catalina.authenticator.SingleSignOn" /&gt;
+           --&gt;
+
+        &lt;!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" --&gt;
+            &lt;Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
+                   prefix="localhost_access_log." suffix=".txt"
+                   pattern="%h %l %u %t &quot;%r&quot; %s %b" /&gt;
+            &lt;Context docBase="/var/lib/tomcat7/webapps/oaipmh" path="/oaipmh"/&gt;
+      &lt;/Host&gt;
+    &lt;/Engine&gt;
+  &lt;/Service&gt;
+&lt;/Server&gt;
+</pre>
+&hellip; followed of course by a server restart:
+<pre> sudo /etc/init.d/tomcat7 restart</pre>
+    </p>
+    <p>I was then able to view the static content by pointing my browser at:
+      <tt>http://localhost:8080/oaipmh/</tt>
+    </p>    
+  </body>
+</html>
