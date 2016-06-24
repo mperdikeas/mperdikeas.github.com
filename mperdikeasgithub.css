@@ -24,3 +24,10 @@ code {
     background: slategrey;
     color: white;
 }
+
+dl > dt {font-weight: bold;}
+dl > dt, dl > dd {display: inline}
+dl > dd::after {
+    content: '\A';
+    white-space: pre;
+}

@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+  </style>
+  <body>
+    <h1>Get rid of the need to type-in passwords in SSH connections using SSH public key authorization</h1>
+    <p>
+      Assuming the following machines:
+      <dl>
+        <dt>A</dt><dd>your local node</dd>
+        <dt>B</dt><dd>the node you wish to be able to hop to without having to enter a password every time</dd>
+      </dl>
+      &hellip; do the following:
+      <ol>
+        <li>on machine A:</li>
+        If the file <code>~/.ssh/id_rsa.pub</code> does not already exist do a:
+        <pre>ssh-keygen -t rsa</pre>
+        &hellip; and copy the long single line that this file contains into your clipboard
+        <li>on machine B</li>
+        Copy the line you placed into the clipboard at the end of file: <code>~/.ssh/authorized_keys</code>
+        (and make sure said file is readable)
+      </ol>
+    </p>
+  </body>
+</html>

@@ -1,135 +1,137 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-<ol reversed>
-<li>bind to a port, continuously, and print on standard out whatever gets sent to that port</li>
-Use the <b>Netcat</b> tool (abbreviation: <b>nc</b>) with the <tt>-k</tt> option as in (e.g. to bind
-to port 4444):
-<pre>nc -k -l 4444</pre>
-NB: In my Ubuntu system I've tried the above with the nc from the netcat-openbsd package (not the
-alternative nc is available in the netcat-traditional package).
-<li>see the redicts of a web page</li>
-Use the <b>curl</b> utility with the <b>-I</b> and <b>-L</b> options
-(to show the headers and to follow the redirects, respectively) as follows:
-<pre>curl -I -L www.google.com</pre>
-<li>use a single outgoing IP address</li>
-When behind a corporate NAT/firewall the packets you sent out 
-(e.g. from you browser) may
-seem to emerge from two different IP addresses which could
-result in your being evicted. In those cases,
-find a remote system you have access to and open an ssh tunnel to
-it:
-<pre>ssh -L 2095:localhost:2095 root@trusted.remote.system.com</pre>
-You can then point your browser to the address: <b>localhost:2095</b><p/>
-(the above instructions work provided your browser was redirected to
-port <i>2095</i> of the remote host to begin with). This will
-stabilize the IP address the remote system sees your packets
-coming from.
-<li>virtual Ethernet interface</li>
-A virtual IP address is created as simply as:
-<pre>ifconfig eth0:1 172.31.129.121</pre>
-and is only visible on the same machine and (?) LAN segment.
-The above incantation produces an eth1 interface with the
-indicated address. Local servers can then bind on that interface.
-You can also ping it from a remote machine and watch the MAC address
-enter that remote machine's <b>arp</b> cache. However it is not currently
-possible to assign a MAC address to that virtual interface that's different
-from the real one.
-<li>How to view multicast groups</li>
-Below are some incantations that work (I haven't correlated amongst them):
-<pre>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li><a href='./networking.html.files/double-ssh-tunnel.html'>do a double (two spans) SSH tunnel between two machines (with a third machine sitting in the middle)</a></li>
+      <li><a href='./networking.html.files/ssh-public-key-authorization.html'>SSH public key authorization</a></li>
+      <li>bind to a port, continuously, and print on standard out whatever gets sent to that port</li>
+      Use the <b>Netcat</b> tool (abbreviation: <b>nc</b>) with the <tt>-k</tt> option as in (e.g. to bind
+      to port 4444):
+      <pre>nc -k -l 4444</pre>
+      NB: In my Ubuntu system I've tried the above with the nc from the netcat-openbsd package (not the
+      alternative nc is available in the netcat-traditional package).
+      <li>see the redicts of a web page</li>
+      Use the <b>curl</b> utility with the <b>-I</b> and <b>-L</b> options
+      (to show the headers and to follow the redirects, respectively) as follows:
+      <pre>curl -I -L www.google.com</pre>
+      <li>use a single outgoing IP address</li>
+      When behind a corporate NAT/firewall the packets you sent out 
+      (e.g. from you browser) may
+      seem to emerge from two different IP addresses which could
+      result in your being evicted. In those cases,
+      find a remote system you have access to and open an ssh tunnel to
+      it:
+      <pre>ssh -L 2095:localhost:2095 root@trusted.remote.system.com</pre>
+      You can then point your browser to the address: <b>localhost:2095</b><p/>
+      (the above instructions work provided your browser was redirected to
+      port <i>2095</i> of the remote host to begin with). This will
+      stabilize the IP address the remote system sees your packets
+      coming from.
+      <li>virtual Ethernet interface</li>
+      A virtual IP address is created as simply as:
+      <pre>ifconfig eth0:1 172.31.129.121</pre>
+      and is only visible on the same machine and (?) LAN segment.
+      The above incantation produces an eth1 interface with the
+      indicated address. Local servers can then bind on that interface.
+      You can also ping it from a remote machine and watch the MAC address
+      enter that remote machine's <b>arp</b> cache. However it is not currently
+      possible to assign a MAC address to that virtual interface that's different
+      from the real one.
+      <li>How to view multicast groups</li>
+      Below are some incantations that work (I haven't correlated amongst them):
+      <pre>
 netstat -g
 /sbin/ip maddress list
 ifconfig eth0 | grep MULTICAST
-</pre>
-<li>Multicast groups</li>
-Joining and leaving multicast groups can be done totally at the application layer
-when one opens a socket. Accordingly for software that has this concept (like JBoss AS7
-in 'high availability'/clustering mode), you provide the multicast address at the
-command line, you don't need to set anything administratively in the routing tables
-or elsewhere.
-<p><b>NB:</b>There's no such concept as 'joining a multicast group'. The concept is
-'joining a multicast group on a particular interface'.
-<li>arp</li>
-To see the <b>arp</b> tables (I believe there is some caching and therefore also expiry involved)
-of your local machine do a:
-<pre>sudo arp -a</pre>
-This will show known IP and MAC addresses for the hosts you've send packets to. Surprisingly
-(but perhaps not so since everything is routed and the <b>arp</b> tables only cache values for the
-LAN segment, i.e. the 1st hop towards the router), you'll see very few hosts there. This is the
-output on my machine:
-<pre>
+      </pre>
+      <li>Multicast groups</li>
+      Joining and leaving multicast groups can be done totally at the application layer
+      when one opens a socket. Accordingly for software that has this concept (like JBoss AS7
+      in 'high availability'/clustering mode), you provide the multicast address at the
+      command line, you don't need to set anything administratively in the routing tables
+      or elsewhere.
+      <p><b>NB:</b>There's no such concept as 'joining a multicast group'. The concept is
+        'joining a multicast group on a particular interface'.
+        <li>arp</li>
+        To see the <b>arp</b> tables (I believe there is some caching and therefore also expiry involved)
+        of your local machine do a:
+        <pre>sudo arp -a</pre>
+        This will show known IP and MAC addresses for the hosts you've send packets to. Surprisingly
+        (but perhaps not so since everything is routed and the <b>arp</b> tables only cache values for the
+        LAN segment, i.e. the 1st hop towards the router), you'll see very few hosts there. This is the
+        output on my machine:
+        <pre>
 $ sudo arp -a
 kerio_control.neuropublic.gr (172.31.128.252) at 00:0f:20:32:c5:49 [ether] on eth0
 iasonaslb1.neuropublic.gr (172.31.128.247) at 00:0f:20:32:c5:49 [ether] on eth0
 iasonas.neuropublic.gr (172.31.128.249) at 00:0c:29:48:58:7c [ether] on eth0
 ? (172.31.128.140) at 02:bf:ac:1f:80:8e [ether] on eth0
-</pre>
-<li>wireless problems in Ubuntu 12.04 LTS Precise</li>
-Original article <a hred="http://linuxplained.com/how-to-fix-wireless-problems-in-ubuntu-1204-precise-pangolin/">here</a>. Gist is to try one of these:
-    <ul>
-      <li>restart networking after reboot</li>
-      <pre>sudo /etc/init.d/networking restart</pre>
-      <li>disable WiFi card power management</li>
-      <pre>sudo iwconfig wlan0 power off</pre>
-      <pre>sudo iwconfig</pre>
-      (and check for 'Power Management:off' under <b>wlan0</b>
-       to ensure that the power management is turned off).
-      <li>disable the use of Wireless N (at a cost of reduced speed)</li>
-      <pre>sudo rmmod -f iwlagn</pre>
-      <pre>sudo modprobe iwlagn 11n_disable=1</pre>
-      for the change to stick, edit <b>/etc/modprobe.d/iwlagn-disable11n.conf</b>
-      and add the following line:
-      <pre>options iwlagn 11n_disable=1</pre>
-      <li>Disable IPv6 (which is useless btw.)</li>
-      <pre class="keyword">
+        </pre>
+        <li>wireless problems in Ubuntu 12.04 LTS Precise</li>
+        Original article <a hred="http://linuxplained.com/how-to-fix-wireless-problems-in-ubuntu-1204-precise-pangolin/">here</a>. Gist is to try one of these:
+        <ul>
+          <li>restart networking after reboot</li>
+          <pre>sudo /etc/init.d/networking restart</pre>
+          <li>disable WiFi card power management</li>
+          <pre>sudo iwconfig wlan0 power off</pre>
+          <pre>sudo iwconfig</pre>
+          (and check for 'Power Management:off' under <b>wlan0</b>
+          to ensure that the power management is turned off).
+          <li>disable the use of Wireless N (at a cost of reduced speed)</li>
+          <pre>sudo rmmod -f iwlagn</pre>
+          <pre>sudo modprobe iwlagn 11n_disable=1</pre>
+          for the change to stick, edit <b>/etc/modprobe.d/iwlagn-disable11n.conf</b>
+          and add the following line:
+          <pre>options iwlagn 11n_disable=1</pre>
+          <li>Disable IPv6 (which is useless btw.)</li>
+          <pre class="keyword">
 echo "#disable ipv6" | sudo tee -a /etc/sysctl.conf 
 echo "net.ipv6.conf.all.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf 
 echo "net.ipv6.conf.default.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf 
 echo "net.ipv6.conf.lo.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
-      </pre>
-    </ul>
-<li>5 Best Linux/Ubuntu compatible USB WiFi cards</li>
-    <ol>
-        <li><a href="http://www.amazon.com/gp/product/B002RCKDEC/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002RCKDEC&#038;linkCode=as2&#038;tag=linuxp-20">AirLink101 AWLL6075 Wireless N Mini USB Adapter</a>
-        </li>
-        <li><a href="http://www.amazon.com/gp/product/B002RM08RE/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002RM08RE&#038;linkCode=as2&#038;tag=linuxp-20">Medialink &#8211; Wireless N USB Adapter &#8211; 802.11n</a>
-        </li>
-        <li><a href="http://www.amazon.com/gp/product/B002UVNW5W/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002UVNW5W&#038;linkCode=as2&#038;tag=linuxp-20">ASUS (USB-N13) Wireless-N USB Adapter</a>
-        </li>
-        <li><a href="http://www.amazon.com/gp/product/B003283M6Q/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B003283M6Q&#038;linkCode=as2&#038;tag=linuxp-20">Panda Mini Wifi (b/g/n) 150Mbps Card</a>
-        </li>
-        <li><a href="http://www.amazon.com/gp/product/B002WBX9C6/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002WBX9C6&#038;linkCode=as2&#038;tag=linuxp-20">TP-Link TL-WN722N 150Mbps High Gain Wireless USB Adapter</a>
-        </li>
-    </ol>
-<li>use <b>nc</b> for HTTP troubleshooting</li>
-First of all use nc.traditional:
-<pre>
+          </pre>
+        </ul>
+        <li>5 Best Linux/Ubuntu compatible USB WiFi cards</li>
+        <ol>
+          <li><a href="http://www.amazon.com/gp/product/B002RCKDEC/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002RCKDEC&#038;linkCode=as2&#038;tag=linuxp-20">AirLink101 AWLL6075 Wireless N Mini USB Adapter</a>
+          </li>
+          <li><a href="http://www.amazon.com/gp/product/B002RM08RE/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002RM08RE&#038;linkCode=as2&#038;tag=linuxp-20">Medialink &#8211; Wireless N USB Adapter &#8211; 802.11n</a>
+          </li>
+          <li><a href="http://www.amazon.com/gp/product/B002UVNW5W/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002UVNW5W&#038;linkCode=as2&#038;tag=linuxp-20">ASUS (USB-N13) Wireless-N USB Adapter</a>
+          </li>
+          <li><a href="http://www.amazon.com/gp/product/B003283M6Q/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B003283M6Q&#038;linkCode=as2&#038;tag=linuxp-20">Panda Mini Wifi (b/g/n) 150Mbps Card</a>
+          </li>
+          <li><a href="http://www.amazon.com/gp/product/B002WBX9C6/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002WBX9C6&#038;linkCode=as2&#038;tag=linuxp-20">TP-Link TL-WN722N 150Mbps High Gain Wireless USB Adapter</a>
+          </li>
+        </ol>
+        <li>use <b>nc</b> for HTTP troubleshooting</li>
+        First of all use nc.traditional:
+        <pre>
 sudo apt-get install netcat-traditional
-</pre>
-Then spawn the <b>nc.traditional</b> binary in a loop
-(that's ok since the socket opens and dies with every request
-according to the stateless character of the HTTP protocol):
-<pre>
+        </pre>
+        Then spawn the <b>nc.traditional</b> binary in a loop
+        (that's ok since the socket opens and dies with every request
+        according to the stateless character of the HTTP protocol):
+        <pre>
 while true ; do nc.traditional -l -p 8085 ; done
-</pre>
-With the above command we've opened a manual HTTP server listening at
-port 8085. One can now point the browser to: localhost:8085/foo
-and we'll see the request on the <b>nc.traditional</b> output.
-What's more, we'll be able to paste a response and see it in the browser.
-Moreover, after the exchange the <b>nc.traditional</b> binary
-won't die but (due to the while true) be available to service 
-the next request coming from the browser. This allows us to test
-the cookie setting behaviour and parameters. E.g. (see the <a href="http://curl.haxx.se/rfc/cookie_spec.html">Netscape spec</a> and <a href="http://stackoverflow.com/questions/12247265/cookie-storing-strategies-and-tabbed-browsing-of-different-jsf-applications-givi">
-this SO discussion</a> for more) we can use this setting to test the cookie behavior when the cookie path attribute is used:
-<ol>
-  <li>launch <b>nc.traditional</b> as described above</li>
-  <li>point the browser to localhost:8085/foo</li>
-  <li>the following HTTP request appears at <b>nc.traditional</b>'s screen</li>
-      <pre>
+        </pre>
+        With the above command we've opened a manual HTTP server listening at
+        port 8085. One can now point the browser to: localhost:8085/foo
+        and we'll see the request on the <b>nc.traditional</b> output.
+        What's more, we'll be able to paste a response and see it in the browser.
+        Moreover, after the exchange the <b>nc.traditional</b> binary
+        won't die but (due to the while true) be available to service 
+        the next request coming from the browser. This allows us to test
+        the cookie setting behaviour and parameters. E.g. (see the <a href="http://curl.haxx.se/rfc/cookie_spec.html">Netscape spec</a> and <a href="http://stackoverflow.com/questions/12247265/cookie-storing-strategies-and-tabbed-browsing-of-different-jsf-applications-givi">
+          this SO discussion</a> for more) we can use this setting to test the cookie behavior when the cookie path attribute is used:
+        <ol>
+          <li>launch <b>nc.traditional</b> as described above</li>
+          <li>point the browser to localhost:8085/foo</li>
+          <li>the following HTTP request appears at <b>nc.traditional</b>'s screen</li>
+          <pre>
 GET /foo HTTP/1.1
 Host: localhost:8085
 User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:15.0) Gecko/20100101 conkeror/1.0pre (Debian-1.0~~pre+git1206072207-~nightly1)
@@ -140,9 +142,9 @@ Connection: keep-alive
 Cookie: JSESSIONID=891d66f2-29fa-4568-9228-c917c5bf1317
 
 
-      </pre>
-  <li>paste the following response to <b>nc.traditional</b>'s screen:</li>
-      <pre>
+          </pre>
+          <li>paste the following response to <b>nc.traditional</b>'s screen:</li>
+          <pre>
 HTTP/1.1 200 OK
 Server: Apache-Coyote/1.1
 X-Powered-By: JSF/2.0
@@ -151,39 +153,39 @@ Content-Type: text/html;charset=UTF-8
 Content-Length: 16
 Date: Tue, 04 Sep 2012 12:22:46 GMT
 
-<body>boo</body>
+            <body>boo</body>
 
-      </pre>
-      (take care with the <b>Content-Length</b> field)
-  <li>setting the <b>path</b> to <b>/</b> means that the cookie will be present in any
-subsequent request, e.g. <b>http://localhost/booboo</b></li>
-  <li>when the cookie path is not set to <b>/</b> the cookie will be present only
-in tail matching requests.</li>
-</ol>
-<li>copy a tarball with permissions between two different machines (no scp):</li>
-sender:
-<pre>tar cpf - git-jboss/ | nc 172.31.129.12 8877</pre>
-receiver:
-<pre>nc -l -p 8877 | tar xpvf -</pre>
-</li>
-<li>make sure a service is listening at a given port:</li>
-Use <i>nc</i> with the <i>-w</i> option as in (for a timeout of 5 seconds):
-<pre>
+          </pre>
+          (take care with the <b>Content-Length</b> field)
+          <li>setting the <b>path</b> to <b>/</b> means that the cookie will be present in any
+            subsequent request, e.g. <b>http://localhost/booboo</b></li>
+          <li>when the cookie path is not set to <b>/</b> the cookie will be present only
+            in tail matching requests.</li>
+        </ol>
+        <li>copy a tarball with permissions between two different machines (no scp):</li>
+        sender:
+        <pre>tar cpf - git-jboss/ | nc 172.31.129.12 8877</pre>
+        receiver:
+        <pre>nc -l -p 8877 | tar xpvf -</pre>
+    </li>
+    <li>make sure a service is listening at a given port:</li>
+    Use <i>nc</i> with the <i>-w</i> option as in (for a timeout of 5 seconds):
+    <pre>
 nc -w 5 94.66.59.15 80
-</pre>
-<li>show local ports and which processes listen on them:</li>
-<pre>sudo lsof -P -i -n</pre>
-<li>How to mount a smbfs file system with read/write permissions</li>
-First, create the mount-point (/media/athina-prj) in the below example.</br>
-Then, obtain your userid and groupid (using <i>id</i>) and then do a:
-<pre>
+    </pre>
+    <li>show local ports and which processes listen on them:</li>
+    <pre>sudo lsof -P -i -n</pre>
+    <li>How to mount a smbfs file system with read/write permissions</li>
+    First, create the mount-point (/media/athina-prj) in the below example.</br>
+    Then, obtain your userid and groupid (using <i>id</i>) and then do a:
+    <pre>
 sudo mount -t smbfs -o username=SEMANTIX\\mperdikeas,password=mperdikeas,dir_mode=0777,file_mode=0777,uid=mperdikeas,gid=mperdikeas //192.168.0.2/prj /media/athina-prj
-</pre>
+    </pre>
 
-<li>How to take a Linux box off the network</li>
-<p>
-log-in to a console and do:<p>
-<pre>
+    <li>How to take a Linux box off the network</li>
+    <p>
+      log-in to a console and do:<p>
+      <pre>
 sudo ifconfig </pre><p>(to find the link you wish to bring down, usually "eth0")<p><pre>
 sudo ifconfig eth0 down
 </pre>
@@ -191,6 +193,6 @@ do work that has to be executed offline, and then:
 <p><pre>
 sudo ifconfig eth0 up
 </pre>
-</ol>
-</body>
+    </ol>
+  </body>
 </html>
