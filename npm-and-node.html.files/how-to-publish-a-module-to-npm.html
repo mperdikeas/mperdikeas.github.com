@@ -51,6 +51,10 @@ npm run build && npm install . -g
             To test, simply <tt>cd</tt> to some other dir, open a repl (<tt>node</tt> or <tt>nodejs</tt>)
             and <tt>require</tt> your package to test its newly added functionality.
           </p>
+          <p><b>NB:</b> I have encountered cases where even though the module was locally installed in the
+            global location, it was still not visible and I had to do an additional <tt>npm link</tt>.
+            See <a href='http://stackoverflow.com/q/38188087/274677'>this SO question of mine</a>.
+          </p>
           <p>
             At the end of a number of such iterations you are now able to publish to <b>npm</b>.
             Before you do that however, remember to update the version in <tt>package.json</tt>

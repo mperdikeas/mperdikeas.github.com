@@ -35,3 +35,8 @@ dl > dd::after {
     content: '\A';
     white-space: pre;
 }
+
+tt.message {
+    background: rgb(180,180,180);
+    color: white;
+}
