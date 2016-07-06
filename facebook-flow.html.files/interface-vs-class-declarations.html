@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <style>
+     blockquote {
+       font-style: italic;
+       }
+    </style>
+  </head>
+  <body>
+    <p>
+      Flow provides two similar declarative structures that however serve different purposes:
+      <ul>
+        <li><a href='https://flowtype.org/docs/declarations.html#_'>class declarations</a></li>
+        <li><a href='https://flowtype.org/docs/classes.html#_'>interface types</a></li>
+      </ul>
+    </p>
+    <p>Their main differences are the following:
+      <ul>
+        <li>class types are nominal (structurally identical classes are not interchangeable)</li>
+        <li>interface (as well as object) types are structural</li>
+        <li>the main use case of class declarations is to allow client code using those classes
+          to type-check without having the implementation code available for typechecking.
+          Note, in that regard the following caveats (from the online Flow documentation):
+          <blockquote>
+Note that declarations are exclusively compile-time entities: they are transpiled away, so they have no effect at run time. In fact, declarations without backing implementations may cause typechecked uses to break at run time! 
+          </blockquote>
+          &hellip; and:
+          <blockquote>
+            Note that it is entirely up to the programmer to ensure that declared definitions actually exist, and have the correct types.
+          </blockquote>
+        </li>
+      </ul>
+    </p>
+    <p>
+      The following playground projects of mine demonstrate the differences:
+      <ul>
+        <li>For interfaces: <a href='https://github.com/mperdikeas/playground/tree/master/javascript/node/06-evaluating-flow-interfaces'>evaluating flow interfaces</a></li>
+        <li>For class declarations: <a href='https://github.com/mperdikeas/playground/tree/master/javascript/node/07-evaluating-flow-classes'>evaluating flow classes</a></li>
+      </ul>
+    </p>
+  </body>
+</html>
