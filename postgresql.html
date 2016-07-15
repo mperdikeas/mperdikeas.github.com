@@ -4,6 +4,7 @@
 </head>
 <body>
   <ol reversed>
+    <li><a href='postgresql.html.files/timstamp-with-or-without-timezone.html'>timestamps with or without timezones</a></li>
     <li>how to write recursive SQL WITH queries</li>
     <p>Today I implemented the following SSCCE to dig recursive WITH queries:</p>
     <p>Let's first define a simple schema to represent trees so we can motivate
@@ -672,7 +673,7 @@ $ diff /etc/postgresql/9.1/main/postgresql.conf.safe.2012-01-15  /etc/postgresql
           &gt log_statement = 'all'# none, ddl, mod, all
 
         </pre>
-        The log directory (value <b>log_directory</b>) is located relative to the <i>data</i> folder of postgresql which is obtained as follows:<p/>
+        The log directory (value <b>log_directory</b>) is located relative to the <i>data</i> directory of postgresql which is obtained as follows:<p/>
         <pre>
 $ grep -i data /etc/postgresql/9.1/main/postgresql.conf
 # option or PGDATA environment variable, represented here as ConfigDir.
@@ -739,8 +740,8 @@ listen_addresses='*'
             <pre>
 local   all              all                                trust
             </pre>
-            For full reproducibility here's the full <a href="postgresql.html.folder/pg_hba.conf.html">pg_hba.conf</a> and the
-            <a href="postgresql.html.folder/postgresql.conf.html">postgresql.conf</a> configuration files.
+            For full reproducibility here's the full <a href="postgresql.html.files/pg_hba.conf.html">pg_hba.conf</a> and the
+            <a href="postgresql.html.files/postgresql.conf.html">postgresql.conf</a> configuration files.
             (the second doesn't play any part in this solution and is just provided for completeness
             purposes).
             <li>Configure PostgreSQL 9.1 to accept remote connections</li><p>

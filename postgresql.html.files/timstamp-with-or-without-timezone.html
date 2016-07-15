@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+  </style>
+  <body>
+    <h1>Timestamps with or without Time Zones in PostgreSQL</h1>
+    <p>See my very popular <a href='http://dba.stackexchange.com/q/59006/34332'>question</a> on
+      this subject in the dba.stackexchange site.
+    </p>
+    <p>
+      Bottom line is that <code>TIMESTAMP WITH TIME ZONE</code> should almost exclusive be used.
+      <code>TIMESTAMP WITHOUT TIME ZONE</code> is <em>wall time</em> and its use is, in
+      most cases an anti-pattern.
+    </p>
+    <p>
+      See also <a href='http://phili.pe/posts/timestamps-and-time-zones-in-postgresql/'>this wonderfull write-up on the same topic</a> from which the following elucidating diagram has been copied:
+    </p>
+    <p>
+      <a href='absolute-time-to-wall-time.svg'>
+        <img height="200px" width="300px" src='absolute-time-to-wall-time.svg'>
+      </a>
+    </p>
+    <p>
+      <code>TIMESTAMP WITH TIME ZONE</code> stores values internally in <code>UTC</code> time which corresponds to the concept of absolute time that always goes forward and never regresses. In contrast, wall time (which is what you get if you look the time in a timezone) regresses due to the clocks being reset for winter / summer time.
+    </p>
+  </body>
+</html>
