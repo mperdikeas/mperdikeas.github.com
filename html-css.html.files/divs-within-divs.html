@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="keywords" content="Menelaos Perdikeas Linux Programming">
+    <meta name="description" content="Menelaos Perdikeas Linux Programming">
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>    
+    <style>
+     h1 {
+       font-size: 18px;
+       color: white;
+       background: black;
+     }
+     h2 {
+       font-size: 16px;
+       color: #444;
+       background: #ece;
+     }
+    </style>
+    <title>common problems in nested div elements</title>
+  </head>
+
+  <body>
+    <h1>common problems in nested <tt>div</tt> elements</h1>
+    The following are some kinds of problems encountered when nesting divs:
+    <h2>absolute position a <tt>div</tt> while respecting the padding of its container</h2>
+    solution: use a wrapper <tt>div</tt> as shown in <a href='https://github.com/mperdikeas/playground/blob/master/html/playground/absolute-positioning-while-respecting-padding/index.html'>this</a> playground project.
+    <h2>different border thickness in <tt>div</tt> elements that are horizontally align using <tt>display: inline-block</tt></h2>
+    <p>Use <tt>vertical-align: top</tt></p>
+    <p>This is exemplified in <a href='http://stackoverflow.com/q/38460979/274677'>this SO question of mine</a> and
+      also in <a href='https://github.com/mperdikeas/playground/blob/master/html/playground/nested-divs-horiz-and-vertically/index.html'>this playground project</a>.
+    </p>
+   
+  </body>
+</html>
+
+
