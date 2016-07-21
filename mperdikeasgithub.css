@@ -18,6 +18,15 @@ pre {
     overflow-y: auto;    
 }
 
+pre.code {
+    background: #fcf;
+    color: #555;
+    font-weight: bold;
+    line-height: 1.6;
+    overflow-x: auto;
+    overflow-y: auto;    
+}
+
 blockquote {
     font-style: italic;
 }
