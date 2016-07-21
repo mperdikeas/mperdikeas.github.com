@@ -36,7 +36,15 @@ ssh mperdikeas@ssh.esac.esa.int -L 18300:localhost:18302 ssh -N voops@esavo00.es
     </pre>
     &hellip; following the above I was able to point <a href='https://www.dbvis.com'>DbVisualizer</a> in the local machine A (host: <tt>localhost</tt>, port: <tt>18300</tt>)
     and access the PostgreSQL database that was running in machine C.
-
+<p>
+  <b>NB:</b> the above incantation uses the port 18302 on the middle (stepping stone) machine. Should this port by in use
+  the boring will fail. In that case just try 18303, 18304, etc. until you find an open port. You will obviously have to replace
+  the stepping stone machine's port in both places where it occurs. It is for this reason (the uncertainty over which ports
+  will be discovered to be open in the middle machine) that I have not crystallized the above incantation as a script.
+</p>
+<p>
+  <b>NB2:</b> the above note applies to the next method, too.
+</p>
     <h2>two separate SSH invocations that bore one tunnel each</h2>
     <p>
     For a case similar to the above, use the following on machine A (mutatis mutandis):
