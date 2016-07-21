@@ -3,6 +3,27 @@
 <link rel='icon' href='/knowledge-favicon.ico'/>
 </head>
 <ol reversed>
+  <li>nicely formatted approval table with irregular cells and background</li>
+  <pre class='code'>
+
+\usepackage{tabu}
+
+\begin{table}[h]
+\fontsize{9pt}{10pt}\selectfont
+\begin{tabu}{|l|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF}
+\rowfont{\color{white}}
+\multicolumn{4}{|c|}{\cellcolor[HTML]{00000}\textbf{APPROVAL}}   \\ \hline
+\rowcolor[HTML]{EFEFEF} 
+\textbf{Title} & \multicolumn{3}{|c|}{How to survive a Zombie Apocalypse}  \\ \hline
+\textbf{Issue} & 0 & \textbf{Revision} & 4 \\ \hline
+\textbf{Author} & Rambo, McGyver & \textbf{Date} & 2015-03-12 \\ \hline
+\textbf{Approved by} & Chuck Norris & \textbf{Date} & 2015-03-12 \\ \hline
+\end{tabu}
+\end{table}
+\endgroup
+  </pre>
   <li>have the Bibliography section as a numbered chapter and (optionally) change its name too</li>
 <pre class='code'>
 \usepackage[nottoc,numbib]{tocbibind}
