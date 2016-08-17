@@ -1,85 +1,128 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
-<body>
-  <div style='background: #aaf; position: fixed; z-index: 1;'>
-  <b>NB:</b>
-  Some of the below tips are outdated and I don't follow them any more.<br/>
-  Refer to my <a href='https://github.com/mperdikeas/environment/blob/master/.emacs'>.emacs</a> file for the
-  best practices I am now using.
-  </div>
-  <div style='margin-top: 30px; position: absolute;'>
-<ol reversed>
-<li>mode information</li>
-<dl>
-<dt><code>C-h m</code></dt><dd>to get information about major and minor modes</dd>
-</dl>
-<dt><code>C-h f json-mode</code></dt><dd>to get information about a particular mode</dd>
-<br/>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <div style='background: #aaf; position: fixed; z-index: 1;'>
+      <b>NB:</b>
+      <i>Some</i> of the below tips are outdated and I don't follow them any more.<br/>
+      Refer to my <a href='https://github.com/mperdikeas/environment/blob/master/.emacs'>.emacs</a> file for the
+      best practices I am now using.
+    </div>
+    <div style='margin-top: 30px; position: absolute;'>
+      <ol reversed>
+        <li>key information</li>
+        <p>
+          <code>C-h k</code>
+        </p>
+        &hellip; followed by an arbitrary key sequence shows which command is mapped to that key sequence.
+        <li>mode information</li>
+        <dl>
+          <dt><code>C-h m</code></dt><dd>to get information about major and minor modes</dd>
+        </dl>
+        <dt><code>C-h f json-mode</code></dt><dd>to get information about a particular mode</dd>
+        <br/>
 
-and a link to the file that defines.
-<li>solve the dreaded <code>M-<RET></code> problem in Org-mode on tty</li>
-Use <a href="http://orgmode.org/manual/TTY-keys.html#TTY-keys">these alternative key bindings</a>
-as suggested in <a href="http://stackoverflow.com/a/6808124/274677">this answer</a>.
-<li>how to disable ALT key hijacking in Unity when working with Emacs</li>
-Follow <a href="http://askubuntu.com/a/455531">these instructions</a>.
-<li>how to load a module in Emacs and associate it with a file extension</li>
-It is a three-step process:
-    <ol>
-        <li>extend the <tt>load-path</tt> to include the directory where the <tt>*.el</tt> file for the mode lives</li>
-        <li>load the module</li>
-        <li>associate the module with the file extension</li>
-    </ol>
-This is nicely shown in the below excrept from my <tt>.emacs</tt> file:
-<pre>
+        and a link to the file that defines.
+        <li>solve the dreaded <code>C-SPACE</code> sequence key not working in emacs</li>
+        <p><i>I was beset by this problem when I installed Emacs24 on Ubuntu 14.04.5 on the Dell Precision
+          laptop (August '16)
+        </i></p>
+        <p>Basically what happens is that the <code>C-SPACE</code> combo is hijacked by the <code>ibus</code> program and not recognized as a sequence in Emacs. When you <tt>ssh</tt> to the computer from another
+          machine that doesn't suffer from this problem the combo works as expected (this proves that the problem
+          is not in Emacs but rather in the desktop environment).
+        </p>
+        <p>Follow <a href='http://askubuntu.com/q/243639'>these instructions</a>.</p>
+        <p>Core of the solution:
+          <quote>
+            <p>In 14.04, you can edit the settings directly is <code>dconf-editor</code>.</p>
+            <p>If it is not installed:
+              <pre>sudo apt install dconf-editor</pre>
+            </p>
+            <p>
+              Then browse to Desktop >> ibus >> general >> hotkey. The trigger and triggers setting will still show 'control+space'. Edit these settings out, being careful to leave empty brackets [] in triggers.
+            </p>
+          </quote>
+
+        </p>
+        <li>solve the dreaded <code>M-<RET></code> problem in Org-mode on tty</li>
+          Use <a href="http://orgmode.org/manual/TTY-keys.html#TTY-keys">these alternative key bindings</a>
+          as suggested in <a href="http://stackoverflow.com/a/6808124/274677">this answer</a>.
+          <li>how to disable ALT key hijacking in Unity when working with Emacs</li>
+          Follow <a href="http://askubuntu.com/a/455531">these instructions</a>.
+          <p>
+            Basically install <code>ccsm</code> (CompizConfig Settings Manager):
+            <pre>
+sudo apt-get install CompizConfig-Settings-Manager.
+            </pre>
+            &hellip; then run <code>ccsm</code> and select Desktop / Ubuntu Unity Plugin and disable the "Key to show the menu bar while pressed" and possibly "Key to show the HUD when tapped" too.
+          </p>
+          <p>
+            Basically disable everything bound to the <code>ALT</code> key to be on the safe side.
+          </p>
+          <li>how to load a module in Emacs and associate it with a file extension</li>
+          It is a three-step process:
+          <ol>
+            <li>extend the <tt>load-path</tt> to include the directory where the <tt>*.el</tt> file for the mode lives</li>
+            <li>load the module</li>
+            <li>associate the module with the file extension</li>
+          </ol>
+          This is nicely shown in the below excrept from my <tt>.emacs</tt> file:
+          <pre>
 (progn
     (add-to-list 'load-path "~/.emacs.d/web-mode/")
     (load "web-mode")
     (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 )
-</pre>
-It is advisable that that the <tt>el</tt> file lives in a <a href="git.html#submodules">git submodule</a>.
-<li>how to view the value of a variable in Emacs</li>
-Use the function <code>describe-variable</code> (usually bound to <tt>C-h v</tt>)
-<li>replace tabs / spaces in Emacs</li>
-The way to do it is via <b>M-x tabify</b> or <b>M-x untabify</b>.
-These functions work on the current selection, so to apply them to
-the whole buffer do a <b>C-x h</b> beforehand.
-<li>how to install Emacs24 on Ubuntu</li>
-I followed the instructions found here:<p>
+          </pre>
+          It is advisable that that the <tt>el</tt> file lives in a <a href="git.html#submodules">git submodule</a>.
+          <li>how to view the value of a variable in Emacs</li>
+          Use the function <code>describe-variable</code> (usually bound to <tt>C-h v</tt>)
+          <li>replace tabs / spaces in Emacs</li>
+          The way to do it is via <b>M-x tabify</b> or <b>M-x untabify</b>.
+          These functions work on the current selection, so to apply them to
+          the whole buffer do a <b>C-x h</b> beforehand.
+          <li>how to install Emacs24 on Ubuntu</li>
+          I followed the instructions found here:<p>
 
-<a href="https://launchpad.net/~cassou/+archive/emacs">
-         https://launchpad.net/~cassou/+archive/emacs
-</a>
-<p>
-(I got there from:<p>
-   <a href="http://askubuntu.com/questions/149562/how-to-upgrade-to-emacs-24-1">
-            http://askubuntu.com/questions/149562/how-to-upgrade-to-emacs-24-1
-   </a>
-)
-<p>
-Be sure to also read the instructions in the link of the "Signing key".
-After the "sudo apt-get update" I then did a "sudo apt-get install emacs24"
-and had Emacs 24 installed.
-<p>
-================================================================
-<p>
-Before succeeding I tried following these instructions instead:
-<p>
-<a href="http://batsov.com/articles/2011/10/09/getting-started-with-emacs-24/">
-         http://batsov.com/articles/2011/10/09/getting-started-with-emacs-24/
-</a>
-<p>
-(which points you to:
- <a href="http://emacs.naquadah.org/">
-    http://emacs.naquadah.org/
- </a>
-)
-<p>
-  but it didn't work. The reason was that I was being silly because the link at http:emacs.naquadah.org ALSO points to Damien Cassou's page (it says: "If you are looking for the Ubuntu packages, Damien Cassou now maintains an emacs-snapshot PPA.") but I was tired and my eyes were sore and didn't notice it.
-</ol>
-</div>
-</body>
+            <a href="https://launchpad.net/~cassou/+archive/emacs">
+              https://launchpad.net/~cassou/+archive/emacs
+            </a>
+            <p>
+              (I got there from:<p>
+              <a href="http://askubuntu.com/questions/149562/how-to-upgrade-to-emacs-24-1">
+                http://askubuntu.com/questions/149562/how-to-upgrade-to-emacs-24-1</a>
+              </p>
+              )
+            </p>
+            <p>
+              Be sure to also read the instructions in the link of the "Signing key".
+              After the "sudo apt-get update" I then did a "sudo apt-get install emacs24"
+              and had Emacs 24 installed.
+            </p>
+            <p>
+              ================================================================
+            </p>
+            <p>
+              Before succeeding I tried following these instructions instead:
+            </p>
+            <p>
+              <a href="http://batsov.com/articles/2011/10/09/getting-started-with-emacs-24/">
+                http://batsov.com/articles/2011/10/09/getting-started-with-emacs-24/
+              </a>
+            </p>
+            <p>
+              (which points you to:
+              <a href="http://emacs.naquadah.org/">
+                http://emacs.naquadah.org/
+              </a>
+              )
+            </p>
+            <p>
+              but it didn't work. The reason was that I was being silly because the link at http:emacs.naquadah.org ALSO points to Damien Cassou's page (it says: "If you are looking for the Ubuntu packages, Damien Cassou now maintains an emacs-snapshot PPA.") but I was tired and my eyes were sore and didn't notice it.
+            </p>
+      </ol>
+    </div>
+  </body>
 </html>
