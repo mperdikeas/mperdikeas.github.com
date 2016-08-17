@@ -1,4 +1,4 @@
-body > ol > li {
+body > ol > li, body > div > ol > li {
     color:teal;
     font-weight:bold;
     text-decoration:underline;
