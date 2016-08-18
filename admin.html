@@ -588,7 +588,7 @@ xinput set-int-prop 11 "Device Enabled" 8 0
     <pre>
 xinput set-int-prop 11 "Device Enabled" 8 1
     </pre>
-    <li>remove existing partitions and format USB hdd for Linux</li>
+    <li>remove existing partitions and format USB flash drive or SDHC memory card for Linux</li>
     <a href="http://www.quentinhuys.com/extharddrive.html">source</a><br/>
     First of all do a <b>sudo -i</b>. Then, use two
     commands: <b>fdisk</b> followed by a <b>mkfs.ext3</b>
@@ -606,21 +606,29 @@ xinput set-int-prop 11 "Device Enabled" 8 1
     <pre>mkfs.ext3 /dev/sdg1</pre>
     ... on the single partition I created. Finally, to label the drive I did a:
     <pre>sudo e2label /dev/sdg1 150GB-USB-hdd</pre>
-    <br/>
+    <p>
     <b>NB</b>: more recently I just did a:
     <pre>mkfs.ext3 -L volume-label /dev/sdg1</pre>
     to format and label the volume in one step without needing to use <tt>e2label</tt>.
-    <br/><br/>
+    </p>
+    <p>
     <b>NB 2</b>
     You may not be able to write to this disk as normal user as root may own it,
     but just doing <tt>chown user:user /media/volume-name</tt> will do the trick.
-    <br/>
+    </p>
+    <p>
     <b>NB 3</b>
     It is important that the <tt>fdisk</tt> is performed on the entire device (as in <tt>fdisk /dev/sdg</tt>)
     but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <tt>mkfs.ext3 .. /dev/sdg1</tt>).<br/>
     Doing the <tt>mkfs.ext3</tt> on the entire
     device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
     to find the file system type.
+    </p>
+    <p><b>NB 3</b>
+      To confirm that you've correctly formated the flash drive do
+      a <code>sudo blkid</code> afterwards (this works whether the
+      drive is mounted or unmounted)
+    </p>
 
     <li>remove BOM from files in Linux</li>
     <pre>tail --bytes=+4 text.txt</pre>
