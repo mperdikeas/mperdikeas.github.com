@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+  </style>
+  <body>
+    <h1>Install Postgresql 9.5 in Ubuntu 14.04 Trusty Tahr</h1>
+<p>
+In August 2015 I successfully install Postgresql 9.5 in Ubuntu 14.04 Trusty Tahr following the instructions
+from the <a href='https://www.postgresql.org/download/linux/ubuntu/'>official Ubuntu page</a> (to which I was led from <a href='http://tecadmin.net/install-postgresql-server-on-ubuntu/#'>this article</a>).
+</p>
+<p>
+Basically I just selected <tt>Trusty (14.04)</tt> as an option in the drop-down menu as shown in the
+figure below:
+</p>
+<p>
+    <a href="install-postgresql9.5-in-Ubuntu-14.04.png">
+      <img height="200px" width="300px" src="install-postgresql9.5-in-Ubuntu-14.04.png"/>
+    </a>.
+</p>
+<p>
+&hellip;and then (after adding the repository and key) I did:
+<pre>
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib
+</pre>
+&hellip; in order to get the latest stable version.
+</p>
+<p>
+Doing a:
+<pre>
+$ sudo su - postgres
+postgres@beorn:~$ psql
+psql (9.5.4)
+Type "help" for help.
+
+</pre>
+&hellip; right afterwards revealed that the version that was installed was
+in fact <tt>9.5.4</tt>.
+</p>
+  </body>
+</html>
