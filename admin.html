@@ -614,12 +614,13 @@ xinput set-int-prop 11 "Device Enabled" 8 1
     <p>
     <b>NB 2</b>
     You may not be able to write to this disk as normal user as root may own it,
-    but just doing <tt>chown user:user /media/volume-name</tt> will do the trick.
+    but just doing <code>chown user:user /media/volume-name</code> 
+    or <code>chmod -R a+rwx /media/volume-name</code> will do the trick.
     </p>
     <p>
     <b>NB 3</b>
-    It is important that the <tt>fdisk</tt> is performed on the entire device (as in <tt>fdisk /dev/sdg</tt>)
-    but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <tt>mkfs.ext3 .. /dev/sdg1</tt>).<br/>
+    It is important that the <tt>fdisk</tt> is performed on the entire device (as in <code>fdisk /dev/sdg</code>)
+    but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <code>mkfs.ext3 .. /dev/sdg1</code>).<br/>
     Doing the <tt>mkfs.ext3</tt> on the entire
     device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
     to find the file system type.
