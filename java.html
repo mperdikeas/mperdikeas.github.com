@@ -5,6 +5,71 @@
 </head>
 <body>
 <ol reversed>
+<li>installing Java 7 64bit on Ubuntu 14.04.5</li>
+<p>On August 2016 I followed the following procedure (<a href='http://stackoverflow.com/a/28874505/274677'>source</a> mutatis mutandis) to install Oracle Java 1.7 after I had downloaded from the Oracle site file <tt>jdk-7u80-linux-x64.tar.gz</tt></p>
+<p>
+<b>NB:</b> I have copied the below instructions from the article linked above and I haven't replaced all filenames and version names, but the procedure should be obvious.
+</p>
+<ol>
+<li>Download the 32-bit or 64-bit Linux  from "http://www.oracle.com/technetwork/java/javase/downloads/index.html" "compressed binary file" - it has a ".tar.gz" file extension.</li>
+<li> Uncompress it:
+<pre>
+tar xvfz jdk-7u80-linux-x64.tar.gz
+</pre>
+
+&hellip; the JDK 7 package is extracted into ./jdk1.7.0_75 directory. 
+</li>
+<li> Now move the JDK 7 directory to /usr/lib
+<pre>
+sudo mkdir -p /usr/lib/jvm
+sudo mv ./jdk1.7.0_75 /usr/lib/jvm/
+</pre>
+</li>
+<li>Now run
+<pre>
+sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.7.0_75/bin/java" 1
+sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.7.0_75/bin/javac" 1
+sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.7.0_75/bin/javaws" 1
+</pre>
+This will assign Oracle JDK a priority of 1, which means that installing other JDKs will replace it as the default. Be sure to use a higher priority if you want Oracle JDK to remain the default.
+</li>
+<li>
+Correct the file ownership and the permissions of the executables:
+<pre>
+sudo chmod a+x /usr/bin/java
+sudo chmod a+x /usr/bin/javac
+sudo chmod a+x /usr/bin/javaws
+sudo chown -R root:root /usr/lib/jvm/jdk1.7.0_75
+</pre>
+</li>
+<li>
+Run
+<pre>
+sudo update-alternatives --config java
+</pre>
+You will see output similar to the one below - choose the number of jdk1.7.0_75 - for example 3 in this list (unless you have have never installed Java installed in your computer in which case a sentence saying "There is nothing to configure" will appear):
+<pre>
+$ sudo update-alternatives --config java
+There are 3 choices for the alternative java (providing /usr/bin/java).
+
+  Selection    Path                                  Priority   Status
+------------------------------------------------------------
+* 0            /usr/lib/jvm/java-6-oracle1/bin/java   1047      auto mode
+  1            /usr/bin/gij-4.6                       1046      manual mode
+  2            /usr/lib/jvm/java-6-oracle1/bin/java   1047      manual mode
+  3            /usr/lib/jvm/jdk1.7.0_75/bin/java      1         manual mode
+
+Press enter to keep the current choice[*], or type selection number: 3
+update-alternatives: using /usr/lib/jvm/jdk1.7.0_75/bin/java to provide /usr/bin/java (java) in manual mode
+</pre>
+Repeat the above for:
+<pre>
+sudo update-alternatives --config javac
+sudo update-alternatives --config javaws
+</pre>
+</li>
+</ol>
+
 <li>how to find the 32-bit or 64-bit memory model status of an existing Java process</li>
 <a name="java-process-32-or-65"></a>
 The following command provides a wealth of information provided the PID is known:
