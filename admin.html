@@ -28,6 +28,26 @@ appeared during startup. This is consistent with what is described <a href='http
 </p>
 </blockquote>
 </p>
+<p>The guy at the store said that for versions of Ubuntu &ge; 14 <a href='https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface'>UEFI</a> should be used instead of BIOS (legacy).</p>
+<p>Some quick Googling reveals that the issue is <a href='http://askubuntu.com/q/647303/89663'>more complicated than that</a>.</p>
+<p>Incidentally I have failed to utilize the (expensive) video card &mdash; initially I had installed Ubuntu 16.04 and
+there appears to be an <a href='http://askubuntu.com/q/760934/89663'>issue with the NVIDIA cards</a>
+I wasted half a day on it, then gave up.</p>
+<p>Subsequently, when I installed Ubuntu 14.04 LTS I <i>think</i> I encountered the problem again but at any rate I finally did
+not install the NVIDIA drivers at all. Googling just now it seems that 14.04 also has some issues with the NVIDIA drivers.
+See for instance <a href='http://unix.stackexchange.com/q/120955/24044'>here</a>.
+</p>
+<p>I wonder if the graphics card problems are related to the fact that the installation was done using <tt>UEFI</tt> and not <tt>BIOS</tt>.</p>
+<p>You can Google many <a href='http://askubuntu.com/q/23238/89663'>ways to verify which controller is actually handling graphics</a> &mdash; i.e. whether it is the processor built-in
+controller (Intel in my case) or an external graphics card controller (e.g. Nvidia).</p>
+<p>
+In my case I get:
+<pre>
+$ lspci | grep -i vga
+00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor Integrated Graphics Controller (rev 06)
+</pre>
+&hellip; I.e. the built-in Intel controller.
+</p>
     <li>how to mount any system that's accessible via ssh</li>
     <a href="http://unix.stackexchange.com/a/59695/24044">source</a><br/>
     Use <a href="https://github.com/libfuse/sshfs">sshfs</a>.
