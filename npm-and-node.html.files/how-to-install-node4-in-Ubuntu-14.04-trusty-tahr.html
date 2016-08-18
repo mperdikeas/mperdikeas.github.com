@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='../knowledge-favicon.ico'/>
+    <style>
+     h1 {
+       font-size: 120%
+       }
+    </style>
+  </head>
+  <body>
+    <h1>How to install Node 4.5 LTS on Ubuntu 14.04 Trusty Tahr</h1>
+<a href='https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions'>source</a>
+<p>
+    The following worked for me in August 2016:
+    <pre>
+ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+ sudo apt-get install -y nodejs
+   </pre>
+</p>
+<p>&hellip; subsequently to the installation above I get:
+<pre>
+$ nodejs -v
+v4.5.0
+mperdikeas@beorn:~#
+$ node -v
+v4.5.0
+</pre>
+&hellip; with no need to setup alternatives as I had to do in the installation method
+described <a href='../npm-and-node.html#install-node-4-in-Ubuntu'>in this post</a>.
+</p>
+<p>
+<b>NB</b> the above process failed the first time it was adapted (I suspect due 
+to some network vagary)</p>
+  </body>
+</html>
