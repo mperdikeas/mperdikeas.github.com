@@ -30,7 +30,63 @@ v4.5.0
 described <a href='../npm-and-node.html#install-node-4-in-Ubuntu'>in this post</a>.
 </p>
 <p>
-<b>NB</b> the above process failed the first time it was adapted (I suspect due 
+<b>NB:</b> the above process failed the first time it was adapted (I suspect due 
 to some network vagary)</p>
-  </body>
+<p>
+<b>NB 2:</b>
+The above also installs <tt>npm</tt> so subsequently to the above
+I configured <tt>npm</tt> to install global packages in my home directory
+as also described in <a href='../npm-and-node.html#change-the-npm-installation-location-of-global-packages-to-home-dir'>this post</a>:
+<pre>
+$ which npm
+/usr/bin/npm
+$ npm --version
+2.15.9
+$ which npm
+/usr/bin/npm
+$ npm --version
+2.15.9
+$ npm config list
+; cli configs
+user-agent = "npm/2.15.9 node/v4.5.0 linux x64"
+
+; node bin location = /usr/bin/nodejs
+; cwd = /home/mperdikeas
+; HOME = /home/mperdikeas
+; 'npm config ls -l' to show all defaults.
+$ npm config get prefix
+/usr
+$ cd && mkdir .node_modules_global
+$ npm config set prefix=$HOME/.node_modules_global
+$ npm config get prefix
+/home/mperdikeas/.node_modules_global
+$ cat .npmrc 
+prefix=/home/mperdikeas/.node_modules_global
+$ npm install npm --global
+/home/mperdikeas/.node_modules_global/bin/npm -> /home/mperdikeas/.node_modules_global/lib/node_modules/npm/bin/npm-cli.js
+npm@3.10.6 /home/mperdikeas/.node_modules_global/lib/node_modules/npm
+</pre>
+&hellip; the above process also re-installed an updated version of <tt>npm</tt> in <tt>~/.node_modules_global</tt> 
+so we also need to update the <tt>PATH</tt> to ensure that <tt>npm</tt> is picked-up from that location:
+<pre>
+$ cat ~/.bashrc_thisnode 
+export PATH=~/.node_modules_global/bin:$PATH
+</pre>
+&hellip; and ensure it works:
+<pre>
+$ which npm
+/home/mperdikeas/.node_modules_global/bin/npm
+$ npm -version
+3.10.6
+</pre>
+Concluding, as part of the above post-node installation configuration we've accomplished three things:
+<div><div>
+<ol>
+<li>we've configured <tt>npm</tt> to install global packages in the home folder and not
+in <tt>/usr</tt></li>
+<li>we've upgraded our version of <tt>npm</tt> (<tt>3.10.6</tt> from <tt>2.15.9</tt>) which also now runs from the home folder</li>
+</ol>
+</div></div>
+</p>
+</body>
 </html>
