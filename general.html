@@ -5,6 +5,21 @@
   </head>
   <body>
     <ol reversed>
+      <li>how to install Skype on Ubuntu 14.04 64bit LTS</li>
+      <p>
+        The installation was eventfull &mdash; I ended up using the following links:
+        <ol>
+          <li><a href='https://community.skype.com/t5/Linux/Ubuntu-14-04-LTS-64-bit-amp-Skype/td-p/3684533'>installation instructions</a></li>
+          <li><a href='http://askubuntu.com/a/555948'>post-installation library problem fix &mdash; step 1</a></li>
+          <li><a href='http://askubuntu.com/a/520507'>post-installation library problem fix &mdash; step 2</a></li>
+        </ol>
+      </p>
+      <p>
+      &hellip; I ended up adding the following line:<br/>
+      <tt>alias skype='LD_PRELOAD=/usr/lib/i386-linux-gnu/me‌​sa/libGL.so.1 skype'</tt>
+      </br>
+&hellip; in the <tt>.bashrc_thisnode</tt> file for the Dell Precision laptop (where I am running Unbuntu 14.04 LTS 64 bit).
+      </p>
       <li>how to merge multiple jpg files into a pdf file</li>
 Use <code>convert</code> (<a href="http://askubuntu.com/q/246647/89663">source</a>) to, e.g. do a:<br/>
       <pre>convert diploma-transcript-greek-pg1-col.jpg diploma-transcript-greek-pg2-col.jpg diploma-transcript-greek-full-size.pdf</pre>
