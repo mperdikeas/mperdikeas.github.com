@@ -5,6 +5,26 @@
   </head>
   <body>
     <ol reversed>
+      <li>Ubuntu 14.04 how to set sound levels on the command line</li>
+      <a href='http://askubuntu.com/a/97945/89663'>source</a>
+      <p>
+        <i>Increase volume by 5%</i>
+        <pre>
+amixer -D pulse sset Master 5%+
+        </pre>
+      </p>
+      <p>
+        <i>Decrease volume by 5%</i>
+        <pre>
+amixer -D pulse sset Master 5%-
+        </pre>
+      </p>
+      <p>
+        <i>Set volume to 50%</i>
+        <pre>
+amixer -D pulse sset Master 50%
+        </pre>
+      </p>
       <li>how to install Skype on Ubuntu 14.04 64bit LTS</li>
       <p>
         The installation was eventfull &mdash; I ended up using the following links:
