@@ -5,6 +5,20 @@
   </head>
   <body>
     <ol reversed>
+      <li><a href='http://askubuntu.com/a/760452/89663'>install Chrome in Ubuntu 16.04</a></li>
+      <b>synopsis:</b>
+      <p>
+        Download the package and install it force-installing the dependencies:
+        <pre>
+sudo dpkg -i --force-depends google-chrome-stable_current_amd64.deb
+        </pre>
+      </p>
+      <p>
+In case any dependencies didn't install (you would have a warning or failure message for this), you can force them via:
+<pre>
+sudo apt-get install -f
+</pre>
+        </p>
       <li>Ubuntu 14.04 how to set sound levels on the command line</li>
       <a href='http://askubuntu.com/a/97945/89663'>source</a>
       <p>
