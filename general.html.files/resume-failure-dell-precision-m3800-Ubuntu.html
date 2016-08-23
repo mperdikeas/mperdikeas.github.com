@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+  </style>
+  <body>
+    <h1>How I managed to solve the dreaded suspend / resume failure on my Dell Precision M3800 laptop running Ubuntu 14.04 or 16.04</h1>
+    <p>The suspend/ resume problem in Ubuntu 14.04 and Ubuntu 16.04 is well documented for a number of laptops.</p>
+    <p>See, e.g. <a href='http://askubuntu.com/q/761820'>here</a>,
+      <a href='http://askubuntu.com/q/458285'>here</a>
+      and <a href='https://bugs.launchpad.net/ubuntu/+source/linux/+bug/1514587'>here</a>.</p>
+    <p>I had this issue on my Dell Precision M3800 laptop with both Ubuntu 14.04 and Ubuntu 16.04 and even though I tried
+      a number of solutions I googled:
+      <ul>
+        <li><a href='http://askubuntu.com/q/230670'>uninstalling apport</a> as I was getting the same message)</li>
+        <li>adding a script (<code>~/environment/turnWifiOffBeforeSuspendOnAfterResume.sh</code>) <a href='http://askubuntu.com/q/279584'>to disable the wifi before suspend and re-enable it after resume</a> 
+        </li>
+      </ul>
+      &hellip; no remedy was found.</p>
+    <p>In the end what solved the issue was updating the kernel to:
+      <pre>
+$ uname -r
+4.6.7-040607-generic
+      </pre>
+    </p>
+    <p>To update the kernel I followed instructions found <a href='http://ubuntuhandbook.org/index.php/2016/05/install-linux-kernel-4-6-ubuntu-16-04/'>here</a> and downloaded the kernel packages from <a href='http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6.7/'>here</a>.
+    </p>
+    <p>Specifically, the following commands were executed:
+      <pre>
+$ cd /tmp/
+$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6.7/linux-headers-4.6.7-040607_4.6.7-040607.201608160432_all.deb
+$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6.7/linux-headers-4.6.7-040607-generic_4.6.7-040607.201608160432_amd64.deb
+$ wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6.7/linux-image-4.6.7-040607-generic_4.6.7-040607.201608160432_amd64.deb
+$ sudo dpkg -i *.deb
+      </pre>
+      &hellip; followed by a reboot.
+    </p>
+    <p>After upgrading the kernel I have done approximately 10 suspend / resume cycles and it seems to work.</p>
+    <p>I have documented my case as a comment to <a href='https://bugzilla.redhat.com/show_bug.cgi?id=1303431'>this bug report</a>
+      
+      and <a href='http://en.community.dell.com/support-forums/laptop/f/3518/t/19618823'>here</a> as well (my post to the last link pending
+      moderator approval as of the time of this writing).</p>
+    <p><b>NB:</b>
+      At the time of this writing, in addition to upgrading the kernel I have also kept the <tt>~/environment/turnWifiOffBeforeSuspendOnAfterResume</tt> script mentioned
+      above; I might try to remove it in the near future to establish that the kernel upgrade alone is sufficient to fix the problem and that
+      disabling the wifi was tangential (though at the moment am not yet 100% convinced).
+    </p>
+  </body>
+</html>
