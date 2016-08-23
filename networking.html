@@ -8,11 +8,19 @@
       <li>how to enable / disable wireless from the command line</li>
       <a href='http://askubuntu.com/a/597131/89663'>source</a>
       <p>
+        <b>Ubuntu 14.04:</b>
         <pre>
 nmcli nm wifi off
 nmcli nm wifi on
         </pre>
       </p>
+      <p>
+        <b>Ubuntu 16.04:</b>
+        <pre>
+nmcli r wifi off
+nmcli r wifi on
+        </pre>
+      </p>      
       <li><a href='./networking.html.files/double-ssh-tunnel.html'>do a double (two spans) SSH tunnel between two machines (with a third machine sitting in the middle)</a></li>
       <li>bind to a port, continuously, and print on standard out whatever gets sent to that port</li>
       Use the <b>Netcat</b> tool (abbreviation: <b>nc</b>) with the <tt>-k</tt> option as in (e.g. to bind
