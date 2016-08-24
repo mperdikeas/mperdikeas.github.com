@@ -11,6 +11,15 @@
 </head>
 <body>
   <ol reversed>
+    <li>check BIOS version command line</li>
+    <a href='https://wiki.ubuntu.com/DellBIOS'>source</a>
+    <pre>sudo dmidecode -s bios-version</pre>
+    <p>
+    The current BIOS release date can be obtained by invoking:
+    <pre>
+    sudo dmidecode -s bios-release-date
+    </pre>
+    </p>
     <li>how to install Ubuntu from a USB flash drive in a Dell Precision laptop</li>
 <p>
   I basically prepared a USB flash drive with the ISO image of Ubuntu 14.04 LTS using <a href='http://askubuntu.com/a/460183'>unetbootin</a>:
