@@ -8,6 +8,8 @@
 Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.
 
   <ul>
+    <li><a href='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</a></li>
+    <li><a href='#invariance-covariance-contravariance'>invariance, covariance and contravariance</a></li>
     <li><a href='#type-system-concepts'>various type-system concepts</a></li>
     <li><a href='wise-technology.html.files/data-vs-code.html'>on the data versus code dichotomy</a></li>
     <li><a href="#on-naming-things">On naming things</a></li>
@@ -27,6 +29,36 @@ Wise sayings on software subjects that can be applicable in deliverables, presen
 <br/>
 <br/>
 
+
+<h2 name='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</h2>
+<ul>
+  <li>the object-oriented inheritance paradigm is broken</li>
+  <li>if you must use it, do not use inheritance (<i>is-a</i> relationships) when the
+    derived class restricts the freedom of the base class. So a <i>Monkey</i> is
+    an <i>Animal</i> but a <i>Circle</i> is <b>not</b> an <i>Ellipse</i>, a <i>Square</i> is <b>not</b>
+    a <i>Rectangle</i> and a <i>Prisoner</i> is <b>not</b> a <i>Person</i>. Given that in the
+    (pure) realm of Geometry a Circle is most assuredly an Ellipse and a Square is most
+    assuredly a Rectangle this reinforces the previous point.
+    <li>a more constructive takeaway is that mutability messes things up.</li>
+</ul>
+<a name='invariance-covariance-contravariance'><h2>invariance, covariance and contravariance</h2></a>
+<p>
+  Let <tt>f</tt> be a type transformation and let <tt>S</tt> (super) and <tt>D</tt> be types.
+  Further, let <tt>&le;</tt> be the subclass relationship such that <tt>D &le; S</tt> signifies that the derived
+  type <tt>D</tt> is a subtype of the <tt>S</tt> type.
+</p>
+<p>
+  Given the above definitions, we say that the transformation <tt>f</tt> is:
+  <dl>
+    <dt>invariant</dt><dd>when <tt>D &le; S</tt> does <b>not</b> imply that <tt>f(D) &le; T(S)</tt></dd>
+    <dt>covariant</dt><dd>when <tt>D &le; S</tt> <b>does</b> imply that <tt>f(D) &le; T(S)</tt></dd>
+    <dt>contravariant</dt><dd>when <tt>D &le; S</tt> <b>does</b> imply that <tt>f(S) &le; T(D)</tt></dd>    
+  </dl>
+</p>
+<p>
+  For a contravariance example in Java see <a href='http://stackoverflow.com/a/2502972/274677'>here</a>. <br/>
+  For invariance and covariance see my playground project <a href='https://github.com/mperdikeas/playground/tree/master/java/exploring-invariance-and-contravariance'>here</a>.
+</p>
 <a name='type-system-concepts'><h2>various type-system concepts</h2>
 <ul>
   <li>Static type checking</li>
@@ -51,11 +83,13 @@ Wise sayings on software subjects that can be applicable in deliverables, presen
 
 <a name="on-naming-things"/><h2>On naming things</h2>
 There is a practical consideration worth keeping in mind with names: they distinguish variables, functions and classes from each other.
+As somebody said:
+<blockquote>
 I found One Hundred Years of Solitude virtually incomprehensible because it features an enormous cast of characters whose names are all similar.
 There is Jos&eacute; Arcadio Buend&iacute;a, Jos&eacute; Arcadio, Arcadio, Aureliano Jos&eacute;, 17 (!) other characters named Aureliano, Jos&eacute; Arcadio Segundo and Jos&eacute; Arcadio II (who is not Segundo),
 Aureliano Buend&iacute;a, Aureliano Segundo, Aureliano Babilonia, Aureliano II (again, different dude from Segundo), and Aureliano III.
 Also Ursula Iguaran, Amaranta Ursula, and Amaranta.
-
+</blockquote>
 <a name="jaxb-unreliable"/><h2>Why JAXB is an unreliable technology</h2>
 This unresponded, un-acknowledged bug report of mine from more than two (2) years ago should suffice to convince
 all impartial observers: <a href='https://java.net/jira/browse/JAXB-965'>JIRA</a>.
