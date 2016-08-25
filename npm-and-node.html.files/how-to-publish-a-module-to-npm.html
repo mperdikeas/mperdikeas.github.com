@@ -36,8 +36,15 @@
           <pre>
 npm install . -g
           </pre>
+          <p>To verify the local-global installation do a:
+            <pre>
+npm list -g --depth 0
+            </pre>
+            Alternatively (and to also allow some REPL-type testing), <tt>cd</tt> to some other directory, open a repl (<tt>node</tt> or <tt>nodejs</tt>)
+            and <tt>require</tt> your package to test its newly added functionality.
+          </p>
           <p>
-            However, after the initial local global installation you will invariably encounter bugs that you will have to
+            &hellip; however, after the initial local-global installation you will invariably encounter bugs that you will have to
             fix (locally again). After each fix you should do (from the root of your project):
             <pre>
 npm run build && npm install . -g
@@ -47,17 +54,28 @@ npm run build && npm install . -g
             During these (local) iterations (that don't get published to the public <b>npm</b> repository) you
             don't need to update the version in <tt>package.json</tt>.
           </p>
-          <p>
-            To test, simply <tt>cd</tt> to some other dir, open a repl (<tt>node</tt> or <tt>nodejs</tt>)
-            and <tt>require</tt> your package to test its newly added functionality.
+          <p><b>NB:</b>To ensure that the package you installed locally-globally is
+            visible to a <tt>Node</tt> REPL ensure that the <tt>main</tt> property
+            in <tt>package.json</tt>
+            is properly set to the location of the compiled (if you are
+            using <tt>Babel</tt>) sources. E.g. I had in my
+            <tt>package.json</tt> <code>"main": "mul.js"</code> which didn't work until
+            I changed it to: <code>"main": "lib/mul.js"</code>. This was necessary as my
+            compiled code resided under <tt>lib/</tt> as per the build line (again in <tt>package.json</tt>):
+<code>"build"      : "babel src --out-dir lib --source-maps"</code>
+          </p>            
+          <p><b>NB2:</b> I have encountered cases where, even though the module was
+            locally installed in the
+            global location, it was still not visible to <tt>Webpack</tt> and I had to
+            do an additional <tt>npm link</tt>.
+            See <a href='http://stackoverflow.com/q/38188087/274677'>this SO question of
+            mine</a>.
           </p>
-          <p><b>NB:</b> I have encountered cases where even though the module was locally installed in the
-            global location, it was still not visible and I had to do an additional <tt>npm link</tt>.
-            See <a href='http://stackoverflow.com/q/38188087/274677'>this SO question of mine</a>.
-          </p>
           <p>
-            At the end of a number of such iterations you are now able to publish to <b>npm</b>.
-            Before you do that however, remember to update the version in <tt>package.json</tt>
+            At the end of a number of such iterations you are now able to publish
+            to <b>npm</b>.
+            Before you do that however, remember to update the version
+            in <tt>package.json</tt>
             respecting <a href='http://semver.org/'>semver</a>.<br/>
             Once this is done do:
             <pre>
