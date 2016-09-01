@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+  </style>
+  <body>
+    <h1><tt>java.lang.NoClassDefFoundError: junit/framework/JUnit4TestAdapterCache</tt> in Ant version &le; 1.9.4</h1>
+    <p>
+      There is apparently a <a href='https://github.com/real-logic/simple-binary-encoding/issues/96'>bug</a> in Ant for versions &le; 1.9.4 that results in the following trace when running junit tests:
+      <pre>
+junit/framework/JUnit4TestAdapterCache
+
+java.lang.NoClassDefFoundError: junit/framework/JUnit4TestAdapterCache
+at java.lang.ClassLoader.defineClass1(Native Method)
+at java.lang.ClassLoader.defineClass(ClassLoader.java:800)
+at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+at java.net.URLClassLoader.defineClass(URLClassLoader.java:449)
+at java.net.URLClassLoader.access$100(URLClassLoader.java:71)
+at java.net.URLClassLoader$1.run(URLClassLoader.java:361)
+at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+at java.security.AccessController.doPrivileged(Native Method)
+at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+at java.lang.Class.forName0(Native Method)
+at java.lang.Class.forName(Class.java:195)
+at java.net.URLClassLoader$1.run(URLClassLoader.java:366)
+at java.net.URLClassLoader$1.run(URLClassLoader.java:355)
+at java.security.AccessController.doPrivileged(Native Method)
+at java.net.URLClassLoader.findClass(URLClassLoader.java:354)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+      </pre>
+      I've verified that the bug is not present in Ant 1.9.4 and that for version 1.9.3 the bug <b>is</b> present and can be circumvented by setting <tt>fork</tt> to <tt>true</tt> in the <tt>junit</tt> task:
+      <pre>
+        &lt;junit printsummary="${junit.summary}" showoutput="${junit.output}" fork="true"&gt;
+      </pre>
+    </p>
+
+  </body>
+</html>
