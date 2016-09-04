@@ -63,8 +63,15 @@ npm run build && npm install . -g
             I changed it to: <code>"main": "lib/mul.js"</code>. This was necessary as my
             compiled code resided under <tt>lib/</tt> as per the build line (again in <tt>package.json</tt>):
 <code>"build"      : "babel src --out-dir lib --source-maps"</code>
-          </p>            
-          <p><b>NB2:</b> I have encountered cases where, even though the module was
+          </p>
+          <p><b>NB2:</b>
+            For the locally-globally test to succeed you need to ensure that your <code>$NODE_PATH</code> environment variable points to the location of the local-globally installed modules.
+            E.g. in one case I had to add the following to my <code>.bashrc</code>:
+            <pre>
+              export NODE_PATH=$NODE_PATH:~/.node_modules_global/lib/node_modules
+            </pre>
+          </p>
+          <p><b>NB3:</b> I have encountered cases where, even though the module was
             locally installed in the
             global location, it was still not visible to <tt>Webpack</tt> and I had to
             do an additional <tt>npm link</tt>.
