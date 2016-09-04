@@ -12,6 +12,32 @@
     </div>
     <div style='margin-top: 30px; position: absolute;'>
       <ol reversed>
+        <li>how to rebuild ELPA packages</li>
+        <p>
+          <a href='http://stackoverflow.com/a/24735377/274677'>source</a>
+        </p>
+        <p>
+          I have encountered cases where an emacs installation would behave erratically with certain key-bindings
+          not working as expected given the packages I've installed. This could be due to an Emacs upgrade and the
+          ELPA packages requiring rebuilding.
+        </p>
+        <p>Based on the source link above (and given that my <tt>package-user-dir</tt> variable was apparently
+          not set), I've used the following:
+        </p>
+        <p>
+          <code>M-: (byte-recompile-directory package-user-dir nil 'force)</code>
+        </p>
+        <p>
+          &hellip; to rebuild the packages. When I re-launced Emacs things seemed to be working more smoothly.
+        </p>
+        <p>
+          If, for some weird reason the <tt>package-user-dir</tt> variable is not set (use <tt>C-h v</tt> to inspect it)
+          you can also provide the directory as a string literal:
+          <br>
+          <code>M-: (byte-recompile-directory package-user-dir "/home/mperdikeas/.emacs.d/elpa" nil 'force)</code>
+        </p> 
+        <p>
+          BTW, <tt>M-:</tt> can be used to evaluate any expression in the minibuffer.
         <li>key information</li>
         <p>
           <code>C-h k</code>
