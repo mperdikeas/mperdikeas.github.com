@@ -5,6 +5,31 @@
   </head>
   <body>
     <ol reversed>
+      <li>How to publish a github project to GitPages</li>
+      <a href='http://stackoverflow.com/a/8446391/274677'>source</a>
+      <p>
+        The gist of the idea is to create an orphan <tt>gh-pages</tt> branch which will include
+        only the HTML pages you wish to publish, and then push it to the origin:
+        <ol>
+          <li><pre>git checkout --orphan gh-pages</pre></li>
+          <li>At this point a simple <tt>git branch</tt> fails to show that you are in the
+            new, orphan branch so do instead the following to verify you in the correct branch:
+            <pre>git symbolic-ref HEAD</pre>
+          </li>
+          <li>remove / add files &hellip;</li>
+          <li><pre>git add . -A</pre></li>
+          <li><pre>git commit -m 'gh-pages initial'</pre></li>
+          <li><pre>git push -u origin gh-pages</pre></li>
+          <li>return to master:
+            <pre>git checkout master</pre>
+          </li>
+        </ol>
+      </p>
+      <p>
+        &hellip; following the above steps it may take a couple of minutes before your site
+        becomes visible in:<br>
+        <tt>https://&lt;your-github-id&gt;.github.io/&lt;repository-name&gt;/dir/to/some/index.html</tt>
+      </p>
       <li>How to remove a git submodule</li>
       <a href="http://stackoverflow.com/a/21211232/274677">source</a>
       <pre>
