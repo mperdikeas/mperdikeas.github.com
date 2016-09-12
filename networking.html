@@ -5,6 +5,17 @@
   </head>
   <body>
     <ol reversed>
+      <li>recursively copy directory to remote machine while maintaining symlinks</li>
+      <p>
+      When recursively copying with <tt>scp</tt>, symlinks are copied rather than
+      being preserved, and so <tt>rsync</tt> has to be used instead.
+      </p>
+      <p>The following incantation has worked for me:
+        <pre>rsync -avz -e ssh esac-rawdar/ user@172.17.12.55:/home/user/ESA/RAWDAR
+        </pre>
+        &hellip; and recursively copied folder "<tt>esac-rawdar</tt>" to the remote
+        machine while preserving symlinks.
+      </p>
       <li>how to enable / disable wireless from the command line</li>
       <a href='http://askubuntu.com/a/597131/89663'>source</a>
       <p>
