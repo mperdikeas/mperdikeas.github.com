@@ -5,6 +5,19 @@
   </head>
   <body>
     <ol reversed>
+      <li>How to discover which commit deleted a file and resurrect it</li>
+      <ol>
+          <li>find the path to the file </li>
+          This is the first step in case you remember a few things about the file's name but have
+          forgotten it's full path (which is necessary for the next step):
+          <pre>git log --diff-filter=D --summary | grep delete | grep -i file-name-fragment</pre>
+          <li>find the commit that deleted the file</li>
+          This will be the last one (hence we are using the <tt>-1</tt> flag below):
+          <pre>git log -1  --stat -- full-path-to-the-file</pre>
+          <li>resurrect the file (you can also do this in some throwaway cloned repo and then copy it manually)</li>
+          To perform the resurrection use the <b>previous</b> commit than the one that deleted the file (hence the <tt>^</tt>):
+          <pre>git checkout commit-identifier^ full-path-to-file </pre>
+      </ol>
       <li>How to publish a github project to GitPages</li>
       <a href='http://stackoverflow.com/a/8446391/274677'>source</a>
       <p>
