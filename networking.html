@@ -5,6 +5,18 @@
   </head>
   <body>
     <ol reversed>
+      <li>show local ports and which processes listen on them:</li>
+      <pre>sudo lsof -P -i -n</pre>
+      More recently, I did the following to find the port an emacs daemon listens to:
+      <pre>
+ps aux | grep -i emacs | grep -v grep
+      </pre>
+      &hellip; and then (after having discovered the port number from the previous command):
+      <pre>
+$ lsof -Pan -p 32605 -i
+COMMAND   PID       USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
+emacs   32605 mperdikeas    5u  IPv4 5351989      0t0  TCP 127.0.0.1:58545 (LISTEN)
+      </pre>
       <li>recursively copy directory to remote machine while maintaining symlinks</li>
       <p>
       When recursively copying with <tt>scp</tt>, symlinks are copied rather than
@@ -199,8 +211,6 @@ Date: Tue, 04 Sep 2012 12:22:46 GMT
     <pre>
 nc -w 5 94.66.59.15 80
     </pre>
-    <li>show local ports and which processes listen on them:</li>
-    <pre>sudo lsof -P -i -n</pre>
     <li>How to mount a smbfs file system with read/write permissions</li>
     First, create the mount-point (/media/athina-prj) in the below example.</br>
     Then, obtain your userid and groupid (using <i>id</i>) and then do a:
