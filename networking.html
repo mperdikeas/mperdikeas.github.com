@@ -25,12 +25,16 @@ emacs   32605 mperdikeas    5u  IPv4 5351989      0t0  TCP 127.0.0.1:58545 (LIST
           <dt>-lu</dt><dd>listening UDP ports</dd>
           <dt>-lx</dt><dd>listening UNIX ports</dd>          
         </dl>
-        &hellip; together with the <tt>--program</tt> option one can get the PID and the name of the program listening on that port.
+        &hellip; together with the <tt>-p</tt> (<tt>--program</tt>) option one can get the PID and the name of the program listening on that port.
       </p>
       <p>For example, to find the process ids of all Emacs daemons listening on UNIX sockets I did a:
         <pre>
-netstat -lx --program | grep -i emacs
+netstat -lxp | grep -i emacs
         </pre>
+      </p>
+      <p>
+        The <tt>ss</tt> tool can also provide the same information as the last incantation with:
+        <pre>ss -lpx | grep -i emacs</pre>
       </p>
       <li>recursively copy directory to remote machine while maintaining symlinks</li>
       <p>
