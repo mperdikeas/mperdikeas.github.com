@@ -5,7 +5,7 @@
   </head>
   <body>
     <ol reversed>
-      <li>show local ports and which processes listen on them:</li>
+      <li>show local listening ports and which processes listen on them:</li>
       <pre>sudo lsof -P -i -n</pre>
       More recently, I did the following to find the port an emacs daemon listens to:
       <pre>
@@ -17,6 +17,21 @@ $ lsof -Pan -p 32605 -i
 COMMAND   PID       USER   FD   TYPE  DEVICE SIZE/OFF NODE NAME
 emacs   32605 mperdikeas    5u  IPv4 5351989      0t0  TCP 127.0.0.1:58545 (LISTEN)
       </pre>
+      <p>
+        Yet more recently, I used the <tt>netstat</tt> program which has the option
+        <tt>-l</tt> for listening sockets and can further narrow them down by type:
+        <dl>
+          <dt>-lt</dt><dd>listening TCP ports</dd>
+          <dt>-lu</dt><dd>listening UDP ports</dd>
+          <dt>-lx</dt><dd>listening UNIX ports</dd>          
+        </dl>
+        &hellip; together with the <tt>--program</tt> option one can get the PID and the name of the program listening on that port.
+      </p>
+      <p>For example, to find the process ids of all Emacs daemons listening on UNIX sockets I did a:
+        <pre>
+netstat -lx --program | grep -i emacs
+        </pre>
+      </p>
       <li>recursively copy directory to remote machine while maintaining symlinks</li>
       <p>
       When recursively copying with <tt>scp</tt>, symlinks are copied rather than
