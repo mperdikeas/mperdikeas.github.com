@@ -8,6 +8,7 @@
 Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.
 
   <ul>
+    <li><a href=''>the test pyramid</a>
     <li><a href='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</a></li>
     <li><a href='#invariance-covariance-contravariance'>invariance, covariance and contravariance</a></li>
     <li><a href='#type-system-concepts'>various type-system concepts</a></li>
@@ -29,6 +30,15 @@ Wise sayings on software subjects that can be applicable in deliverables, presen
 <br/>
 <br/>
 
+<h2 name='#the-test-pyramid'>The test pyramid</h2>
+<a href='http://martinfowler.com/bliki/TestPyramid.html'>source</a><br/>
+<p>The gist is that unit tests are fast and chep, recorded UI tests (e.g. with Selenium)
+slow, brittle and expensive. Use an intermediate layer of testing just below UI
+  (<a href='http://martinfowler.com/bliki/SubcutaneousTest.html'>subcutaneous tests</a>) to avoid having brittle UI tests:<br/>
+    <a href="wise-technology.html.files/test-pyramid.png">
+      <img height="150px" width="200px"  src="wise-technology.html.files/test-pyramid.png">
+    </a>.
+</p>
 
 <h2 name='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</h2>
 <ul>
