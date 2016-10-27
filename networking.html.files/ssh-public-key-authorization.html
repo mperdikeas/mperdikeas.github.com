@@ -8,6 +8,7 @@
   </style>
   <body>
     <h1>Get rid of the need to type-in passwords in SSH connections using SSH public key authorization</h1>
+    <a id='source' href='http://www.linuxproblem.org/art_9.html'>source</a>
     <p>
       Assuming the following machines:
       <dl>
@@ -16,13 +17,20 @@
       </dl>
       &hellip; do the following:
       <ol>
-        <li>on machine A:</li>
+        <li>on machine <b>A</b>:</li>
         If the file <code>~/.ssh/id_rsa.pub</code> does not already exist do a:
         <pre>ssh-keygen -t rsa</pre>
         &hellip; and copy the long single line that this file contains into your clipboard
-        <li>on machine B</li>
+        <li>on machine <b>B</b></li>
         Copy the line you placed into the clipboard at the end of file: <code>~/.ssh/authorized_keys</code>
         (and make sure said file is readable)
+        <li>I have also encountered cases where it was necessary to do the following in machine <b>B</b>:</li>
+          <ul>
+            <li><code>chmod chmod 700 .ssh</code></li>
+            <li><code>chmod 640 .ssh/authorized_keys</code></li>
+          </ul>
+          &hellip; this is described in the <a href='#source'>source</a>. Unless I applied
+          those permissions <tt>ssh</tt> would still ask me for a password.
       </ol>
     </p>
   </body>
