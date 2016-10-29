@@ -5,6 +5,24 @@
   </head>
   <body>
     <ol reversed>
+      <li>make <code>set</code> print only the shell variables, not the functions</li>
+      (<a href='http://unix.stackexchange.com/a/118050/24044'>source</a>)
+      <pre>(set -o posix; set)</pre>
+      <li><code>env</code> vs. <code>printenv</code> vs. <code>set</code></li>
+      <p>
+        <code>env</code> is POSIX, <code>printenv</code> isn't. Other than that,
+        in my system <code>env</code> and <code>printenv</code> yield identical output.
+      </p>
+      <p><code>set</code> however is a different beast and provides
+        more comprehensive output as it includes both shell-local variables
+        (since it's a shell builtin it can see them) and environment variables
+        which are passed on to every executed program. <code>env</code> however
+        is a program and so can only see environment variables, not shell-local
+        variables (<a href='http://stackoverflow.com/a/5657113/274677'>source</a>)
+      </p>
+      <p>BTW, the fact that <code>set</code> is a built-in can be established
+      by the fact that <code>which set</code> produces no output.</p>
+      </p>
       <li>backticks (`) vs. $()</li>
       The grave (`) was the original syntax and should not be used any more unless you want your scripts to run in old Bourne shells. Otherwise simply use:
       <ul>
