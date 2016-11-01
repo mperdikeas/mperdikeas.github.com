@@ -7,7 +7,7 @@
    h1 {font-size: 130%;}
   </style>
   <body>
-    <h1>Get rid of the need to type-in passwords in SSH connections using SSH public key authorization</h1>
+    <h1>Get rid of the need to type-in passwords in SSH connections using SSH public key authentication</h1>
     <a id='source' href='http://www.linuxproblem.org/art_9.html'>source</a>
     <p>
       Assuming the following machines:
@@ -32,6 +32,10 @@
           &hellip; this is described in the <a href='#source'>source</a>. Unless I applied
           those permissions <tt>ssh</tt> would still ask me for a password.
       </ol>
+      <p>
+        <b>NB:</b>I have also encountered cases where public authentication (referred to
+        by the sysadmin people as "passwordless SSH") was disabled for security reasons.
+      </p>
     </p>
   </body>
 </html>
