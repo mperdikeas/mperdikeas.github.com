@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+  </style>
+  <body>
+    <h1>How to open a shell through two successive SSH hops where SSH public key authentication is possible only on the first hop</a></li></h1>
+    <a href='http://unix.stackexchange.com/q/320412/24044'>source 1</a><br/>
+    <a href='http://superuser.com/q/606252/138891'>source 2</a>
+    <p>
+      Imagine you have to go through an intermediate machine
+      (let's call it <i>$gateway</i>) to reach a <i>$server</i>.<br/>
+      Your workflow would be:
+      <pre>
+  ssh $gateway (supply password manually)
+  ssh $server (supply password manually)
+      </pre>
+    </p>
+    <p>
+      If you are able to configure SSH public key authentication on the hop to the <i>$gateway</i> but <b>not</b> on the second hop to the <i>$server</i>, the best you would be able to do is:
+      <pre>
+  ssh $gateway (no password necessary)
+  ssh $server (supply password manually)
+      </pre>
+      &hellip; or at most (with a single incantation):
+      <pre>
+    ssh -t $gateway ssh $server
+      </pre>
+      &hellip; where, however you'd still be prompted to manually
+      enter a password.
+    </p>
+    <p>
+      Further assume that you are unable to install <code>sshpass</code> or some
+      other software on the <i>$gateway</i> machine.
+    </p>
+    <p>
+      Fortunately there is an incantation that will allow you to solve the connundrum
+      that only requires <code>sshpass</code> to be install on your client machine
+      (i.e. from where you make the first hop to <i>$server</i>).
+      <pre>
+sshpass -p $password ssh -oProxyCommand="ssh -W %h:%p $gateway" $server
+      </pre>
+      In the above incantation:
+      <ul>
+        <li>replace <i>$password</i>, <i>$gateway</i> and <i>$server</i> with the correct values</li>
+        <li>leave <tt>%h:%p</tt> as it stands (those aren't placeholders)</li>
+      </ul>
+      <b>NB:</b>the incantation assumes that your username is the same
+      in the client machine, <i>$gateway</i> and <i>$server</i>.
+      Should this be not the case, then use <i>username@$gateway</i> as
+      appropriate.
+    </p>
+  </body>
+</html>
