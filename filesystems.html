@@ -5,6 +5,11 @@
   </head>
   <body>
     <ol reversed>
+      <li>how to find the filesystem that a given path is mounted on</li>
+      <pre>df -P -T /some/path</pre>
+
+      If you just want the <em>type</em> of the filesystem:
+      <pre>df -P -T /some/path | tail -n +2 | awk '{print $2}'</pre>
       <li>how to mount a new disk</li>
       <ol>
         <li>Recognize the new device</li>
