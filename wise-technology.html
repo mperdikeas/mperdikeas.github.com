@@ -1,14 +1,23 @@
 <html>
-<head>
-<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <style>
+     h1 {
+       font-size: 130%;
+     }
+     h2 {
+       font-size: 110%;
+       }
+    </style>
+  </head>
 <body>
 
-Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.
+<h1>Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.</h1>
 
   <ul>
-    <li><a href=''>the test pyramid</a>
+    <li><a href='#web-apps-typology'>Web applications typology</a></li>
+    <li><a href='#the-test-pyramid'>the test pyramid</a>
     <li><a href='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</a></li>
     <li><a href='#invariance-covariance-contravariance'>invariance, covariance and contravariance</a></li>
     <li><a href='#type-system-concepts'>various type-system concepts</a></li>
@@ -30,7 +39,22 @@ Wise sayings on software subjects that can be applicable in deliverables, presen
 <br/>
 <br/>
 
-<h2 name='#the-test-pyramid'>The test pyramid</h2>
+<h2 id='web-apps-typology'>Web applications typology</h2>
+<a href='http://docs.oracle.com/javaee/6/tutorial/doc/bnadr.html'>source</a>
+<p>What follows is a nice, consise and accurate typology definition of otherwise
+  well-known concepts:
+</p>
+
+<p>
+  A web application is a dynamic extension of a web or application server. Web applications are of the following types:
+  <dl>
+
+    <li><dt>Presentation-oriented</dt><dd>A presentation-oriented web application generates interactive web pages containing various types of markup language (HTML, XHTML, XML, and so on) and dynamic content in response to requests.<</dd></li>
+
+    <li><dt>Service-oriented</dt><dd>A service-oriented web application implements the endpoint of a web service. Presentation-oriented applications are often clients of service-oriented web applications.</dd></li>
+  </dl>
+</p>
+<h2 id='the-test-pyramid'>The test pyramid</h2>
 <a href='http://martinfowler.com/bliki/TestPyramid.html'>source</a><br/>
 <p>The gist is that unit tests are fast and chep, recorded UI tests (e.g. with Selenium)
 slow, brittle and expensive. Use an intermediate layer of testing just below UI
@@ -40,7 +64,7 @@ slow, brittle and expensive. Use an intermediate layer of testing just below UI
     </a>.
 </p>
 
-<h2 name='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</h2>
+<h2 id='gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</h2>
 <ul>
   <li>the object-oriented inheritance paradigm is broken</li>
   <li>if you must use it, do not use inheritance (<i>is-a</i> relationships) when the
