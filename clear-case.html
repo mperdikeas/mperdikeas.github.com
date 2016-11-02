@@ -5,7 +5,18 @@
   </head>
   <body>
     <ol reversed>
-      <li>how to create a snapshot view in ClearCase</li>
+      <li>how to delete a view in ClearCase</li>
+      I have only tried this with a snapshot view but I believe it works with dynamic views
+      as well:
+      <pre>
+ct rmview -f -tag mperdike_dev_viewsnap
+      </pre>
+      <p>
+      From what I observed this deletes the (server-side) "view storage directory" that's provided with
+      the <code>-vws</code> in the <code>ct mkview</code> invocation for a <a href='#create-snapshot-view'>snapshot view</a>.
+      I believe I had to delete the "snapshot view directory" (in my local file system) manually.
+      </p>
+       <li id='create-snapshot-view'>how to create a snapshot view in ClearCase</li>
       Here's the incantation I recently used:
       <pre>
 ct mkview -sna -tag mperdike_dev_viewsnap -vws /data/VIEWS/mperdike_dev_viewsnap.vws -host serverhostname -hpath /data/VIEWS/mperdike_dev_viewsnap.vws -gpath /data/VIEWS/mperdike_dev_viewsnap.vws /export/mperdike/cc-snap-views/mperdike-dev-viewsnap
@@ -15,11 +26,11 @@ ct mkview -sna -tag mperdike_dev_viewsnap -vws /data/VIEWS/mperdike_dev_viewsnap
         <li><dt><code>-sna</code></dt><dd>this flag triggers the creation of a snapshot view (as opposed to a dynamic view)</dd>
         <li>the <code>-tag</code>, <code>-hpath</code>, <code>-gpath</code> arguments have the same meaning as in the creation of a <a href='#create-dynamic-view'>dynamic view</a></li>
         <li><dt><code>-vws</code></dt><dd>this is an argument that uniquely applies in the case of the snapshot views only.
-          It provides the "view storage location" on the server. In the case of dynamic views the same information is passed
+          It provides the "view storage directory" on the server. In the case of dynamic views the same information is passed
           not through an optional argument but as the mandatory last argument (described in the documentation as "dynamic-view-storage-pname"
           or "dynamic-view-pname")</dd></li>
         <li>the last argument (<tt>/export/mperdike/cc-snap-views/mperdike-dev-viewsnap</tt> in the above incantation) is the location on my local filesystem where
-          the snapshot view will be created.</li>
+          the snapshot view will be created. I have seen this being referred in the documentation as "snapshot view directory"</li>
       </ul>
       <p>
       Following the creation of the snapshot view, it is of course empty and one has to edit the config spec. In my case, I already had a dynamic view and just
