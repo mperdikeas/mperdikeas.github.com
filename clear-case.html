@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol reversed>
+      <li>how to create a snapshot view in ClearCase</li>
+      Here's the incantation I recently used:
+      <pre>
+ct mkview -sna -tag mperdike_dev_viewsnap -vws /data/VIEWS/mperdike_dev_viewsnap.vws -host serverhostname -hpath /data/VIEWS/mperdike_dev_viewsnap.vws -gpath /data/VIEWS/mperdike_dev_viewsnap.vws /export/mperdike/cc-snap-views/mperdike-dev-viewsnap
+      </pre>
+      Here's my understanding:
+      <ul>
+        <li><dt><code>-sna</code></dt><dd>this flag triggers the creation of a snapshot view (as opposed to a dynamic view)</dd>
+        <li>the <code>-tag</code>, <code>-hpath</code>, <code>-gpath</code> arguments have the same meaning as in the creation of a <a href='#create-dynamic-view'>dynamic view</a></li>
+        <li><dt><code>-vws</code></dt><dd>this is an argument that uniquely applies in the case of the snapshot views only.
+          It provides the "view storage location" on the server. In the case of dynamic views the same information is passed
+          not through an optional argument but as the mandatory last argument (described in the documentation as "dynamic-view-storage-pname"
+          or "dynamic-view-pname")</dd></li>
+        <li>the last argument (<tt>/export/mperdike/cc-snap-views/mperdike-dev-viewsnap</tt> in the above incantation) is the location on my local filesystem where
+          the snapshot view will be created.</li>
+      </ul>
+      <p>
+      Following the creation of the snapshot view, it is of course empty and one has to edit the config spec. In my case, I already had a dynamic view and just
+      wanted the snapshot view to mirror the dynamic view, so I did a:
+      <code>ct catcs</code> in the dynamic view and then used <code>ct edcs</code> in the snapshot view to copy
+      (verbatim) all rules (selection rules) that appeared in the dynamic view config spec.
+      Following that, I added (in my case) a single load rule specifying the vob I wanted to load.
+      </p>
+      <p>
+        So in my case, the dynamic view config spec is:
+        <pre>
+$ ct catcs
+element * CHECKEDOUT
+element src/db/... .../dbdev_br/LATEST
+element * /main/LATEST -mkbranch dbdev_br
+        </pre>
+        &hellip; whereas the snapshot view config spec is:
+        <pre>
+$ ct catcs
+element * CHECKEDOUT
+element src/db/... .../dbdev_br/LATEST
+element * /main/LATEST -mkbranch dbdev_br
+load /vobs/ASC_DB_ADMIN/
+        </pre>
+      </p>
+      <p>
+        Once the snapshot view's config spec was saved, stuff started to get downloaded. I noticed that in addition to
+        the vob I specified some additional ones were downloaded (presumably due to some dependency?).
+      </p>
+      </li>
+      <li id='create-dynamic-view'>how to create a dynamic view in ClearCase</li>
+      <pre>ct mkview -tag mperdike_dev_view -host serverhostname -hpath /data/VIEWS/mperdike_dev_view.vws -gpath /data/VIEWS/mperdike_dev_view.vws /data/VIEWS/mperdike_dev_view.vws</pre>
+      Here's my understanding:
+      <ul>
+        <li><dt><code>-host</code></dt><dd>the <code>-host</code> argument should provide the server where CC runs</dd></li>
+        <li><dt><code>-tag</code></dt><dd>the <code>-tag</code> argument provides the view tag (i.e. a friendly name)</dd></li>
+        <li>the <code>-hpath</code> and <code>-gpath</code> arguments as well as the last mandatory parameter take their names
+          (as a convention I guess) from the <code>-tag</code> argument and basically specify the view storage location on the server.
+          On my machine the <code>/data/VIEWS</code> directory is mounted on an NFS filesystem:
+          <pre>
+$ df -P -T /data/VIEWS | tail -n +2 | awk '{print $2}'
+nfs
+          </pre></li>
+      </ul>
+      <li>common helpful aliases for ClearCase</li>
+      <pre>
+alias ct=cleartool
+alias ci=checkin
+alias co=checkout
+alias uco='uncheckout'
+alias xcc='setenv LANG en_US; xclearcase &'
+alias cmake='clearmake -C gnu MAKE=clearmake UIROOT=/vobs/ASC_BUILD/src'
+alias ctmv='ct setview -exec "newgrp ccase" mperdike_dev_view'
+      </pre>
+      <p>Regarding the last of the above aliases (<tt>ctmv</tt>), it seems there is no actual need
+        to use <tt>setview</tt>. <tt>setview</tt> spawns a second shell and you are expected
+        to navigate to, e.g. <tt>/vobs/ASC_DB_ADMIN</tt> to do your work. Instead, one can
+        simply navigate to (in my case) <tt>/view/mperdike_dev_view/vobs/ASC_DB_ADMIN</tt> and have access
+        to the exact same information without having to spawn a second shell ontop of the
+        existing one (which can cause problems). See <a href='http://stackoverflow.com/q/40347421/274677'>this
+        relevant SO question</a>.
+      </p>
+      <p><b>NB:</b> you will notice that the <tt>ctmv</tt> alias above sets the group as well.
+        As such, when one navigates directly to <tt>/view/view_tag_name/vobs/ASC_DB_ADMIN</tt>
+        directory the group has to be properly set (with <code>newgrp ccase</code>)
+        otherwise some common check-out / check-in commands won't work.
+      </p>
+    </ol>
+  </body>
+</html>
