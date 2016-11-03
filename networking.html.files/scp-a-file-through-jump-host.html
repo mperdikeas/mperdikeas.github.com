@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+  </style>
+  <body>
+    <h1>how to <code>scp</code> a file through an intermediate host (a.k.a. jump host)</h1>
+    <a href='http://superuser.com/a/276549/138891'>source</a>
+    <p>
+      The situation is the following:<br/>
+      <tt>A -- ssh --> B -- ssh --> C</tt>
+      <br/>
+      &hellip; where <tt>A</tt> is my client machine, <tt>B</tt> is
+      the jump host and <tt>C</tt> is the final endpoint of the copy
+      (either source or destination depending on the direction
+      &mdash; the other endpoint being <tt>A</tt>)
+    </p>
+    <p>
+      I 've used the following option from the source:
+      <pre>
+$ scp -oProxyCommand="ssh -W %h:%p B" thefile C:destination
+      </pre>
+      &hellip; and as a matter of fact reversed the copy direction (e.g. I copied from system C to system A).
+      I.e. the incantation I used was:
+      <pre>
+A$ scp -oProxyCommand = "ssh -W %h:%p username@B" username@C:/some/path/on/macine/C some/path/on/machine/A
+      </pre>
+    </p>
+  </body>
+</html>

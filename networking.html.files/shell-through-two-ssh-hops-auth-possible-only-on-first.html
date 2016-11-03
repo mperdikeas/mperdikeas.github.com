@@ -7,12 +7,12 @@
    h1 {font-size: 130%;}
   </style>
   <body>
-    <h1>How to open a shell through two successive SSH hops where SSH public key authentication is possible only on the first hop</a></li></h1>
+    <h1>How to open a shell through two successive SSH hops where SSH public key authentication is possible only on the first hop</h1>
     <a href='http://unix.stackexchange.com/q/320412/24044'>source 1</a><br/>
     <a href='http://superuser.com/q/606252/138891'>source 2</a>
     <p>
       Imagine you have to go through an intermediate machine
-      (let's call it <i>$gateway</i>) to reach a <i>$server</i>.<br/>
+      (let's call it <i>$gateway</i> &mdash; sometimes the term "jump host" or "intermediate host" is also used) to reach a <i>$server</i>.<br/>
       Your workflow would be:
       <pre>
   ssh $gateway (supply password manually)
