@@ -5,6 +5,26 @@
   </head>
   <body>
     <ol reversed>
+      <li>debugging the dreaded "Severe: Error ListenerStart" and "Severe: Error FilterStart Tomcat Error Messages</li>
+      <a href='http://blog.trifork.com/2011/03/18/debugging-the-dreaded-severe-error-listenerstart-and-severe-error-filterstart-tomcat-error-messages/'>source</a>
+      <p>
+        Just a quick post that I hope might benefit others. If you have been developing web applications on Tomcat for a while you have likely come the two error messages mentioned in the title.
+      </p>
+      <ul>
+        <li><dt><tt>SEVERE: Error listenerStart</tt></dt><dd> Occurs when an exception is thrown in the contextInitialized method of a ServletContextListener</dd></li>
+        <li><dt><tt> SEVERE: Error filterStart</tt></dt><dd> Occurs when an exception is thrown in the init method of a Filter</dd></li>
+      </ul>
+      <p>
+        Unfortunately by default, Tomcat won't provide you with any details about the cause of the error. Infact it wont even tell you which filter or listener is failing. This can be big problem in applications of significant size that have many filters and listeners configured. Fortunately there is a solution. In your webapplication's <tt>WEB-INF/classes</tt> folder you can create a <tt>logging.properties</tt> file with the following contents
+      </p>
+      <pre>
+org.apache.catalina.core.ContainerBase.[Catalina].level = INFO
+org.apache.catalina.core.ContainerBase.[Catalina].handlers = java.util.logging.ConsoleHandler
+      </pre>
+      <p>
+        Now you will be presented with the stacktrace
+      </p>
+
       <li>Tomcat support JSP / EL / Java versions per version / release</li>
       <a href='http://tomcat.apache.org/whichversion.html'>Apache Tomcat versions support matrix</a>
       <p>
