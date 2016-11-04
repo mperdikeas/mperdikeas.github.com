@@ -11,6 +11,29 @@
 </head>
 <body>
   <ol reversed>
+    <li>finding which processes cause the disk to be grinding</li>
+    <p>
+      I had noticed by hard disk light flashing a lot so recently I used:
+      <pre>
+$ sync
+$ echo 1 > /proc/sys/vm/block_dump
+$ dmesg -c | grep '/dev/sda'
+      </pre>
+      &hellip; don't forget to change the value of <tt>/proc/sys/vm/block_dump</tt> back to <tt>0</tt>
+      when you're done.
+    </p>
+    <p>
+      I've also used <pre>iotop --only</pre> (the <tt>--only</tt> option results in much cleaner
+      output). It seems that in my case the culprit was <tt>jbd2</tt> which I killed with:
+      <pre>
+pkill gvfsd-metadata
+rm -rf .local/share/gvfs-metadata
+      </pre>
+    </p>
+    <p>
+      Sources: <a href='http://unix.stackexchange.com/a/140261/24044'>here</a> and
+      <a href='http://askubuntu.com/a/486713/89663'>here</a>.
+    </p>
     <li>change the default login shell in RHEL</li>
     Use either <tt>ypchsh</tt> or <tt>chsh</tt>.
     <li>how to install Ubuntu from a USB flash drive in a Dell Precision laptop</li>
