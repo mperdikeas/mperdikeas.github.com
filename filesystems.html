@@ -5,6 +5,19 @@
   </head>
   <body>
     <ol reversed>
+      <li>how to find information on how many times a disk had gone through a shutdown / powerup cycle</li>
+      <pre>
+sudo apt-get install smartmontools
+sudo sudo smartctl -a /dev/sda1
+      </pre>
+      <p>The <tt>Start_Stop_Count</tt> and <tt>Power_Cycle_Count</tt> seem relevant.
+        In my T60 ThinkPad (6 years old) they have a value around 2300.
+      </p>
+      <p>Alternatively, you can grep for all pertinent <tt>Old_age</tt> metrics:
+        <pre>
+sudo sudo smartctl -a /dev/sda1 | grep -i old_age
+        </pre>
+      </p>
       <li>how to find the filesystem that a given path is mounted on</li>
       <pre>df -P -T /some/path</pre>
 

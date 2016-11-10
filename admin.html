@@ -476,9 +476,14 @@ echo "a"> a && stat a | head -2
       I.e. some Unix utilities use the term "block" without any reference to the file system block size.
       <br/>
       More <a href="http://unix.stackexchange.com/a/14411/24044">here</a>.
-      <li>show file systems, their type and mount points</li>
+      <li>show file systems, their type, UUIDs and mount points</li>
+      For file systems types and mount points:
       <pre>
 df -T
+      </pre>
+      For file systems UUIDs and types:
+      <pre>
+sudo blkid
       </pre>
       <li>show the configuration for automatic file system mounting</li>
       <pre>
