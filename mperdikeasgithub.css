@@ -7,6 +7,7 @@
 
 body {
     background: #ffffff;
+    width: 60em;
 }
 
 pre {
@@ -87,12 +88,12 @@ ol.pink-circles > li:before {
     position: absolute;
     left: -28;
 
-    font: bold 18px sans-serif;
+    font: bold 14px sans-serif;
     text-align: center;
     color: #fff;
-    line-height: 28px;
+    line-height: 23px;
 
-    width: 28px; height: 28px;
+    width: 23px; height: 23px;
     background: #f0f;
 
     -moz-border-radius: 999px;

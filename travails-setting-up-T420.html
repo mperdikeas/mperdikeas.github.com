@@ -15,10 +15,10 @@
       with Ubuntu 16.04 Xenial Xerus (Desktop edition, 64 bit).
       It was purchased on 10 November 2016 from the Microcenter at Cambridge MA for 330 USD. The store
       website listed the product with
-      <a href="travails-setting-up-T240.html.files/Lenovo-ThinkPad-T420-14-Laptop-Refurbished-Black-017046-Micro-Center.pdf">
+      <a href="travails-setting-up-T420.html.files/Lenovo-ThinkPad-T420-14-Laptop-Refurbished-Black-017046-Micro-Center.pdf">
         these hardware specifications</a>
       &hellip; whereas Lenovo Support itself provides
-      <a href="travails-setting-up-T240.html.files/Detailed-specifications-ThinkPad-T420-Lenovo-Support.pdf">
+      <a href="travails-setting-up-T420.html.files/Detailed-specifications-ThinkPad-T420-Lenovo-Support.pdf">
         these rather more detailed hardware specifications</a>.
     </p>
     <p>
@@ -36,14 +36,18 @@
         I had to <a href="http://askubuntu.com/q/848418/89663">ask</a> to find out.
         </li>
       <li><h2>create an Ubuntu 16.04 live USB flash drive using <a href='https://unetbootin.github.io/'>UNetbootin</a></h2>
-USB Creator is another option but see in <a href="admin.html.files/ubuntu-bootable-usb-flash.html">this note</a> why you're better off using UNetbootin instead.
+        <tt>USB Creator</tt> is another option but see in <a href="admin.html.files/ubuntu-bootable-usb-flash.html">this note</a> why you're better off using <tt>UNetbootin</tt> instead.<br/>
+        If, after you've created a couple of live Ubuntu USB flash drives, you are unsure which version is each one do a:
+        <pre>
+$cat /media/usb-disk/.disk/info 
+</pre> &hellip; to find out (<a href='http://askubuntu.com/q/665627'>source</a>).
       </li>
       <li><h2>perform a memory test (before wiping clean the disk in case you have to return it)</h2>
         Assuming you created your Live Ubuntu USB flash drive using UNetbootin &mdash; and that you've read
         <a href="admin.html.files/ubuntu-bootable-usb-flash.html#caveat">the caveat on this note</a> &mdash; you should be able to run
         the memory test diagnostic. If all goes well you should see a screen similar to this:<br/>
-        <a href="travails-setting-up-T240.html.files/memory-test-good.jpg">
-          <img height="200px" width="300px" src="travails-setting-up-T240.html.files/memory-test-good.jpg">
+        <a href="travails-setting-up-T420.html.files/memory-test-good.jpg">
+          <img height="200px" width="300px" src="travails-setting-up-T420.html.files/memory-test-good.jpg">
         </a>
         <br/>&hellip; once the "Pass" variable reaches past 100% it will go back to 0% and repeat the test (at which point you
         can press <kbd>ESC</kbd> to exit the test).
@@ -116,8 +120,8 @@ grep -E "(vmx|svm)" --color=always /proc/cpuinfo</pre>
           <pre>$ sudo smartctl -a /dev/sda1 | grep -i old_age</pre>
         </p>
         <p>A more visually reassuring output can be produced with the <tt>disks</tt> Unity program (use as <code>gnome-disks</code> from a terimal):<br/>
-          <a href="travails-setting-up-T240.html.files/disks-smart-data.png">
-            <img height="200px" width="300px" src="travails-setting-up-T240.html.files/disks-smart-data.png"/>
+          <a href="travails-setting-up-T420.html.files/disks-smart-data.png">
+            <img height="200px" width="300px" src="travails-setting-up-T420.html.files/disks-smart-data.png"/>
           </a>
 
         </p>
@@ -128,6 +132,40 @@ grep -E "(vmx|svm)" --color=always /proc/cpuinfo</pre>
       <li><h2>research for other useful hardware diagnostics to run (e.g. provided by the manufacturer)</h2>
         I asked a <a href="http://unix.stackexchange.com/q/322847/24044">question</a> about that but didn't do anything
         in addition to the above checks.
+      </li>
+      <li><h2>install additional drivers (from Ubuntu Software Center) and upgrade kernel</h2>
+        <p>
+          I noticed some very mild flickering on my screen while watching youtube videos and after establishing
+          it was not Chrome-related (as Firefox exhibited the same behaviour), I decided to install additional drivers
+          and upgrade the kernel. In retrospect I don't believe these two measures alleviated the flickering (at least
+          not markedly). At any rate it is borderline imperceptible so I didn't pursue this issue much further.
+        </p>
+        <p>I install additional drivers for my Intel video graphics card (I think) using the Unity interface
+          and the options under system / software sources / additional drivers:<br/>
+          <a href="travails-setting-up-T420.html.files/additional-drivers.png">
+            <img height="120" width="500px" src="travails-setting-up-T420.html.files/additional-drivers.png">
+          </a>
+        </p>
+        <p>
+        Ubuntu 16.04 uses the 4.4 kernel. I upgraded to 4.6:
+        <pre>
+$ uname -r
+4.6.0-040600-generic</pre> &hellip;
+        by following the instructions given <a href='http://ubuntuhandbook.org/index.php/2016/05/install-linux-kernel-4-6-ubuntu-16-04/'>here</a> as follows (mutatis mutandis):
+        <pre>
+cd /tmp/
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6-yakkety/linux-headers-4.6.0-040600_4.6.0-040600.201605151930_all.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6-yakkety/linux-headers-4.6.0-040600-generic_4.6.0-040600.201605151930_amd64.deb
+wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6-yakkety/linux-image-4.6.0-040600-generic_4.6.0-040600.201605151930_amd64.deb
+sudo dpkg -i *.deb</pre>
+        Basically, download the packages you need from <a href='http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6-yakkety/'>here</a>
+        and install them using <code>sudo dpkg -i *.deb</code>.
+        </p>
+      </li>
+      <li><h2>check both VGA and DisplayPort video outputs</h2>
+        I connected an external monitor and verified that the system
+        works as expected with either of the two monitors or both of them turned on.
+        I used <tt>xrandr</tt> to selectively direct the output.
       </li>
       <li><h2>install git and setup my environment</h2>
 This was uneventfull.
@@ -209,6 +247,13 @@ cp build/artifact/org.apache.ivy_2.4.0.final_20161112135640.jar ~/.ant/lib/</pre
 if you fail to check out the stable <tt>2.4.0</tt> tag, then the master branch version <tt>2.5.0.alpha</tt>
 will be built.
         </p>
+      </li>
+      <li><h2>install <tt>TrueCrypt</tt> or other privacy software</h2>
+        To install <tt>TrueCrypt</tt> on Ubuntu 16.04 you also need:
+        <pre>
+sudo apt-get install dmsetup</pre>
+        <tt>dmsetup</tt> is now no standard application, so you must install it explicitly
+        (<a href='https://ubuntuforums.org/showthread.php?t=2321663'>source</a>).
       </li>
     </ol>
   </body>
