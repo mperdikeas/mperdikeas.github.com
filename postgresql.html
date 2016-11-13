@@ -1,9 +1,19 @@
 <head>
   <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
   <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style>
+   body > ol > li {
+    color:teal;
+    font-weight:bold;
+    text-decoration:underline;
+    padding-top: 30px
+   }
+
+  </style>
 </head>
 <body>
   <ol reversed>
+    <li><a href='http://serverfault.com/a/325596/139074'>why you shouldn't change the password of the <tt>postgres</tt> Linux user using <tt>sudo passwd postgres</tt></a>
     <li><a href='postgresql.html.files/install-postgresql9.5-in-Ubuntu-14.04-trusty-thar.html'>Install Postgresql 9.5 in Ubuntu 14.04 Trusty Tahr</a></li>
     <li><a href='postgresql.html.files/timstamp-with-or-without-timezone.html'>timestamps with or without timezones</a></li>
     <li>how to write recursive SQL WITH queries</li>
@@ -768,10 +778,17 @@ listen_addresses = '*'
 sudo /etc/init.d/postgresql restart
                 </pre>
                 <li>Find Postgresql version</li>
+<p>
                 Connect as an existing user to an existing database and run the "select version()" query, or from the command line:
                 <pre>
 psql -Uhr -d ab -c 'select version()'
                 </pre>
+</p>
+<p>&hellip; alternatively, if you don't know the passwords of any existing users but you have <tt>sudo</tt> privilleges, do:
+<pre>sudo -u postgres psql postgres -c 'SELECT version()' | grep PostgreSQL
+</pre>
+
+</p>
   </ol>
 
 

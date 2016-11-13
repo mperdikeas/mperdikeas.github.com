@@ -6,26 +6,30 @@
   <style>
    h1 {font-size: 130%;}
    h2 {font-size: 120%;}
+
   </style>
   <body>
-    <h1>Writeup of my setting up the Lenovo ThinkPad T420 laptop (November 2016)</h1>
+    <h1>Write-up of my setting up the Lenovo ThinkPad T420 laptop (November 2016)</h1>
     <p>
       In 11-12 November 2016 I successfully setup a newly purchased refurbished Lenovo ThinkPad T420 laptop
-      with Ubuntu 16.04 Xenial Xerus.
+      with Ubuntu 16.04 Xenial Xerus (Desktop edition, 64 bit).
       It was purchased on 10 November 2016 from the Microcenter at Cambridge MA for 330 USD. The store
       website listed the product with
       <a href="travails-setting-up-T240.html.files/Lenovo-ThinkPad-T420-14-Laptop-Refurbished-Black-017046-Micro-Center.pdf">
-        these hardware specifications.
-      </a>
+        these hardware specifications</a>
+      &hellip; whereas Lenovo Support itself provides
+      <a href="travails-setting-up-T240.html.files/Detailed-specifications-ThinkPad-T420-Lenovo-Support.pdf">
+        these rather more detailed hardware specifications</a>.
     </p>
     <p>
-      The machine came pre-installed with an accursed "operating system" (W....ws 7) from which I liberated it by wiping clean
-      the harddisk when I installed Xenial Xerus. That is, Xerus was not installed alongside the abomination but replaced it.
+      The machine came pre-installed with an accursed "operating system" (Wi...ws 7) from which I liberated it by wiping clean
+      the harddisk when I installed Xenial Xerus. That is, Xerus was not installed alongside the abomination but purged it
+      and completely replaced it.
     </p>
     <p>In what follows I am not going to describe all the different approaches, tests and paths I took / tried
       but rather I will present the streamlined series of steps (after lessons learned) that should apply for
       the next purchase</p>
-    <ol>
+    <ol class='pink-circles'>
       <li><h2>research how you enter the BIOS</h2>
         In the afore-mentioned machine <kbd>F1</kbd> takes you to the BIOS and <kbd>F12</kbd>
         directly to the boot order menu (which you should use to boot from the USB flash drive).
@@ -35,7 +39,8 @@
 USB Creator is another option but see in <a href="admin.html.files/ubuntu-bootable-usb-flash.html">this note</a> why you're better off using UNetbootin instead.
       </li>
       <li><h2>perform a memory test (before wiping clean the disk in case you have to return it)</h2>
-        Assuming you created your Live Ubuntu USB flash drive using UNetbootin you should be able to run
+        Assuming you created your Live Ubuntu USB flash drive using UNetbootin &mdash; and that you've read
+        <a href="admin.html.files/ubuntu-bootable-usb-flash.html#caveat">the caveat on this note</a> &mdash; you should be able to run
         the memory test diagnostic. If all goes well you should see a screen similar to this:<br/>
         <a href="travails-setting-up-T240.html.files/memory-test-good.jpg">
           <img height="200px" width="300px" src="travails-setting-up-T240.html.files/memory-test-good.jpg">
@@ -43,6 +48,14 @@ USB Creator is another option but see in <a href="admin.html.files/ubuntu-bootab
         <br/>&hellip; once the "Pass" variable reaches past 100% it will go back to 0% and repeat the test (at which point you
         can press <kbd>ESC</kbd> to exit the test).
         <p>Here's a relevant <a href="http://askubuntu.com/a/317292/89663">Ask Ubuntu</a> answer (to which I have commented).</p>
+        <p>Here's another <a href="http://askubuntu.com/q/343114/89663">Ask Ubuntu</a> thread that also mentions
+          (in <a href="http://askubuntu.com/a/343121/89663">this answer</a> &mdash; to which I have also commented) the
+          <tt>memtester</tt> program (<code>sudo apt-get install memtester</code>). I used that as well but it's not practical
+          (or even outright impossible) to scan using <tt>memtester</tt> the entire memory as the system becomes very
+          unresponsive (with all memory being locked by <tt>memtester</tt> to perform the test). Whereas the memory test of UNetbootin
+          is run <b>before</b> loading the operating system and any user programs so there the responsivity point is moot. In general, I
+          think it makes sense to use <tt>memtester</tt> only when trying to check a particular area of memory (though I haven't tried that).
+        </p>
       </li>
       <li><h2>install Ubuntu 16.04 from the live USB flash drive</h2>
         This was entirely incident-free.
@@ -54,54 +67,149 @@ USB Creator is another option but see in <a href="admin.html.files/ubuntu-bootab
           using the <code>dmesg</code> command).
           You should also examine the various system logs in <tt>/var/log</tt>
           (the most important of which is <tt>kern.log</tt> and <tt>syslog</tt>)
-          for anything that might look weird and investigate further.
+          for anything that might look weird and investigate further. Note in this connection
+          that in my Ubuntu 16.04 system <tt>syslog</tt> appears to be a clean superset of <tt>kern.log</tt>
+          (see my comment on <a href="http://askubuntu.com/a/26253">this answer</a>).
         </p>
         <p>
           E.g. I would do:
           <pre>
 $ cat /var/log/kern.log | grep -i -E "error|crit|emerg|alarm"
 $ cat /var/log/syslog   | grep -i -E "error|crit|emerg|alarm"</pre>
-          &hellip; or use <code>-E "error|crit|emerg|alarm|warning"</code> if you want to investigate warnings too. This being
+          &hellip; or use <code>-E "error|crit|emerg|alarm|warning"</code> if you want to investigate warnings too.
+          The various codes are apparently related to the arguments used in <a href="https://en.wikipedia.org/wiki/Syslog">syslog</a> API:
+          <pre>
+$ man syslog | grep -i -E "(conditio|unusable)"</pre>
+          This being
 said, the output is hard to decipher and it's not clear how many of the messages displayed really require action on your
-behalf.
+behalf. Here's the most relevant <a href="http://askubuntu.com/a/186280/89663">Ask Ubuntu answer</a> on this topic.
         </p>
         <p>Visually inspecting the boot process output (which is available in the kernel ring buffer for you to inspect
           with <code>dmesg</code> provided clues which were more actionable and worthwhile to follow in my experience.
-          Using this method I cleared the following problems:
+          Using this method I handled the following cases:
           <ul>
             <li>During boot I was getting the following message:
-              <pre>A TPM error (6) occurred attempting to read a pcr value</pre>. Activating the security chip in BIOS (accessible
-              with <kbd>F1</kbd> removed this message. Relevant posts:
+              <pre>A TPM error (6) occurred attempting to read a pcr value</pre>
+              Activating the Security Chip in BIOS (accessible
+              with <kbd>F1</kbd>) removed this message. Relevant posts:
               <a href="https://bbs.archlinux.org/viewtopic.php?id=139415">here</a>
               and <a href="http://askubuntu.com/a/786331/89663">here</a>.
             </li>
+            <li>Enable virtualization from the BIOS. During boot I was getting the following message:
+              <pre>kvm:disabled by bios</pre>
+              &hellip; this is in fact a warning that even though the processor has <a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine">KVM</a> support
+              (not to be confused by <a href="https://en.wikipedia.org/wiki/KVM_switch">this use</a> of the same acronym), this ability is turned-off by the BIOS.
+              To fix this problem I had to enable some IBM virtualization technology flag in by BIOS. Relevant links on the subject are
+              <a href="http://askubuntu.com/q/303164/89663">here</a> and <a href="https://bbs.archlinux.org/viewtopic.php?id=155146">here</a>.
+              Apparently from the latter answer it can be inferred that the following incantation should server to show whether a CPU has kernel virtualization
+              capabilities:
+              <pre>
+grep -E "(vmx|svm)" --color=always /proc/cpuinfo</pre>
+              &hellip; and indeed the above produces some output on my system.
+            </li>
           </ul>
         </p>
-        TPM error occured after reading a PCR
-        kvm disabled by BIOS
       </li>
-      <li><h2>check disk</h2></li>
-      <li><h2>check for burnt / stuck pixels</h2></li>
-      <li><h2>install git and setup my environment</h2></li>
+      <li><h2>check disk</h2>
+        <p>
+          Install <tt>smartctl</tt> with <code>sudo apt-get install smartmontools</code> and do a:
+          <pre>$ sudo smartctl -a /dev/sda1 | grep -i old_age</pre>
+        </p>
+        <p>A more visually reassuring output can be produced with the <tt>disks</tt> Unity program (use as <code>gnome-disks</code> from a terimal):<br/>
+          <a href="travails-setting-up-T240.html.files/disks-smart-data.png">
+            <img height="200px" width="300px" src="travails-setting-up-T240.html.files/disks-smart-data.png"/>
+          </a>
+
+        </p>
+      </li>
+      <li><h2>check for burnt / stuck pixels</h2>
+        There's plenty of videos on youtube for that.
+      </li>
+      <li><h2>research for other useful hardware diagnostics to run (e.g. provided by the manufacturer)</h2>
+        I asked a <a href="http://unix.stackexchange.com/q/322847/24044">question</a> about that but didn't do anything
+        in addition to the above checks.
+      </li>
+      <li><h2>install git and setup my environment</h2>
+This was uneventfull.
+      </li>
       <li>
         <h2>install Node and npm</h2>
+        <p>
+        I installed <tt>Node 6</tt> (Node 7 is still in active development) and <tt>npm</tt>
+        by following the <a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions">offical instructions</a> and simply doing:
+        <pre>
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs</pre> &hellip; which resulted in the following situation in my system:
+        <pre>
+$ node --version
+v6.9.1
+$ npm --version
+3.10.8
+</pre>
+        </p>
+        <p>Apparently there was a problem with these instructions in the past but
+now they are working fine &mdash; see my comment on <a href="http://askubuntu.com/q/786272">this answer</a>.
+
+        </p>
       </li>
       <li>
         <h2>install Java SDK</h2>
+        To install the Java SDK I followed
+        <a href="http://tipsonubuntu.com/2016/07/31/install-oracle-java-8-9-ubuntu-16-04-linux-mint-18/">these instructions</a>
+        which instructed me to add <a href="https://launchpad.net/~webupd8team/+archive/ubuntu/java">this PPA</a>.
+        Basically, the following is all I did:
+<pre>
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt update; sudo apt install oracle-java8-installer</pre>
+
+After the above stanza I had:
+<pre>
+$ java -version
+java version "1.8.0_111"
+Java(TM) SE Runtime Environment (build 1.8.0_111-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)
+mperdikeas@mp-t420:~/js-react-minesweeper#
+$ javac -version
+javac 1.8.0_111</pre>
       </li>
-      <li><h2>install PostgreSQL</h2></li>
+      <li><h2>install PostgreSQL</h2>
+        I installed PostgreSQL out of the official Ubuntu repo simply using:
+        <pre>
+sudo apt-get update
+sudo apt-get install postgresql postgresql-contrib</pre>
+        
+The version installed was <tt>9.5.5</tt> as evidenced by:
+
+<pre>
+sudo -u postgres psql postgres -c 'SELECT version()' | grep PostgreSQL</pre>
+
+You may run the above incantation fresh out of the install without changing anything provided ofcourse you have
+<tt>sudo</tt> privilleges.
+</pre>
+      </li>
       <li>
         <h2>install Ant</h2>
+        <tt>Ant</tt> was installed uneventfully from the sources:
+        <pre>sudo apt-get update
+sudo apt-get install ant</pre>
       </li>
-      <li>
-        <h2>install Ant</h2>
+      <li><h2>built and install Ivy from sources</h2>
+        <p>
+        I decided to built Ivy from the sources so that I might be in position to insert some logging code in case
+          I encounter any difficult to resolve problem.</p>
+        <p>
+          I installed IVY by following the instructions (to build from sources) on
+          <a href="https://ant.apache.org/ivy/download.cgi">this page</a>
+          and doing:
+<pre>
+git clone https://git-wip-us.apache.org/repos/asf/ant-ivy.git
+git checkout tags/2.4.0
+ant jar
+cp build/artifact/org.apache.ivy_2.4.0.final_20161112135640.jar ~/.ant/lib/</pre>&hellip; otherwise
+if you fail to check out the stable <tt>2.4.0</tt> tag, then the master branch version <tt>2.5.0.alpha</tt>
+will be built.
+        </p>
       </li>
-      <li><h2>built and install Ivy from sources</h2></li>
     </ol>
-    <!--a href="install-postgresql9.5-in-Ubuntu-14.04.png">
-         <img height="200px" width="300px" src="install-postgresql9.5-in-Ubuntu-14.04.png"/>
-         </a-->
-
-
   </body>
 </html>

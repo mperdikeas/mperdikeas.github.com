@@ -39,5 +39,9 @@
         <img height="200px" width="300px" src="../travails-setting-up-T240.html.files/usb-creator-menu-no-test-memory-option.jpg"/>
       </a>
     </p>
-    <p>Related to the above travail see <a href="http://askubuntu.com/a/848772/89663">SO answer of mine</a> where I describe this discrepancy and where another member comments in <a href="http://askubuntu.com/a/317292/89663"his own answer</a> that this has to do with UEFI (though I am not convinced).</p>
+    <p>Related to the above travail see <a href="http://askubuntu.com/a/848772/89663">SO answer of mine</a> where I describe this discrepancy and where another member comments in <a href="http://askubuntu.com/a/317292/89663">his own answer</a> that this has to do with UEFI (though I am not convinced).</p>
+    <p id="caveat">
+      <b>Caveat:</b> Upon selecting the "Test memory" option in <tt>UNetbootin</tt>
+      you need to press <kbd>TAB</kbd> and remove the <code>initrd=/ubninit</code> part from the boot options otherwise you get a message: "cannot load ramdisk with an old kernel image". This is apparently a workaround around a bug of Unetbootin (suggested <a href="http://www.openmutual.org/2014/09/memtest86-cannot-load-a-ramdisk-with-an-old-kernel-image/">here</a>, <a href="https://forums.linuxmint.com/viewtopic.php?t=97585">here</a> and <a href="https://ubuntuforums.org/showthread.php?t=1182171&page=2">here</a>.
+    </p>
 </body>
