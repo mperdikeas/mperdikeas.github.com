@@ -7,6 +7,9 @@
      color: white;
      font-family: monospace;
    }
+   h2 {
+     font-size: 110%;
+     }
   </style>
 </head>
 <body>
@@ -231,13 +234,13 @@ sudo mount -o loop path/to/iso/file/YOUR_ISO_FILE.ISO /media/iso
     <pre>$hash -r</pre>
     Also, when called without any arguments it reports how many times you've hit
     which commands.    
-    <li>how to install a font (e.g. consolas) in Ubuntu</li>
-    <a href="http://www.rushis.com/2013/03/consolas-font-on-ubuntu/">source</a>
+    <li><h2 id='install-consolas'>how to install the <tt>Consolas</tt> font in Ubuntu</h2></li>
+    <a href="http://www.rushis.com/consolas-font-on-ubuntu/">source</a>
     <br/>
     This is the procedure that worked for me:
     <ol>
-      <li>sudo apt-get install font-manager</li>
-      <li>sudo apt-get install cabextract</li>
+      <li><code>sudo apt-get install font-manager</code></li>
+      <li><code>sudo apt-get install cabextract</code></li>
       <li>run the script at: <code>~/tools/consolas.sh</code> in a dir where you don't mind the temporary directory <code>temp</code> that will get created</li>
       <li>double click on the Consolas fonts to install them with the default font manager </li>
       <li>manually copy the font files to <code>/usr/share/fonts</code></li>
@@ -245,8 +248,7 @@ sudo mount -o loop path/to/iso/file/YOUR_ISO_FILE.ISO /media/iso
       would work but in my case it didn't and I had to manually copy the fonts:
       <pre>
 sudo mkdir /usr/share/fonts/truetype/consolas
-sudo cp /home/mperdikeas/tools/temp/CONSOLA*.TTF /usr/share/fonts/truetype/consolas
-      </pre>
+sudo cp /home/mperdikeas/tools/temp/CONSOLA*.TTF /usr/share/fonts/truetype/consolas</pre>
       <li>run the <code>fc-cache</code> thing</li>
       <pre>sudo fc-cache -fv</pre>
       <li>launch LibreOffice to verify that the fonts are found</li>
