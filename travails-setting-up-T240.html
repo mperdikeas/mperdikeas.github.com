@@ -1,0 +1,107 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+  </style>
+  <body>
+    <h1>Writeup of my setting up the Lenovo ThinkPad T420 laptop (November 2016)</h1>
+    <p>
+      In 11-12 November 2016 I successfully setup a newly purchased refurbished Lenovo ThinkPad T420 laptop
+      with Ubuntu 16.04 Xenial Xerus.
+      It was purchased on 10 November 2016 from the Microcenter at Cambridge MA for 330 USD. The store
+      website listed the product with
+      <a href="travails-setting-up-T240.html.files/Lenovo-ThinkPad-T420-14-Laptop-Refurbished-Black-017046-Micro-Center.pdf">
+        these hardware specifications.
+      </a>
+    </p>
+    <p>
+      The machine came pre-installed with an accursed "operating system" (W....ws 7) from which I liberated it by wiping clean
+      the harddisk when I installed Xenial Xerus. That is, Xerus was not installed alongside the abomination but replaced it.
+    </p>
+    <p>In what follows I am not going to describe all the different approaches, tests and paths I took / tried
+      but rather I will present the streamlined series of steps (after lessons learned) that should apply for
+      the next purchase</p>
+    <ol>
+      <li><h2>research how you enter the BIOS</h2>
+        In the afore-mentioned machine <kbd>F1</kbd> takes you to the BIOS and <kbd>F12</kbd>
+        directly to the boot order menu (which you should use to boot from the USB flash drive).
+        I had to <a href="http://askubuntu.com/q/848418/89663">ask</a> to find out.
+        </li>
+      <li><h2>create an Ubuntu 16.04 live USB flash drive using <a href='https://unetbootin.github.io/'>UNetbootin</a></h2>
+USB Creator is another option but see in <a href="admin.html.files/ubuntu-bootable-usb-flash.html">this note</a> why you're better off using UNetbootin instead.
+      </li>
+      <li><h2>perform a memory test (before wiping clean the disk in case you have to return it)</h2>
+        Assuming you created your Live Ubuntu USB flash drive using UNetbootin you should be able to run
+        the memory test diagnostic. If all goes well you should see a screen similar to this:<br/>
+        <a href="travails-setting-up-T240.html.files/memory-test-good.jpg">
+          <img height="200px" width="300px" src="travails-setting-up-T240.html.files/memory-test-good.jpg">
+        </a>
+        <br/>&hellip; once the "Pass" variable reaches past 100% it will go back to 0% and repeat the test (at which point you
+        can press <kbd>ESC</kbd> to exit the test).
+        <p>Here's a relevant <a href="http://askubuntu.com/a/317292/89663">Ask Ubuntu</a> answer (to which I have commented).</p>
+      </li>
+      <li><h2>install Ubuntu 16.04 from the live USB flash drive</h2>
+        This was entirely incident-free.
+      </li>
+      <li> <h2>examine dmesg and syslogs for hardware / BIOS issues</h2>
+        <p>
+          Once you login for the first time you should check the output of the boot process
+          (which is usually available for you to inspect in <code>/var/logs/dmesg</code> or just by
+          using the <code>dmesg</code> command).
+          You should also examine the various system logs in <tt>/var/log</tt>
+          (the most important of which is <tt>kern.log</tt> and <tt>syslog</tt>)
+          for anything that might look weird and investigate further.
+        </p>
+        <p>
+          E.g. I would do:
+          <pre>
+$ cat /var/log/kern.log | grep -i -E "error|crit|emerg|alarm"
+$ cat /var/log/syslog   | grep -i -E "error|crit|emerg|alarm"</pre>
+          &hellip; or use <code>-E "error|crit|emerg|alarm|warning"</code> if you want to investigate warnings too. This being
+said, the output is hard to decipher and it's not clear how many of the messages displayed really require action on your
+behalf.
+        </p>
+        <p>Visually inspecting the boot process output (which is available in the kernel ring buffer for you to inspect
+          with <code>dmesg</code> provided clues which were more actionable and worthwhile to follow in my experience.
+          Using this method I cleared the following problems:
+          <ul>
+            <li>During boot I was getting the following message:
+              <pre>A TPM error (6) occurred attempting to read a pcr value</pre>. Activating the security chip in BIOS (accessible
+              with <kbd>F1</kbd> removed this message. Relevant posts:
+              <a href="https://bbs.archlinux.org/viewtopic.php?id=139415">here</a>
+              and <a href="http://askubuntu.com/a/786331/89663">here</a>.
+            </li>
+          </ul>
+        </p>
+        TPM error occured after reading a PCR
+        kvm disabled by BIOS
+      </li>
+      <li><h2>check disk</h2></li>
+      <li><h2>check for burnt / stuck pixels</h2></li>
+      <li><h2>install git and setup my environment</h2></li>
+      <li>
+        <h2>install Node and npm</h2>
+      </li>
+      <li>
+        <h2>install Java SDK</h2>
+      </li>
+      <li><h2>install PostgreSQL</h2></li>
+      <li>
+        <h2>install Ant</h2>
+      </li>
+      <li>
+        <h2>install Ant</h2>
+      </li>
+      <li><h2>built and install Ivy from sources</h2></li>
+    </ol>
+    <!--a href="install-postgresql9.5-in-Ubuntu-14.04.png">
+         <img height="200px" width="300px" src="install-postgresql9.5-in-Ubuntu-14.04.png"/>
+         </a-->
+
+
+  </body>
+</html>

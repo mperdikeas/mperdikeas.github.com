@@ -11,15 +11,7 @@
 </head>
 <body>
   <ol reversed>
-    <li>how to create a bootable USB flash drive with an image of Ubuntu</li>
-    <p>
-      In the past I had used the <tt>unetbootin</tt> utility with good results
-      (as described <a href="#how-to-install-Ubuntu-from-a-USB-flash-drive">here</a>)
-    </p>
-    <p>
-      In November 2016 I also used the USB Creator application (which can be
-      launched from the command line with <code>usb-creator-gtk</code>).
-    </p>
+    <li><a href="admin.html.files/ubuntu-bootable-usb-flash.html">how to create a bootable USB flash drive with an image of Ubuntu</a></li>
     <li>finding which processes cause the disk to be grinding</li>
     <p>
       I had noticed by hard disk light flashing a lot so recently I used:
@@ -46,47 +38,47 @@ rm -rf .local/share/gvfs-metadata
     <li>change the default login shell in RHEL</li>
     Use either <tt>ypchsh</tt> or <tt>chsh</tt>.
     <li id="how-to-install-Ubuntu-from-a-USB-flash-drive">how to install Ubuntu from a USB flash drive in a Dell Precision laptop</li>
-<p>
-  I basically prepared a USB flash drive with the ISO image of Ubuntu 14.04 LTS using <a href='http://askubuntu.com/a/460183'>unetbootin</a>:
-  <pre>
+    <p>
+      I basically prepared a USB flash drive with the ISO image of Ubuntu 14.04 LTS using <a href='http://askubuntu.com/a/460183'>unetbootin</a>:
+      <pre>
 sudo apt-get install unetbootin
 sudo unetbootin
-  </pre>
-  </p>
-<p>&hellip; I then inserted the flash drive to a port and tapped <tt><b>F12</b></tt> when the Dell logo
-appeared during startup. This is consistent with what is described <a href='http://www.dell.com/support/article/us/en/04/SLN151664/en'>here</a> under section: <i><b>3.</b>Setup the Ubuntu Install</i>:
-<blockquote>
-<p>
-  1. Insert the Ubuntu disk into your DVD drive or connect your Bootable USB into a port on the system.
-</p>
-<p>
-  2. Tap rapidly on the F12 key when you see the Dell logo appear during start up. This will take you to the Boot Once menu.
-</p>
-<p>
-  3. You can use the Cursor/Arrow keys to navigate the menu and highlight your selection. It will be either boot from USB or Boot from CD/DVD Drive. Once your Choice is highlighted hit the ENTER key.
-</p>
-</blockquote>
-</p>
-<p>The guy at the store said that for versions of Ubuntu &ge; 14 <a href='https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface'>UEFI</a> should be used instead of BIOS (legacy).</p>
-<p>Some quick Googling reveals that the issue is <a href='http://askubuntu.com/q/647303/89663'>more complicated than that</a>.</p>
-<p>Incidentally I have failed to utilize the (expensive) video card &mdash; initially I had installed Ubuntu 16.04 and
-there appears to be an <a href='http://askubuntu.com/q/760934/89663'>issue with the NVIDIA cards</a>
-I wasted half a day on it, then gave up.</p>
-<p>Subsequently, when I installed Ubuntu 14.04 LTS I <i>think</i> I encountered the problem again but at any rate I finally did
-not install the NVIDIA drivers at all. Googling just now it seems that 14.04 also has some issues with the NVIDIA drivers.
-See for instance <a href='http://unix.stackexchange.com/q/120955/24044'>here</a>.
-</p>
-<p>I wonder if the graphics card problems are related to the fact that the installation was done using <tt>UEFI</tt> and not <tt>BIOS</tt>.</p>
-<p>You can Google many <a href='http://askubuntu.com/q/23238/89663'>ways to verify which controller is actually handling graphics</a> &mdash; i.e. whether it is the processor built-in
-controller (Intel in my case) or an external graphics card controller (e.g. Nvidia).</p>
-<p>
-In my case I get:
-<pre>
+      </pre>
+    </p>
+    <p>&hellip; I then inserted the flash drive to a port and tapped <tt><b>F12</b></tt> when the Dell logo
+      appeared during startup. This is consistent with what is described <a href='http://www.dell.com/support/article/us/en/04/SLN151664/en'>here</a> under section: <i><b>3.</b>Setup the Ubuntu Install</i>:
+      <blockquote>
+        <p>
+          1. Insert the Ubuntu disk into your DVD drive or connect your Bootable USB into a port on the system.
+        </p>
+        <p>
+          2. Tap rapidly on the F12 key when you see the Dell logo appear during start up. This will take you to the Boot Once menu.
+        </p>
+        <p>
+          3. You can use the Cursor/Arrow keys to navigate the menu and highlight your selection. It will be either boot from USB or Boot from CD/DVD Drive. Once your Choice is highlighted hit the ENTER key.
+        </p>
+      </blockquote>
+    </p>
+    <p>The guy at the store said that for versions of Ubuntu &ge; 14 <a href='https://en.wikipedia.org/wiki/Unified_Extensible_Firmware_Interface'>UEFI</a> should be used instead of BIOS (legacy).</p>
+    <p>Some quick Googling reveals that the issue is <a href='http://askubuntu.com/q/647303/89663'>more complicated than that</a>.</p>
+    <p>Incidentally I have failed to utilize the (expensive) video card &mdash; initially I had installed Ubuntu 16.04 and
+      there appears to be an <a href='http://askubuntu.com/q/760934/89663'>issue with the NVIDIA cards</a>
+      I wasted half a day on it, then gave up.</p>
+    <p>Subsequently, when I installed Ubuntu 14.04 LTS I <i>think</i> I encountered the problem again but at any rate I finally did
+      not install the NVIDIA drivers at all. Googling just now it seems that 14.04 also has some issues with the NVIDIA drivers.
+      See for instance <a href='http://unix.stackexchange.com/q/120955/24044'>here</a>.
+    </p>
+    <p>I wonder if the graphics card problems are related to the fact that the installation was done using <tt>UEFI</tt> and not <tt>BIOS</tt>.</p>
+    <p>You can Google many <a href='http://askubuntu.com/q/23238/89663'>ways to verify which controller is actually handling graphics</a> &mdash; i.e. whether it is the processor built-in
+      controller (Intel in my case) or an external graphics card controller (e.g. Nvidia).</p>
+    <p>
+      In my case I get:
+      <pre>
 $ lspci | grep -i vga
 00:02.0 VGA compatible controller: Intel Corporation 4th Gen Core Processor Integrated Graphics Controller (rev 06)
-</pre>
-&hellip; I.e. the built-in Intel controller.
-</p>
+      </pre>
+      &hellip; I.e. the built-in Intel controller.
+    </p>
     <li>how to mount any system that's accessible via ssh</li>
     <a href="http://unix.stackexchange.com/a/59695/24044">source</a><br/>
     Use <a href="https://github.com/libfuse/sshfs">sshfs</a>.
@@ -169,7 +161,7 @@ Type "help", "copyright", "credits" or "license" for more information.
     <pre>
 $ sudo cat /usr/share/applications/defaults.list | grep okular
 application/pdf=okular.desktop
-   </pre>
+    </pre>
     <li>how to fix the screen resolution problem with VirtualBox in Ubuntu 14.04 64bit</li>
     <a href='http://askubuntu.com/a/591195/89663'>source</a>
     <br/>
@@ -696,23 +688,23 @@ xinput set-int-prop 11 "Device Enabled" 8 1
     ... on the single partition I created. Finally, to label the drive I did a:
     <pre>sudo e2label /dev/sdg1 150GB-USB-hdd</pre>
     <p>
-    <b>NB</b>: more recently I just did a:
-    <pre>mkfs.ext3 -L volume-label /dev/sdg1</pre>
-    to format and label the volume in one step without needing to use <tt>e2label</tt>.
+      <b>NB</b>: more recently I just did a:
+      <pre>mkfs.ext3 -L volume-label /dev/sdg1</pre>
+      to format and label the volume in one step without needing to use <tt>e2label</tt>.
     </p>
     <p>
-    <b>NB 2</b>
-    You may not be able to write to this disk as normal user as root may own it,
-    but just doing <code>chown user:user /media/volume-name</code> 
-    or <code>chmod -R a+rwx /media/volume-name</code> will do the trick.
+      <b>NB 2</b>
+      You may not be able to write to this disk as normal user as root may own it,
+      but just doing <code>chown user:user /media/volume-name</code> 
+      or <code>chmod -R a+rwx /media/volume-name</code> will do the trick.
     </p>
     <p>
-    <b>NB 3</b>
-    It is important that the <tt>fdisk</tt> is performed on the entire device (as in <code>fdisk /dev/sdg</code>)
-    but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <code>mkfs.ext3 .. /dev/sdg1</code>).<br/>
-    Doing the <tt>mkfs.ext3</tt> on the entire
-    device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
-    to find the file system type.
+      <b>NB 3</b>
+      It is important that the <tt>fdisk</tt> is performed on the entire device (as in <code>fdisk /dev/sdg</code>)
+      but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <code>mkfs.ext3 .. /dev/sdg1</code>).<br/>
+      Doing the <tt>mkfs.ext3</tt> on the entire
+      device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
+      to find the file system type.
     </p>
     <p><b>NB 3</b>
       To confirm that you've correctly formated the flash drive do
@@ -760,7 +752,7 @@ xinput set-int-prop 11 "Device Enabled" 8 1
         <li>dismount:<pre>sudo umount /dev/sdc1</pre></li>
         <li>format:<pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</pre>
     </p>Note, sometimes <b>-n</b>  is not understood and the following works instead:</p>
-    </pre>sudo mkfs.ext3 /dev/sdc1</pre></li>
+      </pre>sudo mkfs.ext3 /dev/sdc1</pre></li>
         <li>I've also seen:
           <pre>sudo mkfs -t vfat /dev/sdb1</pre></li>
       </ol>

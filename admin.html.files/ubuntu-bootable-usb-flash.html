@@ -1,0 +1,43 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style type='text/css'>
+   .console {
+     background-color: black;
+     color: white;
+     font-family: monospace;
+   }
+  </style>
+</head>
+<body>
+    <h1>how to create a bootable USB flash drive with an image of Ubuntu</h1>
+    <p>
+      In the past I had used the <tt>UNetbootin</tt> utility with good results
+      (as described <a href="../admin.html#how-to-install-Ubuntu-from-a-USB-flash-drive">here</a>)
+    </p>
+    <p>
+      In November 2016 I also used the USB Creator application (which can be
+      launched from the command line with <code>usb-creator-gtk</code>).
+    </p>
+    <p>
+      Even though both approaches work, I found the UNetbootin option to work better
+      in my Lenovo ThinkPad T420 as when booting from the live USB flash drive
+      (in T420 by using <kbd>F1</kbd> you enter the BIOS or by using <kbd>F12</kbd>
+      you enter directly the boot menu screen that allows you to select from which
+      device to boot) made with UNetbootin I was presented with an additional
+      option that allowed
+      me to perform a memory test:
+      <br/>
+      <a href="../travails-setting-up-T240.html.files/unetbootin-menu-with-test-memory-option.jpg">
+        <img height="200px" width="300px" src="../travails-setting-up-T240.html.files/unetbootin-menu-with-test-memory-option.jpg"/>
+      </a>
+      <br/>
+      &hellip; whereas booting with the USB flash drive created
+      using USB Creator my only options were to either test or install Ubuntu:
+      <br/>
+      <a href="../travails-setting-up-T240.html.files/usb-creator-menu-no-test-memory-option.jpg">
+        <img height="200px" width="300px" src="../travails-setting-up-T240.html.files/usb-creator-menu-no-test-memory-option.jpg"/>
+      </a>
+    </p>
+    <p>Related to the above travail see <a href="http://askubuntu.com/a/848772/89663">SO answer of mine</a> where I describe this discrepancy and where another member comments in <a href="http://askubuntu.com/a/317292/89663"his own answer</a> that this has to do with UEFI (though I am not convinced).</p>
+</body>
