@@ -4,7 +4,7 @@
     <link rel='icon' href='/knowledge-favicon.ico'/>
   </head>
   <body>
-    <ol reversed>
+    <ol class='pink-circles' reversed>
       <li>make <code>set</code> print only the shell variables, not the functions</li>
       (<a href='http://unix.stackexchange.com/a/118050/24044'>source</a>)
       <pre>(set -o posix; set)</pre>
@@ -44,29 +44,30 @@
         <a href="https://github.com/mperdikeas/tools/blob/master/sleep-until-modified.sh"><code>tools/sleep-until-modified.sh</code></a>
         In the following manner, e.g. to invoke <code>make</code> when a LaTeX file changes:
         <pre>
-while sleep-until-modified.sh my-awesome-document.tex ; do make ; done
-        </pre>
+while sleep-until-modified.sh my-awesome-document.tex ; do make ; done</pre>
         <strong>NB:</strong>Unfortunately, the above way does *not* work for more than one file.
         So, use the second method if practicable:
         <li>using the Pythonic <code>when-changed</code> utility</li>
         <p>
           Install with:
           <pre>
-sudo pip install when-changed
-          </pre>
+sudo pip install when-changed</pre>
+        </p>
+        <p>
+          &hellip; or as I did more recently following the instructions from the <a href='https://github.com/joh/when-changed'>github repo</a>:
+          <pre>
+pip install https://github.com/joh/when-changed/archive/master.zip</pre>
         </p>
         <p>
           Use like:
           <pre>
-when-changed esa-sre-gedais-sc-0001.tex *.input -c make
-          </pre>
+when-changed esa-sre-gedais-sc-0001.tex *.input -c make</pre>
         </p>
         Notice that, using this method, more than one file can be tracked.
         <p>
           More recently, I also did:
           <pre>
-when-changed $(find . -iname \*.java) -c "ant clean-except-ivy && ant dry-compile"
-          </pre>
+when-changed $(find . -iname \*.java) -c "ant clean-except-ivy && ant dry-compile"</pre>
           &hellip; which exemplifies monitoring a truly arbitrary set of files
           and executing two commands.
         </p>
