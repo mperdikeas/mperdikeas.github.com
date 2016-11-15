@@ -21,6 +21,8 @@
       <a href="travails-setting-up-T420.html.files/Detailed-specifications-ThinkPad-T420-Lenovo-Support.pdf">
         these rather more detailed hardware specifications</a>.
     </p>
+    <p>Full list of specs, guides and manuals <a href='travails-setting-up-T420.html.files/specs.html'>here</a>.
+    </p>
     <p>
       The machine came pre-installed with an accursed "operating system" (Wi...ws 7) from which I liberated it by wiping clean
       the harddisk when I installed Xenial Xerus. That is, Xerus was not installed alongside the abomination but purged it
@@ -167,6 +169,25 @@ sudo dpkg -i *.deb</pre>
         works as expected with either of the two monitors or both of them turned on.
         I used <tt>xrandr</tt> to selectively direct the output.
       </li>
+      <li><h2>check battery</h2></li>
+      <p>
+        Apparently a number of Lenovo laptops are equiped with <a href='http://code.jasonbhill.com/linux/faulty-firmware-in-lenovo-batteries/'>faulty Panasonic batteries</a> (local printed copy
+        <a href='travails-setting-up-T420.html.files/faulty-firmware-in-lenovo-batteries-Jason-s-code-blog.pdf'>here</a>).
+      </p>
+      <p>So, you might want to check that as well. The following incantations provide helpful information:
+        <pre>
+$ upower -e
+/org/freedesktop/UPower/devices/line_power_AC
+/org/freedesktop/UPower/devices/battery_BAT0
+/org/freedesktop/UPower/devices/DisplayDevice
+$ upower -i /org/freedesktop/UPower/devices/battery_BAT0</pre>
+      </p>
+      <p>Also, the <tt>fwts</tt> program actually tests the battery:
+        <pre>
+sudo apt-get install fwts
+sudo fwts battery</pre>
+        &hellip; in my case the <tt>fwts</tt> results <a href='travails-setting-up-T420.html.files/fwts-battery-results.log'>weren't stellar</a> but I decided to keep the battery (life's too short, one can't afford to get lost in rabbit holes all the time). As a matter of fact I have actually already encountered one case where the battery wasn't charging even though the laptop was plugged-in (this was solved by a full shutdown of the machine and a restart so I let it go at that).
+      </p>
       <li><h2>install git and setup my environment</h2>
 This was uneventfull.
       </li>
