@@ -100,3 +100,9 @@ ol.pink-circles > li:before {
     border-radius: 999px
 }
 
+.nb {
+    font-weight: bold;
+    color: red;
+}
+
+
