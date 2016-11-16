@@ -5,6 +5,7 @@
   </head>
   <style>
    h1 {font-size: 130%;}
+   h2 {font-size: 110%;}
   </style>
   <body>
     <h1>Get rid of the need to type-in passwords in SSH connections using SSH public key authentication</h1>
@@ -16,6 +17,7 @@
         <dt>B</dt><dd>the node you wish to be able to hop to without having to enter a password every time</dd>
       </dl>
       &hellip; do the following:
+      <h2>old-style manual way</h2>
       <ol>
         <li>on machine <b>A</b>:</li>
         If the file <code>~/.ssh/id_rsa.pub</code> does not already exist do a:
@@ -23,18 +25,31 @@
         &hellip; and copy the long single line that this file contains into your clipboard
         <li>on machine <b>B</b></li>
         Copy the line you placed into the clipboard at the end of file: <code>~/.ssh/authorized_keys</code>
-        (and make sure said file is readable)
-        <li>I have also encountered cases where it was necessary to do the following in machine <b>B</b>:</li>
+        (and make sure said file is readable).
+        <b>NB 1:</b>make sure to add an end-of-line at the end otherwise the file will be mangled
+        if you try to add an additional key using the more automated way described below.
+      </ol>
+      <h2>more automated way</h2>
+      Recently I did the following (<a href='http://unix.stackexchange.com/a/27052/24044'>source</a>) and it worked like a charm (provided the <code>~/.ssh/authorized_keys</code>
+      file at the destination machine ends with an end-of-line character (<tt>0x0A</tt> in real operating systems).
+      From the source machine:
+      <pre>
+ssh-copy-id -i  ~/.ssh/id_rsa.pub youraccountname@destination.machine.com</pre>
+      <h2>caveats</h2>
+      <ol>
+        <li>I have also encountered cases where it was necessary to do the following in machine <b>B</b>:
           <ul>
             <li><code>chmod 700 .ssh</code></li>
             <li><code>chmod 640 .ssh/authorized_keys</code></li>
           </ul>
           &hellip; this is described in the <a href='#source'>source</a>. Unless I applied
           those permissions <tt>ssh</tt> would still ask me for a password.
+        </li>
+        <li>I have also encountered cases where public authentication (referred to
+          by the sysadmin people as "passwordless SSH") was disabled for "security reasons" (whatever).</li>
       </ol>
       <p>
-        <b>NB:</b>I have also encountered cases where public authentication (referred to
-        by the sysadmin people as "passwordless SSH") was disabled for security reasons.
+        
       </p>
     </p>
   </body>
