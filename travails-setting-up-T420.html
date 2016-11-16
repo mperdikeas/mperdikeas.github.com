@@ -109,8 +109,12 @@ behalf. Here's the most relevant <a href="http://askubuntu.com/a/186280/89663">A
               <pre>kvm:disabled by bios</pre>
               &hellip; this is in fact a warning that even though the processor has <a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine">KVM</a> support
               (not to be confused by <a href="https://en.wikipedia.org/wiki/KVM_switch">this use</a> of the same acronym), this ability is turned-off by the BIOS.
-              To fix this problem I had to enable some IBM virtualization technology flag in by BIOS. Relevant links on the subject are
-              <a href="http://askubuntu.com/q/303164/89663">here</a> and <a href="https://bbs.archlinux.org/viewtopic.php?id=155146">here</a>.
+              To fix this problem I had to enable some IBM virtualization technology flag in the BIOS. Relevant links on the subject are
+              <a href="http://askubuntu.com/q/303164/89663">here</a>, <a href="https://bbs.archlinux.org/viewtopic.php?id=155146">here</a> and <a href='http://amiduos.com/support/knowledge-base/article/enabling-virtualization-in-lenovo-systems'>here</a>.
+              Here are some screenshots from the last link (not from my own system but very similar according to my recollections): <a href='travails-setting-up-T420.html.files/bios-security-virtualization-1.JPG'>screen 1</a>,
+              <a href='travails-setting-up-T420.html.files/bios-security-virtualization-2.JPG'>screen 2</a>
+              and
+<a href='travails-setting-up-T420.html.files/bios-security-virtualization-3.JPG'>screen 3</a>,               
               Apparently from the latter answer it can be inferred that the following incantation should server to show whether a CPU has kernel virtualization
               capabilities:
               <pre>
