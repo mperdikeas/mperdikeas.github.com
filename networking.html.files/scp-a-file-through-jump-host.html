@@ -21,13 +21,11 @@
     <p>
       I 've used the following option from the source:
       <pre>
-$ scp -oProxyCommand="ssh -W %h:%p B" thefile C:destination
-      </pre>
+$ scp -oProxyCommand="ssh -W %h:%p B" thefile C:destination</pre>
       &hellip; and as a matter of fact reversed the copy direction (e.g. I copied from system C to system A).
       I.e. the incantation I used was:
       <pre>
-A$ scp -oProxyCommand = "ssh -W %h:%p username@B" username@C:/some/path/on/macine/C some/path/on/machine/A
-      </pre>
+A$ scp -oProxyCommand = "ssh -W %h:%p username@B" username@C:/some/path/on/macine/C some/path/on/machine/A</pre>
     </p>
   </body>
 </html>

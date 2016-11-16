@@ -13,10 +13,9 @@
       To establish some terminology lets use the following:
       <dl>
         <dt>A</dt><dd>your local node</dd>
-        <dt>B</dt><dd>the intermediate node</dd>
+        <dt>B</dt><dd>the intermediate node (a.k.a jump host, firewall host, gateway)</dd>
         <dt>C</dt><dd>the destination node</dd>
       </dl>
-      <b>NB:</b> the intermediate node is sometimes referred to as "intermediate host" or "jump host".
     </p>
     <p>Once you have this chain of SSH accesses &mdash; even with an intermediary stepping stone &mdash; you
       can effectively access every port of the node C.</p>
@@ -27,13 +26,12 @@
         <li>two separate SSH invocations, each boring a single span</li>
       </ul>
     </p>
-    <p>In both cases it is a good idea to <a href='ssh-public-key-authorization.html'>authorize public keys</a> on node B (for node A) and on node C (for node B).</p>
+    <p>In both cases it is a good idea to <a href='ssh-public-key-authentication.html'>implement SSH public key authentication</a> on node B (for node A) and on node C (for node B).</p>
     <h2>single SSH invocation that bores both tunnels</h2>
     I wanted to directly access port 8300 where PostgreSQL was running on machine C and used
     the following:
     <pre>
-ssh mperdikeas@ssh.esac.esa.int -L 18300:localhost:18302 ssh -N voops@esavo00.esac.esa.int -L 18302:localhost:8300
-    </pre>
+ssh username@ssh.esac.esa.int -L 18300:localhost:18302 ssh -N username@esavo00.esac.esa.int -L 18302:localhost:8300</pre>
     &hellip; following the above I was able to point <a href='https://www.dbvis.com'>DbVisualizer</a> in the local machine A (host: <tt>localhost</tt>, port: <tt>18300</tt>)
     and access the PostgreSQL database that was running in machine C with <a href='dbvis-using-tunnel.png'>this configuration</a>.
 <p>
@@ -49,14 +47,12 @@ ssh mperdikeas@ssh.esac.esa.int -L 18300:localhost:18302 ssh -N voops@esavo00.es
     <p>
     For a case similar to the above, use the following on machine A (mutatis mutandis):
     <pre>
-ssh mperdikeas@ssh.esac.esa.int -L 18300:localhost:18302
-    </pre>
+ssh username@ssh.esac.esa.int -L 18300:localhost:18302</pre>
     </p>
     <p>
-    &hellip; and the following on machine A (mutatis mutandis):
+    &hellip; and the following on machine B (mutatis mutandis):
     <pre>
-ssh voops@esavo00.esac.esa.int -L 18302:localhost:8300
-    </pre>
+ssh username@esavo00.esac.esa.int -L 18302:localhost:8300</pre>
     &hellip; the end result was the same in both cases.
     </p>    
   </body>
