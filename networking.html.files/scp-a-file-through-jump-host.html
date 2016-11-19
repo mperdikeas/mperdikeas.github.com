@@ -67,7 +67,7 @@ scp -o 'ProxyCommand ssh username@B -W %h:%p' someFile username@C:/some/path</pr
     </p>
     <p>
       The final improvement was to use <tt>sshpass</tt> to avoid being prompted (I had setup SSH public key authentication
-      between <tt>A</tt> and <tt>B</tt> but was unable to do so between <tt>B</tt> and <tt>C</tt>:
+      between <tt>A</tt> and <tt>B</tt> but was unable to do so between <tt>B</tt> and <tt>C</tt>):
       <pre>
 sshpass -f password scp -o 'ProxyCommand ssh username@B -W %h:%p' someFile username@C:/some/path</pre>
     </p>
