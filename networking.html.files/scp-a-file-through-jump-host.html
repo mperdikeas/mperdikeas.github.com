@@ -9,6 +9,7 @@
   </style>
   <body>
     <h1>how to <code>scp</code> a file through an intermediate host (a.k.a. jump host)</h1>
+    (with or without using an SSH tunnel)<br/>
     There's various methods (more recently I used and settled to <a href='#method-c'>method C</a>).
     <h2 id='method-a'>method A</h2>
     <a href='http://superuser.com/a/276549/138891'>source</a>
@@ -49,8 +50,9 @@ scp -P 1234 -pr prj/ username@localhost:/some/path</pre>
 
     <h2 id='method-c'>method C</h2>
     <p><a href='#method-b'>Method B</a> has the disadvantage that it requires that you use two shells, one for the tunnel and one
-      for the actual <tt>scp</tt>. It also requires you to manually set up and tear down the tunnel.
-      This method does not suffer from these two problems.
+      for the actual <tt>scp</tt>. It also requires you to manually set up and tear down the tunnel. Finally you have to guess
+      and reserve a local available port.
+      This method does not suffer from these three problems.
     </p>
     <p>I used the method recommended in <a href='http://stackoverflow.com/a/16144454/274677'>this answer</a> without the <tt>-o 'Host remote2'</tt> part as advised in the <a href='http://stackoverflow.com/a/32216956/274677'>comments to this answer</a>.
       <pre>
