@@ -32,6 +32,12 @@
       but rather I will present the streamlined series of steps (after lessons learned) that should apply for
       the next purchase</p>
     <ol class='pink-circles'>
+      <li><h2 id='run-windows-diagnostics'>run Windows diagnostics provided by the manufacturer</h2></li>
+      <p>Before wiping clean the Windows OS / malware with which your computer can pre-installed
+      be sure to run any diagnostic tests supplied by the manufacturer in case they are only provided
+      for Windows. In my particular case there were some battery diagnostics which I neglected to run
+      before formatting the drive and so I relied on <a href='#check-battery'>Linux battery diagnostics</a>.
+</p>
       <li><h2>research how you enter the BIOS</h2>
         In the afore-mentioned machine <kbd>F1</kbd> takes you to the BIOS and <kbd>F12</kbd>
         directly to the boot order menu (which you should use to boot from the USB flash drive).
@@ -177,9 +183,11 @@ sudo dpkg -i *.deb</pre>
         works as expected with either of the two monitors or both of them turned on.
         I used <tt>xrandr</tt> to selectively direct the output.
       </li>
-      <li><h2>check battery</h2></li>
+      <li><h2 id='check-battery'>check battery</h2></li>
+      <p><span class='nb'>NB:</span> be sure to execute <a href='#run-windows-diagnostics'>this step first</a></p>
       <p>
-        Apparently a number of Lenovo laptops are equiped with <a href='http://code.jasonbhill.com/linux/faulty-firmware-in-lenovo-batteries/'>faulty Panasonic batteries</a> (local printed copy
+        Apparently a number of Lenovo laptops (thankfully not the one I purchased)
+        are equiped with <a href='http://code.jasonbhill.com/linux/faulty-firmware-in-lenovo-batteries/'>faulty Panasonic batteries</a> (local printed copy
         <a href='travails-setting-up-T420.html.files/faulty-firmware-in-lenovo-batteries-Jason-s-code-blog.pdf'>here</a>).
       </p>
       <p>So, you might want to check that as well. The following incantations provide helpful information:
