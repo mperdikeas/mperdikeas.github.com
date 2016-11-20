@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <style>
+     h2 {font-size: 110%} </style>
+  </head>
+  <body>
+    <ol reversed class='pink-circles'>
+      <li><h2>how to install Tomcat 9 in Ubuntu 16.04</h2></li>
+      <p>I followed the instructions from <a href='http://tecadmin.net/install-tomcat-9-on-ubuntu/'>here</a> except for the 3rd step (the configuration of environmental variables) which I took care of in my local <tt>.bashrc</tt> script.
+        <pre>
+cd /opt/
+sudo wget http://mirrors.advancedhosters.com/apache/tomcat/tomcat-9/v9.0.0.M13/bin/apache-tomcat-9.0.0.M13.tar.gz
+sudo tar xvfz apache-tomcat-9.0.0.M13.tar.gz
+sudo ln -s apache-tomcat-9.0.0.M13 tomcat9</pre>
+      </p>
+      <p>Also, to be able to deploy content I did the following:
+        <pre>
+cd /opt/tomcat9
+sudo chown -R mperdikeas:mperdikeas .</pre>
+      </p>
+    </ol>
+  </body>
+</html>
