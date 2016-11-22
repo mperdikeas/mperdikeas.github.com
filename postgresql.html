@@ -116,6 +116,7 @@
     <br/>... and proceed to answer "yes" to the question whether the user ought to be a superuser.
     <br/>
     <br/>
+    <div id='edit-of-pg_hba.conf-9.4.5'>
     I then changed <tt>~/postgres-9.4.5/data/pg_hba.conf</tt>
       to contain:
       <pre>
@@ -126,7 +127,7 @@ host    all             all             127.0.0.1/32            md5
 # IPv6 local connections:
 host    all             all             ::1/128                 md5
 
-</pre>
+</pre></div>
 <br/>... and then connected as user <tt>postgres</tt> and changed its password to:
 <pre>
 $ which psql

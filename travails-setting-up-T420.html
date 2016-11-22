@@ -288,7 +288,24 @@ $ sudo -u postgres psql -c 'show hba_file'
 (1 row)
 </pre>
         </p>
-</pre>
+        <p>
+          Following the above, I edited the file <tt>pg_hba.conf</tt> (in the above) location
+          to contain the following (so I can run my create database / drop database scripts with
+          no hassles):
+          <pre>
+# Database administrative login by Unix domain socket
+local   all             postgres                                trust
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+# "local" is for Unix domain socket connections only
+local   all             all                                     trust
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5</pre>
+          <span class='nb'>NB:</span> the above is <i>slightly</i> different than what
+          is written <a href='postgresql.html#edit-of-pg_hba.conf-9.4.5'>here</a> as I changed the method to <tt>trust</tt>
+          for the <tt>postgres</tt> user as well.
+        </p>
       </li>
       <li>
         <h2>install Ant</h2>
