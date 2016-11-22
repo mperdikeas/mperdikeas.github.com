@@ -250,18 +250,44 @@ $ javac -version
 javac 1.8.0_111</pre>
       </li>
       <li><h2>install PostgreSQL</h2>
+        <p.
         I installed PostgreSQL out of the official Ubuntu repo simply using:
         <pre>
 sudo apt-get update
 sudo apt-get install postgresql postgresql-contrib</pre>
-        
+        </p>
+        <p>
 The version installed was <tt>9.5.5</tt> as evidenced by:
-
 <pre>
 sudo -u postgres psql postgres -c 'SELECT version()' | grep PostgreSQL</pre>
 
 You may run the above incantation fresh out of the install without changing anything provided ofcourse you have
 <tt>sudo</tt> privilleges.
+        </p>
+        <p>I verified that the UNIX user <tt>postgres</tt> was locked
+          as <a href='http://serverfault.com/a/325596/139074'>it ought to be</a>:
+          <pre>
+$ sudo passwd -S postgres
+postgres L 11/12/2016 0 99999 7 -1</pre>
+        </p>
+        <p>I then asked PostgreSQL to tell me the location of
+          the <a href='http://stackoverflow.com/a/3006482/274677'>data directory</a>
+          and the location of the <a href='http://askubuntu.com/q/256534/89663'><tt>pg-hba.conf</tt> file</a>:
+          <pre>
+$ sudo -u postgres psql -c 'show data_directory'
+        data_directory
+------------------------------
+ /var/lib/postgresql/9.5/main
+(1 row)
+
+mperdikeas@mp-t420:~#
+$ sudo -u postgres psql -c 'show hba_file'
+               hba_file
+--------------------------------------
+ /etc/postgresql/9.5/main/pg_hba.conf
+(1 row)
+</pre>
+        </p>
 </pre>
       </li>
       <li>
