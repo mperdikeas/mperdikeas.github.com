@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <style>
+     h2 {font-size: 110%} </style>
+  </head>
+  <body>
+    <ol reversed class='pink-circles'>
+      <li><h2>how I installed Tomcat 8.5 in Ubuntu 16.04</h2></li>
+      Below are the relevant commands from my history:
+      <pre>
+ 5390  wget http://mirror.olnevhost.net/pub/apache/tomcat/tomcat-8/v8.5.8/bin/apache-tomcat-8.5.8.tar.gz
+ 5391  cd /opt/
+ 5393  sudo mv ~/Downloads/apache-tomcat-8.5.8.tar.gz .
+ 5394  sudo tar xvfz apache-tomcat-8.5.8.tar.gz
+ 5395  sudo ln -s apache-tomcat-8.5.8 tomcat8.5
+ 5396  cd tomcat8.5
+ 5401  sudo chown -R mperdikeas:mperdikeas  . </pre>
+      I also set <code>export CATALINA_HOME=/opt/tomcat8.5</code> in my local
+      <tt>.bashrc</tt>.
+
+  </body>
+</html>
