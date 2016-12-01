@@ -2,9 +2,17 @@
 <head>
 <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
 <link rel='icon' href='/knowledge-favicon.ico'/>
+<style>
+ ol.pink-circles > li {
+   font-size: 110%;
+   background: plum;
+   }
+</style>
 </head>
 <body>
-  <ol reversed>
+  <ol class='pink-circles' reversed>
+    <li>awesome tools to probe stack traces inside running JVMs</li>
+    <tt>jstack</tt> and <tt>jinfo</tt>. <tt>jstack</tt> in particular shows you the stack trace of every thread running in the particular JVM whose pid you provide as argument.
     <li><a href='./java.html.files/JUnit4TestAdapterCache-for-Ant-lte-1_9_3.html'><tt>java.lang.NoClassDefFoundError: junit/framework/JUnit4TestAdapterCache</tt> in Ant version &le; 1.9.4</a></li>
     
 <li>installing Java 7 64bit on Ubuntu 14.04.5</li>
