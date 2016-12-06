@@ -7,6 +7,28 @@
   </head>
   <body>
     <ol reversed class='pink-circles'>
+      <li><h2>how I configured SSL on Tomcat 8.5 in Ubuntu 16.04 with a self-signed certificate</h2></li>
+      <p>I followed the instructions from <a href='https://tomcat.apache.org/tomcat-8.5-doc/ssl-howto.html'>this page</a>.</p>
+      <p>Basically, I only did two things:
+        <ol>
+          <li>created a new JKS keystore from scratch with a self-signed certificate</li>
+          <pre>
+keytool -genkey -alias tomcat -keyalg RSA </pre>
+          <li>uncommented the 8443 connector in the <tt>server.xml</tt> file in Tomcat's <tt>conf</tt> directory
+            and modified it to read as follows:
+            <pre>
+&lt;Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+         maxThreads="150" SSLEnabled="true"
+         scheme="https" secure="true"
+         keystoreFile="${user.home}/.keystore" keystorePass="changeme"
+         clientAuth="false" sslProtocol="TLS"/&gt;</pre>
+            &hellip; where the value for the <tt>keystorePass</tt> attribute had to match what I provided
+            when I run the <tt>keytool</tt> program.
+            </li>
+        </ol>
+
+
+      </p>
       <li><h2>how I installed Tomcat 8.5 in Ubuntu 16.04</h2></li>
       Below are the relevant commands from my history:
       <pre>
