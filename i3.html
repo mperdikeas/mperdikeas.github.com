@@ -2,9 +2,28 @@
   <head>
     <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
     <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style type='text/css'>
+   .console {
+     background-color: black;
+     color: white;
+     font-family: monospace;
+   }
+ ol.pink-circles > li {
+     font-size: 110%;
+     background: plum;     
+     }
+  </style>
   </head>
   <body>
-    <ol reversed>
+    <ol class='pink-circles' reversed>
+      <li>make DbVisualizer appear in the <tt>dbmen_run</tt> bar that gets displayed when
+        <code>Meta+D</code> is pressed</li>
+      I had installed DbVisualizer in <code>~/DbVisualizer</code>. From a terminal I can
+        simply type <code>dbvis</code> and start it as it is placed in the PATH by my
+        <code>.bashrc</code> but <a href='https://faq.i3wm.org/question/4973/config-dmenu-not-picking-up-user-path.1.html'>i3wm
+          is not responsible for sourcing .bashrc</a>. However, in my <code>.profile</code> (which obviously gets taken into
+        account) I add <code>~/.local/bin</code> in the PATH so I simply created a symlink from <code>~/.local/bin</code> to
+        <code>~/DbVisualizer/dbvis</code>.
       <li>reload <tt>.i3/config</tt> configuration from bash</li>
       <p>
         <pre>
