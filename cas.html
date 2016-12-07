@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <style>
+     h1 {
+       font-size: 80%;
+       margin: 0 0 1em 0;
+       padding: 0;
+     }
+     ol {
+       margin-top: 0;
+       }
+     h2 {
+        font-size: 110%;
+     }
+     h2:first-child {
+margin: 0;
+       }
+    </style>
+  </head>
+  <body>
+<h1>CAS notes</h1>
+    <ol class='pink-circles' reversed>
+      <li><h2>how CAS works</h2>
+      <p>
+      I found the following diagram from <a href='https://apereo.github.io/cas/4.2.x/protocol/CAS-Protocol.html'>here</a> very elucidating:<br/>
+        <a href="cas.html.files/cas_flow_diagram.png">
+          <img height="200px" width="80px" src="cas.html.files/cas_flow_diagram.png"/>
+        </a>
+      </p>
+      <p>I believe I get all parts of the interaction except the setting of the <tt>MOD_AUTH_CAS_S</tt> cookie
+        in the second access to the application (<i>protected app #2</i>) but I understand this is related to an
+      Apache-specific module.</p>
+      </li>
+    </ol>
+  </body>
+</html>
