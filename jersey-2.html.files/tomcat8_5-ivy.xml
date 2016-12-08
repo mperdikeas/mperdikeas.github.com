@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ivy-module version="2.0" 
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation="mjb44" module="tap-service-webapp" status="integration"/>
+    <configurations>
+        <conf name="compile-time" description="jars used while building the war"/>
+        <conf name="deploy-time"  description="jars used by the war when deployed in Tomcat"/>
+    </configurations>
+    <dependencies>
+
+        <dependency org="org.glassfish.jersey.core" name="jersey-server"        rev="2.24.1"        conf="compile-time->master"/>
+        <dependency org="org.glassfish.jersey.core" name="jersey-common"        rev="2.24.1"        conf="compile-time->master"/>
+        <dependency org="org.glassfish.jersey.core" name="jersey-client"        rev="2.24.1"        conf="compile-time->master"/>
+        <dependency org="javax.servlet"             name="javax.servlet-api"    rev="3.1.0"         conf="compile-time->master"/>
+        <dependency org="com.google.code.gson"      name="gson"                 rev="2.8.0"         conf="compile-time->master"/>
+        <dependency org="javax"                     name="javaee-api"           rev="7.0"           conf="compile-time->master"/>
+        <dependency org="junit"                     name="junit"                rev="4.12"          conf="compile-time->master"/>
+        <dependency org="com.google.guava"          name="guava"                rev="20.0"          conf="compile-time->master"/>
+        
+
+        <dependency org="org.glassfish.jersey.core" name="jersey-server"        rev="2.24.1"        conf="deploy-time->default"/>
+        <dependency org="org.glassfish.jersey.core" name="jersey-common"        rev="2.24.1"        conf="deploy-time->default"/>
+        <dependency org="org.glassfish.jersey.core" name="jersey-client"        rev="2.24.1"        conf="deploy-time->default"/>
+        <dependency org="org.glassfish.jersey.containers" name="jersey-container-servlet-core" rev="2.24.1" conf="deploy-time->default"/>
+        <dependency org="javax"                     name="javaee-api"           rev="7.0"           conf="deploy-time->master"/>
+        <dependency org="com.google.code.gson"      name="gson"                 rev="2.8.0"         conf="deploy-time->default"/>
+        <dependency org="commons-dbutils"           name="commons-dbutils"      rev="1.6"           conf="deploy-time->default"/>
+        <dependency org="org.postgresql"            name="postgresql"           rev="9.4.1212.jre7" conf="deploy-time->default"/>
+        <dependency org="junit"                     name="junit"                rev="4.12"          conf="deploy-time->default"/>
+        <dependency org="org.jboss.weld.servlet"    name="weld-servlet"         rev="2.4.1.Final"   conf="deploy-time->default"/><!-- we are adding this so we can use the javax.inject.Singleton annotation for our Jersey JAX-RS POJO resources -->
+        <dependency org="org.slf4j"                 name="slf4j-api"            rev="1.7.21"        conf="deploy-time->default"/>
+        <dependency org="com.sun.mail"              name="javax.mail"           rev="1.5.6"         conf="deploy-time->default"/>
+    </dependencies>
+</ivy-module>
+
