@@ -8,9 +8,18 @@
     <link rel="stylesheet" type="text/css" href="./index.css">
     <style>
      h1 {
-       font-size: 16px;
+       font-size: 110%;
        color: black;
      }
+     h2 {
+       font-size: 104%;
+       color: black;
+     }
+     h3 {
+       font-size: 101%;
+       color: black;
+       margin: 0;
+     }          
      dl > dd {
        font-style: italic;
      }
@@ -18,15 +27,18 @@
        font-size: 70%;
        }
     </style>
-    <title>Menelaos Perdikeas potpourri notes</title>
+    <title>Menelaus Perdikeas scratchpad</title>
   </head>
 
   <body>
+
+    <h1>
     <a href="http://stackexchange.com/users/695155">
       <img src="http://stackexchange.com/users/flair/695155.png" width="208" height="58" alt="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites">
     </a>
-    <h1><a href='cv-mperdikeas.pdf'>My CV</a></h1>
-    <h1>My repositories</h1>
+    </h1>
+    <h2><a href='cv-mperdikeas.pdf'>My CV</a></h2>
+    <h2>My repositories</h2>
     Some of my (public) repositories:
     <ul>
       <li><a href="https://github.com/mperdikeas/environment">a github repo containing my <tt>.bashrc</tt>, <tt>.emacs</tt>
@@ -69,7 +81,7 @@
         </li>      
       </ul>
     </p>
-    <p>Some of my npm-published <b>Node</b>.js modules:
+    <h2>Some of my npm-published <b>Node</b>.js modules:</h2>
       <dl>
         <dt><a href='https://www.npmjs.com/package/obj-properties'>obj-properties</a></dt>
         <dd>
@@ -82,13 +94,12 @@
           be active at a time.
         </dd>        
       </dl>
-    </p>
     <p>
     What follows is a motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
     over the years and posted here for the benefit of my future self (and as such unlikely to be useful to anyone else). 
     </p>    
-    <p>
-      <b>Linux:</b>
+
+      <h2>Linux:</h2>
       <ul>
         <li><a href="i3.html">i3 window manager</a></li>
         <li><a href="general.html">general</a></li>
@@ -101,28 +112,32 @@
         <li><a href="emacs.html">emacs</a></li>
         <li><a href="http://www.ibm.com/developerworks/views/linux/libraryview.jsp?site_id=1&contentarea_by=Linux&sort_by=Date&sort_order=2&start=1&end=18&topic_by=-1&product_by=&type_by=Articles&show_abstract=true&search_by=learn%20linux,%20101&industry_by=">IBM technical library</a></li>
       </ul>
-    </p>
-    <b>Front-end development:</b>
+
+    <h2>Front-end development:</h2>
     <ul>
-    <li><a href='html-css.html'>Web, HTML and CSS resources</a></li>
-    <li><a href='react-webpack.html'>ReactJS and webpack</a></li>
-    <li><a href='babel-webpack.html'>Babel and webpack</a>    </li>
-    <li><a href='facebook-flow.html'>Flow static type checker</a></li>
-    <li><a href="javascript.html">JavaScript</a></li>
-    <li><a href="npm-and-node.html">npm, Babel and ECMAScript2016</a></li>
-    <li><a href="web-productivity.html">productivity</a></li>
-    <li><a href="typescript.html">typescript</a></li>
-    <li><a href="struts-1.1/res_rep.pdf">Struts version 1 guide</a></li>
+      <li><a href='html-css.html'>Web, HTML and CSS resources</a></li>
+      <li><a href='react-webpack.html'>ReactJS and webpack</a></li>
+      <li><a href='babel-webpack.html'>Babel and webpack</a>    </li>
+      <li><a href='facebook-flow.html'>Flow static type checker</a></li>
+      <li><a href="javascript.html">JavaScript</a></li>
+      <li><a href="npm-and-node.html">npm, Babel and ECMAScript2016</a></li>
+      <li><a href="web-productivity.html">productivity</a></li>
+      <li><a href="typescript.html">typescript</a></li>
+      <li><a href="struts-1.1/res_rep.pdf">Struts version 1 guide</a></li>
     </ul>
-    <p></p>
-    <b>XML specifications</b>
+    <h2>Back-end development:</h2>
+    <ul>
+      <li><a href='java.html'>Java</a></li>
+    </ul>    
+    <h2>XML specifications</h2>
     <a href="xml.html">XML</a>
     <a href="wsdl.html">WSDL</a>
-    <p></p>
-    <b>Sui-generis notes:</b>
+
+    <h2>Sui-generis notes:</h2>
     <ul>
-      <b><i>on various libraries and tools:</i></b>
+      <h3><i>on various libraries, tools, technologies and protocols:</i></h3>
       <ul class='horizontal-list'>
+        <li><a href="cas.html">CAS protocol</a></li>        
         <li><a href="javax-servlet.html">javax.servlet</a></li>
         <li><a href="jax-rs.html">JAX-RS</a></li>        
         <li><a href="jax-ws.html">JAX-WS</a></li>
@@ -134,11 +149,10 @@
         <li><a href="shiro.html">Shiro</a></li>
       </ul>
       <p></p>
-      <b><i>on languages:</i></b>
-      <a href="java.html">Java</a>
+      <h3><i>on languages:</i></h3>
       <a href="python.html">python</a>
       <p></p>
-      <b><i>on platforms:</i></b>
+      <h3><i>on platforms:</i></h3>
       <a href="postgresql.html">Postgresql</a>
       <a href="pgsphere.html">pgSphere</a>
       <a href="tomcat7.html">Tomcat 7</a>
@@ -148,7 +162,7 @@
       <a href="jboss7.html">JBoss 7</a>
       <a href="vmware.html">VMWare</a>
       <p></p>
-      <b><i>travails:</i></b>
+      <h3><i>travails:</i></h3>
       <ul>
         <li><a href="travails-setting-up-T420.html">Installing Ubuntu 16.04 64 bit on my Lenovo ThinkPad T420 and setting up the machine</a></li>
         <li><a href="jboss-as-7_1-config.html">JBoss AS 7.1 configuration</a></li>
@@ -157,12 +171,12 @@
         <li><a href="clojure-repl-emacs.html">configure Clojure Mode and Clojure REPL in Emacs</a></li>
         <li><a href="clear-case.html">the ClearCase abomination</a></li>
       </ul>
-      <b><i>eternal:</i></b>
+      <h3><i>eternal:</i></h3>
       <ul>
         <li><a href='./why-of-Y.pdf'>Why of Y</a></li>
         </li>
       </ul>
-      <b><i>misc:</i></b>
+      <h3><i>misc:</i></h3>
       <ul>
         <li><a href="acronyms.html">some unusual acronyms I recently encountered</a>
         <li><a href="https://github.com/vhf/free-programming-books">list of free programming books, free online courses, etc.</a></li>
