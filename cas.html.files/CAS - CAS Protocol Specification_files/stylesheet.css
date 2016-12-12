@@ -1,0 +1,161 @@
+/*******************************************************************************
+Slate Theme for GitHub Pages
+by Jason Costello, @jsncostello
+*******************************************************************************/
+@import url(pygment_trac.css);
+html, body { font-family: 'Lato', sans-serif; height: 100%; background: #333; }
+
+header { /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#153e50+0,003380+100 */ background: #153e50; /* Old browsers */ background: -moz-linear-gradient(top, #153e50 0%, #003380 100%); /* FF3.6-15 */ background: -webkit-linear-gradient(top, #153e50 0%, #003380 100%); /* Chrome10-25,Safari5.1-6 */ background: linear-gradient(to bottom, #153e50 0%, #003380 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */ color: #fff; padding: 10px; }
+header h1 { font-weight: 300; font-size: 16px; margin-top: 1rem; }
+header img { max-width: 70%; height: auto; }
+
+h1 { font-size: 1.75rem; }
+
+h2 { font-size: 1.5rem; }
+
+h3 { font-size: 1.25rem; }
+
+.cas-docs-container { padding-top: 10px; margin-top: 50px; }
+
+.header-link { position: absolute; left: -0.5em; opacity: 0; \-webkit-transition: opacity 0.2s ease-in-out 0.1s; \-moz-transition: opacity 0.2s ease-in-out 0.1s; \-ms-transition: opacity 0.2s ease-in-out 0.1s; }
+
+h2:hover .header-link, h3:hover .header-link, h4:hover .header-link, h5:hover .header-link, h6:hover .header-link { opacity: 1; }
+
+pre { white-space: pre-wrap; }
+
+.navbar-cas { border-width: 0; background-color: #153e50; color: #ffffff; font-family: arial, sans-serif; top: 0; position: fixed; width: 100%; border-radius: 0; }
+.navbar-cas h1 { font-size: 1.10rem; text-align: right; margin-left: 10px; margin-top: 15px; float: left; }
+.navbar-cas .logo { padding: 3px; width: 56px; margin: 7px 2px 5px 0; }
+
+.navbar { padding: 0; }
+
+.navbar-toggler { float: left; margin-left: 5px; margin-top: 5px; margin-right: 5px; }
+
+.navbar-cas li > a, .navbar-toggler { color: #efefef; }
+
+.navbar-cas .dropdown-menu li a { color: #2A4888; }
+
+.navbar-cas .dropdown-menu li > a { padding-left: 30px; }
+
+.navbar-cas li > a:hover, .navbar-cas li > a:focus, .navbar-cas .open, .navbar-cas .open > a, .navbar-cas .open > a:hover, .navbar-cas .open > a:focus { background-color: #2A4888; color: #fff; }
+
+.navbar-toggler, .close { outline: 0; }
+
+.navbar-toggler .icon-bar { background-color: #fff; }
+
+.navbar-nav .nav-item { float: none; margin-left: 1rem; }
+
+@media (min-width: 48em) { .navbar-cas { position: relative; background-color: #0090ff; }
+  .navbar-cas li > a { color: #efefef; padding: 0 .5rem; }
+  .navbar-nav .nav-item { float: left; } }
+#toolbarIcons { display: none; }
+
+.highlight { background-color: transparent; position: relative; margin-bottom: 40px; }
+.highlight pre { padding: 10px; background-color: #f8f8f4; border: 1px solid #ececec; overflow: auto; margin-bottom: 0; }
+.highlight pre, .highlight code { font-family: "Consolas", "Andale Mono", "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace; font-size: .8rem; }
+.highlight table td { border-top: none; }
+.highlight table td.gutter { padding-right: 0; }
+.highlight table td.code { width: 100%; padding-left: 0; }
+.highlight table td.code pre { border-left-width: 0; }
+
+.copy-code-button { border: 1px solid peachpuff; padding: 3px 5px 5px; position: absolute; bottom: -21px; left: 12px; }
+
+.copy-button { cursor: pointer; border: 0; font-size: 10px; text-transform: uppercase; font-weight: 500; color: #795548; background-color: transparent; position: absolute; top: 15px; right: 15px; }
+.copy-button:hover { text-decoration: underline; }
+.copy-button:focus { outline-width: 1px; }
+.copy-button:before { content: ''; display: inline-block; width: 16px; height: 16px; margin-right: 3px; background-size: contain; background-image: url("../images/clipboard.svg"); background-repeat: no-repeat; position: relative; top: 3px; }
+
+/*
+
+.highlight { .btn { -webkit-transition: opacity 0.3s ease-in-out; -o-transition: opacity 0.3s ease-in-out; transition: opacity 0.3s ease-in-out; opacity: 0; padding: 2px 6px; position: absolute; right: 15px; top: 15px; line-height: 20px; background-color: #eee; background-image: linear-gradient(#fcfcfc,#eee); border: 1px solid #d5d5d5;
+ &:focus:hover, &.selected:focus { border-color: #51a7e8; } &:hover { background-color: #ddd; background-image: linear-gradient(#eee,#ddd); border-color: #ccc; } } &:hover .btn { opacity: 1; }
+}
+.clippy { margin-top: -3px; position: relative; top: 3px;
+}*/
+footer { border-top: 1px solid #333; background: #3d664f; clear: both; padding: 10px; color: #f2f2f2; }
+footer a { color: #fff; }
+footer a:hover { color: #43adff; text-shadow: #0090ff 0 0 2px; }
+
+.box { left: 0; position: absolute; right: 0; top: 0; background-color: #333; }
+
+#main { background-color: white; padding-left: 0; padding-right: 0; }
+
+.wrapper, .row { height: 100%; margin-left: 0; margin-right: 0; }
+
+.wrapper, .row { height: 100%; margin-left: 0; margin-right: 0; }
+
+.wrapper:before, .wrapper:after { content: ""; display: table; }
+
+.wrapper:after { clear: both; }
+
+.column { height: 100%; overflow: auto; *zoom: 1; }
+.column:before, .column:after { content: ""; display: table; }
+.column:after { clear: both; }
+.column .padding { padding: 20px; }
+
+.row-offcanvas { position: relative; -webkit-transition: all 0.25s ease-out; -moz-transition: all 0.25s ease-out; transition: all 0.25s ease-out; }
+
+.row-offcanvas-right { right: 0; }
+
+.row-offcanvas-right.active { right: 168px; }
+
+.row-offcanvas-right.active .sidebar-offcanvas { position: absolute; top: 0; margin-right: 5px; right: -173px; width: 203px; }
+
+#pageContents { padding: 10px; height: 100%; }
+#pageContents h2 { font-size: 1.25rem; border-bottom: 1px solid #efefef; padding-bottom: 5px; margin-bottom: 15px; }
+#pageContents ul { list-style: none; margin-left: 0; padding-left: 0px; }
+#pageContents ul li { list-style: none; margin-bottom: 5px; }
+#pageContents a { color: inherit; font-size: 13px; }
+
+#sidebar, .sidebar { padding: 0px; padding-top: 15px; color: white; background-color: #333; }
+#sidebar a, .sidebar a { color: inherit; }
+#sidebar .nav, .sidebar .nav { font-size: 13px; }
+#sidebar .nav li > a, .sidebar .nav li > a { position: relative; display: block; padding: 5px 15px; }
+#sidebar .nav li > a:hover, #sidebar .nav li > a:focus, .sidebar .nav li > a:hover, .sidebar .nav li > a:focus { background-color: #393939; text-decoration: none; }
+
+/** Collapse menu */
+#lg-menu li.active a { background-color: transparent; }
+
+#lg-menu a i.expand { float: right; font-family: FontAwesome; font-style: normal; font-weight: normal; text-decoration: inherit; font-size: 12px; padding-right: 0.5em; }
+
+#lg-menu a.collapsed i.expand:before { content: "\f105"; }
+
+#lg-menu li > a.collapsed { background-color: transparent; }
+
+#lg-menu a i.expand:before { content: "\f107"; }
+
+#lg-menu a ul, #lg-menu ul li { list-style: none; }
+
+#lg-menu ul li { margin-bottom: 5px; margin-left: 20px; }
+#lg-menu ul li > ul { margin-right: -4px; }
+#lg-menu ul li > ul li { padding-left: 20px; }
+#lg-menu ul li > ul li a { margin-left: -15px; }
+#lg-menu ul li > ul li > ul { padding-left: 0; }
+#lg-menu ul li > ul li > ul li { padding-left: 0; }
+
+@media (min-width: 34em) { .row-offcanvas-right.active .sidebar-offcanvas { width: 223px; } }
+@media (min-width: 48em) { .row-offcanvas-right.active .sidebar-offcanvas { width: 223px; }
+  #sidebar .nav li > a { padding: 5px 15px; } }
+/* Extra small devices (portrait phones, less than 34em)*/
+/* No media query since this is the default in Bootstrap*/
+/* Small devices (landscape phones, 34em and up) */
+@media (min-width: 34em) { html { font-size: 16px; }
+  header { padding: 5px; }
+  header h1 { font-size: 1.5rem; }
+  header img { max-width: 100%; height: auto; } }
+/* Medium devices (tablets, 48em and up)*/
+@media (min-width: 48em) { h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.5rem; }
+  html { font-size: 16px; }
+  header { padding: 30px; }
+  #toolbarIcons { display: block; float: right; text-align: right; }
+  #toolbarIcons a { margin: 2px 5px; font-size: 1.25rem; color: #999999; }
+  #toolbarIcons a:hover { color: #000000; }
+  .cas-docs-container { margin-top: 0; }
+  .cas-docs-sidebar { padding-left: 20px; }
+  #forkme_banner { display: block; position: absolute; top: 0; right: 10px; z-index: 10; padding: 10px 50px 10px 10px; color: #fff; background: url("../images/blacktocat.png") #0090ff no-repeat 95% 50%; font-weight: 300; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; margin-top: -30px; } }
+/*Large devices (desktops, 62em and up)*/
+@media (min-width: 62em) { html { font-size: 16px; } }
+/*Extra large devices (large desktops, 75em and up)*/
