@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 110%; background: grey; color: white;}
+  </style>
+  <body>
+    <h1>How to setup a VPN using <tt>vpnc</tt> on Linux</h1>
+    <a href='https://www.lullabot.com/articles/using-vpnc-as-a-command-line-vpn-client'>source</a>
+    <p>
+    You first need to install <tt>vpnc</tt>:
+    <pre>
+sudo apt-get install vpnc</pre>
+    </p>
+    <p>
+      Following that you can directly invoke <tt>vpnc</tt> (it requires <tt>sudo</tt>):
+      <pre>
+sudo vpnc</pre>      
+      &hellip; and answer the prompts as shown below (mutatis mutandis):
+      <pre>
+$ sudo vpnc
+Enter IPSec gateway address: &lt;enter the server address&gt;
+Enter IPSec ID for 131.142.33.100: &lt;this is the group name (ask you network admins)&gt;
+Enter IPSec secret for perdikeasm@131.142.33.100: &lt;the password for the group (again ask the network admins)&gt;
+Enter username for 131.142.33.100: &lt; your username &gt;
+Enter password for perdikeasm@131.142.33.100: &lt; your password&gt;</pre>
+    </p>
+    <p>In my case the network admins provided the values they had to provide in a CfA email on 2016-12-16.</p>
+    <p>
+      You can then disconnect with:
+      <pre>
+sudo vpnc-disconnect</pre>
+    </p>
+    <p>
+      To avoid having to manually enter all this information I did the following:
+      <pre>
+sudo -i
+cp /etc/vpnc/default.conf /etc/vpnc/myvpn.conf
+\emacs -nw /etc/vpnc/myvpn.conf</pre>
+      And basically set the above values in the <tt>myvpn.conf</tt> file (remember to uncomment the lines).<br/>
+      NB: I had to keep the line that read: <tt>IKE Authmode hybrid</tt> commented as I was getting
+      <a href='http://www.gossamer-threads.com/lists/vpnc/devel/3719'>this problem</a>.
+    </p>
+    <p>
+      Once you have the <tt>myvpn.conf</tt> file properly setup you can then simply do:
+      <pre>sudo vpnc myvpn.conf</pre> (without having to be in the <tt>/etc/vpnc/</tt> directory)
+    </p>
+    <p>To bring down the VPN do <code>sudo vpnc-disconnect</code> like before.</p>
+    <p>For added security (if you are that type of person) you may leave the password line commented
+    as well, this way you'll be prompted for the password each time.</p>
+  </body>
+</html>
