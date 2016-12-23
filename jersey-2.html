@@ -2,45 +2,41 @@
   <head>
     <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
     <link rel='icon' href='/knowledge-favicon.ico'/>
-    <style>
-     h2 {font-size: 110%} 
-     xmp {border: 1px solid black;
-     background-color: eee;}
-    </style>
   </head>
   <body>
     <ol reversed class='pink-circles'>
-      <li><h2>configuration for Jersey 2 in Tomcat 8.5</h2></li>
-      <h3>dependencies</h3>
+      <li>configuration for Jersey 2 in Tomcat 8.5</li>
+      <ul>
+        <li>dependencies</li>
         <a href='jersey-2.html.files/tomcat8_5-ivy.xml'>This</a> is the IVY file that I used (contains some extra dependencies I don't have time to trim right now).
-      <h3>web.xml</h3>        
+        <li>web.xml</li>        
         Regarding the <tt>web.xml</tt> there's two options I've discovered to work:
         <ol>
           <li><h4>use an <tt>Application</tt> class</h4></li>
-            In this case you'd have the following in your <tt>web.xml</tt>:
-            <xmp>
-    <servlet>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <servlet-class>
-            org.glassfish.jersey.servlet.ServletContainer
-        </servlet-class>
+          In this case you'd have the following in your <tt>web.xml</tt>:
+          <xmp>
+            <servlet>
+              <servlet-name>jersey-serlvet</servlet-name>
+              <servlet-class>
+                org.glassfish.jersey.servlet.ServletContainer
+              </servlet-class>
 
-        <init-param>
-            <param-name>javax.ws.rs.Application</param-name>
-            <param-value>mjb44.auth.dbdalrest.RestApplication</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+              <init-param>
+                <param-name>javax.ws.rs.Application</param-name>
+                <param-value>mjb44.auth.dbdalrest.RestApplication</param-value>
+              </init-param>
+              <load-on-startup>1</load-on-startup>
+            </servlet>
 
-    <servlet-mapping>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <url-pattern>/jax-rs/*</url-pattern>
-    </servlet-mapping>
-            </xmp>
+            <servlet-mapping>
+              <servlet-name>jersey-serlvet</servlet-name>
+              <url-pattern>/jax-rs/*</url-pattern>
+            </servlet-mapping>
+          </xmp>
 
-            &hellip; and also define a <tt>javax.ws.rs.core.Application</tt> class which would return your
-            actual resources:
-            <pre>
+          &hellip; and also define a <tt>javax.ws.rs.core.Application</tt> class which would return your
+          actual resources:
+          <pre>
 package mjb44.auth.dbdalrest;
 
 import java.util.Arrays;
@@ -53,28 +49,28 @@ import javax.ws.rs.core.Application;
 
 public class RestApplication extends Application {
     public Set<Class<?>> getClasses() {
-        return new HashSet<Class<?>>(Arrays.asList(UserDatabaseResource.class));
-    }
-}</pre>
+            return new HashSet<Class<?>>(Arrays.asList(UserDatabaseResource.class));
+            }
+            }</pre>
             <li><h4>use package scanning</h4></li>
             In this case you don't need an <tt>javax.ws.rs.core.Application</tt> class and your <tt>web.xml</tt> looks like the following:
             <xmp>
-    <servlet>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <servlet-class>
-            org.glassfish.jersey.servlet.ServletContainer
-        </servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>mjb44.auth.dbdalrest</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
+              <servlet>
+                <servlet-name>jersey-serlvet</servlet-name>
+                <servlet-class>
+                  org.glassfish.jersey.servlet.ServletContainer
+                </servlet-class>
+                <init-param>
+                  <param-name>jersey.config.server.provider.packages</param-name>
+                  <param-value>mjb44.auth.dbdalrest</param-value>
+                </init-param>
+                <load-on-startup>1</load-on-startup>
+              </servlet>
 
-    <servlet-mapping>
-        <servlet-name>jersey-serlvet</servlet-name>
-        <url-pattern>/jax-rs/*</url-pattern>
-    </servlet-mapping>
+              <servlet-mapping>
+                <servlet-name>jersey-serlvet</servlet-name>
+                <url-pattern>/jax-rs/*</url-pattern>
+              </servlet-mapping>
 
             </xmp>
         </ol>
@@ -82,10 +78,11 @@ public class RestApplication extends Application {
           There is some code in <tt>playground/cookies/006-CAS-like-approach-to-sso</tt> that
           shows how this is done.<b>TODO:</b> add github link.
         </p>
-      <p>
-        More information and additional options (which I have not fully or conclusively explored)
-        are available <a href="https://jersey.java.net/nonav/documentation/2.0/deployment.html">here</a>.
-      </p>
+        <p>
+          More information and additional options (which I have not fully or conclusively explored)
+          are available <a href="https://jersey.java.net/nonav/documentation/2.0/deployment.html">here</a>.
+        </p>
+      </ul>
     </ol>
   </body>
 </html>

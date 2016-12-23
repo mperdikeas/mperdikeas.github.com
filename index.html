@@ -8,15 +8,15 @@
     <link rel="stylesheet" type="text/css" href="./index.css">
     <style>
      h1 {
-       font-size: 110%;
        color: black;
      }
      h2 {
-       font-size: 104%;
-       color: black;
+       font-size: 110%;
+       color: white;
+       background: #888;
      }
      h3 {
-       font-size: 101%;
+       font-size: 103%;
        color: black;
        margin: 0;
      }          
@@ -25,7 +25,7 @@
      }
      #misc-non-technical {
        font-size: 70%;
-       }
+     }
     </style>
     <title>Menelaus Perdikeas scratchpad</title>
   </head>
@@ -33,11 +33,11 @@
   <body>
 
     <h1>
-    <a href="http://stackexchange.com/users/695155">
-      <img src="http://stackexchange.com/users/flair/695155.png" width="208" height="58" alt="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites">
-    </a>
+      <a href="http://stackexchange.com/users/695155">
+        <img src="http://stackexchange.com/users/flair/695155.png" width="208" height="58" alt="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites">
+      </a>
     </h1>
-    <h2><a href='cv-mperdikeas.pdf'>My CV</a></h2>
+    <a href='cv-mperdikeas.pdf'>My CV</a>
     <h2>My repositories</h2>
     Some of my (public) repositories:
     <ul>
@@ -45,146 +45,140 @@
         and i3 configuration files</a>
         <li><a href="https://github.com/mperdikeas/tools">a collection of Bash tools and utilities</a></li>
         <li><a href="https://github.com/mperdikeas/euler-js">project Euler solutions in JavaScript (Node.js)</a></li>
+        <!--
         <li><a href="https://github.com/mperdikeas/playground">playground projects</a> working with various technologies (to explore and exemplify how stuff works)</li>
+        -->
         <li><a href="https://github.com/mperdikeas/archetypes">archetype projects</a> starter projects / setups for various
           technologies (like <i>playground</i> but less exploratory, more stable and meant to be actually used to bootstrap
           projects)
         </li>
         <!--li><a href="https://github.com/mperdikeas/java-mutil">a collection of pre-Java 7 utilities</a>
-        <b>NB: </b>not actively maintained any more - I've also moved to a much better Ant/Ivy <tt>build.xml</tt> template and workflow
-        </li-->
+             <b>NB: </b>not actively maintained any more - I've also moved to a much better Ant/Ivy <tt>build.xml</tt> template and workflow
+             </li-->
         <li>A collection of <a href="https://github.com/mperdikeas/ocaml-mutil">OCaml utilities</a> I put together and found useful when doing <a href="https://projecteuler.net/">project Euler</a> stuff in OCaml</li>
 
     </ul>
-    <br/>
-    <p>
-      <b>JavaScript games I've developed (play them with sound)</b>
-      <ul>
-        <li>Using <a href='https://facebook.github.io/react/'>React</a>:
-          <ul>
-            <li><a href='./tetris/index.html'>Tetris game</a>
-              (<a href='https://github.com/mperdikeas/js-react-tetris'>github repo</a>)
-            </li>            
-            <li><a href='./minesweeper/index.html'>Minesweeper game</a>
-              (<a href='https://github.com/mperdikeas/js-react-minesweeper'>github repo</a>)
-            </li>
-          </ul>
-
-        </li>
-        <li>Using the <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API'>Canvas API:</a>
-          <ul>
-            <li><a href="space-game/foo.html">space game</a> (next: add ammo-packs, wave attacks and new weapon types)</li>
-            <!--
-            <li><a href="apps/bouncing-ball/foo.html">bouncing ball</a> (warning: boring)</li>
-            -->
-          </ul>
-        </li>      
-      </ul>
-    </p>
-    <h2>Some of my npm-published <b>Node</b>.js modules:</h2>
-      <dl>
-        <dt><a href='https://www.npmjs.com/package/obj-properties'>obj-properties</a></dt>
-        <dd>
-          Returns dynamically evaluated collections of object properties based on arbitrary boolean predicates.
-        </dd>
-
-        <dt><a href='https://www.npmjs.com/package/sort-enum'>sort-enum</a></dt>
-        <dd>
-          Utility classes for managing sorting options where only one should
-          be active at a time.
-        </dd>        
-      </dl>
-    <p>
-    What follows is a motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
-    over the years and posted here for the benefit of my future self (and as such unlikely to be useful to anyone else). 
-    </p>    
-
-      <h2>Linux:</h2>
-      <ul>
-        <li><a href="i3.html">i3 window manager</a></li>
-        <li><a href="general.html">general</a></li>
-        <li><a href="admin.html">admin</a>, <a href="filesystems.html">filesystems</a></li>
-        <li><a href="networking.html">networking</a></li>
-        <li><a href="shell.html">shell tricks &amp; incantations</a></li>
-        <li><a href="git.html">git</a>, <a href="svn.html">svn</a></li>
-        <li><a href="latex.html">LaTeX</a></li>
-
-        <li><a href="emacs.html">emacs</a></li>
-        <li><a href="http://www.ibm.com/developerworks/views/linux/libraryview.jsp?site_id=1&contentarea_by=Linux&sort_by=Date&sort_order=2&start=1&end=18&topic_by=-1&product_by=&type_by=Articles&show_abstract=true&search_by=learn%20linux,%20101&industry_by=">IBM technical library</a></li>
-      </ul>
-
-    <h2>Front-end development:</h2>
+    <h2>JavaScript</h2>
+    <h3>games I've developed (play them with sound)</h3>
     <ul>
-      <li><a href='html-css.html'>Web, HTML and CSS resources</a></li>
-      <li><a href='react-webpack.html'>ReactJS and webpack</a></li>
-      <li><a href='babel-webpack.html'>Babel and webpack</a>    </li>
-      <li><a href='facebook-flow.html'>Flow static type checker</a></li>
-      <li><a href="javascript.html">JavaScript</a></li>
-      <li><a href="npm-and-node.html">npm, Babel and ECMAScript2016</a></li>
-      <li><a href="web-productivity.html">productivity</a></li>
-      <li><a href="typescript.html">typescript</a></li>
-      <li><a href="struts-1.1/res_rep.pdf">Struts version 1 guide</a></li>
+      <li>Using <a href='https://facebook.github.io/react/'>React</a>:
+        <ul>
+          <li><a href='./tetris/index.html'>Tetris game</a>
+            (<a href='https://github.com/mperdikeas/js-react-tetris'>github repo</a>)
+          </li>            
+          <li><a href='./minesweeper/index.html'>Minesweeper game</a>
+            (<a href='https://github.com/mperdikeas/js-react-minesweeper'>github repo</a>)
+          </li>
+        </ul>
+
+      </li>
+      <li>Using the <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API'>Canvas API:</a>
+        <ul>
+          <li><a href="space-game/foo.html">space game</a> (next: add ammo-packs, wave attacks and new weapon types)</li>
+          <!--
+               <li><a href="apps/bouncing-ball/foo.html">bouncing ball</a> (warning: boring)</li>
+             -->
+        </ul>
+      </li>      
     </ul>
-    <h2>Back-end development:</h2>
+    <h3>My npm-published modules</h3>
+    <a href='https://www.npmjs.com/~marcusjuniusbrutus'>marcusjuniusbrutus on npmjs.com</a>
+
+<div style='margin: 1em'><hr/></div>
+<p>What follows is an uncurated, motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
+    over the years and posted here for the benefit of my future self (and as such unlikely to be useful to anyone else):
+</p>    
+
+    <h2>Linux:</h2>
     <ul>
-      <li><a href='java.html'>Java</a></li>
-      <li><a href='jersey-2.html'>Jersey 2</a></li>      
-    </ul>    
+      <li><a href="i3.html">i3 window manager</a></li>
+      <li><a href="general.html">general</a></li>
+      <li><a href="admin.html">admin</a>, <a href="filesystems.html">filesystems</a></li>
+      <li><a href="networking.html">networking</a></li>
+      <li><a href="shell.html">shell tricks &amp; incantations</a></li>
+      <li><a href="git.html">git</a>, <a href="svn.html">svn</a></li>
+      <li><a href="latex.html">LaTeX</a></li>
+
+      <li><a href="emacs.html">emacs</a></li>
+    </ul>
+    <hr/>
+    <h2>Web applications</h2>
+    <div style='display: flex; flex-direction:row'>
+      <div>
+        <h3>Presentation-oriented</h3>
+        <ul>
+          <li><a href='html-css.html'>Web, HTML and CSS resources</a></li>
+          <li><a href='react-webpack.html'>ReactJS and webpack</a></li>
+          <li><a href='babel-webpack.html'>Babel and webpack</a>    </li>
+          <li><a href='facebook-flow.html'>Flow static type checker</a></li>
+          <li><a href="javascript.html">JavaScript</a></li>
+          <li><a href="npm-and-node.html">npm, Babel and ECMAScript2016</a></li>
+          <li><a href="web-productivity.html">the Pythonic live-reload</a></li>
+          <li><a href="struts-1.1/res_rep.pdf">Struts version 1 guide</a></li>
+          <li><a href="jsf.html">JSF</a></li>
+        </ul>
+      </div>
+      <div style='padding-left: 1em;'>
+        <h3>Service-oriented</h3>
+        <ul>
+          <li><a href='jersey-2.html'>Jersey 2</a></li>
+          <li><a href="jax-rs.html">JAX-RS</a></li>        
+          <li><a href="jax-ws.html">JAX-WS</a></li>
+        </ul>        
+      </div>
+      <div style='padding-left: 1em;'>
+        <h3>Architectures</h3>
+        <ul>
+          <li><a href='java-web-architectures.html'>Java for the web</a></li>
+        </ul>        
+      </div>      
+    </div>
+
+
     <h2>XML specifications</h2>
     <a href="xml.html">XML</a>
     <a href="wsdl.html">WSDL</a>
 
+    <h2>Java</h2>
+      <a href='java.html'>infastructure</a>
+      <a href="javax-servlet.html">javax.servlet</a>
+      <a href="jasper.html">Jasper</a>
+      <a href="slf4j.html">slf4j</a>
+
+    <h2>Platforms</h2>
+    <a href="postgresql.html">Postgresql</a>
+    <a href="pgsphere.html">pgSphere</a>
+    <a href="tomcat7.html">Tomcat 7</a>
+    <a href="tomcat8.5.html">Tomcat 8.5</a>            
+    <a href="tomcat9.html">Tomcat 9</a>      
+    <a href="jboss-eap-6.html">JBoss EAP 6</a>
+    <a href="jboss7.html">JBoss 7</a>
+    <a href="vmware.html">VMWare</a>
     <h2>Sui-generis notes:</h2>
+      <a href="cas.html">CAS protocol</a>
+      <a href="shiro.html">Shiro</a>
+      <a href="python.html">Python</a>
+      <a href="mechanize.html">Mechanize</a>
+
+    <h2>Travails</h2>
     <ul>
-      <h3><i>on various libraries, tools, technologies and protocols:</i></h3>
-      <ul class='horizontal-list'>
-        <li><a href="cas.html">CAS protocol</a></li>        
-        <li><a href="javax-servlet.html">javax.servlet</a></li>
-        <li><a href="jax-rs.html">JAX-RS</a></li>        
-        <li><a href="jax-ws.html">JAX-WS</a></li>
-        <li><a href="jsf.html">JSF</a></li>
-        <li><a href="maven.html">maven</a>    </li>
-        <li><a href="slf4j.html">slf4j</a></li>
-        <li><a href="mechanize.html">Mechanize</a></li>
-        <li><a href="jasper.html">Jasper</a></li>
-        <li><a href="shiro.html">Shiro</a></li>
-      </ul>
-      <p></p>
-      <h3><i>on languages:</i></h3>
-      <a href="python.html">python</a>
-      <p></p>
-      <h3><i>on platforms:</i></h3>
-      <a href="postgresql.html">Postgresql</a>
-      <a href="pgsphere.html">pgSphere</a>
-      <a href="tomcat7.html">Tomcat 7</a>
-      <a href="tomcat8.5.html">Tomcat 8.5</a>            
-      <a href="tomcat9.html">Tomcat 9</a>      
-      <a href="jboss-eap-6.html">JBoss EAP 6</a>
-      <a href="jboss7.html">JBoss 7</a>
-      <a href="vmware.html">VMWare</a>
-      <p></p>
-      <h3><i>travails:</i></h3>
-      <ul>
-        <li><a href="travails-setting-up-T420.html">Installing Ubuntu 16.04 64 bit on my Lenovo ThinkPad T420 and setting up the machine</a></li>
-        <li><a href="jboss-as-7_1-config.html">JBoss AS 7.1 configuration</a></li>
-        <li><a href="travails_postgres_9.1.html">Postgresql 9.1 configuration</a></li>
-        <li><a href="travails_jndi.html">JNDI DataSource names in Glassfish</a></li>
-        <li><a href="clojure-repl-emacs.html">configure Clojure Mode and Clojure REPL in Emacs</a></li>
-        <li><a href="clear-case.html">the ClearCase abomination</a></li>
-      </ul>
-      <h3><i>eternal:</i></h3>
-      <ul>
-        <li><a href='./why-of-Y.pdf'>Why of Y</a></li>
-        </li>
-      </ul>
-      <h3><i>misc:</i></h3>
-      <ul>
-        <li><a href="acronyms.html">some unusual acronyms I recently encountered</a>
+      <li><a href="travails-setting-up-T420.html">Installing Ubuntu 16.04 64 bit on my Lenovo ThinkPad T420 and setting up the machine</a></li>
+      <li><a href="jboss-as-7_1-config.html">JBoss AS 7.1 configuration</a></li>
+      <li><a href="travails_postgres_9.1.html">Postgresql 9.1 configuration</a></li>
+      <li><a href="travails_jndi.html">JNDI DataSource names in Glassfish</a></li>
+      <li><a href="clojure-repl-emacs.html">configure Clojure Mode and Clojure REPL in Emacs</a></li>
+      <li><a href="clear-case.html">the ClearCase abomination</a></li>
+    </ul>
+    <h2>miscellaneous</h2>
+    <ul>
+      <li><a href='./why-of-Y.pdf'>Why of Y</a></li>      
+      <li><a href="acronyms.html">some unusual acronyms I recently encountered</a>
         <li><a href="https://github.com/vhf/free-programming-books">list of free programming books, free online courses, etc.</a></li>
         <li><a href="wise-technology.html">useful mental models, articulations and wise positions on software stuff</a></li>
         <li><a href='https://github.com/vic317yeh/One-Click-to-Be-Pro'>One Click to be Pro links (best resources per area)</a></li>
-      </ul>
+
     </ul>
+    <hr/>
     <div id='misc-non-technical'>
       <b>non-technical / dump:</b>
       <a href="tsmede.html">tsmede</a>      

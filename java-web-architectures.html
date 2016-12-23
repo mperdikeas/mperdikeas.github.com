@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <style>
+     dl > dt {font-weight: bold}
+    </style>
+  </head>
+  <body>
+    <h1>Java Web Architectures</h1>
+    <h2>History and fundamentals</h2>
+    <h3>JSP model 0</h3>
+    <p>Everything is effectively based on Servlets. You can do everything by writing code that extends the <tt>HttpServlet</tt> class.</p>
+    <p>The first Java applications on the web (circa 2000) did just that: they subclassed <tt>HttpServlet</tt> and created all response content with <tt>println</tt> statements. This was awesome and worked except that the code was too complicated. But it was a heroic era. The Servlet did everything:
+      <dl>
+        <dt>model</dt><dd>as it did the JDBC with the database</dd>
+        <dt>view</dt><dd>as it build the HTML with <tt>println</tt> statements</dd>
+        <dt>controller</dt><dd>as it had the entire logic</dd>
+      </dl>
+      Some people call the above (perhaps disparangingly) JSP model 0 (there's no JSP yet).
+    </p>
+    <h3>JSP model 1</h3>
+    In MVC model 1 people used JSP which is really a camouflaged HttpServlet (each JSP page is used to automatically generate and compile a Servlet) and you had Java Beans for the database access. So basically in this approach:
+    <ul>
+      <li>the Java Bean was the model</li>
+      <li>the JSP took care of the View and the Control </li>
+    </ul>
+    This is depicted <a href='java-web-architectures.html.files/jsp-model-1.png'>here</a> and <a href='java-web-architectures.html.files/jsp-model-1b.gif'>here</a>.
+    <p>
+      It was a dark era because around that time some wicked people starting
+      thinking about the abomination that became known as "Enterprise Java Beans".
+    </p>
+    <h3>JSP model 2</h3>
+    <p>
+      This pattern made more sense, you got your vanilla HttpServlet back which you kept for all of the control and you had JSP for the view and beans (ordinary Java Beans even though some perverts used EJBs) for the model. So this resulted in a very clear and nice separation of the MVC concerns.
+    </p>
+    <p>This pattern is depicted <a href='java-web-architectures.html.files/jsp-model-2.jpg'>here</a>.</p>
+    <h3>enter the frameworks &hellip;</h3>
+    <p>
+      There was nothing really wrong with JSP model 2 except people began arguing whether you should have a single controller servlet or whether each JSP page should have its own or any other approach in between. Around that time Struts appeared. Struts was a request-based framework (as they became known) that presented a single "controller" HttpServlet that then dispathed to various "action" classes which the programmer provided.
+    </p>
+    <p>Also around the same time some unshaven people working in a rat-infested basement came up with idea of JSF and the so-called "component" framworks.</p>
+    <h2>component-based vs. request-based frameworks</h2>
+    <p>
+      The basic dichotomy is that between component-oriented frameworks and request-based (a.k.a. action based) frameworks. In a nutshell, component-based frameworks are high-level and evil and suck whereas request-based frameworks are lower-level, expose the HTTP requests and responses, allow you to retain full and fine-level control and smell nice. A more extended description is found <a href='http://stackoverflow.com/a/4804476/274677'>here</a>.
+      <dl>
+        <dt>component-based</dt><dd>JSF, Wicket, Play, Tapestry</dd>
+        <dt>request-based</dt><dd>Spring MVC, Struts (both 1 and 2)</dd>        
+      </dl>
+    </p>
+    <p>Request-based frameworks generally make it clear through their APIs that they're working with parsing an HTML request / generating an HTML response, while Component-based frameworks attempt to abstract this away and treat the application as collections of components with renderers and actions to do things.</p>
+    <p>
+      <b>Request based framework</b> is a web framework that gets user's request then determine what the system should do and give back the response back to the user. So the flow is pretty much linear. You're thinking in actions: what does user want (request) -> what user will get back (response). An example of Request based framework is Struts. The modern Grails is pretty much a Request based framework too.
+    </p>
+    <p>
+      <b>Component based framework</b> is not like that. There is actually no clear sense of the flow from front to back. An example of it is not JSF, because in some way JSF is pretty much quite the same with Struts (since the creator of Struts and JSF is the same). A good example of Component based framework Tapestry and Wicket. The paradigm in these two framework is different. You don't think in actions or request-response, but components and components. You define a component in your application, and you tell what the component does. But the flow does not have to be linear as in Request based framework.
+      </p>
+    <h2>some terminology definitions and useful stuff I've collected</h2>
+    <a href='http://stackoverflow.com/a/2097732/274677'>source</a>
+    <dl><dt>JSP</dt><dd>
+      <ul>
+        <li>JSP is a specialized kind of servlet </li>        
+        <li>JSP technology is part of the Java technology family. JSP pages are compiled into servlets and may call JavaBeans components (beans) or Enterprise JavaBeans components (enterprise beans) to perform processing on the server. </li>
+        <li>Old-school JSP, with embedded Java code (scriptlets) is uncool; modern JSP with tag files and libraries is pretty good.</li>
+        <li>JSP can also be thought of as an HTML templating engine. In fact, both JSF, Spring MVC and Struts will allow you to use JSP as the view layer (allthough JSF's recommended display technology is Facelets which are XML-based). Some will let you use something else too (Velocity, Freemarker, etc.)</li>
+        <li>JavaServer Pages works by having a special servlet known as a JSP container, which is installed on a Web server and handles all JSP page view requests. The JSP container translates a requested JSP into servlet code that is then compiled and immediately executed. Subsequent requests to the same page simply invoke the runtime servlet for the page.</li>
+        <li><p>JSP is a Java view technology running on the server machine which allows you to write template text in client side languages (like HTML, CSS, JavaScript, ect.). JSP supports taglibs, which are backed by pieces of Java code that let you control the page flow or output dynamically. A well-known taglib is JSTL. JSP also supports Expression Language, which can be used to access backend data (via attributes available in the page, request, session and application scopes), mostly in combination with taglibs.</p>
+          <p>
+            When a JSP is requested for the first time or when the web app starts up, the servlet container will compile it into a class extending HttpServlet and use it during the web app's lifetime. You can find the generated source code in the server's work directory. In for example Tomcat, it's the /work directory. On a JSP request, the servlet container will execute the compiled JSP class and send the generated output (usually just HTML/CSS/JS) through the web server over a network to the client side, which in turn displays it in the web browser.</p>
+        </li>
+      </ul>
+    </dd>
+    <dl><dt>JSF</dt><dd>
+      <ul>
+        <li>JSF is a set of tags you can use with JSP.</li>
+        <li>JSF is a component based MVC framework which is built on top of the Servlet API and provides components via taglibs which can be used in JSP or any other Java based view technology such as Facelets. Facelets is much more suited to JSF than JSP.</li>
+        <li>A couple of the major players in JSF implementations are Apache MyFaces and Oracle Mojarra. An implementation of JSF simply implements the basic specifications for JSF. This is where most of the standard components are going to come from. This includes UI components like forms, tables, columns, messages and select items – the UI components that you would expect to see. This is in contrast to a component library, which is where the special features and combined components come in. Since JSF is the Java EE standard, it’s available through a lot of third-party component libraries including PrimeFaces, RichFaces, IceFaces, OpenFaces and Tomahawk.</li>
+      </ul>
+    </dd>
+    <h2>Share in 2016</h2>
+    <a href="java-web-architectures.html.files/frameworks-share.png">
+      <img height="300px" width="400px" src="java-web-architectures.html.files/frameworks-share.png"/>
+    </a>
+    
+  </body>
+</html>

@@ -2,24 +2,19 @@
   <head>
     <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
     <link rel='icon' href='/knowledge-favicon.ico'/>
-    <style>
-     h2 {
-        font-size: 110%;
-       }
-    </style>
   </head>
   <body>
     <ol class='pink-circles' reversed>
-      <li><h2><a href='./networking.html.files/how-to-setup-vpn-using-vpnc.html'>How to setup a VPN using <tt>vpnc</tt> on Linux</a></h2>      
-      <li><h2><a href='http://unix.stackexchange.com/a/158747/24044'>how to select wireless network from the command line</a></h2>
+      <li><a href='./networking.html.files/how-to-setup-vpn-using-vpnc.html'>How to setup a VPN using <tt>vpnc</tt> on Linux</a>      
+      <li><a href='http://unix.stackexchange.com/a/158747/24044'>how to select wireless network from the command line</a>
         <pre>
 nmcli c
 sudo nmcli c up uuid &lt;paste uuid here&gt;</pre>
 
         </li>
-      <li><h2><a href='./networking.html.files/scp-a-file-through-jump-host.html'>how to <code>scp</code> a file through an intermediate host (a.k.a. jump host)</a></h2></li>
-      <li><h2><a href='./networking.html.files/shell-through-two-ssh-hops-auth-possible-only-on-first.html'>how to open a shell through two successive SSH hops where SSH public key authentication is possible only on the first hop</a></h2></li>
-      <li><h2>show local listening ports and which processes listen on them:</h2></li>
+      <li><a href='./networking.html.files/scp-a-file-through-jump-host.html'>how to <code>scp</code> a file through an intermediate host (a.k.a. jump host)</a></li>
+      <li><a href='./networking.html.files/shell-through-two-ssh-hops-auth-possible-only-on-first.html'>how to open a shell through two successive SSH hops where SSH public key authentication is possible only on the first hop</a></li>
+      <li>show local listening ports and which processes listen on them:</li>
       <pre>sudo lsof -P -i -n</pre>
       More recently, I did the following to find the port an emacs daemon listens to:
       <pre>
@@ -50,7 +45,7 @@ netstat -lxp | grep -i emacs
         The <tt>ss</tt> tool can also provide the same information as the last incantation with:
         <pre>ss -lpx | grep -i emacs</pre>
       </p>
-      <li><h2>recursively copy directory to remote machine while maintaining symlinks</h2></li>
+      <li>recursively copy directory to remote machine while maintaining symlinks</li>
       <p>
       When recursively copying with <tt>scp</tt>, symlinks are copied rather than
       being preserved, and so <tt>rsync</tt> has to be used instead.
@@ -69,7 +64,7 @@ netstat -lxp | grep -i emacs
         In those cases the <tt>--ignore-times</tt> (or <tt>-I</tt>) or <tt>--checksum</tt> flags are necessary.
         See <a href='http://serverfault.com/a/211083'>this SO answer</a> and my comment to it.
       </p>
-      <li><h2>how to enable / disable wireless from the command line</h2></li>
+      <li>how to enable / disable wireless from the command line</li>
       <a href='http://askubuntu.com/a/597131/89663'>source</a>
       <p>
         <b>Ubuntu 14.04:</b>
@@ -85,18 +80,18 @@ nmcli r wifi off
 nmcli r wifi on
         </pre>
       </p>      
-      <li><h2><a href='./networking.html.files/double-ssh-tunnel.html'>do a double (two spans) SSH tunnel between two machines (with a third machine sitting in the middle)</a></h2></li>
-      <li><h2>bind to a port, continuously, and print on standard out whatever gets sent to that port</h2></li>
+      <li><a href='./networking.html.files/double-ssh-tunnel.html'>do a double (two spans) SSH tunnel between two machines (with a third machine sitting in the middle)</a></li>
+      <li>bind to a port, continuously, and print on standard out whatever gets sent to that port</li>
       Use the <b>Netcat</b> tool (abbreviation: <b>nc</b>) with the <tt>-k</tt> option as in (e.g. to bind
       to port 4444):
       <pre>nc -k -l 4444</pre>
       NB: In my Ubuntu system I've tried the above with the nc from the netcat-openbsd package (not the
       alternative nc is available in the netcat-traditional package).
-      <li><h2>see the redicts of a web page</h2></li>
+      <li>see the redicts of a web page</li>
       Use the <b>curl</b> utility with the <b>-I</b> and <b>-L</b> options
       (to show the headers and to follow the redirects, respectively) as follows:
       <pre>curl -I -L www.google.com</pre>
-      <li><h2>use a single outgoing IP address</h2></li>
+      <li>use a single outgoing IP address</li>
       When behind a corporate NAT/firewall the packets you sent out 
       (e.g. from you browser) may
       seem to emerge from two different IP addresses which could
@@ -109,7 +104,7 @@ nmcli r wifi on
       port <i>2095</i> of the remote host to begin with). This will
       stabilize the IP address the remote system sees your packets
       coming from.
-      <li><h2>virtual Ethernet interface</h2></li>
+      <li>virtual Ethernet interface</li>
       A virtual IP address is created as simply as:
       <pre>ifconfig eth0:1 172.31.129.121</pre>
       and is only visible on the same machine and (?) LAN segment.
@@ -119,14 +114,14 @@ nmcli r wifi on
       enter that remote machine's <b>arp</b> cache. However it is not currently
       possible to assign a MAC address to that virtual interface that's different
       from the real one.
-      <li><h2>How to view multicast groups</h2></li>
+      <li>How to view multicast groups</li>
       Below are some incantations that work (I haven't correlated amongst them):
       <pre>
 netstat -g
 /sbin/ip maddress list
 ifconfig eth0 | grep MULTICAST
       </pre>
-      <li><h2>Multicast groups</h2></li>
+      <li>Multicast groups</li>
       Joining and leaving multicast groups can be done totally at the application layer
       when one opens a socket. Accordingly for software that has this concept (like JBoss AS7
       in 'high availability'/clustering mode), you provide the multicast address at the
@@ -134,7 +129,7 @@ ifconfig eth0 | grep MULTICAST
       or elsewhere.
       <p><b>NB:</b>There's no such concept as 'joining a multicast group'. The concept is
         'joining a multicast group on a particular interface'.
-        <li><h2>arp</h2></li>
+        <li>arp</li>
         To see the <b>arp</b> tables (I believe there is some caching and therefore also expiry involved)
         of your local machine do a:
         <pre>sudo arp -a</pre>
@@ -149,7 +144,7 @@ iasonaslb1.neuropublic.gr (172.31.128.247) at 00:0f:20:32:c5:49 [ether] on eth0
 iasonas.neuropublic.gr (172.31.128.249) at 00:0c:29:48:58:7c [ether] on eth0
 ? (172.31.128.140) at 02:bf:ac:1f:80:8e [ether] on eth0
         </pre>
-        <li><h2>wireless problems in Ubuntu 12.04 LTS Precise</h2></li>
+        <li>wireless problems in Ubuntu 12.04 LTS Precise</li>
         Original article <a hred="http://linuxplained.com/how-to-fix-wireless-problems-in-ubuntu-1204-precise-pangolin/">here</a>. Gist is to try one of these:
         <ul>
           <li>restart networking after reboot</li>
@@ -173,7 +168,7 @@ echo "net.ipv6.conf.default.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
 echo "net.ipv6.conf.lo.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
           </pre>
         </ul>
-        <li><h2>5 Best Linux/Ubuntu compatible USB WiFi cards</h2></li>
+        <li>5 Best Linux/Ubuntu compatible USB WiFi cards</li>
         <ol>
           <li><a href="http://www.amazon.com/gp/product/B002RCKDEC/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002RCKDEC&#038;linkCode=as2&#038;tag=linuxp-20">AirLink101 AWLL6075 Wireless N Mini USB Adapter</a>
           </li>
@@ -186,7 +181,7 @@ echo "net.ipv6.conf.lo.disable_ipv6 = 1" | sudo tee -a /etc/sysctl.conf
           <li><a href="http://www.amazon.com/gp/product/B002WBX9C6/ref=as_li_ss_tl?ie=UTF8&#038;camp=1789&#038;creative=390957&#038;creativeASIN=B002WBX9C6&#038;linkCode=as2&#038;tag=linuxp-20">TP-Link TL-WN722N 150Mbps High Gain Wireless USB Adapter</a>
           </li>
         </ol>
-        <li><h2>use <b>nc</b> for HTTP troubleshooting</h2></li>
+        <li>use <b>nc</b> for HTTP troubleshooting</li>
         First of all use nc.traditional:
         <pre>
 sudo apt-get install netcat-traditional
@@ -241,25 +236,25 @@ Date: Tue, 04 Sep 2012 12:22:46 GMT
           <li>when the cookie path is not set to <b>/</b> the cookie will be present only
             in tail matching requests.</li>
         </ol>
-        <li><h2>copy a tarball with permissions between two different machines (no scp)</h2></li>
+        <li>copy a tarball with permissions between two different machines (no scp)</li>
         sender:
         <pre>tar cpf - git-jboss/ | nc 172.31.129.12 8877</pre>
         receiver:
         <pre>nc -l -p 8877 | tar xpvf -</pre>
     </li>
-    <li><h2>make sure a service is listening at a given port</h2></li>
+    <li>make sure a service is listening at a given port</li>
     Use <i>nc</i> with the <i>-w</i> option as in (for a timeout of 5 seconds):
     <pre>
 nc -w 5 94.66.59.15 80
     </pre>
-    <li><h2>How to mount a smbfs file system with read/write permissions</h2></li>
+    <li>How to mount a smbfs file system with read/write permissions</li>
     First, create the mount-point (/media/athina-prj) in the below example.</br>
     Then, obtain your userid and groupid (using <i>id</i>) and then do a:
     <pre>
 sudo mount -t smbfs -o username=SEMANTIX\\mperdikeas,password=mperdikeas,dir_mode=0777,file_mode=0777,uid=mperdikeas,gid=mperdikeas //192.168.0.2/prj /media/athina-prj
     </pre>
 
-    <li><h2>How to take a Linux box off the network</h2></li>
+    <li>How to take a Linux box off the network</li>
     <p>
       log-in to a console and do:<p>
       <pre>
@@ -270,7 +265,7 @@ do work that has to be executed offline, and then:
 <p><pre>
 sudo ifconfig eth0 up
 </pre>
-      <li><h2><a href='./networking.html.files/ssh-public-key-authentication.html'>SSH public key authentication</a></h2></li>
+      <li><a href='./networking.html.files/ssh-public-key-authentication.html'>SSH public key authentication</a></li>
     </ol>
   </body>
 </html>
