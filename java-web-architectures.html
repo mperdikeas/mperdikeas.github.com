@@ -35,9 +35,9 @@
     <p>This pattern is depicted <a href='java-web-architectures.html.files/jsp-model-2.jpg'>here</a>.</p>
     <h3>enter the frameworks &hellip;</h3>
     <p>
-      There was nothing really wrong with JSP model 2 except people began arguing whether you should have a single controller servlet or whether each JSP page should have its own or any other approach in between. Around that time Struts appeared. Struts was a request-based framework (as they became known) that presented a single "controller" HttpServlet that then dispathed to various "action" classes which the programmer provided.
+      There was nothing really wrong with JSP model 2 except people began arguing whether you should have a single controller servlet (a.k.a. the <a href='https://en.wikipedia.org/wiki/Front_controller'>Front Controller</a>) or whether each JSP page should have its own or any other approach in between. Around that time Struts appeared. Struts was a request-based framework (as they became known) that presented a single "front controller" HttpServlet that then dispathed to various "action" classes which the programmer provided. Spring MVC which is another request-based framework also implements the front controller pattern.
     </p>
-    <p>Also around the same time some unshaven people working in a rat-infested basement came up with idea of JSF and the so-called "component" framworks.</p>
+    <p>Sadly, also around the same time some unshaven people working in a rat-infested basement came up with idea of JSF and the so-called "component" frameworks.</p>
     <h2>component-based vs. request-based frameworks</h2>
     <p>
       The basic dichotomy is that between component-oriented frameworks and request-based (a.k.a. action based) frameworks. In a nutshell, component-based frameworks are high-level and evil and suck whereas request-based frameworks are lower-level, expose the HTTP requests and responses, allow you to retain full and fine-level control and smell nice. A more extended description is found <a href='http://stackoverflow.com/a/4804476/274677'>here</a>.
