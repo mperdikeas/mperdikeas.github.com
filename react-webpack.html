@@ -4,7 +4,7 @@
 <link rel='icon' href='/knowledge-favicon.ico'/>
 </head>
 <body>
-  <ol reversed>
+  <ol reversed class='pink-circles'>
     <li>Resolving the <i>Can only update a mounted or mounting component</i> warning</li>
     <p>
       <a href='http://jaketrent.com/post/set-state-in-callbacks-in-react/'>source</a>
@@ -17,21 +17,21 @@
     <p>Obviously that was because the the <code>this.setState</code> was called from an asynchronous
       callback, as in the following code:
       <pre>
-        componentDidMount: function() {
-                $.getJSON(this.getURL(), function(data) {
-                    this.setState({files: data});
-                }.bind(this));
-        }
+ componentDidMount: function() {
+    $.getJSON(this.getURL(), function(data) {
+              this.setState({files: data});
+    }.bind(this));
+ }
       </pre>
       What fixed that (according to the <i>source</i>) was simply doing a:
       <pre>
-        componentDidMount: function() {
-                $.getJSON(this.getURL(), function(data) {
-                    if (this.isMounted()) {
-                        this.setState({files: data});
-                    }
-                }.bind(this));
-        }
+ componentDidMount: function() {
+    $.getJSON(this.getURL(), function(data) {
+          if (this.isMounted()) {
+              this.setState({files: data});
+           }
+    }.bind(this));
+ }
        </pre>
        The <i>source</i> also provides an alternative solution which I think is cleaner: abort the
        asynchronous request in the <code>componentWillUnmount</code> method (assuming of course that
