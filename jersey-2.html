@@ -5,84 +5,17 @@
   </head>
   <body>
     <ol reversed class='pink-circles'>
+      <li>SPA / REST interplay with alternate Tomcat / JBoss deployments and CORS configuration for a Jersey 2 application</li>
+      Checkout
+      <a href='https://github.com/mperdikeas/playground/tree/master/spa-REST-architectures/000-REST-spa-and-third-JSP-user-app'>
+        this project
+      </a>
+      in my playground that shows how to achieve interplay between a SPA application and a REST backend using the Jersey 2
+      JAX-RS implementation under a variety of CORS configuration
+      approaches (and also attempting to achieve deployment in both Tomcat and JBoss EAP 6.2).
       <li>configuration for Jersey 2 in Tomcat 8.5</li>
-      <ul>
-        <li>dependencies</li>
-        <a href='jersey-2.html.files/tomcat8_5-ivy.xml'>This</a> is the IVY file that I used (contains some extra dependencies I don't have time to trim right now).
-        <li>web.xml</li>        
-        Regarding the <tt>web.xml</tt> there's two options I've discovered to work:
-        <ol>
-          <li><h4>use an <tt>Application</tt> class</h4></li>
-          In this case you'd have the following in your <tt>web.xml</tt>:
-          <xmp>
-            <servlet>
-              <servlet-name>jersey-serlvet</servlet-name>
-              <servlet-class>
-                org.glassfish.jersey.servlet.ServletContainer
-              </servlet-class>
-
-              <init-param>
-                <param-name>javax.ws.rs.Application</param-name>
-                <param-value>mjb44.auth.dbdalrest.RestApplication</param-value>
-              </init-param>
-              <load-on-startup>1</load-on-startup>
-            </servlet>
-
-            <servlet-mapping>
-              <servlet-name>jersey-serlvet</servlet-name>
-              <url-pattern>/jax-rs/*</url-pattern>
-            </servlet-mapping>
-          </xmp>
-
-          &hellip; and also define a <tt>javax.ws.rs.core.Application</tt> class which would return your
-          actual resources:
-          <pre>
-package mjb44.auth.dbdalrest;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-
-
-public class RestApplication extends Application {
-    public Set<Class<?>> getClasses() {
-            return new HashSet<Class<?>>(Arrays.asList(UserDatabaseResource.class));
-            }
-            }</pre>
-            <li><h4>use package scanning</h4></li>
-            In this case you don't need an <tt>javax.ws.rs.core.Application</tt> class and your <tt>web.xml</tt> looks like the following:
-            <xmp>
-              <servlet>
-                <servlet-name>jersey-serlvet</servlet-name>
-                <servlet-class>
-                  org.glassfish.jersey.servlet.ServletContainer
-                </servlet-class>
-                <init-param>
-                  <param-name>jersey.config.server.provider.packages</param-name>
-                  <param-value>mjb44.auth.dbdalrest</param-value>
-                </init-param>
-                <load-on-startup>1</load-on-startup>
-              </servlet>
-
-              <servlet-mapping>
-                <servlet-name>jersey-serlvet</servlet-name>
-                <url-pattern>/jax-rs/*</url-pattern>
-              </servlet-mapping>
-
-            </xmp>
-        </ol>
-        <p>
-          There is some code in <tt>playground/cookies/006-CAS-like-approach-to-sso</tt> that
-          shows how this is done.<b>TODO:</b> add github link.
-        </p>
-        <p>
-          More information and additional options (which I have not fully or conclusively explored)
-          are available <a href="https://jersey.java.net/nonav/documentation/2.0/deployment.html">here</a>.
-        </p>
-      </ul>
+      <a href='jersey-2.html.files/configuration-of-jersey-in-tomcat.html'>notes for a particular configuration of Jersey 2
+        in Tomcat 8.5 (December 2016)</a>
     </ol>
   </body>
 </html>
