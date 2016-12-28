@@ -26,6 +26,15 @@
      #misc-non-technical {
        font-size: 70%;
      }
+     .horiz-col {
+       display: flex;
+       flex-direction:row;
+     }
+     .horiz-col > div {
+       margin: 0 0.3em;
+       border: 1px solid #bbb;
+       padding: 0 0.3em;
+       }
     </style>
     <title>Menelaus Perdikeas scratchpad</title>
   </head>
@@ -106,7 +115,7 @@
     </ul>
     <hr/>
     <h2>Web applications</h2>
-    <div style='display: flex; flex-direction:row'>
+    <div class='horiz-col'>
       <div>
         <h3>Presentation-oriented</h3>
         <ul>
@@ -125,7 +134,7 @@
         <h3>Service-oriented</h3>
         <ul>
           <li><a href='jersey-2.html'>Jersey 2</a></li>
-          <li><a href="jax-rs.html">JAX-RS</a></li>        
+          <li><a href="jax-rs.html">Jersey 1.9</a></li>        
           <li><a href="jax-ws.html">JAX-WS</a></li>
         </ul>        
       </div>
@@ -148,15 +157,37 @@
       <a href="jasper.html">Jasper</a>
       <a href="slf4j.html">slf4j</a>
 
-    <h2>Platforms</h2>
-    <a href="postgresql.html">Postgresql</a>
-    <a href="pgsphere.html">pgSphere</a>
-    <a href="tomcat7.html">Tomcat 7</a>
-    <a href="tomcat8.5.html">Tomcat 8.5</a>            
-    <a href="tomcat9.html">Tomcat 9</a>      
-    <a href="jboss-eap-6.html">JBoss EAP 6</a>
-    <a href="jboss7.html">JBoss 7</a>
-    <a href="vmware.html">VMWare</a>
+      <h2>Platforms</h2>
+      <div class='horiz-col'>
+        <div>
+          <h3>Databases</h3>
+          <ul>
+            <li><a href="postgresql.html">Postgresql</a></li>
+            <li><a href="pgsphere.html">pgSphere</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Tomcat</h3>
+          <ul>
+            <li><a href="tomcat7.html">Tomcat 7</a></li>
+            <li><a href="tomcat8.5.html">Tomcat 8.5</a></li>
+            <li><a href="tomcat9.html">Tomcat 9</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>JBoss</h3>
+          <ul>
+            <li><a href="jboss-eap-6.html">JBoss EAP 6</a></li>
+            <li><a href="jboss7.html">JBoss 7</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Other</h3>
+          <ul>
+            <li><a href="vmware.html">VMWare</a></li>
+          </ul>          
+        </div>
+      </div>
     <h2>Sui-generis notes:</h2>
       <a href="cas.html">CAS protocol</a>
       <a href="shiro.html">Shiro</a>
