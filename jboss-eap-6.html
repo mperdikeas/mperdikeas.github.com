@@ -1,21 +1,24 @@
 <html>
-<head>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<link rel='icon' href='/knowledge-favicon.ico'/>
-</head>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>    
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
 
-<body>
-<ol>
-<li>basic sequence of actions for setting up clusting in JBoss EAP 6.0.0</li>
-    <ol type=i>
-    <li>follow the instructions in Chapters 13.x and 14.1.9 of the JBoss Administration and Configuration guide (available from the official JBoss site</li>
-    <li>setup JBoss EAP in two hosts (or virtual hosts) and declare one to be the master and the other to be the slave</li>
-    <li>add a user, obtain 'secret' and configure it in the 'server identities' of that EAP instance (or the other?)</li>
-    <li>do some stuff in JMS so that they can see each other</li>
-    <li>establish that they can indeed see each other by looking at the logs</li>
+  <body>
+    <ol reversed class='pink-circles'>
+      <li>how to configure a datasource</li>
+      <a href='jboss-eap-6.html.files/how-to-configure-a-datasource.html'>Writeup of what I did December 2016 in order to configure a datasource in JBoss EAP 6.2</a></li>
+      <li>basic sequence of actions for setting up clusting in JBoss EAP 6.0.0</li>
+      <ol type=i>
+        <li>follow the instructions in Chapters 13.x and 14.1.9 of the JBoss Administration and Configuration guide (available from the official JBoss site</li>
+        <li>setup JBoss EAP in two hosts (or virtual hosts) and declare one to be the master and the other to be the slave</li>
+        <li>add a user, obtain 'secret' and configure it in the 'server identities' of that EAP instance (or the other?)</li>
+        <li>do some stuff in JMS so that they can see each other</li>
+        <li>establish that they can indeed see each other by looking at the logs</li>
+      </ol>
     </ol>
-</ol>
-</body>
+  </body>
 </html>
 
 
