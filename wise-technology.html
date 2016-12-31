@@ -15,7 +15,8 @@
 
 <h1>Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.</h1>
 
-  <ul>
+<ul>
+    <li><a href='#spring-framework-ioc'>On Spring framework's failure when it comes to Inversion of Control / Dependency Injection</a></li>
     <li><a href='#web-apps-typology'>Web applications typology</a></li>
     <li><a href='#the-test-pyramid'>the test pyramid</a>
     <li><a href='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</a></li>
@@ -38,6 +39,23 @@
   </ul>
 <br/>
 <br/>
+
+<h2 id='spring-framework-ioc'>On Spring framework's failure when it comes to Inversion of Control / Dependency Injection</h2>
+<a href='https://www.reddit.com/r/programming/comments/3uhytt/why_i_hate_spring/?st=ixc3mcw4&sh=837cd273'>source</a>
+<p>
+You keep saying "hand rolled framework" while the thing being discussed is a basic factory, I have to wonder if you know what a "framework" is as well. The scenario you describe simply doesn't exist. I "hand roll" my wiring <u>precisely because my projects are big and modular, and I need the control inverted to the application boostrap and not scattered around in vague XML files and annotations</u>.
+</p>
+<p>
+<b>I write this code because I realize it's the most important aspect of my application - the logic that hooks the parts into a whole exactly as I need and not by random happenstance and type name matching.</b>
+</p>
+<p>
+When you have a project that largely consists of reusable modules, it's not a smart idea to embed project-specific configuration in annotations on supposedly project-neutral components, don't you think?
+When you use annotations and autowiring in Spring, do you realize the very point you seem to stress about, namely inversion of control, gets the knife? Annotations represent inversion... of inversion of control. Information that should be specified outside the object is instead embedded back on it, same as would be the case if you directly instantiated dependencies inside it, or fetched from a global service locator.
+  Spring doesn't assist IoC, in fact it provides tools which quickly and swiftly destroy it.
+</p>
+<p>
+Ever needed empty "tag" classes and interfaces? Or qualifier annotations? Tell me, how does this fit into the whole "the object is not aware of its environment" concept of IoC. With qualifiers, it seems that the object is painfully aware not just of the existence of a container, but also how is that container configured exactly with qualifiers. This is no IoC.
+</p>
 
 <h2 id='web-apps-typology'>Web applications typology</h2>
 <a href='http://docs.oracle.com/javaee/6/tutorial/doc/bnadr.html'>source</a>

@@ -40,11 +40,16 @@
     <p>Sadly, also around the same time some unshaven people working in a rat-infested basement came up with idea of JSF and the so-called "component" frameworks.</p>
     <h2>component-based vs. request-based frameworks</h2>
     <p>
-      The basic dichotomy is that between component-oriented frameworks and request-based (a.k.a. action based) frameworks. In a nutshell, component-based frameworks are high-level and evil and suck whereas request-based frameworks are lower-level, expose the HTTP requests and responses, allow you to retain full and fine-level control and smell nice. A more extended description is found <a href='http://stackoverflow.com/a/4804476/274677'>here</a>.
+      The basic dichotomy is that between component-oriented frameworks and request-based (a.k.a. action based) frameworks. In a nutshell, component-based frameworks are high-level and evil and suck whereas request-based frameworks are lower-level, expose the HTTP requests and responses, allow you to retain full and fine-level control and smell nice. A more extended description is found <a href='http://stackoverflow.com/a/4804476/274677'>here</a> and <a href='https://dzone.com/articles/why-another-mvc-framework-java'>here</a> (the latter one discussing the new MVC coming with Java EE 8).
       <dl>
         <dt>component-based</dt><dd>JSF, Wicket, Play, Tapestry</dd>
         <dt>request-based</dt><dd>Spring MVC, Struts (both 1 and 2)</dd>        
       </dl>
+    </p>
+    <p>
+      The following figure is also instructional:<br/>
+        <img style='border: 1px solid black; padding: 1em;' src="java-web-architectures.html.files/component-oriented-vs-action-oriented.png"/>
+
     </p>
     <p>Request-based frameworks generally make it clear through their APIs that they're working with parsing an HTML request / generating an HTML response, while Component-based frameworks attempt to abstract this away and treat the application as collections of components with renderers and actions to do things.</p>
     <p>
