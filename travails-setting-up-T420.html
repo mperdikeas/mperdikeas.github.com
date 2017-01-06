@@ -38,19 +38,18 @@
       for Windows. In my particular case there were some battery diagnostics which I neglected to run
       before formatting the drive and so I relied on <a href='#check-battery'>Linux battery diagnostics</a>.
 </p>
-      <li><h2>research how you enter the BIOS</h2>
+      <li><h2>research how you enter the BIOS</h2></li>
         In the afore-mentioned machine <kbd>F1</kbd> takes you to the BIOS and <kbd>F12</kbd>
         directly to the boot order menu (which you should use to boot from the USB flash drive).
         I had to <a href="http://askubuntu.com/q/848418/89663">ask</a> to find out.
-        </li>
-      <li><h2>create an Ubuntu 16.04 live USB flash drive using <a href='https://unetbootin.github.io/'>UNetbootin</a></h2>
+      <li><h2>create an Ubuntu 16.04 live USB flash drive using <a href='https://unetbootin.github.io/'>UNetbootin</a></h2></li>
         <tt>USB Creator</tt> is another option but see in <a href="admin.html.files/ubuntu-bootable-usb-flash.html">this note</a> why you're better off using <tt>UNetbootin</tt> instead.<br/>
         If, after you've created a couple of live Ubuntu USB flash drives, you are unsure which version is each one do a:
         <pre>
 $cat /media/usb-disk/.disk/info 
 </pre> &hellip; to find out (<a href='http://askubuntu.com/q/665627'>source</a>).
-      </li>
-      <li><h2>perform a memory test (before wiping clean the disk in case you have to return it)</h2>
+
+      <li><h2>perform a memory test (before wiping clean the disk in case you have to return it)</h2></li>
         Assuming you created your Live Ubuntu USB flash drive using UNetbootin &mdash; and that you've read
         <a href="admin.html.files/ubuntu-bootable-usb-flash.html#caveat">the caveat on this note</a> &mdash; you should be able to run
         the memory test diagnostic. If all goes well you should see a screen similar to this:<br/>
@@ -68,17 +67,16 @@ $cat /media/usb-disk/.disk/info
           is run <b>before</b> loading the operating system and any user programs so there the responsivity point is moot. In general, I
           think it makes sense to use <tt>memtester</tt> only when trying to check a particular area of memory (though I haven't tried that).
         </p>
-      </li>
-      <li><h2>install Ubuntu 16.04 from the live USB flash drive</h2>
+
+      <li><h2>install Ubuntu 16.04 from the live USB flash drive</h2></li>
         I wish I could say that that was entirely incident-free but I <i>think</i> that at some point
         I was unable to boot from the USB flash drive (consistently thankfully, it was not random) and I had to bookmark
         
         <a href='http://askubuntu.com/q/544414/89663'>this solution</a> but I am not sure at the moment when that was while
         trying to boot 16.04 or some older LTS versions (14.04, 12.04) which I also tried.
-      </li>
       <li> <h2>test that the wireless network card is working</h2></li>
       &hellip; test the wired card too if you have a network and cable handy.
-      <li> <h2>examine dmesg and syslogs for hardware / BIOS issues</h2>
+      <li> <h2>examine dmesg and syslogs for hardware / BIOS issues</h2></li>
         <p>
           Once you login for the first time you should check the output of the boot process
           (which is usually available for you to inspect in <code>/var/logs/dmesg</code> or just by
@@ -131,8 +129,8 @@ grep -E "(vmx|svm)" --color=always /proc/cpuinfo</pre>
             </li>
           </ul>
         </p>
-      </li>
-      <li><h2>check disk</h2>
+
+      <li><h2>check disk</h2></li>
         <p>
           Install <tt>smartctl</tt> with <code>sudo apt-get install smartmontools</code> and do a:
           <pre>$ sudo smartctl -a /dev/sda1 | grep -i old_age</pre>
@@ -143,15 +141,14 @@ grep -E "(vmx|svm)" --color=always /proc/cpuinfo</pre>
           </a>
 
         </p>
-      </li>
-      <li><h2>check for burnt / stuck pixels</h2>
+      <li><h2>check for burnt / stuck pixels</h2></li>
         There's plenty of videos on youtube for that.
       </li>
-      <li><h2>research for other useful hardware diagnostics to run (e.g. provided by the manufacturer)</h2>
+      <li><h2>research for other useful hardware diagnostics to run (e.g. provided by the manufacturer)</h2></li>
         I asked a <a href="http://unix.stackexchange.com/q/322847/24044">question</a> about that but didn't do anything
         in addition to the above checks.
-      </li>
-      <li><h2>install additional drivers (from Ubuntu Software Center) and upgrade kernel</h2>
+
+      <li><h2>install additional drivers (from Ubuntu Software Center) and upgrade kernel</h2></li>
         <p>
           I noticed some very mild flickering on my screen while watching youtube videos and after establishing
           it was not Chrome-related (as Firefox exhibited the same behaviour), I decided to install additional drivers
@@ -179,12 +176,12 @@ sudo dpkg -i *.deb</pre>
         Basically, download the packages you need from <a href='http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.6-yakkety/'>here</a>
         and install them using <code>sudo dpkg -i *.deb</code>.
         </p>
-      </li>
-      <li><h2>check both VGA and DisplayPort video outputs</h2>
+
+      <li><h2>check both VGA and DisplayPort video outputs</h2></li>
         I connected an external monitor and verified that the system
         works as expected with either of the two monitors or both of them turned on.
         I used <tt>xrandr</tt> to selectively direct the output.
-      </li>
+
       <li><h2 id='check-battery'>check battery</h2></li>
       <p><span class='nb'>NB:</span> be sure to execute <a href='#run-windows-diagnostics'>this step first</a></p>
       <p>
@@ -206,11 +203,10 @@ sudo apt-get install fwts
 sudo fwts battery</pre>
         &hellip; in my case the <tt>fwts</tt> results <a href='travails-setting-up-T420.html.files/fwts-battery-results.log'>weren't stellar</a> but I decided to keep the battery (life's too short, one can't afford to get lost in rabbit holes all the time). As a matter of fact I have actually already encountered one case where the battery wasn't charging even though the laptop was plugged-in (this was solved by a full shutdown of the machine and a restart so I let it go at that).
       </p>
-      <li><h2>install git and setup my environment</h2>
+      <li><h2>install git and setup my environment</h2></li>
 This was uneventfull.
-      </li>
-      <li>
-        <h2>install Node and npm</h2>
+
+        <li><h2>install Node and npm</h2></li>
         <p>
         I installed <tt>Node 6</tt> (Node 7 is still in active development) and <tt>npm</tt>
         by following the <a href="https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions">offical instructions</a> and simply doing:
@@ -228,9 +224,7 @@ $ npm --version
 now they are working fine &mdash; see my comment on <a href="http://askubuntu.com/q/786272">this answer</a>.
 
         </p>
-      </li>
-      <li>
-        <h2>install Java SDK</h2>
+      <li> <h2>install Java SDK</h2></li>
         To install the Java SDK I followed
         <a href="http://tipsonubuntu.com/2016/07/31/install-oracle-java-8-9-ubuntu-16-04-linux-mint-18/">these instructions</a>
         which instructed me to add <a href="https://launchpad.net/~webupd8team/+archive/ubuntu/java">this PPA</a>.
@@ -248,9 +242,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)
 mperdikeas@mp-t420:~/js-react-minesweeper#
 $ javac -version
 javac 1.8.0_111</pre>
-      </li>
-      <li><h2>install PostgreSQL</h2>
-        <p.
+
+      <li><h2>install PostgreSQL</h2></li>
+        <p>
         I installed PostgreSQL out of the official Ubuntu repo simply using:
         <pre>
 sudo apt-get update
@@ -306,14 +300,13 @@ host    all             all             ::1/128                 md5</pre>
           is written <a href='postgresql.html#edit-of-pg_hba.conf-9.4.5'>here</a> as I changed the method to <tt>trust</tt>
           for the <tt>postgres</tt> user as well.
         </p>
-      </li>
-      <li>
-        <h2>install Ant</h2>
+
+      <li> <h2>install Ant</h2></li>
         <tt>Ant</tt> was installed uneventfully from the sources:
         <pre>sudo apt-get update
 sudo apt-get install ant</pre>
-      </li>
-      <li><h2>built and install Ivy from sources</h2>
+
+      <li><h2>built and install Ivy from sources</h2></li>
         <p>
         I decided to built Ivy from the sources so that I might be in position to insert some logging code in case
           I encounter any difficult to resolve problem.</p>
@@ -329,8 +322,8 @@ cp build/artifact/org.apache.ivy_2.4.0.final_20161112135640.jar ~/.ant/lib/</pre
 if you fail to check out the stable <tt>2.4.0</tt> tag, then the master branch version <tt>2.5.0.alpha</tt>
 will be built.
         </p>
-      </li>
-      <li><h2>install <tt>TrueCrypt</tt> or other privacy software</h2>
+
+      <li><h2>install <tt>TrueCrypt</tt> or other privacy software</h2></li>
         To install <tt>TrueCrypt</tt> on Ubuntu 16.04 you also need:
         <pre>
 sudo apt-get install dmsetup</pre>
