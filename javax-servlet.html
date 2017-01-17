@@ -4,7 +4,7 @@
     <link rel='icon' href='/knowledge-favicon.ico'/>
   </head>
   <body>
-    <ol reversed class=pink-circles>
+    <ol reversed class=main-list-items>
       <li>Path mappings and extension mappings in sevlets</li>
       In a nuthshell: path mappings take precedence over extension mappings.</br></br>
       A request may match more than one servlet-mapping in a given context. The servlet container uses a straightforward matching procedure to determine the best match. The matching procedure has four simple rules. First, the container prefers an exact path match over a wildcard path match. Second, the container prefers to match the longest pattern. Third, the container prefers path matches over filetype matches. Finally, the pattern "/" always matches any request that no other pattern matches.

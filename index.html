@@ -5,7 +5,7 @@
     <meta name="keywords" content="Menelaus Perdikeas github page">
     <meta name="description" content="Menelaus Perdikeas github page">
     <link rel='icon' href='Marcus_Brutus-favicon.png'/>
-    <link rel="stylesheet" type="text/css" href="./index.css">
+    <link rel="stylesheet" type="text/css" href="./mperdikeasgithub.css">    
     <style>
      h1 {
        color: black;
@@ -34,7 +34,7 @@
        margin: 0 0.3em;
        border: 1px solid #bbb;
        padding: 0 0.3em;
-       }
+     }
     </style>
     <title>Menelaus Perdikeas scratchpad</title>
   </head>
@@ -50,21 +50,25 @@
     <h2>My repositories</h2>
     Some of my (public) repositories:
     <ul>
-      <li><a href="https://github.com/mperdikeas/environment">a github repo containing my <tt>.bashrc</tt>, <tt>.emacs</tt>
-        and i3 configuration files</a>
-        <li><a href="https://github.com/mperdikeas/tools">a collection of Bash tools and utilities</a></li>
-        <li><a href="https://github.com/mperdikeas/euler-js">project Euler solutions in JavaScript (Node.js)</a></li>
-        <!--
-        <li><a href="https://github.com/mperdikeas/playground">playground projects</a> working with various technologies (to explore and exemplify how stuff works)</li>
-        -->
-        <li><a href="https://github.com/mperdikeas/archetypes">archetype projects</a> starter projects / setups for various
-          technologies (like <i>playground</i> but less exploratory, more stable and meant to be actually used to bootstrap
-          projects)
-        </li>
-        <!--li><a href="https://github.com/mperdikeas/java-mutil">a collection of pre-Java 7 utilities</a>
-             <b>NB: </b>not actively maintained any more - I've also moved to a much better Ant/Ivy <tt>build.xml</tt> template and workflow
-             </li-->
-        <li>A collection of <a href="https://github.com/mperdikeas/ocaml-mutil">OCaml utilities</a> I put together and found useful when doing <a href="https://projecteuler.net/">project Euler</a> stuff in OCaml</li>
+      <li><a href="https://github.com/mperdikeas/emacs">emacs</a> configuration files for the One True Editor</li>
+      <li><a href="https://github.com/mperdikeas/bashrc">bashrc</a> dotfiles for BASH</li>
+      <li>scripts and configuration files for my overall command line <a href="https://github.com/mperdikeas/environment">environment</a> (includes the above two as submodules) and lots of other stuff&mdash;e.g. configuration files for the awesome i3 window manager</li>
+
+      <!--li><a href="https://github.com/mperdikeas/environment">a github repo containing my <tt>.bashrc</tt>, <tt>.emacs</tt>
+        and i3 configuration files</a></li-->
+      <li><a href="https://github.com/mperdikeas/tools">a collection of Bash tools and utilities</a></li>
+      <li><a href="https://github.com/mperdikeas/euler-js">project Euler solutions in JavaScript (Node.js)</a></li>
+      <!--
+           <li><a href="https://github.com/mperdikeas/playground">playground projects</a> working with various technologies (to explore and exemplify how stuff works)</li>
+         -->
+      <li><a href="https://github.com/mperdikeas/archetypes">archetype projects</a> starter projects / setups for various
+        technologies (like <i>playground</i> but less exploratory, more stable and meant to be actually used to bootstrap
+        projects)
+      </li>
+      <!--li><a href="https://github.com/mperdikeas/java-mutil">a collection of pre-Java 7 utilities</a>
+           <b>NB: </b>not actively maintained any more - I've also moved to a much better Ant/Ivy <tt>build.xml</tt> template and workflow
+           </li-->
+      <li>A collection of <a href="https://github.com/mperdikeas/ocaml-mutil">OCaml utilities</a> I put together and found useful when doing <a href="https://projecteuler.net/">project Euler</a> stuff in OCaml</li>
 
     </ul>
     <h2>JavaScript</h2>
@@ -96,10 +100,10 @@
     <h3>My npm-published modules</h3>
     <a href='https://www.npmjs.com/~marcusjuniusbrutus'>marcusjuniusbrutus on npmjs.com</a>
 
-<div style='margin: 1em'><hr/></div>
-<p>What follows is an uncurated, motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
-    over the years and posted here for the benefit of my future self (and as such unlikely to be useful to anyone else):
-</p>    
+    <div style='margin: 1em'><hr/></div>
+    <p>What follows is an uncurated, motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
+      over the years and posted here for the benefit of my future self (and as such unlikely to be useful to anyone else):
+    </p>    
 
     <h2>Linux:</h2>
     <ul>
@@ -119,7 +123,8 @@
       <div>
         <h3>Presentation-oriented</h3>
         <ul>
-          <li><a href='html-css.html'>Web, HTML and CSS resources</a></li>
+          <li><a href='html-css.html'>HTTP, HTML and CSS resources</a></li>
+          <li><a href='fonts.html'>Fonts</a></li>
           <li><a href='react-webpack.html'>ReactJS and webpack</a></li>
           <li><a href='babel-webpack.html'>Babel and webpack</a>    </li>
           <li><a href='facebook-flow.html'>Flow static type checker</a></li>
@@ -143,9 +148,14 @@
         <h3>Architectures</h3>
         <ul>
           <li><a href='java-web-architectures.html'>Java for the web</a></li>
+          <li><a href="cas.html">CAS protocol</a></li>
         </ul>        
       </div>      
     </div>
+    <h2>Relational Databases</h2>
+    <i>stuff that's not vendor specific:</i>
+    <a href="http://use-the-index-luke.com">indices</a>
+    <a href="./architecture-of-a-database-system.pdf">DBMS architecture</a>    
 
 
     <h2>XML specifications</h2>
@@ -153,49 +163,42 @@
     <a href="wsdl.html">WSDL</a>
 
     <h2>Java</h2>
-      <a href='java.html'>infastructure</a>
-      <a href="javax-servlet.html">javax.servlet</a>
-      <a href="jasper.html">Jasper</a>
-      <a href="slf4j.html">slf4j</a>
+    <a href='java.html'>infastructure</a>
+    <a href="javax-servlet.html">javax.servlet</a>
+    <a href="jasper.html">Jasper</a>
+    <a href="slf4j.html">slf4j</a>
 
-      <h2>Platforms</h2>
-      <div class='horiz-col'>
-        <div>
-          <h3>Databases</h3>
-          <ul>
-            <li><a href="postgresql.html">Postgresql</a></li>
-            <li><a href="pgsphere.html">pgSphere</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Tomcat</h3>
-          <ul>
-            <li><a href="tomcat7.html">Tomcat 7</a></li>
-            <li><a href="tomcat8.5.html">Tomcat 8.5</a></li>
-            <li><a href="tomcat9.html">Tomcat 9</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>JBoss</h3>
-          <ul>
-            <li><a href="jboss-eap-6.html">JBoss EAP 6</a></li>
-            <li><a href="jboss7.html">JBoss 7</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Other</h3>
-          <ul>
-            <li><a href="vmware.html">VMWare</a></li>
-          </ul>          
-        </div>
+    <h2>Platforms</h2>
+    <div class='horiz-col'>
+      <div>
+        <h3>Databases</h3>
+        <ul>
+          <li><a href="postgresql.html">Postgresql</a></li>
+          <li><a href="pgsphere.html">pgSphere</a></li>
+        </ul>
       </div>
-    <h2>Sui-generis notes:</h2>
-      <a href="cas.html">CAS protocol</a>
-      <a href="shiro.html">Shiro</a>
-      <a href="python.html">Python</a>
-      <a href="mechanize.html">Mechanize</a>
-      <a href="web-productivity.html">the Pythonic live-reload</a>
-
+      <div>
+        <h3>Tomcat</h3>
+        <ul>
+          <li><a href="tomcat7.html">Tomcat 7</a></li>
+          <li><a href="tomcat8.5.html">Tomcat 8.5</a></li>
+          <li><a href="tomcat9.html">Tomcat 9</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>JBoss</h3>
+        <ul>
+          <li><a href="jboss-eap-6.html">JBoss EAP 6</a></li>
+          <li><a href="jboss7.html">JBoss 7</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Other</h3>
+        <ul>
+          <li><a href="vmware.html">VMWare</a></li>
+        </ul>          
+      </div>
+    </div>
     <h2>Travails</h2>
     <ul>
       <li><a href="travails-setting-up-T420.html">Installing Ubuntu 16.04 64 bit on my Lenovo ThinkPad T420 and setting up the machine</a></li>
@@ -212,8 +215,12 @@
       <li><a href="http://jvns.ca/">Julia Evans blog</a></li>
       <li><a href="https://www.youtube.com/playlist?list=PLelIK3uylPMGzHBuR3hLMHrYfMqWWsmx5&app=desktop">Abstract Algebra Harvard courses</a></li>
     </ul>
-
-    <h2>miscellaneous</h2>
+    <h2>Sui-generis notes:</h2>
+    <a href="shiro.html">Shiro</a>
+    <a href="python.html">Python</a>
+    <a href="mechanize.html">Mechanize</a>
+    <a href="web-productivity.html">the Pythonic live-reload</a>
+    <h2>Miscellaneous</h2>
     <ul>
       <li><a href="life-hacks.html">life hacks</a></li>
       <li><a href="wise-technology.html">useful mental models, articulations and wise positions on software stuff</a></li>
