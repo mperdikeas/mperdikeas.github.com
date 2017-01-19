@@ -106,9 +106,9 @@ xmp {border: 1px solid black;
      background-color: eee;}
 
 
-/* dl dd dt one liner with a 15-85 split     -- START */
+/* dl dd dt one liner      -- START */
 /* source: http://stackoverflow.com/a/21261303/274677 */
-dl.dt-dd-one-line-15-85 {
+dl.one-line {
     display: flex;
     flex-direction: column;
     flex-flow: row;
@@ -116,14 +116,14 @@ dl.dt-dd-one-line-15-85 {
     width: 100%;
     overflow: visible;
 }
-dl.dt-dd-one-line-15-85 > dt {
+dl.one-line > dt {
     flex-basis: 15%;
     flex-grow: 0;
     flex-shrink: 0;
     text-overflow: ellipsis;
     overflow: hidden;
 }
-dl.dt-dd-one-line-15-85 > dd {
+dl.one-line > dd {
     margin-left: auto;
     text-align: left;
     flex-basis: 85%;
@@ -132,4 +132,26 @@ dl.dt-dd-one-line-15-85 > dd {
     flex-grow: 0;
     flex-shirnk: 0;
 }
-/* dl dd dt one liner with a 15-85 split     -- END   */
+
+dl.one-line-15-85 > dt {
+    flex-basis: 15%;
+}
+dl.one-line-15-85 > dd {
+    flex-basis: 85%;
+}
+
+dl.one-line-20-80 > dt {
+    flex-basis: 20%;
+}
+dl.one-line-20-80 > dd {
+    flex-basis: 80%;
+}
+
+dl.one-line-25-75 > dt {
+    flex-basis: 25%;
+}
+dl.one-line-25-75 > dd {
+    flex-basis: 75%;
+}
+/* dl dd dt one liner      -- END   */
+

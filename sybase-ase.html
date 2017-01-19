@@ -1,0 +1,98 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+</head>
+<body>
+  <ol reversed class=main-list-items>
+    <li id='sqsh-prompt-commands'>common commands available inside the <tt>sqsh</tt> promprt</li>
+    <em>For the invocation command line arguments to the <tt>sqsh</tt> tool
+      themselves, see <a href='#sqsh-incantations'>this note</a>.</em><br/>
+    <span class='nb'>NB:</span> most of the below are specific to the CfA environment and
+    you can see their code as shown in <a href='#show-source-of-sp-procedures'>this note</a>.
+    <dl class='one-line one-line-25-75'>
+      <dt>show a lot of information on a table</dt><code>sp_help sometablename</code>
+      <dt>show privilleges of user</dt><dd><code>sp_helprotect mperdike</code> &mdash; Note: this only works in the <i>axafusers</i> database</dd>
+      <dt>show tables</dt><dd><code>sp_ls</code></dd>
+      <dt>show tables and views</dt><dd><code>sp_ls a</code></dd>      
+      <dt>show tables sorted</dt><dd><code>sp_lsn</code></dd>
+      <dt>show views</dt><dd><code>sp_ls v</code></dd>
+      <dt>show procedures</dt><dd><code>sp_ls p</code></dd>
+      <dt>show triggers</dt><dd><code>sp_ls t</code></dd>      
+    </dl>
+    <li id='show-source-of-sp-procedures'>how to show source code of stored procedures</li>
+    <p><span class='nb'>NB:</span> CfA-specific</p>
+    You need to connect to the sybsystemprocs database:
+    <pre>sqsh -Ssqldev -Dsybsystemprocs -Umperdike</pre>
+    &hellip; and then do, e.g.:
+    <pre>sp_helptext sp_cols;</pre>
+    <p></p>
+    <li id='sqsh-incantations'>common incantations of the <tt>sqsh</tt> tool</li>
+    <em>For commands available once inside the <tt>sqsh</tt> prompt,
+      see <a href='#sqsh-prompt-commands'>this note</a>.</em>
+    <ul>
+      <li>connect to the default database of a particular user on a particular server</li>
+      <pre>
+sqsh -Uloginname -Sservername</pre>
+      What is provided in the above incantation is the loginname, which is mapped to a username.
+      Once inside (at the prompt) you can obtain the username with:
+      <pre>select user_name();</pre>
+      &hellip; which may very well not be the same as the loginame. The loginname itself is shown with:
+      <pre>select suser_name();</pre>
+      In general, the dbadmin will map login names to usernames. The mappings are shown by the command:
+      <pre>sp_helpuser;</pre>
+      To see the database we were connected to, do a:
+      <pre>select db_name();</pre>
+      &hellip; if a database was not provided as a command line argument on the <code>sqsh</code>
+      tool invocation (using <tt>-D</tt>), then that database is the default database
+      associated with a given login.
+    </ul>
+    <li id='login-usernames-default-dbs'>login names, usernames and default databases</li>
+    <p>Tools such as <tt>sqsh</tt> use the so called "login names". Once inside the prompt these are mapped to the DB user names (I've also seen those referred to as "name-in-db"). Every login name has a default database.</p>
+    <p>The default database for a particular login can be obtained by the following query:
+      <pre>select name, dbname from master.dbo.syslogins; | grep part-of-the-username</pre>
+      (<a href='http://dba.stackexchange.com/a/161521/34332'>source</a>)
+    </p>
+    <li>Sybase ASE concepts</li>
+    <p>
+      In ASE, there is no concept of a "schema" (like you have in PostgreSQL or Oracle), instead tables are owned by users.
+      So, hierarchically, the concepts of database server, database, user and table are arranged as follows:
+    </p>
+    <img  src="sybase-ase.html.files/ase-concepts.png"/>
+    <p>Referential integrity constraints <b>can</b> cross databases.</p>
+    <p>
+      Once connected to a Sybase server (e.g. by means of the <tt>sqsh</tt> tool) you can use either of the below forms to
+      access a table:
+      <dl class='one-line one-line-20-80'>
+        <dt>database.owner.table</dt><dd>this is the fully qualified form, e.g. <code>SELECT * FROM cxcaccounts.dbo.a</code> where:
+          <dl class='one-line one-line-25-75'>
+            <dt>cxcaccounts</dt><dd>is the database name</dd>
+            <dt>dbo</dt><dd>is the user&mdash;not the login ('dbo' stands for Database Owner)</dd>
+            <dt>a</dt><dd>is the table name</dd>
+          </dl>
+        </dd>
+        <dt>database..table</dt><dd>E.g. <code>SELECT * FROM cxcaccounts..a</code> where the two dots <code>..</code> stand for the owner of that table (or the default owner / usename&mdash;this is not very clear at the moment)
+        <dt>..table</dt><dd>&hellip;where the omitted database name is taken to be the default database (I think)</dd>
+      </dl>
+    </p>
+    <li>Sybase ASE server structure</li>
+    <p>
+      See also <a href='http://dba.stackexchange.com/q/161470/34332'>this dba.stackexchange question of mine</a>.
+    </p>
+    <p>
+      An ASE database server (single OS process with a single listening port) contains multiple databases, some of which
+      are "system" databases and the rest are "user" databases (e.g. in the CfA environment these would
+      be <i>cxcaccounts</i>, <i>axafusers</i> and about 40 others). Two system databases that are always present in an
+      ASE system are:
+      <ul>
+        <li>master</li>
+        <li>sybsystemprocs</li>
+      </ul>
+      The database server may also be known by a database name
+      that's used by tools like <tt>sqsh</tt> to connect to it. In the CfA environment the configurations are kept
+      in file:
+      <code>/soft/SYBASE15.7/interfaces</code>
+    </p>
+  </ol>
+
+
+</body>
