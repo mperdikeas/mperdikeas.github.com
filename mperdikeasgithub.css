@@ -1,5 +1,6 @@
 body {
-    background: white;
+    /*    background: white;*/
+    background-image: url('bg.png');
     width: 60em;
     font-family: Helvetica, Lato, Raleway;
 }
