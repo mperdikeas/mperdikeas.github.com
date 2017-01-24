@@ -4,7 +4,7 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
-    <li>The charming table <tt>sysobjects</tt></li>
+    <li>The interesting table <tt>sysobjects</tt></li>
     <p>Table <tt>sysobjects</tt> is an interesting table (do a <code>sp_cols</code> on it to see more).</p>
     <p>To verify that table <tt>sysobjects</tt> is among the system tables
       in a database do:
@@ -21,6 +21,7 @@
     <span class='nb'>NB:</span> most of the below are specific to the CfA environment and
     you can see their code as shown in <a href='#show-source-of-sp-procedures'>this note</a>.
     <dl class='one-line one-line-25-75'>
+      <dt>show information on databases</dt><dd><code>sp_helpdb</code></dd>      
       <dt>show a lot of information on a table</dt><dd><code>sp_help sometablename</code></dd>
       <dt>show the columns of a table</dt><dd><code>sp_cols sometable</code></dd>      
       <dt>show privilleges of user</dt><dd><code>sp_helprotect mperdike</code>&nbsp;&mdash;&nbsp;LLNote: this only works in the <i>axafusers</i> database</dd>
