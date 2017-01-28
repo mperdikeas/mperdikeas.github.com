@@ -4,6 +4,36 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>tips on how to use <tt>sqsh</tt> effectively in interactive mode</li>
+    For some weird reason the output of many <tt>sqsh</tt> commands (either <tt>SELECT</tt> statements
+    or stored procedures) is very wide and folds or generates line breaks that interfere with piping
+    operations and stuff like <tt>cut</tt> or <tt>awk</tt> (that are possible in <tt>sqsh</tt>). To combat that:
+    <ul>
+      <li>use the <tt>-J</tt> switch to select the <tt>iso_1</tt> character set. For some reason, that results
+        in denser output. E.g.:<pre>sqsh -Jiso_1 -Umperdike -Ssqldev</pre>
+        <li>Append, after a <tt>SQL</tt> statement or the call to a stored procedure <tt>-mbcp</tt>. This
+          will result in pipe-separated output which is denser. E.g.:
+          <pre>select * from sysobjects; -mbcp</pre> &hellip; or:
+          <pre>sp_ls; -mbcp</pre>
+        </li>
+    </ul>
+        
+    <li>tips on how to use <tt>sqsh</tt> effectively when running scripts in batch mode</li>
+    <ul>
+      <li><p>
+        the <b style='font-size:110%'><tt>-h</tt></b> option turns off column headers and trailers. E.g. stuff like "<i>(#rows affected)</i>" or "<i>(return status=0)</i>" &mdash; but sadly not <i>"Type added"</i> messages.
+        </p>
+        <p>
+        Sample invocation:
+          <pre>sqsh -h -Uusername -Sdbname -i script-dml.sql</pre>
+        </p>
+      </li>
+      <li>the <b style='font-size:110%'><tt>-a</tt></b> option supposedly is the maximum number of errors before aborting but I 've tried
+        that with 0 and 1 and it didn't seem to work (I got the impression that the script carried on)
+      <li>the <b style='font-size:110%'><tt>-e</tt></b> option allows you to echo each line that <tt>sqsh</tt> executes. In this way when
+        something breaks you'll be able to see the approximate point where the breakage happened. Example invocation:
+        <pre>sqsh -e -Uusername -SdatabaseName -i script-ddl.sql </pre></li>
+    </ul>
     <li>The interesting table <tt>sysobjects</tt></li>
     <p>Table <tt>sysobjects</tt> is an interesting table (do a <code>sp_cols</code> on it to see more).</p>
     <p>To verify that table <tt>sysobjects</tt> is among the system tables
@@ -14,6 +44,10 @@
       To view all user tables in a database do:
       <pre>select name from sysobjects where type='U'</pre>
       &hellip; this is the same set returned with <code>sp_ls</code>
+    </p>
+    <p>
+      To view all stored procedures in some other database 'foo' that have the string 'person' in their name do:
+      <pre>select type, name from foo..sysobjects where type='P'; | grep person</pre>
     </p>
     <li id='sqsh-prompt-commands'>common commands available inside the <tt>sqsh</tt> promprt</li>
     <em>For the invocation command line arguments to the <tt>sqsh</tt> tool

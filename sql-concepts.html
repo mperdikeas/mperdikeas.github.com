@@ -1,0 +1,60 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style>
+   table
+   {
+     border-collapse: collapse;
+     border-spacing: 0px;
+   }
+   table, th, td
+   {
+     padding: 5px;
+     border: 1px solid black;
+     }
+  </style>
+</head>
+<body>
+  <ol reversed class=main-list-items>
+    <li>chained vs. unchained transactions mode</li>
+    sources:
+    <a href='https://www.experts-exchange.com/questions/23585504/Difference-between-Set-chained-OFF-ON-Sybase.html'>a</a>
+    <a href='https://www.ibm.com/developerworks/community/blogs/websphere_adapters/entry/jdbc_adapter_supported_transaction_modes_in_sybase?lang=en'>b</a>    
+    <p>
+      There is an interesting dichotomy of transaction types:
+      <dl>
+        <dt>Chained transactions</dt><dd>This is the ANSI standard way and conforms to the SQL 92 behavior of implicit transactions. There is no explicit 'begin transaction' statement. You are <em>always</em> in a transaction. When the client connects to the server an invisible <tt>BEGIN TRAN</tt> is issued. When the client issues a <tt>COMMIT TRAN</tt> or <tt>ROLLBACK TRAN</tt> again, an invisible <tt>COMMIT TRAN</tt> is also immediately issued as well. This means that in chained mode, you never issue <tt>BEGIN TRAN</tt>. Effectively, you close transactions but not open them. Another way to put it is that a transaction automatically begins with the first statement, and no work is committed until <tt>COMMIT</tt> is explicitly called.</dd> 
+        <dt>Unchained transactions (a.k.a. autocommit)</dt><dd>This is the PostgreSQL and Sybase ASE standard/default. Any individual command is atomic (so an update of 1 million rows will update all million or none) just like the case of chained transactions (atomicity for single statements is always maintained). However, each command is automatically commited on execute so atomicity for a group of commands is not possible. Instead, you must explicitly issue a <tt>BEGIN TRAN</tt> before you are in a multi-statement transaction. In PostgreSQL you use <tt>BEGIN [WORK|TRANSACTION]</tt> and <tt>COMMIT [WORK|TRANSACTION]</tt> for that. In much the same way, Sybase extends standard AutoCommit with multi-statement transaction support if <tt>BEGIN TRANSACTION</tt> is explicitly called. </dd>
+      </dl>
+    </p>
+    <p>
+      <table>
+        <thead>
+          <tr>
+            <th>Transaction mode</th>
+            <th>Default in:</th>
+            <th>JDBC</th>        
+          </tr>
+          <tr>
+        </thead>
+        <tr>
+          <td>Chained</td>
+          <td>ANSI SQL</td>
+          <td><tt>Connection#setAutoCommit(false)</tt></td>
+        </tr>
+        <tr>
+        <td>Unchained</td>
+        <td>PostgreSQL, Sybase ASE</td>
+        <td><tt>Connection#setAutoCommit(true)</tt></td>
+        </tr>        
+      </table>
+    </p>
+    <p>I think that the concept of transaction chaining is orthogonal to that of the transaction isolation levels.</p>
+    <p>See also my <a href='http://dba.stackexchange.com/q/162246/34332'>stack exchange question</a> on the matter.</p>
+    <p>TODO: add mnemonic for chained / unchained transactions</p>
+    <li>Multi-version concurrency control</li>
+    TODO
+    <li>Transaction isolation levels</li>
+    TODO
+  </ol>
+</body>
