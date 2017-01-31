@@ -1,0 +1,220 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>    
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <h1>How to configure logging in JBoss EAP 6.2</h1>
+    <p>Writeup of what I did in late January 2017 in order to configure logging in JBoss EAP 6.2.
+    </p>
+    <p>Based on my travails, when it comes to logging in JBoss EAP6.2
+      there are three distinct options:
+      <ul>
+        <li>eschew logging and just use <tt>System.out.println</tt> statements</li>
+        <li>use <tt>log4j</tt> and rely on the logging subsystem provided by JBoss</li>
+        <li>use <tt>log4j</tt> and provide your own <tt>log4j.xml</tt>&mdash;this has the effect of bypassing the logging sybystem of JBoss</li>
+      </ul>
+    </p>
+    <p>
+      The above options are discussed in the respective sections below.
+    </p>
+    <h2>just use <tt>System.out.println</tt></h2>
+    <p>
+      This is the simplest approach of all. Under this approach all of your output is given by <tt>System.out.println</tt>
+      statements which are going to find their way into the <tt>server.log</tt> file (e.g. in <tt>standalone/log/server.log</tt>). There is however a catch: Apparently there is a <a href='https://bugzilla.redhat.com/show_bug.cgi?id=1070453'>bug</a> in JBoss
+      to the effect that if a <tt>log4j.xml</tt> or <tt>logging.properties</tt> file is present on the classpath (typically in
+      <tt>WEB-INF/classes</tt>) then these <tt>System.out.println</tt> logging statement will not be logged on the console, server.log, or test.log. They will simply vanish. According to a JBoss developer I <a href='https://developer.jboss.org/message/968063#968063'>spoke to</a> this bug was fixed in EAP 6.2.3.
+    </p>
+    <p>I also posted <a href='http://stackoverflow.com/a/41939143/274677'>a question in SO</a> about this mysterious disappearence of <tt>System.out.println</tt> messages and the same
+      JBoss developer confirmed the issue (more or less) and suggested a workaround that might not require removal of <tt>logging.properties</tt> files. Namely, that I <i>"just add a jboss-deployment-descriptor.xml and exclude the logging subsystem from processing your deployment"</i>. I tried that I solution as well but it didn't work.</p>
+
+    <h2>use <tt>log4j</tt> and rely on the logging subsystem provided by JBoss</h2>
+    <p>JBoss EAP 6.2+ and JBoss EAP 7.x use 1.2.16 (<a href='https://developer.jboss.org/message/968063#968063'>source</a>).
+      So you can directly use <tt>logger.info</tt> and it works out of the box with the output of all statements ending
+      up in both the console and file <tt>server.log</tt>. You do not need to configure any additional logging
+      in <tt>standalone-full.xml</tt>. Below is what I've used which is only trivially modified with respect to
+      the default configuration bundled in EAP 6.2.0:
+      <xmp>
+        <subsystem xmlns="urn:jboss:domain:logging:1.3">
+          <console-handler name="CONSOLE">
+            <level name="INFO"/>
+            <formatter>
+              <pattern-formatter pattern="%K{level}%d{MM-dd HH:mm:ss} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+          </console-handler>
+          <periodic-rotating-file-handler name="FILE" autoflush="true">
+            <formatter>
+              <pattern-formatter pattern="%d{MM-dd HH:mm:ss} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+            <file relative-to="jboss.server.log.dir" path="server.log"/>
+            <suffix value=".yyyy-MM-dd"/>
+            <append value="true"/>
+          </periodic-rotating-file-handler>
+          <logger category="com.arjuna">
+            <level name="WARN"/>
+          </logger>
+          <logger category="org.apache.tomcat.util.modeler">
+            <level name="WARN"/>
+          </logger>
+          <logger category="org.jboss.as.config">
+            <level name="DEBUG"/>
+          </logger>
+          <logger category="sun.rmi">
+            <level name="WARN"/>
+          </logger>
+          <logger category="jacorb">
+            <level name="WARN"/>
+          </logger>
+          <logger category="jacorb.config">
+            <level name="ERROR"/>
+          </logger>
+          <root-logger>
+            <level name="INFO"/>
+            <handlers>
+              <handler name="CONSOLE"/>
+              <handler name="FILE"/>
+            </handlers>
+          </root-logger>
+        </subsystem>  
+      </xmp>
+    </p>
+    <p>
+      In this approach, since there is <b>no</b> <tt>log4j.xml</tt> file bundled with our WAR (see next section), we have no
+      problem with the <tt>System.out.println</tt> statements as well, i.e. they all appear both in the console and <tt>server.xml</tt>
+    </p>
+    <p>
+      If we also want our logging to end up in a separate file as well we can issue the following CLI commands (<a href='https://developer.jboss.org/message/968063#968063'>source</a>), e.g. for packages under <tt>mjb44</tt>:
+      <pre>
+/subsystem=logging/file-handler=my-app:add(append=true, autoflush=true, file={relative-to=jboss.server.log.dir, path=myapp.log})
+/subsystem=logging/logger=mjb44:add(level=INFO, handlers=[my-app])</pre>
+    </p>
+    <p>
+      Issuing the above commands on the CLI:
+      <pre>
+$ ./bin/jboss-cli.sh
+You are disconnected at the moment. Type 'connect' to connect to the server or 'help' for the list of supported commands.
+[disconnected /] connect
+[standalone@localhost:9999 /] /subsystem=logging/file-handler=my-app:add(append=true, autoflush=true, file={relative-to=jboss.server.log.dir, path=myapp.log})
+{"outcome" => "success"}
+[standalone@localhost:9999 /] /subsystem=logging/logger=mjb44:add(level=INFO, handlers=[my-app])
+{"outcome" => "success"}
+[standalone@localhost:9999 /] </pre>
+      &hellip; results in the following <tt>standalone.xml</tt>:
+      <xmp>
+        <subsystem xmlns="urn:jboss:domain:logging:1.3">
+          <console-handler name="CONSOLE">
+            <level name="INFO"/>
+            <formatter>
+              <pattern-formatter pattern="%K{level}%d{MM-dd HH:mm:ss} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+          </console-handler>
+          <file-handler name="my-app" autoflush="true">
+            <file relative-to="jboss.server.log.dir" path="myapp.log"/>
+            <append value="true"/>
+          </file-handler>
+          <periodic-rotating-file-handler name="FILE" autoflush="true">
+            <formatter>
+              <pattern-formatter pattern="%d{MM-dd HH:mm:ss} %-5p [%c] (%t) %s%E%n"/>
+            </formatter>
+            <file relative-to="jboss.server.log.dir" path="server.log"/>
+            <suffix value=".yyyy-MM-dd"/>
+            <append value="true"/>
+          </periodic-rotating-file-handler>
+          <logger category="com.arjuna">
+            <level name="WARN"/>
+          </logger>
+          <logger category="org.apache.tomcat.util.modeler">
+            <level name="WARN"/>
+          </logger>
+          <logger category="org.jboss.as.config">
+            <level name="DEBUG"/>
+          </logger>
+          <logger category="sun.rmi">
+            <level name="WARN"/>
+          </logger>
+          <logger category="jacorb">
+            <level name="WARN"/>
+          </logger>
+          <logger category="jacorb.config">
+            <level name="ERROR"/>
+          </logger>
+          <logger category="mjb44">
+            <level name="INFO"/>
+            <handlers>
+              <handler name="my-app"/>
+            </handlers>
+          </logger>
+          <root-logger>
+            <level name="INFO"/>
+            <handlers>
+              <handler name="CONSOLE"/>
+              <handler name="FILE"/>
+            </handlers>
+          </root-logger>
+        </subsystem>                             
+      </xmp>
+    </p>
+    <p>
+    &hellip; the effect is the following:
+    <ul>
+      <li><tt>logger.info</tt> statements are shown in console, <tt>server.log</tt> and the (application-specific) <tt>myapp.log</tt></li>
+      <li><tt>System.out.println</tt> statements are shown in the console and <tt>server.log</tt></li>
+    </ul>
+    This is in many respects the best of both worlds and the only disadvantage is that we can't keep the logging configuration
+    in our application's source control (as there is no <tt>log4j.xml</tt> file and the configuration was made directly
+    in the server's <tt>standalone.xml</tt>).
+    </p>
+    <h2>use <tt>log4j</tt> and provide your own <tt>log4j.xml</tt></h2>
+    <p>
+      By including a <tt>log4j.xml</tt> file in tha classpath (typically in <tt>WEB-INF/classes</tt>), you
+      can issue <tt>Logger#info</tt> statements in your application that end up in some application-specific
+      log file (not <tt>server.log</tt>).
+    </p>
+    <p>E.g. I've confirmed that the following <tt>log4j.xml</tt> sends <tt>logger.info</tt> output
+      to file <tt>cas-auth.log</tt>.
+      <xmp>
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+        <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+                             debug="false">
+          <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+            <layout class="org.apache.log4j.PatternLayout">
+              <param name="ConversionPattern" value="[%d{dd/MM/yy hh:mm:ss:sss z}] %5p %c{2}: %m%n" />
+            </layout>
+          </appender>
+          <appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+            <param name="File" value="${jboss.server.log.dir}/cas-auth.log" />
+            <param name="MaxFileSize" value="1MB" />
+            <param name="MaxBackupIndex" value="100" />
+            <layout class="org.apache.log4j.PatternLayout">
+              <param name="ConversionPattern" value="[%d{yyyy-MM-dd hh:mm:ss:sss z}] %c %5p: %m%n" />
+            </layout>
+          </appender>
+          <root>
+            <priority value="info" />
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+          </root>
+
+        </log4j:configuration> 
+      </xmp>
+    </p>
+    <p>However, even though the above logger has a <tt>ConsoleAppender</tt> attached to it, no <tt>logger.info</tt> output
+      is seen in either the console or in <tt>server.log</tt> (maybe a JBoss EAP 6.2.0 bug?)
+    </p>
+    <p>Also, I have been advised against using a console appender in my own logger in
+      <a href='https://developer.jboss.org/message/968063#968063'>this thread</a>.
+      The gist is:
+      <blockquote>
+        I'd also advise against using the ConsoleAppender as it could result in deadlocks unless you disable the console-handler on the server.
+      </blockquote>
+      &hellip; and:
+      <blockquote>
+        With regards to using the ConsoleAppender. The issues is you'd have two different log managers writing to the same output stream. In most cases it should work, it's just not a good practice to have two different objects writing to the same output stream.
+      </blockquote>
+    </p>
+  </body>
+</html>
+
+
