@@ -18,6 +18,7 @@
     </p>
     <p>
       The above options are discussed in the respective sections below.
+      Note that JBoss EAP 6.2+ and JBoss EAP 7.x use Log4j 1.2.16 (<a href='https://developer.jboss.org/message/968063#968063'>source</a>).
     </p>
     <h2>just use <tt>System.out.println</tt></h2>
     <p>
@@ -30,8 +31,11 @@
       JBoss developer confirmed the issue (more or less) and suggested a workaround that might not require removal of <tt>logging.properties</tt> files. Namely, that I <i>"just add a jboss-deployment-descriptor.xml and exclude the logging subsystem from processing your deployment"</i>. I tried that I solution as well but it didn't work.</p>
 
     <h2>use <tt>log4j</tt> and rely on the logging subsystem provided by JBoss</h2>
-    <p>JBoss EAP 6.2+ and JBoss EAP 7.x use 1.2.16 (<a href='https://developer.jboss.org/message/968063#968063'>source</a>).
-      So you can directly use <tt>logger.info</tt> and it works out of the box with the output of all statements ending
+    <p>As noted, JBoss EAP 6.2+ and JBoss EAP 7.x use Log4j so you can directly use <tt>logger.info</tt> and
+      it works out of the box. Just be sure to compile your sources against a compatible version of Log4j (in other words pull
+      the right Ivy dependency). Also, you only need the Log4j jars for the compilation stage. In both this and the next approach
+      there is no reason (in fact you shouldn't) bundle the Log4j jar in the deployment WAR (e.g. in <tt>WEB-INF/lib</tt>).
+      The output of all statements ending
       up in both the console and file <tt>server.log</tt>. You do not need to configure any additional logging
       in <tt>standalone-full.xml</tt>. Below is what I've used which is only trivially modified with respect to
       the default configuration bundled in EAP 6.2.0:
@@ -170,6 +174,14 @@ You are disconnected at the moment. Type 'connect' to connect to the server or '
       By including a <tt>log4j.xml</tt> file in tha classpath (typically in <tt>WEB-INF/classes</tt>), you
       can issue <tt>Logger#info</tt> statements in your application that end up in some application-specific
       log file (not <tt>server.log</tt>).
+    </p>
+    <p>
+      <span class='nb'>NB:</span> as in the previous approach, there is no reason to provide the Log4j jars in <tt>WEB-INF/lib</tt>.
+      The JBoss server provides its own Log4j implementation in a module (in fact it is based on a fork of Log4j as they had
+      to tweak something). Theoretically it should be possible to provide your own Log4j jar in <tt>WEB-INF/lib</tt>
+      and include a <tt>jboss-deployment-structure.xml</tt> in <tt>META-INF</tt> to disable the JBoss own Log4j module
+      as described
+      <a href='http://stackoverflow.com/a/41939143/274677'>here</a> but I didn't have much luck with this approach.
     </p>
     <p>E.g. I've confirmed that the following <tt>log4j.xml</tt> sends <tt>logger.info</tt> output
       to file <tt>cas-auth.log</tt>.

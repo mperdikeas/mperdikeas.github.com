@@ -1,0 +1,181 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>    
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <style>
+     h1 {font-size: 115%; color: navy;}
+     h2 {font-size: 108%; color: navy;}
+    </style>
+  </head>
+  <body>
+    <h1>More instructions on how to setup JBoss EAP 6.2</h1>
+    I 've also used the below with success:
+    <h2>1. Create jboss directory</h2>
+    <p>
+      Copy jboss-eap-6.2.0.zip and unzip the file in that directory. You might as well want to change the group permissions:
+      <pre>chmod -R g-w jboss-eap-6.2</pre>
+    </p>
+    <p>
+      I have also had consistently good results with using the installer:
+      <pre>java -jar ~/Downloads/jboss-eap-6.2.0-installer.jar</pre>
+      The installer also gives you the nice option to configure standard and administrative ports at a convenient offset (e.g. +1, +2 or +100)
+    </p>
+
+    At any rate, following the above, <tt>cd</tt> into the jboss-eap-6.2 directory for the subsequent instructions.
+
+    <h2>2. Make a copy of the original configuration file (for safety)</h2>
+
+    <pre>cp standalone/configuration/standalone-full.xml standalone/configuration/standalone-full-original.xml</pre>
+
+    <h2>3. Add management user</h2>
+    (this is only applicable if you didn't use the installer but instead unziped the archive)
+    Execute:
+    <pre>./bin/add-user.sh</pre>
+    &hellip; and go with the flow.
+    <h2>4. Configure datasources</h2>
+
+    <p>
+      For datasources which roll-over, add the following parameter:
+      <xmp> <url-delimiter>|</url-delimiter> </xmp>
+    </p>
+    <p>
+      I used something along the below lines to configure a Sybase datasource (yes, that zombie just won't die)
+      <xmp>
+        <subsystem xmlns="urn:jboss:domain:datasources:1.1">
+          <datasources>
+            <datasource jta="false" jndi-name="java:jboss/datasources/sqlDataSource" pool-name="sqlDataSource" enabled="true" use-ccm="false">
+              <connection-url>jdbc:sybase:Tds:231.102.107.30:2545/mydatabase</connection-url>
+              <driver-class>com.sybase.jdbc4.jdbc.SybDriver</driver-class>
+              <driver>sybase</driver>
+              <security>
+                <user-name>username</user-name>
+                <password>secret</password>
+              </security>
+              <pool>
+                <min-pool-size>0</min-pool-size>
+                <max-pool-size>15</max-pool-size>
+              </pool>
+              <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+              <validation>
+                <validate-on-match>true</validate-on-match>
+                <check-valid-connection-sql>select 1 from mydatabase..sometable</check-valid-connection-sql>
+                <background-validation>false</background-validation>
+              </validation>
+              <timeout>
+                <idle-timeout-minutes>1</idle-timeout-minutes>
+              </timeout>
+              <statement>
+                <share-prepared-statements>true</share-prepared-statements>
+                <prepared-statement-cache-size>10</prepared-statement-cache-size>
+              </statement>
+            </datasource>
+          </datasources>
+        </subsystem>
+      </xmp>
+    </p>
+    <h2>5. Configure JNDI aliases for datasources</h2>
+    <p>This is only for reasons of backwards compatibility if you wish to change some names and at the same
+      time allow old code to continue using the old names.</p>
+    <p>In such a case, you can add the following to the naming subsystems:
+      <xmp>
+        <subsystem xmlns="urn:jboss:domain:naming:1.4">
+          <bindings>
+	    <lookup name="java:/someName" lookup="java:jboss/datasources/someNameB"/>
+	    <lookup name="java:/anotherName" lookup="java:jboss/datasources/anotherNameB"/>
+          </bindings>
+          <remote-naming/>
+        </subsystem>
+      </xmp>
+    </p>
+    <p>
+      I've verified that with the above, you can use the below code to obtain a datasource (from a Web application)
+      using e.g. either <i>java:jboss/datasources/someNameB</i> or <i>java:/someName</i>.
+      <pre class='code'>
+InitialContext cxt = new InitialContext();
+if ( cxt == null ) {
+    throw new RuntimeException("Uh oh -- no context!");
+}
+DataSource ds = (DataSource) cxt.lookup( "java:jboss/datasources/someNameB" ); // you can use "java:/someName" as well
+</pre>
+    </p>
+
+    <h2>6. Add the Sybase driver as a module:</h2>
+
+    <p>
+    <pre>mkdir -p modules/com/sybase/main</pre>
+    </p>
+    <p>
+&hellip; subsequently, copy <tt>jconn4.jar</tt> in there.
+    </p>
+    <p>
+      Following that, create a file <tt>module.xml</tt> with the below content:
+    <xmp>
+      <?xml version="1.0" encoding="UTF-8"?>
+      <module xmlns="urn:jboss:module:1.0" name="com.sybase">
+        <resources>
+          <resource-root path="jconn4.jar"/>
+        </resources>
+        <dependencies>
+          <module name="javax.api"/>
+          <module name="javax.transaction.api"/>
+        </dependencies>
+      </module>
+    </xmp>
+    </p>
+    <p>
+      I've also had success in using the open-source JTDS driver instead (<tt>jtds-1.3.1.jar</tt>).
+    </p>
+    <h2>7. Make web & interface pages public</h2>
+    Unless you do the below I think JBoss binds only to the local loopback address (<tt>127.0.0.1</tt>)
+    <xmp>
+      <interfaces>
+        <interface name="management">
+          <inet-address value="${jboss.bind.address.management:0.0.0.0}"/>
+        </interface>
+        <interface name="public">
+          <inet-address value="${jboss.bind.address:0.0.0.0}"/> 
+        </interface>
+        <interface name="unsecure">
+          <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
+        </interface>
+      </interfaces>
+    </xmp>
+    <h2>8. Configure access logging</h2>
+    <p>
+      Add the following in subsystem <tt>urn:jboss:domain:web:1.5</tt> after <tt>&ltconnector... /&gt</tt>:
+      <xmp>
+        <virtual-server name="default-host" enable-welcome-root="false">
+          <alias name="localhost"/>
+          <alias name="example.com"/>
+          <access-log pattern="%a %t %H %r %s %S %b %D '%{Referer}i' '%{User-Agent}i' " rotate="true" prefix="access_log.">
+            <directory relative-to="jboss.server.log.dir"/> 
+          </access-log>
+        </virtual-server>
+      </xmp>
+      &hellip; this will allow you to view access logs (in a separate file for convenience).
+    </p>
+    <p>
+      <b>NB:</b> access logging is buffered and writes the access logs in chunks.
+    </p>
+    <h2>9. Customize logging</h2>
+    <p>
+      If you're that kind of person you might wish to further customize logging in <tt>urn:jboss:domain:logging:1.3</tt>:
+      <xmp>
+      <periodic-rotating-file-handler name="FILE" autoflush="true">
+        <formatter>
+          <pattern-formatter pattern="[%d{dd/MMM/yyyy:HH:mm:ss,SSS Z}] %-5p [%c] (%t) %s%E%n"/>
+        </formatter>
+        <file relative-to="jboss.server.log.dir" path="server.log"/>
+        <suffix value=".yyyy-MM-dd"/>
+        <append value="true"/>
+      </periodic-rotating-file-handler>
+      </xmp>
+    </p>
+    <p>
+      I have done a more thorough writeup specifically on logging <a href='how-to-configure-logging-in-jboss-eap-6.2.html'>here</a>.
+    </p>
+    <h2>10. Start server and experience joy</h2>
+    <pre>./bin/standalone.sh  -c standalone-full.xml >& /dev/null &</pre>
+  </body>
+</html>

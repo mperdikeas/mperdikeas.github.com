@@ -5,6 +5,10 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to update all submodules</li>
+      Assuming you've cloned your repository with <tt>git clone --recursive</tt> (which you always should), then do a:
+      <pre>
+git submodule update --recursive --remote</pre>
       <li>How to discover which commit deleted a file and resurrect it</li>
       <ol>
           <li>find the path to the file </li>

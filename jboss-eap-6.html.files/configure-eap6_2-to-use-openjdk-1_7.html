@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>    
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <h1>How to configure JBoss EAP 6.2 to use Open JDK 1.7 (instead of Oracle 1.8)</h1>
+    <p>Writeup of what I did in late January 2017 in order to configure JBoss EAP with Open JDK 1.7 (instead of Oracle 1.8)
+    </p>
+    <p>
+      Apparently JBoss EAP 6.2 (and maybe 6.x in general) doesn't play nicely with Java 1.8 and requires Java 1.7 instead.
+      In my system I only had Oracle Java 1.8 installed:
+      <pre>
+$ java -version
+java version "1.8.0_111"
+Java(TM) SE Runtime Environment (build 1.8.0_111-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.111-b14, mixed mode)
+mperdikeas@mp-t420:~#
+$ javac -version
+javac 1.8.0_111
+mperdikeas@mp-t420:~#
+$ echo $JAVA_HOME
+/usr/lib/jvm/java-8-oracle
+      </pre>
+      &hellip; and that gave rise to the following exception when I tried to deploy a WAR application containing some JSPs
+      (the error apparently occured during compilation of the JSPs):
+      <pre>
+JBWEB000065: HTTP Status 500 - JBWEB004062: Unable to compile class for JSP:
+
+JBWEB000309: type JBWEB000066: Exception report
+
+JBWEB000068: message JBWEB004062: Unable to compile class for JSP:
+
+JBWEB000069: description JBWEB000145: The server encountered an internal error that prevented it from fulfilling this request.
+
+JBWEB000070: exception
+
+org.apache.jasper.JasperException: JBWEB004062: Unable to compile class for JSP:
+
+JBWEB004061: An error occurred at line: 1 in the generated java file
+The type java.io.ObjectInputStream cannot be resolved. It is indirectly referenced from required .class files
+
+JBWEB004211: Stacktrace:
+org.apache.jasper.compiler.DefaultErrorHandler.javacError(DefaultErrorHandler.java:85)
+org.apache.jasper.compiler.ErrorDispatcher.javacError(ErrorDispatcher.java:69)
+org.apache.jasper.compiler.JDTCompiler.generateClass(JDTCompiler.java:447)
+org.apache.jasper.compiler.Compiler.compile(Compiler.java:361)
+org.apache.jasper.compiler.Compiler.compile(Compiler.java:339)
+org.apache.jasper.compiler.Compiler.compile(Compiler.java:326)
+org.apache.jasper.JspCompilationContext.compile(JspCompilationContext.java:606)
+org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:308)
+org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:309)
+org.apache.jasper.servlet.JspServlet.service(JspServlet.java:242)
+javax.servlet.http.HttpServlet.service(HttpServlet.java:847)
+mjb44.auth.gui.ControllerServlet.service(ControllerServlet.java:126)
+javax.servlet.http.HttpServlet.service(HttpServlet.java:847)</pre>
+    </p>
+    <p>
+      It is entirely possible to have multiple version of Java installed, you just need to configure EAP 6.2 to use the
+      correct one (1.7 in this case).
+    </p>
+    <p>
+      So, after I installed OpenJDK 1.7 (following <a href='http://askubuntu.com/a/761527/89663'>these instructions</a>),
+      I edited file <tt>standalone.conf</tt> (in folder <tt>jboss-eap-6.2/bin/</tt>) to include the following line:
+      <pre>JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-amd64"</pre>
+    </p>
+    <p>
+      &hellip; once the above line was added, I restarted the server:
+      <pre>./standalone.sh -c standalone-full.xml</pre>
+      &hellip; and the problem was gone.
+    </p>
+    <p>Note, that on my system the default Java remained 1.8, and the global <tt>JAVA_HOME</tt> on the shell remained
+      the one corresponding to Oracle JDK 1.8.
+    </p>
+  </body>
+</html>
+
+
