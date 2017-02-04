@@ -141,11 +141,22 @@ DataSource ds = (DataSource) cxt.lookup( "java:jboss/datasources/someNameB" ); /
         </interface>
       </interfaces>
     </xmp>
-    <h2>8. Configure access logging</h2>
+    <h2>8. Ensure that <tt>enable-welcome-root</tt> is set to true</h2>
+    The <tt>enable-welcome-root</tt> attribute should be set to <tt>true</tt>
+    (I believe it is by default) if you wish to see the "Welcome to JBoss EAP 6.2" page
+    <xmp>
+        <subsystem xmlns="urn:jboss:domain:web:1.5" default-virtual-server="default-host" native="false">
+            <connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>
+            <virtual-server name="default-host" enable-welcome-root="true">
+            ...
+    </xmp>
+    &hellip; otherwise (if set to <tt>false</tt>) when you hit, e.g. <tt>localhost:8080</tt> you'd get HTTP 404. People typically set this to <tt>false</tt> in order to deploy their
+    own root application.
+    <h2>9. Configure access logging</h2>
     <p>
       Add the following in subsystem <tt>urn:jboss:domain:web:1.5</tt> after <tt>&ltconnector... /&gt</tt>:
       <xmp>
-        <virtual-server name="default-host" enable-welcome-root="false">
+        <virtual-server name="default-host" enable-welcome-root="true">
           <alias name="localhost"/>
           <alias name="example.com"/>
           <access-log pattern="%a %t %H %r %s %S %b %D '%{Referer}i' '%{User-Agent}i' " rotate="true" prefix="access_log.">
@@ -158,7 +169,7 @@ DataSource ds = (DataSource) cxt.lookup( "java:jboss/datasources/someNameB" ); /
     <p>
       <b>NB:</b> access logging is buffered and writes the access logs in chunks.
     </p>
-    <h2>9. Customize logging</h2>
+    <h2>10. Customize logging</h2>
     <p>
       If you're that kind of person you might wish to further customize logging in <tt>urn:jboss:domain:logging:1.3</tt>:
       <xmp>
@@ -175,7 +186,7 @@ DataSource ds = (DataSource) cxt.lookup( "java:jboss/datasources/someNameB" ); /
     <p>
       I have done a more thorough writeup specifically on logging <a href='how-to-configure-logging-in-jboss-eap-6.2.html'>here</a>.
     </p>
-    <h2>10. Start server and experience joy</h2>
+    <h2>11. Start server and experience joy</h2>
     <pre>./bin/standalone.sh  -c standalone-full.xml >& /dev/null &</pre>
   </body>
 </html>

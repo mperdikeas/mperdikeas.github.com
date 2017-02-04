@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 110%; background: grey; color: white;}
+  </style>
+  <body>
+    <h1>How to setup a VPN using <tt>openconnect</tt> on Linux</h1>
+    <p>
+      In January 2017 I was <a href='./how-to-setup-vpn-using-vpnc.html'>using vpnc</a> to setup a VPN.
+    </p>
+    <p>
+      Howerver, I run into disconnect problems after 8 hours. I asked
+      <a href='http://askubuntu.com/q/878478/89663'>here</a> but didn't receive any answer. Then a network administrator said the following:
+      <blockquote>
+        When using vpnc, the connection will always be dropped after it has been up for at most 8 hours, when rekeying occurs. This is because rekeying is not yet supported in vpnc, and Cisco's default rekey-intervall is 8 hours. Usually this is not too inconvenient, but you may want to consider using either GNU screen or TightVNC if you want to make sure you don't loose any state if you are disconnected unexpectedly.
+      </blockquote>
+      Since this appears to be a <tt>vpnc</tt> limitation
+      he further suggested that I try <tt>openconnect</tt> istead.
+    </p>
+    <p>
+      You first need to install <tt>openconnect</tt>:
+      <pre>
+sudo apt-get install network-manager-openconnect-gnome</pre>
+      <p>
+        &hellip; and follow the prompts.
+        After that, I opened the network manager (or
+        the <tt>nm-applet</tt> if you're using the <tt>i3</tt>
+        window manager) and configured the VPN as shown
+        in the figure below (the name of the gateway was
+        given to me by networks people) :
+      </p>
+      <p>
+        <a href='./how-to-setup-vpn-using-openconnect.html.files/nm-openconnect-configure.png'>
+          <img src='./how-to-setup-vpn-using-openconnect.html.files/nm-openconnect-configure.png' height='300px' width='300px'>
+        </a>
+      </p>
+      <p>
+        Following that, I selected the connection I had just
+        configured from the network manager (or the nm-applet)
+        as shown below:
+      </p>
+      <p>
+        <a href='./how-to-setup-vpn-using-openconnect.html.files/nm-select-vpn-connection.png'>
+          <img src='./how-to-setup-vpn-using-openconnect.html.files/nm-select-vpn-connection.png' height='150px' width='220px'>
+        </a>
+      </p>
+      <p>
+        &hellip; and was met with the following message which I simply
+        dismissed (it's not consequential):
+      </p>
+      <p>
+        <a href='./how-to-setup-vpn-using-openconnect.html.files/nm-openconnect-vpn-certificate.png'>
+          <img src='./how-to-setup-vpn-using-openconnect.html.files/nm-openconnect-vpn-certificate.png' height='150px' width='150px'>
+        </a>
+      </p>
+      <p>
+        &hellip; then I was prompted to enter my credentials which I did as shown below:
+      </p>
+      <p>
+        <a href='./how-to-setup-vpn-using-openconnect.html.files/nm-openconnect-login.png'>
+          <img src='./how-to-setup-vpn-using-openconnect.html.files/nm-openconnect-login.png' height='150px' width='150px'>
+        </a>
+      </p>
+      <p>
+        &hellip; and the connection was established!
+      </p>
+      <p>
+        In case of failure this is the message that was shown on my screen
+        (under the i3 window manager):
+      </p>
+      <p>
+        <a href='./how-to-setup-vpn-using-openconnect.html.files/nm-failure.png'>
+          <img src='./how-to-setup-vpn-using-openconnect.html.files/nm-failure.png' height='100px' width='250px'>
+        </a>
+      </p>
+  </body>
+</html>
