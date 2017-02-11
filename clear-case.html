@@ -4,7 +4,16 @@
     <link rel='icon' href='/knowledge-favicon.ico'/>
   </head>
   <body>
-    <ol reversed>
+    <ol class='main-list-items' reversed>
+      <li>remove a dir and all its sub-directories</li>
+      <p>
+        Say you wish to remove directory <tt>dir-to-remove</tt> in present directory.
+<pre>
+ct co -nc .
+ct rmname dir-to-remove
+ct ci .</pre>
+<tt>-nc</tt> stands for <i>no comment</i>
+      </p>
       <li>how to delete a view in ClearCase</li>
       I have only tried this with a snapshot view but I believe it works with dynamic views
       as well:
