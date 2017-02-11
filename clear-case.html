@@ -5,6 +5,17 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>find whether the current directory is checked out</li>
+      <pre>ct des . | grep check</pre>
+      &hellip; or:
+      <pre>ct lsco -dir .</pre>
+      <li>how to find view-private objects</li>
+      <p>
+        In the current directory:<pre>ct ls -l | grep private</pre>
+      </p>
+      <p>Recursively, under the current directory:
+        <pre>ct lsprivate .</pre>
+      </p>
       <li>remove a dir and all its sub-directories</li>
       <p>
         Say you wish to remove directory <tt>dir-to-remove</tt> in present directory.
