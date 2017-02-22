@@ -5,6 +5,28 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>remove a file or directory (recursively) in ClearCase</li>
+      <pre>
+$ ct co .
+$ ct rm foo
+$ ct ci . </pre>
+      At this point in time it is not clear to me how <tt>ct rm</tt> is different
+      from <tt>ct rmelem</tt> and <tt>ct rmname</tt>. Our ClearCase resident expert
+      suggested using <tt>ct rmname</tt> and that indeed does the trick. In fact
+      if you invoke <tt>ct rmname foo</tt> where <i>foo</i> is the directory name
+      that's all you have to do to recursively delete the directory. But I think
+      that <tt>ct rm</tt> is what people are meant to use.
+      
+      <li>commit an arbitrary tree (with symlinks and all) to ClearCase</li>
+      <a href='http://stackoverflow.com/a/42375618/274677'>source</a>
+      <p>
+      First move it out of the dynamic view (say to <tt>/tmp/some-tree</tt>), and then issue:
+        <pre>$ clearfsimport -recu -nset ~/tmp/some-tree/ .</pre>
+      </p>
+      <p>
+        Following the above, I have been advised to also issue the following (after doing a <tt>cd</tt> to <tt>some-tree</tt>):
+        <pre>ct protect -chmod ug+w $(find -type d)</pre>
+      </p>      
       <li>find whether the current directory is checked out</li>
       <pre>ct des . | grep check</pre>
       &hellip; or:
@@ -39,8 +61,7 @@ ct rmview -f -tag mperdike_dev_viewsnap
        <li id='create-snapshot-view'>how to create a snapshot view in ClearCase</li>
       Here's the incantation I recently used:
       <pre>
-ct mkview -sna -tag mperdike_dev_viewsnap -vws /data/VIEWS/mperdike_dev_viewsnap.vws -host serverhostname -hpath /data/VIEWS/mperdike_dev_viewsnap.vws -gpath /data/VIEWS/mperdike_dev_viewsnap.vws /export/mperdike/cc-snap-views/mperdike-dev-viewsnap
-      </pre>
+ct mkview -sna -tag mperdike_dev_viewsnap -vws /data/VIEWS/mperdike_dev_viewsnap.vws -host serverhostname -hpath /data/VIEWS/mperdike_dev_viewsnap.vws -gpath /data/VIEWS/mperdike_dev_viewsnap.vws /export/mperdike/cc-snap-views/mperdike-dev-viewsnap</pre>
       Here's my understanding:
       <ul>
         <li><dt><code>-sna</code></dt><dd>this flag triggers the creation of a snapshot view (as opposed to a dynamic view)</dd>
@@ -65,16 +86,14 @@ ct mkview -sna -tag mperdike_dev_viewsnap -vws /data/VIEWS/mperdike_dev_viewsnap
 $ ct catcs
 element * CHECKEDOUT
 element src/db/... .../dbdev_br/LATEST
-element * /main/LATEST -mkbranch dbdev_br
-        </pre>
+element * /main/LATEST -mkbranch dbdev_br </pre>
         &hellip; whereas the snapshot view config spec is:
         <pre>
 $ ct catcs
 element * CHECKEDOUT
 element src/db/... .../dbdev_br/LATEST
 element * /main/LATEST -mkbranch dbdev_br
-load /vobs/ASC_DB_ADMIN/
-        </pre>
+load /vobs/ASC_DB_ADMIN/ </pre>
       </p>
       <p>
         Once the snapshot view's config spec was saved, stuff started to get downloaded. I noticed that in addition to
@@ -92,8 +111,7 @@ load /vobs/ASC_DB_ADMIN/
           On my machine the <code>/data/VIEWS</code> directory is mounted on an NFS filesystem:
           <pre>
 $ df -P -T /data/VIEWS | tail -n +2 | awk '{print $2}'
-nfs
-          </pre></li>
+nfs </pre></li>
       </ul>
       <li>common helpful aliases for ClearCase</li>
       <pre>
@@ -103,8 +121,7 @@ alias co=checkout
 alias uco='uncheckout'
 alias xcc='setenv LANG en_US; xclearcase &'
 alias cmake='clearmake -C gnu MAKE=clearmake UIROOT=/vobs/ASC_BUILD/src'
-alias ctmv='ct setview -exec "newgrp ccase" mperdike_dev_view'
-      </pre>
+alias ctmv='ct setview -exec "newgrp ccase" mperdike_dev_view'</pre>
       <p>Regarding the last of the above aliases (<tt>ctmv</tt>), it seems there is no actual need
         to use <tt>setview</tt>. <tt>setview</tt> spawns a second shell and you are expected
         to navigate to, e.g. <tt>/vobs/ASC_DB_ADMIN</tt> to do your work. Instead, one can
