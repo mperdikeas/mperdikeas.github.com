@@ -10,12 +10,17 @@
 $ ct co .
 $ ct rm foo
 $ ct ci . </pre>
-      At this point in time it is not clear to me how <tt>ct rm</tt> is different
-      from <tt>ct rmelem</tt> and <tt>ct rmname</tt>. Our ClearCase resident expert
-      suggested using <tt>ct rmname</tt> and that indeed does the trick. In fact
-      if you invoke <tt>ct rmname foo</tt> where <i>foo</i> is the directory name
-      that's all you have to do to recursively delete the directory. But I think
-      that <tt>ct rm</tt> is what people are meant to use.
+      <p>
+        <tt>rm</tt> is an alias for <tt>rmname</tt>.
+      </p>
+      <p>
+        At this point in time it is not clear to me how <tt>rm</tt> / <tt>rmname</tt> is different
+        from <tt>ct rmelem</tt>. Our ClearCase resident expert
+        suggested using <tt>ct rm/rmname</tt> and that indeed does the trick (recursively)
+      </p>
+      <p>My impression at the moment is that <tt>rmelem</tt> is of a more permanent nature whereas
+        with <tt>rmname</tt> you maintain history.
+      </p>
       
       <li>commit an arbitrary tree (with symlinks and all) to ClearCase</li>
       <a href='http://stackoverflow.com/a/42375618/274677'>source</a>
