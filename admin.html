@@ -4,6 +4,19 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>configuring swappiness</li>
+    <p>
+      Obtain current swappiness with:
+      <pre>cat /proc/sys/vm/swappiness</pre>
+    </p>
+    <p>The Ubuntu default value is <tt>60</tt>, for a reasonable endowed (memory-wise) system it is recommended to set that value to <tt>10</tt>.
+      <br/>Set it with:
+      <pre>sudo sysctl vm.swappiness=10</pre>
+    </p>
+    <p>
+      &hellip; following the above I did the following to (temporarily) clear and then turn back on the swap so that the new settings would take full effect:
+      <pre>$ sudo swapoff -a &&  sudo swapon -a</pre>
+    </p>
     <li><a href="admin.html.files/ubuntu-bootable-usb-flash.html">how to create a bootable USB flash drive with an image of Ubuntu</a></li>
     <li>finding which processes cause the disk to be grinding</li>
     <p>
