@@ -5,6 +5,36 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>awesome tool to import an arbitrary directory structure into a ClearCase view</li>
+      <p>
+        The <code>clearfsimport</code> makes working with the ClearCase abomination borderline bearable.
+        In the below incantation assume that:
+        <ul>
+          <li>the current directory is some ClearCase dynamic view</li>
+          <li>the path <code>/tmp/foo</code> is just a random filesystem directory, outside of ClearCase</li>
+        </ul>
+<pre>clearfsimport -recu -nset /tmp/foo/ . </pre>
+      </p>
+      <p>For some inscrutable reason the <code>-nset</code> flag is essential. Note that I've only tried
+        that in dynamic views, not snapshots. For more see
+        <a href='http://stackoverflow.com/q/42371537/274677'>here</a>
+        and
+        <a href='http://stackoverflow.com/q/42396640/274677'>here</a>.
+      </p>
+      <li>some useful commands I used recently (unordered)</li>
+      <pre>
+ct ls -l
+ct ls -view-only
+ct ls -rec -view-only
+ct lshistory
+ct lsprivate -co
+ct unco
+ct des .
+ct lsco
+ct lsco -dir .
+ct lsco -recu foo
+ct lsco -me -recu
+ct mkelem -mkpath dir-or-source-file</pre>
       <li>remove a file or directory (recursively) in ClearCase</li>
       <pre>
 $ ct co .
@@ -29,7 +59,7 @@ $ ct ci . </pre>
         <pre>$ clearfsimport -recu -nset ~/tmp/some-tree/ .</pre>
       </p>
       <p>
-        Following the above, I have been advised to also issue the following (after doing a <tt>cd</tt> to <tt>some-tree</tt>):
+        Following the above, I have been advised (by CfA people) to also issue the following (after doing a <tt>cd</tt> to <tt>some-tree</tt>):
         <pre>ct protect -chmod ug+w $(find -type d)</pre>
       </p>      
       <li>find whether the current directory is checked out</li>

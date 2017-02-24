@@ -4,6 +4,27 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>find swap size</li>
+    <p>
+      There's a number of ways to obtain swap size:
+      <ul>
+        <li>Using <code>free</code></li>
+<pre>
+    $ free -h
+                  total        used        free      shared  buff/cache   available
+    Mem:           7.7G        4.8G        484M        387M        2.5G        2.2G
+    Swap:          7.9G        5.1M        7.9G
+</pre>
+        <li>Using the <code>/proc</code> filesystem</li>
+<pre>
+$ cat /proc/swaps
+Filename    Type          Size       Used  Priority
+/dev/sda5   partition     8267772    5172  -1
+</pre>
+        <li>Using high-level tools like <code>htop</code> or <code>glance</code></li>
+      </ul>
+
+    </p>
     <li>configuring swappiness</li>
     <p>
       Obtain current swappiness with:
