@@ -13,14 +13,20 @@
           <li>the current directory is some ClearCase dynamic view</li>
           <li>the path <code>/tmp/foo</code> is just a random filesystem directory, outside of ClearCase</li>
         </ul>
-<pre>clearfsimport -recu -nset /tmp/foo/ . </pre>
+        <pre>clearfsimport -recu -nset /tmp/foo/ . </pre>
       </p>
-      <p>For some inscrutable reason the <code>-nset</code> flag is essential. Note that I've only tried
-        that in dynamic views, not snapshots. For more see
-        <a href='http://stackoverflow.com/q/42371537/274677'>here</a>
-        and
-        <a href='http://stackoverflow.com/q/42396640/274677'>here</a>.
+      <p>For some inscrutable reason the <code>-nset</code> flag is essential. For more see
+        <a href='http://stackoverflow.com/q/42371537/274677'>here</a>.</p>
+      <p>
+        To perform an update (after the initial import) simply additionally use the <tt>-rmname</tt> flag
+        in the above incantation:
+        <pre>clearfsimport -recu -nset -rmname /tmp/foo/ .</pre>
+        For more on the update functionality, see <a href='http://stackoverflow.com/q/42396640/274677'>here</a>.
       </p>
+      <p>
+        Note that I've only tried the above in dynamic views, not snapshots.
+      </p>
+
       <li>some useful commands I used recently (unordered)</li>
       <pre>
 ct ls -l
@@ -34,7 +40,9 @@ ct lsco
 ct lsco -dir .
 ct lsco -recu foo
 ct lsco -me -recu
-ct mkelem -mkpath dir-or-source-file</pre>
+ct mkelem -mkpath dir-or-source-file
+ct diff -diff -pre Makefile
+cat Makefile@@/main/dbdev_br/1</pre>
       <li>remove a file or directory (recursively) in ClearCase</li>
       <pre>
 $ ct co .
