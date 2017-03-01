@@ -1,0 +1,71 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style>
+   table
+   {
+     border-collapse: collapse;
+     border-spacing: 0px;
+   }
+   table, th, td
+   {
+     padding: 5px;
+     border: 1px solid black;
+     }
+  </style>
+</head>
+<body>
+  <ol reversed class=main-list-items>
+    <li>Databases, JDBC drivers and connection URLs</li>
+    <p>
+      I've used the combinations shown in the table below:
+    </p>
+    <p>
+    <table>
+      <thead style='color:white; background: #444'>
+        <tr>
+          <th>RDBMS</th>
+          <th>Driver</th>
+          <th>Typical JAR name</th>
+          <th>Typical Connection URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PostgreSQL 9.x</td>
+          <td>org.postgresql.Driver</td>
+          <td>postgresql-9.1-901-1.jdbc4.jar</td>
+          <td>jdbc:postgresql://localhost:5432/RegTAP</td>
+        </tr>
+        <tr>
+          <td>Sybase ASE 15.7</td>
+          <td>net.sourceforge.jtds.jdbc.Driver</td>
+          <td>jtds-1.3.1.jar</td>
+          <td>jdbc:jtds:sybase://138.143.107.50:2545/axafusers</td>
+        </tr>
+        <tr>
+          <td>Sybase ASE 15.7</td>
+          <td>com.sybase.jdbc4.jdbc.SybDriver</td>
+          <td>jconn4.jar</td>
+          <td>jdbc:sybase:Tds:131.142.197.150:2545/axafusers</td>
+        </tr>                
+      </tbody>
+    </table>
+    </p>
+    <p>
+      As far as Sybase is concerned:
+      <ul>
+        <li>the <tt>net.sourceforge.jtds.jdbc.Driver</tt> driver is open-source,
+          is know as <b>jTDS</b> and is available from <a href='http://jtds.sourceforge.net/'>here</a>.</li>
+        <li>the <tt>com.sybase.jdbc4.jdbc.SybDriver</tt> driver is closed-source, is known as <b>jConnect4</b> and only available through Sybase (e.g.
+        see <a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01776.1604/doc/html/san1357754912881.html'>here</a>)</li>
+      </ul>
+    </p>
+    <p>
+      Regarding the possibility of using two different drivers for Sybase you may also refer
+      to my <tt>axafusers-connectivity</tt> project for some performance tests.
+      According to these tests
+      it appears that the <i>jTDS</i> driver is more performant than the <i>jConnect4</i>.
+    </p>
+  </ol>
+</body>
