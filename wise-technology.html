@@ -16,6 +16,10 @@
 <h1>Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.</h1>
 
 <ul>
+    <li><a href='#failing-abstractions'>failing abstractions (evil twin / if thou stare long into an abyss)</a>  
+    <li><a href='#battling-complexity'>battling complexity</a>
+    <li><a href='#xml-vs-yaml'>YAML vs. XML</a></li>  
+    <li><a href='#rube-goldberg'>Rube Goldberg machine</a></li>
     <li><a href='#spring-framework-ioc'>On Spring framework's failure when it comes to Inversion of Control / Dependency Injection</a></li>
     <li><a href='#web-apps-typology'>Web applications typology</a></li>
     <li><a href='#the-test-pyramid'>the test pyramid</a>
@@ -32,6 +36,7 @@
     <li><a href="#verification_vs_validation">Verification -vs- Validation</a></li>
     <li><a href="#software_schedules">On productivity and estimating software schedules</a></li>
     <li><a href="#pike_on_programming">Pike on programming</a></li>
+    <li><a href="#orms-suck">ORMs suck</a></li>    
     <li><a href="#osgi_sucks">OSGI sucks</a></li>
     <li><a href="#guis_suck">GUIs sucks</a></li>
     <li><a href="#bottom_up_down">Bottom-up and top-down</a></li>
@@ -39,6 +44,28 @@
   </ul>
 <br/>
 <br/>
+
+<h2 id='failing-abstractions'>Failing abstractions (or why if thou gaze long into an abyss, the abyss will also gaze into thee)</h2>
+<p>
+When people try to fix all the leaks in an abstraction, this usually turn the abstraction into an ugly twin of the stuff it tried to simplify. <a href="#orms-suck">ORMs</a> are a good example of that.
+</p>
+
+<h2 id='battling-complexity'>battling complexity</h2>
+<p>
+Noticing how these pockets of complexity lead to those kinds of problems isn't obvious or intuitive, because it's effectively a Butterfly Effect that causes most of its severe repercussions much further down the line.
+</p>
+<h2 id='xml-vs-yaml'>YAML vs. XML</h2>
+<p>
+YAML has more complexity in syntax, but a data model that fits to data structures in programming languages (records/maps, arrays/lists, integers, floats, boolean, bytes, strings). As long as you do not implement a YAML parser yourself (why would you do that?) you should have easy times with YAML.
+XML on the other hand is relatively easy to parse, but has a complex data model that maps well just to a DOM. For anything but markup text, you do not have a direct mapping to/from XML.
+</p>
+
+<h2 id='rube-goldberg'>Rube Goldberg machine</h2>
+<p>
+A Rube Goldberg machine is a deliberately over-engineered contraption in which a series of devices that perform
+simple tasks are linked together to produce a domino effect in which activating one device triggers the next device
+in the sequence.
+</p>
 
 <h2 id='spring-framework-ioc'>On Spring framework's failure when it comes to Inversion of Control / Dependency Injection</h2>
 <a href='https://www.reddit.com/r/programming/comments/3uhytt/why_i_hate_spring/?st=ixc3mcw4&sh=837cd273'>source</a>
@@ -232,7 +259,14 @@ It is not usually until you've built and used a version of the program
 that you understand the issues well enough to get the design right.
 —Brian Kernighan, Rob Pike, The Practice of Programming
 
-<a name="osgi_sucks"/><h2>Why OSGI sucks</h2>
+<h2 id="orms-suck">ORMs suck</h2>
+<p>
+  ORMs start easy and simple, but lack various features of full SQL. If you start a new project, the ORM is fine.
+  At some point, you are forced to use plain SQL, which clashes horribly with the ORM concepts.
+  Thus the desire to extend the ORM. Over time more and more features are bolted on and the complexity grows.
+</p>
+
+<h2 id="osgi_sucks">Why OSGI sucks</h2>
 <i>2011-03-22</i><br/>
 It is very very hard to find opinions of what might be “not so great” about OSGi, or reasons that hinder it’s adoption. It’s even harder to find that kind of info from insiders who truly know OSGi by heart.
 Most criticism is received with flames, so most times it isn’t even worth it to comment on critical posts, attracting flamers.

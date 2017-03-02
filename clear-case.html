@@ -5,6 +5,16 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>working directly on the filesystem in ClearCase (not inside an extra shell using <tt>setview</tt>)</li>
+      <p>
+        See the following SO question of mine:
+        <ul>
+          <li><a href='http://stackoverflow.com/q/40347421/274677'>working in /vobs/some/path versus /view/view-tag-name/vobs/some/path</a></li>
+        </ul>
+      </p>
+      <p>Bottom line is that <tt>ct setview</tt> is evil and you can simply work in <tt>/view/view-tag-name/vobs/some/path</tt>.
+        I've also confirmed that with colleagues. The only caveat is that I've only tried this with dynamic views (not snapshots).
+      </p>
       <li>awesome tool to import an arbitrary directory structure into a ClearCase view</li>
       <p>
         The <code>clearfsimport</code> makes working with the ClearCase abomination borderline bearable.
