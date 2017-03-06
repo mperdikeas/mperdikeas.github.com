@@ -4,6 +4,48 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>on the precision of the <code>datetime</code> datatype in Sybase (and SQL Server)</li>
+    <p>
+      The <code>datetime</code> data type in Sybase (this applies to SQL Server as well), is able to only distinguish time in (approximately) 1/300ths of a second. No greater precision is possible.
+    </p>
+    <p>
+      This is corroborated by the fact that the following query, when executed on
+      a table with more than 1000 <code>datetime</code> values, yields only 237
+      distinct millisecond values:
+      <pre>
+ SELECT COUNT(*) FROM
+ (
+ SELECT DISTINCT y.millis FROM
+ (
+ SELECT RIGHT(RTRIM(LTRIM(x.submissionDate)), 6) AS millis FROM (
+ SELECT convert(char(32), submission_date, 139) AS submissionDate FROM proposal..proposal
+ ) x
+ ) y
+ ) z</pre>
+    </p>
+    <p>
+      So, the bottom line is that when using a client-side API such as JDBC,
+      the <a href='http://docs.oracle.com/javase/8/docs/api/index.html?java/sql/Timestamp.html'>java.sql.Timestamp</a>
+      (which can hold an exact date up to <b>nanosecond</b> precision) is way more
+      than enough to accurately convey to the client side any value stored in a
+      <code>datetime</code> column.
+    </p>
+    <p>Conversely, it also means that the <code>datetime</code> data type is
+      inadequate to hold all possible values of a <code>java.sql.Timestamp</code>
+      or indeed, even of the much humbler <a href='http://docs.oracle.com/javase/8/docs/api/java/util/Date.html'>java.util.Date</a> which has millisecond precision.
+    </p>
+    <p>
+      The wretched Sybase documentation imprecisely states that the <code>datetime</code> data type can hold values accurate to <i>1/300 second</i>. This is misleading.
+      What they actually mean is that the granularity of the <code>datetime</code>
+      data type is approximately 3 ms.
+    </p>
+    <p>
+      Sources:
+      <ul>
+        <li><a href='http://dba.stackexchange.com/q/166370/34332'>my question on SO on datetime fractional seconds</a> (prompted by the misleading and unclear Sybase documentation)</li>
+        <li>Slightly irrelevant (but provides nice links) answer on the fact that Sybase time data types do not store time zone information: <a href='http://dba.stackexchange.com/a/69733/34332'>How does Sybase store datetime information?</a></li>
+      </ul>
+    </p>
     <li>how to convert <code>datetime</code> to <code>char</code></li>
     <pre>SELECT convert(char(32), submission_date, 139) AS submissionDate FROM proposal..proposal</pre>
     Sources:
