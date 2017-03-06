@@ -4,6 +4,13 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>how to convert <code>datetime</code> to <code>char</code></li>
+    <pre>SELECT convert(char(32), submission_date, 139) AS submissionDate FROM proposal..proposal</pre>
+    Sources:
+    <ul>
+      <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc38151.1520/html/iqrefbb/Convert.htm'>Sybase CONVERT function format style codes</a>
+      </li>
+    </ul>
     <li>tips on how to use <tt>sqsh</tt> effectively in interactive mode</li>
     For some weird reason the output of many <tt>sqsh</tt> commands (either <tt>SELECT</tt> statements
     or stored procedures) is very wide and folds or generates line breaks that interfere with piping
