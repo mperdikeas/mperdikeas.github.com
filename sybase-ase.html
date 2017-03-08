@@ -6,7 +6,8 @@
   <ol reversed class=main-list-items>
     <li>on the precision of the <code>datetime</code> datatype in Sybase (and SQL Server)</li>
     <p>
-      The <code>datetime</code> data type in Sybase (this applies to SQL Server as well), is able to only distinguish time in (approximately) 1/300ths of a second. No greater precision is possible.
+      The <code>datetime</code> data type in Sybase (this applies to SQL Server as well), is able to only distinguish time in (approximately) 1/300ths of a second. No greater resolution is possible. Contrast that with glorious
+      PostgreSQL which has microsecond resolution for a <a href='https://www.postgresql.org/docs/9.1/static/datatype-datetime.html'>huge range of dates</a>.
     </p>
     <p>
       This is corroborated by the fact that the following query, when executed on
@@ -32,17 +33,18 @@
     </p>
     <p>Conversely, it also means that the <code>datetime</code> data type is
       inadequate to hold all possible values of a <code>java.sql.Timestamp</code>
-      or indeed, even of the much humbler <a href='http://docs.oracle.com/javase/8/docs/api/java/util/Date.html'>java.util.Date</a> which has millisecond precision.
+      or indeed, even of the much humbler <a href='http://docs.oracle.com/javase/8/docs/api/java/util/Date.html'>java.util.Date</a> which has millisecond resolution.
     </p>
     <p>
       The wretched Sybase documentation imprecisely states that the <code>datetime</code> data type can hold values accurate to <i>1/300 second</i>. This is misleading.
-      What they actually mean is that the granularity of the <code>datetime</code>
-      data type is approximately 3 ms.
+      What they actually mean is that the resolution / granularity / precision (pick your favorite term) of
+      the <code>datetime</code> data type is approximately 3 ms.
     </p>
     <p>
       Sources:
       <ul>
-        <li><a href='http://dba.stackexchange.com/q/166370/34332'>my question on SO on datetime fractional seconds</a> (prompted by the misleading and unclear Sybase documentation)</li>
+        <li><a href='http://dba.stackexchange.com/q/166370/34332'>my question on SO on datetime fractional seconds</a> (prompted by the misleading and unclear Sybase documentation). See especially, the update on <a href='http://dba.stackexchange.com/a/166398/34332'>my own answer</a>.
+        </li>
         <li>Slightly irrelevant (but provides nice links) answer on the fact that Sybase time data types do not store time zone information: <a href='http://dba.stackexchange.com/a/69733/34332'>How does Sybase store datetime information?</a></li>
       </ul>
     </p>
