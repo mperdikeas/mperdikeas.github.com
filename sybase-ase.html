@@ -4,6 +4,54 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>Sybase Datetime to Unix epoch</li>
+    <p>
+      Note first of all that Sybase is totally oblivious to time zones. It
+      stores no time zone iformation at all. The server simply stores
+      whatever <tt>Datetime</tt> values the client provides without applying any
+      kind of transformation. It also reports the stored values without any
+      kind of transformation. So the onus is on the client application to not
+      mess up. Also, in case different application access
+      the same server, they should all be aware of each other's conventions.
+    </p>
+    <p>
+      The only case I am aware of, of the server reporting a <tt>Datetime</tt>
+      value that was not previously provided by the client, is with the
+      <tt>getDate</tt> function:
+      <pre>select getDate()</pre>
+    </p>
+    <p>&hellip; in this case I've verified that the server's behavior is
+      identical to simply returning the date value provided by Linux (e.g.
+      using <tt>date</tt>)
+      <b>totally ignoring</b> the timestamp information. 
+    </p>
+    <p>I am not aware of a method to inquire a Sybase server as to the time zone
+      it is located (e.g. what you get in Unix with <code>date +%z</code> or
+      <code>date +%Z</code>). This is equivalent as saying that it is impossible
+      to ask a Sybase server to return the time in seconds since the epoch (what
+      you get with <code>date +%s</code> in Bash).
+    </p>
+    <p>With the above caveats in mind, below are the functions to convert
+      between Unix epoch values and <tt>Datetime</tt> values in Sybase:
+      <dl>
+        <dt>Unix Epoch to Datetime</dt>
+        <dd><pre>SELECT dateadd( SECOND, 1489426961, '1970-1-1' )</pre></dd>
+        <dt>Datetime to Unix Epoch</dt>
+        <dd><pre>SELECT datediff( SECOND, '1970-1-1', getDate())</pre></dd>
+        <dt>Invariant (sanity check)</dt>
+        <dd><pre>SELECT datediff (SECOND, '1970-1-1', dateadd( SECOND, 42, '1970-1-1' ))</pre></dd>
+      </dl>
+      &hellip; given the caveats noted above, the conversion functions above
+      (except the invariant) will return correct values only if the server is
+      in UTC (which is where the Unix Epoch is defined). The invariant however
+      works in all cases as the effects of the two transformations cancel each
+      other out (so the invariant always returns <tt>42</tt>).
+       </p>
+       <p>Finally, just to note that some useful Sybase <tt>Datetime</tt> to
+         String </tt>conversion formats are defined under path <i>Transact-SQL Users Guide &gt; Using Transact-SQL Functions in Queries &gt; Built-in functions</i>.
+         I am not providing a link as the Sybase shitty company can't even implement bookmarkable documentation.
+       </p>
+
     <li>on the precision of the <code>datetime</code> datatype in Sybase (and SQL Server)</li>
     <p>
       The <code>datetime</code> data type in Sybase (this applies to SQL Server as well), is able to only distinguish time in (approximately) 1/300ths of a second. No greater resolution is possible. Contrast that with glorious
