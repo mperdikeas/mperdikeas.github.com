@@ -33,6 +33,8 @@
         <pre>clearfsimport -recu -nset -rmname /tmp/foo/ .</pre>
         For more on the update functionality, see <a href='http://stackoverflow.com/q/42396640/274677'>here</a>.
       </p>
+      <p>Following the above don't forget to add write privilleges to directories for user and group
+        as advised <a href='#p:ct-protect'>here</a>.</p>
       <p>
         Note that I've only tried the above in dynamic views, not snapshots.
       </p>
@@ -76,7 +78,7 @@ $ ct ci . </pre>
       First move it out of the dynamic view (say to <tt>/tmp/some-tree</tt>), and then issue:
         <pre>$ clearfsimport -recu -nset ~/tmp/some-tree/ .</pre>
       </p>
-      <p>
+      <p id='p:ct-protect'>
         Following the above, I have been advised (by CfA people) to also issue the following (after doing a <tt>cd</tt> to <tt>some-tree</tt>):
         <pre>ct protect -chmod ug+w $(find -type d)</pre>
       </p>      
