@@ -23,8 +23,8 @@
     <p>
       There is an interesting dichotomy of transaction types:
       <dl>
-        <dt>Chained transactions</dt><dd>This is the ANSI standard way and conforms to the SQL 92 behavior of implicit transactions. There is no explicit 'begin transaction' statement. You are <em>always</em> in a transaction. When the client connects to the server an invisible <tt>BEGIN TRAN</tt> is issued. When the client issues a <tt>COMMIT TRAN</tt> or <tt>ROLLBACK TRAN</tt> again, an invisible <tt>COMMIT TRAN</tt> is also immediately issued as well. This means that in chained mode, you never issue <tt>BEGIN TRAN</tt>. Effectively, you close transactions but not open them. Another way to put it is that a transaction automatically begins with the first statement, and no work is committed until <tt>COMMIT</tt> is explicitly called.</dd> 
-        <dt>Unchained transactions (a.k.a. autocommit)</dt><dd>This is the PostgreSQL and Sybase ASE standard/default. Any individual command is atomic (so an update of 1 million rows will update all million or none) just like the case of chained transactions (atomicity for single statements is always maintained). However, each command is automatically commited on execute so atomicity for a group of commands is not possible. Instead, you must explicitly issue a <tt>BEGIN TRAN</tt> before you are in a multi-statement transaction. In PostgreSQL you use <tt>BEGIN [WORK|TRANSACTION]</tt> and <tt>COMMIT [WORK|TRANSACTION]</tt> for that. In much the same way, Sybase extends standard AutoCommit with multi-statement transaction support if <tt>BEGIN TRANSACTION</tt> is explicitly called. </dd>
+        <dt>Chained transactions</dt><dd>This is the ANSI standard way and conforms to the SQL 92 behavior of implicit transactions. There is no need for an explicit 'begin transaction' statement. You are <em>always</em> in a transaction. When the client connects to the server an invisible <tt>BEGIN TRAN</tt> is issued. When the client issues a <tt>COMMIT TRAN</tt> or <tt>ROLLBACK TRAN</tt> again, an invisible <tt>COMMIT TRAN</tt> is also immediately issued as well. This means that in chained mode, you never need to issue <tt>BEGIN TRAN</tt>. Effectively, you close transactions but not open them. Another way to put it is that a transaction automatically begins with the first statement, and no work is committed until <tt>COMMIT</tt> is explicitly called.</dd> 
+        <dt>Unchained transactions (a.k.a. autocommit)</dt><dd>This is the PostgreSQL and Sybase ASE standard/default. Any individual command is atomic (so an update of 1 million rows will update all million or none) just like the case of chained transactions (atomicity for single statements is always maintained). However, each command is automatically commited on execute so atomicity for a group of commands is only possible. if you explicitly issue a <tt>BEGIN TRAN</tt>. Only then are you in a multi-statement transaction. In PostgreSQL you use <tt>BEGIN [WORK|TRANSACTION]</tt> and <tt>COMMIT [WORK|TRANSACTION]</tt> for that. In much the same way, Sybase extends standard AutoCommit with multi-statement transaction support if <tt>BEGIN TRANSACTION</tt> is explicitly called. </dd>
       </dl>
     </p>
     <p>
@@ -49,17 +49,56 @@
         </tr>        
       </table>
     </p>
-    <p>I think that the concept of transaction chaining is orthogonal to that of the transaction isolation levels.</p>
+    <p>The following excrept from a rather old PostgreSQL book (<i>PostgreSQL: Introduction and Concepts, Bruce Momjian, <span style="font-variant: small-caps">Addisson-Wesley 2001</span></i>) further corroborates the above:
+      <blockquote>
+        By default, Postgres executes transactions in unchained mode (also known as autocommit in other
+        database systems). In other words, each user statement is executed in its own transaction and a
+        commit is implicitly performed at the end of the statement (if execution was successful, otherwise a
+        rollback is done). BEGIN initiates a user transaction in chained mode, i.e., all user statements after
+        BEGIN command will be executed in a single transaction until an explicit COMMIT, ROLLBACK,
+        or execution abort. Statements in chained mode are executed much faster, because transaction
+        start/commit requires significant CPU and disk activity. Execution of multiple statements inside a
+        transaction is also required for consistency when changing several related tables.
+      </blockquote>
+    </p>
+    <p>When it comes to stored procedures, the precise wording to use is <i>execution mode of a stored procedure</i>.
+      This can be set using the <tt>sp_procxmode</tt> system stored procedure to one of the following three main values:
+      <ul>
+        <li>unchained</li>
+        <li>chained</li>
+        <li>anymode</li>
+      </ul>
+    </p>
+    <p>
+      To see all possible modes, mistype a mode's name in an invocation of <tt>sp_procxmode</tt> and see
+      also my <a href='http://dba.stackexchange.com/q/168572/34332'>stack exchange question on this matter</a>.
+    </p>
+    <p>
+      See my <tt>cfa/playground/000-stored-procedure-commit-tests</tt> project where I believe I've gotten
+      to the bottom of the <i>chained</i> / <i>unchained</i> / <i>anymode</i> thing.
+    </p>
     <p>See also the following stack exchange (database administrators) questions of mine on the matter:
       <ul>
         <li><a href='http://dba.stackexchange.com/q/162246/34332'>transaction chaining, isolation levels and atomicity</a></li>
         <li><a href='http://dba.stackexchange.com/q/165874/34332'>relationship between transaction chaining and autocommit</a></li>
       </ul>
-      my 
     </p>
+    <p>Finally, and unrelated to the above, the concept of transaction chaining is orthogonal to that of the transaction isolation levels.</p>
     <p>TODO: add mnemonic for chained / unchained transactions</p>
     <li>Multi-version concurrency control</li>
-    TODO
+    <p>
+    The Sybase ASE abomination is not a true RDBMS as it lacks support for MVCC. Under MVCC:
+    <ul>
+      <li>readers never block writers</li>
+      <li>writers never block readers</li>
+    </ul>
+    </p>
+    <p>
+      Moreover, in some RDBMSs (e.g. Oracle) it is also possible to ensure that different row writers
+      never block writers (only same-row writers block writers but that is normal). Each user
+      is guaranteed to see a consistent view (snapshot) of the data that was commited at the
+      time the query started.
+    </p>
     <li>Transaction isolation levels</li>
     TODO
   </ol>
