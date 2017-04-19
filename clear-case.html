@@ -5,6 +5,16 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>create (and commit) a directory in ClearCase</li>
+      <pre>
+    ct co &lt;parent directory&gt;
+    ct mkdir dirname
+    ct ci &lt;parent directory&gt;</pre>
+      <li>commit an existing file in ClearCase</li>
+      <pre>
+    ct co &lt;parent directory&gt;
+    ct mkelem -ci file
+    ct ci &lt;parent directory&gt;</pre>
       <li>working directly on the filesystem in ClearCase (not inside an extra shell using <tt>setview</tt>)</li>
       <p>
         See the following SO question of mine:
@@ -88,15 +98,22 @@ $ ct ci . </pre>
       <pre>ct lsco -dir .</pre>
       <li>how to find view-private objects</li>
       <p>
-        In the current directory:<pre>ct ls -l | grep private</pre>
+        In the current directory only (non recursively):<pre>ct ls -l | grep private</pre>
+
+      &hellip; alternatively:
+        <pre>ct ls -view_only</pre>
       </p>
       <p>Recursively, under the current directory:
         <pre>ct lsprivate .</pre>
+        &hellip; alternatively:
+        <pre>ct ls -view_only -recurse</pre>
       </p>
+      <p>NB: some of the above incantations may return both view-private and checked-out objects.</p>
       <li>remove a dir and all its sub-directories</li>
       <p>
+        
         Say you wish to remove directory <tt>dir-to-remove</tt> in present directory.
-<pre>
+        <pre>
 ct co -nc .
 ct rmname dir-to-remove
 ct ci .</pre>
