@@ -1,0 +1,75 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+    <style>
+     h1 {
+       font-size: 110%;
+       margin: 0 0 1em 0;
+       padding: 0;
+     }
+     ol {
+       margin-top: 0;
+     }
+     h2 {
+       font-size: 110%;
+     }
+     h2:first-child {
+       margin: 0;
+     }
+    </style>
+  </head>
+  <body>
+    <h1>on the need to convey X-Forwarded-* headers</h1>
+    <p>
+      When using reverse proxies (SSL terminators, load balancers etc.), whether
+      just one or multiple, in tandem, your application will typically
+      reside in an upstream server (more accurately called an origin server in this
+      context). A case that can come up is that your application might need to redirect
+      the user to a second application (perhaps deployed in another server) in which
+      case you 'd expect that second application, after it's done, to redirect the
+      user's browser back to the first application, to the page he was viewing so as
+      to continue his browsing. A typical use case for that would be a filter that
+      redirects the user's browser to authenticate to some common authentication
+      service (in the <a href='cas.html'>CAS</a> model).
+    </p>
+    <p>
+      In those cases success of the eventual redirection is premised on the ability
+      of your application (deployed in the origin server) to reliably restructure/obtain
+      the URL requested by the user's browser. This is impossible to achieve (with
+      heuristics at least) unless the following <tt>X-Forwarded</tt> headers are provided:
+      <ul>
+        <li><tt>X-Forwarded-Host</tt></li>
+        <li><tt>X-Forwarded-Proto</tt></li>
+        <li><tt>X-Forwarded-Port</tt></li>
+      </ul>
+    </p>
+    <p>
+      In a setting where Apache is used as the proxy and Tomcat as the origin,
+      I understand that the following headers are provided iff the <tt>httpd.conf</tt> file has: <pre>ProxyPreserveHost On</pre>
+      <ul>
+        <li><tt>X-Forwarded-Host</tt></li>
+        <li><tt>X-Forwarded-Server</tt></li>
+        <li><tt>X-Forwarded-For</tt></li>        
+      </ul>
+      &hellip; the above is useful but not enough:
+      <ul>
+        <li>the <tt>X-Forwarded-For</tt> is the IP address of the browser and is totally irrelevant for this discussion</li>
+        <li>the <tt>X-Forwarded-Host</tt> was not needed in my case as the <tt>X-Forwarded-Server</tt> contained a more pertinent value (see <a href='http://stackoverflow.com/q/43689625/274677'>this SO question of mine</a> on this topic)</li>
+      </ul>
+    </p>
+    <p>
+      I understand that to pass the essential (but missing from the above list)
+      <tt>X-Forwarded-Proto</tt> and <tt>X-Forwarded-Port</tt> headers, they have to be <b>hardcoded</b>
+      in the Apache <tt>httpd.conf</tt> as follows (assuming that our Apache is only accepting SSL
+      connections on 443):
+      <pre>
+RequestHeader set X-Forwarded-Proto "https"
+RequestHeader set X-Forwarded-Port "443"</pre>
+    </p>
+    <p>I also understand that the fact that the values of those two headers have to be
+      provided in a hardcoded way in the Apache configuration (as opposed to being deduced
+      from the incoming HTTP request) is a limitation of the <tt>mod_proxy</tt>.
+    </p>
+  </body>
+</html>
