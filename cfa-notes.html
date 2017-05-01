@@ -5,6 +5,52 @@
 <body>
   <h1>notes on the CfA environment</h1>
   <ol reversed class=main-list-items>
+    <li>preview server</li>
+    <p>
+      For the non-SSL preview server the URL is:
+      <a href='http://cxc-dmz-prev.cfa.harvard.edu/soft/cps/CPS.html'>
+         http://cxc-dmz-prev.cfa.harvard.edu/soft/cps/CPS.html
+      </a>
+    </p>
+    <li>configuration and log files for secure test deployment</li>
+    <p>
+      For the test deployment on the secure (SSL) server at <a href='https://cxc-dmz.test/'>https://cxc-dmz.test/</a> (e.g. <a href='https://cxc-dmz.test/soft/cps/CPS.html'>https://cxc-dmz.test/soft/cps/CPS.html</a>)
+      the following diagram shows the proxy / origin server arrangements:
+      <pre>
+                          *~~~~~~~~~~~~*               *~~~~~~~~*
+                          |cxc-dmz-test|               |        |
+[browser] --- (HTTPS) --> |Apache      | --- (HTTP) -->| Tomcat |
+                          *~~~~~~~~~~~~*               *~~~~~~~~* </pre>
+    </p>
+    <p>
+      Moreover, from what I was made to understand, there is a further
+      load balancer at the very front. But at any rate the server
+      at <tt>cxc-dmz-test</tt> acts as an SSL offloader (or <i>SSL terminator</i>
+      or <i>TSL terminator</i>).
+    </p>
+    <p>
+      <ul>
+        <li>
+          The <tt>httpd.conf</tt> file for the Apache server is:
+          <pre>/proj/web-cxc-secure-test/conf/httpd_2.2.15.conf</pre>
+          Typical <tt>ps</tt> line for the Apache:
+          <pre>cxcweb   28814 11429  0 13:41 ?        00:00:00 /usr/sbin/httpd -DSSL -f /proj/web-cxc-secure-test/conf/httpd_2.2.15.conf</pre>
+        </li>
+        <li>The configuration files for the Tomcat server area at:
+          <pre>/proj/web-cxc-secure-test/catalina_base/soft/conf/</pre>
+          Typical <tt>ps</tt> line for Tomcat:
+          <pre>cxcweb   25794     1  0 08:15 ?        00:00:37 /proj/cm/Release/ots.install.DS10.4/jdk-1.7.0.75.Linux64/bin/java -server -classpath /soft/SYBASE15.7/jConnect-7_0/classes/jconn4.jar:/usr/share/tomcat/lib/servlet-api.jar:.:/usr/share/tomcat/bin/bootstrap.jar:/usr/share/tomcat/bin/tomcat-juli.jar:/usr/share/java/commons-daemon.jar -Dcatalina.base=/proj/web-cxc-secure-test/catalina_base/soft -Dcatalina.home=/usr/share/tomcat -Djava.endorsed.dirs= -Djava.io.tmpdir=/export/servers/cxc-secure-test/tomcat/tmp -Djava.util.logging.config.file=/proj/web-cxc-secure-test/catalina_base/soft/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager org.apache.catalina.startup.Bootstrap start</pre>
+        </li>
+        <li>The log file for the CPS Tomcat application is at:
+<pre>/data/rpc_test/prop/cps/cps.log</pre>
+        </li>        
+        <li>The CPS application can be accessed at:
+          <a href='https://cxc-dmz-test/soft/cps/CPS.html'>
+            https://cxc-dmz-test/soft/cps/CPS.html
+          </a>
+        </li>
+      </ul>
+    </p>
     <li>file where the sqsh aliases are defined</li>
     <pre>/soft/SYBASE15.7/interfaces</pre>
     <li>Acronyms and names</li>
