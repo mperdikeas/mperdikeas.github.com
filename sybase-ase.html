@@ -4,6 +4,10 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>show connected users</li>
+    The below (in sqsh) will show all users connected to database <i>somedatabase</i> together
+    with the header row for additional information:
+    <pre>sp_who; | grep 'somedatabase\|threadpool'</pre>
     <li>show a table's constraints</li>
     In sqsh:
     <pre>
