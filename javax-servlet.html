@@ -5,6 +5,19 @@
   </head>
   <body>
     <ol reversed class=main-list-items>
+      <li>Behavior of <span class='tt'>getContextPath</span>, <span class='tt'>getServletPath</span> and <span class='tt'>getPathInfo</span></li>
+      <p>
+        The <a href='http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html'>HttpServletRequest</a>
+        class includes the following related methods:
+        <ul>
+          <li><span class='tt'>getContextPath</span></li>
+          <li><span class='tt'>getServletPath</span></li>
+          <li><span class='tt'>getPathInfo</span></li>        
+        </ul>
+      </p>
+      <p>The following image shows their usage:<br/><br/>
+        <img src="javax-servlet.html.files/contextPath-servletPath-pathInfo.png"/>
+      </p>
       <li>Path mappings and extension mappings in sevlets</li>
       In a nuthshell: path mappings take precedence over extension mappings.</br></br>
       A request may match more than one servlet-mapping in a given context. The servlet container uses a straightforward matching procedure to determine the best match. The matching procedure has four simple rules. First, the container prefers an exact path match over a wildcard path match. Second, the container prefers to match the longest pattern. Third, the container prefers path matches over filetype matches. Finally, the pattern "/" always matches any request that no other pattern matches.

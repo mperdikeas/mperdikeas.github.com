@@ -156,3 +156,6 @@ dl.one-line-25-75 > dd {
 }
 /* dl dd dt one liner      -- END   */
 
+.tt {
+    font-family: "Courier New", Courier, monospace;
+}
