@@ -91,5 +91,13 @@
         <li>Pass "undef" for all other parameters</li>
       </ul>
     </p>
+    <p>
+      <span class='nb'>NB:</span> The above statement (about using <tt>sp_axafusers_person_update</tt>
+      for updates) is wrong. PH confirmed to me on <i>2017-05-09</i> that <tt>sp_axafusers_person_apply</tt>
+      can just as well be used for updates and that in fact the <tt>sp_axafusers_person_update</tt>
+      was developed in response to a somewhat different use case (some people needed a CLI-type interface
+      to easily update only the specific fields the cared about).
+    </p>
+      
   </ol>
 </body>
