@@ -13,11 +13,24 @@
     ct co &lt;parent directory&gt;
     ct mkdir dirname
     ct ci &lt;parent directory&gt;</pre>
-      <li>commit an existing file in ClearCase</li>
+      <li>commit an existing file or symlink in ClearCase</li>
+      <p>
+      If it's a regular file:
       <pre>
     ct co &lt;parent directory&gt;
     ct mkelem -ci file
     ct ci &lt;parent directory&gt;</pre>
+      </p>
+      <p>
+        If it's a symlink:
+        <pre>
+      $ ct co -nc .
+      Checked out "." from version "/main/branchname/6".
+      $ ct ln -slink ../../some/other/filename filename
+      Link created: "filename"
+      $ ct ci -nc .
+      Checked in "." version "/main/branchname/7"</pre>
+      </p>
       <li>working directly on the filesystem in ClearCase (not inside an extra shell using <tt>setview</tt>)</li>
       <p>
         See the following SO question of mine:
