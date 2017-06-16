@@ -4,6 +4,15 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>show chained mode of stored procedure</li>
+    <pre>sp_procxmode &lt;stored procedure name&gt;</pre>
+    With an extra argument can also be used to change the mode to either 'chained' or 'unchained'.
+    <li>show transaction depth</li>
+    <pre>SELECT @@TRANCOUNT</pre>
+    A value of `0` signifies that we are not inside a transaction. In case of nested transactions
+    Sybase actually commits a transaction if a `commit` is given at level `1` only. Commits in levels
+    greater than `1` simply reduce the transaction depth by one. A commit on level `1` reduces
+    the depth to `0` and it is only at that point that Sybase commits the transaction.
     <li>show connected users</li>
     The below (in sqsh) will show all users connected to database <i>somedatabase</i> together
     with the header row for additional information:
