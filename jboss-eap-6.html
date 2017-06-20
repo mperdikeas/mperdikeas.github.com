@@ -7,6 +7,86 @@
 
   <body>
     <ol reversed class='main-list-items'>
+      <li>JSP compilation problem when EAP 6.2 is run with a Java 8 interpreter</li>
+      <p>
+        I got a JSP compilation problem when running EAP 6.2 with a Java 8 runtime.
+        This is what it looks like:
+        <a href="jboss-eap-6.html.files/jsp-compilation-problem-with-Java8.png">
+          <img height="300px" width="400px" src="jboss-eap-6.html.files/jsp-compilation-problem-with-Java8.png"/>
+        </a>
+      </p>
+      <p>
+        The problem is treacherous as it occurs, not upon deployment of the WAR but rather when the JSP page is
+        accessed (at which point JBoss attempts to compile it). It is further compounded by the fact that it may
+        not show up if a compiled version of the JSP page happens to exist in JBoss cache (e.g. from a time
+        when JBoss was run with a different, compatible, version of Java). In the latter case, to trigger
+        the problem you will have to delete the <i>standalone/tmp</i> directory of JBoss.
+      </p>
+      <p>
+        In my environment the default Java version was 1.8 hence I had this problem. To solve the problem
+        you need to ensure that your JBoss is launched with Java 1.7. There's two ways to accomplish this:
+        <ul>
+          <li>set the <i>PATH</i> at the point when you invoke the <i>standalone.sh</i> script (i.e. at the
+            narrowest possible scope). E.g.
+            <pre>PATH=/some/path/jdk-1.7.0.95.Linux64/bin/:$PATH ./standalone.sh  -c standalone-full.xml </pre>
+          </li>
+          <li>set the <i>JAVA_HOME</i> in <i>standalone.conf</i>:
+            <pre>
+$ grep -i java_home standalone.conf
+JAVA_HOME="/usr/lib/jvm/java-1.7.0-openjdk-amd64"</pre>
+        </ul>
+      </p>
+      <p>
+        This compilation problem should not come as a total surprise as JBoss does not list Java 1.8
+        as a supported configuration for EAP 6.2 (see <a href='#eap-6.2-supported-java'>here</a>).
+      </p>
+      </p>
+      <li id='eap-6.2-supported-java'>EAP 6.2 supported Java versions</li>
+      <p>
+        <a href='https://access.redhat.com/articles/111663'>source</a>
+      </p>
+      <p>
+        As can be seen by the following table JBoss EAP 6.2 effectively
+        does not support Java 8:
+        <table>
+          <tr>
+            <th>Java Virtual Machine</th>
+            <th>Version</th>
+          </tr>
+          <tr>
+            <td>OpenJDK [2]</td>
+            <td>1.6<br />
+              1.7<br />
+              1.8 ** support only with 6.4.1 update and above</td>
+          </tr>
+          <tr>
+            <td>Oracle JDK</td>
+            <td>1.6<br />
+              1.7<br />
+              1.8 ** support only with 6.3.3 update and above</td>
+          </tr>
+          <tr>
+            <td>IBM JDK</td>
+            <td>1.6<br />
+              1.7<br />
+              1.8 ** support only with 6.3.3 update and above</td>
+          </tr>
+          <tr>
+            <td>HP JDK [3]</td>
+            <td>1.7</td>
+          </tr>
+          <tr>
+            <td>Azul Zing JDK</td>
+            <td>1.6<br />
+              1.7<br />
+              1.8</td>
+          </tr>
+          <tr>
+            <td>Azul Zulu </td>
+            <td>1.7</td>
+          </tr>
+        </table>
+      </p>
       <li>how to gracefully shutdown EAP 6.2</li>
       Execute the following in the <tt>bin</tt> directory:
       <pre>
