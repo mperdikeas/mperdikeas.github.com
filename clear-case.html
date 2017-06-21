@@ -5,6 +5,35 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>text_file_delta: Error: "some/file" is not a 'text file': it contains a line exceeding 8000 bytes.</li>
+      <p>The despicable, cold-war era, shitty "product" ClearCase somehow thinks that
+        text files cannot include lines extending 8000 bytes. When you try to commit
+        a minified Javascript library this "feature" will rear its ugly head:
+        <pre>
+$ ct mkelem -ci -nc jquery-3.2.1.min.js
+Created element "jquery-3.2.1.min.js" (type "text_file").
+Created branch "dbdev_br" from "jquery-3.2.1.min.js" version "/main/0".
+text_file_delta: Error: "jquery-3.2.1.min.js" is not a 'text file': it contains a line exceeding 8000 bytes.
+Use a different type manager (such as compressed file).
+cleartool: Error: Type manager "text_file_delta" failed create_version operation.
+cleartool: Error: Unable to check in "jquery-3.2.1.min.js".</pre>
+      </p>
+      <p>
+        To fix the above, use:
+        <pre>cleartool chtype compressed_file jquery-3.2.1.min.js</pre>
+        &hellip; once you do that you don't need to re-run <i>mkelem</i> as the
+        element already exists:
+        <pre>
+$ ct mkelem -ci -nc jquery-3.2.1.min.js
+cleartool: Error: Entry named "jquery-3.2.1.min.js" already exists.
+cleartool: Error: Unable to create element "jquery-3.2.1.min.js".</pre>
+        &hellip; Instead, running <i>ci</i> is enough:
+        <pre>
+$ ct ci -nc jquery-3.2.1.min.js
+Checked in "jquery-3.2.1.min.js" version "/main/dbdev_br/1".
+        </pre>
+        <a href='http://www-01.ibm.com/support/docview.wss?uid=swg21146197'>source</a>
+      </p>
       <li>command to "start" a view</li>
       Apparently the below is sometimes needed following a ClearCase restart:
       <pre>cleartool setview mperdike_dev_view</pre>
