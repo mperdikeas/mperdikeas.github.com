@@ -5,6 +5,52 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to edit your view configuration to pickup a specific version of a specific file</li>
+      In my particular case, I had the file showcased in <a href='#how-to-list-all-versions-and-labels-on-a-file'>this tip</a> where the latest version was <code>/main/dbdev_br/5</code> (and was also laballed <code>ANTBUILD</code>). My original config spec was the following:
+<pre>
+$ ct catcs
+element * CHECKEDOUT
+element /vobs/ASC_BUILD/... ANTBUILD
+element src/db/... .../dbdev_br/LATEST
+element * /main/LATEST -mkbranch dbdev_br </pre>
+&hellip; and was pointing at the <code>/main/dbdev_br/5</code> version. To nail that file to the <code>/main/dbdev_br/4</code> version I only had to add a single line (using <code>ct edcs</code>) as follows:
+<pre>
+  $ ct catcs
+  element * CHECKEDOUT
+  element /vobs/ASC_DB_WEB/src/db/www/ant-buildsystem/ivy-filesystem-resolver-root.properties .../dbdev_br/4
+  element /vobs/ASC_BUILD/... ANTBUILD
+  element src/db/... .../dbdev_br/LATEST
+  element * /main/LATEST -mkbranch dbdev_br
+</pre>
+      <li id='how-to-list-all-versions-and-labels-on-a-file'>how to list all versions and labels on a file</li>
+      Take advantage of the pseudo-filesystem that CC uses &emdash; accessible with the <i>@@</i> symbols. Since the CC pseudo-filesystem is accessible like any normal filesystem, you can use typical programs such as <code>tree</code> or <code>find</code>. Example output:
+      <pre>
+$ tree  /view/mperdike_dev_view/vobs/ASC_DB_WEB/src/db/www/ant-buildsystem/ivy-filesystem-resolver-root.properties@@
+/view/mperdike_dev_view/vobs/ASC_DB_WEB/src/db/www/ant-buildsystem/ivy-filesystem-resolver-root.properties@@
+├── ANTBUILD
+└── main
+    ├── 0
+    ├── dbdev_br
+    │   ├── 0
+    │   ├── 1
+    │   ├── 2
+    │   ├── 3
+    │   ├── 4
+    │   ├── 5
+    │   ├── ANTBUILD
+    │   └── LATEST
+    └── LATEST
+</pre>
+      <li>how to list the current version of a file used by a view and the rule that applied</li>
+      <p>
+        Use the <code>ct ls -l</code> command.
+      </p>
+      <p>
+        Example output:
+        <pre>
+$ ct ls -l /view/mperdike_dev_view/vobs/ASC_DB_WEB/src/db/www/ant-buildsystem/ivy-filesystem-resolver-root.properties
+version                /view/mperdike_dev_view/vobs/ASC_DB_WEB/src/db/www/ant-buildsystem/ivy-filesystem-resolver-root.properties@@/main/dbdev_br/4           Rule: element /vobs/ASC_DB_WEB/src/db/www/ant-buildsystem/ivy-filesystem-resolver-root.properties .../dbdev_br/4 </pre>
+      </p>
       <li>text_file_delta: Error: "some/file" is not a 'text file': it contains a line exceeding 8000 bytes.</li>
       <p>The despicable, cold-war era, shitty "product" ClearCase somehow thinks that
         text files cannot include lines extending 8000 bytes. When you try to commit
