@@ -16,6 +16,7 @@
 <h1>Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.</h1>
 
 <ul>
+    <li><a href='#essential-vs-incidental-complexity'>Essential vs. incidental complexity</a></li>
     <li><a href='#failing-abstractions'>failing abstractions (evil twin / if thou stare long into an abyss)</a>  
     <li><a href='#battling-complexity'>battling complexity</a>
     <li><a href='#xml-vs-yaml'>YAML vs. XML</a></li>  
@@ -45,6 +46,17 @@
 <br/>
 <br/>
 
+<h2 id='essential-vs-incidental-complexity'>Essential vs. incidental complexity</h2>
+<p>
+  Adding a single feature means that you have to figure out how it is going to play with all the other features. That makes the cost of implementing the <i>N+1</i> feature closer to <i>N</i> than to <i>1</i>. &hellip;
+Indeed, these two kinds of complexity feed off each other. If <span style='text-decoration: underline'>essential complexity</span> growth is inevitable, you want to do everything you can to reduce ongoing <span style='text-decoration:underline'>accidental complexity</span>.
+</p>
+<p>
+  <ul>
+    <li>Essential complexity is also referred to as "inherent complexity"</li>
+    <li>Accidental complexity is also referred to as "incidental complexity" or "unnecessary complexity"</li>
+  </ul>
+</p>
 <h2 id='failing-abstractions'>Failing abstractions (or why if thou gaze long into an abyss, the abyss will also gaze into thee)</h2>
 <p>
 When people try to fix all the leaks in an abstraction, this usually turn the abstraction into an ugly twin of the stuff it tried to simplify. <a href="#orms-suck">ORMs</a> are a good example of that.
