@@ -4,6 +4,30 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>database where the system procedures are installed</li>
+    <a href='http://infocenter.sybase.com/help/topic/com.sybase.infocenter.dc36273.1570/html/sprocs/CEGEBDEJ.htm?resultof=%22%69%6e%74%72%6f%64%75%63%74%69%6f%6e%22%20%22%69%6e%74%72%6f%64%75%63%74%22%20%22%73%79%73%74%65%6d%22%20%22%70%72%6f%63%65%64%75%72%65%73%22%20%22%70%72%6f%63%65%64%75%72%22%20'>source</a>
+    <p>System procedures such as <tt>sp_procxmode</tt> are stored in database <tt>sybsystemprocs</tt>.
+    </p>
+    <p>The documentation says (the link does not appear very trustworthy):
+      <blockquote style='font-size: 90%;}'>
+        <p>
+        System procedures are created by <b>installmaster</b> at installation. They are located in the <i>sybsystemprocs</i> database, and owned by the system administrator. Use <b>sp_version</b> to determine which version of <i>installmaster</i> was most recently run.
+        </p>
+        <p>
+          Some system procedures can be run only in a specific database, but many of them can be run in any database. You can create your own system procedures that can be executed from any database. For more information, see the <i>System Administration Guide</i>.
+        </p>
+        <p>
+        All system procedures execute at isolation level 1.
+        </p>
+        <p>
+        All system procedures report a return status. The following example means that the procedure executed successfully:
+<tt>return status = 0</tt>
+        </p>
+        <p>
+          Beginning with Adaptive Server® version 12.5.1, you can declare up to 10,000 variables in a stored procedure. In earlier versions of Adaptive Server, the limit was 2,000.
+          </p>
+      </blockquote>
+    </p>
     <li>show chained mode of stored procedure</li>
     <pre>sp_procxmode &lt;stored procedure name&gt;</pre>
     With an extra argument can also be used to change the mode to either 'chained' or 'unchained'.
