@@ -5,6 +5,22 @@
 <body>
   <h1>notes on the CfA environment</h1>
   <ol reversed class=main-list-items>
+    <li>how to grep the release DDL</li>
+    <p style='size: 90%'>source: TB email 2017-04-25</p>
+    <p>
+      E.g. suppose we want to discover which database hosts a table <tt>cda_mail</tt>. We do a:
+      <pre>
+$ grep cda_mail /home/ascds/DS.release/config/db/arcops/ddl_* | grep -i create\ table
+/home/ascds/DS.release/config/db/arcops/ddl_obstat:create table cda_mail</pre>
+      &hellip; from the name of the file that contains this statement above (<tt>ddl_obstat</tt>)
+      we gather that it is the <tt>obstat</tt> database that holds this table. 
+    </p>
+    <p>
+      We are subsequently able to connect with:
+      <pre>sqsh -S sqldev -D axafobstat -U dbm -J iso_1</pre>
+      &hellip; once inside (after the password prompt) we can view all tables with <tt>sp_ls</tt>
+      and do a <tt>select * from cda_mail</tt> to see the data.
+    </p>
     <li>DDL for the <tt>axaf_users</tt> database</li>
     <pre>vobs/ASC_DB_WEB/src/db/www/cxcusers/SQL/ddl_axafusers</pre>
     <li>preview server</li>
