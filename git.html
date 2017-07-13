@@ -5,6 +5,19 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>various capablities of <tt>git diff</tt></li>
+      <a href='https://stackoverflow.com/a/1587952/274677'>source</a>
+      <p><img src='git.html.files/git-diff-explanation.png' alt='git diff explanation'></p>
+      <p>
+        <dl>
+          <dt>git diff</dt>
+          <dd>Shows the changes between the working directory and the index. This shows what has been changed, but is not staged for a commit.</dd>
+          <dt>git diff --cached</dt>
+          <dd>Shows the changes between the index and the HEAD (which is the last commit on this branch). This shows what has been added to the index and staged for a commit.</dd>
+          <dt>git diff HEAD</dt>
+          <dd>Shows all the changes between the working directory and HEAD (which includes changes in the index). This shows all the changes since the last commit, whether or not they have been staged for commit or not.</dd>
+        </dl>
+      </p>
       <li>how to update all submodules</li>
       Assuming you've cloned your repository with <tt>git clone --recursive</tt> (which you always should), then do a:
       <pre>
