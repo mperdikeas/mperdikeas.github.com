@@ -19,9 +19,20 @@
         </dl>
       </p>
       <li>how to update all submodules</li>
+      <p>
       Assuming you've cloned your repository with <tt>git clone --recursive</tt> (which you always should), then do a:
       <pre>
 git submodule update --recursive --remote</pre>
+      </p>
+      <p>
+        Then,
+        <dl>
+          <dt>for the upstream:</dt><dd>you should add the submodule and commit the repository (that hosts the submodule) and push</dd>
+          <dt>for the downstream:</dt><dd>you should fetch in the repository that hosts the submodule and merge. It is not super-clear
+            to me whether at the downstream you also need to do <code>git submodule update --recursive --remote</code> prior to fetching
+          and merging the top-level repository.</dd>
+        </dl>
+      </p>
       <li>How to discover which commit deleted a file and resurrect it</li>
       <ol>
           <li>find the path to the file </li>
