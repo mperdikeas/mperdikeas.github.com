@@ -5,6 +5,14 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to stash and apply changes in a new branch</li>
+      <a href='https://stackoverflow.com/a/6925136/274677'>source</a>
+      <pre>
+git stash -k -u
+git checkout -b new-branch
+git stash pop
+git commit -m 'applied stashed changes in new branch'
+git stash drop</pre>
       <li>various capablities of <tt>git diff</tt></li>
       <a href='https://stackoverflow.com/a/1587952/274677'>source</a>
       <p><img src='git.html.files/git-diff-explanation.png' alt='git diff explanation'></p>
