@@ -4,6 +4,10 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>show information about a rule, and its text</li>
+    <pre>
+sp_help &lt;rule-name&gt;
+sp_helptext &lt;rule-name&gt;</pre>
     <li>database where the system procedures are installed</li>
     <a href='http://infocenter.sybase.com/help/topic/com.sybase.infocenter.dc36273.1570/html/sprocs/CEGEBDEJ.htm?resultof=%22%69%6e%74%72%6f%64%75%63%74%69%6f%6e%22%20%22%69%6e%74%72%6f%64%75%63%74%22%20%22%73%79%73%74%65%6d%22%20%22%70%72%6f%63%65%64%75%72%65%73%22%20%22%70%72%6f%63%65%64%75%72%22%20'>source</a>
     <p>System procedures such as <tt>sp_procxmode</tt> are stored in database <tt>sybsystemprocs</tt>.
@@ -44,7 +48,7 @@
     <li>show a table's constraints</li>
     In sqsh:
     <pre>
-sp_helpconstraint <table-name>;</pre>
+sp_helpconstraint &lt;table-name&gt;;</pre>
     <li>Sybase Datetime to Unix epoch</li>
     <p>
       Note first of all that Sybase is totally oblivious to time zones. It
