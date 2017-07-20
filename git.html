@@ -5,6 +5,39 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>workflow for rebase / merge</li>
+      <p>
+        Based on <a href='https://stackoverflow.com/a/9147389/274677'>this</a> and <a href='https://stackoverflow.com/a/14005910/274677'>this</a>, I am now resolved to using the following workflow:
+        <ol>
+          <li>create feature branch by branching off master</li>
+          <li>rebase on top of master</li>
+          <li>merge feature branch with master (this should be a fast forward merge)</li>
+          <li>remove merged branch</li>
+        </ol>
+      </p>
+      <p>E.g.
+        <pre>
+$ git checkout cool-feature
+$ git rebase master
+$ git checkout master
+$ git merge cool-feature
+$ git branch -d cool-feature </pre>
+        Note that git will bark at the branch delete command if it thinks it's not fully merged so no worries.
+      </p>
+      <li>Show files changed in a branch</li>
+      <a href='https://stackoverflow.com/a/6913546/274677'>source</a>
+      <p>
+        Say you branched off from <tt>master</tt> at some point in the past
+        and you are now in a branch for a cool new feature.
+        Given that in the meantime (i.e. since you branched-off) the <tt>master</tt> branch has also advanced
+        doing (from your feature branch) the following: <pre>git diff --name-only master</pre> &hellip; will also show files
+        changed in <tt>master</tt>.
+      </p>
+      <p>
+        To actually only see differences since the point you branched off from <tt>master</tt> (and not to bother with
+        subsequent <tt>master</tt> commits), you need to do (from your feature branch):
+        <pre>git diff --name-only master...</pre>
+      </p>
       <li>how to stash and apply unstaged changes in a new branch</li>
       <a href='https://stackoverflow.com/a/6925136/274677'>source</a>
       <pre>
