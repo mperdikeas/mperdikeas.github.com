@@ -7,6 +7,31 @@
 
   <body>
     <ol reversed class='main-list-items'>
+      <li>configuring maximum POST size in JBoss EAP 6.2</li>
+      <p>All web servers provide a way to limit the maximum post size as a plausible defence against
+        DoS attacks. In the JBoss family of servers this is usually done in the configuration of
+        the HTTP connector using an attribute named <tt>max-post-size</tt> (or <tt>maxPostSize</tt>
+        in some older versions).
+      </p>
+      <p>E.g. I stumbled upon <a href='https://docs.jboss.org/jbossweb/7.0.x/config/http.html'>this web page</a>
+        that describes the configuration of the HTTP Connector FOR JBossWeb 7.0. Among the many attributes
+        listed one finds <tt>max-post-size</tt> (a different, likely older, version of JBoss Web had this as <tt>maxPostSize</tt>).
+        I tried both variants in JBoss EAP 6.2 and it was the <tt>max-post-size</tt> one that worked. JBoss EAP 6.2 is solid
+        enough that if an unrecognized attribute is configured in the HTTP Connector, it helpfully explodes spectacularly during
+        launch (rather than silently and insidiously ignoring the attribute).
+      </p>
+      <p>Finally, setting the value of this attribute to 0 translates to no limit at all (proceed at thy own risk). E.g.
+        in my JBoss EAP 6.2 test server I have in my <tt>standalone-full.xml</tt> file:
+        <pre>
+      &lt;subsystem xmlns="urn:jboss:domain:web:1.5" default-virtual-server="default-host" native="false"&gt;
+        &lt;connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http" max-post-size="0"/&gt;
+        &lt;virtual-server name="default-host" enable-welcome-root="true"&gt;
+          &lt;alias name="localhost"/&gt;
+          &lt;alias name="example.com"/&gt;
+        &lt;/virtual-server&gt;
+      &lt;/subsystem&gt; </pre>
+      </p>
+      
       <li>JSP compilation problem when EAP 6.2 is run with a Java 8 interpreter</li>
       <p>
         I got a JSP compilation problem when running EAP 6.2 with a Java 8 runtime.
