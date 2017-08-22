@@ -5,6 +5,48 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>examining file differences in commits</li>
+      <ul>
+        <li style='color: brown; text-decoration:underline;'>to get a list of files modified between any two commits (commit-id-1 and commit-id-2)<li>
+
+          <pre>
+$ git diff --name-status commit-id-1..commit-id-2</pre>
+
+          Notes:
+          <ul>
+            <li>The above command reports only the name of the file and whether it was modified, deleted or added. It is meant to provide a short and compact listing of modified files so it does not report the changes as well (only the fact that a file was changed)</li>
+            <li>if you omit commit-id-2 it defaults to the HEAD (i.e. latest commit in your local repo)</li>
+            <li>if you omit both commit-id-1 and commit-id-2 it shows the uncommitted changes you've made locally to your repo.</li>
+            <li>to see the changes made in one particular commit there's two ways: Either provide the identifiers of that commit and its ancestor OR (better) use the ^ symbol which means "the ancestor of that commit". So the command:
+
+              <pre>
+git diff --name-status fc847cb^..fc847cb</pre>
+
+              .. shows all the changes made between the ancestor of commit git fc847cb and commit fc847cb. I.e. all the changes made in that particular commit only. E.g. if you see the following:
+              <pre>
+$ git diff --name-status fc847cb^..fc847cb
+  M       FileA.java
+  M       FileB.java
+  M       FileC.java</pre>
+
+              &hellip; it means that the above three files were modified (M) in that particular commit.
+            </li>
+          </ul>
+          <li style='color: brown; text-decoration:underline;'>to see the actual changes of a particular file in single commit</li>
+          <p>
+            Based on the example above, to see the changes made in FileB.java in the commit fc847cb (only) you can do:
+
+            <pre>git diff fc847cb^:FileA.java fc847cb:FileA.java</pre>
+
+            The above says: <i>show me the differences of FileA.java between the direct ancestor of commit fc847cb and commit fc847cb.</i> I.e. the differences in FileA.java made in commit fc847cb.
+          </p>
+          <li style='color: brown; text-decoration:underline;'>to see the actual changes of a particular file over a range of commits</li>
+          <p>
+          To see the changes of a particular file over a number of commits you just provide the range of the two commits (beginning commit and ending commit). E.g. to see how file FileA.java changed between commits 12347dd and fc847cb do:
+
+            <pre>git diff 12347dd:FileA.java fc847cb:FileA.java</pre>
+          </p>
+      </ul>
       <li>workflow for rebase / merge</li>
       <p>
         Based on <a href='https://stackoverflow.com/a/9147389/274677'>this</a> and <a href='https://stackoverflow.com/a/14005910/274677'>this</a>, I am now resolved to using the following workflow:
