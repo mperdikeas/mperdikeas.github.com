@@ -5,6 +5,17 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>How to sent a POST on https using curl (with basic Authorization headers too)</li>
+      Notes:
+      <ul>
+        <li>The following method uses the <tt>-k</tt> flag to turn off curl's verification
+          of the certificate.</li>
+        <li>In the below incantation I am also passing a basic Authorization header.
+          This is <b>entirely</b> unrelated to the SSL (it is an application-specific requirement)</li>
+        <li>The particular POST method sends no data</li>
+        <pre>curl -X POST -k -v -H 'Authorization:Basic Y3hjbG9naW4tZ2VuZXJpYy1jbGllbnQtYXBwLnVzZXJuYW1lOmN4Y2xvZ2luLWdlbmVyaWMtY2xpZW50LWFwcC5wd2Q=' https://cdatest.cfa.harvard.edu/cxclogin-dbdal-rest/jax-rs/userdb/serviceTicket/aauvc4d1dl4g3ovz3ejt0l5h0wv88iiri409bx5/authuser?useMode=normal
+        </pre>
+      </ul>
       <li><a href='./networking.html.files/how-to-setup-vpn-using-openconnect.html'>How to setup a VPN using <tt>openconnect</tt> on Linux</a></li>
       <li><a href='./networking.html.files/how-to-setup-vpn-using-vpnc.html'>How to setup a VPN using <tt>vpnc</tt> on Linux</a>      
       <li><a href='http://unix.stackexchange.com/a/158747/24044'>how to select wireless network from the command line</a>
