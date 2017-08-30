@@ -5,6 +5,13 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to encrypt PDF files in Ubuntu</li>
+      (<a href='https://askubuntu.com/a/258867/89663'>source</a>) &mdash; the following worked on Ubuntu 16.04 in 2017:
+      <pre>
+sudo apt install pdftk
+pdftk ~/Downloads/mp.pdf output ~/Downloads/mp-encrypted.pdf owner_pw changeme user_pw changeme2</pre>
+      The above incantation purposefully disallows printing the document. The owner and user passwords have to differ (I am not super-clear on the
+      nuances).
       <li><a href='./general.html.files/install-graphviz-Ubuntu-16.04.html'>install Graphviz in Ubuntu 16.04</a></li>
       <li><a href='./general.html.files/resume-failure-dell-precision-m3800-Ubuntu.html'>how I managed to solve the dreaded suspend / resume failure on my Dell Precision M3800 laptop running Ubuntu 14.04 or 16.04</a></li>
       <li><a href='http://askubuntu.com/a/760452/89663'>install Chrome in Ubuntu 16.04</a></li>
