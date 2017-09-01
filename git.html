@@ -5,6 +5,17 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to selectively checkout particular files from older commits and then revert</li>
+      <pre>
+        $ git checkout 855f48bd39cf56ef3ddb94389243ebd3e5b0bb8f ../../path/to/file
+        $ echo 'do your tests'
+        $ git reset --hard
+      </pre>
+      
+      <li>finding common ancestor between current branch and some other branch</li>
+      If the "other" branch is "master" you can do a:
+      <pre>git merge-base HEAD master</pre>
+      (the operation is obviously commutative)
       <li>how to stash untracked files without having to stage them</li>
       <pre>git stash save -u</pre>
       <li>examining file differences in commits</li>
@@ -34,7 +45,7 @@ $ git diff --name-status fc847cb^..fc847cb
               &hellip; it means that the above three files were modified (M) in that particular commit.
             </li>
           </ul>
-          <li style='color: brown; text-decoration:underline;'>to see the actual changes of a particular file in single commit</li>
+          <li style='color: brown; text-decoration:underline;'>to see the changes of a particular file in single commit</li>
           <p>
             Based on the example above, to see the changes made in FileB.java in the commit fc847cb (only) you can do:
 
@@ -42,11 +53,27 @@ $ git diff --name-status fc847cb^..fc847cb
 
             The above says: <i>show me the differences of FileA.java between the direct ancestor of commit fc847cb and commit fc847cb.</i> I.e. the differences in FileA.java made in commit fc847cb.
           </p>
-          <li style='color: brown; text-decoration:underline;'>to see the actual changes of a particular file over a range of commits</li>
+          <li style='color: brown; text-decoration:underline;'>to see the changes of a particular file over a range of commits</li>
           <p>
           To see the changes of a particular file over a number of commits you just provide the range of the two commits (beginning commit and ending commit). E.g. to see how file FileA.java changed between commits 12347dd and fc847cb do:
 
             <pre>git diff 12347dd:FileA.java fc847cb:FileA.java</pre>
+            Alternatively, the following also works:
+            <pre>git diff 12347dd fc847cb -- FileA.java</pre>
+            Instead of commit numbers you may use HEAD (for the tip of the current branch) or a branch name (in which case the tip of that branch is used)
+          </p>
+          <li style='color: brown; text-decoration:underline;'>to see recent changes on a file against another(distant) commit</li>
+          <p>
+            To see <b>all</b> changes (including unstaged ones):
+            <pre> git diff --no-ext-diff 968da4d -- path/to/file</pre>
+          </p>
+          <p>To see only up to staged changes:
+            <pre>git diff --no-ext-diff --staged 968da4d -- path/to/file</pre>
+            Notice that in the above it is an error to give <tt>HEAD</tt> after the <tt>--staged</tt>
+            as <tt>HEAD</tt> is implicit.
+          </p>
+          <p>To see up to the tip of the current branch:
+            <pre>git diff --no-ext-diff 968da4d HEAD -- path/to/file</pre>
           </p>
       </ul>
       <li>workflow for rebase / merge</li>
