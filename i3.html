@@ -5,6 +5,13 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>get rid of the Nautilus desktop window</li>
+      The solution given <a href='https://faq.i3wm.org/question/1/how-can-i-get-rid-of-the-nautilus-desktop-window.1.html'>here</a>
+      does not work on Ubuntu 16.04. Instead I tried:
+      <pre>nautilus -q</pre>
+      &hellip; suggested <a href='https://unix.stackexchange.com/questions/78762/closing-all-nautilus-windows-from-terminal'>here</a>.
+      This produced good results (although when a new i3 window is opened the nautilus default background still appears - but at
+      least the desktop was gone).
       <li>make DbVisualizer appear in the <tt>dbmen_run</tt> bar that gets displayed when
         <code>Meta+D</code> is pressed</li>
       I had installed DbVisualizer in <code>~/DbVisualizer</code>. From a terminal I can
