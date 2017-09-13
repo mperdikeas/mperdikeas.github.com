@@ -5,11 +5,15 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to show which files were changed as part of a commit</li>
+      <a href='https://stackoverflow.com/a/424142/274677'>source</a>
+      <pre>git diff-tree --no-commit-id --name-only -r bd61ad98</pre>
       <li>how to selectively checkout particular files from older commits and then revert</li>
       <pre>
         $ git checkout 855f48bd39cf56ef3ddb94389243ebd3e5b0bb8f ../../path/to/file
         $ echo 'do your tests'
         $ git reset --hard
+        $ echo 'you are now back where you started (before the checkout)
       </pre>
       
       <li>finding common ancestor between current branch and some other branch</li>
