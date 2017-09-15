@@ -1,0 +1,158 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+  <link rel='icon' href='knowledge-favicon.ico'/>
+  <style>
+   h1 {
+     font-size: 140%;
+   }
+   body > ol > div.app > h2 {
+     font-size: 130%;
+     font-weight: bold;
+     background: #ffe0ff;
+     margin-top: 1.4em;
+     margin-below: 1.4em;
+     border-bottom: 2px solid blue;
+   }
+   h3 {
+     font-size: 120%;
+   }
+
+   .flex-row {
+     display: flex;
+     flex-direction: row;
+   }
+
+   .flex-row > div {
+     margin-right: 1em;
+   }
+
+   .flex-column {
+     display: flex;
+     flex-direction: column;
+   }
+
+   .flex-column > * {
+     margin-bottom: 0.5em;
+   }
+  </style>
+  <script
+      src="https://code.jquery.com/jquery-3.2.1.min.js"
+      integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1 style='font-size: 110%'>links for deployed applications in the CfA environment</h1>
+    <span class='nb'>NB: </span>Most of the below links are accessible from HEAD only. Also, all REST API applications require authorization headers to be set.
+  </header>
+  <p>
+    <div class='flex-row'>
+      <div class='flex-column'>
+        <div>applications:</div>
+        <div>servers</div>
+      </div>
+      <div class='flex-column'>
+        <select id='apps'></select>
+        <select id='servers'></select>        
+      </div>
+    </div>
+  </p>
+  <ol reversed class=main-list-items>
+    <div class='app cps'>
+      <h2><tt>cps</tt> application</h2>
+      <div class='server cxc-dmz-test'>
+        <h3><tt>cxc-dmz-test</tt></h3>
+        <a href='https://cxc-dmz-test/soft/cps/CPS.html'>https://cxc-dmz-test/soft/cps/CPS.html</a>
+        <p>
+          Some notes:
+          <ul>
+            <li>This is the test server for this application (it's not deployed on <tt>cdatest</tt>).</li>
+            <li>It is deployed in a Tomcat server running on the <tt>cxcweb0</tt> machine (ssh-able from HEAD).</li>
+            <li>Exploded WAR is found in the following path:
+              <pre>/proj/web-cxc-secure-test/catalina_base/soft/webapps/cps-app/</pre>
+              (the above path is accessible without requiring an SSH to the <tt>cxcweb0</tt> machine)
+            </li>
+            <li>Tomcat's log file is:
+              <pre>data/rpc_test/prop/cps/cps.lo</pre>
+              (requires SSH to <tt>cxcweb0</tt>)
+            </li>
+          </ul>
+        </p>
+      </div>
+      <div class='server zap-v'>
+        <h3><tt>zap-v</tt></h3>
+        <a href='http://zap-v.cfa.harvard.edu:8021/proposer/CPS.html'>http://zap-v.cfa.harvard.edu:8021/proposer/CPS.html</a>
+        <p>This is DH's development server</p>
+      </div>
+    </div>
+    <div class='app cxcaccount'>
+      <h2><tt>cxcaccount</tt> application</h2>
+      <div class='server cdatest'>
+        <h3><tt>cdatest</tt></h3>
+        <a href='http://cdatest.cfa.harvard.edu/cxcaccount'>http://cdatest.cfa.harvard.edu/cxcaccount</a>
+      </div>
+      <div class='server newdevel9'>
+        <h3><tt>newdevel9</tt></h3>
+        <a href='http://newdevel9.cfa.harvard.edu/cxcaccount:8080'>http://newdevel9.cfa.harvard.edu/cxcaccount:8080</a>
+      </div>
+    </div>
+    <div class='app cxclogin-cas'>
+      <h2><tt>cxclogin-cas</tt> application</h2>
+      <div class='server cdatest'>
+        <h3><tt>cdatest</tt></h3>
+        <a href='http://cdatest.cfa.harvard.edu/cxclogin-cas'>http://cdatest.cfa.harvard.edu/cxclogin-cas</a>    
+      </div>
+      <div class='server newdevel9'>
+        <h3><tt>newdevel9</tt></h3>
+        <a href='http://newdevel9.cfa.harvard.edu/cxclogin-cas:8080'>http://newdevel9.cfa.harvard.edu/cxclogin-cas:8080</a>
+      </div>            
+    </div>
+    <div class='app proposal-dbdal-rest'>
+      <h2><tt>proposal-dbdal-rest</tt> application</h2>
+      <div class='server newdevel9'>
+        <h3><tt>newdevel9</tt></h3>
+        <a href='http://newdevel9.cfa.harvard.edu:8080/proposal-dbdal-rest/jax-rs/main/person/4217/proposal-summaries'>example invocation to get all summaries</a>
+      </div>
+      <div class='server localhost'>      
+        <h3><tt>localhost</tt></h3>
+        <a href='http://localhost:8082/proposal-dbdal-rest/jax-rs/main/person/4217/proposal-summaries'>example invocation to get all summaries</a>
+      </div>
+    </div>
+    <div class='app cxclogin-dbdal-rest'>
+      <h2><tt>cxclogin-dbdal-rest</tt> application</h2>
+      <div class='server cdatest'>
+        <h3><tt>cdatest</tt></h3>
+        <a href='https://cdatest.cfa.harvard.edu/cxclogin-dbdal-rest/jax-rs/userdb/serviceTicket/5sg7uz9pfbxmjmye8sqncftpu7shmuah45a7zdo/associatedTGTisValid'>example call to validate a ST</a>
+      </div>
+    </div>
+  </ol>
+  <script>
+   const lovs = {apps: ['all', 'cps', 'cxcaccount', 'cxclogin-cas', 'proposal-dbdal-rest', 'cxclogin-dbdal-rest'],
+                 servers: ['all', 'cdatest', 'cxc-dmz-test', 'zap-v', 'newdevel9', 'localhost']};
+   $.each(lovs, function (prop) {
+     const select$ = $('#'+prop);
+     $.each(lovs[prop], function (_, x) {
+       const $option = $('<option>', {value: x});
+       $option.html(x);
+       select$.append($option);
+     });
+     select$.change( function() {
+       console.log(prop+' is now: '+$(this).val());
+     });
+   });
+
+   function serversForApp(app) {
+     return $.map($('div.app.'+app+' > div.server > h3 > tt')
+                , function (x) {
+                  console.log(x);
+                  console.log($(x).html());
+                  return $(x).html();
+                });
+   }
+
+   function appsForServer(server) {
+     // todo
+   }
+
+  </script>
+</body>
