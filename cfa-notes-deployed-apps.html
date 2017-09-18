@@ -34,6 +34,10 @@
    .flex-column > * {
      margin-bottom: 0.5em;
    }
+
+   .hidden {
+     display: none;
+   }
   </style>
   <script
       src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -137,22 +141,116 @@
        select$.append($option);
      });
      select$.change( function() {
-       console.log(prop+' is now: '+$(this).val());
      });
    });
 
    function serversForApp(app) {
-     return $.map($('div.app.'+app+' > div.server > h3 > tt')
+     if (app==='all')
+       return lovs.servers;
+     const rv = $.map($('div.app.'+app+' > div.server > h3 > tt')
                 , function (x) {
-                  console.log(x);
-                  console.log($(x).html());
                   return $(x).html();
                 });
+     rv.unshift('all');
+     return rv;
    }
 
    function appsForServer(server) {
-     // todo
+     if (server==='all')
+       return lovs.apps;
+     const allAppDivs$ = $('div.app');
+     const rv = [];
+     allAppDivs$.each(function (idx, el) {
+       if ($(el).find('div.server.'+server).length>0) {
+         var classList = $(el).attr('class').split(/\s+/).filter(function (x) {
+           return (x!=='app') && (x!=='hidden');
+         });
+         if (classList.length!==1)
+           throw 'expected classList to have length 1 at this point, yet length was: '+classList.length+', list is: '+classList.join(', ');
+         rv.push(classList[0]);
+       }
+     });
+     rv.unshift('all');
+     return rv;     
    }
 
+   const apps    = $('#apps');
+   const servers = $('#servers');
+
+   apps.change(function() {
+     const app = event.target.value;
+     const serversForAppV = serversForApp(app);
+     const existingServer = servers.val();
+     console.log('servers for app:'+app+' are: '+serversForAppV);
+     servers.empty().append(serversForAppV.map(function(x){
+       return '<option value="'+x+'">'+x+'</option>';
+     }));
+     if (existingServer!=='all') {
+       if ($.inArray(existingServer, serversForAppV))
+         servers.val(existingServer);
+       else
+         servers.val('all');
+     }
+     onlyShow(app          ==='all'?valuesExceptAll(lovs.apps   ):[app]
+            , servers.val()==='all'?valuesExceptAll(lovs.servers):[servers.val()]);
+   });
+
+   servers.change(function() {
+     const server = event.target.value;
+     const appsForServerV = appsForServer(server);
+     const existingApp    = apps.val();
+     console.log('apps for server:'+' are: '+appsForServerV);
+     apps.empty().append(appsForServerV.map(function(x){
+       return '<option value="'+x+'">'+x+'</option>';
+     }));
+     if (existingApp!=='all') {
+       if ($.inArray(existingApp, appsForServerV))
+         apps.val(existingApp);
+       else
+         apps.val('all');
+     }
+     onlyShow(apps.val()==='all'?valuesExceptAll(lovs.apps):[apps.val()]
+            , server    ==='all'?valuesExceptAll(lovs.servers):[server]);
+   });
+
+   function onlyShow(apps, servers) {
+     console.log('only showing divs for apps=['+apps+'], servers=['+servers+']');
+     onlyShowApps   (apps);
+     onlyShowServers(servers);
+   }
+
+   function onlyShowApps(apps) {
+     $('div.app').each(function(idx, el) {
+       if ($(el).is(arrayToClasses(apps)))
+         $(el).removeClass('hidden');
+       else
+         $(el).addClass('hidden');
+     });
+   }
+
+   function onlyShowServers(servers) {
+     $('.server').each(function(idx, el) {
+       if ($(el).is(arrayToClasses(servers)))
+         $(el).removeClass('hidden');
+       else
+         $(el).addClass('hidden');
+     });
+   }
+
+   function arrayToClasses(arr) {
+     const rv = [];
+     for (var i = 0; i < arr.length ; i++) {
+       rv.push('.'+arr[i]);
+     }
+     return rv.join(',');
+   }
+
+   function valuesExceptAll(vals) {
+     return vals.filter(function (x) {
+       return x!=='all';
+     });
+   }
+
+   
   </script>
 </body>
