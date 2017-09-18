@@ -178,38 +178,31 @@
    const servers = $('#servers');
 
    apps.change(function() {
-     const app = event.target.value;
-     const serversForAppV = serversForApp(app);
-     const existingServer = servers.val();
+     const app    = apps   .val();
+     const server = servers.val();
+     const appsForServerV  = appsForServer(server);
+     const serversForAppV  = serversForApp(app);
      servers.empty().append(serversForAppV.map(function(x){
        return '<option value="'+x+'">'+x+'</option>';
      }));
-     if (existingServer!=='all') {
-       if ($.inArray(existingServer, serversForAppV))
-         servers.val(existingServer);
-       else
-         servers.val('all');
-     }
-     const appsForExistingServer = appsForServer(existingServer);
-     onlyShow(apps.val()==='all'?valuesExceptAll(appsForExistingServer):[apps.val()]
-            , servers.val()==='all'?valuesExceptAll(lovs.servers):[servers.val()]);
+     servers.val(server); // maybe this is not necessary
+
+     onlyShow(   apps.val()==='all'?valuesExceptAll(appsForServerV):[apps   .val()]
+            , servers.val()==='all'?valuesExceptAll(serversForAppV):[servers.val()]);
    });
 
    servers.change(function() {
-     const server = event.target.value;
+     const app    = apps   .val();
+     const server = servers.val();
      const appsForServerV = appsForServer(server);
-     const existingApp    = apps.val();
+     const serversForAppV = serversForApp(app);
      apps.empty().append(appsForServerV.map(function(x){
        return '<option value="'+x+'">'+x+'</option>';
      }));
-     if (existingApp!=='all') {
-       if ($.inArray(existingApp, appsForServerV))
-         apps.val(existingApp);
-       else
-         apps.val('all');
-     }
-     onlyShow(apps.val()==='all'?valuesExceptAll(appsForServerV):[apps.val()]
-            , server    ==='all'?valuesExceptAll(lovs.servers):[server]);
+     apps.val(app); // maybe this is not necessary
+     
+     onlyShow(   apps.val()==='all'?valuesExceptAll(appsForServerV):[apps   .val()]
+            , servers.val()==='all'?valuesExceptAll(serversForAppV):[servers.val()]);
    });
 
    function onlyShow(apps, servers) {
