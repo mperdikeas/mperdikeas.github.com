@@ -181,7 +181,6 @@
      const app = event.target.value;
      const serversForAppV = serversForApp(app);
      const existingServer = servers.val();
-     console.log('servers for app:'+app+' are: '+serversForAppV);
      servers.empty().append(serversForAppV.map(function(x){
        return '<option value="'+x+'">'+x+'</option>';
      }));
@@ -191,7 +190,8 @@
        else
          servers.val('all');
      }
-     onlyShow(app          ==='all'?valuesExceptAll(lovs.apps   ):[app]
+     const appsForExistingServer = appsForServer(existingServer);
+     onlyShow(apps.val()==='all'?valuesExceptAll(appsForExistingServer):[apps.val()]
             , servers.val()==='all'?valuesExceptAll(lovs.servers):[servers.val()]);
    });
 
@@ -199,7 +199,6 @@
      const server = event.target.value;
      const appsForServerV = appsForServer(server);
      const existingApp    = apps.val();
-     console.log('apps for server:'+' are: '+appsForServerV);
      apps.empty().append(appsForServerV.map(function(x){
        return '<option value="'+x+'">'+x+'</option>';
      }));
@@ -209,12 +208,11 @@
        else
          apps.val('all');
      }
-     onlyShow(apps.val()==='all'?valuesExceptAll(lovs.apps):[apps.val()]
+     onlyShow(apps.val()==='all'?valuesExceptAll(appsForServerV):[apps.val()]
             , server    ==='all'?valuesExceptAll(lovs.servers):[server]);
    });
 
    function onlyShow(apps, servers) {
-     console.log('only showing divs for apps=['+apps+'], servers=['+servers+']');
      onlyShowApps   (apps);
      onlyShowServers(servers);
    }
