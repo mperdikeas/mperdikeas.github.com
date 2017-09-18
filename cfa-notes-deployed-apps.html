@@ -185,7 +185,7 @@
      servers.empty().append(serversForAppV.map(function(x){
        return '<option value="'+x+'">'+x+'</option>';
      }));
-     servers.val(server); // maybe this is not necessary
+     servers.val(server);
 
      onlyShow(   apps.val()==='all'?valuesExceptAll(appsForServerV):[apps   .val()]
             , servers.val()==='all'?valuesExceptAll(serversForAppV):[servers.val()]);
@@ -199,7 +199,7 @@
      apps.empty().append(appsForServerV.map(function(x){
        return '<option value="'+x+'">'+x+'</option>';
      }));
-     apps.val(app); // maybe this is not necessary
+     apps.val(app);
      
      onlyShow(   apps.val()==='all'?valuesExceptAll(appsForServerV):[apps   .val()]
             , servers.val()==='all'?valuesExceptAll(serversForAppV):[servers.val()]);
