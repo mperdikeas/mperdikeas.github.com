@@ -4,6 +4,13 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>how to see which directories are mounted on a local disk</li>
+    <a href='https://unix.stackexchange.com/a/72224/24044'>source</a>.
+    The following incantantion yields good results:
+    <pre> df -P -T | awk '{print $NF " " $2}'| grep -v nfs | grep -v mvfs</pre>
+    In the above incantantion we are filtering out the <tt>nfs</tt>
+    and the MultiVersion File System filesystem types (the latter being
+    used by the shitty ClearCase "product")
     <li>find swap size</li>
     <p>
       There's a number of ways to obtain swap size:
