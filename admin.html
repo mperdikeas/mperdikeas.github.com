@@ -4,6 +4,19 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>quick test to see if the locally configured SMTP MSA (Mail Submission Agent) is working</li>
+    <p>
+      This can be helpful when trying to troubleshoot programmatic MUA (e.g. using the <tt>javax.mail.Transport</tt>
+      class).
+      <pre>mail -s "subject" john.doe@gmail.com</pre>
+      Program works by typing message body and ending it with a dot, at which point the email is sent out.
+      <tt>mail</tt> is apparently using the Sendmail MUA (Mail User Agent) and talks to a MSA over SMTP
+      at port 587 or 25 (if still allowed).
+    </p>
+    <p>
+      It can happen that both the programmatic API and the <tt>mail</tt> program fail silently (with a 0 exit code)
+      but then, when looking at the <tt>/var/log/maillog</tt> file one sees "Relaying denied" messages.
+    </p>
     <li>how to see which directories are mounted on a local disk</li>
     <a href='https://unix.stackexchange.com/a/72224/24044'>source</a>.
     The following incantantion yields good results:
