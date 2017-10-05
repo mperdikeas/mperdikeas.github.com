@@ -271,7 +271,7 @@ load /vobs/ASC_DB_ADMIN/ </pre>
 $ df -P -T /data/VIEWS | tail -n +2 | awk '{print $2}'
 nfs </pre></li>
       </ul>
-      <li>common helpful aliases for ClearCase</li>
+      <li>common helpful aliases for ClearCase and on the /view/<tt>some-view</tt> directory</li>
       <pre>
 alias ct=cleartool
 alias ci=checkin
@@ -280,7 +280,7 @@ alias uco='uncheckout'
 alias xcc='setenv LANG en_US; xclearcase &'
 alias cmake='clearmake -C gnu MAKE=clearmake UIROOT=/vobs/ASC_BUILD/src'
 alias ctmv='ct setview -exec "newgrp ccase" mperdike_dev_view'</pre>
-      <p>Regarding the last of the above aliases (<tt>ctmv</tt>), it seems there is no actual need
+      <p><span class='nb'>NB: </span>Regarding the last of the above aliases (<tt>ctmv</tt>), it seems there is no actual need
         to use <tt>setview</tt>. <tt>setview</tt> spawns a second shell and you are expected
         to navigate to, e.g. <tt>/vobs/ASC_DB_ADMIN</tt> to do your work. Instead, one can
         simply navigate to (in my case) <tt>/view/mperdike_dev_view/vobs/ASC_DB_ADMIN</tt> and have access
@@ -288,7 +288,14 @@ alias ctmv='ct setview -exec "newgrp ccase" mperdike_dev_view'</pre>
         existing one (which can cause problems). See <a href='http://stackoverflow.com/q/40347421/274677'>this
         relevant SO question</a>.
       </p>
-      <p><b>NB:</b> you will notice that the <tt>ctmv</tt> alias above sets the group as well.
+      <p><span class='nb' >NB2: </span> on a fresh system the <code>/view/some-view</code> directory/-ies are not created
+        by default. To create them you have to do the following:
+        <pre>
+cleartool setview some-view</pre>
+        &hellip; once you execute above, lo and behold, the <code>/view/some-view</code> directory appears. You obviously
+        do the above only once.
+      </p>      
+      <p><span class='nb' >NB3: </span> you will notice that the <tt>ctmv</tt> alias above sets the group as well.
         As such, when one navigates directly to <tt>/view/view_tag_name/vobs/ASC_DB_ADMIN</tt>
         directory the group has to be properly set (with <code>newgrp ccase</code>)
         otherwise some common check-out / check-in commands won't work.
