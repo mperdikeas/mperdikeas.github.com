@@ -36,11 +36,12 @@ To check out the original branch and stop rebasing, run "git rebase --abort". </
         Following the advice given in the <a href='#how-to-resolve-conflicts-during-merge.source'>linked source</a>
         I did the following:
         <ol>
-          <li>identified files in conflict (in the above example, that was <code>docs/release-notes</code></li>
+          <li>identified files in conflict (in the above example, that was <code>docs/release-notes</code>)</li>
           <li>resolved the conflict by editing the files that are in conflict (examining and eventually removing
             the Git demarcation markers)</li>
           <li><code>git add</code> the edited files. <span class='nb'>NB:</span> be sure to not <code>commit</code> at this point, no <code>commit</code> is necessary</li>
-          <li>did a <code>git rebase --continue</code> as that was the command Git said to do when you completed.
+          <li>did a <code>git rebase --continue</code> as that was the command Git said to do when you completed.</li>
+          <li>at that point, given that the rebase was successful, I saw (as expected) a <b>fast forward</b> merge.    
         </ol>
       </p>
       
