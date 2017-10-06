@@ -96,9 +96,9 @@
         <h3><tt>cdatest</tt></h3>
         <a href='http://cdatest.cfa.harvard.edu/cxcaccount'>http://cdatest.cfa.harvard.edu/cxcaccount</a>
       </div>
-      <div class='server newdevel9'>
-        <h3><tt>newdevel9</tt></h3>
-        <a href='http://newdevel9.cfa.harvard.edu:8080/cxcaccount'>http://newdevel9.cfa.harvard.edu/cxcaccount:8080</a>
+      <div class='server devel9'>
+        <h3><tt>devel9</tt></h3>
+        <a href='http://devel9.cfa.harvard.edu:8080/cxcaccount'>http://devel9.cfa.harvard.edu/cxcaccount:8080</a>
       </div>
     </div>
     <div class='app cxclogin-cas'>
@@ -107,16 +107,16 @@
         <h3><tt>cdatest</tt></h3>
         <a href='http://cdatest.cfa.harvard.edu/cxclogin-cas'>http://cdatest.cfa.harvard.edu/cxclogin-cas</a>    
       </div>
-      <div class='server newdevel9'>
-        <h3><tt>newdevel9</tt></h3>
-        <a href='http://newdevel9.cfa.harvard.edu:8080/cxclogin-cas'>http://newdevel9.cfa.harvard.edu/cxclogin-cas:8080</a>
+      <div class='server devel9'>
+        <h3><tt>devel9</tt></h3>
+        <a href='http://devel9.cfa.harvard.edu:8080/cxclogin-cas'>http://devel9.cfa.harvard.edu/cxclogin-cas:8080</a>
       </div>            
     </div>
     <div class='app proposal-dbdal-rest'>
       <h2><tt>proposal-dbdal-rest</tt> application</h2>
-      <div class='server newdevel9'>
-        <h3><tt>newdevel9</tt></h3>
-        <a href='http://newdevel9.cfa.harvard.edu:8080/proposal-dbdal-rest/jax-rs/main/person/4217/proposal-summaries'>example invocation to get all summaries</a>
+      <div class='server devel9'>
+        <h3><tt>devel9</tt></h3>
+        <a href='http://devel9.cfa.harvard.edu:8080/proposal-dbdal-rest/jax-rs/main/person/4217/proposal-summaries'>example invocation to get all summaries</a>
       </div>
       <div class='server localhost'>      
         <h3><tt>localhost</tt></h3>
@@ -133,7 +133,7 @@
   </ol>
   <script>
    const lovs = {apps: ['all', 'cps', 'cxcaccount', 'cxclogin-cas', 'proposal-dbdal-rest', 'cxclogin-dbdal-rest'],
-                 servers: ['all', 'cdatest', 'cxc-dmz-test', 'zap-v', 'newdevel9', 'localhost']};
+                 servers: ['all', 'cdatest', 'cxc-dmz-test', 'zap-v', 'devel9', 'localhost']};
    $.each(lovs, function (prop) {
      const select$ = $('#'+prop);
      $.each(lovs[prop], function (_, x) {
