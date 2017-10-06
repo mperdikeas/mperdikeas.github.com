@@ -5,6 +5,45 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to resolve conflics during rebase operations</li>
+      <p><a id='how-to-resolve-conflicts-during-merge.source' href='https://stackoverflow.com/a/162056/274677'>source</a></p>
+      <p>In a recent rebase operation (where I was following the script given
+        <a href='#workflow-for-rebase-merge'>here</a>), I had the following output:
+        <pre>
+$ git rebase master
+First, rewinding head to replay your work on top of it...
+Applying: &lt; some commit message &gt;
+Applying: &lt; some commit message &gt;
+Applying: &lt; some commit message &gt;
+Applying: &lt; some commit message &gt;
+Using index info to reconstruct a base tree...
+Mdocs/release-notes
+.git/rebase-apply/patch:46: trailing whitespace.
+
+warning: 1 line adds whitespace errors.
+Falling back to patching base and 3-way merge...
+Auto-merging docs/release-notes
+CONFLICT (content): Merge conflict in docs/release-notes
+error: Failed to merge in the changes.
+Patch failed at &lt; some commit message &gt;
+The copy of the patch that failed is found in: .git/rebase-apply/patch
+
+When you have resolved this problem, run "git rebase --continue".
+If you prefer to skip this patch, run "git rebase --skip" instead.
+To check out the original branch and stop rebasing, run "git rebase --abort". </pre>
+      </p>
+      <p>
+        Following the advice given in the <a href='#how-to-resolve-conflicts-during-merge.source'>linked source</a>
+        I did the following:
+        <ol>
+          <li>identified files in conflict (in the above example, that was <code>docs/release-notes</code></li>
+          <li>resolved the conflict by editing the files that are in conflict (examining and eventually removing
+            the Git demarcation markers)</li>
+          <li><code>git add</code> the edited files. <span class='nb'>NB:</span> be sure to not <code>commit</code> at this point, no <code>commit</code> is necessary</li>
+          <li>did a <code>git rebase --continue</code> as that was the command Git said to do when you completed.
+        </ol>
+      </p>
+      
       <li>how to show which files were changed as part of a commit</li>
       <a href='https://stackoverflow.com/a/424142/274677'>source</a>
       <pre>git diff-tree --no-commit-id --name-only -r bd61ad98</pre>
@@ -80,7 +119,7 @@ $ git diff --name-status fc847cb^..fc847cb
             <pre>git diff --no-ext-diff 968da4d HEAD -- path/to/file</pre>
           </p>
       </ul>
-      <li>workflow for rebase / merge</li>
+      <li id='workflow-for-rebase-merge'>workflow for rebase / merge</li>
       <p>
         Based on <a href='https://stackoverflow.com/a/9147389/274677'>this</a> and <a href='https://stackoverflow.com/a/14005910/274677'>this</a>, I am now resolved to using the following workflow:
         <ol>
