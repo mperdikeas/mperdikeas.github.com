@@ -5,11 +5,68 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li id='how-to-upload-files-with-spring'>How to do file uploads with Spring MVC 4.3.5</li>
+      <p>
+        <a id='how-to-upload-files-with-spring-source' href='https://docs.spring.io/spring/docs/4.3.5.RELEASE/spring-framework-reference/html/mvc.html#mvc-multipart'>source</a>
+      </p>
+      <p>I had a form working in the Spring MVC way (Models, Validators and all) and was asked to add
+        a file upload field. I.e. an <code>&lt;input&gt;</code> element with <code>type='file'</code></p>
+      <p>For that it was necessary to change the form from the following:
+        <br/><br/>
+        <code>&lt;form:form id='the-form' modelAttribute="newAccountView" action="submit.do" method="POST"&gt;</code>
+        &hellip; to the following:
+        <br/><br/>
+        <code>&lt;form:form id='the-form' modelAttribute="newAccountView" action="submit.do" method="POST" enctype="multipart/form-data"&gt;</code>
+        <br/>
+      </p>
+      <p>
+        This is very clearly stated in a number of guides.
+      </p>
+      <p>However, this alone does not work as I was met by a number of weird NPE exceptions (on the validators of that model).
+        This was due to the fact that Spring was unable to retrieve any of the parameters present in the form due to the
+        change of the form encoding (from the default <i>application/x-www-form-urlencoded</i> to <i>multipart/form-data</i>)
+      </p>
+      <p>To fix that I had to setup a <b>multi-part resolver</b> with my Spring application.
+        So I added the following to my <code>mvc-dispatcher-servlet.xml</code>:
+        <pre>
+ &lt;bean id="multipartResolver"
+      class="org.springframework.web.multipart.commons.CommonsMultipartResolver"&gt;
+      &lt;!-- one of the properties available; the maximum file size in bytes --&gt;
+      &lt;property name="maxUploadSize" value="30000000"/&gt;
+ &lt;/bean&gt;</pre>
+      </p>
+      <p>I also had to add the following dependency to my Ivy:
+        <pre>
+&ltdependency org="commons-fileupload" name="commons-fileupload" rev="1.3.3" conf="run-time->default"/&gt;</pre>
+      </p>
+      <p>After doing the above, I added a <code>org.springframework.web.multipart.MultipartFile</code> field in my Spring MVC
+        model class for that view</p>
+      <p>Inside, the controller it wasn't necessary to change the signature of the method at all. I was simply able to access
+        the blob doing a:
+        <pre>myViewModel.getCv().getSize()</pre>
+        (where <code>cv</code> was the field I added to my view model)
+      </p>
+      <p>For completeness purposes, here's a simplified view of my method inside the controller:
+        <pre>
+    @RequestMapping(path="/submit", method=RequestMethod.POST)
+    public String submit(HttpServletRequest request
+                               , @ModelAttribute("myModel") @Valid MyViewModel myViewModel
+                               , BindingResult result
+                               , Model model) {
+        ...
+        System.out.printf("%d bytes retrieved.\n", myViewModel.getCv().getSize());
+        ...
+    }
+        </pre>
+      </p>
+      <p><b>NB:</b> At the time of this writing I have not yet experimented using the alternative multi-part resolver
+provided by Spring: the <code>StandardServletMultipartResolver</code> one for Servlet 3.0 &mdash; see the <a href='#how-to-upload-files-with-spring-source'>source</a>.
+      </p>
       <li>Spring MVC hello world application for JBoss</li>
       <p>
-      Checkout
-      <a href='https://github.com/mperdikeas/playground/tree/master/spa-REST-architectures/001-REST-spa-for-JBoss'>
-        this project TODO fix the link, it's wrong
+        Checkout
+      <a href='https://github.com/mperdikeas/playground/tree/master/spring-mvc/001-database-access'>
+        this project
       </a>
       in my playground that shows how to deploy a simple Spring MVC application with a database back-end
       in JBoss (tested against JBoss EAP 6.4)
