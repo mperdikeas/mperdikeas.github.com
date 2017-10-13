@@ -4,6 +4,19 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>Sybase attrocious handling of time</li>
+    <p><a href='https://dba.stackexchange.com/a/69733/34332'>source</a></p>
+    <p>
+    Sybase Servers support the use of date and time data through the datetime and smalldatetime datatypes (and, with newer server, the date and time datatypes), as well as the getdate(), dateadd(), datediff(), and datepart() functions. The getutcdate() function was also added to some servers to provide the current datetime value in Coordinated Universal Time regardless of the time zone the server is otherwise running under.
+    </p>
+    <p>
+      The datetime and smalldatetime datatypes, however, do not store time zone information and the products are entirely ignorant of the concepts of time zones and daylight saving time. Sybase Servers only recognize and store the date and time portions of the values provided by the operating system, which are based on the time zone configured at the operating system level (typically though the TZ environment variable setting in Unix or the Date/Time function of the Windows Control Panel) for the user who started the product. The calculations behind the dateadd and datediff functions are aware of leap years (using the rule of every 4th year, except for every 100th year, except for every 400th year), but do not include any adjustments for leap seconds or transitions from daylight saving time to regular time.
+    </p>
+    <p>
+      Therefore changing the underlying OS timezone will not have any appreciable effect on the data stored in the datetime fields in one's database.
+    </p>
+    <p>Also, the implication of the above is that looking at the <tt>DATETIME</tt> values in a Sybase database you don't know the exact time unless you also know the timezone of the server!</p>
+    
     <li>show information about a rule, and its text</li>
     <pre>
 sp_help &lt;rule-name&gt;
