@@ -4,6 +4,37 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li id='schemas-and-sybase-table-access-notation'>Schemas, users and the <tt>dbname.username.tablename</tt> notation</li>
+    <p>
+    Sybase ASE does not have a proper schema concept. Instead it conflates the concept of a user with that of the schema. Tables are thought to be owned by the user who created them. See <a href='https://stackoverflow.com/a/34725708/274677'>this SO answer</a> on the topic. As such the notation <tt>dbname.username.tablename</tt> is used with the meaning "<i>table <tt>tablename</tt> owned by user <tt>username</tt> in the database <tt>dbname</tt></i>"
+    </p>
+    <p>This being said, since it is possible for different user to have different tables with the exact same name in the same database, this concept does allow one to user usernames as namespaces for tables much as the schemas are used in PostgreSQL to provide a namespace for table names.</p>
+    <p>However, this is not the established convention. Instead, the established convention is the following:
+      <ul>
+        <li>all objects (tables, views, stored procedures) are owned by the database owner (that's the user <i>dbo</i>)</li>
+        <li>users do not own any objects <b>at all</b>, &hellip;</li>
+        <li>&hellip;instead the <i>dbo</i> user owns everything and grants to the users permissions to read or update the various tables, call the various stored procedures etc.</li>
+      </ul>
+    </p>
+    <p>This is ostensibly done so that when a user is fired, you don't have to rename their tables. IMO this doesn' make much sense as there's nothing that says that the users of a database have to correspond to physical persons.</p>
+    <p>OTOH and in defence of Sybase it has to be said that since it is possible to have Foreign Key constraints across databases (in the same server obviously), then the concept of the database itself functions like the namespace for tables. Instead, in PostgreSQL, last time I used it (2015), it wasn't possible to have FK constraints across databases so the schema concept was indispensable. Still that's not quite the same thing as you have to create the same user on multiple databases if your application needs to access a bunch of different databases (which is very often the case).</p>
+    <p>At any rate and coming back to the <tt>dbname.username.tablename</tt> notation, either or both of the <i>dbname</i> and <i>username</i> components may be missing:
+      <ul>
+        <li>If the <i>dbname</i> component is missing then it is assumed to be the database currently used by the connection</li>
+        <li>If the <i>username</i> component is missing then it is assumed to be the user that's logged-in on the current connection. However, if that user owns no tables (which is what the established convention is), then Sybase falls back to the <i>dbo</i> user and looks there for a table named <i>tablename</i>. </li>
+      </ul>
+      <p>See also this <a href='https://stackoverflow.com/q/46942914/274677'>SO question of mine</a> and this <a href='#sybase-ase-concepts'>older note of mine</a>.</p>
+    </p>
+
+    <li>Find a connection's user and all currently logged-in users and connections</li>
+    <p>
+      To find which user is connected on the particualr connection we are in, use the <code>suser_name()</code> function. E.g. from <i>sqsh</i>:
+      <pre>select suser_name();</pre>
+    </p>
+    <p>
+      To show all currently logged-in users and information about their connections (e.g. client host name, database name, command) use the system stored procedure <code>sp_who</code>. E.g. from <i>sqsh</i>:
+      <pre> sp_who; | grep something</pre>
+    </p>
     <li>Find character set and sort order of Sybase server</li>
     <p>
       Use: <code>sp_helpsort</code>
@@ -271,7 +302,10 @@ sqsh -Uloginname -Sservername</pre>
       <pre>select name, dbname from master.dbo.syslogins; | grep part-of-the-username</pre>
       (<a href='http://dba.stackexchange.com/a/161521/34332'>source</a>)
     </p>
-    <li>Sybase ASE concepts</li>
+    <li id='sybase-ase-concepts'>Sybase ASE concepts</li>
+    <p>
+      <span class='nb'>NB:</span> See also this <a href='#schemas-and-sybase-table-access-notation'>more recent note of mine</a>.
+    </p>
     <p>
       In ASE, there is no concept of a "schema" (like you have in PostgreSQL or Oracle), instead tables are owned by users.
       So, hierarchically, the concepts of database server, database, user and table are arranged as follows:
@@ -293,6 +327,7 @@ sqsh -Uloginname -Sservername</pre>
         <dt>..table</dt><dd>&hellip;where the omitted database name is taken to be the default database (I think)</dd>
       </dl>
     </p>
+
     <li>Sybase ASE server structure</li>
     <p>
       See also <a href='http://dba.stackexchange.com/q/161470/34332'>this dba.stackexchange question of mine</a>.
