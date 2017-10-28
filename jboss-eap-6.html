@@ -7,6 +7,37 @@
 
   <body>
     <ol reversed class='main-list-items'>
+      <li>JBoss EAP 6 JDBC connection pool timeout parameters</li>
+      <p>
+        <a href='https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/6.2/html-single/administration_and_configuration_guide/index#Topic2772-timeout'>source</a>
+        <p>Of the timeout parameters that appear below, the following are of particular
+          importance:
+          <ul>
+            <li>blocking-timeout-millis</li>
+            <li>idle-timeout-minutes</li>
+          </ul>
+          &hellip; alongside of course with the <i>min-pool-size</i>, <i>max-pool-size</i> which are confiugred for each pool.
+          Also, <i>prefill</i> and <i>use-strict-min</i> may in some cases affect things.
+        </p>
+
+        <p><strong>Timeout parameters</strong></p>
+      <table class="lt-4-cols gt-7-rows" summary="Timeout parameters"><colgroup><col width="50%" align="left" class="c1"><!--Empty--></col><col width="50%" align="left" class="c2"><!--Empty--></col></colgroup><thead><tr><th align="left" id="idm140578249227664" scope="col"> Parameter </th><th align="left" id="idm140578243663696" scope="col"> Description </th></tr></thead><tbody><tr><td align="left" headers="idm140578249227664"> use-try-lock </td><td align="left" headers="idm140578243663696"> Uses <code class="code">tryLock()</code> instead of <code class="code">lock()</code>. This attempts to obtain the lock for the configured number of seconds, before timing out, rather than failing immediately if the lock is unavailable. Defaults to <code class="literal">60</code> seconds. As an example, to set a timeout of 5 minutes, set <code class="code">&lt;use-try-lock&gt;</code>300<code class="code">&lt;/use-try-lock&gt;</code>. </td></tr><tr><td align="left" headers="idm140578249227664"> blocking-timeout-millis </td><td align="left" headers="idm140578243663696"> The maximum time, in milliseconds, to block while waiting for a connection. After this time is exceeded, an exception is thrown. This blocks only while waiting for a permit for a connection, and does not throw an exception if creating a new connection takes a long time. Defaults to 30000, which is 30 seconds. </td></tr><tr><td align="left" headers="idm140578249227664"> idle-timeout-minutes </td><td align="left" headers="idm140578243663696"> 
+        The maximum time, in minutes, before an idle connection is closed. The actual maximum time depends upon the idleRemover scan time, which is half of the smallest <code class="literal">idle-timeout-minutes</code> of any pool.
+      </td></tr><tr><td align="left" headers="idm140578249227664"> set-tx-query-timeout </td><td align="left" headers="idm140578243663696"> 
+        Whether to set the query timeout based on the time remaining until transaction timeout. Any configured query timeout is used if no transaction exists. Defaults to <code class="literal">false</code>.
+
+      </td></tr><tr><td align="left" headers="idm140578249227664"> query-timeout </td><td align="left" headers="idm140578243663696"> Timeout for queries, in seconds. The default is no timeout. </td></tr><tr><td align="left" headers="idm140578249227664"> allocation-retry </td><td align="left" headers="idm140578243663696"> The number of times to retry allocating a connection before throwing an exception. The default is <code class="literal">0</code>, so an exception is thrown upon the first failure. </td></tr><tr><td align="left" headers="idm140578249227664"> allocation-retry-wait-millis </td><td align="left" headers="idm140578243663696"> 
+        How long, in milliseconds, to wait before retrying to allocate a connection. The default is 5000, which is 5 seconds.
+
+      </td></tr><tr><td align="left" headers="idm140578249227664"> xa-resource-timeout </td><td align="left" headers="idm140578243663696"> 
+        If non-zero, this value is passed to method <code class="code">XAResource.setTransactionTimeout</code>.
+      </td>
+      </tr>
+      </tbody>
+      </table>
+
+        
+        </p>
       <li>configuring maximum POST size in JBoss EAP 6.2</li>
       <p>All web servers provide a way to limit the maximum post size as a plausible defence against
         DoS attacks. In the JBoss family of servers this is usually done in the configuration of
