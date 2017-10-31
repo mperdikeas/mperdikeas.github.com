@@ -6,8 +6,18 @@
   </head>
 
   <body>
+    <h1 style='font-size: 110%'>JBoss EAP 6 notes</h1>
     <ol reversed class='main-list-items'>
-      <li>JBoss EAP 6 JDBC connection pool timeout parameters</li>
+      <li><a href='jboss-eap-6.html.files/datasource-max-pool-size-and-db-max-connections.html'>datasource <tt>max-pool-size</tt>
+        and a database's max connections</a></li>
+      <li>how to create a new user</li>
+      <p>
+        Go to the <tt>bin</tt> directory and execute script <tt>add-user.sh</tt>.
+      </p>
+      <p>&hellip; you will then observe a new or modified file <tt>mgmt-users.properties</tt>
+in the <tt>standalone/configuration</tt> directory containing the username and the hashed password.
+      </p>
+      <li id='connection-pool-timeout-params'>connection pool timeout parameters</li>
       <p>
         <a href='https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/6.2/html-single/administration_and_configuration_guide/index#Topic2772-timeout'>source</a>
         <p>Of the timeout parameters that appear below, the following are of particular

@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link type="text/css" rel="stylesheet" href="../mperdikeasgithub.css"/>    
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <h1>Interplay between datasource configuration and a database's max connections</h1>
+    <p>
+      <span class='nb'>NB:</span> this is likely application-server agnostic stuff.
+    </p>
+    <p>There are different failure modes involved based on the relation between:
+      <ul>
+        <li>the value of the <tt>max-pool-size</tt> configured for a datasource</li>
+        <li>a database's configured max connections</li>
+      </ul>
+      It may seem confusing at first but eventually it makes perfect sense.
+    </p>
+    <p>
+      Let's assume a scenario of having a number of threads more than the datasource's <tt>max-pool-size</tt> asking for a connection at the exact same time. Or equivalently asking for a connection within a couple of seconds and each holding long running transactions.
+    </p>
+    <p>This, in itself will not result in failure. Effectively each datasource implements a FIFO queue and so
+      if a thread asks for a connection and it so happens that currenty all the connections of the pool are busy, the call
+      to <code>getConnection</code> on the <a href='https://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html'>DataSource</a>
+      object will simply block. I.e. no exception or error will be thrown at that point in time. The thread asking for the connection
+      will simply have to wait a little longer before obtaining a connection and doing its thing.
+    </p>
+    <p>If, however, none of the other connections return to the pool anytime soon (e.g. because they are running long transactions), then eventually,
+      an exception <b>will</b> be thrown, when the blocking time exceeds the <tt>blocking-timeout-millis</tt> parameter (see
+      <a href='../jboss-eap-6.html#connection-pool-timeout-params'>this note</a>).
+    </p>
+    <p>The above is all nice and well and very reasonable. Nobody could expect anything different</p>
+    <p>Note that under no circumstances should the <tt>max-pool-size</tt> parameter exceed the number of max connections
+      configured in the database. This makes no sense and can result in <b>immediate</b> failure if more than <i>max connections</i>
+      thread request a connection from the datasource simultaneously. I stress that the failure will be immediate without having to wait
+      for the configured value of <tt>blocking-timeout-millis</tt>. This, too, makes perfect sense. The reasoning is that the
+      datasource detects that something is wrongly configured as it cannot obtain more connections from the database and yet it hasn't
+      reached its cap (the <tt>max-pool-size</tt> limit).
+    </p>
+    <p>To explore the different failure modes I wrote some testing code. The following definitions apply:
+      <dl>
+        <dt>P</dt><dd>max pool size configured for the datasource</dd>
+        <dt>D</dt><dd>max open connections in the database</dd>
+        <dt>T</dt><dd>number of threads</dd>
+      </dl>
+      It is assumed that each thread executes a very lengthy transaction.
+    </p>
+    <h2>Scenario 1</h2>
+    <b>P &lt; D and T &gt; P</b>
+    <p>
+      Outcome: I get <tt>IJ000453</tt> caused by <tt>IJ000655</tt>.
+      <dl>
+        <dt>IJ000453:</dt><dd>Unable to get managed connection for java:jboss/datasources/proposal</dd>
+        <dt>IJ000655:</dt><dd>No managed connections available within configured blocking timeout (30000 [ms])</dd>
+      </dl>
+    </p>
+    <p>
+      This happens after some time (a bit more than the configured blocking timeout).
+    </p>
+    <p>Notice how the wording of <tt>IJ000655</tt> beautifully concurs with the intuitive mental model of how datasources / pools ought to work.</p>
+    <h2>Scenario 2.</h2>
+    <b>P &gt; D and T &gt; D</b>
+    <p><i>this is really a misconfiguration as explained above</i> because you should nevel really have <b>P &gt; D</b></p>
+    <p>
+      Outcome: I get <tt>IJ000453</tt><br/>
+      ... caused by <tt>IJ000658</tt>: Unexpected throwable while trying to create a connection: null<br/>
+      ... caused by <tt>javax.resource.ResourceException</tt>: Could not create connection<br/>
+      ... caused by <tt>java.sql.SQLException: JZ00L</tt>: Login failed.  Examine the SQLWarnings chained to this exception for the reason(s).
+      <br/>
+    </p>
+    <p>
+      This happens almost immediately as explained above.
+    </p>
+  </body>
+</html>
+
+
