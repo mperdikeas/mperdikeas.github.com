@@ -57,9 +57,15 @@ To check out the original branch and stop rebasing, run "git rebase --abort". </
       </pre>
       
       <li>finding common ancestor between current branch and some other branch</li>
+      <p>
       If the "other" branch is "master" you can do a:
       <pre>git merge-base HEAD master</pre>
       (the operation is obviously commutative)
+      </p>
+      <p>
+        The following can also serve to graphically show the branch point:
+        <pre>git log --graph --oneline --all</pre>
+      </p>
       <li>how to stash untracked files without having to stage them</li>
       <pre>git stash save -u</pre>
       <li>examining file differences in commits</li>
