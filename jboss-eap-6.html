@@ -27,7 +27,12 @@ in the <tt>standalone/configuration</tt> directory containing the username and t
             <li>idle-timeout-minutes</li>
           </ul>
           &hellip; alongside of course with the <i>min-pool-size</i>, <i>max-pool-size</i> which are confiugred for each pool.
-          Also, <i>prefill</i> and <i>use-strict-min</i> may in some cases affect things.
+        </p>
+        <p>
+          Also, <i>prefill</i> and <i>use-strict-min</i> may in some cases affect things. According to <a href='https://access.redhat.com/solutions/457243'>this paywalled link</a>:
+          <blockquote>
+            When use-strict-min is set to true, the idle connection scan will not mark for closure any further connections once the <i>min-pool-size</i> (<i>in-use</i> + <i>available</i> connections) has been reached.
+          </blockquote>
         </p>
 
         <p><strong>Timeout parameters</strong></p>
