@@ -103,10 +103,12 @@ sp_helptext &lt;rule-name&gt;</pre>
     The below (in sqsh) will show all users connected to database <i>somedatabase</i> together
     with the header row for additional information:
     <pre>sp_who; | grep 'somedatabase\|threadpool'</pre>
-    <li>show a table's constraints</li>
+    <li>show a table's constraints (e.g. foreign keys)</li>
     In sqsh:
     <pre>
 sp_helpconstraint &lt;table-name&gt;;</pre>
+    &hellip; the above will show all foreign keys both originating from this table and
+    pointing to this table.
     <li>Sybase Datetime to Unix epoch</li>
     <p>
       Note first of all that Sybase is totally oblivious to time zones. It
@@ -259,9 +261,9 @@ sp_helpconstraint &lt;table-name&gt;;</pre>
     <dl class='one-line one-line-25-75'>
       <dt>show information on databases</dt><dd><code>sp_helpdb</code></dd>      
       <dt>show a lot of information on a table</dt><dd><code>sp_help sometablename</code></dd>
-      <dt>show the columns of a table</dt><dd><code>sp_cols sometable</code></dd>      
-      <dt>show privilleges of user</dt><dd><code>sp_helprotect mperdike</code>&nbsp;&mdash;&nbsp;LLNote: this only works in the <i>axafusers</i> database</dd>
-
+      <dt>show the columns of a table or a SP</dt><dd><code>sp_cols sometable</code></dd>
+      <dt>show privilleges of user</dt><dd><code>sp_helprotect &lt;username&gt;</code></dd>
+      <dt>show permissions on object</dt><dd><code>sp_helprotect &lt;object&gt;</code> (same SP as above, it can polymorphically accept as an argument either the name of an object or the name of a user)</dd>
       <dt>show tables</dt><dd><code>sp_ls</code></dd>
       <dt>show tables and views</dt><dd><code>sp_ls a</code></dd>      
       <dt>show tables sorted</dt><dd><code>sp_lsn</code></dd>
