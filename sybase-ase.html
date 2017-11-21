@@ -4,6 +4,30 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>ANSI treatment of NULL values in comparisons</li>
+    <p>
+      Sybase as well as the equally abominable SQL Server don't treat NULLs according to the ANSI SQL standard by default. In Sybase, you'd have to explicitly set the <tt>ansinull</tt> setting to make sure you have a sound environment. This can be set on a connection basis but I suppose the default can also be configured globally somehow.
+    </p>
+    <pre>
+[1] sqldev> set ansinull on;
+[2] sqldev> select count(*) from some_table WHERE some_column = null;
+
+ -----------
+           0
+
+(1 row affected)
+[3] sqldev> select count(*) from some_table WHERE some_column IS null;
+
+ -----------
+        2990
+
+(1 row affected)
+[4] sqldev> set ansinull off;
+[5] sqldev> select count(*) from some_table WHERE some_column = null;
+ -----------
+        2990
+    </pre>
+
     <li id='schemas-and-sybase-table-access-notation'>Schemas, users and the <tt>dbname.username.tablename</tt> notation</li>
     <p>
     Sybase ASE does not have a proper schema concept. Instead it conflates the concept of a user with that of the schema. Tables are thought to be owned by the user who created them. See <a href='https://stackoverflow.com/a/34725708/274677'>this SO answer</a> on the topic. As such the notation <tt>dbname.username.tablename</tt> is used with the meaning "<i>table <tt>tablename</tt> owned by user <tt>username</tt> in the database <tt>dbname</tt></i>"
