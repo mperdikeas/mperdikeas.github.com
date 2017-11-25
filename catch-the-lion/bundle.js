@@ -56532,7 +56532,7 @@
 	                'special-link-disabled': !enabled
 	            });
 	        }
-	        var linksEnabled = this.props.aiSide !== this.props.movingSide;
+	        var linksEnabled = this.props.aiSide !== this.props.movingSide || this.props.winner !== null;
 	        var styleForLinks = styleForLinksF(linksEnabled);
 	        console.log('rendering control panel with style for links: ' + styleForLinks);
 	        var style = { backgroundColor: '#7f8c8d', color: 'blue', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' };
