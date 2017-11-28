@@ -5,6 +5,24 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>sound issues in Ubuntu 16.04</li>
+      <p>I recently (Autumn 2017) lost sound in two separate occassions, on two separate machines
+        (Ubuntu 14.04 and Ubuntu 16.04). I managed to restore sound
+        with the following two methods:</p>
+      <ul>
+      <li>In the first case (Ubuntu 14.04) by opening the <tt>gnome-control-center</tt> and playing with the
+        audio settings.</li>
+      <li>In the second case (Ubuntu 16.04) the <tt>gnome-control-center</tt> <a href='https://askubuntu.com/a/634645/89663'>only displayed a few icons</a> (not including any audio controls). In that case I managed
+        to restore sound by using the <tt>pavucontrol</tt> program (tab <i>Output Devices</i>, port <i>Speakers</i>)
+      </li>
+      </ul>
+      <p>In both cases I tried playing with the <tt>alsamixer</tt> dB gains settings but that didn't fix
+        my problem.
+      </p>
+      <p>
+        To verify the solutions I used:
+        <pre>play /usr/share/sounds/alsa/Front_Center.wav</pre>
+      </p>
       <li>how to encrypt PDF files in Ubuntu</li>
       (<a href='https://askubuntu.com/a/258867/89663'>source</a>) &mdash; the following worked on Ubuntu 16.04 in 2017:
       <pre>
