@@ -4,6 +4,33 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>how to remove a Personal Package Archive (PPA) and any packages updated / installed by it</li>
+    <p>
+    In November 2017 I installed Emacs 25 on Ubuntu 16.04 by first installing a PPA (as described <a href='#install-emacs25-ubuntu-16.04'>here</a>). It was working fine, but I subsequently decided to unistall it and to remove the PPA I had installed for that purpose alone.
+    </p>
+    <p>Normally, I would purge the package and remove the PPA. Turns out there's a safer and cleaner approach that allows you to remove a PPA <b>and</b> at the same time gracefully downgrade any pacages it updated (over the official repositories) or any packages installed by it. This alternative is the program <i>ppa-purge</i>. I read about it <a href='https://askubuntu.com/a/310/89663'>here</a>.
+    </p>
+    <p>
+      So that's what I did in two simple commands:
+      <pre>
+sudo apt-get install ppa-purge
+sudo ppa-purge ppa:kelleyk/emacs</pre>
+          &hellip; after the above, <i>emacs25</i> was no more (without having to explicitly <i>apt-remove</i> it)
+    </p>
+    <p>Note that the following file:
+      <pre>/etc/apt/sources.list.d/kelleyk-ubuntu-emacs-xenial.list</pre>
+      &hellip; continued to exist after the above procedure, but all its lines were commented out.
+    </p>
+    <li id='install-emacs25-ubuntu-16.04'>how to install emacs25 on Ubuntu 16.04</li>
+    <a href='https://askubuntu.com/a/851646/89663'>source</a>
+    <p>
+      In November 2017 I followed the below procedure to install Emacs 25 on my Ubuntu 16.04 ThinkPad T420 machine:
+    </p>
+<pre>
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt-get update
+sudo apt-get install emacs25
+</pre>
     <li>quick test to see if the locally configured SMTP MSA (Mail Submission Agent) is working</li>
     <p>
       This can be helpful when trying to troubleshoot programmatic MUA (e.g. using the <tt>javax.mail.Transport</tt>
