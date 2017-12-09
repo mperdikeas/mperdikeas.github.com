@@ -33,6 +33,10 @@ in the <tt>standalone/configuration</tt> directory containing the username and t
           <blockquote>
             When use-strict-min is set to true, the idle connection scan will not mark for closure any further connections once the <i>min-pool-size</i> (<i>in-use</i> + <i>available</i> connections) has been reached.
           </blockquote>
+          In another article we read:
+          <blockquote>
+            By default, datasource connection pools are filled lazily. Set the value for the <prefill> attribute to true to fill the pool with &lt;min-pool-size&gt; connections (defaults to 0) at start-up.
+          </blockquote>
         </p>
 
         <p><strong>Timeout parameters</strong></p>
