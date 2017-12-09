@@ -72,8 +72,7 @@
 	function doStuff() {
 	    _reactDom2.default.render(_react2.default.createElement(_game2.default, {
 	        key: key++,
-	        reset: doStuff,
-	        foo: '42'
+	        reset: doStuff
 	    }), $('#app')[0]);
 	}
 
@@ -19849,7 +19848,6 @@
 
 	    propTypes: {
 	        reset: React.PropTypes.func.isRequired
-	        //        foo    : React.PropTypes.string.isRequired
 	    },
 	    mixins: [_reactTimerMixin2.default],
 	    getInitialState: function getInitialState() {
@@ -19870,7 +19868,7 @@
 	            _sounds.sounds.currentlyPlaying.sound.stop();
 	            _sounds.sounds.currentlyPlaying.sound = null;
 	        }
-	        if (!this.props.firstGame) _sounds.sounds.newGame();
+	        _sounds.sounds.newGame();
 	        /* -- this is how to implement a timer
 	        const intervalId = this.setInterval(
 	            () => {
