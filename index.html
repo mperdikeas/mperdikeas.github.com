@@ -60,9 +60,9 @@
       <!--
            <li><a href="https://github.com/mperdikeas/playground">playground projects</a> working with various technologies (to explore and exemplify how stuff works)</li>
          -->
-      <li><a href="https://github.com/mperdikeas/archetypes">archetype projects</a> starter projects / setups for various
-        technologies (like <i>playground</i> but less exploratory, more stable and meant to be actually used to bootstrap
-        projects)
+      <li><a href="https://github.com/mperdikeas/archetypes">archetype projects</a> starter / bootstrap projects and setups for various
+        technologies.<!-- (like <i>playground</i> but less exploratory, more stable and meant to be actually used to bootstrap
+        projects) -->
       </li>
       <!--li><a href="https://github.com/mperdikeas/java-mutil">a collection of pre-Java 7 utilities</a>
            <b>NB: </b>not actively maintained any more - I've also moved to a much better Ant/Ivy <tt>build.xml</tt> template and workflow
@@ -80,8 +80,12 @@
               <li><a href='https://github.com/mperdikeas/js-react-catch-the-lion'>github repo for the main game</a></li>
               <li><a href='https://github.com/mperdikeas/js-ai-for-shogi-like-games'>github repo for the AI library (based on the Minimax algorithm)</a></li>
             </ul>
-            The current version of the game doesn't have sound. I am also presently working on an improved (and more generic) implementation
-            of the <a href='https://en.wikipedia.org/wiki/Minimax'>Minimax algorithm</a> that will also do <a href='https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning'>Alpha-beta pruning</a>. Future games will be based on the new Minimax library.
+            Note: I recently released <a href='https://www.npmjs.com/package/minmax-wt-alpha-beta-pruning'>minmax-wt-alpha-beta-pruning</a> which is a much improved, generic (can be used with any game) implementation
+            of the minmax algorithm that also employs the alpha-beta pruning optimization. In contrast, the
+            AI library for this game does not perform alpha-beta pruning and, most importantly, does not cleanly
+            separate the minmax algorithm from the game rules and game state evaluation logic that's specific
+            to this game.
+            Future games will be based on my new minmax library.
           </li>          
           <li><a href='./stack-piling-and-tumbling/index.html'>Stacks of grain piling and tumbling</a>
             <ul>
@@ -110,13 +114,16 @@
         </ul>
       </li>      
     </ul>
+    <!--
     <h3>My npm-published modules</h3>
     <a href='https://www.npmjs.com/~marcusjuniusbrutus'>marcusjuniusbrutus on npmjs.com</a>
-
+    -->
     <div style='margin: 1em'><hr/></div>
-    <p>What follows is an uncurated, motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
-      over the years and posted here for the benefit of my future self (and as such unlikely to be useful to anyone else):
-    </p>    
+    <p>What follows is an <b>uncurated</b>, motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
+      over the years and posted here for the benefit of my future self (and, as such, unlikely to be useful to anyone else).</p>
+    <p style='color: red'>Proceed and read beyond the line below at your own peril.
+    </p>
+    <hr style='border:solid #ff0000 2px; width: 100%'>
 
     <h2>Linux:</h2>
     <ul>
@@ -166,6 +173,17 @@
           <li><a href="spa-rest.html">SPA and REST</a></li>
           <li><a href="x-forwarded.html">X-Forwarded and proxies</a></li>
         </ul>        
+      </div>
+    </div>
+    <div>
+      &nbsp;
+    </div>
+    <div class='horiz-col'>
+      <div>
+        <h3>Generic</h3>
+        <ul>
+          <li><a href='web-stress-testing-wt-python-poster.html'>Python stress tests</a></li>
+        </ul>
       </div>
       <div style='padding-left: 1em;'>
         <h3>Trivia</h3>
@@ -242,6 +260,7 @@
     </ul>
     <h2>Sui-generis notes:</h2>
     <a href="web-productivity.html">the Pythonic live-reload</a>
+    <a href='http://www.clker.com/inc/svgedit/svg-editor.html'>online SVG editor</a>
     <h2>Miscellaneous</h2>
     <ul>
       <li><a href="life-hacks.html">life hacks</a></li>
