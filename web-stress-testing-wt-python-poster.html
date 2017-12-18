@@ -17,5 +17,15 @@
       To install <i>poster</i> on my Ubuntu 16.04 machine, I downloaded its Python 2.7 egg from <a href='https://atlee.ca/software/poster/index.html'>here</a> and then did:
       <pre>sudo easy_install poster-0.8.1-py2.7.egg</pre>
     </p>
+    <p>
+      If you can't install it, I've found that the following also works:
+
+      <pre>
+#!/usr/bin/env python
+import sys
+sys.path.append('/absolute/path/to/the/egg/poster-0.8.1-py2.7.egg')
+from poster.encode        import multipart_encode
+from poster.streaminghttp import register_openers</pre>
+    </p>
   </body>
 </html>
