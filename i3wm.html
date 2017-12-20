@@ -5,6 +5,16 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to show all icons in the Unity control center</li>
+      <p>
+      When running <i>i3wm</i>, if you launch the Unity control center with:
+      <pre>unity-control-center</pre>
+      &hellip; you only see 3 icons: Language Support, Printers and Software & Updates.
+      </p>
+      <p>To see all icons (e.g. including sound, power management etc.)
+        do:
+        <pre>unset XDG_CURRENT_DESKTOP; unity-control-center</pre>
+      </p>
       <li>get rid of the Nautilus desktop window</li>
       The solution given <a href='https://faq.i3wm.org/question/1/how-can-i-get-rid-of-the-nautilus-desktop-window.1.html'>here</a>
       does not work on Ubuntu 16.04. Instead I tried:
