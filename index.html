@@ -71,7 +71,7 @@
 
     </ul>
     <h2>JavaScript</h2>
-    <h3>games I've developed (most of them should be played with sound)</h3>
+    <h3>games I've developed (tested on Chrome &mdash; should be played with sound for best experience)</h3>
     <ul>
       <li>Using <a href='https://facebook.github.io/react/'>React</a>:
         <ul>
@@ -81,10 +81,11 @@
               <li><a href='https://github.com/mperdikeas/js-ai-for-shogi-like-games'>github repo for the AI library (based on the Minimax algorithm)</a></li>
             </ul>
             Note: I recently released <a href='https://www.npmjs.com/package/minmax-wt-alpha-beta-pruning'>minmax-wt-alpha-beta-pruning</a> which is a much improved, generic (can be used with any game) implementation
-            of the minmax algorithm that also employs the alpha-beta pruning optimization. In contrast, the
+            of the minmax algorithm that employs the alpha-beta pruning optimization. In contrast, the
             AI library for this game does not perform alpha-beta pruning and, most importantly, does not cleanly
             separate the minmax algorithm from the game rules and game state evaluation logic that's specific
-            to this game.
+            to this game. It also fails to quickly recognize victory end states and foolishly waits until all
+            other game tree leaf nodes are evaluated (the alpha-beta optimization addresses that, among other things).
             Future games will be based on my new minmax library.
           </li>          
           <li><a href='./stack-piling-and-tumbling/index.html'>Stacks of grain piling and tumbling</a>
@@ -121,7 +122,7 @@
     <div style='margin: 1em'><hr/></div>
     <p>What follows is an <b>uncurated</b>, motley crew collection of <a href="http://www.urbandictionary.com/define.php?term=TIL">TIL</a>s and notes I've added
       over the years and posted here for the benefit of my future self (and, as such, unlikely to be useful to anyone else).</p>
-    <p style='color: red'>Proceed and read beyond the line below at your own peril.
+    <p style='color: red'>Content below the red line is basically my scratchpad.
     </p>
     <hr style='border:solid #ff0000 2px; width: 100%'>
 
