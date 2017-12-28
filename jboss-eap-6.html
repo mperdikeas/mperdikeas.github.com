@@ -9,6 +9,7 @@
     <h1 style='font-size: 110%'>JBoss EAP 6 notes</h1>
     <ol reversed class='main-list-items'>
       <li>how to enable access logging</li>
+      <a href='https://access.redhat.com/solutions/185383'>source</a>
       <p>
       To enable access logging I recently had to add the following line:
       <pre>
@@ -25,6 +26,9 @@
         &lt;access-log pattern="%h %l %u %t %r %s %b %{Referer}i %{User-Agent}i %S %T"/&gt;
     &lt;/virtual-server&gt;
 &lt;/subsystem&gt;</pre>
+      </p>
+      <p>
+        By default, access logging is output under <tt>${jboss.server.log.dir}/default-host</tt> i.e. under <tt>$JBOSS_HOME/standalone/log/default-home</tt>
       </p>
       <li><a href='jboss-eap-6.html.files/datasource-max-pool-size-and-db-max-connections.html'>datasource <tt>max-pool-size</tt>
         and a database's max connections</a></li>
