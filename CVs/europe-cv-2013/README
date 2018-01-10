@@ -1,0 +1,10 @@
+Requires the following package to be installed:
+
+    https://github.com/leinardi/europecv2013.git
+
+How to install it on *nix:
+
+    mkdir -p ~/texmf/tex/latex/
+    cd ~/texmf/tex/latex/
+    git clone 
+
