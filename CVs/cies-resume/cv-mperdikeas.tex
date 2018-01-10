@@ -35,14 +35,14 @@
 %	NAME AND CONTACT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\maintitle{Menelaus Perdikeas}{%December 24, 1974
+\maintitle{Menelaos Perdikeas}{%December 24, 1974
 }  % Your name and date of birth or subtitle
 
 \noindent\href{mailto:mperdikeas@gmail.com}{mperdikeas@gmail.com}\bull % Your email address
 %\textsmaller{+}30 (210) 5322914\bull
 menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype username
 \href{http://mperdikeas.github.com}{mperdikeas.github.com}\\ % Your URL
-11, Dimitras st.\bull Ag. Paraskeuh, 15342\bull Athens\bull Greece % Your address
+7 Milton St., Arlington MA 02474, United States % Your address
 
 \spacedhrule{0.9em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
 
@@ -57,21 +57,26 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
 \begin{multicols}{2}  % Start a two-column layout
   \noindent
   %\textit{A summary of your interests, achievements, history, topic of study or any other short summary of your professional life.}\\\\
-  I have been coding in Java since version 1.1 came out in 1997. Over the years I have written more than 300K
-  LoC in Java and have explored a wide array of technologies and frameworks in the landscape. 
+  I am a full stack software engineer able to design and code all layers of a modern application: browser, application server, database.
+  I have worked with a variety of technologies in all tiers. In the browser: from vanilla HTML/CSS/JavaScript, jQuery to using UI component
+  libraries like jQuery UI or DHTMLX, to Webpack / ReactJS. In the application server I've experience with a Java stack
+  deployed in Tomcat or JBoss servers with both presentation oriented (Spring Web MVC / JSP) and
+  service-oriented (JAX-RS, SOAP, Restlet, Jersey, RESTEasy) applications. In the database I have experience with Sybase, Oracle,
+  MySQL and PostgreSQL databases.
   I am a proficient Emacs user (with an Emacs setup that I've honed over the years for maximum productivity)
   and I like to live as close to the command line as possible
   (though I can of course also use an IDE
-  if required). I have worked commercially in practically the entire
-  stack from front-facing web services, rich client applications, server-side Java code all the way to the back-end relational
+  if required). I have coded professionally in the entire
+  stack from rich or lightweight client applications, front-facing web applications, back-end web services all the way to the 
   database. I am also typically involved in devops stuff as well. That is, in addition to writing the code I can
-  handle the build system (Ant / Ivy), test cases, coding standards, compliance checking, code coverage,
+  handle the build system (Ant / Ivy), unit testing, static code analysis, coding standards and automatic compliance checking, code coverage,
   integration testing, shell-scripting, etc.
-  HTML in the browser is the only part of the stack where I haven't worked in a professional capacity
-  though I am very proficient in JavaScript-the-language (ECMAScript 6) including
-  the Node and Babel ecosystem and have
-  experience in HTML/CSS3/JavaScript in the browser (using WebPack etc.) 
-  (check my \href{http://mperdikeas.github.com}{my github page} for some sandbox projects)\hairspace{}---\hairspace{}I am also currently exploring ReactJS in my free time.
+  I am also proficient  in JavaScript-the-language (ECMAScript 6) including
+  the Node / Babel / Webpack ecosystem and the Mocha / FlowType tools.
+  In my free time I study Math and develop JavaScript games which you can play at:
+  \href{https://mperdikeas.github.com/games.html}{https://mperdikeas.github.com/games.html}.
+
+  %\hairspace{}---\hairspace{}I am also currently exploring ReactJS in my free time.
 
 \end{multicols}
 
@@ -82,6 +87,77 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
 %----------------------------------------------------------------------------------------
 
 \roottitle{Experience} % Top level section
+
+\headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
+    {\href{https://www.cfa.harvard.edu/}{Harvard-Smithsonian Center for Astrophysics}} {
+
+
+\headedsubsection % Job title entry for the current employer
+{SW Application Specialist (developer)}
+{October '16 -- now}
+{\bodytext{I am a member of the Data Archive team in the High Energy Astrophysics Division of the CfA (Center for Astrophysics),
+    at the Smithosonian Astrophysical Observatory (Cambridge MA). I am coding primarily in Java and JavaScript but also in Python.
+  Projects and accomplishments in this position:
+  \begin{itemize}
+  \item Designed and implemented a test suite for both the front-end (presentation-oriented) and the back-end (service-oriented)
+    components of the new Chandra Proposer system (this is the system to be used by researchers wishing to submit proposals for
+    use rights on the Chandra X-Ray telescope). The test suite allows us to simulate a large number of concurrent users
+    interacting with the web site and is used to stress-test both the web application itself and also the login functionality
+    offered by the SSO mechanism
+    (see below)
+    \technologies Python 2.7 (with the Requests library), Java
+  \item Designed and implemented the signup and edit profile pages for the new Chandra Proposer system. \\
+      \technologies{} HTML/CSS/DHTMLX/JavaScript, Java, Spring Web MVC, JSP, JAX-RS (RESTEasy), Sybase.    
+  \item Designed and implemented an SSO (Single-Sign On) solution loosely based on the
+    \href{https://en.wikipedia.org/wiki/Central_Authentication_Service}{CAS protocol}. The system provides
+    an \href{https://en.wikipedia.org/wiki/Role-based_access_control}{RBAC}-based Authorization
+    and Authentication in a uniform manner for all participating applications. It also supports all features
+    taken for granted in a modern authentication system (salted and peppered cryptographic hashes, auditing, etc.). \\
+      \technologies{} HTML/CSS/DHTMLX/JavaScript, Java, JSP, JAX-RS (RESTEasy), Sybase.
+    
+    \item Proactively advocated and implemented a new team-wide build system for Java WAR
+      and JAR applications and libraries . The new build system is based on Ant and Ivy
+      (with a local file-system based repository) and guarantees
+    fully reproducible builds with no Internet connectivity requirements (i.e. no dependencies are accessed or downloaded during
+    the build). The new build system
+    additionally includes the following features: (a) integrated testing (via JUnit) (b) detection of bugs by means
+    of static code analysis using two different but complementary solutions: FindBugs and PMD (c) style checker using
+    CheckStyles to ensure code styling conformance. \\
+      \technologies{} Ant, Ivy, FindBugs, PMD, CheckStyles
+  \end{itemize}
+
+
+}}
+}
+
+
+      
+
+\headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
+    {\href{http://www.esac.com}{ESAC} (through \href{http://www.neuropublic.gr}{Neuropublic})} {
+
+\headedsubsection % Job title entry for the current employer
+{Lead Programmer and Technical Project Manager}
+{February '16 -- September '16}
+{\bodytext{I was the lead coder and technical project manager for the RAWDAR/RADACER project which aimed
+    to create a data clearing house for the telemetry of a large number (upwards of 12) of European Space Agency
+    missions. The work took place for the {\href{http://www.esac.com}{ESAC}} establishment though, unlike, the previous project work was
+    mostly off-site.
+
+  In this project:
+  \begin{itemize}
+    \item I studied telemetry and telecontrol standards for recent ESA missions.
+    \item coded a library to decode BSCS telemetry files for the BepiColombo mission telemetry format. This was done mostly to gain
+      familiarity with the subject domain and the relevant standards.
+    \item designed and implemented a prototype REST interface to be exposed by the unified data archive.
+    \item designed and implemented the database and the REST server back-end of a graphical web application that displays statistics
+      on the accumulated telemetry for the various missions.
+  \end{itemize}
+  \technologies{} Java, ReactJS, JAX-RS, PostgreSQL 9.2, PL/pgSQL, JDBC, SQL.
+
+}}
+
+}
 
 \headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
     {\href{http://www.esac.com}{ESAC} (through \href{http://www.neuropublic.gr}{Neuropublic})}
@@ -158,8 +234,8 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
       The system finally informs the user which subsidies (s)he can apply for and also creates
       a visual diagram that explains to the users why they failed to qualify for certain subsidies.
       S-expressions were used in order to allow for dynamic evaluation and also because the company wanted
-      the DSL logic / script to be created by business people. So S-expression were chosen
-      as Lisp has no other syntax except the opening and closing parenthesis.\\
+      the DSL logic / script to be created by business people. Therefore, Lisp S-expressions were chosen
+      for their reduced mental baggage, as Lisp requires one to use no syntax except for opening and closing parenthesis.\\
       \technologies{} \href{https://clojure.org/}{Clojure} (for
       the dynamic evaluation of the S-expressions), dynamic evaluation of Clojure code from Java,
       \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{DOT} (for visualizing
@@ -350,7 +426,7 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
     and awarding an engineering diploma after 5 years of studies.
     I entered 1\ts{st} in rank after a nationwide competitive examination and finished 2\ts{nd} in rank
     (class size \textasciitilde{150}).
-    Coded various applications in technologies like Pascal, Lisp, C and Java.
+    Coded various applications in Pascal, Lisp, C and Java.
     }}
 }
 
@@ -365,14 +441,15 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 
 \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
 {Technical specialties:}
-{Software design and implementation, alone or in a team. I am a professional Java coder but also love
-  and have written production code in C, C++ and (more recently) Python and Clojure.
-  Also, non-production code in JavaScript and OCaml. I am very comfortable
+{Software design and implementation, alone or in a team. I am a professional Java / JavaScript coder but 
+  have also written production code in C, C++ and (more recently) Python and Clojure.
+  Also, non-production code in OCaml. I am very comfortable
   at the command line and casually write Bash one-liners daily.
- Solid knowledge of the following technologies: Java 7, JDBC, \acr{XML}, \acr{XPath}, \acr{XSD}, \acr{REST}, \acr{SOAP}, RDBMSs,
-  bare-bones JavaScript.
-  Linux administration skills:\ bash, Apache Tomcat,
-  Postgres\acr{SQL}}
+  \underline{Solid knowledge of the following technologies}: Java 7 (SE and EE), Ant/Ivy, HTML/CSS/JavaScript (ECMAScript 2016), ReactJS, Spring Web MVC,
+  \acr{XML}, \acr{XPath}, \acr{XSD}, \acr{REST}, \acr{SOAP}, relational databases (Sybase, Oracle, MySQL, PostgreSQL).
+  \underline{Administration skills}:\ Linux administration, Bash scripting, Apache Tomcat, JBoss, PostgresSQL.
+  \underline{Source control}: ClearCase, Subversion, Git.
+}
 
 \inlineheadsection{}{}
 %------------------------------------------------
@@ -405,12 +482,19 @@ Available upon request.
 \spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
 
 %----------------------------------------------------------------------------------------
-%	REFERENCES SECTION
+%	PUBLICATIONS SECTION
 %----------------------------------------------------------------------------------------
 
 \roottitle{Publications} % Top level section
-\paragraph{Books and reference works}
 
+  \paragraph{International Standards}
+  \begin{description}
+  \item[2015] Markus Demleitner, Paul Harrison, Marco Molinaro, Gretchen Greene, Theresa Dower, Menelaos Perdikeas,
+    ``IVOA Registry Relational Schema'' International Virtual Observatory Alliance. Latest version available at:
+    \href{http://www.ivoa.net/documents/RegTAP/}{http://www.ivoa.net/documents/RegTAP/}
+  \end{description}
+
+  \paragraph{Books and reference works}
   \begin{description}
   \item[2001] Iakovos S. Venieris, Menelaos K. Perdikeas
     \href{http://onlinelibrary.wiley.com/doi/10.1002/0471219282.eot257/full}{``Distributed Intelligent Network''} article in the
@@ -418,14 +502,16 @@ Available upon request.
   \item[2000] Co-author in \href{http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0471623792.html}{``Object Oriented Software Technologies in Telecommunications: from theory to practice''}, edited by I.Venieris, F.Zizza, T. Magedanz. Published by John Wiley \& Sons LTD, Chichester, UK, April 2000.
   \item[1999] M. K. Perdikeas, O. I. Pyrovolakis, F. G. Chatzipapadopoulos and I. S. Venieris, ``Service Design in Distributed Intelligent Networks'' in ``On the Way to the Information Society --- A Retrospective View on 5 Years of ACTS IS\&N Research'' Baltzer press, 1999.
   \end{description}
-  \paragraph{Papers in International Journals}
+
+  
+  \paragraph{Papers in International, peer-reviewed Journals}
   \begin{description}
   \item[2001] M.K. Perdikeas and I.S. Venieris,  ``Parlay-based Service Engineering in a Converged Internet-PSTN Environment'' \href{http://www.sciencedirect.com/science/journal/13891286}{Computer Networks (Elsevier)},
     vol. 35, Issue 5, April 2001, pp. 565--578
   \item[2000]F. G. Chatzipapadopoulos, M. K. Perdikeas and I. S. Venieris, ``Mobile Agent and CORBA Technologies in the Broadband Intelligent Network'', \href{http://www.comsoc.org/commag}{IEEE Communications Magazine.}, Vol. 38, Issue 6, pp. 116--124
     \item[1999] M.K. Perdikeas, F.G. Chatzipapadopoulos, I.S. Venieris and G. Marino, ``Mobile Agent Standards and Available Platforms'', \href{http://www.sciencedirect.com/science/journal/13891286}{Computer Networks (Elsevier)}, vol. 31, Issue 19, August 1999, pp. 1999--2016
   \end{description}
-\paragraph{Papers in International Conferences, Workshops etc. (non exclusive list)}
+\paragraph{Papers in International Conferences, Workshops etc. (non-exclusive list)}
 \begin{description}
 \item[2014] Christophe Arviset, Menelaus Perdikeas et al., ``The Euro-VO Registry, re-engineering the back-end'' (\href{http://adsabs.harvard.edu/abs/2015ASPC..495..457A}{link to abstract}) in the \href{http://www.adass2014.org/announcements_en.php}{24\textsuperscript{th} annual conference on Astronomical Data Analysis Software and Systems}, Calgary---Canada
 \item[2011] Theodore Zahariadis, Menelaos Perdikeas, Fotis Chatzipapadopoulos, Javier Lucio Ruiz Andino,
@@ -452,8 +538,8 @@ Available upon request.
 \roottitle{Interests} % Top level section
 
 \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
-{Non-exhaustive:}
-{optimizing my environment, setup and workflow; Emacs, JavaScript, ReactJS, Linux, i3 window manager, \LaTeX; historical reading, Chess, boardgames.}
+{}
+{Optimizing my environment, setup and workflow: Emacs, JavaScript, ReactJS, Linux, i3 window manager, \LaTeX; Math, Chess, boardgames.}
 
 %----------------------------------------------------------------------------------------
 
