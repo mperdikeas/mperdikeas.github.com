@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="keywords" content="Menelaus Perdikeas github page">
+    <meta name="description" content="Menelaus Perdikeas github page">
+    <link rel='icon' href='Marcus_Brutus-favicon.png'/>
+    <link rel="stylesheet" type="text/css" href="./mperdikeasgithub.css">    
+    <style>
+     h1 {
+       color: black;
+     }
+     h2 {
+       font-size: 110%;
+       color: white;
+       background: #888;
+     }
+     h3 {
+       font-size: 103%;
+       color: black;
+       margin: 0;
+     }          
+     dl > dd {
+       font-style: italic;
+     }
+     #misc-non-technical {
+       font-size: 70%;
+     }
+     .horiz-col {
+       display: flex;
+       flex-direction:row;
+     }
+     .horiz-col > div {
+       margin: 0 0.3em;
+       border: 1px solid #bbb;
+       padding: 0 0.3em;
+     }
+    </style>
+    <title>Menelaos Perdikeas games</title>
+  </head>
+
+  <body>
+
+    <h1>
+      <a href="http://stackexchange.com/users/695155">
+        <img src="http://stackexchange.com/users/flair/695155.png" width="208" height="58" alt="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites" title="profile for MarcusJuniusBrutus on Stack Exchange, a network of free, community-driven Q&amp;A sites">
+      </a>
+    </h1>
+
+    Here are some JavaScript games I've developed (tested on Chrome &mdash; should be played with sound for best experience):
+
+    <ul>
+      <li>Using <a href='https://facebook.github.io/react/'>React</a>:
+        <ul>
+          <li><a href='./catch-the-lion/index.html'>Catch the Lion (click to play)</a>
+            <ul>
+              <li><a href='https://github.com/mperdikeas/js-react-catch-the-lion'>github repo for the main game</a></li>
+              <li><a href='https://github.com/mperdikeas/js-ai-for-shogi-like-games'>github repo for the AI library (based on the Minimax algorithm)</a></li>
+            </ul>
+            Note: I recently released <a href='https://www.npmjs.com/package/minmax-wt-alpha-beta-pruning'>minmax-wt-alpha-beta-pruning</a> which is a much improved, generic (can be used with any game) implementation
+            of the minmax algorithm that employs the alpha-beta pruning optimization. In contrast, the
+            AI library for this game does not perform alpha-beta pruning and, most importantly, does not cleanly
+            separate the minmax algorithm from the game rules and game state evaluation logic that's specific
+            to this game. It also fails to quickly recognize victory end states and foolishly waits until all
+            other game tree leaf nodes are evaluated (the alpha-beta optimization addresses that, among other things).
+            Future games will be based on my new minmax library.
+          </li>          
+          <li><a href='./stack-piling-and-tumbling/index.html'>Stacks of grain piling and tumbling</a>
+            <ul>
+              <li><a href='https://github.com/mperdikeas/js-react-stack-piling-and-tumbling'>github repo</a></li>
+            </ul>
+          </li>
+          <li><a href='./tetris/index.html'>Tetris game (click to play)</a>
+            <ul>
+              <li><a href='https://github.com/mperdikeas/js-react-tetris'>github repo</a></li>
+            </ul>
+          </li>
+          <li><a href='./minesweeper/index.html'>Minesweeper game (click to play)</a>
+            <ul>
+              <li><a href='https://github.com/mperdikeas/js-react-minesweeper'>github repo</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      </li>
+      <li>Using the <a href='https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API'>Canvas API:</a>
+        <ul>
+          <li><a href="space-game/foo.html">space invaders game (click to play)</a> (next: add ammo-packs, wave attacks and new weapon types)</li>
+          <!--
+               <li><a href="apps/bouncing-ball/foo.html">bouncing ball</a> (warning: boring)</li>
+             -->
+        </ul>
+      </li>      
+    </ul>
