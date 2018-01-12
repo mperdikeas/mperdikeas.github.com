@@ -26,6 +26,7 @@
 % my own additions to the template - start
 \newcommand{\technologies}[0]{\textbf{\textit{Technologies:}}}
 \usepackage{multicol} % Required for multiple columns of text
+\newcommand{\ts}{\textsuperscript}
 % my own additions to the template - end
 
 \begin{document}
@@ -310,56 +311,122 @@ I was the software architect and lead coder for the
     \technologies{} C++, ASN.1, Java, Oracle, PL-SQL.
                    }                   
                    
-%
-%
-%
-% TODO: I am left to continue with the education and training section
-%
-%
-%
-%
 
 \ecvsection{Education and training}
 
-\ecveducation{1997 -- 2001}{PhD - Thesis Title: `Young People in the Construction of the Virtual University', Empirical research on e-learning}{Brunel University, London United Kingdom}{}{}
+\ecveducation{1997 -- 2001}{PhD - Thesis Title: `Mobile Agent Technologies in a Distributed Environment}{National Technical University of Athens---Department of Electrical and Computer Engineering}{
 
-\ecveducation{1993 -- 1997}{Bachelor of Science in Sociology and Psychology}{Brunel University, London United Kingdom}{
-- sociology of risk\par
-- sociology of scientific knowledge / information society\par
-- anthropology\par
-E-learning and Psychology\par
-- research methods}{}
+}{}
+\ecveducation{1999 -- 2001}{Master of Science in the management of Technical and Economic Systems}             {National Technical University of Athens---Department of Electrical and Computer Engineering}{
+  \par
+   I graduated with a grade of 8.75, 6\ts{th} out of 50 students. My direction was ``Technical Systems Management'' and the title of my graduation thesis was ``Business models for the provision of 4th generation services''.
+}{}
+\ecveducation{1992 -- 1997}{Diploma in Computer Engineering and Informatics (5 year engineering diploma equivalent to Bachelor plus Master)}{University of Patras---Department of Computer Engineering and Informatics}{
+  The Department of Computer Engineering and Informatics at the Univesity of Patras is the oldest school in Greece offering a software engineering curriculum. I entered after highly competitive written exams in which I scored
+  \textbf{1\ts{st}} (nationwide) out of approx. twenty thousand high school graduates for entry in the Greek tertiary education system. I graduated in the shortest allowable time (5 years) \textbf{2\ts{nd}} in my class with a grade of 9.44.
+  \par
+  Some of the subjects were: \par
+  - Computer Systems I and II \par
+  - Structured Programming and Pascal \par
+  - Finite Automata and Formal Languages\par
+  - Discrete Mathematics I and II \par  
+  - Computer Networks I and II \par
+  - Operating Systems I and II \par
+  - Microcontrollers I and II \par    
+  - Distributed Systems I and II \par
+  - Computer Architecture \par
+  - Advanced Architecture Topics \par  
+  - Databases I and II \par
+  - Advanced Data Structures and Graphics \par
+  - Digital Communications \par  
+  - Artificial Intelligence and Expert Systems \par
+
+
+}{}
+
 
 \ecvsection{Personal skills}
 
-\ecvmothertongue[20pt]{English}
+\ecvmothertongue[20pt]{Greek}
 \ecvlanguageheader
-\ecvlanguage{French}{C1}{C2}{B2}{C1}{C2}
-\ecvlastlanguage{German}{A2}{A2}{A2}{A2}{A2}
+\ecvlanguage{English}{C2}{C2}{C2}{C2}{C2}
 \ecvlanguagefooter[10pt]
 
 \ecvitem[10pt]{Communication skills}{
-- team work: I have worked in various types of teams from research teams to national league hockey. For 2 years I coached my university hockey team\par
-- mediating skills: I work on the borders between young people, youth trainers, youth policy and researchers, for example running a 3 day workshop at CoE Symposium `Youth Actor of Social Change', and my continued work on youth training programmes\par
-- intercultural skills: I am experienced at working in a European dimension such as being a rapporteur at the CoE Budapest `youth against violence seminar' and working with refugees.}
+  - team work: I have worked in various types of teams from research teams, development / implementation teams, project management. In 2001 I founded, with 2 other co-founders, a company (Semantix Information Technologies SA) which operated profitably for 11 years before it
+  was acquired / merged in 2012 with the much larger Neuropublic SA.\par
+- intercultural skills: I have lived and worked for substantial periods outside of my native country. I lived in Spain for 2 years working at the European Space Agency (ESAC). For approximately the last year and a half I am living in the United States
+working at the Harvard-Smithsonian Centre for Astrophysics}
 
 \ecvitem[10pt]{Organisational / managerial skills}{
-- whilst working for a Brussels based refugee NGO `Convivial' I organized a `Civil Dialogue between refugees and civil servants at the European Commission 20th June 2002\par
-- during my PhD I organised a seminar series on research methods}
+  - after founding Semantix Information Technologies and while helping the company grow, in addition to my technical work, I undertook a number of managerial duties as  well. These included: hiring, project management, business development, authoring of proposals
+  for research grants and European Research projects in the various EU frameworks and authoring of tenders for national and international bids / competitions (including the authoring of at least 4 successful bids for European Space Agency
+  projects)\par
+}
 
-\ecvitem[10pt]{Computer skills}{Creating pieces of Art and visiting Modern Art galleries. Enjoy all sports particularly hockey, football and running. Love to travel and experience different cultures.}
+\ecvitem[10pt]{Computer skills}{Please see summary section at the beginning of this CV and my work experience}
 
-\ecvitem[10pt]{Other skills}{Creating pieces of Art and visiting Modern Art galleries. Enjoy all sports particularly hockey, football and running. Love to travel and experience different cultures.}
+\ecvitem[10pt]{Other skills}{recreational Math, Chess}
 
-\ecvitem[10pt]{Driving licence}{A, B}
+%\ecvitem[10pt]{Driving licence}{A, B}
 
 
 \bibliographystyle{plain}
 \nobibliography{publications-en}
 
-\ecvsection{ADDITIONAL INFORMATION}
+\ecvsection{PUBLICATIONS}
 
-\ecvitem{Publications}{\bibentry{pub1}}
+% The publications don't seem to work in this package
+% For the time being, to get things going, I am adding the bibliography here manually, but this isn't the right
+% approach. I should find a way to properly use a bibliography in both CV templates. 
+%\ecvitem{Publications}{\bibentry{pub1}}
+\ecvitem{International Standards}{
+  \begin{description}
+  \item[2015] Markus Demleitner, Paul Harrison, Marco Molinaro, Gretchen Greene, Theresa Dower, Menelaos Perdikeas,
+    ``IVOA Registry Relational Schema'' International Virtual Observatory Alliance. Latest version available at:
+    \href{http://www.ivoa.net/documents/RegTAP/}{http://www.ivoa.net/documents/RegTAP/}
+  \end{description}
+  }
+
+\ecvitem{Books and reference works}{
+  \begin{description}
+  \item[2001] Iakovos S. Venieris, Menelaos K. Perdikeas
+    \href{http://onlinelibrary.wiley.com/doi/10.1002/0471219282.eot257/full}{``Distributed Intelligent Network''} article in the
+    \href{http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0471369721.html}{``Encyclopedia of Telecommunications''} ISBN: 0-471-36972, J. Proakis ed. John Wiley. 2002. pp. 719-729.
+    \item[2000] Co-author in \href{http://eu.wiley.com/WileyCDA/WileyTitle/productCd-0471623792.html}{``Object Oriented Software Technologies in Telecommunications: from theory to practice''}, edited by I.Venieris, F.Zizza, T. Magedanz. Published by John Wiley \& Sons LTD, Chichester, UK, April 2000.
+  \item[1999] M. K. Perdikeas, O. I. Pyrovolakis, F. G. Chatzipapadopoulos and I. S. Venieris, ``Service Design in Distributed Intelligent Networks'' in ``On the Way to the Information Society --- A Retrospective View on 5 Years of ACTS IS\&N Research'' Baltzer press, 1999.
+  \end{description}
+}
+
+\ecvitem{Papers in international, peer-reviewed journals}{
+  \begin{description}
+  \item[2001] M.K. Perdikeas and I.S. Venieris,  ``Parlay-based Service Engineering in a Converged Internet-PSTN Environment'' \href{http://www.sciencedirect.com/science/journal/13891286}{Computer Networks (Elsevier)},
+    vol. 35, Issue 5, April 2001, pp. 565--578
+  \item[2000]F. G. Chatzipapadopoulos, M. K. Perdikeas and I. S. Venieris, ``Mobile Agent and CORBA Technologies in the Broadband Intelligent Network'', \href{http://www.comsoc.org/commag}{IEEE Communications Magazine.}, Vol. 38, Issue 6, pp. 116--124
+    \item[1999] M.K. Perdikeas, F.G. Chatzipapadopoulos, I.S. Venieris and G. Marino, ``Mobile Agent Standards and Available Platforms'', \href{http://www.sciencedirect.com/science/journal/13891286}{Computer Networks (Elsevier)}, vol. 31, Issue 19, August 1999, pp. 1999--2016
+  \end{description}
+}
+
+\ecvitem{Papers in International Conferences, Workshops etc. (non-exclusive list)}{
+\begin{description}
+\item[2014] Christophe Arviset, Menelaus Perdikeas et al., ``The Euro-VO Registry, re-engineering the back-end'' (\href{http://adsabs.harvard.edu/abs/2015ASPC..495..457A}{link to abstract}) in the \href{http://www.adass2014.org/announcements_en.php}{24\textsuperscript{th} annual conference on Astronomical Data Analysis Software and Systems}, Calgary---Canada
+\item[2011] Theodore Zahariadis, Menelaos Perdikeas, Fotis Chatzipapadopoulos, Javier Lucio Ruiz Andino,
+  Maria Angeles Barba Rodriguez: Middleware for energy aware appliances
+  2nd Workshop on eeBuildings Data Models, Sofia Antipolis---France
+\item[2010] Menelaos Perdikeas, Theodore Zahariadis, and Pierre Plaza: The BeyWatch Conceptual Model for Demand-Side Management, E-Energy conference, October 14--15, Athens---Greece
+\item[2001] I. S. Venieris; T. Magedanz; M. Perdikeas; L. Hagen: Enhancing Parlay with mobile code technologies---IEEE 2001 Intelligent Network Workshop, 6-9 May 2001, Boston MA, pp. 287--299
+\item[2001] M.K.Perdikeas et al: Realizing Distributed Intelligent Networks Based on Distributed Object and Mobile Agent Technologies---First International Conference on Networking, ICN 2001, LNCS 2094, Colmar, France July 9-13, 2001, Proceedings Part II, pp. 488--496
+\item[1999] M.K.Perdikeas et al., An evaluation study of mobile agent technology: standardization, implementation and evolution---IEEE International Conference on Multimedia Computing and Systems, July 1999, Florence, pp. 287--291, vol.2
+%\item[1999] Designing Advanced Services for Distributed Intelligent Broadband Networks
+%  Pyrovolakis O., Chatzipapadopoulos F., Perdikeas M. and Venieris Iakovos S.
+%  ---Proceedings of the 7\textsuperscript{th} International Conference on Advances in Communications and Control (COMCON7)
+% \item \ldots and eight (8) others in previous years including a couple of IEEE and \href{http://www.icin.co.uk/}{ICIN}
+  conferences.
+  
+\end{description}
+
+
+  }
 
 \end{europecv}
 \end{document} 
