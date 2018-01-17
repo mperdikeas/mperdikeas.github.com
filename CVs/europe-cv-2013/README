@@ -6,5 +6,10 @@ How to install it on *nix:
 
     mkdir -p ~/texmf/tex/latex/
     cd ~/texmf/tex/latex/
-    git clone 
+    git clone
+
+Find examples in:
+
+    ~/texmf/tex/latex/europecv2013/examples
+
 
