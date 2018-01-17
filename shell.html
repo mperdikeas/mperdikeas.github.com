@@ -5,6 +5,52 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>on the various forms of boolean tests in Bash using <tt>()</tt>, <tt>[]</tt> and <tt>[[]]</tt></li>
+      <p>This is explained wonderfully in <a href='https://unix.stackexchange.com/a/306115/24044'>this Unix stackexchange</a> post.</p>
+      <p>TL;DR:
+        <dl>
+          <dt><tt>if command</tt></dt><dd>execute command and proceed based on exit code</dd>
+          <dt><tt>if (command)</tt></dt><dd>same as above but execute command in subshell</dd>
+          <dt><tt>if ((arithmetic condition))</tt></dt><dd>this is no longer a command but an arithmetic condition (NB: non-zero result is interpreted as true)</dd>
+          <dt><tt>if [ condition ]</tt></dt><dd>some condition like <tt>-e</tt></dd>
+          <dt><tt>if [[ condition ]]</tt></dt><dd>same as above but with some additional goodies</dd>
+        </dl>
+      </p>
+<p>
+      Below are some examples to build up intution:
+<pre>
+$ ((1+1))
+$ echo $?
+0
+$ ((1-1))
+$ echo $?
+1
+$ if ls > /dev/null ; then echo 'a'; else echo 'b'; fi
+a</pre>
+
+Some other examples:
+<pre>
+$ touch foo ; if [ -e foo ] ; then echo 'a'; else echo 'b' ; fi
+a
+$ rm -f foo ; if [ -e foo ] ; then echo 'a'; else echo 'b' ; fi
+b
+$ if ((1+2>2)); then echo 'a'; else echo 'b'; fi
+a
+</pre>
+The below prints <i>a</i> because the assignment succeeds and so the condition for the <i>if</i> statement is evaluated to true:
+<pre>
+$ a=0; if [ a=1 ]; then echo 'a'; else echo 'b'; fi
+a</pre>
+&hellip; the correct way is to use arithmetic evaluation:
+<pre>
+$ a=0; if (( $a==1 )); then echo 'a'; else echo 'b'; fi
+b</pre>
+The below prints nothing as the assignment was done in a subshell:
+<pre>
+$ ( b=1 ); echo $b
+
+</pre>
+</p>
       <li>make <code>set</code> print only the shell variables, not the functions</li>
       (<a href='http://unix.stackexchange.com/a/118050/24044'>source</a>)
       <pre>(set -o posix; set)</pre>

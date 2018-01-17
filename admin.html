@@ -4,6 +4,38 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>Fonts</li>
+    <p>
+    The collection of fonts you are able to use is the set of all fonts found under any subdirectory of
+      <tt>/usr/share/fonts</tt> and <tt>~/.fonts</tt>
+    </p>
+    <p>
+      The above locations are scanned and any font found therein is added to the collection. 
+      The following command can be used to refresh the contents of the font cache:
+      <pre>fc-cache -fv</pre>
+      You may have to invoke it both with and without <tt>sudo</tt> as the effects may be different.
+    </p>
+    <p>
+      In my system I have cloned the <a href='https://github.com/google/fonts'>Google fonts</a> repository
+      on my home directory (so the repo resides in <tt>~/fonts</tt>). I then did the following:
+      <pre>
+cd ~/.fonts
+ln -s ~/fonts
+fc-cache -fv
+sudo fc-cache -fv</pre>
+    </p>
+    <p>
+      I did the above in an effort to be able to configure my terminals to use the <i>inconsolata</i> font.
+      Sadly, even though the <tt>fc-list</tt> command succeeds in finding the <i>inconsolata</i> both in the personal (<tt>~/.fonts</tt>) and the system-wide (<tt>/usr/share/fonts</tt>) locations:
+      <pre>
+$ fc-list | grep -i inconsol
+/usr/share/fonts/truetype/inconsolata/Inconsolata-Bold.ttf: Inconsolata:style=Bold
+/home/mperdikeas/.fonts/fonts/ofl/inconsolata/Inconsolata-Regular.ttf: Inconsolata:style=Regular
+/home/mperdikeas/.fonts/fonts/ofl/inconsolata/Inconsolata-Bold.ttf: Inconsolata:style=Bold
+/usr/share/fonts/truetype/inconsolata/Inconsolata-Regular.ttf: Inconsolata:style=Regular</pre>
+      &hellip; and even though Libreoffice finds the font, I still am not able to find it under the profile
+      preferences of the terminal. So symlinking the <tt>~/fonts</tt> directory from within <tt>~/.fonts</tt> had no effect in my case (I guess that's because I had already copied the font into <tt>/usr/share/fonts</tt>).
+    </p>
     <li>how to remove a Personal Package Archive (PPA) and any packages updated / installed by it</li>
     <p>
     In November 2017 I installed Emacs 25 on Ubuntu 16.04 by first installing a PPA (as described <a href='#install-emacs25-ubuntu-16.04'>here</a>). It was working fine, but I subsequently decided to unistall it and to remove the PPA I had installed for that purpose alone.
