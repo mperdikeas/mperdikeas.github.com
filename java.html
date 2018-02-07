@@ -11,6 +11,22 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>How to deal with: <tt>There is insufficient memory for the Java Runtime Environment to continue.</tt></li>
+    <p>
+      While compiling (using Ant) on a machine with 12 cores I encountered the following failure while running <tt>ant build</tt>:
+      <pre>
+    [javac] # There is insufficient memory for the Java Runtime Environment to continue.
+    [javac] # Cannot create GC thread. Out of system resources.
+    [javac] # An error report file with more information is saved as:
+    [javac] # /tmp/jvm-21655/hs_error.log</pre>
+    </p>
+    <p>
+      Following the advice given in <a href='https://stackoverflow.com/a/18408969/274677'>this SO answer</a> I did:
+      <pre>
+export _JAVA_OPTIONS="-XX:ParallelGCThreads=2"</pre>
+      <span class='nb'>NB:</span> there is, indeed, an underscore at the beginning. The name of the variable is <tt>_JAVA_OPTIONS</tt>, not <tt>JAVA_OPTIONS</tt>. Read up more on this (undocumented) environment variable <a href='https://stackoverflow.com/a/30305597/274677'>here</a>.
+    </p>
+    <p>That fixed it. Apparently the JVM was creating too many garbage collection threads (because of the high number of cores) and that caused the memory exhaustion.</p>
     <li>awesome tools to probe stack traces inside running JVMs</li>
     <tt>jstack</tt> and <tt>jinfo</tt>. <tt>jstack</tt> in particular shows you the stack trace of every thread running in the particular JVM whose pid you provide as argument.
     <li><a href='./java.html.files/JUnit4TestAdapterCache-for-Ant-lte-1_9_3.html'><tt>java.lang.NoClassDefFoundError: junit/framework/JUnit4TestAdapterCache</tt> in Ant version &le; 1.9.4</a></li>

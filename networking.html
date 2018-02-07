@@ -5,6 +5,13 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to see what IP address a hostname is resolved to via the hosts file</li>
+      The <cc>getent</cc> program is your friend. E.g. on my machine:
+      <pre>
+$ tail -1 /etc/hosts
+127.0.0.8 foo
+$ getent hosts foo
+127.0.0.8       foo</pre>
       <li>How to sent a POST on https using curl (with basic Authorization headers too)</li>
       Notes:
       <ul>

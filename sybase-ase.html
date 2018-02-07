@@ -4,6 +4,12 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>show max number of user connections on a database</li>
+    <p>
+      Use the <code>sp_configure</code> stored procedure and grep for <i>connections</i>. I.e. something like:
+      <pre> sp_configure; | grep -i connections </pre>
+
+    </p>
     <li>ANSI treatment of NULL values in comparisons</li>
     <p>
       Sybase as well as the equally abominable SQL Server don't treat NULLs according to the ANSI SQL standard by default. In Sybase, you'd have to explicitly set the <tt>ansinull</tt> setting to make sure you have a sound environment. This can be set on a connection basis but I suppose the default can also be configured globally somehow.
