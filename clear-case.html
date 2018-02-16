@@ -5,6 +5,15 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to see which version of a file gets picked up by the view I am currently in</li>
+      <pre>ct ls -l some/file</pre>
+      &hellip; the above incantation also shows the rule that gets applied and selects this particular version.
+      <li>how to see the commit history of a particular file</li>
+      <pre>ct lshistory some/file</pre>
+      &hellip; the above command reports latest commits first (higher up in the
+      output). Dates are displayed in the US notation without the year.
+      To see the year as well, do:
+      <pre>ct lshistory -long some/file</pre>
       <li>how to see all available views</li>
       <pre>ct lsview</pre>
       <li>how to examine the view configuration of a particular view</li>
@@ -26,6 +35,7 @@
         <pre>ct catcs</pre>
         &hellip; to see that view's configuration.
       </p>
+      <span class='nb'>NB:</span> rules that appear first (higher up) in the <code>ct catcs</code> output take precedence over rules that appear further down.
       <li>how to edit your view configuration to pickup a specific version of a specific file</li>
       In my particular case, I had the file showcased in <a href='#how-to-list-all-versions-and-labels-on-a-file'>this tip</a> where the latest version was <code>/main/dbdev_br/5</code> (and was also laballed <code>ANTBUILD</code>). My original config spec was the following:
 <pre>
