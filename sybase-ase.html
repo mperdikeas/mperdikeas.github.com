@@ -4,6 +4,13 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>list tables, triggers, stored procedures and views in a database</li>
+    <dl>
+      <dt>list tables</dt><dd><code>sp_ls</code></dd>
+      <dt>list triggers</dt><dd><code>sp_ls t</code></dd>
+      <dt>list SPs</dt><dd><code>sp_ls p</code></dd>
+      <dt>list views</dt><dd><code>sp_ls v</code></dd>
+    </dl>
     <li>show max number of user connections on a database</li>
     <p>
       Use the <code>sp_configure</code> stored procedure and grep for <i>connections</i>. I.e. something like:
