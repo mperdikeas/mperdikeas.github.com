@@ -5,6 +5,17 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to copy Audio CD in Ubuntu</li>
+      <p>
+      Install the awesome K3B (KDE Burning Tool) - much better than Brasero which has given me a lot of grief.
+        The below worked like a charm in my 32-bit Ubuntu 12.04.5 LTS on July 2017.
+        <pre>$ sudo apt-get install k3b -y --force-yes</pre>
+      </p>
+      <p>
+      Launch with:
+
+        <pre>$ k3b</pre>
+      </p>
       <li>how to extract a slice out of an mp3 file without re-encoding (which might lead to quality degradation)</li>
       <pre>
 ffmpeg -i long-boring-cd.mp3 -vn -acodec copy -ss 00:00:00 -t 00:03:03 my-favourite-track.mp3</pre> 
