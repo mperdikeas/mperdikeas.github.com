@@ -5,6 +5,9 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to extract a slice out of an mp3 file without re-encoding (which might lead to quality degradation)</li>
+      <pre>
+ffmpeg -i long-boring-cd.mp3 -vn -acodec copy -ss 00:00:00 -t 00:03:03 my-favourite-track.mp3</pre> 
       <li>alsamixer settings</li>
       <p>
         Most of the <i>alsamixer</i> settings are about the microphones. Most of the settings are about the microphones

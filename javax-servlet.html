@@ -5,6 +5,37 @@
   </head>
   <body>
     <ol reversed class=main-list-items>
+      <li>issues when configuring secure cookies</li>
+      <p>There are two main recommendations to protect your cookies against various threats. In both cases you need to configure some properties in your <i>web.xml</i> file, inside the <code>&lt;session-config&gt;</code> element. The properties are:
+        <ul>
+          <li>secure</li>
+          <li>http-only</li>
+        </ul>
+      </p>
+      <p>E.g. a sample section from a <i>web.xml</i> file that sets both properties would be the following:
+        <pre>
+          &lt;session-config&gt;
+            &lt;cookie-config&gt;
+              &lt;secure&gt;true&lt;/secure&gt;
+              &lt;http-only&gt;true&lt;/http-only&gt;
+            &lt;/cookie-config&gt;
+          &lt;/session-config&gt;</pre>
+      </p>
+      <p>I've never encountered any problems with <i>http-only</i>
+        but <i>secure</i> can lead to hard to diagnose problems if 
+        the server doesn't provide <i>https</i> or if there's something wrong
+        with the certificates. In one particular case the server's refusal
+        to send a cookie over an unsecure connection caused my filter code
+        to enter into an infinite loop and I encountered the following (not
+        helpful at all) message at my browser:
+      </p>
+      <p>
+        <img height=280 width=480 src="javax-servlet.html.files/cookies-secure-glitch.png"/>
+      </p>
+      <p>
+        Setting <code>&lt;secure&gt;false&lt;/secure&gt;</code> or simply removing
+        the <i>secure</i> element altogether fixed that problem.
+      </p>
       <li>Behavior of <span class='tt'>getContextPath</span>, <span class='tt'>getServletPath</span> and <span class='tt'>getPathInfo</span></li>
       <p>
         The <a href='http://docs.oracle.com/javaee/7/api/javax/servlet/http/HttpServletRequest.html'>HttpServletRequest</a>
