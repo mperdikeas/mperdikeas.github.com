@@ -4,6 +4,27 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>how to execute a Sybase stored procedure with output variables</li>
+    <p>
+      In <i>sqsh</i> do the following:
+      <pre>
+[97] sqldev.proposal.1> DECLARE @outputParam1 VARCHAR(50)
+[97] sqldev.proposal.2> DECLARE @outputParam2 INT
+[97] sqldev.proposal.3> EXECUTE some_stored_procedure 'foo', 42, NULL, @outputParam1 OUTPUT, @outputParam2 OUTPUT
+[97] sqldev.proposal.4> go
+(return status = 0)
+
+
+ ----------- --
+        bar zar
+
+(1 row affected)
+[98] sqldev.proposal.1> </pre>
+    </p>
+    <p>In <i>DbVisualizer</i> do the same followed by:
+      <pre>SELECT @outputParam1, @outputParam2</pre>
+&hellip; and execute the entire block together as a single batch.
+    </p>
     <li>on login names and user names</li>
     <p><i>Login names</i> are what have passwords associated with them.
       Once logged-in, the login names are mapped to <i>user names</i>.
