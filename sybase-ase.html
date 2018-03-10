@@ -4,6 +4,26 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>how to find <i>all</i> constraints in a database</li>
+    <p>
+      The below query shows all constraints in a database, the tables
+      they are defined on and the constraints' type. In the case
+      of Foreign Key constraints, the query show the tables
+      the FK constraints originate from (the source tables, not the target tables):
+      <pre>
+SELECT CONVERT(VARCHAR(30),so1.name) table_name, so2.type, CONVERT(VARCHAR(30),so2.name) constraint_name
+FROM sysconstraints sc, sysobjects so1, sysobjects so2
+WHERE sc.tableid=so1.id AND sc.constrid=so2.id
+ORDER BY table_name;</pre>
+    </p>
+    <p>If you want to explicitly search for Referential Integrity (foreign key)
+      constraints only, do:
+      <pre>
+SELECT CONVERT(VARCHAR(30),so1.name) table_name, CONVERT(VARCHAR(30),so2.name) constraint_name
+FROM sysconstraints sc, sysobjects so1, sysobjects so2
+WHERE sc.tableid=so1.id AND sc.constrid=so2.id AND so2.type='RI'
+ORDER BY table_name;</pre>
+    </p>
     <li>how to execute a Sybase stored procedure with output variables</li>
     <p>
       In <i>sqsh</i> do the following:
