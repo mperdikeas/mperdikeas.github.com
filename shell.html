@@ -5,6 +5,14 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to find a user's login shell</li>
+      <p>Most of the time this is stored in the <tt>/etc/passwd</tt> file so the following would work:
+        <pre>grep username /etc/passwd</pre>
+      </p>
+      <p>
+        However, when some kind of directory service is used the information may not reside there. So, the following <b>always</b> works:
+        <pre>getent passwd username</pre>
+      </p>
       <li>on the various forms of boolean tests in Bash using <tt>()</tt>, <tt>[]</tt> and <tt>[[]]</tt></li>
       <p>This is explained wonderfully in <a href='https://unix.stackexchange.com/a/306115/24044'>this Unix stackexchange</a> post.</p>
       <p>TL;DR:
