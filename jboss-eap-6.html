@@ -8,6 +8,78 @@
   <body>
     <h1 style='font-size: 110%'>JBoss EAP 6 notes</h1>
     <ol reversed class='main-list-items'>
+      <li>how to configure TLS</li>
+      <p>
+        <a href='https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html'>source #1</a>,
+        <a href='http://tutorials.jenkov.com/java-cryptography/keytool.html'>source #2</a>,
+        <a href='https://docs.jboss.org/jbossweb/3.0.x/ssl-howto.html'>source #3</a>,
+        <a href='https://www.digitalocean.com/community/tutorials/java-keytool-essentials-working-with-java-keystores'>source #4</a>,
+        <a href='https://docs.oracle.com/javase/1.5.0/docs/tooldocs/solaris/keytool.html'>old but nice encyclopaedic description of the <i>keytool</i></a>,
+        <a href='http://www.zytrax.com/tech/survival/ssl.html'>very thorough article on TLS/SSL and X.509 certificates</a> (also saved as a <a href='jboss-eap-6.html.files/survival-guide-TLS_SSL-SSL-and-X509.pdf'>PDF</a>).
+      </p>
+      <p>
+        Configuring TLS on JBoss consists of two steps:
+        <ul>
+          <li>create a public-private key pair and wrap the public key into an X.509 self-signed certificate</li>
+          <li>configure the <i>https</i> connector in JBoss</li>
+        </ul>
+      </p>
+      <p>
+        To create a public-private key pair and wrap the public key into an X.509 self-signed certificate you need
+        to use a single incantation of the <a href='https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html'>keytool</a>.
+        Here's an excerpt from a <a href='jboss-eap-6.html.files/Makefile'>Makefile</a> I used:
+        <pre>
+create-public-private-key-pair:
+	keytool -genkeypair -alias testkey \
+                            -keyalg RSA \
+                            -keysize 2048 \
+                            -dname "CN=mperdikeas-jboss-server, OU=mperdikeas-laptop, O=mperdikeas, L=planet Earth, ST=N/A, C=N/A" \
+                            -keypass changeit \
+                            -validity 10000 \
+                            -storetype JKS \
+                            -keystore $(KEYSTORE_FILE) \
+                            -storepass $(PASSWORD)</pre>
+        <span class='nb'>NB:</span>A gotcha is that for some reason, the <i>keypass</i> and the <i>keystore</i> password must be the same.
+        This limitation stems not from the <i>keytool</i> but rather from a bug in the way JBoss uses the configuration options (discussed below).
+        See <a href='https://developer.jboss.org/thread/111138'>here</a> and <a href='https://issues.jboss.org/browse/JBREM-488?_sscc=t'>here</a>.
+      </p>
+      <p>
+        Effectively, what the above incantation does is to create a <a href='https://en.wikipedia.org/wiki/Keystore'>JKS</a> format keystore
+        (the standard keystore format used by Java) and create (and name with an alias) an entry in that keystore consisting of a private key,
+        a public key, and a self-signed certificate, (i.e. one in which the issuer is the same as the subject). Essentially, the public key is wrapped
+        in a self-signed certificate and so the certificate chain contains only a single element (and this is why the browser will warn the user that
+        this is an untrusted connection later on).
+      </p>
+      <p>
+        Once the keystore file is created (with the above incantation), copy it to some location accessible from JBoss and change the <i>web subsystem</i>
+        element to include an <i>https</i> connector. The connector references all three of: the keystore file, the key pair alias and the password
+        (which as noted above is the same for both the store as a whole and the particular key). If you configured different store and key passwords
+        browsers won't be able to connect to JBoss.
+        <pre>
+&lt;subsystem xmlns="urn:jboss:domain:web:1.5" default-virtual-server="default-host" native="false"&gt;
+    &lt;connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http" max-post-size="0"/&gt;
+    &lt;connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" enable-lookups="false" secure="true"&gt;
+        &lt;ssl name="ssl"
+             key-alias="testkey"
+             password="changeit"
+             certificate-key-file="../standalone/configuration/mperdikeas-jboss-server.jks"
+             protocol="TLSv1"
+             verify-client="false"/&gt;
+    &lt;/connector&gt;
+    &lt;virtual-server name="default-host" enable-welcome-root="true"&gt;
+        &lt;alias name="localhost"/&gt;
+        &lt;alias name="example.com"/&gt;
+        &lt;access-log pattern="%h %l %u %t %r %s %b %{Referer}i %{User-Agent}i %S %T"/&gt;
+    &lt;/virtual-server&gt;
+&lt;/subsystem&gt;</pre>
+      </p>
+      <p>
+        Following the above, I was able to connect to my JBoss server via <i>https</i>. I had to connect to port 8445 as I had (in my <code>socket-binding-group</code> element
+        in tne <i>standalone-full.xml</i> file) the following attribute:
+        <pre>port-offset="${jboss.socket.binding.port-offset:2}"</pre>
+        Also, since the self-signed certificate is obviously not considered secure I was presented with the usual warnings about this being unsecure.
+      </p>
+      
       <li>how to enable access logging</li>
       <a href='https://access.redhat.com/solutions/185383'>source</a>
       <p>

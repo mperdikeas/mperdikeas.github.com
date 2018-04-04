@@ -4,6 +4,65 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>how to restore packages if something you did broke Ubuntu</li>
+    <p>
+      My sad, didactic tale <a href='https://askubuntu.com/q/1020616/89663'>here</a> &mdash; see my answer which
+      is what eventually fixed the appearance of the terminal (apparently a lot of things in Ubuntu depend
+      on the version of Python so you should never change those that come with the system).
+    </p>
+    <p>If you want to see why a particular package was installed, install <i>aptitude</i> and do:
+      <pre>aptitude why &lt;name-of-package&gt;</pre>
+    </p>
+    <li>on whether <tt>autoremove</tt> is safe</li>
+    <p>Short answer is that no, it's not. See
+      <a href='https://askubuntu.com/a/393307/89663'>here</a>,
+      <a href='https://administratosphere.wordpress.com/2011/11/29/the-metapackage-problem-and-apt-get-autoremove/'>here</a>,
+      <a href='https://ubuntuforums.org/showthread.php?t=2243852'>here</a>,
+      and
+      <a href='https://www.linuxquestions.org/questions/debian-26/is-this-apt-get-autoremove-operation-safe-935534/'>here</a>.
+    </p>
+    <p>
+      To make matters worse there's no easy way to discover if a package is a meta-package (and thus unsafe to remove
+      &mdash; see also <a href='https://askubuntu.com/a/679734/89663'>here</a> for more). 
+    </p>
+    
+    <li>How to list packages with partial installation or uninstallation</li>
+    <a href='https://askubuntu.com/q/772653/89663'>source</a>
+    <p>I use:
+      <pre>dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -v ^ii</pre>
+      &hellip; to find packages with partial installation or uninstallation.
+    </p>
+    <p>To narrow down to only partially installed packages:
+      <pre>dpkg-query -W -f='${db:Status-Abbrev} ${binary:Package}\n' | grep -E ^.[^nci]</pre>
+    </p>
+    <p>
+      The description of each field is (<a href='https://askubuntu.com/a/18807/89663'>source</a>):
+      <ul>
+        <li>First letter -> desired package state ("selection state")</li>
+        <ul>
+          <li><b>u</b> unknown</li>
+          <li><b>i</b> install</li>
+          <li><b>r</b> remove/deinstall</li>
+          <li><b>p</b> purge (remove including config files)</li>
+          <li><b>h</b> hold</li>
+        </ul>
+        <li>Second letter -> current package state</li>
+        <ul>
+          <li><b>n</b> not-installed</li>
+          <li><b>i</b> installed</li>
+          <li><b>c</b> config-files (only the config files are installed)</li>
+          <li><b>U</b> unpacked</li>
+          <li><b>F</b> half-configured (configuration failed for some reason)</li>
+          <li><b>h</b> half-installed (installation failed for some reason)</li>
+          <li><b>W</b> triggers-awaited (package is waiting for a trigger from another package)</li>
+          <li><b>t</b> triggers-pending (package has been triggered)</li>
+        </ul>
+        <li>Third letter -> error state (you normally shouldn't see a third letter, but a space, instead)</li>
+        <ul>
+          <li><b>R</b>  reinst-required (package broken, reinstallation required)</li>
+        </ul>
+      </ul>
+    </p>
     <li>Fonts</li>
     <p>
     The collection of fonts you are able to use is the set of all fonts found under any subdirectory of
