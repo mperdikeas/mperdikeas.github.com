@@ -11,6 +11,23 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>How to compare Java JARs or WARs</li>
+    <p>
+      Java JAR files may be compared with the awesome package change analyzer
+      <a href='https://lvc.github.io/pkgdiff/'>pkgdiff</a> &mdash; which in fact
+      can be used to visualize changes in <i>any</i> kind of Linux
+      software package.
+      <pre>
+$ pkgdiff dist/cxcaccount-1.0.0.war dist.safe/cxcaccount-1.0.0.war
+reading packages ...
+comparing packages ...
+creating changes report ...
+result: CHANGED (0.01%)
+see detailed report:
+  pkgdiff_reports/cxcaccount/1.0.0_to_1.0.0/changes_report.html
+$ echo $?
+1</pre>
+    </p>
     <li>How to deal with: <tt>There is insufficient memory for the Java Runtime Environment to continue.</tt></li>
     <p>
       While compiling (using Ant) on a machine with 12 cores I encountered the following failure while running <tt>ant build</tt>:
