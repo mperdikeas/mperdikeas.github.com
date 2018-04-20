@@ -5,6 +5,19 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>switch vs. bridge</li>
+      <a href='https://serverfault.com/q/78184/139074'>source</a>
+      <p>
+      A <i>switch</i> is not a proper technical term (the IEEE 802.1D standard does not even mention the word "switch").
+      So a <i>switch</i> is just a marketing name for a <i>multiport bridge</i>. A <i>bridge</i>, in turn,
+        is a layer 2 (data link) device that splits <i>collision domains</i> but <u>not</u> <i>multicast domains</i>.
+        A hub is level 1 device that doesn't split collision domains (and therefore neither does it split broadcast domains)
+        and knows nothing about MAC addresses. A hub only sees bits as it
+        resides at the physical layer and simply repeats them to all its ports.
+        A bridge is more intelligent in that it only floods initially, but over time, learns
+      the MAC addresses of the computers connected to its ports and will eventually forward frames (the name for Layer 2 packets) only to the right
+      ports.
+      </p>
       <li>how to see what IP address a hostname is resolved to via the hosts file</li>
       The <cc>getent</cc> program is your friend. E.g. on my machine:
       <pre>

@@ -3,6 +3,11 @@
   <link rel='icon' href='/knowledge-favicon.ico'/>
 </head>
 <body>
+  <hr>
+  <p>
+    <span class='NB'>NB: </span>All new filesystem-related stuff should go <a href='filesystems.html'>here</a>. However I am not moving some older gists from this page to avoid breaking links.
+  </p>
+  <hr>
   <ol class='main-list-items' reversed>
     <li>how to restore packages if something you did broke Ubuntu</li>
     <p>
@@ -835,10 +840,11 @@ xinput set-int-prop 11 "Device Enabled" 8 1
     </pre>
     <li>remove existing partitions and format USB flash drive or SDHC memory card for Linux</li>
     <a href="http://www.quentinhuys.com/extharddrive.html">source</a><br/>
+    <p>Before you start, make sure you've unmounted any file systems that were mounted on that device</p>
     First of all do a <b>sudo -i</b>. Then, use two
     commands: <b>fdisk</b> followed by a <b>mkfs.ext3</b>
     First, do a:
-    <pre>df- h</pre>
+    <pre>lsblk</pre>
     ... to find the device names and the partitions. In my case I had three (3) 
     partitions on the same external USB HDD: <b>/dev/sdg1/</b>, <b>/dev/sdg2</b>
     and <b>/dev/sdg3</b>. I then did a:
@@ -852,28 +858,53 @@ xinput set-int-prop 11 "Device Enabled" 8 1
     ... on the single partition I created. Finally, to label the drive I did a:
     <pre>sudo e2label /dev/sdg1 150GB-USB-hdd</pre>
     <p>
-      <b>NB</b>: more recently I just did a:
+      <span class='NB'>NB</span>: more recently I just did a:
       <pre>mkfs.ext3 -L volume-label /dev/sdg1</pre>
       to format and label the volume in one step without needing to use <tt>e2label</tt>.
     </p>
     <p>
-      <b>NB 2</b>
+      <span class='NB'>NB2</span>
       You may not be able to write to this disk as normal user as root may own it,
       but just doing <code>chown user:user /media/volume-name</code> 
       or <code>chmod -R a+rwx /media/volume-name</code> will do the trick.
     </p>
     <p>
-      <b>NB 3</b>
+      <span class='NB'>NB3</span>
       It is important that the <tt>fdisk</tt> is performed on the entire device (as in <code>fdisk /dev/sdg</code>)
       but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <code>mkfs.ext3 .. /dev/sdg1</code>).<br/>
       Doing the <tt>mkfs.ext3</tt> on the entire
       device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
       to find the file system type.
     </p>
-    <p><b>NB 3</b>
+    <p><span class='NB'>NB4</span>
       To confirm that you've correctly formated the flash drive do
       a <code>sudo blkid</code> afterwards (this works whether the
       drive is mounted or unmounted)
+    </p>
+    <hr>
+    <p>
+      <b style='color:blue'>2018, April</b>. I did the following to format to FAT32 a Transcend 8GB USB flash drive (which I intended to use to create a bootable Ubuntu 16.04 flash drive):
+      <pre>
+sudo fdisk /dev/sdb</pre>
+      In the step above I followed the sequence of steps described above to list the existing partitions (<b>p</b>), delete the
+      existing partition (<b>d</b>) and then create a new partition (<b>n</b>) and, finally, write the partition table (<b>w</b>).
+    </p>
+    <p>
+      This was then followed by:
+      <pre>sudo mkfs.fat -F 32 /dev/sdb1</pre>
+      to create a FAT32 file-system on the flash drive.
+    </p>
+    <p>
+      However, I was unable to label it. I tried:
+      <pre>sudo fatlabel /dev/sdb TRANS-8GB</pre>
+      &hellip; but it wasn't working. However, I tried again later using:
+      <pre>sudo fatlabel /dev/sdb1 TRNSND8BLAC</pre>
+      &hellip; (as advised <a href=filesystems.html#how-to-label-fat32-filesystem'>here</a>) and it worked like a charm (on the second try). The difference was that the second incantation used the partition, not the entire device, and that filesystem was dismounted when I tried the second incantation.
+    </p>
+      <p>
+      At any rate notice again how
+        (as advised above) <code>fdisk</code> is performed on the entire disk whereas <code>mkfs</code> on a single partition.
+      </p>
     </p>
 
     <li>remove BOM from files in Linux</li>

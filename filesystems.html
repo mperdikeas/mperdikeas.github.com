@@ -5,18 +5,44 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li id='how-to-label-fat32-filesystem'>how to label a FAT32 file system</li>
+      <p>
+        In April 2018 to label a FAT32 file system on a USB flash drive I did:
+        <pre>sudo fatlabel /dev/sdb1 LEXR16GWHIT</pre>
+        &hellip; and it worked like a charm.
+      </p>
+      <p>
+        Note however, that there should be no filesystem mounted on that device otherwise you get:
+        <pre>$ sudo fatlabel /dev/sdb1 LEXR16GWHIT
+0x41: Dirty bit is set. Fs was not properly unmounted and some data may be corrupt.
+ Automatically removing dirty bit.</pre>
+      </p>
+      <li>show labels of mounted filesystems</li>
+      <pre>sudo lsblk -o name,mountpoint,label,size,uuid</pre>
+      I also think that <code>sudo lsblk</code> alone suffices.
       <li>how to find information on how many times a disk had gone through a shutdown / powerup cycle</li>
       <pre>
 sudo apt-get install smartmontools
-sudo sudo smartctl -a /dev/sda1
-      </pre>
+sudo sudo smartctl -a /dev/sda1</pre>
       <p>The <tt>Start_Stop_Count</tt> and <tt>Power_Cycle_Count</tt> seem relevant.
         In my T60 ThinkPad (6 years old) they have a value around 2300.
       </p>
       <p>Alternatively, you can grep for all pertinent <tt>Old_age</tt> metrics:
         <pre>
-sudo sudo smartctl -a /dev/sda1 | grep -i old_age
-        </pre>
+sudo sudo smartctl -a /dev/sda1 | grep -i old_age</pre>
+      </p>
+      <li>how to find filesystem information on all devices</li>
+      <p>
+        This only shows mounted filesystems:
+        <pre>df -Th</pre>
+        <i>T</i> for the filesystem information, <i>h</i> for human-readable.
+      </p>
+      <p>
+        The below provides way more / complementary information on the filesystem (and also works on unmounted devices):
+        <pre>sudo file -sL /dev/sda1</pre>
+        In particular, in my system <code>file -sL</code> properly reports <tt>FAT (32 bit)</tt>
+        whereas <code>df -Th</code> simply reports <tt>vfat</tt> which is not technically correct
+        as <i>FAT32</i> is an extension of both <i>FAT</i> and <i>VFAT</i> (and enhances both)
       </p>
       <li>how to find the filesystem that a given path is mounted on</li>
       <pre>df -P -T /some/path</pre>
