@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="keywords" content="Menelaus Perdikeas github page">
+    <meta name="description" content="Menelaus Perdikeas github page">
+    <link rel='icon' href='Marcus_Brutus-favicon.png'/>
+    <link rel="stylesheet" type="text/css" href="./mperdikeasgithub.css">        
+    <title>Mathematics I Use</title>
+  </head>
+  <body>
+    <header>
+      <h1>Mathematics I Use</h1>
+    </header>
+
+    <section>
+      <hr>
+      <p><span class='NB'>NB:</span> article by Dan Cross copied from
+        <a href='http://pub.gajendra.net/2012/10/mathematics_i_use'>here</a> (lest the
+        link goes bad)
+      </p>
+      <hr>
+      <p>Recently, on an online forum, a question was posed: How much,
+        and what kind, of mathematics does a working programmer actually
+        use?  Here is my answer.</p>
+
+      <p>First, I and almost all programmers use a lot of
+        <a href="http://en.wikipedia.org/wiki/Boolean_algebra">boolean
+          logic</a>, from evaluating boolean expressions for conditionals
+        and loop exit criteria, to rearranging the terms of such
+        expressions according to, e.g.,
+        <a href="http://en.wikipedia.org/wiki/De_Morgan%27s_laws">De Morgan's
+          laws</a>.  Much of our work borders on the
+        <a href="http://en.wikipedia.org/wiki/First-order_logic">first-order
+          predicate calculus</a> and other
+        <a href="http://en.wikipedia.org/wiki/Predicate_logic">predicate
+          logics</a> in the guise of analysis of preconditions, invariants,
+        etc (though it may not always be presented as such).</p>
+
+      <p>Next, I do a lot of performance analysis.  The kind of data
+        sets we process these days are massive.  In 2010,
+        <span itemscope="itemscope" itemtype="http://schema.org/Person"><a itemprop="url" href="https://plus.google.com/104233435224873922474/posts"><span itemprop="name">Eric Schmidt</span></a></span>
+        made a comment at the
+        <a href="http://techonomy.com/">Techonomy</a> conference that we
+        (humans) produce as much data in <em>two days</em> as <em>ever
+          existed</em> world-wide in 2003.  I want to be able to process
+        large chunks of that and infer things from it, and understanding
+        the
+        <a href="http://en.wikipedia.org/wiki/Analysis_of_algorithms">space
+          and time complexity</a> of the operations we apply to the data is
+        critical to determining whether the computations are even
+        feasible.  Further, unlike in much traditional
+        <a href="http://en.wikipedia.org/wiki/Big_O_notation">big-O</a> or
+        <a href="http://mathworld.wolfram.com/Big-ThetaNotation.html">theta</a>
+        analysis, the constant factors matter very much at that kind of
+        scale: a factor of 2 will not change the asymptotic time
+        complexity of an algorithm, but if it means the difference
+        between running it over 10,000 or 20,000 processors, now we are
+        talking about real resources.  The calculations tend to be much
+        more intricate as a result.  Examples: can I take some linear
+        computation and reduce it in strength to a logarithmic
+        computation?  Can I reduce memory usage by a factor of three?
+        Etc.</p>
+
+      <p>Often times, I want to compute the worst-case or upper bound
+        of, say, the size of some data set.  The calculations can be
+        nontrivial for many of these.  Or, I may want to analyze some
+        <a href="http://en.wikipedia.org/wiki/Recurrence_relation">recurrence
+          relation</a> to see how it varies as I increase the recursion
+        depth.  To do that, I need, among other things, the
+        <a href="http://en.wikipedia.org/wiki/Master_theorem">Master
+          Theorem</a> and a good understanding of how to analyze
+        <a href="http://en.wikipedia.org/wiki/Series_(mathematics)">series</a>.
+        Believe it or not, this sometimes means I need to evaluate an
+        <a href="http://en.wikipedia.org/wiki/Integral">integral</a>
+        (though mostly of the
+        <a href="http://en.wikipedia.org/wiki/Riemann_integral">Riemann</a>
+        variety).  Or can I just solve the recurrence and get a
+        <a href="http://mathworld.wolfram.com/Closed-FormSolution.html">closed-form
+          solution</a>?  Do I have to resort to
+        <a href="http://en.wikipedia.org/wiki/Linear_algebra">linear algebra</a>?
+        This gets into things like
+        <a href="http://en.wikipedia.org/wiki/Generating_function">generating
+          functions</a>,
+        <a href="http://en.wikipedia.org/wiki/Stirling_number">Stirling
+          numbers</a>,
+        <span itemscope="itemscope" itemtype="http://schema.org/Book" itemid="urn:isbn:9780801854149"><a itemprop="url" href="http://www.cs.cornell.edu/cv/books/gvl/index.htm">matrix
+          computations</a></span>, etc.  If you are curious what goes into
+        “fundamental” mathematical concepts necessary to understand
+        computer science, have a look at volume 1 of,
+        <span itemscope="itemscope" itemtype="http://schema.org/Book" itemid="urn:isbn:9780201896831">
+          <cite>The Art of Computer Programming</cite>, by
+          <span itemprop="author"><span itemscope="itemscope" itemtype="http://schema.orb/Person" id="knuth"><span itemprop="name">Donald Knuth</span></span></span></span>, or
+          <span itemscope="itemscope" itemtype="http://schema.org/Book" itemid="urn:isbn:9780201558029">
+            <cite>Concrete Mathematics</cite>, by
+            <span itemprop="author" itemscope="itemscope" itemref="knuth">Knuth</span>,
+            <span itemprop="author"><span itemscope="itemscope" itemtype="http://schema.org/Person"><span itemprop="name">Ronald L. Graham</span></span></span> and
+            <span itemprop="author"><span itemscope="itemscope" itemtype="http://schema.org/Person"><span itemprop="name">Oren Patashnik</span></span></span></span>.</p>
+
+      <p>I do a lot of straight-up computation in terms of aggregating,
+        combining and transforming data; lots of
+        <a href="http://en.wikipedia.org/wiki/Combinatorics">combinatorics</a>
+        (e.g., counting things, looking for symmetries across different
+        dimensions, etc).  Examples are obvious, I think.</p>
+
+      <p>I do a lot of
+        <a href="http://en.wikipedia.org/wiki/Discrete_mathematics">discrete
+          mathematics</a>: looking for
+        <a href="http://en.wikipedia.org/wiki/Algebraic_structure">algebraic
+          structures</a>
+        across operations on extremely large sets.  Is there some kind of
+        structure latent in whatever I am doing that can be preserved
+        across
+        <a href="http://en.wikipedia.org/wiki/Homomorphism">homomorphism</a>
+        to some
+        <a href="http://en.wikipedia.org/wiki/Group_(mathematics)">group</a>
+        or
+        <a href="http://en.wikipedia.org/wiki/Ring_(mathematics)">ring</a>
+        that I understand better?  Is there a looser constraint?  Can I apply
+        <a href="http://en.wikipedia.org/wiki/Group_action">group actions</a>
+        to some set in order to build a mental model for some
+        transformation that makes it easier to reason about?  Can I
+        define some
+        <a href="http://en.wikipedia.org/wiki/Topology">topology</a>
+        towards analyzing the data?  You would be surprised how many
+        things fall into the category of
+        <a href="http://mathworld.wolfram.com/DiscreteTopology.html">discrete
+          topologies</a>.  For that matter, you would be surprised how many
+        places the
+        <a href="http://en.wikipedia.org/wiki/Triangle_inequality">triangle
+          inequality</a> shows up.</p>
+
+      <p>I do a lot of
+        <a href="http://en.wikipedia.org/wiki/Graph_theory">graph theory</a>.
+        “Designing a web site” is not
+        just about where to put the cute cat graphic on the page, it is
+        also about inserting nodes into the global
+        <a href="http://en.wikipedia.org/wiki/Hyperlink">hyperlink</a>
+        graph; a single page potentially adds many edges to the graph and
+        that can have subtle effects on performance, analysis, search
+        engine rankings, etc.  Understanding the consequences of that can
+        yield interesting insights: how does the graph grow?  As it turns
+        out, it
+        <a href="http://www.sciencemag.org/content/287/5461/2115.full">looks
+          an awful lot</a>
+        like it obeys a
+        <a href="http://en.wikipedia.org/wiki/Power_law">power law</a>: the
+        web is a
+        <a href="http://en.wikipedia.org/wiki/Scale-free_network">scale-free
+          network</a>.  What is the
+        <a href="http://en.wikipedia.org/wiki/Shortest_path_problem">shortest
+          distance between two nodes in that graph</a>?  What would it mean
+        for the web graph to be
+        <a href="http://en.wikipedia.org/wiki/Planar_graph">planar</a>?
+        <a href="http://en.wikipedia.org/wiki/Bipartite_graph">Bipartite</a>?
+        When, if ever, do these properties hold?  What if the graph isn't
+        the web, but entire road network for North America, Europe or
+        Asia?</p>
+
+      <p>This implies something else.  Something people often do
+        not realize about “modern” web pages is that they are not just
+        <a href="http://www.w3.org/html/">HTML</a> documents with
+        links to images and other resources, but they are really
+        <a href="http://en.wikipedia.org/wiki/Tree_structure">tree
+          structures</a> of data that are linked together in a
+        <a href="http://en.wikipedia.org/wiki/Graph_(mathematics)">graph</a>.
+        Those trees are often walked over, reprocessed and updated
+        dynamically by interactions between the user's web browser
+        and some server (this is what
+        “<a href="http://en.wikipedia.org/wiki/Ajax_(programming)">AJAX</a>”
+        is all about).  For a clever and relevant example of this, see:
+        <a href="http://www.mathjax.org/">MathJax</a>.  Or
+        <a href="https://mail.google.com/">GMail</a>.  Understanding how
+        to do that means having some understanding of
+        <a href="http://en.wikipedia.org/wiki/Symbolic_computation">symbolic
+          computation</a> and
+        <a href="http://en.wikipedia.org/wiki/Semantic_analysis_(compilers)">semantic
+          analysis</a> of the elements of a page.  For MathJax, the
+        authors must write a program that can walk a tree generated from
+        the
+        <a href="http://en.wikipedia.org/wiki/Document_Object_Model">Document
+          Object Model</a> (or DOM), look for mathematical elements,
+        <a href="http://en.wikipedia.org/wiki/Parsing">parse</a> them,
+        and dynamically replace them with new rendered elements
+        representing the underlying expression.  It may not seem like
+        much to most users, for whom it “just works”, but it is actually
+        some heady stuff under the hood.  I do not do things like that
+        necessarily (I am not a front-end person), but I do do similar
+        things in
+        <a href="http://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a>
+        all the time.  Note that Lisp was originally defined as a
+        mathematical notation for symbolic processing: Lisp macros are
+        all about manipulation of symbolic expressions.</p>
+
+      <p>I do a lot of
+        <a href="http://en.wikipedia.org/wiki/Time_series">time-series
+          analysis</a>.  How is traffic or resource consumption changing?
+        What are the trends?  Is a spike in request latency or memory use
+        <a href="http://en.wikipedia.org/wiki/Seasonality">seasonal</a>?
+        How does the
+        <a href="http://en.wikipedia.org/wiki/Rate_of_change">rate of
+          change</a> of something vary as input changes in different
+        dimensions?  Is it
+        <a href="http://en.wikipedia.org/wiki/Correlation_and_dependence">correlated</a>
+        with some external event?</p>
+
+      <p>I do a lot of
+        <a href="http://en.wikipedia.org/wiki/Statistics">statistical</a>
+        analysis of data, not just to understand its performance
+        characteristics but also to understand the data itself.  In
+        addition to looking at the aforementioned
+        DOM tree for semantic metadata (e.g.,
+        <a href="http://www.w3.org/TR/2011/WD-microdata-20110525/">microdata</a>
+        and
+        <a href="http://microformats.org/">microformats</a>,
+        <a href="http://www.w3.org/TR/rdfa-core/">RDFa</a>,
+        other
+        <a href="http://www.w3.org/XML/">XML</a> data with some explicit
+        <a href="http://en.wikipedia.org/wiki/Schema">schema</a>,
+        etc) also trying to make sense of
+        <a href="http://en.wikipedia.org/wiki/Unstructured_data">unstructured
+          data</a>.  What is the
+        <a href="http://en.wikipedia.org/wiki/Probability">probability</a>
+        that this text is a street address?
+        <a href="http://en.wikipedia.org/wiki/Geographic_coordinate_system">Geographical
+          coordinates</a>?  What context does it appear in?  Is it
+        <a href="http://en.wikipedia.org/wiki/Spam_(electronic)">spam</a>?
+        Does it make sense? Does it look like the output of a
+        <a href="http://en.wikipedia.org/wiki/Markov_chain">Markov chain</a>
+        generator?  Is it a series of exact quotes from some well-known
+        work of literature?  Or is it some discussion about literature?
+        Is it a discussion about spam that includes literature?  I still
+        chuckle when I think about the piece of spam I got for
+        pharmaceuticals wrapped inside a section of
+        <span itemscope="itemscope" itemtype="http://schema.org/Book" itemid="urn:isbn:9780141180144"><span itemprop="author"><span itemscope="itemscope" itemtype="http://schema.org/Person"><span itemprop="name">Mikhail Bulgakov</span></span></span>'s
+          <cite>The Master and Margarita</cite></span>.</p>
+
+      <p><a href="http://en.wikipedia.org/wiki/Category_theory">Category
+        theory</a>.
+        <a href="http://en.wikipedia.org/wiki/Type_theory">Types</a>
+        in computer programming languages roughly correspond to
+        categories, and
+        <a href="http://en.wikipedia.org/wiki/Monad_(category_theory)">monads</a>
+        and
+        <a href="http://en.wikipedia.org/wiki/Functor">functors</a>
+        can be brought to bear to greatly simplify some constructs
+        in surprisingly elegant ways.  For instance, the
+        <a href="http://en.wikipedia.org/wiki/Functional_programming">functional
+          programming</a> language
+        <a href="http://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>
+        uses
+        <a href="http://en.wikipedia.org/wiki/Monad_(functional_programming)">monads</a>
+        for
+        <a href="http://en.wikipedia.org/wiki/Input/output">input and output</a>,
+        and for modeling
+        <a href="http://en.wikipedia.org/wiki/State_(computer_science)">state</a>.
+        Simplified programs are easier to get right, easier to reason
+        about, understand, modify, etc.  Types can often be inferred;
+        this brings in things like
+        <a href="http://en.wikipedia.org/wiki/Unification_(computer_science)">unification</a>
+        (which can also be used in general problems of inference).
+        Consider using
+        <a href="http://en.wikipedia.org/wiki/Inference">inference</a>
+        to apply
+        <a href="http://en.wikipedia.org/wiki/Prolog">prolog</a>-style
+        predicates as an approach to
+        <a href="http://en.wikipedia.org/wiki/Operational_transformation">transforming graphs</a>
+        in a
+        <a href="http://pdos.csail.mit.edu/6.824/">distributed system</a>.</p>
+
+      <p>Distributed systems bring us back to graph theory: at scale,
+        in the real world, systems fail, backhoes cut fiber, there are
+        earthquakes, volcanoes, and fishing trawlers that disturb Marine
+        cables.  One needs to understand the graph characteristics of the
+        network to understand the effects of these things and how best to
+        respond.  Routing algorithms and network analysis is intimately
+        tied to things like how to find the
+        <a href="http://en.wikipedia.org/wiki/Shortest_path_problem">shortest
+          path between nodes</a> in the network graph;
+        <a href="http://en.wikipedia.org/wiki/Dijkstra&apos;s_algorithm">Dijkstra's
+          algorithm</a> anyone?</p>
+
+      <p>Also, how does one distribute a large computation across
+        globally distributed data centers?  You have to understand
+        some physics to do this well: at Internet scale, the
+        <a href="http://en.wikipedia.org/wiki/Speed_of_light">speed
+          of light</a> starts to be a bottleneck.
+        <a href="http://en.wikipedia.org/wiki/Thermal_management_of_electronic_devices_and_systems">Heat
+          dissipation</a>,
+        <a href="http://en.wikipedia.org/wiki/Current_density">density of
+          electrical current</a> draw per unit area, etc, are all real world
+        considerations that go into what programmers do.  Should I put a
+        data center in Iceland?  Cheap cooling and geothermal energy sound
+        appealing, but what is the minimum latency to some place where
+        user's care abut the data living on those servers in Iceland?  That
+        is the
+        <a href="http://en.wikipedia.org/wiki/Great_circle">great-circle</a>
+        distance between, say, Iceland and London?  Berlin?  Amsterdam?
+        These are fairly simple things to figure out, but I need to have
+        enough mathematical chops to do them.  Can I run fiber from
+        Iceland to some hub location?  What is the average latency?  What
+        is the probability of a fiber break in a marine cable under the
+        North Sea over a 12 month period?  48 months?</p>
+
+      <p>Of course, the
+        <a href="http://en.wikipedia.org/wiki/Theory_of_computation">theory
+          of computation</a> and
+        <a href="http://en.wikipedia.org/wiki/Automata_theory">automata</a>,
+        <a href="http://en.wikipedia.org/wiki/Parsing">parsing</a>,
+        <a href="http://en.wikipedia.org/wiki/Formal_grammar">grammars</a>,
+        <a href="http://en.wikipedia.org/wiki/Regular_language">regular
+          languages</a>, etc, all enter into what programmers' work.  I do
+        a lot of parsing and
+        <a href="http://en.wikipedia.org/wiki/Pattern_matching">pattern
+          matching</a>.  At even moderate size, real-world data sets
+        contain items that can trigger
+        <a href="http://en.wikipedia.org/wiki/Pathological_(mathematics)">pathologically
+          bad behavior</a> when using, for instance,
+        <a href="http://en.wikipedia.org/wiki/Backtracking">backtracking</a>
+        techniques.  If I use
+        <a href="http://en.wikipedia.org/wiki/Regular_expression">regular
+          expressions</a> to match data, I must be careful to make sure that
+        the expressions
+        <a href="http://swtch.com/~rsc/regexp/">really are regular</a>.  If
+        I am using a
+        <a href="http://en.wikipedia.org/wiki/Pushdown_automaton">push-down
+          automaton</a> to parse a
+        <a href="http://en.wikipedia.org/wiki/Context-free_grammar">context-free
+          grammar</a> (which happens every time you send a request to an
+        <a href="http://www.ietf.org/rfc/rfc2616.txt">HTTP</a> server, by
+        the way), I have to make sure I limit the depth of recursion to
+        avoid things like processor
+        <a href="http://en.wikipedia.org/wiki/Call_stack">procedure call stack</a>
+        exhaustion, which requires understanding the underlying principles
+        of the computation and the mathematics they are based on.
+        If I have to actually write a
+        <a href="http://en.wikipedia.org/wiki/Recursive_descent_parser">recursive
+          descent parser</a> for some funky grammar that is not
+        <a href="http://en.wikipedia.org/wiki/LALR_parser">LALR(1)</a> (so
+        I can't just use
+        <a href="http://en.wikipedia.org/wiki/Yacc">yacc</a> or
+        <a href="http://www.gnu.org/software/bison/">bison</a>),
+        I have to be careful or maintain the state stack separately from
+        procedural recursion.  That this is also something I need to
+        understand if I am walking a DOM tree (or any recursively defined
+        data structure).
+        <a href="http://golang.org/">Some programming languages</a>
+        recognize this as a hassle for the programmer and work around it
+        by using
+        <a href="http://golang.org/doc/go_faq.html#stack_or_heap">segmented
+          stacks</a>.  Of course, it would be nice if I could define my
+        “compilation” of some parsable resource as a
+        <a href="http://en.wikipedia.org/wiki/Function_(mathematics)">function</a>
+        (in the mathematical sense).  Wouldn't it be nice if this was
+        all just some
+        <a href="http://en.wikipedia.org/wiki/Linear_programming">linear
+          programming</a>
+        <a href="http://en.wikipedia.org/wiki/Mathematical_optimization">optimization</a>
+        problem?</p>
+
+      <p>Note that none of this is esoterica; it is all based on
+        real-world experience with real-world data sets and problems.  Of
+        course, I do not do <em>all</em> of this every day, but I have
+        done all of it at one time or another and most of it regularly.
+        Probably a lot more is based on observation, experience and
+        <a hef="http://en.wikipedia.org/wiki/Heuristic">heuristics</a>
+        than should be (the heuristic models are often incomplete and
+        inaccurate).  Do I know enough math to calculate the average
+        <a href="http://mathworld.wolfram.com/ErrorPropagation.html">error</a>
+        between reality and my heuristic model?</p>
+
+      <p>This is what computer science really is, and how it interacts
+        with programming and the realities of modern computing.  Being
+        the “IT expert” somewhere is not the same thing as being a
+        computer scientist, and as many correctly note, being a computer
+        scientist is a lot closer to being an applied mathematician than
+        a tradesman.  This is not to downplay the importance of trade
+        professions, which are both useful and highly respectable, but to
+        point out that computer science is different.  I am very
+        fortunate that I was able to serve in the Marines with a number
+        of folks who work in trades; we as a society should show them a
+        lot more respect than we do.</p>
+
+      <p>(For the record, I am not a computer scientist.  I was trained
+        as a [pure] mathematician, and what I do professionally is a lot
+        closer to engineering.)</p>
+    </section>
+
+    <footer>
+      Copyright © Dan Cross.  All rights reserved.
+    </footer>
+</html>
