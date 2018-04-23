@@ -1,0 +1,174 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+
+  </style>
+  <body>
+    <header>
+      <h1>Write-up of the Ubuntu 16.04.4 installation on my Lenovo ThinkPad T510 laptop (April 2018)</h1>
+      <hr>
+    </header>
+    <p>
+      In the second half of April 2018 I successfully setup a newly purchased refurbished Lenovo ThinkPad T510 laptop
+      with Ubuntu 16.04.4 Xenial Xerus (Desktop edition, 64 bit).
+      It was purchased from the Microcenter at Cambridge MA for aprox. $ 270. The store
+      website listed the product with the following specs:
+      <blockquote>
+        SKU: 708339 ThinkPad T510 15.6" Laptop Computer Refurbished - Black; Intel Core i5 Processor 2.4GHz; Microsoft Windows 10 Pro 64-bit; 8GB RAM; 320GB Hard Drive; 10/100/1000 Network; 15.6" Display
+      </blockquote>
+      Lenovo itself provides <a href='travails-setting-up-T510.html.files/t510-specs.pdf'>these hardware specifications</a>.
+    </p>
+    <p>
+      The machine came pre-installed with a laughable "operating system" (Wi...ws 10). Since the laptop was intended for Constantine,
+      I installed Xerus alongiside the abomination in case some child molester at school forces him to use Win..ws.
+    </p>
+    <p>
+      In general, I followed the script from the last successful installation of 16.04 on a ThinkPad machine (found <a href='./travails-setting-up-T420.html'>here</a>)
+      and, overall, things worked out rather well.
+    </p>
+    <ol class='main-list-items'>
+      <li><h2 id='run-windows-diagnostics'>run Windows diagnostics provided by the manufacturer</h2></li>
+      <p>I was able to obtain from the <a href='https://pcsupport.lenovo.com/us/en/downloads/ds102688'>Lenovo site</a>
+        an application called <i>LSC Lite for Windows 10</i>. Apparently, the application, confusingly, has an array of equivalent (?) names:
+        <ul>
+          <li>Lenovo Diagnostics Tool Lite</li>
+          <li>Lite GUI for Lenovo Solution Center</li>
+          <li>Lenovo Diagnostics 4.20.1</li>
+        </ul>
+        &hellip; and offers a wide range of diagnostics: Audio, Audio Controller, Battery, Processor, Display, Display Interface, Keyboard, Memory, Motherboard, Optical Drive, PCI Express, Pointing Devices, Pointing Devices, Storage, Video Card, Wired Ethernet.
+      </p>
+      <p>
+        All of the tests succeeded with the exception of the Battery and the Camera test. As for the batter it is apparently not in pristince condition but I didn't mind
+        that so much as the laptop will be used as a desktop for most of the time. As for the camera, apparently it's not working. I intend to buy an external USB camera and
+        ask Microcenter for a discount.
+      </p>
+      <p>In the case of the battery I also run Linux battery diagnostics on it (as described <a href='travails-setting-up-T420.html#check-battery'>here</a>):
+        <pre>
+sudo apt install fwts
+sudo fwts battery</pre>
+        &hellip; with the following <a href='travails-setting-up-T510.html.files/t510-battery-results.txt'>results</a>
+        <b>TODO:</b> show how to print the Wh readings of the battery.
+      </p>
+      <p>Some other diagnostics-related links I kept in my notes were:
+        <ul>
+          <li><a href='https://forums.lenovo.com/t5/ThinkPad-T400-T500-and-newer-T/How-can-I-test-the-batteries/td-p/3943852'>https://forums.lenovo.com/t5/ThinkPad-T400-T500-and-newer-T/How-can-I-test-the-batteries/td-p/3943852</a></li>
+          <li><a href='https://pcsupport.lenovo.com/us/en/lenovodiagnosticsolutions/downloads'>https://pcsupport.lenovo.com/us/en/lenovodiagnosticsolutions/downloads</a></li>          
+        </ul>
+      </p>
+      <li><h2 id='create-bootable-usb-flash-drives'>create bootable USB flash drive with 16.04 ISO image</h2></li>
+        <p>I actually created two flash drives to experiment with different methods</p>
+        <p>
+          First, I formatted and labelled both USB flash drives to the FAT32 filesystem as described
+          <a href='admin.html#format-usb-flash-2018-April'>here</a>.
+        </p>
+        <p>
+          Then, I downloaded from <a href='http://releases.ubuntu.com/16.04/'>http://releases.ubuntu.com/16.04/</a> the ISO image
+          for 16.04.4 (filename: <code>ubuntu-16.04.4-desktop-amd64.iso</code>)
+          which is described as: <it>Desktop image for 64-bit PC (AMD64) computers</it> (MD5 sum: <tt>b47e23601d56533fb01a941ef1794e57</tt>)
+          and proceeded to create two USB flash drives:
+          <ul>
+            <li>one with <i>UNetbootin</i>.
+            </li>
+            <li>the other with the KDE version of the <i>USB Creator</i>:
+              <pre>
+sudo apt install usb-creator-kde
+sudo usb-creator-kde</pre>
+              (Note that this is the <b>KDE</b> version (not the <i>-gtk</i> version) as advised
+              <a href='https://askubuntu.com/a/677474/89663'>here</a>.)
+            </li>
+          </ul>
+        </p>
+        <p>
+          I was able to modify the boot sequence by pressing <b>F12</b> with no issues and both USB flash drives appeared as options at
+          that point.
+        </p>
+        <p>
+          The USB flash drive created with <i>USB Creator</i> worked like a charm and allowed me to both run and / or install Ubuntu
+          (either alongside the abomination or replacing it).
+        </p>
+        <p>
+          However, the
+          one created with <i>UNetbootin</i> wasn't recognized as a valid operating system. That is,
+          even though it <a href='travails-setting-up-T510.html.files/unetbootin-usb-shows-up-as-option.jpg'>showed up as an option on the boot menu</a>,
+          when it was selected I was presented with this screen:
+        </p>
+        <p>
+          <a href="travails-setting-up-T510.html.files/unetbootin-usb-not-recognized-as-valid-OS.jpg">
+            <img height="200px" width="300px" src="travails-setting-up-T510.html.files/unetbootin-usb-not-recognized-as-valid-OS.jpg"/>
+          </a>
+        </p>          
+
+        <p>Upon further investigation I came across <a href='https://github.com/unetbootin/unetbootin/issues/90'>this post</a> which explains that apparently
+          recent versions of <i>UNetbootin</i>
+          fail to set the boot flag on the device. I checked and verified that I was using one of the recent versions that people reported problems
+          about : <tt>608-1</tt>
+          (this can be discovered by looking at the file <tt>/usr/share/doc/unetbootin/changelog.Debian.gz</tt>)
+        </p>
+        <p>
+          To fix this problem I had to set the boot flag on the live Ubuntu USB flash drive that was prepared with <i>UNetbootin</i>:
+          <pre>parted /dev/sdb set 1 boot on</pre>
+          &hellip; as advised <a href='https://www.linuxquestions.org/questions/linux-newbie-8/how-to-set-boot-flag-on-usb-through-the-terminal-717280/'>here</a>.
+        </p>
+        <p>
+          Once the boot flag was set on the device (note that the boot flag is set on the entire USB flash drive device, not on an individual partition),
+          I was able to both run Ubuntu from that drive and / or install it.
+        </p>
+        <p>
+          Finally note that both bootable USB flash drives (the one created with <i>USB Creator</i> and the one created with <i>UNetbootin</i> &mdash; after the boot flag
+          had been set) gave me the option of either installing Ubuntu 16.04 alongside the abomination or wipe the disk clean and
+          only install Ubuntu 16.04.
+        </p>
+        <li><h2 id='unetbootin-memory-test'>UNetbootin memory test</h2></li>
+        <p>
+          Regardless of the installation problem with the <i>UNetbootin</i>-created flash drive, IIRC I was able to perform the memory test that comes bundled
+          with it. However, there was again the usual, expected problem described in the caveat offered
+          <a href='admin.html.files/ubuntu-bootable-usb-flash.html#caveat'>here</a>. Moreover, this time it was not clear to me how to "remove some options"
+          (as the previous link advises in the caveat). Instead, what I had to do was to press <tt>TAB</tt> and then type:
+          <pre>/install/mt86plus</pre>
+        </p>
+        <p>
+          This is advised <a href='http://www.openmutual.org/2014/09/memtest86-cannot-load-a-ramdisk-with-an-old-kernel-image/'>here</a> (screenshot in case
+          the link goes bad is <a href='travails-setting-up-T510.html.files/how-to-run-unetbootin-memtest.png'>here</a>).
+        </p>
+        <li>configure French accents for the keyboard</li>
+        <p>
+          Following the successful installation of Ubuntu 16.04.4 64bit on the T510 machine, most of the other things I cared to install
+          at that point in time were entirely problem-free. The only thing that I spent quite a bit of time on was how to allow all French accents
+          and diacritics to be inserted using the keyboard.
+        </p>
+        <p>
+          In the end, after considerable experimentation (in which I also tried some French-language keyboard layouts) I ended up using
+          the "<it>English (international with Alt Gr dead keys)</it>" keyboard layout as advised in <a href='https://askubuntu.com/a/333242/89663'>this
+          askubuntu.com answer</a>.
+        </p>
+        <p>
+          This method provides a very intuitive way to combine various accents and diacritics with characters (<b>TODO</b>: I think this also enables the tilda
+          used in Spanish senor). The cedila is available with the
+          <code>ALT+,</code> combo as advised <a href='https://superuser.com/a/1076106/138891'>here</a>. Also one still retains four distinct characters / graphemes
+          per key depending on the combination used:
+          <ul>
+            <li>key alone</li>
+            <li><code>SHIFT</code> + key</li>
+            <li><code>Alt Gr</code> + key</li>
+            <li><code>SHIFT</code> + <code>Alt Gr</code> + key</li>                        
+          </ul>
+          &hellip; so many accented characters can be entered using both approaches.
+        </p>
+        <p>
+          It should be noted that one of the comments to the <i>askubuntu.com</i> answer given above suggests using "<i>US internation [sic] with dead keys</i>"
+          (no <i>Alt Gr</i> in the description). I experimented with that keyboard layout as well but found no way to enter those dead keys (<code>` " ^ ~ '</code>).
+          In contrast, in the "<it>English (international with Alt Gr dead keys)</it>" keyboard layout those keys become "dead" only when <i>Alt Gr</i> is pressed.
+        </p>
+        <p>Finally note that I have four characters per key even though I left the keyboard settings (under typing) 
+           in the default position (i.e. Compose Key: Disabled, Alternative Characters Key: Disabled) &mdash; it's a bit confusing
+          that this still works even though the "<i>Alternative Characters</i>" key appears to be disabled but it's working nonetheless and I
+          am happy to leave it at that.
+        </p>
+    </ol>
+  </body>
+</html>
