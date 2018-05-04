@@ -1,0 +1,36 @@
+
+$ wget https://repo.skype.com/latest/skypeforlinux-64.deb
+--2018-05-01 04:42:12--  https://repo.skype.com/latest/skypeforlinux-64.deb
+Resolving repo.skype.com (repo.skype.com)... 207.180.128.247, 2600:1408:20:384::1263, 2600:1408:20:38c::1263
+Connecting to repo.skype.com (repo.skype.com)|207.180.128.247|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 82425142 (79M) [application/x-debian-package]
+Saving to: ‘skypeforlinux-64.deb’
+
+skypeforlinux-64.de 100%[===================>]  78.61M  2.91MB/s    in 34s
+
+2018-05-01 04:42:46 (2.33 MB/s) - ‘skypeforlinux-64.deb’ saved [82425142/82425142]
+
+constantine@ThinkPad-T510:~#
+$ sudo dpkg -i skypeforlinux-64.deb
+[sudo] password for constantine:
+Selecting previously unselected package skypeforlinux.
+(Reading database ... 222704 files and directories currently installed.)
+Preparing to unpack skypeforlinux-64.deb ...
+Unpacking skypeforlinux (8.20.0.9) ...
+Setting up skypeforlinux (8.20.0.9) ...
+Processing triggers for bamfdaemon (0.5.3~bzr0+16.04.20180209-0ubuntu1) ...
+Rebuilding /usr/share/applications/bamf-2.index...
+Processing triggers for gnome-menus (3.13.3-6ubuntu3.1) ...
+Processing triggers for desktop-file-utils (0.22-1ubuntu5.1) ...
+Processing triggers for mime-support (3.59ubuntu1) ...
+Processing triggers for hicolor-icon-theme (0.15-0ubuntu1) ...
+constantine@ThinkPad-T510:~#
+
+$ sudo apt install -f
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+constantine@ThinkPad-T510:~#
+$ 
