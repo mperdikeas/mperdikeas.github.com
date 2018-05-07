@@ -143,19 +143,38 @@ sudo usb-creator-kde</pre>
         </p>
         <p>
           In the end, after considerable experimentation (in which I also tried some French-language keyboard layouts) I ended up using
-          the "<it>English (international with Alt Gr dead keys)</it>" keyboard layout as advised in <a href='https://askubuntu.com/a/333242/89663'>this
-          askubuntu.com answer</a>.
+          the "<i>English (international with Alt Gr dead keys)</i>" keyboard layout as advised in <a href='https://askubuntu.com/a/333242/89663'>this
+          askubuntu.com answer</a> (which references <a href='http://forum.ubuntu-fr.org/viewtopic.php?pid=213071#p213071'>this post][1] on french Ubuntu forums</a>).
+        </p>
+        <p>
+          Basically, this layout works as follows:
+          The keys to input the characters <kbd>'</kbd>, <kbd>"</kbd>, <kbd>`</kbd>, <kbd>~</kbd>, and <kbd>^</kbd> become "dead keys" while 
+          you hold pressed <kbd>Alt Gr</kbd>. After releasing the key combination with <kbd>Alt Gr</kbd>, no characters will be printed (hence "dead"), 
+          but inserting a letter afterwards will yield a variation of the base character of the letter, in accordance with the dead key you pressed
+          before; for example, `é`, `ë`, `è`, `ẽ`, and `ê` for `e` (respectively). (If you have no explicit <kbd>Alt Gr</kbd> key, just use the rightmost <kbd>Alt</kbd> key.)
+        </p>
+        <p>
+          So in summary, using the "<i>English (international with Alt Gr dead keys)</i>" keyboard layout, to insert a symbol:
+          <ol>
+            <li>press and hold <kbd>Alt Gr</kbd>,</li>
+              <li>press the modifier key / key combination; e.g., <kbd>`</kbd>,</li>
+              <li>release all keys pressed so far, and</li>
+              <li>press the base character key; e.g., <kbd>E</kbd> for `è`.</li>
+          </ol>
+          <i>Note</i>: You can also enter an acute accented vowel by just pressing <kbd>Alt Gr</kbd> + <kbd>(vowel)</kbd>.
         </p>
         <p>
           This method provides a very intuitive way to combine various accents and diacritics with characters (<b>TODO</b>: I think this also enables the tilda
           used in Spanish senor). The cedila is available with the
-          <code>ALT+,</code> combo as advised <a href='https://superuser.com/a/1076106/138891'>here</a>. Also one still retains four distinct characters / graphemes
-          per key depending on the combination used:
+          <kbd>ALT</kbd>+<kbd>,</kbd> combo as advised <a href='https://superuser.com/a/1076106/138891'>here</a>.
+        </p>
+
+        <p>In addition to the escape mechanism described above, one still retains four distinct characters / graphemes per key depending on the combination used:
           <ul>
             <li>key alone</li>
-            <li><code>SHIFT</code> + key</li>
-            <li><code>Alt Gr</code> + key</li>
-            <li><code>SHIFT</code> + <code>Alt Gr</code> + key</li>                        
+            <li><kbd>SHIFT</kbd> + key</li>
+            <li><kbd>Alt Gr</kbd> + key</li>
+            <li><kbd>SHIFT</kbd> + <kbd>Alt Gr</kbd> + key</li>                        
           </ul>
           &hellip; so many accented characters can be entered using both approaches.
         </p>
