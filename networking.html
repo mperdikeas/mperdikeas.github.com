@@ -5,6 +5,46 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to send an HTTP POST request directly to a server socket and read the response</li>
+      <p>I was experimenting with a multipart POST failure and so I wrote the following script to directly send a POST request to some socket and read back the response from the same socket:
+        <pre>
+#!/usr/bin/env bash
+if [[ ($# -ne 1) ]]
+then
+    echo "usage is $0 <file holding the request to send to server>"
+else
+    FILE=$1
+    exec 3<>/dev/tcp/some.server.edu/80 && cat $FILE >&3 && cat <&3
+fi</pre>
+      </p>
+      <p>
+        E.g. in my case the request that was failing was:
+        <pre>
+POST /csccli/getProperties?outputFormat=vot HTTP/1.1
+Content-Type: multipart/form-data
+Content-Length: 332
+Host: some.server.cfa.harvard.edu
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.2 (Java/1.7.0_95)
+Accept-Encoding: gzip,deflate
+
+---~.-~.-~.-~.-~.-~.-~.-~.-~.
+Content-Disposition: form-data; name="query"
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 8bit
+
+SELECT COUNT(*) FROM master_source
+
+---~.-~.-~.-~.-~.-~.-~.-~.-~.--</pre>
+      </p>
+      <p>
+        The above POST request was failing because the server couldn't find the
+        <i>query</i> parameter which seemed weird to me (at that time) as the
+        request clearly includes such a parameter.
+        I eventually discovered that the failure was due to the fact that
+        <tt>Content-Type</tt> header also has to indicate the boundary in case
+        of multipart requests.
+      </p>
       <li>how to find saved wifi password</li>
       Sources:
       <a href='https://www.idiotinside.com/2015/02/16/how-to-find-saved-wifi-password-via-command-line-in-ubuntu/'>here</a> and <a href='https://askubuntu.com/a/371986/89663'>here</a>.
