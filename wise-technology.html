@@ -16,6 +16,8 @@
 <h1>Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.</h1>
 
 <ul>
+    <li><a href='#static-typing-vs-type-inference'>Static typing vs. type inference</a></li>
+    <li><a href='#javascript-evolution'>JavaScript evolution</a></li>
     <li><a href='#essential-vs-incidental-complexity'>Essential vs. incidental complexity</a></li>
     <li><a href='#failing-abstractions'>failing abstractions (evil twin / if thou stare long into an abyss)</a>  
     <li><a href='#battling-complexity'>battling complexity</a>
@@ -45,6 +47,30 @@
   </ul>
 <br/>
 <br/>
+
+<h2 id='static-typing-vs-type-inference'>Static Typing versus Inference</h2>
+<p>Using a statically typed language doesnt mean you need to add type signature everywhere, these are languages who lack a good type inference (like java).
+  In languages with good type inference (ocaml, f#, haskell), the compiler can infer the types, and check your code at compiler time.</p>
+<p>The style of programming change a bit with good inference, because you dont use types of arguments to document your code, or specify a behaviour or abstraction. You can create simple functions and compose that, because is not verbose and safe checked at compile time.</p>
+<p>[...] It is really easy to confuse statically typed languages with poor type inference (like Java), with others with good type inference (like ocaml). The program is compile checked in both cases, but the code is really different.
+
+<pre>
+public int Add(int a, int b) {
+  return a + b;
+}
+</pre>
+  vs.
+<pre>
+let add a b =
+  a + b
+</pre>
+</p>
+<a href='https://discuss.reactjs.org/t/if-typescript-is-so-great-how-come-all-notable-reactjs-projects-use-babel/4887/22'>source</a>
+<h2 id='javascript-evolution'>JavaScript Evolution</h2>
+<p>
+  We see a mostly linear progression for the JavaScript community from the days of plain scripts, to adding module systems, to adding compilers, to adding type systems.
+  <a href='https://discuss.reactjs.org/t/if-typescript-is-so-great-how-come-all-notable-reactjs-projects-use-babel/4887/2'>source</a>
+</p>
 
 <h2 id='essential-vs-incidental-complexity'>Essential vs. incidental complexity</h2>
 <p>
