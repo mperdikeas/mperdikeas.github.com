@@ -67,10 +67,9 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
   and I like to live as close to the command line as possible
   (though I can of course also use an IDE
   if required). In addition to writing the code I can
-  handle the build system (Ant / Ivy), unit testing, static code analysis, coding standards and automatic compliance checking
-  , code coverage,
-  integration testing, shell-scripting, etc.
-  I am also proficient  in JavaScript-the-language (ECMAScript 6) including
+  handle the build system (Ant / Ivy), unit testing, static code analysis, coding standards and automatic compliance checking,
+  code coverage, integration testing, shell-scripting, etc.
+  I am also proficient  in JavaScript (ECMAScript 6 and 7) including
   the Node / Babel / Webpack ecosystem and the Mocha (unit tests) and FlowType (type checking and static code analysis) tools.
 
 
@@ -97,14 +96,16 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
 \roottitle{Experience} % Top level section
 
 \headedsection % Employer name which can include a hyperlink and location/URL on the right side of the page
-    {\href{https://www.cfa.harvard.edu/}{Harvard-Smithsonian Center for Astrophysics}} {
+{\href{https://www.cfa.harvard.edu/sao}{Smithsonian Astrophysical Observatory }} {
+%    {\href{https://www.cfa.harvard.edu/}{Harvard-Smithsonian Center for Astrophysics}} {
 
 
 \headedsubsection % Job title entry for the current employer
 {SW Application Specialist (developer)}
 {October '16 -- now}
 {\bodytext{I am working at the {\href{http://cxc.harvard.edu/cda/}{Chandra Data Archive}}
-    at the Smithsonian Astrophysical Observatory (Cambridge MA). I am coding primarily in Java and JavaScript but also in Python.
+    at the Smithsonian Astrophysical Observatory which is part of the Harvard-Smithsonian Center for Astrophysics (Cambridge MA).
+    I am coding primarily in Java and JavaScript but also in Python.
   Projects and accomplishments in this position:
   \begin{itemize}
   \item Design and implementation of the new Chandra Source Catalog web-based application. The application will allow researchers
@@ -126,8 +127,8 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
     taken for granted in a modern authentication system (salted and peppered cryptographic hashes, auditing, etc.). \\
       \technologies{} HTML/CSS/DHTMLX/JavaScript, Java, JSP, JAX-RS (RESTEasy), Sybase.
     
-    \item Proactively advocated and implemented a new team-wide build system for Java WAR
-      and JAR applications and libraries . The new build system is based on Ant and Ivy
+    \item Advocated and implemented a new team-wide build system for Java WAR
+      and JAR applications and libraries. The new build system is based on Ant and Ivy
       (with a local file-system based repository) and guarantees
     fully reproducible builds with no Internet connectivity requirements (i.e. no dependencies are accessed or downloaded during
     the build). The new build system
@@ -164,6 +165,7 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
     \item designed and implemented the database and the REST server back-end of a graphical web application that displays statistics
       on the accumulated telemetry for the various missions.
   \end{itemize}
+  This project did not reach production phase.\\
   \technologies{} Java, ReactJS, JAX-RS, PostgreSQL 9.2, PL/pgSQL, JDBC, SQL.
 
 }}
@@ -193,7 +195,7 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
     \technologies{} Java, XPath 2.0 (Saxon), XSLT, REST (Jersey), HTTP, Tomcat 7
   \item the \href{http://www.ivoa.net/documents/RegTAP/}{RegTAP} functionality and interface. I came into the project with \textbf{zero} domain-specific
     knowledge and I managed to implement the second, globally, RegTAP search interface and make material
-    contributions to the RegTAP specification itself to the effect that I was recognized as a co-author of the spec.\\
+    contributions to the RegTAP specification itself to the extent that I was recognized as a co-author of the spec.\\
     \technologies{} Java, XPath 2.0 (Saxon), REST (Jersey), JDBC, Tomcat 7
   \item the \href{http://www.ivoa.net/documents/RegistryInterface/20091104/REC-RegistryInterface-1.0.pdf}{IVOA RI1} Search interface. This is a \href{https://en.wikipedia.org/wiki/SOAP}{SOAP interface}, defined in WSDL (i.e. following a top-down approach). 
     Due to the complexity of the XSDs used by the IVOA community I ran into problems with the automatic stub
@@ -238,15 +240,13 @@ menelaos.perdikeas \textit{(Skype)}\bull % Your phone number(s) and Skype userna
     \item designed and developed all the server-side code for an expert system that advises farmers
       on the subsidies they are entitled to apply for. I devised a formal way to capture the legal requirements
       for each subsidy in the form of \href{https://en.wikipedia.org/wiki/S-expression}{Lisp S-expressions}.
-      Essentially, each subsidy ministerial decision is
-      modelled as a declarative, Lisp-like \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL}.
+      The provisions and rules of each ministerial decision involving subsidies are
+      modelled in the form of a declarative, Lisp-like \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL}.
       Then the system reads from the database the profile of each user (age, income, past subsidies, location
       and size of fields, crops, animal capital) and dynamically evaluates them against all possible subsidies.
-      The system finally informs the user which subsidies (s)he can apply for and also creates
-      a visual diagram that explains to the users why they failed to qualify for certain subsidies.
-      S-expressions were used in order to allow for dynamic evaluation and also because the company wanted
-      the DSL logic / script to be created by business people. Therefore, Lisp S-expressions were chosen
-      for their reduced mental baggage, as Lisp requires one to use no syntax except for opening and closing parenthesis.\\
+      The system finally informs the user which subsidies (s)he can apply for (based on their circumstances
+      and the rules encoded in each ministerial decision) and also creates
+      a visual diagram that explains to the users why they failed to qualify for certain subsidies.\\
       \technologies{} \href{https://clojure.org/}{Clojure} (for
       the dynamic evaluation of the S-expressions), dynamic evaluation of Clojure code from Java,
       \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{DOT} (for visualizing
@@ -455,13 +455,13 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
 {Technical specialties:}
 {Software design and implementation, alone or in a team. I am a professional Java / JavaScript coder but 
-  have also written production code in C, C++ and (more recently) Python and Clojure.
-  Also, non-production code in OCaml. I am very comfortable
-  at the command line and casually write Bash one-liners daily.
-  \underline{Solid knowledge of the following technologies}: Java 7 (SE and EE), Ant/Ivy, HTML/CSS/JavaScript (ECMAScript 2016), ReactJS, Spring Web MVC,
-  \acr{XML}, \acr{XPath}, \acr{XSD}, \acr{REST}, \acr{SOAP}, relational databases (Sybase, Oracle, MySQL, PostgreSQL).
+  have also written production code in Python, Clojure and (in another life) C and C++.
+  I am very comfortable
+  at the command line and casually write Bash one-liners daily.\\
+  \underline{Solid knowledge of the following technologies}: Java 7 (SE and EE), Ant/Ivy, HTML/CSS/JavaScript (ECMAScript 6 and 7), ReactJS, Spring Web MVC,
+  \acr{XML}, \acr{XPath}, \acr{XSD}, \acr{REST}, \acr{SOAP}, relational databases (PostgreSQL, Oracle, MySQL, Sybase).
   \underline{Administration skills}:\ Linux administration, Bash scripting, Apache Tomcat, JBoss, PostgresSQL.
-  \underline{Source control}: ClearCase, Subversion, Git.
+  \underline{Source control}:  Git, Subversion, ClearCase.
 }
 
 \inlineheadsection{}{}
@@ -469,7 +469,7 @@ I was technical project manager for the EGOS Visualization Tool for ESOC (Contra
 
 \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
 {Natural languages:}
-{Greek \textit{(mother tongue)}, English \textit{(full professional proficiency: Cambridge Certificate of Proficiency in English, Grade A)}, Spanish \textit{(elementary)}}
+{Greek \textit{(mother tongue)}, English \textit{(full professional proficiency: Cambridge Certificate of Proficiency in English, Grade A)}, Spanish \textit{(A1 level--no degree)}}
 
 \spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
 
@@ -544,15 +544,15 @@ Available upon request.
 
 \spacedhrule{1.6em}{-0.4em} % Horizontal rule - the first bracket is whitespace before and the second is after
 
-%----------------------------------------------------------------------------------------
-%	INTERESTS SECTION
-%----------------------------------------------------------------------------------------
-
-\roottitle{Interests} % Top level section
-
-\inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
-{}
-{Optimizing my environment, setup and workflow: Emacs, JavaScript, ReactJS, Linux, i3 window manager, \LaTeX; Math, Chess, boardgames.}
+% %----------------------------------------------------------------------------------------
+% %	INTERESTS SECTION
+% %----------------------------------------------------------------------------------------
+% 
+% \roottitle{Interests} % Top level section
+% 
+% \inlineheadsection % Special section that has an inline header with a 'hanging' paragraph
+% {}
+% {Optimizing my environment, setup and workflow: Emacs, JavaScript, ReactJS, Linux, i3 window manager, \LaTeX; Math, Chess, boardgames.}
 
 %----------------------------------------------------------------------------------------
 
