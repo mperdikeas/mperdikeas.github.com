@@ -5,12 +5,99 @@
 </head>
 <body>
 <ol reversed class=main-list-items>
-    <li id='jersey-1.9-cors'>how to configure Jersey 1.9 to support HTTP access control CORS (Cross-Origin Resource Sharing)</li>
-    <a href="http://stackoverflow.com/a/28067653/274677">source</a>
-    <br/>
-    I have created an <a href="https://github.com/mperdikeas/archetypes/tree/master/jax-rs/003-jaxrs-how-to-configure-CORS">archetype project</a> to exemplify just that.
-    <li>how to configure JAX-RS services for deployment in a Web container</li>
-    This <a href='http://stackoverflow.com/a/23041643/274677'>answer</a> to a question of mine in SO is very thorough.
+  <li id='jersey-1.9-cors'>how to configure Jersey 1.9 to support HTTP access control CORS (Cross-Origin Resource Sharing)</li>
+  <a href="http://stackoverflow.com/a/28067653/274677">source</a>
+  <br/>
+  I have created an <a href="https://github.com/mperdikeas/archetypes/tree/master/jax-rs/003-jaxrs-how-to-configure-CORS">archetype project</a> to exemplify just that.
+  <li>how to configure JAX-RS services for deployment in a Web container</li>
+  This <a href='http://stackoverflow.com/a/23041643/274677'>answer</a> to a question of mine in SO is very thorough.
+  <li>SPA / REST interplay with alternate Tomcat / JBoss deployments and CORS configuration for a Jersey 2 application</li>
+  Checkout
+  <a href='https://github.com/mperdikeas/playground/tree/master/spa-REST-architectures/000-REST-spa-and-third-JSP-user-app'>
+    this project
+  </a>
+  in my playground that shows how to achieve interplay between a SPA application and a REST backend using the Jersey 2
+  JAX-RS implementation under a variety of CORS configuration
+  approaches (and also attempting but <b><a href='http://stackoverflow.com/q/41352551/274677'>not succeeding</a></b>
+  to achieve deployment in both Tomcat and JBoss EAP 6.2).
+  <li>SPA / REST interplay with an JBoss EAP 6.4.0 deployment and CORS configuration for a RESTEasy application</li>
+  <p>
+    Checkout
+    <a href='https://github.com/mperdikeas/playground/tree/master/spa-REST-architectures/001-REST-spa-for-JBoss'>
+      this project
+    </a>
+    in my playground that shows how to achieve interplay between a SPA application and a REST backend using the RESTEasy
+    JAX-RS implementation and deployed in the JBoss EAP 6.4.0 server.
+  </p>
+  <p>Also, <a href='https://github.com/mperdikeas/playground/tree/master/spa-REST-architectures/001-REST-spa-for-JBoss/search-application/search-REST-backend'>this</a> particular application (further into the above project) shows how to achieve
+    JAX-RS deployment with the RESTEasy implementation using either the "scanner" or the "application" approach.
+  </p>
+  <p>
+    In the context of this travail, I posted this <a href='http://stackoverflow.com/q/41368698/274677'>SO question</a>
+    and drew heavily (but not without changes) from <a href='http://www.mkyong.com/webservices/jax-rs/resteasy-hello-world-example/'>this blog post</a>.
+  </p>  
+  <li>configuration for Jersey 2 in Tomcat 8.5</li>
+  <a href='jersey-2.html.files/configuration-of-jersey-in-tomcat.html'>notes for a particular configuration of Jersey 2
+    in Tomcat 8.5 (December 2016)</a>  
+  <li>annotation corresondances between Spring MVC and JAX-RS</li>
+  Sources:
+  <a href='https://dzone.com/articles/lets-compare-jax-rs-vs-spring-for-rest-endpoints'>1</a>,
+  <a href='https://stormpath.com/blog/jax-rs-vs-spring-rest-endpoints'>2</a>,
+  <a href='https://stackoverflow.com/a/42955575/274677'>3</a>,
+  <table>
+    <thead>
+      <tr>
+        <th>Spring Annotation</th>
+        <th>JAX-RS Annotation</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>@RequestMapping(path = "/troopers"</code></td>
+        <td><code>@Path("/troopers")</code></td>
+      </tr>
+      <tr>
+        <td><code>@RequestMapping(method = RequestMethod.POST)</code></td>
+        <td><code>@POST</code></td>
+      </tr>
+      <tr>
+        <td><code>@RequestMapping(method = RequestMethod.GET)</code></td>
+        <td><code>@GET</code></td>
+      </tr>
+      <tr>
+        <td><code>@RequestMapping(method = RequestMethod.DELETE)</code></td>
+        <td><code>@DELETE</code></td>
+      </tr>
+      <tr>
+        <td><code>@ResponseBody</code></td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><code>@RequestBody</code></td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td><code>@PathVariable("id")</code></td>
+        <td><code>@PathParam("id")</code></td>
+      </tr>
+      <tr>
+        <td><code>@RequestParam("xyz")</code></td>
+        <td><code>@QueryParam('xyz")</code></td>
+      </tr>
+      <tr>
+        <td><code>@RequestParam(value="xyz"</code></td>
+        <td>@FormParam(&#8220;xyz&#8221;)</td>
+      </tr>
+      <tr>
+        <td><code>@RequestMapping(produces = {"application/json"})</code></td>
+        <td><code>@Produces("application/json")</code></td>
+      </tr>
+      <tr>
+        <td><code>@RequestMapping(consumes = {"application/json"})</code></td>
+        <td><code>@Consumes("application/json")</code></td>
+      </tr>
+    </tbody>
+  </table>
 </ol>
 </body>
 </html>
