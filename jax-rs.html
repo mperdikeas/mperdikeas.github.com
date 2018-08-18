@@ -98,6 +98,45 @@
       </tr>
     </tbody>
   </table>
+  <li>two methods of returning a JSON response (not a view) from a Spring MVC controller</li>
+<p>
+  I've tested the below with Spring Web MVC 4.3.5:
+<pre>
+
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RequestParam;
+    import org.springframework.web.bind.annotation.RequestMethod;
+    import org.springframework.web.bind.annotation.ResponseBody;
+
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.http.MediaType;
+    import org.springframework.http.HttpHeaders;
+    import org.springframework.http.HttpStatus;
+
+    @RequestMapping(path="/example-of-method-1-of-generating-a-JSON-response", method=RequestMethod.GET)
+    public ResponseEntity<String> fooBar(final HttpServletRequest request
+                         , @RequestParam(value="json", required=true) String json) {
+        final HttpHeaders httpHeaders= new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return new ResponseEntity<String>(GsonHelper.toJson(new FooBar(json)), httpHeaders, HttpStatus.OK);
+    }
+
+    @ResponseBody
+    @RequestMapping(path="/example-of-method-2-of-generating-a-JSON-response", method=RequestMethod.GET)
+    public String fooBar2(final HttpServletRequest request
+                         , @RequestParam(value="json", required=true) String json) {
+        return GsonHelper.toJson(new FooBar(json));
+    }
+
+    ...
+    class FooBar {
+        public String echo;
+        public FooBar(String echo) {
+            this.echo = echo;
+        }
+    }
+</pre>
+</p>
 </ol>
 </body>
 </html>

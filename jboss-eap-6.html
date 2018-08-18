@@ -8,6 +8,10 @@
   <body>
     <h1 style='font-size: 110%'>JBoss EAP 6 notes</h1>
     <ol reversed class='main-list-items'>
+      <li>some examples of the management CLI DSL used to apply overlays to deployed WARs</li>
+      <pre>
+deployment-overlay --name=foo --content=WEB-INF/web.xml=cxcaccount-web.xml --deployments=cxcaccount.war --action=add
+deployment-overlay --name=foo --action=remove</pre>
       <li>how to configure TLS</li>
       <p>
         <a href='https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html'>source #1</a>,

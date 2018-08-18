@@ -352,7 +352,7 @@ sp_helpconstraint &lt;table-name&gt;;</pre>
     <dl class='one-line one-line-25-75'>
       <dt>show information on databases</dt><dd><code>sp_helpdb</code></dd>      
       <dt>show a lot of information on a table</dt><dd><code>sp_help sometablename</code></dd>
-      <dt>show the columns of a table or a SP</dt><dd><code>sp_cols sometable</code></dd>
+      <dt>show the columns of a table or a SP</dt><dd><code>sp_cols sometable</code>. Also <code>sp_colsn</code> is similar except in that it prints the columns in alphabetical order (and in that sense can be simulated with a <code>sp_cols sometable; | sort</code></dd>
       <dt>show privilleges of user</dt><dd><code>sp_helprotect &lt;username&gt;</code></dd>
       <dt>show permissions on object</dt><dd><code>sp_helprotect &lt;object&gt;</code> (same SP as above, it can polymorphically accept as an argument either the name of an object or the name of a user)</dd>
       <dt>show tables</dt><dd><code>sp_ls</code></dd>
