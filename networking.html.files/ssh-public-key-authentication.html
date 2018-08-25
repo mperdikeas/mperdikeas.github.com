@@ -4,8 +4,12 @@
     <link rel='icon' href='/knowledge-favicon.ico'/>
   </head>
   <style>
-   h1 {font-size: 130%;}
-   h2 {font-size: 110%;}
+   h1, h2, h3 {
+     color: purple;
+     }
+   h1 {font-size: 140%; text-decoration: underline;}
+   h2 {font-size: 110%; text-transform: uppercase;}
+   h3 {font-size: 100%;}
   </style>
   <body>
     <h1>Get rid of the need to type-in passwords in SSH connections using SSH public key authentication</h1>
@@ -30,12 +34,22 @@
         if you try to add an additional key using the more automated way described below.
       </ol>
       <h2>more automated way</h2>
-      Recently I did the following (<a href='http://unix.stackexchange.com/a/27052/24044'>source</a>) and it worked like a charm (provided the <code>~/.ssh/authorized_keys</code>
-      file at the destination machine ends with an end-of-line character (<tt>0x0A</tt> in real operating systems).
-      From the source machine:
-      <pre>
-ssh-copy-id -i  ~/.ssh/id_rsa.pub youraccountname@destination.machine.com</pre>
-      <h2>caveats</h2>
+      <p>
+        Recently I did the following (<a href='http://unix.stackexchange.com/a/27052/24044'>source</a>) and it worked like a charm (provided the <code>~/.ssh/authorized_keys</code>
+        file at the destination machine ends with an end-of-line character (<tt>0x0A</tt> in real operating systems).
+        From the source machine:
+        <pre>
+ssh-copy-id -i  ~/.ssh/id_rsa.pub youraccountname@destination.machine</pre>
+      </p>
+      <h3>update 2018 August</h3>
+      <p>
+        I used the following (also from the source machine):
+        <pre>cat ~/.ssh/id_rsa.pub | ssh youraccountname@destination.machine "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"</pre>
+        &hellip; as advised <a href='https://askubuntu.com/a/262074/89663'>here</a>.
+        The advantage of this method is that it does not require the <tt>ssh-copy-id</tt> program to be installed
+        on the source machine.
+      </p>
+      <h2 id='caveats'>caveats</h2>
       <ol>
         <li>I have also encountered cases where it was necessary to do the following in machine <b>B</b>:
           <ul>
@@ -45,12 +59,9 @@ ssh-copy-id -i  ~/.ssh/id_rsa.pub youraccountname@destination.machine.com</pre>
           &hellip; this is described in the <a href='#source'>source</a>. Unless I applied
           those permissions <tt>ssh</tt> would still ask me for a password.
         </li>
-        <li>I have also encountered cases where public authentication (referred to
+        <li id='caveats-passwordless-ssh-disabled'>I have also encountered cases where public authentication (referred to
           by the sysadmin people as "passwordless SSH") was disabled for "security reasons" (whatever).</li>
       </ol>
-      <p>
-        
-      </p>
     </p>
   </body>
 </html>
