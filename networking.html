@@ -5,6 +5,20 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to use HTTP Basic Authentication with either wget or curl</li>
+      <p>
+        Using <tt>wget</tt>:
+        <pre>wget -q -d -S -O - --auth-no-challenge --http-user=USERNAME --http-password=PASSWORD 'https://example.com/some/path?a=1&b=2'</pre>
+        Using <tt>curl</tt>:
+        <pre>curl -v --user USERNAME:PASSWORD 'https://example.com/some/path?a=1&b=2'</pre>
+      </p>
+      <p>
+        As an added bonus, the verbose output on both incantation reveals (among other things):
+        <ul>
+          <li>whether or not the SSH handshake is successful</li>
+          <li>the encoded HTTP Request Authentication header (e.g. <tt>Authorization: Basic Y3hjbG9naW4tZ2VuZXJpYy1jbGllbnQtYXBwLnVzZXJuYW1lOmN4Y2xvZ2luLWdlbmVyaWMtY2xpZW50LWFwcC5wd2Q=</tt>)</li>
+        </ul>
+      </p>
       <li>how to send an HTTP POST request directly to a server socket and read the response</li>
       <p>I was experimenting with a multipart POST failure and so I wrote the following script to directly send a POST request to some socket and read back the response from the same socket:
         <pre>
