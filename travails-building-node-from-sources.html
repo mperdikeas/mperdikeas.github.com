@@ -64,6 +64,7 @@ v8.11.4</pre>
         <pre>make test-only</pre>
         &hellip; this was also executed successfully.
       </p>
+      <h2>setting up the environment (the wrong way)</h2>
       <p>Following the above I placed the <tt>out/Release</tt> directory ahead of my <tt>PATH</tt>
         in my <tt>.bashrc</tt> file and sure enough:
         <pre>
@@ -76,6 +77,19 @@ v8.11.4</pre>
         <pre>
 ln -s ../../deps/npm/bin/npm-cli.js npm</pre>
         See also <a href='https://github.com/nodejs/help/issues/1467'>my question in the <tt>nodejs</tt> github issue tracker</a>.
+      </p>
+      <h2>setting up the environment (the right way)</h2>
+      <p>
+        Some time after the above I received a reply in the github issue tracker to the effect that
+        I simply have to to run the makefile's <tt>install</tt> target specifying <tt>PREFIX</tt>.
+        This automatically takes care of creating the expected <tt>npm</tt> symlinks (alongside
+        the <tt>node</tt> executable).
+      </p>
+      <p>
+        Given this information, I executed the following:
+        <pre>make install PREFIX=/home/mperdikeas/node/8.11.4/</pre>
+        &hellip; which worked like a charm and then I updated the PATH in my <tt>.bashrc</tt>
+        accordingly.
       </p>
     </article>
 
