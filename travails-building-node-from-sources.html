@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+
+  </style>
+  <body>
+    <header>
+      <h1>How I build Node from sources on Ubuntu 16.04 (August 2018)</h1>
+      <hr>
+    </header>
+    <article>
+      <p>
+      This is a writeup of how I built the latest stable version of <tt>node</tt>
+      (v8.11.4 at the time of this writing) from sources and how I setup <tt>node</tt>
+      and <tt>npm</tt> to be used from the custom build location (and not be installed
+        system-wide, e.g. as in <tt>/usr/bin</tt>).
+      </p>
+      <p>
+        See in <a href='admin.html#node-8-pre-built-binaries'>this note</a> on how to
+        get <tt>node</tt> with pre-built binaries.
+      </p>
+      <h2>preliminaries</h2>
+      <pre>
+sudo apt-get install make g++ libssl-dev git</pre>
+      <h2>actual build</h2>
+      <p>
+        Fetch and explode the sources:
+        <pre>
+wget https://nodejs.org/dist/v8.11.4/node-v8.11.4.tar.gz
+tar xv node-v8.11.4.tar.gz
+cd node-v8.11.4</pre>
+      </p>
+      <p>
+        I then <tt>cd</tt> into node-v8.11.4/ and created an HTML out of <i>BUILDING.md</i>
+        (using <code>pandoc -s --toc BUILDING.md -o /tmp/building.html</code>)
+      </p>
+      <p>
+        On the supported platforms section I saw that for GNU/Linux x64, (Tier 1 support)
+        the requirements are: <tt>kernel >= 2.6.32, glibc >= 2.12</tt>. Using <tt>uname -r</tt>
+        and <tt>/lib/i386-linux-gnu/libc.so.6</tt> I saw that I had (on my Ubuntu 16.04 machine)
+        the <tt>4.6.0</tt> Linux kernel and the <tt>2.23</tt> glibc (GNU C Library)
+        so everything was clear to proceed.
+      </p>
+      <p>Following the above, the following (I used <tt>-j4</tt> as I have 4 processors on my machine):
+        <pre>
+./configure
+make -j4</pre>
+        &hellip; worked like a charm (both <tt>configure</tt> and <tt>make -j4</tt> exited with 0)
+      </p>
+      <p>
+        The produced binary is available at <tt>out/Release/node</tt>
+        <pre>
+$ ./out/Release/node --version
+v8.11.4</pre>
+      </p>
+      <h2>running tests</h2>
+      <p>
+        The instructions on <i>BUILDING.md</i> mention a way of running tests:
+        <pre>make test-only</pre>
+        &hellip; this was also executed successfully.
+      </p>
+      <p>Following the above I placed the <tt>out/Release</tt> directory ahead of my <tt>PATH</tt>
+        in my <tt>.bashrc</tt> file and sure enough:
+        <pre>
+$ node --version
+v8.11.4</pre>
+      </p>
+      <h2>using <tt>npm</tt> from sources</h2>
+      <p>Given that the <tt>node-v8.11.4/out/Release</tt> directory is now in the <tt>$PATH</tt>
+        I simply created a symlink from that directory to the file <tt>npm-cli.js</tt>:
+        <pre>
+ln -s ../../deps/npm/bin/npm-cli.js npm</pre>
+        See also <a href='https://github.com/nodejs/help/issues/1467'>my question in the <tt>nodejs</tt> github issue tracker</a>.
+      </p>
+    </article>
+
+  </body>
+</html>
