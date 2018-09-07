@@ -4,6 +4,16 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>Find the default database for a particular user</li>
+    <pre>
+SELECT name, dbname FROM master.dbo.syslogins WHERE name='username';
+</pre>
+    <li>list stored procedures in a database (shows owner too)</li>
+    <pre>sp_stored_procedures</pre>
+    <li>how to view dependencies to / from a view in a database</li>
+    <pre>sp_depends viewname;</pre>
+    <li>how to list all views in a database</li>
+    <pre>sp_tables @table_type="'VIEW'";</pre>
     <li>how to find <i>all</i> constraints in a database</li>
     <p>
       The below query shows all constraints in a database, the tables
