@@ -4,6 +4,12 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>show the currently connected user</li>
+    <pre>select suser_name();</pre>
+    <li>show login name and alias of a user</li>
+    <pre>sp_helpuser johndoe</pre>
+    &hellip; or <pre>sp_helpuser</pre> &hellip; to see info on all users.
+    See also <tt>sp_addalias</tt>
     <li>Find the default database for a particular user</li>
     <pre>
 SELECT name, dbname FROM master.dbo.syslogins WHERE name='username';
