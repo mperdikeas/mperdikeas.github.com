@@ -4,6 +4,77 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>Sybase documentation online</li>
+    <ul>
+      <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
+      <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
+    </ul>
+    <li>how to find the owner of a particular SP</li>
+    <p>
+      source: DVS gmail (CfA) 2018-09-20 (edited)
+    </p>
+    <p>
+      <pre>SELECT CAST(loginame AS VARCHAR(20)), CAST(name AS VARCHAR(20)) FROM sysobjects WHERE type="P"</pre>
+      &hellip; the above fetches the "server user name" a.k.a. "login (account) name" of the owner.
+    </p>
+    <p>If, instead, you want the database-specific id, do:
+<pre>SELECT object_owner_id(id), CAST(name AS VARCHAR(20)) FROM sysobjects WHERE type="P";</pre>
+    </p>
+    <p>To get, in addition to the above, the local, database-specific username do:
+<pre>SELECT u.name user_name, CAST(o.name AS VARCHAR(20)) FROM sysusers u INNER JOIN sysobjects o ON u.uid=o.uid AND o.type="P";</pre>
+    </p>
+    <li>server user names (login names) and user names</li>
+    <p>
+      Relevant sections from the documentation:
+      <ul>
+        <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1570/html/sec_admin/X11284.htm'>
+        ASE 15.7 SP 100 - Security Administration Guide - Chapter 3: Managing Adaptive Server Logins and Database Users</a></li>
+      </ul>
+    </p>
+    <p>
+      When a new user needs to connect to a SQL Server, the first thing
+      that needs to be done is for the Security Officer (SO) to create a new "login account".
+      The login is at the level of the server as a whole, and is not tied
+      to a particular database (even though some default database may
+      optionally be chosen so that the user doesn't have to type <tt>'use &lt;dbname&gt;'</tt>once he's in.
+    </p>
+    <p>It follows therefore, that the login name chosen by the SO
+      must be unique. This name is also known as "Server User Name"
+      and is not to be confused with the DB-specific usernames.
+      Once the SO executes the <b><tt>create login</tt></b>
+      command, a new row is added in the <b><tt>master.dbo.syslogins</tt></b>
+      table. This row includes:
+      <ul>
+        <li>the login name (a.k.a. server user name &mdash; not to be confused with the database-specific usernames)</li>
+        <li>the unique Server User ID (suid) for the new user</li>
+      </ul>
+    </p>
+    <p>Subsequently, when a DataBase Owner (DBO) or System Administrator (SA)
+      can use <tt><b>sp_adduser</b></tt> to add a login account to a specific
+      database (<a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/BCFIJEEG.htm'>source</a>).
+      At that point, the DBO or SA can optionally assign a "name_in_db"
+      which maybe different than the login name and by which the user will
+      be known inside that particular database. Otherwise the username in
+      the database will be the user's login name. The <tt>sp_adduser</tt> SP
+      adds a row in the <tt><b>sysusers</b></tt> system table in that
+      database. When a user has an entry in the <tt>sysusers</tt> table
+      of a database he can issue <tt>use <i>database_name</i></tt> to
+      access that database.
+    </p>
+    <p>
+      The following diagram shows the correspondances between the most
+      important columns of tables <b>syslogins</b> and <b>sysusers</b>
+      as discussed above (and also includes <b>sysobjects</b>):
+      <div>
+        <a href='sybase-ase.html.files/syslogins-sysusers-sysobjects.png'>
+          <img src='sybase-ase.html.files/syslogins-sysusers-sysobjects.png'
+               width=200px height=170px >
+        </a>
+      </div>
+
+    </p>
+    <li>find all logins in an ASE server</li>
+    <pre>SELECT suid, name, dbname FROM master.dbo.syslogins ORDER BY suid DESC;</pre>
     <li>show the currently connected user</li>
     <pre>select suser_name();</pre>
     <li>show login name and alias of a user</li>
