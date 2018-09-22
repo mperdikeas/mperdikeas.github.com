@@ -9,6 +9,20 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li>how to find the currently connected user (in squish)</li>
+    <p>
+      Currently connected login (server user name):
+      <pre>select suser_name()</pre>
+      Full information about the current login:
+      <pre>sp_displaylogin</pre>
+    </p>
+    <p>
+      Alias in the current DB (or name under which user is known in the DB)
+      <pre>select user</pre>
+      and:
+      <pre>select user_name()</pre>
+      (I haven't yet seen any difference between the two)
+    </p>
     <li>how to find the owner of a particular SP</li>
     <p>
       source: DVS gmail (CfA) 2018-09-20 (edited)
@@ -206,7 +220,7 @@ ORDER BY table_name;</pre>
 
     <li>Find a connection's user and all currently logged-in users and connections</li>
     <p>
-      To find which user is connected on the particualr connection we are in, use the <code>suser_name()</code> function. E.g. from <i>sqsh</i>:
+      To find which Server User (i.e. login account) is connected on the particualr connection we are in, use the <code>suser_name()</code> function. E.g. from <i>sqsh</i>:
       <pre>select suser_name();</pre>
     </p>
     <p>
