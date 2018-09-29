@@ -60,7 +60,15 @@ ssh-copy-id -i  ~/.ssh/id_rsa.pub youraccountname@destination.machine</pre>
           those permissions <tt>ssh</tt> would still ask me for a password.
         </li>
         <li id='caveats-passwordless-ssh-disabled'>I have also encountered cases where public authentication (referred to
-          by the sysadmin people as "passwordless SSH") was disabled for "security reasons" (whatever).</li>
+          by the sysadmin people as "passwordless SSH") was disabled for "security reasons" (whatever).
+          Apparently this is configured in the <tt>/etc/ssh/sshd_config</tt> file
+          where, for instance in my system where I have SSH public key
+          authentication enabled one sees:
+          <pre>PubkeyAuthentication yes</pre>
+          BTW, it is actually considered a best practice to <em>disable</em>
+          password-based authentication and only allow public key-based
+          authentication, i.e. the exact opposite of what those admins are doing!
+        </li>
       </ol>
     </p>
   </body>

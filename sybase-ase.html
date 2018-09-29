@@ -9,6 +9,21 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li>obtaining useful information about the current transaction (transaction depth and chained mode)</li>
+    <a href='https://dba.stackexchange.com/a/168813/34332'>source</a>
+    <p>
+      To see the current transaction's chaining mode:
+      <pre>SELECT @@tranchained</pre>
+      The result is either 0 or 1, per the following:
+<pre>
+0 = unchained
+1 = chained
+</pre>
+    </p>
+    <p>To see the current transaction "depth":
+      <pre>SELECT @@trancount</pre>
+      &hellip; where a value of 0 indicates that we are outside of any transaction.
+    </p>
     <li>how to find the currently connected user (in squish)</li>
     <p>
       Currently connected login (server user name):
@@ -99,8 +114,12 @@
     <pre>
 SELECT name, dbname FROM master.dbo.syslogins WHERE name='username';
 </pre>
-    <li>list stored procedures in a database (shows owner too)</li>
-    <pre>sp_stored_procedures</pre>
+    <li id='list-SPs-in-a-db'>list stored procedures in a database (shows owner too)</li>
+    <pre>sp_stored_procedures;</pre>
+    <p>
+      <strong>caveat:</strong> the above apparently only shows the SPs that the current user has <tt>EXECUTE</tt> permissions on. To see <em>all</em> SPs (regardless of <tt>EXECUTE</tt> privilleges) the below is more reliable:
+      <pre>sp_ls p;</pre>
+    </p>
     <li>how to view dependencies to / from a view in a database</li>
     <pre>sp_depends viewname;</pre>
     <li>how to list all views in a database</li>
@@ -161,10 +180,10 @@ ORDER BY table_name;</pre>
     <pre>select suid, name from sysusers;</pre>
     <li>list tables, triggers, stored procedures and views in a database</li>
     <dl>
-      <dt>list tables</dt><dd><code>sp_ls</code></dd>
-      <dt>list triggers</dt><dd><code>sp_ls t</code></dd>
-      <dt>list SPs</dt><dd><code>sp_ls p</code></dd>
-      <dt>list views</dt><dd><code>sp_ls v</code></dd>
+      <dt>list tables</dt><dd><code>sp_ls;</code></dd>
+      <dt>list triggers</dt><dd><code>sp_ls t;</code></dd>
+      <dt>list SPs</dt><dd><code>sp_ls p;</code>&nbsp;&mdash; see also the caveat <a href='#list-SPs-in-a-db'>here</a></dd>
+      <dt>list views</dt><dd><code>sp_ls v;</code></dd>
     </dl>
     <li>show max number of user connections on a database</li>
     <p>
@@ -198,7 +217,17 @@ ORDER BY table_name;</pre>
 
     <li id='schemas-and-sybase-table-access-notation'>Schemas, users and the <tt>dbname.username.tablename</tt> notation</li>
     <p>
-    Sybase ASE does not have a proper schema concept. Instead it conflates the concept of a user with that of the schema. Tables are thought to be owned by the user who created them. See <a href='https://stackoverflow.com/a/34725708/274677'>this SO answer</a> on the topic. As such the notation <tt>dbname.username.tablename</tt> is used with the meaning "<i>table <tt>tablename</tt> owned by user <tt>username</tt> in the database <tt>dbname</tt></i>"
+      Sybase ASE does not have a proper schema concept. Instead it conflates the concept of a user with that of the schema. Tables are thought to be owned by the user who created them. See e.g. <a href='https://stackoverflow.com/a/34725708/274677'>this SO answer</a> on the topic where we read:
+      <blockquote>
+Sybase ASE does not use the schema concept that SQL Server and Oracle use. Objects are located inside a database, and owned by a user - no other logical separations are there.        
+      </blockquote>
+      <a href='https://stackoverflow.com/a/35063370/274677'>This SO answer</a> is also pertinent, where we read:
+      <blockquote>
+        Oracle (and Microsoft) use a schema logical construct that Sybase ASE does not. In SAP/Sybase ASE, all tables and columns in a database are in the same schema. It is possible to users to have their own objects in the database though, so there is the possibility of imitating some of the schema behavior using user ownership, but it would require an extra level of effort.
+      </blockquote>
+    </p>
+    <p>
+      As such the notation <tt>dbname.username.tablename</tt> is used with the meaning "<i>table <tt>tablename</tt> owned by user <tt>username</tt> in the database <tt>dbname</tt></i>"
     </p>
     <p>This being said, since it is possible for different user to have different tables with the exact same name in the same database, this concept does allow one to user usernames as namespaces for tables much as the schemas are used in PostgreSQL to provide a namespace for table names.</p>
     <p>However, this is not the established convention. Instead, the established convention is the following:

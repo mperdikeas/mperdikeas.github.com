@@ -5,6 +5,14 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>find IP address of Internet host</li>
+      <p>
+        <pre>dig www.google.com</pre>
+        &hellip; also:
+        <pre>nslookup www.google.com</pre>
+      </p>
+      <p><span class='nb'>NB:</span>The <tt>dig</tt> program uses the OS resolver libraries and, as such, should be preferred over <tt>nslookup</tt>.</p>
+
       <li>how to use HTTP Basic Authentication with either wget or curl</li>
       <p>
         Using <tt>wget</tt>:
