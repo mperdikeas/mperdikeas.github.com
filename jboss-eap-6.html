@@ -8,6 +8,35 @@
   <body>
     <h1 style='font-size: 110%'>JBoss EAP 6 notes</h1>
     <ol reversed class='main-list-items'>
+      <li>how to add / configure management users</li>
+      <p>
+        In JBoss EAP 6, a <em>management user</em> is a user who can connect
+        to the JBoss administrative console and, e.g., manage deployments
+        or view information about the pool usage of the various datasources.
+      </p>
+      <p>
+        In JBoss EAP 6, coming from a fresh install, there is no default management
+        user. You need to add one manually by invoking the script
+        <pre>$JBOSS_HOME/bin/add-user.sh</pre>
+        If you create the new user to be an "Management User" (I've never
+        used "Application User"), the above will result in a row being
+        added in file:
+        <pre>$JBOSS_HOME/standalone/configuration/mgmt-users.properties</pre>
+        &hellip; containing the username and the hashed password.
+      </p>
+      <p>
+        The path to the file <tt>mgmt-users.properties</tt> is
+        actually given in file
+        <pre>$JBOSS_HOME/standalone/configuration/standalone-full.xml</pre>
+        in the <code>management/security-realsm</code> element.
+      </p>
+      <p>
+        I typically maintain the admin passwords for the JBoss servers I
+        install in path <tt>codes/cfa-my-servers</tt>.
+      </p>
+      <p>
+        To remove a management user see <a href='https://stackoverflow.com/a/37210174/274677'>this SO answer</a>.
+      </p>
       <li>some examples of the management CLI DSL used to apply overlays to deployed WARs</li>
       <pre>
 deployment-overlay --name=foo --content=WEB-INF/web.xml=cxcaccount-web.xml --deployments=cxcaccount.war --action=add
