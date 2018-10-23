@@ -9,6 +9,23 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li><tt>showplan</tt> and <tt>noexec</tt></li>
+    <p>
+      To see the plan for a query you need to toggle on the <code>showplan</code> option:
+      <pre>set showplan on;</pre>
+    </p>
+    <p>
+      For cleaner output you may also want to toggle on the <code>noexec</code> option as well.
+    </p>
+    <p>Don't forget to toggle them back off when you're done:
+      <pre>set showplan off;
+set noexec off;</pre>
+    </p>
+    <p>Information about which options are set on a particular session
+      is cryptically encoded in the <code>@@options</code> variable:
+      <pre>select @@options</pre>
+      Some documentation is available <a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc36272.1572/html/commands/X64136.htm'>here</a>.
+    </p>
     <li>obtaining useful information about the current transaction (transaction depth and chained mode)</li>
     <a href='https://dba.stackexchange.com/a/168813/34332'>source</a>
     <p>
