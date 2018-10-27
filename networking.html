@@ -5,14 +5,23 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
-      <li>find IP address of Internet host</li>
+      <li>find IP address of Internet host or domain / subdomain</li>
       <p>
-        <pre>dig www.google.com</pre>
-        &hellip; also:
-        <pre>nslookup www.google.com</pre>
+        There's lots of ways with subtle differences:
+        <ul>
+          <li><pre>dig +short www.google.com</pre></li>          
+          <li><pre>nslookup www.google.com</pre></li>
+          <li><pre>getent hosts www.google.com</pre></li>
+          <li><pre>host www.google.com</pre></li>
+        </ul>
       </p>
-      <p><span class='nb'>NB:</span>The <tt>dig</tt> program uses the OS resolver libraries and, as such, should be preferred over <tt>nslookup</tt>.</p>
-
+      <p>Some notes on the various subtleties involved:</p>
+      <p>The <tt>dig</tt> program uses the OS resolver libraries and, as such, should be preferred over <tt>nslookup</tt>.</p>
+      <p>The <tt>dig</tt> program is also <b>not</b> using the local <tt>/etc/hosts</tt> file whereas the
+        <tt>getent hosts</tt> incantation and the <tt>host</tt> program both do. Depending on your use case you
+        may therefore wish to use <tt>dig</tt> over <tt>getent</tt> or <tt>host</tt> (e.g. when you are trying
+        to troubleshoot what an external client might resolve up to).
+      </p>
       <li>how to use HTTP Basic Authentication with either wget or curl</li>
       <p>
         Using <tt>wget</tt>:
@@ -86,13 +95,15 @@ $ sudo cat WIFI_SSID_Name | grep psk</pre>
       the MAC addresses of the computers connected to its ports and will eventually forward frames (the name for Layer 2 packets) only to the right
       ports.
       </p>
-      <li>how to see what IP address a hostname is resolved to via the hosts file</li>
-      The <cc>getent</cc> program is your friend. E.g. on my machine:
+      <li>how to see what IP address a hostname or domain is resolved to via the hosts file</li>
+      <p>
+      Use <tt>getent hosts</tt>. E.g. on my machine:
       <pre>
 $ tail -1 /etc/hosts
 127.0.0.8 foo
 $ getent hosts foo
 127.0.0.8       foo</pre>
+      </p>
       <li>How to sent a POST on https using curl (with basic Authorization headers too)</li>
       Notes:
       <ul>
