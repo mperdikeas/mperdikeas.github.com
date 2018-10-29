@@ -5,6 +5,13 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>when <tt>which</tt> does not work</li>
+      <p>
+        The <tt>which</tt> command executable cannot find
+        shell alies and shell builtins (such as <tt>cd</tt>).
+        To see those, use:
+        <pre>type -a some-alias-or-shell-bultin</pre>
+      </p>
       <li>how to find a user's login shell</li>
       <p>Most of the time this is stored in the <tt>/etc/passwd</tt> file so the following would work:
         <pre>grep username /etc/passwd</pre>
