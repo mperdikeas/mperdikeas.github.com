@@ -5,6 +5,21 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>view diff with the immediately previous version of a file</li>
+      <p>
+        One can use <tt>ct diff</tt> as in:
+        <pre>ct diff -pre /path/to/file</pre>
+        &hellip; personally I'd much rather use <tt>git diff</tt> and the
+        virtual file system that's accessible after sufixing the file's name
+        with <tt>@@</tt>.
+      </p>
+      <li>graphical tool to view commits / branches / merges on files</li>
+      <p>
+        Use the <tt>xclearcase</tt> tool (without any parameters) to launch an explorer-type graphical tool;
+        you can select files and view their versioning tree.
+        Alternatively, (to just view the tree for a particular file you're interested in) use:
+        <pre>xclearcase -vtree /path/to/file</pre>
+      </p>
       <li>how to see which version of a file gets picked up by the view I am currently in</li>
       <pre>ct ls -l some/file</pre>
       &hellip; the above incantation also shows the rule that gets applied and selects this particular version.
