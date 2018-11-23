@@ -9,6 +9,8 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li>how to view objects that depend on a table (e.g. triggers, SPs, indices)</li>
+    <pre>sp_depends some_table_name;</pre>
     <li><tt>showplan</tt> and <tt>noexec</tt></li>
     <p>
       To see the plan for a query you need to toggle on the <code>showplan</code> option:
