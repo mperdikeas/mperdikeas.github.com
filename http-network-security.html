@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="keywords" content="Menelaus Perdikeas Web Programming">
+    <meta name="description" content="Menelaus Perdikeas Web Programming">
+    <link rel='icon' href='Marcus_Brutus-favicon.png'/>    
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>    
+    <title>HTTP and misc. network / security notes</title>
+  </head>
+
+  <body>
+    <ol reversed class='main-list-items'>
+      <li>multipart POST</li>
+      <p><a href='https:////stackoverflow.com/a/28380690/274677'>This SO answer</a> nails it. NB: I had to
+        tweak some scripts &mdash; a running example is available in my <i>playground/http/multipart-post</i>
+        directory.
+      </p>
+      <p>TLDR: browsers will generate an HTTP POST request with a <tt>Content-Type: multipart/form-data</tt> header
+        when displaying an HTML form with an <code>enctype='multipart/formdata'</code> attribute.</p>
+      <li><a href='https://github.com/FallibleInc/security-guide-for-developers'>Security guide for web developers</a></li>
+    </ol>
+  </body>
+</html>
+
+
