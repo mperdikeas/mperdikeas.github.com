@@ -16,37 +16,45 @@
 <h1>Wise sayings on software subjects that can be applicable in deliverables, presentations, arguments etc.</h1>
 
 <ul>
-    <li><a href='#static-typing-vs-type-inference'>Static typing vs. type inference</a></li>
-    <li><a href='#javascript-evolution'>JavaScript evolution</a></li>
-    <li><a href='#essential-vs-incidental-complexity'>Essential vs. incidental complexity</a></li>
-    <li><a href='#failing-abstractions'>failing abstractions (evil twin / if thou stare long into an abyss)</a>  
-    <li><a href='#battling-complexity'>battling complexity</a>
-    <li><a href='#xml-vs-yaml'>YAML vs. XML</a></li>  
-    <li><a href='#rube-goldberg'>Rube Goldberg machine</a></li>
-    <li><a href='#spring-framework-ioc'>On Spring framework's failure when it comes to Inversion of Control / Dependency Injection</a></li>
-    <li><a href='#web-apps-typology'>Web applications typology</a></li>
-    <li><a href='#the-test-pyramid'>the test pyramid</a>
-    <li><a href='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</a></li>
-    <li><a href='#invariance-covariance-contravariance'>invariance, covariance and contravariance</a></li>
-    <li><a href='#type-system-concepts'>various type-system concepts</a></li>
-    <li><a href='wise-technology.html.files/data-vs-code.html'>on the data versus code dichotomy</a></li>
-    <li><a href="#on-naming-things">On naming things</a></li>
-    <li><a href="#jaxb-unreliable">Why JAXB is an unreliable technology</a></li>
-    <li><a href="#logging-strategy">Logging strategy</a></li>
-    <li><a href="#data-flow-analysis-for-domain">Data flow analysis as a tool for understanding a domain</a></li>
-    <li><a href="#xml_sucks">XML is bad for distributed systems</a></li>
-    <li><a href="#soap_sucks_interop">why SOAP sucks for interoperable systems</a></li>
-    <li><a href="#verification_vs_validation">Verification -vs- Validation</a></li>
-    <li><a href="#software_schedules">On productivity and estimating software schedules</a></li>
-    <li><a href="#pike_on_programming">Pike on programming</a></li>
-    <li><a href="#orms-suck">ORMs suck</a></li>    
-    <li><a href="#osgi_sucks">OSGI sucks</a></li>
-    <li><a href="#guis_suck">GUIs sucks</a></li>
-    <li><a href="#bottom_up_down">Bottom-up and top-down</a></li>
-    <li><a href="#rpc_sucks">RPC is bad</a></li>
-  </ul>
+  <li><a href='#rewrite-or-face-code-rot'>on the need to rewrite software from time to time</a></li>
+  <li><a href='#static-typing-vs-type-inference'>Static typing vs. type inference</a></li>
+  <li><a href='#javascript-evolution'>JavaScript evolution</a></li>
+  <li><a href='#essential-vs-incidental-complexity'>Essential vs. incidental complexity</a></li>
+  <li><a href='#failing-abstractions'>failing abstractions (evil twin / if thou stare long into an abyss)</a></li>
+  <li><a href='#battling-complexity'>battling complexity</a></li>
+  <li><a href='#xml-vs-yaml'>YAML vs. XML</a></li>  
+  <li><a href='#rube-goldberg'>Rube Goldberg machine</a></li>
+  <li><a href='#spring-framework-ioc'>On Spring framework's failure when it comes to Inversion of Control / Dependency Injection</a></li>
+  <li><a href='#web-apps-typology'>Web applications typology</a></li>
+  <li><a href='#the-test-pyramid'>the test pyramid</a></li>
+  <li><a href='#gist-of-liskov-and-circle-ellipse'>the gist of the Liskov substitution principle and the circle/ellipse problem (for practical purposes)</a></li>
+  <li><a href='#invariance-covariance-contravariance'>invariance, covariance and contravariance</a></li>
+  <li><a href='#type-system-concepts'>various type-system concepts</a></li>
+  <li><a href='wise-technology.html.files/data-vs-code.html'>on the data versus code dichotomy</a></li>
+  <li><a href="#on-naming-things">On naming things</a></li>
+  <li><a href="#jaxb-unreliable">Why JAXB is an unreliable technology</a></li>
+  <li><a href="#logging-strategy">Logging strategy</a></li>
+  <li><a href="#data-flow-analysis-for-domain">Data flow analysis as a tool for understanding a domain</a></li>
+  <li><a href="#xml_sucks">XML is bad for distributed systems</a></li>
+  <li><a href="#soap_sucks_interop">why SOAP sucks for interoperable systems</a></li>
+  <li><a href="#verification_vs_validation">Verification -vs- Validation</a></li>
+  <li><a href="#software_schedules">On productivity and estimating software schedules</a></li>
+  <li><a href="#pike_on_programming">Pike on programming</a></li>
+  <li><a href="#orms-suck">ORMs suck</a></li>    
+  <li><a href="#osgi_sucks">OSGI sucks</a></li>
+  <li><a href="#guis_suck">GUIs sucks</a></li>
+  <li><a href="#bottom_up_down">Bottom-up and top-down</a></li>
+  <li><a href="#rpc_sucks">RPC is bad</a></li>
+</ul>
 <br/>
 <br/>
+
+<h2 id='rewrite-or-face-code-rot'>on the need to rewrite software from time to time</h2>
+<a href='https://news.ycombinator.com/item?id=18818412'>source</a>
+<p>
+  Code rots, even the best code rots, because the people and cultural environment that the code was written under change and fade away. Refreshing it occasionally, even if it isn’t improved in a significant way, is one way to deal with that rot.
+Even if the product/library/framework never changed much, rewrites would still be necessary to keep it going as new generations of programmers shuffle through. Otherwise we wind up with a [...] dystopian culture of software archeology.
+</p>
 
 <h2 id='static-typing-vs-type-inference'>Static Typing versus Inference</h2>
 <p>Using a statically typed language doesnt mean you need to add type signature everywhere, these are languages who lack a good type inference (like java).
@@ -382,4 +390,3 @@ As a last note, I would like to say that we've known for years how to handle the
 If anybody is interested in the beginnings of such a system, I have an open source project that I think is still in the 'cathedral' stage. I would like help and input on its development though, and I need help making it easy to port and compile in random environments. If you would like to help, please e-mail me. I call the system the StreamModule system, and it's architecturally related to the idea of UNIX pipes, and the System V STREAMS drivers.
 </body>
 </html>
-
