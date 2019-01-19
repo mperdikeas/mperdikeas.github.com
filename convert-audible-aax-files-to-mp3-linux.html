@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+
+  </style>
+  <body>
+    <header>
+      <h1>How to convert Audible aax files to mp3 in Linux</h1>
+      <hr>
+    </header>
+    <article>
+      <p>
+        I followed the instructions from 
+        <a href='https://en.code-bude.net/2017/02/12/how-to-convert-audible-aax-files-to-mp3-in-linux/'>here</a>
+        &ldots;
+        which I found in this <a href='https://unix.stackexchange.com/a/374682/24044'>stackexchange answer</a>.
+      </p>
+      <p>
+        Every step of that guide worked flawlessly except for a minor snag at the last step. That last incantation should actually read:
+        <pre>./AAXtoMP3 --authcode &lt;authcode&gt; &lt;aax-file&gt;</pre>
+        <br>
+        I.e. you need to explicitly type the <code>--authcode</code> option.
+      </p>
+      <p>
+        A PDF printout of that page (obtained 2019-01-07) is <a href='./convert-audible-aax-files-to-mp3-linux.pdf'>here</a>.
+      </p>
+      <p>
+        The work was executed on the T420 machine, directory <tt>~/aax2mp3tools</tt>. The history (with the audible authentication
+        code anonymized) is given below:
+        <pre>
+  apt-get install ffmpeg
+  sudo apt-get install ffmpeg
+  echo $?
+  mkdir aax2mp3tools
+  cd aax2mp3tools
+  wget https://github.com/inAudible-NG/audible-activator/archive/master.zip
+  unzip master.zip
+  rm master.zip
+  cd audible-activator-master/
+  sudo pip install requests
+  sudo pip install selenium
+  wget https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
+  unzip chromedriver_linux64.zip
+  ./chromedriver
+  mv ~/Downloads/HarryPotterandtheHalf-BloodPrinceBook6_ep6.aax .
+  ./audible-activator.py -1 us
+  ./audible-activator.py -l us
+  cd ..
+  cd audible-activator-master/
+  cd ..
+  wget https://github.com/KrumpetPirate/AAXtoMP3/archive/master.zip
+  unzip master.zip
+  rm master.zip
+  cd AAXtoMP3-master/
+  mv ../audible-activator-master/HarryPotterandtheHalf-BloodPrinceBook6_ep6.aax ..
+  ./AAXtoMP3 349bea28 ../HarryPotterandtheHalf-BloodPrinceBook6_ep6.aax
+* ./AAXtoMP3 -h
+  ./AAXtoMP3 --authcode XXXXXXXX ../HarryPotterandtheHalf-BloodPrinceBook6_ep6.aax
+  ls ../Audiobook/
+        </pre>
+      </p>
+    </article>
+
+  </body>
+</html>
