@@ -9,6 +9,9 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li>show permissions on a table</li>
+    <pre>sp_helprotect someTableName</pre>
+    NB: <code>sp_helprotect</code> can also be used on other objects besides tables.
     <li>mapping of <i>sqsh</i> aliases to Unix hostnames</li>
     <p>This configuration is kept in the so called <i>interfaces</i> file which is located
       at <pre>$SYBASE/interfaces</pre>E.g.:<pre>/soft/SYBASE15.7/interfaces</pre>
