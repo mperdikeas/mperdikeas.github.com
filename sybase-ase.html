@@ -215,7 +215,11 @@ ORDER BY table_name;</pre>
     <p>
       Use the <code>sp_configure</code> stored procedure and grep for <i>connections</i>. I.e. something like:
       <pre> sp_configure; | grep -i connections </pre>
-
+    </p>
+    <p>I've also used this:
+<pre>sp_configure "number of user connections"
+go </pre>
+&hellip; I am not clear on what's the difference between the two.
     </p>
     <li>ANSI treatment of NULL values in comparisons</li>
     <p>
