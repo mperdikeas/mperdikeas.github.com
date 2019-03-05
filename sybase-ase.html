@@ -9,6 +9,12 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li>convert seconds since the Epoch to human-readable Boston (EST) time</li>
+    <pre>SELECT dateadd(hour, -5, dateadd(second, timeSSE, '19700101')) from SomeTable</pre>
+    <br/>&hellip; where <tt>timeSSE</tt> is the name of a column in table <tt>SomeTable</tt>
+    that's holding an integer value denoting number of seconds elapsed since the Unix Epoch.
+    Note that <tt>hour</tt> and <tt>second</tt> are unquoted literal values that Sybase understands
+    in this context.
     <li>show permissions on a table</li>
     <pre>sp_helprotect someTableName</pre>
     NB: <code>sp_helprotect</code> can also be used on other objects besides tables.
