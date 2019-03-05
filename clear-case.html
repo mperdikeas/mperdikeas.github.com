@@ -173,7 +173,7 @@ Checked in "jquery-3.2.1.min.js" version "/main/dbdev_br/1".
           that we're trying to import</li>
           <li>the path <code>/tmp/foo</code> is just a random filesystem directory, outside of ClearCase</li>
         </ul>
-        <pre>clearfsimport -recu -nset /tmp/foo/ . </pre>
+        <pre>clearfsimport -c 'optional comment' -recu -nset /tmp/foo/ . </pre>
       </p>
       <p>For some inscrutable reason the <code>-nset</code> flag is essential. For more see
         <a href='http://stackoverflow.com/q/42371537/274677'>here</a>.</p>
