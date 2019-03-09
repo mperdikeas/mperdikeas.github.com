@@ -5,6 +5,30 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>decrypting PDF files</li>
+      <a href='https://www.howtogeek.com/197195/how-to-remove-a-password-from-a-pdf-file-in-linux/'>source</a><br/>
+      <p>On 2019-03-08 I used the <tt>qpdf</tt> tool as described in the source:
+        <pre>
+sudo apt-get install qpdf
+qpdf –password=password –decrypt /home/lori/Documents/secured.pdf /home/lori/Documents/unsecured.pdf
+        </pre>
+        &hellip; it worked like a charm.
+      </p>
+      <p>
+        NB: I encountered problems when trying to use the other approach suggested in the same
+        source, namely that of using <tt>pdftk</tt>:
+        <pre>
+$ pdftk ~/Downloads/plan-to-conquer-the-world.pdf input_pw superdupersecretpwd output foo.pdf
+Error: Unexpected Exception in open_reader()
+Unhandled Java Exception in main():
+java.lang.NullPointerException
+   at gnu.gcj.runtime.NameFinder.lookup(libgcj.so.16)
+   at java.lang.Throwable.getStackTrace(libgcj.so.16)
+   at java.lang.Throwable.stackTraceString(libgcj.so.16)
+   at java.lang.Throwable.printStackTrace(libgcj.so.16)
+   at java.lang.Throwable.printStackTrace(libgcj.so.16)
+        </pre>
+      </p>
       <li><a href='convert-audible-aax-files-to-mp3-linux.html'>convert audible *.aax files to *.mp3 in Linux</a></li>
       <li>getting a window's PID by clicking on it</li>
       <pre>xprop _NET_WM_PID | cut -d' ' -f3
