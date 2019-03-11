@@ -5,6 +5,17 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to edit / view description on branches</li>
+      <p>To edit the checked-out branch's description:
+        <pre>git branch --edit-description</pre>
+      </p>
+      <p>To view a branch's (say <i>awesome-new-feature</i>) description:
+        <pre>git config branch.awesome-new-feature.description</pre>
+        <br/>
+        <span class='nb'>NB:</span> simply increasing the verbosity of the <code>git branch</code>
+        command doesn't display the branch description:
+        <pre>git branch -vv</pre>
+      </p>
       <li>how to show all commits that have affected a particular file</li>
       <a href='https://stackoverflow.com/a/8808453/274677'>source</a>
       <pre>
