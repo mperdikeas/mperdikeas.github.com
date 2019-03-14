@@ -9,6 +9,13 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li>how to get <i>Seconds Since the Epoch</i></li>
+    To get <i>Seconds Since the Epoch</i>, and since Sybase is ignorant of time zones, you need to know
+    the difference between your time zone and <tt>UTC</tt> (which may vary during the year due to the summer / winter
+    time abomination). E.g. on March 13th 2019, Boston was 4 hours behind <tt>UTC</tt> so the below query worked
+    in that case:
+    <pre> SELECT Datediff(SECOND, '1970-01-01', dateadd(HOUR, 4, getdate()))</pre>
+    
     <li>convert seconds since the Epoch to human-readable Boston (EST) time</li>
     <pre>SELECT dateadd(hour, -5, dateadd(second, timeSSE, '19700101')) from SomeTable</pre>
     <br/>&hellip; where <tt>timeSSE</tt> is the name of a column in table <tt>SomeTable</tt>
