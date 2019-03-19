@@ -9,6 +9,38 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
+    <li>how I installed Artifactory Pro on Ubuntu 16.04</li>
+    <p>
+      After confirming with <code>lsb_release -a</code> that my release is codenamed <i>xenial</i>,
+      I followed the instructions on 
+      <a href='https://www.jfrog.com/confluence/display/RTF/Installing+on+Linux+Solaris+or+Mac+OS#InstallingonLinuxSolarisorMacOS-RPMorDebianInstallation'>this page</a>:
+      <pre>
+$ echo "deb https://jfrog.bintray.com/artifactory-pro-debs xenial main" | sudo tee -a /etc/apt/sources.list
+$ curl https://bintray.com/user/downloadSubjectPublicKey?username=jfrog | sudo apt-key add -
+$ sudo apt-get update
+$ sudo apt-get install jfrog-artifactory-pro</pre>
+    </p>
+    <p>To check the service, and in contrast to what one is advised in the linked page,
+      the following did not work:
+      <pre>
+sudo service artifactory check</pre>
+&hellip; instead, I confirmed correct installation with:
+      <pre>
+sudo systemctl status artifactory.service
+sudo tail -f /var/opt/jfrog/artifactory/logs/artifactory.log</pre>
+      &hellip; while also trying the following (for additional assurance):
+      <pre>
+$ sudo systemctl stop artifactory.service
+$ sudo systemctl start artifactory.service</pre>
+    </p>
+    <p>
+      When, following the above steps, I tried to connect to:
+      <a href='http://localhost:8081/artifactory'>http://localhost:8081/artifactory</a>
+      <br/>&hellip; but my Nexus Repository Manager was already running there, so I edited
+      the following file:
+      <pre>/var/opt/jfrog/artifactory/tomcat/conf/server.xml</pre>
+      <br/>&hellip; and changed the port number to <tt>9081</tt>.
+    </p>
     <li id='node-8-pre-built-binaries'>how I got Node 8.11.4 with pre-built binaries for Linux x64</li>
     <p>
       Simply fetch the version you need from <a href='https://nodejs.org/en/download/'>https://nodejs.org/en/download/</a>:

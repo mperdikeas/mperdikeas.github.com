@@ -10,6 +10,65 @@
 
   <body>
     <ol reversed class='main-list-items'>
+      <li>origin/importance, specificity and order in CSS</li>
+      <p>
+        <i>Origin/Importance</i> trumps <i>Specificity</i>
+        which, in turn, trumps <i>Order</i> of declaration.
+        What's meant by <i>Origin</i> is the three different origins from which stylesheets may come
+        (originate from):
+        <ul>
+          <li>User-agent stylesheets</li>
+          <li>Author stylesheets (the most common type)</li>
+          <li>User stylesheets</li>
+        </ul>
+        <br/>
+        <i>User stylesheets</i> trump <i>Author stylesheets</i> which, in turn, trump
+        <i>User-agent stylesheets</i>. The presence of the <tt>!important</tt> annotation also
+        enters this calculation. According to the
+        <a href='http://www.w3.org/TR/CSS21/cascade.html#cascading-order'>spec</a>:
+        <blockquote>
+          Sort according to importance (normal or important) and origin (author, user, or user agent). In ascending order of precedence:
+          <ol>
+            <li>user agent declarations</li>
+            <li>user normal declarations</li>
+            <li>author normal declarations</li>
+            <li>author important declarations</li>
+            <li>user important declarations</li>
+          </ol>
+        </blockquote>
+      </p>
+      <p>If the <i>Origin/Importance</i> is the same, only then do we check for
+        <i>Specificity</i> (higher specificity obviously trumps
+        lower specificity).
+      </p>
+      <p>If both the <i>Origin/Importance</i> and the <i>Specificity</i> are the same, only then do
+        we check for <i>Order</i>: rules that appear later in the code override earlier rules.
+      </p>
+      <p>Inline styles affect <i>Specificity</i>; internal versus external stylesheets affects <i>Order</i>
+        and it only depends on which one is defined later in the code. Either internal or external stylesheets
+        may take precedence over the other. E.g.:
+        <pre>
+&lt;head&gt;
+  &lt;link rel=stylesheet href="style.css"&gt;
+  &lt;style&gt;
+    h3{
+    color:red;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;</pre>
+        versus:
+        <pre>
+&lt;head&gt;
+  &lt;style&gt;
+    h3{
+    color:red;
+    }
+  &lt;/style&gt;
+  &lt;link rel=stylesheet href="style.css"&gt;
+&lt;/head&gt;</pre>
+        I.e. there is no hard and fast rule that says, e.g. that internal stylesheets have higher precedence over
+        external stylesheets (or vice-versa).
+      </p>
       <li><a href='html-css.html.files/box-sizing.html'>on the question of which box sizing model to use</a></li>
       <li><a href='html-css.html.files/css-resets.html'>CSS resets</a></li>
       <li><a href='html-css.html.files/box-model.html'>Schematic for the HTML box model (and padding vs. margin)</a></li>
