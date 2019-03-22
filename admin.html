@@ -9,7 +9,55 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
-    <li>how I installed Artifactory Pro on Ubuntu 16.04</li>
+    <li>how I installed Artifactory Pro on Ubuntu 16.04 (manually)</li>
+    <p>
+      NB: this is the preferred way as it affords greater control and does not require <tt>sudo</tt>
+    </p>
+    <p>
+      After downloading the Artifactory Pro zip file from <a href='https://jfrog.com/download-artifactory-pro/'>this page</a>
+      I followed the instructions on
+      <a href='https://www.jfrog.com/confluence/display/RTF/Installing+on+Linux+Solaris+or+Mac+OS'>this page</a>
+      under the <i>Manual Installation</i> heading:
+      <blockquote>
+        <p>
+          To install Artifactory manually, simply unzip the Artifactory download file to a location on your file system.
+          This will be your $ARTIFACTORY_HOME location.
+        </p>
+        <p>
+          No further action is needed.
+        </p>
+        <p>
+          Don't forget to modify your JVM parameters as needed by setting JAVA_OPTIONS in $ARTIFACTORY_HOME/bin/artifactory.default.
+        </p>
+      </blockquote>
+    </p>
+    <p>
+      I did not bother to set an <tt>ARTIFACTORY_HOME</tt> environment variable in my environment, nor did I bother
+      to edit the <tt>JAVA_OPTIONS</tt> in the <tt>$ARTIFACTORY_HOME/bin/artifactory.default</tt> file.
+    </p>
+    <p>The only thing I did edit was the <tt>$ARTIFACTORY_HOME/tomcat/conf/server.xml</tt> file where I simply changed
+      the value of a single connector port from <tt>8081</tt> (that's the first one that appears inside the Catalina
+      service element) to <tt>9081</tt>
+    </p>
+    <p>
+      To launch artifactory I simply followed the instructions on the above page under heading <i>Running Artifactory</i>:
+      <blockquote>
+        <p>Running Artifactory</p>
+        <p>
+        You can run Artifactory manually to see its behavior by directly executing:
+
+        $ARTIFACTORY_HOME/bin/artifactory.sh
+
+        The console is locked on the Artifactory process and you can stop it cleanly with Ctrl+C.
+
+        To directly run Artifactory as a daemon process, using the environment variables of the shell you are currently in, execute the following script:
+
+          $ARTIFACTORY_HOME/bin/artifactoryctl start
+          </p>
+      </blockquote>
+      &hellip; I just used <tt>artifactory.sh</tt> from a console terminal &mdash; I didn't bother with running it as a daemon.
+    </p>
+    <li>how I installed Artifactory Pro on Ubuntu 16.04 (as a service)</li>
     <p>
       After confirming with <code>lsb_release -a</code> that my release is codenamed <i>xenial</i>,
       I followed the instructions on 

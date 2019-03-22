@@ -5,6 +5,28 @@
   </head>
   <body>
     <ol reversed class=main-list-items>
+      <li>how to do npm installs without employing a cache</li>
+      <p>
+        By combining <a href='https://stackoverflow.com/a/36155362/274677'>this SO answer</a>
+        with
+        <a href='https://stackoverflow.com/a/45546082/274677'>that SO answer</a>,
+one can arrive at the following solution:
+        <pre>
+export npm_config_cache=$(shell mktemp -d)
+
+install:
+    @printf "using throw-away cache at: [$$npm_config_cache]\n"
+    npm install
+    @du -h $$npm_config_cache | printf "size of temp cache is: $$(du -h . | tail -1 | cut -f1)\n"
+    @rm -fr $$npm_config_cache
+    @printf "temporary cache at: $$npm_config_cache is now deleted.\n"
+
+clean:
+    rm -fr node_modules/
+    rm -f es5/*.js
+    rm -f es5/*.map
+    npm cache -f clean # this is not really necessary as we're using a throw-away cache </pre>
+      </p>
       <li>invoke an <em>npm</em> target without triggering the <tt>pre-</tt> and <tt>post-</tt> hooks:&nbsp;&nbsp;<code>npm run foo --ignore-scripts</code></li>
       &hellip; or in the case of built-in targets like <tt>publish</tt> simply do:
 <pre>

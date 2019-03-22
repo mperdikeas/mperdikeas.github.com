@@ -25,6 +25,8 @@ pre.code {
 
 blockquote {
     font-style: italic;
+    border: 0.5px solid gray;
+    padding: 0.4em;
 }
 
 code {
