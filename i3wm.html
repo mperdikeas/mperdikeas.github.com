@@ -5,6 +5,16 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>login as other user without exiting my i3wm session
+      </li>
+      <p>
+        <a href='https://unix.stackexchange.com/q/321944/24044'>source</a>
+      </p>
+      <p>
+         The following (on any terminal) worked like a charm on Ubuntu 16.04
+        <pre>dm-tool switch-to-greeter</pre>
+        &hellip; and it allowed me to start a Unity session, do some stuff I could only do there, and then logout and log back into my trusty old <i>i3wm</i> session (which was going on for 169 days at that time). <tt>lightdm</tt> is the default <a href='https://askubuntu.com/a/860942/89663'>display manager</a> in Ubuntu 16.04.
+          </p>
       <li>how to show all icons in the Unity control center</li>
       <p>
       When running <i>i3wm</i>, if you launch the Unity control center with:
