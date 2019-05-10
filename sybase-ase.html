@@ -9,6 +9,13 @@
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.help.ase.15.7.sp100/doc/html/title.html'>ASE-15.7 SP100 documentation index</a></li>
       <li><a href='http://infocenter.sybase.com/help/index.jsp?topic=/com.sybase.infocenter.dc01672.1572/html/sec_admin/X53658.htm'>ownership chains article (for ASE-15.7 SP100)</a></li>
     </ul>
+    <li><i>sqsh</i> &mdash; display query result set vertically</li>
+    This is very handy for wide result sets:
+    <pre>
+> SELECT * FROM some_wide_table
+> go -m vert
+    </pre>
+    &hellip; observe that you're not supposed to end the query with a question mark in this case (for the <tt>go</tt> to have effect)
     <li>how to get <i>Seconds Since the Epoch</i></li>
     To get <i>Seconds Since the Epoch</i>, and since Sybase is ignorant of time zones, you need to know
     the difference between your time zone and <tt>UTC</tt> (which may vary during the year due to the summer / winter
