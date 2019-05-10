@@ -1014,7 +1014,14 @@ sudo fdisk /dev/sdb</pre>
       At any rate notice again how
         (as advised above) <code>fdisk</code> is performed on the entire disk whereas <code>mkfs</code> on a single partition.
       </p>
-    </p>
+  </p>
+  <p>
+    <b style='color:blue'>2019, May</b>
+    I encountered some problems with the above procedure in that the thumb drive I created (even though FAT32) wasn't readable
+    from a High Sierra MacBook Air. To fix that I first completely erased and re-formatted the USB thumb drive using the
+    <i>gnome-disks</i> program before proceeding with the <i>April 2018</i> procedure. I still couldn't get the High Sierra machine
+    to read it. I then formatted it on the Mac using the simple FAT filesystem and at that point it worked in both Ubuntu and MacOS.
+  </p>
 
     <li>remove BOM from files in Linux</li>
     <pre>tail --bytes=+4 text.txt</pre>
