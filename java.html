@@ -11,6 +11,32 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>How to install OpenJDK 1.8 in Ubuntu 16.04</li>
+    <p>The following worked like a charm in June, 2019</p>
+    <p>
+      <pre>$ sudo apt-get install openjdk-8-jdk
+$ sudo apt-get install openjdk-8-jre
+$ sudo update-alternatives --config java
+$ sudo update-alternatives --config javac</pre>
+    </p>
+    <p>
+      With hindsight it was probably uncessary to install the JRE once I had already
+      installed the JDK but then again it didn't hurt either.
+    </p>
+    <p><span class='nb'>NB:</span> even after updating the alternatives, the <tt>JAVA_HOME</tt> environment
+      in my shell was:
+      <pre> $ echo $JAVA_HOME
+/usr/lib/jvm/java-8-oracle</pre>
+      &hellip; the above was on account of a file in <tt>/etc/profile.d</tt> with the following
+      content:
+      <pre>
+$ cat /etc/profile.d/jdk.sh
+export J2SDKDIR=/usr/lib/jvm/java-8-oracle
+export J2REDIR=/usr/lib/jvm/java-8-oracle/jre
+export PATH=$PATH:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export DERBY_HOME=/usr/lib/jvm/java-8-oracle/db</pre>
+    </p>
     <li>How to compare Java JARs or WARs</li>
     <p>
       Java JAR files may be compared with the awesome package change analyzer
