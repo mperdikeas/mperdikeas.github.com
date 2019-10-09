@@ -4,6 +4,52 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>how I setup the postgres user in PostgreSQL 9.5 and created user 'mperdikeas'</li>
+    <p>
+      PostgreSQL allows one to authenticate using two mechanisms:
+      <ul>
+        <li>the so called <it>IDENT/PEER</it> authentication which uses UNIX accounts</li>
+        <li>the <it>TCP</it> authentication which uses PostgreSQL's own managed username / passwords</li>
+      </ul>
+      You want to keep the <tt>postgres</tt> UNIX account locked (for security purposes). So I did the following:
+      <pre>
+sudo passwd --lock postgres</pre>
+      &hellip; and subsequently verified that the <tt>postgres</tt> UNIX account is indeed locked by doing:
+      <pre>
+$ sudo cat /etc/shadow | grep -i postgres
+postgres:!*:17117:0:99999:7:::
+$ sudo passwd -S postgres
+postgres L 11/12/2016 0 99999 7 -1</pre>
+    You may read more <a href='https://serverfault.com/a/325596/139074'>here</a>.
+    </p>
+    <p>
+      I then changed the password of the TCP user <tt>postgres</tt> by doing:
+      <pre>$ sudo -i -u postgres psql postgres
+psql (9.5.19)
+Type "help" for help.
+
+postgres=# \password postgres
+Enter new password:
+Enter it again:</pre>
+    </p>
+    <p>
+      Finally, I created a new TCP user <tt>mperdikeas</tt> and set his password:
+      <pre>
+$ sudo -i -u postgres createuser --interactive mperdikeas
+Shall the new role be a superuser? (y/n) n
+Shall the new role be allowed to create databases? (y/n) y
+Shall the new role be allowed to create more new roles? (y/n) n
+$ sudo -i -u postgres psql
+psql (9.5.19)
+Type "help" for help.
+
+postgres=# ALTER USER mperdikeas WITH PASSWORD '&lt;redacted&gt;';
+ALTER ROLE
+postgres=# \q</pre>
+    </p>
+    <p>
+      You will notice that for all administrative commands we are using the UNIX user <tt>postgres</tt>
+    </p>
     <li><a href='http://serverfault.com/a/325596/139074'>why you shouldn't change the password of the <tt>postgres</tt> Linux user using <tt>sudo passwd postgres</tt></a>
     <li><a href='postgresql.html.files/install-postgresql9.5-in-Ubuntu-14.04-trusty-thar.html'>Install Postgresql 9.5 in Ubuntu 14.04 Trusty Tahr</a></li>
     <li><a href='postgresql.html.files/timstamp-with-or-without-timezone.html'>timestamps with or without timezones</a></li>
