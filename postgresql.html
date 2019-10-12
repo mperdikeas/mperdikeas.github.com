@@ -8,8 +8,8 @@
     <p>
       PostgreSQL allows one to authenticate using two mechanisms:
       <ul>
-        <li>the so called <it>IDENT/PEER</it> authentication which uses UNIX accounts</li>
-        <li>the <it>TCP</it> authentication which uses PostgreSQL's own managed username / passwords</li>
+        <li>the so called <i>IDENT/PEER</i> authentication which uses UNIX accounts</li>
+        <li>the <i>TCP</i> authentication which uses PostgreSQL's own managed username / passwords</li>
       </ul>
       You want to keep the <tt>postgres</tt> UNIX account locked (for security purposes). So I did the following:
       <pre>
@@ -49,6 +49,11 @@ postgres=# \q</pre>
     </p>
     <p>
       You will notice that for all administrative commands we are using the UNIX user <tt>postgres</tt>
+    </p>
+    <p>
+      <span class='nb'>NB:</span> be sure to set the authentication method to 'md5' in the following file:
+      <pre>/etc/postgresql/9.5/main/pg_hba.conf</pre>
+      (allowed values are <i>trust</i>, <i>peer</i> and <i>md5</i>)
     </p>
     <li><a href='http://serverfault.com/a/325596/139074'>why you shouldn't change the password of the <tt>postgres</tt> Linux user using <tt>sudo passwd postgres</tt></a>
     <li><a href='postgresql.html.files/install-postgresql9.5-in-Ubuntu-14.04-trusty-thar.html'>Install Postgresql 9.5 in Ubuntu 14.04 Trusty Tahr</a></li>
