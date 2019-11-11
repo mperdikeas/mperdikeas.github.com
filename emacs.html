@@ -12,6 +12,39 @@
     </div>
     <div style='margin-top: 30px; position: absolute;'>
       <ol reversed class='main-list-items'>
+        <li><b>2019, November</b>: how I installed Emacs 25 on Ubuntu 16.04</li>
+        <p>
+          Following the instructions from <a href='http://ubuntuhandbook.org/index.php/2017/04/install-emacs-25-ppa-ubuntu-16-04-14-04/'>here</a>
+          I did the following:
+          <pre>
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt install emacs25
+$ emacs --version | head -1
+GNU Emacs 24.5.1
+$ emacs25 --version | head -1
+GNU Emacs 25.3.2</pre>
+        </p>
+        <p>
+          Subsequently, I configured alternatives for <b>emacs</b>:
+          <pre>
+$ sudo update-alternatives --config emacs
+[sudo] password for mperdikeas:
+There are 2 choices for the alternative emacs (providing /usr/bin/emacs).
+
+  Selection    Path                Priority   Status
+------------------------------------------------------------
+* 0            /usr/bin/emacs24-x   27        auto mode
+  1            /usr/bin/emacs24-x   27        manual mode
+  2            /usr/bin/emacs25     27        manual mode
+
+Press &lt;enter&gt; to keep the current choice[*], or type selection number: 2
+            update-alternatives: using /usr/bin/emacs25 to provide /usr/bin/emacs (emacs) in manual mode
+$
+$
+$ emacs --version | head -1
+GNU Emacs 25.3.2
+</pre>
+        </p>
         <li>how to rebuild ELPA packages</li>
         <p>
           <a href='http://stackoverflow.com/a/24735377/274677'>source</a>
