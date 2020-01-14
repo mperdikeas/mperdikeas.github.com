@@ -143,99 +143,75 @@ Nestanis 13, Peristeri, 12135, Greece % Your address
 
 }}
 
+
+
+
+
+\headedsubsection
+{Head of International IT Projects}
+{2012 -- 2013}
+{\bodytext{
+    Neuropublic developed a cloud-based platform that offers a suite of applications for the agricultural sector.
+    These include the electronic farmer card, ERP, CRM, MIS for cooperatives,  traceability application for
+    agriculture products, smart irrigation and fertilization solutions etc. The central data repository
+    is an information discovery and retrieval service that covers all agricultural activities and stakeholders
+    in Greece. Information is gathered (mostly) via fully automated pipelines by harvesting data from web
+    sites, publicly available web services, academic publications and solicited articles written by various
+    contributors. Users can access the repository through a web portal or via web services to allow for
+    unmediated software integration.
+
+}}
+
 }
 
 
+
 \headedsection
-{\href{http://www.neuropublic.com}{Neuropublic S.A.}}
-{\textsc{Piraeus, Greece}
+    {\href{https://www.neuropublic.gr}{Semantix information Technologies S.A.}}
+{
+
+\headedsubsection
+{Chief Executive Officer}
+{2008 -- 2012}
+{\bodytext{
+    Chief Executive Officer  (CEO) and co-founder of Semantix information Technologies S.A. Semantix
+    was an boutique software development company founded in 2001. The company included, among
+    its clients, the following organizations: European Space Agency (ESA), Vodafone (Greece), EADS
+    Astrium SAS, Mobily (Saudi Arabia), Amdocs (USA), Oracle (USA), SwitchLab (UK), O2 (Ireland),
+    Telefonica (Equador), Xerox (Greece), Byte (Greece), Fts-soft (Israel) and Bell (Canada). I
+    led the company through the 2008 financial crisis and further developed its business model to
+    include as clients a number of Greek public sector entities. I also initiated and handled the
+    acquisition discussions that conluded in 2012 when Semantix was merged with Neuropublic SA.
+}}
 
 
-\headedsubsection % Job title entry for the current employer
+
+\headedsubsection
+{Chief Executive Officer}
+{2005 -- 2008}
+{\bodytext{
+Member of the board and IT Director in Semantix information Technologies S.A.
+}}
+
+
+\headedsubsection
 {Senior Software Engineer}
-{June '12 -- March '13}
+{2003 -- 2005}
 {\bodytext{
-    I worked as a software engineer in the company's flagship \href{https://www.neuropublic.gr/en/component/k2/gaia-epicheirein}{GAIA} series of cloud-based services.
-    \\
-    Among the things I did:
-    \begin{itemize}
-    \item designed and developed all the server-side code for an expert system that advises farmers
-      on the subsidies they are entitled to apply for. I devised a formal way to capture the legal requirements
-      for each subsidy in the form of \href{https://en.wikipedia.org/wiki/S-expression}{Lisp S-expressions}.
-      The provisions and rules of each ministerial decision involving subsidies are
-      modelled in the form of a declarative, Lisp-like \href{https://en.wikipedia.org/wiki/Domain-specific_language}{DSL}.
-      Then the system reads from the database the profile of each user (age, income, past subsidies, location
-      and size of fields, crops, animal capital) and dynamically evaluates them against all possible subsidies.
-      The system finally informs the user which subsidies (s)he can apply for (based on their circumstances
-      and the rules encoded in each ministerial decision) and also creates
-      a visual diagram that explains to the users why they failed to qualify for certain subsidies.\\
-      \technologies{} \href{https://clojure.org/}{Clojure} (for
-      the dynamic evaluation of the S-expressions), dynamic evaluation of Clojure code from Java,
-      \href{https://en.wikipedia.org/wiki/DOT_(graph_description_language)}{DOT} (for visualizing
-      criteria logic using graphs), \href{https://en.wikipedia.org/wiki/IText}{iText} for creating
-      PDF reports, \href{http://www.stringtemplate.org/}{StringTemplate}, JDBC.
-    \item designed and developed the authentication / authorization database and implemented all back-end Java
-      code to integrate Apache Shiro into our \href{http://www.javaserverfaces.org/}{JSF} pages and deliver an elaborate RBAC authentication solution
-      for all GAIA applications.\\
-      \technologies{} \href{http://shiro.apache.org/}{Apache Shiro}, PostgreSQL, JDBC.
-    \item implemented a \href{http://www.jython.org/}{Jython} solution integrating Java code with
-      Python scripts. The objective was to
-      allow the accounting people to write simple arithmetic expressions (formulas) to derive dynamically
-      various fields that were used in the generation of financial reports.
-      \\
-      \technologies{} \href{http://www.jython.org/}{Jython}, Python, \href{http://community.jaspersoft.com/project/jasperreports-library}{Jasper Reports}.
-    \end{itemize}
+Software design and development and product management in Semantix information Technologies S.A. department of E-Government Projects.
 }}
+
+
+
+
 }
 
-\headedsection
-{\href{http://www.synelixis.com}{Synelixis Solutions}}
-{\textsc{Athens, Greece}} {
 
-  \headedsubsection % Job title entry for the current employer
-{Senior Software Engineer at the \href{http://www.synelixis.com/coast/}{COAST} project}
-{Feb '10 -- May '12}
-{\bodytext{
-    I led the company's technical participation in this project. The domain of the project was multimedia
-    content delivery and streaming over a dynamically configured mesh of network caches that are co-located
-    with network routers (something \textit{like} a content delivery network).
-    Some of the things I did:
-    \begin{itemize}
-    \item designed and implemented: (a) the cache communication protocol on top of TCP and (b) custom HTTP proxies
-      in Java that transparently take advantage of the caches. Also, for demonstration purposes, coded
-      a few pages for video streaming solutions.
-      \\ \technologies{} Java TCP networking, HTML, integration with video streaming / playback.
-    \item designed and implemented a rich client overview and monitoring application that visualizes
-      the utilization and available capacity of all network caches, plots graphs over time and allows
-      an operator to dynamically interact with them by issuing commands or writing Python scripts
-      (to automate common administrative logic) in a console-like prompt.
-      \\ \technologies Java (networking), Java Swing, Jython (for the dynamic console)
-    \end{itemize}
-}}
-  
-\headedsubsection % Job title entry for the current employer
-{Senior Software Engineer at the \href{http://www.innovationseeds.eu/Virtual_Library/Results/BEYWATCH.kl}{BeyWatch} project}
-{Jan '09 -- Oct '10}
-{\bodytext{
-    I led the company's technical participation in this project. The domain of the project was home automation
-    and centralized optimization and scheduling of household tasks involving use of electrical appliances
-    in a system of continuously changing real-time tariffs.
-    Some of the things I did:
-    \begin{itemize}
-    \item implemented a brute-force particle swarm optimization algorithm in Java that accepts as inputs
-      a set of tasks, electricity tariffs over the next 24 hours and a weather forecast (so that solar
-      panel output or heating needs may be anticipated) and calculates the best possible scheduling of
-      tasks to minimize either cost or carbon footprint or a combination of both.
-      \\ \technologies{} Java
-    \item implemented a rich client Java application that visualizes the scheduling of the various
-      tasks against the electricity tariffs
-      \\ \technologies{} Java Swing
-    \item implemented the client (scheduler) side of a number of controllers that are used to program or monitor
-      household appliances (washing machines, refrigerators, solar panels)
-      \\ \technologies{} Java, REST, \href{https://www.osgi.org/}{OSGI}.
-    \end{itemize}
-}}
-}
+
+
+
+
+
 
 %------------------------------------------------
 
