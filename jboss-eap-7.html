@@ -8,6 +8,17 @@
   <body>
     <h1 style='font-size: 110%'>JBoss EAP 7.2 notes</h1>
     <ol reversed class='main-list-items'>
+      <li>how I installed my own SSL certificate in JBoss EAP 7</li>
+      <p>
+        I generated a keystore file <i>mperdikeas-jboss-server.jks</i>
+        using <a href='jboss-eap-7.html.files/Makefile'>this Makefile</a>
+        and then changed the <i>&lt;security-realm&gt;</i> element in the
+        JBoss configuration file as shown
+        <a href='jboss-eap-7.html.files/configuration-fragment-ssl.xml'>in this XML fragment</a>
+      </p>
+      <p>See also commit <tt>7fe163a</tt> in the git repository at:
+      <tt>~/EAP-7.1.0/jboss-eap-7.1/standalone/configuration</tt></p>
+           
       <li>how to configure automatic redirects from http to https</li>
       <p>
         <a href="https://stackoverflow.com/a/56549496/274677">https://stackoverflow.com/a/56549496/274677</a>
