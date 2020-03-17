@@ -5,6 +5,8 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>test mouse for click problems in Ubuntu</li>
+      <pre>xev | awk '/ButtonRelease/ {print $1, i++}'</pre>
       <li>play music CDs from the command line</li>
       <pre>mplayer -cdrom-device /dev/sr0 cdda://</pre>
       <li id='decrypting-PDF-files'>decrypting PDF files</li>
@@ -186,6 +188,8 @@ xxd -bp sample.dat | head -3
       This is useful when wanting to also capture a context popup menu (e.g. as typically launched
       by a right mouse click).
       <pre>$ gnome-screenshot -w -d 10</pre>
+      <br/>
+      Also: <pre>gnome-screenshot --interactive</pre>
       <li>Hex editor for the shell</li>
       Emacs has the <tt>hexl-mode</tt> for hexadecimal viewing/editing.
       <li>infinite loop in bash; and break on problem</li>
