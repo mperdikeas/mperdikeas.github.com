@@ -14,6 +14,23 @@
       <hr>
     </header>
     <article>
+      <h2>Streamlined</h2>
+      <p>
+        The below are for the audible site at the UK (notice the <tt>-l uk</tt> switch):
+        <pre>
+mperdikeas@mp-t420:~/aax2mp3tools-hp-5/audible-activator-master
+$ ./audible-activator.py -l uk
+Username: scharamousou@gmail.com
+Password: 
+[*] Player ID is 2jmj7l5rSw0yVb/vlWAYkK/YBwk=
+activation_bytes: 6328eb28
+mperdikeas@mp-t420:~/aax2mp3tools-hp-5/audible-activator-master#
+$ cd ../AAXtoMP3-master/
+mperdikeas@mp-t420:~/aax2mp3tools-hp-5/AAXtoMP3-master#
+$ ./AAXtoMP3 --authcode 6328eb28 ../HarryPotterandtheOrderofthePhoenixBook5_ep6.aax 
+        </pre>
+      </p>
+      <h2>previous messy instructions</h2>
       <p>
         I followed the instructions from 
         <a href='https://en.code-bude.net/2017/02/12/how-to-convert-audible-aax-files-to-mp3-in-linux/'>here</a>
