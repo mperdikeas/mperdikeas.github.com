@@ -5,6 +5,44 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to merge a github pull request locally in order to test it before accepting it</li>
+      <p>
+        <a href='https://gist.github.com/adam-p/15413fabef6cffecd897'>source</a>
+      </p>
+      <p>
+        I followed the below workflow recently:
+        <pre>
+git fetch origin pull/7/head:pr7
+git checkout -t -b origin_master origin/master
+git merge pr7
+git push origin HEAD:master</pre>
+      </p>
+      <p>
+        Following the above I also did:
+        <pre>
+ git checkout -B master origin/master</pre>
+        &hellip; whereupon I got the following message:<pre>
+Branch master set up to track remote branch master from origin.
+Switched to and reset branch 'master'
+Your branch is up-to-date with 'origin/master'.</pre>
+      </p>
+      <li>how to cleanly rebase contributions from a collaborator</li>
+      <p>This is supposedly useful when I also have commits in my local repo
+        that I haven't pushed for a while while the collaborator has pushed
+        his commits to github. Rebase also results in a linear history
+        in contrast to merge. That was the theory at least; I tried that
+        circa September 2020 and it didn't work too well &hellip;</p>
+      <pre>
+$ git fetch -v
+$ git pull --rebase origin master</pre>
+      <p>NB: there should be no slash between <i>origin</i> and <i>master</i></p>
+      <p>So failing the above I had to resort to the familiar:
+        <pre>
+git fetch -v
+git merge origin/master </pre>
+      </p>
+      <p>In both cases you obviously still have to deal with the merge conflicts.a</p>
+
       <li>how to edit / view description on branches</li>
       <p>To edit the checked-out branch's description:
         <pre>git branch --edit-description</pre>
