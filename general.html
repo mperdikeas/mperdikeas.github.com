@@ -5,6 +5,22 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>concatenate / merge multiple PDF into a single one</li>
+      <p>
+        <a href='https://stackoverflow.com/a/19358402/274677'>source 1</a>
+        <a href='https://stackoverflow.com/a/52661288/274677'>source 2</a>
+        <br/>
+        I 've used the following:
+        <pre>sudo convert -density 300x300 -quality 100 1.pdf 2.pdf merged.pdf</pre>
+        After I was hit with:
+        <pre>convert: not authorized `*.pdf' @ error/constitute.c/ReadImage/412.</pre>
+        I modified file <pre>/etc/ImageMagick-6/policy.xml</pre> as follows:
+        <pre>
+&lt;   &lt;policy domain="coder" rights="none" pattern="PDF" /&gt;
+---
+&gt;   &lt;policy domain="coder" rights="read|write" pattern="PDF" /&gt;
+        </pre>
+      </p>
       <li>analyze PDF document for malicious code</li>
       <p>
         Starting off from <a href='https://security.stackexchange.com/a/2897/131157'>https://security.stackexchange.com/a/2897/131157</a> I used the following two programs:
