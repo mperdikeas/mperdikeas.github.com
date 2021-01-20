@@ -11,7 +11,7 @@
         <a href='https://stackoverflow.com/a/52661288/274677'>source 2</a>
         <br/>
         I 've used the following:
-        <pre>sudo convert -density 300x300 -quality 100 1.pdf 2.pdf merged.pdf</pre>
+        <pre>convert -density 300x300 -quality 100 1.pdf 2.pdf merged.pdf</pre>
         After I was hit with:
         <pre>convert: not authorized `*.pdf' @ error/constitute.c/ReadImage/412.</pre>
         I modified file <pre>/etc/ImageMagick-6/policy.xml</pre> as follows:
