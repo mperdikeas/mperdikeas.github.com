@@ -5,6 +5,14 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>obtain new dynamic IP following reconfiguration of DHCP pool in router</li>
+      <p>
+        <pre>
+sudo ifconfig
+// I see that the wired interface is named enp0s31f6
+sudo ifconfig enp0s31f6 down
+sudo ifconfig enp0s31f6 up</pre>
+      </p>
       <li>turn off / on wireless on Ubuntu 16.04</li>
       <p>
 <a href='https://askubuntu.com/a/834194/89663'>source</a>
