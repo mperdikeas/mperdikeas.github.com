@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+
+  </style>
+  <body>
+    <header>
+      <h1>Write-up of the Ubuntu 20.04.2 installation on my Lenovo ThinkPad T510 laptop (April 2018)</h1>
+      <hr>
+    </header>
+    <ol>
+    <p>
+      I lost a huge amount trying to enter BIOS / UEFI from the thrice-accursed accursed windows pseudo-operating system.
+      In the end I discovered I had to disable the <i>Windows 10 Fast Startup</i> (as explained
+      <a href='https://www.windowscentral.com/how-disable-windows-10-fast-startup'>here</a>).
+      In my case it was further complicated as my BIOS didn't support UEFI (the machine has 'Legacy' BIOS).
+    </p>
+    <p>
+      Subsequently, I lost some time trying to discover which are the keys to enter BIOS on a ThinkStation
+      machine and when to press them. I discovered it is <b>F1</b> and that, crucially,
+      you need to press them <b>immediately</b> after the start of a power cycle.
+    </p>
+    <p>
+      I then managed to enter BIOS and after changing the boot order, I successfully booted from a USB flash
+      drive I had created using <i>USB Creator</i> as advised <a href='http://mperdikeas.github.io/travails-setting-up-T510.html#create-bootable-usb-flash-drives'>here</a>.
+    </p>
+    <p>
+      I then installed emacs and modified the <tt>GRUB</tt> settings as shown <a href='https://askubuntu.com/a/754875'>here</a>
+      and then entered CRUB by pressing <tt>ESC</tt> (or <tt>SHIFT</tt>) while rebooting and started a memory test. However, the test hung up on me and I was unable to enter the CRUB menu again.
+    </p>
+    </ol>
+  </body>
+</html>
