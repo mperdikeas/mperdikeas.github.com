@@ -11,6 +11,94 @@
 </head>
 <body>
   <ol class='main-list-items' reversed>
+    <li>How I installed a Java development environment in my Ubuntu 20.04 machine</li>
+      <p>
+        In late April 2021 I had to install a Java development environment in my Ubuntu 20.04 machine
+        and be able to use my Ant/Ivy-based build machinery with local IVY repositories. What follows
+        is a writeup of how I proceeded.
+      </p>
+      <p>
+        The Java 11 runtime was already installed so I only needed to install the JDK with:
+        <pre>sudo apt install javac</pre>
+        This installed JDK 11
+      </p>
+      <p>
+        It should be noted that in the previous Java developement environment I had on the T460 ThinkPad
+        machine I had Java 8. This caused a problem further down the road (read on).
+      </p>
+      <p>
+        I then installed Ant with:
+        <pre>sudo apt install ant</pre>
+        That gave me version <tt>1.10.7</tt> (instead of <tt>1.9.6</tt> I had on T460)
+      </p>
+      <p>
+        The next question was how to install Ivy. Here, I tried various approaches and even though
+        some initial ones were successful, in the end I used a different method.
+        As documented, Ivy is simply a jar and it can be installed in two ways:
+        <ol>
+          <li>locally, for the current user, at <tt>~/.ant/lib</tt></li>
+          <li>in some global location which you can google </li>
+        </ol>
+      </p>
+      <p>Furthermore, in Ubuntu 20 there's also a third way:
+        <ol start='3'>
+          <li>by using <pre>sudo apt install ivy</pre> which places the <tt>ivy.jar</tt>
+            under <tt>/usr/share/java</tt></li>
+        </ol>
+        <br/>
+        I tried methods #1 and #3 and both seemed to, sort of, work (not without problems).
+        But, later, when I had to
+        copy the entire <tt>/proj/DS.ots/</tt> directory, this became moot as the Ivy jar is picked
+        up from OTS and so I both purged the <i>ivy</i> package and removed the Ivy jar from
+        <tt>~/.ant/lib</tt>
+      </p>
+      <p>
+        Next, I had to install some auxiallary Ant tasks (<i>ant-contrib</i>)
+        which is some sort of abandonware available at: <a href='https://sourceforge.net/projects/ant-contrib/'>sourceforge</a>.
+        This project only makes the sources available (not the compiled library) and I had some issues
+        getting the code to compile. Fortunately, once I copied over the <tt>/proj/DS.ots</tt> directory as
+        mentioned above, this point too became moot as the <i>ant-contrib</i> library is available there too, as well,
+        as an OTS dependency.
+      </p>
+      <p>
+        I then had to edit the various <tt>build.xml</tt> scripts as in the T460 laptop they used absolute paths to reach the
+        home of the <i>archetype-java-ant-ivy/build-system-machinery</i> whereas in the P320 desktop I am using relative paths.
+        In the same spirit, I also had to change certain symlinks to use relative, instead of absolute, paths (the latter never
+        being a good idea).
+      </p>
+      <p>
+        In the save vein I had to change some hardcoded executables, e.g. the <tt>javac.executable</tt>
+        property in file <tt>/repos/prj/archetype-java-ant-ivy/build-system-machinery/build-env.properties</tt>
+      </p>
+      <p>
+        Finally, another issue I had to solve was that in Java 11 the <tt>javax.activation</tt> package is not available
+        (it has actually been retired since Java 9). As such I was getting a compilation error in the
+        <tt>~/repos/prj/js-react-leaflet/common</tt> project. The solution was found in <a href='https://stackoverflow.com/a/46493809/274677'>SO</a>.
+        To implement the SO solution I had to add the following ivy dependency in the <tt>ivy,xml</tt> file
+        of the above-mentioned project.
+        <pre>&lt;dependency org="com.sun.activation" name="javax.activation" rev="1.2.0" conf="compile-time->master"/&gt; </pre>
+        <br/>
+        However, adding the above depenency wasn't enough. By default, the various projects only rely on the Local File-System Based Ivy
+        Repository (LFSBIR). This is for security and determinism / reproducability purposes. Since this was a new dependency it wasn't
+        available in the LFSBIR I copied over from the ThinkPad T460 laptop. As such to enable direct retrieval of repos from the Maven
+        central repository (if they can't be found in the LFSBIR) I had to further modify the <tt>build.xml</tt> of
+        the <tt>~/repos/prj/js-react-leaflet/common</tt> project mentioned above so as to define the property <i>enable-ibiblio</i>
+        and set its value to "true". This was done as follows:
+        <pre>&lt;property name="enable-ibiblio" value="true"/&gt;</pre>
+      </p>
+      <p>
+        After the above modifications, I was able to fully build the <i>js-react-leaflet</i> project. However, I also wanted to recreate
+        the entire LFSBIR from scratch as opposed to copying it over from the ThinkPad T460 machine and also include this new dependency
+        there (in the LFSBIR) as opposed to setting the <tt>enable-ibiblio</tt> property to <i>true</i>. To that end I modified
+        file <tt>~/repos/prj/archetype-java-ant-ivy/ivy-importation-to-local-fs/build-ivy-install-local.xml</tt> and discoverd, in the process,
+        that I had to further retrieve a couple of more additional packages there. During this
+        process I also changed the properties in the <tt>/data/asc3/mperdike/</tt> directory to make it writable. I was then able to fetch a
+        fresh <tt>/data/asc3/mperdike/local-ivy-repository</tt> and I verified that its size profile was similar to the previous one.
+      </p>
+      <p>
+        I then removed the <tt>enable-ibiblio</tt> property from the <tt>build.xml</tt> file in the <tt>~/repos/prj/js-react-leaflet/common</tt> project
+        , cleaned the Ivy cache, re-build everything (including the sibling <tt>rest-backend</tt> project and so successfully concluded this process.
+      </p>
     <li>How to install OpenJDK 1.8 in Ubuntu 16.04</li>
     <p>The following worked like a charm in June, 2019</p>
     <p>
