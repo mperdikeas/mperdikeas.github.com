@@ -16,7 +16,7 @@
     (PDF also saved
     <a href='./admin.html.files/install-Oracle-XE-11_2-on_Ubuntu_16_04.pdf'>here</a>) and
     the process was, for the most part, smooth.
-  <li>how to launch GNOME control center will <b>all</b> the icons from the command line &mdash; i3wm and 16.04</li>
+    <li>how to launch GNOME control center will <b>all</b> the icons from the command line &mdash; i3wm and 16.04</li>
     The following is sufficient (no sudo is required):
     <pre>env XDG_CURRENT_DESKTOP=GNOME gnome-control-center</pre>
     provenance: <a href='https://askubuntu.com/q/542744/89663'>https://askubuntu.com/q/542744/89663</a>
@@ -55,16 +55,16 @@
       <blockquote>
         <p>Running Artifactory</p>
         <p>
-        You can run Artifactory manually to see its behavior by directly executing:
+          You can run Artifactory manually to see its behavior by directly executing:
 
-        $ARTIFACTORY_HOME/bin/artifactory.sh
+          $ARTIFACTORY_HOME/bin/artifactory.sh
 
-        The console is locked on the Artifactory process and you can stop it cleanly with Ctrl+C.
+          The console is locked on the Artifactory process and you can stop it cleanly with Ctrl+C.
 
-        To directly run Artifactory as a daemon process, using the environment variables of the shell you are currently in, execute the following script:
+          To directly run Artifactory as a daemon process, using the environment variables of the shell you are currently in, execute the following script:
 
           $ARTIFACTORY_HOME/bin/artifactoryctl start
-          </p>
+        </p>
       </blockquote>
       &hellip; I just used <tt>artifactory.sh</tt> from a console terminal &mdash; I didn't bother with running it as a daemon.
     </p>
@@ -83,7 +83,7 @@ $ sudo apt-get install jfrog-artifactory-pro</pre>
       the following did not work:
       <pre>
 sudo service artifactory check</pre>
-&hellip; instead, I confirmed correct installation with:
+      &hellip; instead, I confirmed correct installation with:
       <pre>
 sudo systemctl status artifactory.service
 sudo tail -f /var/opt/jfrog/artifactory/logs/artifactory.log</pre>
@@ -112,7 +112,7 @@ tar xf node-v8.11.4-linux-x64.tar.xz</pre>
     <li>how I fixed my python3 package on Ubuntu 16.04</li>
     <p>
       When I was trying to execute <pre>sudo apt-get install python3</pre> &hellip; I would eventually see the following problems:
-    <pre>
+      <pre>
 dpkg: error processing package python3 (--configure):
  package is in a very bad inconsistent state; you should
  reinstall it before attempting configuration
@@ -128,7 +128,7 @@ dpkg: dependency problems prevent configuration of idle3:
 dpkg: dependency problems prevent removal of python3</pre>
     </p>
     <p>I eventually managed to reinstall python3 only with:
-    <pre>sudo apt-get --reinstall install python3</pre></p>
+      <pre>sudo apt-get --reinstall install python3</pre></p>
     <li>how to restore packages if something you did broke Ubuntu</li>
     <p>
       My sad, didactic tale <a href='https://askubuntu.com/q/1020616/89663'>here</a> &mdash; see my answer which
@@ -190,7 +190,7 @@ dpkg: dependency problems prevent removal of python3</pre>
     </p>
     <li>Fonts</li>
     <p>
-    The collection of fonts you are able to use is the set of all fonts found under any subdirectory of
+      The collection of fonts you are able to use is the set of all fonts found under any subdirectory of
       <tt>/usr/share/fonts</tt> and <tt>~/.fonts</tt>
     </p>
     <p>
@@ -222,7 +222,7 @@ $ fc-list | grep -i inconsol
     </p>
     <li>how to remove a Personal Package Archive (PPA) and any packages updated / installed by it</li>
     <p>
-    In November 2017 I installed Emacs 25 on Ubuntu 16.04 by first installing a PPA (as described <a href='#install-emacs25-ubuntu-16.04'>here</a>). It was working fine, but I subsequently decided to unistall it and to remove the PPA I had installed for that purpose alone.
+      In November 2017 I installed Emacs 25 on Ubuntu 16.04 by first installing a PPA (as described <a href='#install-emacs25-ubuntu-16.04'>here</a>). It was working fine, but I subsequently decided to unistall it and to remove the PPA I had installed for that purpose alone.
     </p>
     <p>Normally, I would purge the package and remove the PPA. Turns out there's a safer and cleaner approach that allows you to remove a PPA <b>and</b> at the same time gracefully downgrade any pacages it updated (over the official repositories) or any packages installed by it. This alternative is the program <i>ppa-purge</i>. I read about it <a href='https://askubuntu.com/a/310/89663'>here</a>.
     </p>
@@ -231,7 +231,7 @@ $ fc-list | grep -i inconsol
       <pre>
 sudo apt-get install ppa-purge
 sudo ppa-purge ppa:kelleyk/emacs</pre>
-          &hellip; after the above, <i>emacs25</i> was no more (without having to explicitly <i>apt-remove</i> it)
+      &hellip; after the above, <i>emacs25</i> was no more (without having to explicitly <i>apt-remove</i> it)
     </p>
     <p>Note that the following file:
       <pre>/etc/apt/sources.list.d/kelleyk-ubuntu-emacs-xenial.list</pre>
@@ -242,11 +242,11 @@ sudo ppa-purge ppa:kelleyk/emacs</pre>
     <p>
       In November 2017 I followed the below procedure to install Emacs 25 on my Ubuntu 16.04 ThinkPad T420 machine:
     </p>
-<pre>
+    <pre>
 sudo add-apt-repository ppa:kelleyk/emacs
 sudo apt-get update
 sudo apt-get install emacs25
-</pre>
+    </pre>
     <li>quick test to see if the locally configured SMTP MSA (Mail Submission Agent) is working</li>
     <p>
       This can be helpful when trying to troubleshoot programmatic MUA (e.g. using the <tt>javax.mail.Transport</tt>
@@ -272,18 +272,18 @@ sudo apt-get install emacs25
       There's a number of ways to obtain swap size:
       <ul>
         <li>Using <code>free</code></li>
-<pre>
+        <pre>
     $ free -h
                   total        used        free      shared  buff/cache   available
     Mem:           7.7G        4.8G        484M        387M        2.5G        2.2G
     Swap:          7.9G        5.1M        7.9G
-</pre>
+        </pre>
         <li>Using the <code>/proc</code> filesystem</li>
-<pre>
+        <pre>
 $ cat /proc/swaps
 Filename    Type          Size       Used  Priority
 /dev/sda5   partition     8267772    5172  -1
-</pre>
+        </pre>
         <li>Using high-level tools like <code>htop</code> or <code>glance</code></li>
       </ul>
 
@@ -937,99 +937,99 @@ UBUNTU_MENUPROXY=libappmenu.so
     E: Problem with MergeList /var/lib/apt/lists/es.archive.ubuntu.com_ubuntu_dists_precise_main_i18n_Translation-en
     E: The package lists or status file could not be parsed or opened.
         </pre>
-    </p>The following fixes it:
-    <pre>
+  </p>The following fixes it:
+  <pre>
 sudo rm /var/lib/apt/lists/* -vf
 sudo apt-get update
-    </pre>
-    After the above two commands <b>sudo apt-get install graphviz</b> succeeds.
-    I think doing a <b>sudo apt-get install upgrade</b> wouldn't hurt either
-    but I didn't try it in this particular case. I also tried it again in a similar
-    situation and was able to <b>sudo apt-get install p7zip-full</b> while it previously failed.
-    <li>find which fonts are available</li>
-    <pre>fc-list</pre>
-    <li>disabled laptop internal keyboard (e.g. so as to only use the USB keyboard)</li>
-    Original article <a href="http://ubuntuforums.org/showthread.php?t=1663298">here</a>.
-    Do a:
-    <pre>
+  </pre>
+  After the above two commands <b>sudo apt-get install graphviz</b> succeeds.
+  I think doing a <b>sudo apt-get install upgrade</b> wouldn't hurt either
+  but I didn't try it in this particular case. I also tried it again in a similar
+  situation and was able to <b>sudo apt-get install p7zip-full</b> while it previously failed.
+  <li>find which fonts are available</li>
+  <pre>fc-list</pre>
+  <li>disabled laptop internal keyboard (e.g. so as to only use the USB keyboard)</li>
+  Original article <a href="http://ubuntuforums.org/showthread.php?t=1663298">here</a>.
+  Do a:
+  <pre>
 xinput --list
-    </pre>
-    to find the id of the devices connected to the computer.
-    Then to disable a device (say the built-in keyboard has id <b>11</b>, do a:
-    <pre>
+  </pre>
+  to find the id of the devices connected to the computer.
+  Then to disable a device (say the built-in keyboard has id <b>11</b>, do a:
+  <pre>
 xinput set-int-prop 11 "Device Enabled" 8 0 
-    </pre>
-    And to enable it back again, do a:
-    <pre>
+  </pre>
+  And to enable it back again, do a:
+  <pre>
 xinput set-int-prop 11 "Device Enabled" 8 1
-    </pre>
-    <li>remove existing partitions and format USB flash drive or SDHC memory card for Linux</li>
-    <a href="http://www.quentinhuys.com/extharddrive.html">source</a><br/>
-    <p>Before you start, make sure you've unmounted any file systems that were mounted on that device</p>
-    First of all do a <b>sudo -i</b>. Then, use two
-    commands: <b>fdisk</b> followed by a <b>mkfs.ext3</b>
-    First, do a:
-    <pre>lsblk</pre>
-    ... to find the device names and the partitions. In my case I had three (3) 
-    partitions on the same external USB HDD: <b>/dev/sdg1/</b>, <b>/dev/sdg2</b>
-    and <b>/dev/sdg3</b>. I then did a:
-    <pre>fdisk /dev/sdg</pre>
-    to create a single partition (<b>m</b> to list the available commands, <b>p</b> to list
-    existing partitions, <b>d</b> to delete partitions, <b>n</b> to create a new partition
-    and <b>w</b> to write the partition table).
-    <p/>
-    This was followed by a:
-    <pre>mkfs.ext3 /dev/sdg1</pre>
-    ... on the single partition I created. Finally, to label the drive I did a:
-    <pre>sudo e2label /dev/sdg1 150GB-USB-hdd</pre>
-    <p>
-      <span class='NB'>NB</span>: more recently I just did a:
-      <pre>mkfs.ext3 -L volume-label /dev/sdg1</pre>
-      to format and label the volume in one step without needing to use <tt>e2label</tt>.
-    </p>
-    <p>
-      <span class='NB'>NB2</span>
-      You may not be able to write to this disk as normal user as root may own it,
-      but just doing <code>chown user:user /media/volume-name</code> 
-      or <code>chmod -R a+rwx /media/volume-name</code> will do the trick.
-    </p>
-    <p>
-      <span class='NB'>NB3</span>
-      It is important that the <tt>fdisk</tt> is performed on the entire device (as in <code>fdisk /dev/sdg</code>)
-      but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <code>mkfs.ext3 .. /dev/sdg1</code>).<br/>
-      Doing the <tt>mkfs.ext3</tt> on the entire
-      device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
-      to find the file system type.
-    </p>
-    <p><span class='NB'>NB4</span>
-      To confirm that you've correctly formated the flash drive do
-      a <code>sudo blkid</code> afterwards (this works whether the
-      drive is mounted or unmounted)
-    </p>
-    <hr>
-    <p id='format-usb-flash-2018-April'>
-      <b style='color:blue'>2018, April</b>. I did the following to format to FAT32 a Transcend 8GB USB flash drive (which I intended to use to create a bootable Ubuntu 16.04 flash drive):
-      <pre>
+  </pre>
+  <li>remove existing partitions and format USB flash drive or SDHC memory card for Linux</li>
+  <a href="http://www.quentinhuys.com/extharddrive.html">source</a><br/>
+  <p>Before you start, make sure you've unmounted any file systems that were mounted on that device</p>
+  First of all do a <b>sudo -i</b>. Then, use two
+  commands: <b>fdisk</b> followed by a <b>mkfs.ext3</b>
+  First, do a:
+  <pre>lsblk</pre>
+  ... to find the device names and the partitions. In my case I had three (3) 
+  partitions on the same external USB HDD: <b>/dev/sdg1/</b>, <b>/dev/sdg2</b>
+  and <b>/dev/sdg3</b>. I then did a:
+  <pre>fdisk /dev/sdg</pre>
+  to create a single partition (<b>m</b> to list the available commands, <b>p</b> to list
+  existing partitions, <b>d</b> to delete partitions, <b>n</b> to create a new partition
+  and <b>w</b> to write the partition table).
+  <p/>
+  This was followed by a:
+  <pre>mkfs.ext3 /dev/sdg1</pre>
+  ... on the single partition I created. Finally, to label the drive I did a:
+  <pre>sudo e2label /dev/sdg1 150GB-USB-hdd</pre>
+  <p>
+    <span class='NB'>NB</span>: more recently I just did a:
+    <pre>mkfs.ext3 -L volume-label /dev/sdg1</pre>
+    to format and label the volume in one step without needing to use <tt>e2label</tt>.
+  </p>
+  <p>
+    <span class='NB'>NB2</span>
+    You may not be able to write to this disk as normal user as root may own it,
+    but just doing <code>chown user:user /media/volume-name</code> 
+    or <code>chmod -R a+rwx /media/volume-name</code> will do the trick.
+  </p>
+  <p>
+    <span class='NB'>NB3</span>
+    It is important that the <tt>fdisk</tt> is performed on the entire device (as in <code>fdisk /dev/sdg</code>)
+    but that <tt>mkfs.ext3</tt> is performed on a single partition (as in <code>mkfs.ext3 .. /dev/sdg1</code>).<br/>
+    Doing the <tt>mkfs.ext3</tt> on the entire
+    device would still work but then the <tt>fdisk -l</tt> command will complain about not being able
+    to find the file system type.
+  </p>
+  <p><span class='NB'>NB4</span>
+    To confirm that you've correctly formated the flash drive do
+    a <code>sudo blkid</code> afterwards (this works whether the
+    drive is mounted or unmounted)
+  </p>
+  <hr>
+  <p id='format-usb-flash-2018-April'>
+    <b style='color:blue'>2018, April</b>. I did the following to format to FAT32 a Transcend 8GB USB flash drive (which I intended to use to create a bootable Ubuntu 16.04 flash drive):
+    <pre>
 sudo fdisk /dev/sdb</pre>
-      In the step above I followed the sequence of steps described above to list the existing partitions (<b>p</b>), delete the
-      existing partition (<b>d</b>) and then create a new partition (<b>n</b>) and, finally, write the partition table (<b>w</b>).
-    </p>
-    <p>
-      This was then followed by:
-      <pre>sudo mkfs.fat -F 32 /dev/sdb1</pre>
-      to create a FAT32 file-system on the flash drive.
-    </p>
-    <p>
-      However, I was unable to label it. I tried:
-      <pre>sudo fatlabel /dev/sdb TRANS-8GB</pre>
-      &hellip; but it wasn't working. However, I tried again later using:
-      <pre>sudo fatlabel /dev/sdb1 TRNSND8BLAC</pre>
-      &hellip; (as advised <a href=filesystems.html#how-to-label-fat32-filesystem'>here</a>) and it worked like a charm (on the second try). The difference was that the second incantation used the partition, not the entire device, and that filesystem was dismounted when I tried the second incantation.
-    </p>
-      <p>
-      At any rate notice again how
-        (as advised above) <code>fdisk</code> is performed on the entire disk whereas <code>mkfs</code> on a single partition.
-      </p>
+    In the step above I followed the sequence of steps described above to list the existing partitions (<b>p</b>), delete the
+    existing partition (<b>d</b>) and then create a new partition (<b>n</b>) and, finally, write the partition table (<b>w</b>).
+  </p>
+  <p>
+    This was then followed by:
+    <pre>sudo mkfs.fat -F 32 /dev/sdb1</pre>
+    to create a FAT32 file-system on the flash drive.
+  </p>
+  <p>
+    However, I was unable to label it. I tried:
+    <pre>sudo fatlabel /dev/sdb TRANS-8GB</pre>
+    &hellip; but it wasn't working. However, I tried again later using:
+    <pre>sudo fatlabel /dev/sdb1 TRNSND8BLAC</pre>
+    &hellip; (as advised <a href=filesystems.html#how-to-label-fat32-filesystem'>here</a>) and it worked like a charm (on the second try). The difference was that the second incantation used the partition, not the entire device, and that filesystem was dismounted when I tried the second incantation.
+  </p>
+  <p>
+    At any rate notice again how
+    (as advised above) <code>fdisk</code> is performed on the entire disk whereas <code>mkfs</code> on a single partition.
+  </p>
   </p>
   <p>
     <b style='color:blue'>2019, May</b>
@@ -1038,123 +1038,139 @@ sudo fdisk /dev/sdb</pre>
     <i>gnome-disks</i> program before proceeding with the <i>April 2018</i> procedure. I still couldn't get the High Sierra machine
     to read it. I then formatted it on the Mac using the simple FAT filesystem and at that point it worked in both Ubuntu and MacOS.
   </p>
+  <p>
+    <b style='color:blue'>2021, May</b>
+    While trying to format a brand-new SanDisk 256G thumb drive I encountered problems with the above
+    procedure. Specifically, the following step:
+    <pre>$ sudo mkfs.ext3 -L san256G /dev/sdc1</pre>
+    &hellip; became stuck at the point where the journal get's created:
+    <pre>Creating journal (262144 blocks): </pre>
+    To get around this problem I formated the drive in <i>ext4</i> as follows:
+    <pre>$ sudo mkfs.ext4 -L san256G -F /dev/sdc1</pre>
+    <span class='NB'>NB5</span> As always, you must remember to <b>first</b> delete the existing
+    partitions, then create a new partition (just accept the defaults) and write it on
+    the drive using:
+    <pre>$ sudo fdisk /dev/sdc</pre>
+    Only after the above step (which has always succeeded in my experience) should you
+    go ahead with the <tt>mkfs.ext4</tt> tool.
+  </p>
 
-    <li>remove BOM from files in Linux</li>
-    <pre>tail --bytes=+4 text.txt</pre>
-    <li>remote desktop connection in Linux</li>
-    <pre>rdesktop -a 16 -f 192.168.0.2</pre>
-    <b>a</b> for color depth (16 bits), <b>f</b> for full-screen
-    <li>how I transformed a set of java files using the slav-latin encoding (for Czech) to UTF-8</li>
-    Two steps:
+  <li>remove BOM from files in Linux</li>
+  <pre>tail --bytes=+4 text.txt</pre>
+  <li>remote desktop connection in Linux</li>
+  <pre>rdesktop -a 16 -f 192.168.0.2</pre>
+  <b>a</b> for color depth (16 bits), <b>f</b> for full-screen
+  <li>how I transformed a set of java files using the slav-latin encoding (for Czech) to UTF-8</li>
+  Two steps:
+  <ol>
+    <li>change the encoding of the files using <b>iconv</b></li>
+    <pre> for x in $(find . -iname \*.java) ; do  iconv  --from-code=ISO-8859-2 --to-code=UTF-8 $x > $x.boo ; done</pre>
+    <li>rename the sources back to Java</li>
+    <pre>for i in $(find . -iname \*.java.boo) ; do mv -v $i ${i%.java.boo}.java ; done</pre>
+    <b>NOTE:</b> before the previous I had the following which doesn't work as it does the renames to the local folder:
+    <pre>for i in $(find . -iname \*.java.boo) ; do mv "$i" "`basename $i .java.boo`.java"; done</pre>
+  </ol>
+  <li>find a package's version<li>
+    <pre>dpkg -s postgresql</pre>
+    <li>apt-get update -vs- apt-get upgrade -vs- apt-get dist-upgrade</li>
+    You should first run <b>update</b>, then <b>upgrade</b>. Neither of them automatically
+    runs the other:
+    <ul>
+      <li><b>apt-get update</b> updates the list of available packages and their versions, but it does not install
+        or upgrade any packages.</li>
+      <li><b>apt-get upgrade</b> actually updates packages you have to newer versions.</li>
+      <li><b>apt-get dist-upgrade</b> in addition to performing the function of upgrade, also intelligenly
+        handles changing dependencies with new version of packages and <i>may</i>
+        install new packages.</li>
+    </ul>
+    <li>list of fonts</li>
+    <pre>fc-list</pre>
+    <li>format external USB flash drive in Linux</li>
     <ol>
-      <li>change the encoding of the files using <b>iconv</b></li>
-      <pre> for x in $(find . -iname \*.java) ; do  iconv  --from-code=ISO-8859-2 --to-code=UTF-8 $x > $x.boo ; done</pre>
-      <li>rename the sources back to Java</li>
-      <pre>for i in $(find . -iname \*.java.boo) ; do mv -v $i ${i%.java.boo}.java ; done</pre>
-      <b>NOTE:</b> before the previous I had the following which doesn't work as it does the renames to the local folder:
-      <pre>for i in $(find . -iname \*.java.boo) ; do mv "$i" "`basename $i .java.boo`.java"; done</pre>
+      <li>remove and insert the flash drive and do a:
+        <pre>dmesg | tail</pre>
+        .. to identify the device (/dev/sdc1 in my system)</li>
+      <li>confirm with a:
+        <pre>df</pre></li>
+      <li>dismount:<pre>sudo umount /dev/sdc1</pre></li>
+      <li>format:<pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</pre>
+  </p>Note, sometimes <b>-n</b>  is not understood and the following works instead:</p>
+    </pre>sudo mkfs.ext3 /dev/sdc1</pre></li>
+      <li>I've also seen:
+        <pre>sudo mkfs -t vfat /dev/sdb1</pre></li>
     </ol>
-    <li>find a package's version<li>
-      <pre>dpkg -s postgresql</pre>
-      <li>apt-get update -vs- apt-get upgrade -vs- apt-get dist-upgrade</li>
-      You should first run <b>update</b>, then <b>upgrade</b>. Neither of them automatically
-      runs the other:
-      <ul>
-        <li><b>apt-get update</b> updates the list of available packages and their versions, but it does not install
-          or upgrade any packages.</li>
-        <li><b>apt-get upgrade</b> actually updates packages you have to newer versions.</li>
-        <li><b>apt-get dist-upgrade</b> in addition to performing the function of upgrade, also intelligenly
-          handles changing dependencies with new version of packages and <i>may</i>
-          install new packages.</li>
-      </ul>
-      <li>list of fonts</li>
-      <pre>fc-list</pre>
-      <li>format external USB flash drive in Linux</li>
-      <ol>
-        <li>remove and insert the flash drive and do a:
-          <pre>dmesg | tail</pre>
-          .. to identify the device (/dev/sdc1 in my system)</li>
-        <li>confirm with a:
-          <pre>df</pre></li>
-        <li>dismount:<pre>sudo umount /dev/sdc1</pre></li>
-        <li>format:<pre>sudo mkfs.ext3 -n 'name' /dev/sdc1</pre>
-    </p>Note, sometimes <b>-n</b>  is not understood and the following works instead:</p>
-      </pre>sudo mkfs.ext3 /dev/sdc1</pre></li>
-        <li>I've also seen:
-          <pre>sudo mkfs -t vfat /dev/sdb1</pre></li>
-      </ol>
-      <li>find sockets bound and listened-to in the local host</li>
-      <pre> sudo lsof -P -i -n </pre>
-      <li>find the libraries used by a program</li>
-      <pre>ldd $(which wget)</pre>
-      <li>use the <b>ldd</b> Linux command to find version information
-        (and dependencies?) about specific library files</li>
-      <pre>ldd /usr/lib/libappindicator3.so.1</pre>
-      <li>get seconds since the epoch to time</li>
-      <pre>date -d @23948239</pre>
-      <li>get date as seconds since the epoch</li>
-      <pre>
+    <li>find sockets bound and listened-to in the local host</li>
+    <pre> sudo lsof -P -i -n </pre>
+    <li>find the libraries used by a program</li>
+    <pre>ldd $(which wget)</pre>
+    <li>use the <b>ldd</b> Linux command to find version information
+      (and dependencies?) about specific library files</li>
+    <pre>ldd /usr/lib/libappindicator3.so.1</pre>
+    <li>get seconds since the epoch to time</li>
+    <pre>date -d @23948239</pre>
+    <li>get date as seconds since the epoch</li>
+    <pre>
 date +%s
 date -d "Dec 24 1974" +%s
-      </pre>
-      <li>open a file manager on the current directory</li>
-      <pre>xdg-open .</pre>
-      <li>viewing binary files in Linux</li>
-      Use the <b>hexedit</b> program.
-      <li>the two components of the <b>LANG</b> environment variable</li>
-      In my machine, at present:
-      <pre>
+    </pre>
+    <li>open a file manager on the current directory</li>
+    <pre>xdg-open .</pre>
+    <li>viewing binary files in Linux</li>
+    Use the <b>hexedit</b> program.
+    <li>the two components of the <b>LANG</b> environment variable</li>
+    In my machine, at present:
+    <pre>
 echo $LANG
 en_US.UTF-8
-      </pre>
-      The first component of the environment variable specifies the <i>collation</i>
-      which dictates: (a) lowercase / uppercase logic, (b) ordering logic, (c) maybe, default
-      codepage. The second component is the encoding. <b>LANG</b> should be set to the
-      same value as the <b>LC_ALL</b> otherwise some instabilities may be observed.
-      <li>on the <b>LANG</b> environment variable</li>
-      The <b>LANG</b> environment variable is taken into account by
-      the <i>i18n</i> component of <b>libc</b>, and therefore, because
-      of that by all tools, interpreters and other libraries that
-      interact with the console.<p>
-        In my machine it is currently:<p>
-        <pre>
+    </pre>
+    The first component of the environment variable specifies the <i>collation</i>
+    which dictates: (a) lowercase / uppercase logic, (b) ordering logic, (c) maybe, default
+    codepage. The second component is the encoding. <b>LANG</b> should be set to the
+    same value as the <b>LC_ALL</b> otherwise some instabilities may be observed.
+    <li>on the <b>LANG</b> environment variable</li>
+    The <b>LANG</b> environment variable is taken into account by
+    the <i>i18n</i> component of <b>libc</b>, and therefore, because
+    of that by all tools, interpreters and other libraries that
+    interact with the console.<p>
+      In my machine it is currently:<p>
+      <pre>
 $echo $LANG
 en_US.UTF-8
-        </pre>
-        As a result everything that's inputed from the keyboard or
-        output to the keyboard is converted automatically to UTF-8
-        (this is analogous to the 'Regional Settings' in Windows machines).<p>
-          To experiment do a:
-          <pre>
+      </pre>
+      As a result everything that's inputed from the keyboard or
+      output to the keyboard is converted automatically to UTF-8
+      (this is analogous to the 'Regional Settings' in Windows machines).<p>
+        To experiment do a:
+        <pre>
 cat > datatest
-          </pre>
-          and type-in some Greek characters. The command <i>file</i> on
-          my machine then yields:
-          <pre>
+        </pre>
+        and type-in some Greek characters. The command <i>file</i> on
+        my machine then yields:
+        <pre>
 file datatest
 datatest: UTF-8 Unicode text
-          </pre>
-          If the file is converted to a Greek codepage, with:
-          <pre>
+        </pre>
+        If the file is converted to a Greek codepage, with:
+        <pre>
 iconv -f utf-8 -t iso8859-7 < datatest > greek
-          </pre>
-          .. <i>file</i> then duly reports:
-          <pre>
+        </pre>
+        .. <i>file</i> then duly reports:
+        <pre>
 file greek
 greek: ISO-8859 text
-          </pre>
-          .. and <i>cat</i>ing the file produces garbage on the console.
-          <li>configure emacs as the default text editor in GNOME</li>
-          Open (or touch if it doesn't exist) file:
-          <pre>~/.local/share/applications/defaults.list</pre>
-          Add or edit the following text:
-          <pre>
+        </pre>
+        .. and <i>cat</i>ing the file produces garbage on the console.
+        <li>configure emacs as the default text editor in GNOME</li>
+        Open (or touch if it doesn't exist) file:
+        <pre>~/.local/share/applications/defaults.list</pre>
+        Add or edit the following text:
+        <pre>
 [Default Applications]
 text/plain=emacs
-          </pre>
-          <li>restore corrupt VM in Ubuntu</li>
-          do the following as root (history excrept):
-          <pre>
+        </pre>
+        <li>restore corrupt VM in Ubuntu</li>
+        do the following as root (history excrept):
+        <pre>
   348  cd /home/mperdikeas/virtual-machines/vm/
   349  l
   350  ls -ltra
@@ -1170,183 +1186,183 @@ text/plain=emacs
   360  chmod 644 *
   361  l
   362  vmplayer Windows\ XP\ Professional.vmx
-          </pre>
-          <li>enable ssh authentication</li>
-          <pre>
+        </pre>
+        <li>enable ssh authentication</li>
+        <pre>
 cat .ssh/id_dsa.pub
 (grep with mouse)
 cat >> .ssh/authorized_keys
-          </pre>
-          <li>how to view the shared directories of a samba system</li>
-          <pre>
+        </pre>
+        <li>how to view the shared directories of a samba system</li>
+        <pre>
 smbclient -U a_tsiodras -L //172.31.128.250
-          </pre>
-          Occassionally, this might give a: 
-          <pre>
+        </pre>
+        Occassionally, this might give a: 
+        <pre>
 session setup failed: NT_STATUS_LOGON_FAILURE
-          </pre>
-          if the server is not configured to provide a listing of the shared folders.
-          In these cases, the only recourse is to know the shared folder names and
-          directly mount them as shown on the below item.
-          <li>how to mount a samba system</li>
-          <pre>
+        </pre>
+        if the server is not configured to provide a listing of the shared folders.
+        In these cases, the only recourse is to know the shared folder names and
+        directly mount them as shown on the below item.
+        <li>how to mount a samba system</li>
+        <pre>
 sudo mount -t cifs -o username=a_tsiodras //172.31.128.250/Download /iso2/ 
-          </pre>
-          <li>find the (not-installed) package a file, e.g. <i>javac</i> belongs to</li>
-          Use the <b>apt-file</b> program:
-          <pre>
+        </pre>
+        <li>find the (not-installed) package a file, e.g. <i>javac</i> belongs to</li>
+        Use the <b>apt-file</b> program:
+        <pre>
 sudo apt-get install apt-file
 sudo apt-file update
 apt-file search /usr/bin/mysqldump
-          </pre>
-          (<a href="http://unix.stackexchange.com/a/6314/24044">SO answer</a>)
-          <br>
-          Also, to find which <u>installed</u> package a file belongs to
-          you can use, e.g.:
-          <pre>dpkg -S /bin/ls</pre>
-          <br>
-          Note that this doesn't always work for config files and files in
-          <b>/var</b> since those are generated after the package is extracted.
-          <li>my LANG setting</li>
-          <pre>
+        </pre>
+        (<a href="http://unix.stackexchange.com/a/6314/24044">SO answer</a>)
+        <br>
+        Also, to find which <u>installed</u> package a file belongs to
+        you can use, e.g.:
+        <pre>dpkg -S /bin/ls</pre>
+        <br>
+        Note that this doesn't always work for config files and files in
+        <b>/var</b> since those are generated after the package is extracted.
+        <li>my LANG setting</li>
+        <pre>
 $ echo $LANG
 en_US.UTF-8
-          </pre>
-          <li>how to format a memory stick</li>
-          First view drives and partitions:
-          <pre>sudo fdisk -l</pre>
-          Unmount the drive in question and format it, e.g. in NTFS:
-          <pre>sudo mkfs -t ntfs /dev/sdg1</pre>
-          <li>find the UUID of a device in Ubuntu</li>
-          <pre>sudo blkid</pre>
-          <li>updated from unauthenticated sources in Ubuntu</li>
-          <pre>sudo apt-get update && sudo apt-get upgrade --allow-unauthenticated</pre>
-          (<a href="http://askubuntu.com/questions/171144/update-manager-wont-install-from-un-authenticated-sources">source</a>)
-          <li>view system calls made (e.g. in the invocation './NeuroCode.exe Project.xml'): </li>
-          <pre>strace -f ./NeuroCode.exe Project.xml 2>&1 | less</pre>
-          <li>view loaded modules in a Linux system</li>
-          <pre>lsmod</pre>
-          <li>how to install a bundle in Ubuntu:</li>
-          <pre>sudo sh VMware-Player-5.0.0-812388.i386.bundle </pre>
-          <li>troubleshooting mounting problems</li>
-          Things one can do:
-          <ul>
-            <li>cat /proc/partitions</li>
-            <li>sudo fdisk -l /dev/sdc</li>
-            <li>sudo fdisk -l</li>
-            <li>dmesg | tail <i>(after you've plugged in the drive)</i></li>
-            <li>check what the kernel is saying when the USB device gets mounted (leave running while attaching):<li>
-              <pre>sudo tail -f /var/log/syslog</pre>
-              <li>check whether the drive appears in the BIOS</li>
-          </ul>
-          <p>The <b>umount</b> command shows all mounted filesystems.
-            <p>If an external HDD is not visible even at the output of <b>fdisk -l</b> this means that it
-              is not visible, even as a device, which strongly suggests that the USB port itself may have
-              been fried. I suppose a fried USB port could be diagnosed by the output of the <b>lsusb</b>
-              command.
-              <li>mounting NTFS filesystems</li>
-              In general, all kernels provide default mount drivers in the kernel. However, for NTFS filesystems
-              in particular, the best available mount driver is of type FUSE (Filesystems in USEr space) and
-              you can get it with <b>sudo mount ntfs-3g</b>. You then use <b>ntfs-3g</b> instead of <b>mount</b>
-              to do the actual mounting.
-              <li>find user id of a user</li>
-              <pre>id -u john</pre>
-              For more information, includiing group id:
-              <pre>id john</pre>
-              <li>add an Ubuntu repo's key to your APT keyring</li>
-              <pre>wget -q -O - http://emacs.naquadah.org/key.gpg | sudo apt-key add -</pre>
-              <li>show USB devices recognized by the kernel</li>
-              <pre>lsusb</pre>
-              <li>kernel messages</li>
-              <pre>dmesg</pre>
-              <li>cleanly remove an application</li>
-              <pre>
+        </pre>
+        <li>how to format a memory stick</li>
+        First view drives and partitions:
+        <pre>sudo fdisk -l</pre>
+        Unmount the drive in question and format it, e.g. in NTFS:
+        <pre>sudo mkfs -t ntfs /dev/sdg1</pre>
+        <li>find the UUID of a device in Ubuntu</li>
+        <pre>sudo blkid</pre>
+        <li>updated from unauthenticated sources in Ubuntu</li>
+        <pre>sudo apt-get update && sudo apt-get upgrade --allow-unauthenticated</pre>
+        (<a href="http://askubuntu.com/questions/171144/update-manager-wont-install-from-un-authenticated-sources">source</a>)
+        <li>view system calls made (e.g. in the invocation './NeuroCode.exe Project.xml'): </li>
+        <pre>strace -f ./NeuroCode.exe Project.xml 2>&1 | less</pre>
+        <li>view loaded modules in a Linux system</li>
+        <pre>lsmod</pre>
+        <li>how to install a bundle in Ubuntu:</li>
+        <pre>sudo sh VMware-Player-5.0.0-812388.i386.bundle </pre>
+        <li>troubleshooting mounting problems</li>
+        Things one can do:
+        <ul>
+          <li>cat /proc/partitions</li>
+          <li>sudo fdisk -l /dev/sdc</li>
+          <li>sudo fdisk -l</li>
+          <li>dmesg | tail <i>(after you've plugged in the drive)</i></li>
+          <li>check what the kernel is saying when the USB device gets mounted (leave running while attaching):<li>
+            <pre>sudo tail -f /var/log/syslog</pre>
+            <li>check whether the drive appears in the BIOS</li>
+        </ul>
+        <p>The <b>umount</b> command shows all mounted filesystems.
+          <p>If an external HDD is not visible even at the output of <b>fdisk -l</b> this means that it
+            is not visible, even as a device, which strongly suggests that the USB port itself may have
+            been fried. I suppose a fried USB port could be diagnosed by the output of the <b>lsusb</b>
+            command.
+            <li>mounting NTFS filesystems</li>
+            In general, all kernels provide default mount drivers in the kernel. However, for NTFS filesystems
+            in particular, the best available mount driver is of type FUSE (Filesystems in USEr space) and
+            you can get it with <b>sudo mount ntfs-3g</b>. You then use <b>ntfs-3g</b> instead of <b>mount</b>
+            to do the actual mounting.
+            <li>find user id of a user</li>
+            <pre>id -u john</pre>
+            For more information, includiing group id:
+            <pre>id john</pre>
+            <li>add an Ubuntu repo's key to your APT keyring</li>
+            <pre>wget -q -O - http://emacs.naquadah.org/key.gpg | sudo apt-key add -</pre>
+            <li>show USB devices recognized by the kernel</li>
+            <pre>lsusb</pre>
+            <li>kernel messages</li>
+            <pre>dmesg</pre>
+            <li>cleanly remove an application</li>
+            <pre>
 apt-get remove --purge [appname]
 apt-get autoremove [appname]
 apt-get clean
 apt-get autoclean
-              </pre>
-              update 29.VIII.2012: ttsiodras recommends this:
-              <pre>
+            </pre>
+            update 29.VIII.2012: ttsiodras recommends this:
+            <pre>
 dpkg -P [packagename]
-              </pre>
-              <li>install DEB packages</li>
-              wget the package (say package.deb) in a tmp folder and then do a:
-              <pre>
+            </pre>
+            <li>install DEB packages</li>
+            wget the package (say package.deb) in a tmp folder and then do a:
+            <pre>
 sudo dpkg -i package.deb
-              </pre>
-              <li>starting scripts upon bootup</li>
-              There are two ways:
+            </pre>
+            <li>starting scripts upon bootup</li>
+            There are two ways:
+            <p>
+              <b>1<sup>st</sup> way. </b> Either:  (a) using /etc/rc.local for things that are supposed to simply be run at startup, and (b) the init.d scripts - and their symlinks under runlevels /etc/rc{3,5}.d - for everything else.
               <p>
-                <b>1<sup>st</sup> way. </b> Either:  (a) using /etc/rc.local for things that are supposed to simply be run at startup, and (b) the init.d scripts - and their symlinks under runlevels /etc/rc{3,5}.d - for everything else.
+                <b>2<sup>nd</sup> way. </b> 
+                There's also something without the complexity of startup scripts, which is much easier to use when you want to start/stop your process as if it is a daemon: "supervisor" ( http://supervisord.org/ ):
                 <p>
-                  <b>2<sup>nd</sup> way. </b> 
-                  There's also something without the complexity of startup scripts, which is much easier to use when you want to start/stop your process as if it is a daemon: "supervisor" ( http://supervisord.org/ ):
-                  <p>
-                    <pre>
+                  <pre>
   [program:yourapp]
   command=/path/to/app --option1 ... 
   user=yourapp
   directory=/apps/yourapp
-                    </pre>
-                    <p>
-                      You add the file to /etc/supervisor/conf.d/, make a "supervisorctl update" and your service is up an running. It's a no-brainer and much easier than juggling rc.d scripts. Crash recovery and optional web interface included.
-            </li>
+                  </pre>
+                  <p>
+                    You add the file to /etc/supervisor/conf.d/, make a "supervisorctl update" and your service is up an running. It's a no-brainer and much easier than juggling rc.d scripts. Crash recovery and optional web interface included.
+          </li>
 
-            <li>how to find if Apache is running</li>
-            <pre>
+          <li>how to find if Apache is running</li>
+          <pre>
 ps ax | grep httpd | grep -v grep
-            </pre>
+          </pre>
 
 
-            <li>how to cleanly re-install Apache (Debian)</li>
-            <pre>
+          <li>how to cleanly re-install Apache (Debian)</li>
+          <pre>
 sudo apt-get remove --purge apache2 apache2-utils
 sudo apt-get install apache2
-            </pre>
+          </pre>
 
 
-            <li>how to find installed packages (Debian)</li>
-            <pre> dpkg --get-selections</pre>
+          <li>how to find installed packages (Debian)</li>
+          <pre> dpkg --get-selections</pre>
 
-            <li>how to find the source package a binary (e.g. ldapsearch) belongs to</li>
-            <pre>dpkg -S ldapsearch</pre>
+          <li>how to find the source package a binary (e.g. ldapsearch) belongs to</li>
+          <pre>dpkg -S ldapsearch</pre>
 
-            <li>how to find the loci of the files of an installed package (Debian)</li>
-            <b>update:</b>
-            It seems that the following produce more verbose / extensive output (see also <a href="http://askubuntu.com/a/32509/89663">this answer</a>):
-            <pre>
+          <li>how to find the loci of the files of an installed package (Debian)</li>
+          <b>update:</b>
+          It seems that the following produce more verbose / extensive output (see also <a href="http://askubuntu.com/a/32509/89663">this answer</a>):
+          <pre>
 dpkg-query -L &lt;package name&gt;
 apt-file list &lt;package name&gt;
-            </pre>
-            <pre>dpkg -L httpd</pre><p>
-              <i>end of update</i><br/>
-              (-L lists all files installed to your system from that package name)</p>
-              Note that <b>dpkg</b> lists the files that were <u>fetched</u> as part of the install
-              processes. Post-install hooks may create additional files (e.g. pyc files from py
-              Python files). This can be seen by comparing the outputs of the following two commands:
-              <pre>
+          </pre>
+          <pre>dpkg -L httpd</pre><p>
+            <i>end of update</i><br/>
+            (-L lists all files installed to your system from that package name)</p>
+            Note that <b>dpkg</b> lists the files that were <u>fetched</u> as part of the install
+            processes. Post-install hooks may create additional files (e.g. pyc files from py
+            Python files). This can be seen by comparing the outputs of the following two commands:
+            <pre>
 dpkg -L python2.7
 ls -s /usr/lib/python2.7/
-              </pre>
-              To find which packages are installed (so you can then do a <code>dpkg -L</code> on them, do a:
-              <pre>dpkg --get-selections</pre>
-              <li>how to find directories in current dir </li>
-              <pre>ls | grep ^d</pre>
+            </pre>
+            To find which packages are installed (so you can then do a <code>dpkg -L</code> on them, do a:
+            <pre>dpkg --get-selections</pre>
+            <li>how to find directories in current dir </li>
+            <pre>ls | grep ^d</pre>
 
 
-              <li>find the 10 largest files or directories in a hierarchy</li>
-              <pre>find . -type f -print0 | xargs -0 du -sb | sort -n | tail -10 | cut -f2 | xargs -I{} du -sh {}</pre>
-              <p>(for directories just use '-type d' instead of '-type f')
+            <li>find the 10 largest files or directories in a hierarchy</li>
+            <pre>find . -type f -print0 | xargs -0 du -sb | sort -n | tail -10 | cut -f2 | xargs -I{} du -sh {}</pre>
+            <p>(for directories just use '-type d' instead of '-type f')
 
 
-                <li>find the largest directories in a hierarchy</li>
-                <pre>du * | sort -n</pre>or..<p>
-                  <pre>du --max-depth=1 * | sort -n </pre>.. or .. <p>
-                    <pre>du --max-depth=1 | sort -n</pre> ('*' is really redundant)<p>
+              <li>find the largest directories in a hierarchy</li>
+              <pre>du * | sort -n</pre>or..<p>
+                <pre>du --max-depth=1 * | sort -n </pre>.. or .. <p>
+                  <pre>du --max-depth=1 | sort -n</pre> ('*' is really redundant)<p>
 
-                      <li>get list of users in Linux</li>
-                      <pre>cat /etc/passwd | cut -d ":" -f1</pre>
+                    <li>get list of users in Linux</li>
+                    <pre>cat /etc/passwd | cut -d ":" -f1</pre>
 
 
   </ol>
