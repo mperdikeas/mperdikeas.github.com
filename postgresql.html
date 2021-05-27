@@ -4,7 +4,75 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
-    <li>how I setup the postgres user in PostgreSQL 9.5 and created user 'mperdikeas'</li>
+    <li>installation and initial configuration of PostgreSQL 12 on Ubuntu 20.04 (May 2021)</li>
+    <p>
+      I followed the instructions from <a href='http://www.postgresql.org/download/linux/ubuntu/'>here</a> and asked, specifically, for <i>PostgreSQL 12</i> to be installed on the last step:
+
+      <pre>
+sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+sudo apt-get update
+sudo apt-get -y install postgresql-12
+</pre>
+    </p>
+    <p>
+      I then verified that PostgreSQL was running by doing a:
+      <pre>/etc/init.d/postgresql status</pre>
+    </p>
+    <p>
+      Since the above does not report the version of PostgreSQL, I confirmed that it is PostgreSQL 12 that is running by doing a:
+      <pre>pgrep -u postgres -fa -- -D</pre>
+    </p>
+    <p>
+      Subsequently, to connect to PostgreSQL, I had to edit the file <tt>/etc/postgresql/12/main/pg_hba.conf</tt>. This controls the client authentication mechanisms and allows client-side tools
+      (which use Unix Domain sockets) to connect to the database server.
+      To that end, I was guided, more or less by <a href='#postgres-9-config'>this previous note</a></p>
+    <p>
+      Namely, since I had forgotten, or wasn't able to use, the default PostgreSQL password I
+      initially changed the <i>local</i> authentication mode to 'trust'. I.e. I changed the line:
+      <pre>local   all             postgres                                peer</pre>
+      to:
+      <pre>local   all             all                                     trust</pre>
+      or (I am not really sure, but I dont think it makes much difference) to:
+      <pre>local   all             postgres                                trust</pre>
+      This allowed me to change the <i>postgres</i> user password to:
+      <pre>ALTER USER postgres PASSWORD 'supersecret';</pre>
+      (mind the <tt>;</tt> at the end &mdash; it is important)
+      Following that, I changed the authentication method for both <tt>local</tt> (i.e. Unix Domain sockets) and <tt>host</tt> (i.e. TCP/IP sockets) to <tt>md5</tt>:
+      <pre>
+local   all             all                                    md5
+host    all             all   192.168.2.0/8                    md5</pre>
+
+      The <tt>192.168.2.0/8</tt> means that the server is accepting connections from all IPv4 address in
+      the local <tt>192.168.2.0/8</tt> subnet. There are much more permissive wildcards one can use,
+      including any IP address on the Internet.
+    </p>
+    <p>
+      However, following the above, I was still unable to connect to PostgreSQL from
+      another machine (even though I had set <i>host</i> authentication to <tt>md5</tt>.
+      Moreover, when trying
+      to connect from other machines I was getting <i>connection refused</i> (or something).
+    </p>
+    <p>
+      To fix that I had to instruct PostgreSQL to listen on the network card interface as well
+      and not just on the localhost loop (which is the initial configuration for obvious
+      security reasons). To do that I edited file <tt>/etc/postgresql/12/main/postgresql.conf</tt>
+      and change the line
+      <pre>#listen_addresses = 'localhost'</pre>
+      to:
+      <pre>listen_addresses = 'localhost, 192.168.2.7'</pre>
+      After that I was able to connect remotely as well.
+    </p>
+    <p>
+      <b>initial files:</b>
+      <a href='./postgresql.html.files/postgres-12/pg_hba.conf.INITIAL'>pg_hba.conf</a>
+      <a href='./postgresql.html.files/postgres-12/postgresql.conf.INITIAL'>postgresql.conf</a>
+      <br/>
+      <b>modified files:</b>
+      <a href='./postgresql.html.files/postgres-12/pg_hba.conf'>pg_hba.conf</a>
+      <a href='./postgresql.html.files/postgres-12/postgresql.conf'>postgresql.conf</a>      
+    </p>
+    <li><a name='postgres-9-config'></a>how I setup the postgres user in PostgreSQL 9.5 and created user 'mperdikeas'</li>
     <p>
       PostgreSQL allows one to authenticate using two mechanisms:
       <ul>
