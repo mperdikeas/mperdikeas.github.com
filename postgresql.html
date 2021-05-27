@@ -35,6 +35,9 @@ sudo apt-get -y install postgresql-12
       <pre>local   all             all                                     trust</pre>
       or (I am not really sure, but I dont think it makes much difference) to:
       <pre>local   all             postgres                                trust</pre>
+      <span class='nb'>NB:</span> after each modification of the <tt>pg_hba.conf</tt> or <tt>postgresql.conf</tt> files you have to do a:
+      <pre>/etc/init.d/postgresql restart</pre>
+      &hellip; for the changes to take effect.
       This allowed me to change the <i>postgres</i> user password to:
       <pre>ALTER USER postgres PASSWORD 'supersecret';</pre>
       (mind the <tt>;</tt> at the end &mdash; it is important)
