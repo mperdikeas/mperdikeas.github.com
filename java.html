@@ -99,6 +99,13 @@
         I then removed the <tt>enable-ibiblio</tt> property from the <tt>build.xml</tt> file in the <tt>~/repos/prj/js-react-leaflet/common</tt> project
         , cleaned the Ivy cache, re-build everything (including the sibling <tt>rest-backend</tt> project and so successfully concluded this process.
       </p>
+      <h2>update June 25 2021</h2>
+      <p>
+        When trying to implement the new Java-based IACS backend I ended up adding:<br/>
+        <tt>&lt;dependency org="javax.activation" name="activation" rev="1.1" conf="compile-time->master"/&gt;</tt>
+        <br/>
+        &hellip; which also worked. Initially I had tried to use <tt>rev="1.1.1"</tt> (from some other SO answer I won't bother linking to) but that failed as that exact version was not present in the LFSBIR.
+      </p>
     <li>How to install OpenJDK 1.8 in Ubuntu 16.04</li>
     <p>The following worked like a charm in June, 2019</p>
     <p>
