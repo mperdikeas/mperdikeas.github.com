@@ -8,6 +8,71 @@
   <body>
     <h1 style='font-size: 110%'>JBoss EAP 7.2 notes</h1>
     <ol reversed class='main-list-items'>
+      <li>how I installed PostgreSQL JDBC driver in JBoss EAP 7 (June 2021)</li>
+      <p>
+        <a href='https://developer.jboss.org/blogs/amartin-blog/2012/02/08/how-to-set-up-a-postgresql-jdbc-driver-on-jboss-7'>provenance</a>
+        <ol>
+          <li>Download the Postgres Driver which you need as .jar-file (<a href='http://jdbc.postgresql.org/download.html'>http://jdbc.postgresql.org/download.html</a>)</li>
+          <li>Go to JBoss directory and find modules\org folder. Create two new folders, so you get modules\org\postgresql\main and insert the .jar file there.</li>
+          <li>Create in the same folder a file named module.xml with the content (set
+            in &lt;resource-root path="" &gt; the name of your .jar-file):
+          </li>
+          <pre>
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;module xmlns="urn:jboss:module:1.0" name="org.postgresql"&gt;
+ &lt;resources&gt;
+ &lt;resource-root path="postgresql-Y.X-Z.jdbcV.jar"/&gt;
+ &lt;/resources&gt;
+ &lt;dependencies&gt;
+ &lt;module name="javax.api"/&gt;
+ &lt;module name="javax.transaction.api"/&gt;
+ &lt;/dependencies&gt;
+&lt;/module&gt; </pre>
+          <li>Edit your standalone.xml and add the following code between the tags &lt;datasources&gt;&gt;drivers&lt;</li>
+            <pre>
+&lt;driver name=”postgresql” module=”org.postgresql”&gt;
+     &lt;xa-datasource-class&gt; org.postgresql.xa.PGXADataSource &lt;/xa-datasource-class&gt;
+&lt;/driver&gt;
+            </pre>
+            <li>Now start the server and check wether he is loading the driver. The console should show something like: INFO [org.jboss.as.connector.subsystems.datasources] JBAS010404: Deploying non-JDBC-compliant driver class org.postgresql.Driver (version 8.4). If it nothing showing about your Postgres Driver, check the spelling and the coding (e.g. the quotation marks can be in different code and dont work, can happen if you just copy and paste). Fix this before going on.
+            </li>
+            <li>Go to your standalone.xml and set between <datasources> following code (set your connection-url, usename and password, jndi-name can also be java:/postgresDS, you can do this step through admin console of the server as well):</li>
+              <pre>
+&lt;datasource jndi-name="java:jboss/postgresDS" pool-name="postgresDS" enabled="true" jta="false" use-java-context="true" use-ccm="false"&gt;
+&lt;connection-url&gt;
+ jdbc:postgresql://192.z.y.x:5432/yourdatabase
+ &lt;/connection-url&gt;
+ &lt;driver-class&gt;
+ org.postgresql.Driver
+ &lt;/driver-class&gt;
+ &lt;driver&gt;
+ postgresql
+ &lt;/driver&gt;
+ &lt;pool&gt;
+ &lt;min-pool-size&gt; 2 &lt;/min-pool-size&gt;
+ &lt;max-pool-size&gt; 20 &lt;/max-pool-size&gt;
+ &lt;/pool&gt;
+ &lt;security&gt;
+ &lt;user-name&gt; urusername &lt;/user-name&gt;
+ &lt;password&gt; urpasswort &lt;/password&gt;
+ &lt;/security&gt;
+ &lt;validation&gt;
+ &lt;validate-on-match&gt; false &lt;/validate-on-match&gt;
+ &lt;background-validation&gt; false &lt;/background-validation&gt;
+ &lt;background-validation-millis&gt; 0 &lt;/background-validation-millis&gt;
+ &lt;/validation&gt;
+ &lt;statement&gt;
+ &lt;prepared-statement-cache-size&gt;
+ 0
+ &lt;/prepared-statement-cache-size&gt;
+ &lt;share-prepared-statements&gt;
+ false
+ &lt;/share-prepared-statements&gt;
+ &lt;/statement&gt;
+ &lt;/datasource&gt;
+              </pre>
+        </ol>
+      </p>
       <li>how I installed my own SSL certificate in JBoss EAP 7</li>
       <p>
         I generated a keystore file <i>mperdikeas-jboss-server.jks</i>
