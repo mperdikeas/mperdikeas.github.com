@@ -178,6 +178,10 @@ amixer -D pulse sset Master 50%
       <li>how to merge multiple JPG or PNG files into a PDF file</li>
 Use <code>convert</code> (<a href="http://askubuntu.com/q/246647/89663">source</a>) to, e.g. do a:<br/>
       <pre>convert diploma-transcript-greek-pg1-col.jpg diploma-transcript-greek-pg2-col.jpg diploma-transcript-greek-full-size.pdf</pre>
+      <p>
+        To control page size and background color you can do:
+        <pre>convert IMG_20190331_143038.jpg IMG_20190331_143055.jpg IMG_20190331_143110.jpg -background white -page a4 plot-signed.pdf</pre>
+        </p>
       Following the conversion you may wish to <a href="#how-to-compress-a-pdf-file">compress the resultant PDF file</a>.
       <p><b>update</b>
         When the files (e.g. PNG) are not already A4-sized I have also successfully used the below incantation:
