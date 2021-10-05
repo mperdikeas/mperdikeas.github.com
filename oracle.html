@@ -1,0 +1,109 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+</head>
+<body>
+  <ol reversed class=main-list-items>
+    <li>installation and use of the Oracle to PostgreSQL migration script <tt>ora2pg</tt></li>
+    <p>
+      <tt>ora2pg</tt> is a free tool (based on Perl) used to migrate an Oracle database to a PostgreSQL compatible schema. It is available <a href='https://ora2pg.darold.net/documentation.html'>here</a>.
+    </p>
+    <p>
+      In October 2021 I used it to migrate an Oracle database to PostgreSQL.
+      In what follows I describe the installation of the tool, and then its usage.
+      <ol type='I'>
+        <li style='color: blue'><h2>INSTALLATION</h2></li>
+        <p>
+          I downloaded the sources for version 22.1 from <a href='https://github.com/darold/ora2pg/releases'>here</a>.
+          The tools requires a version of Perl greater than 5.10 which I alread had:
+          <pre>
+$ perl --version | head -2
+
+This is perl 5, version 30, subversion 0 (v5.30.0) built for x86_64-linux-gnu-thread-multi</pre>
+        </p>
+        <p>
+          After exploding the tarball <pre>ora2pg-22.1.tar.gz</pre>, I <tt>cd</tt>-ed
+          into that directory and read the README file, then I tried to install
+          with:
+          <pre>perl Makefile.PL</pre> followed by <pre>make && make install</pre>
+          The above failed because of lack of sudo privilleges, so
+          <pre>sudo make && sudo make install</pre> succeeded.
+        </p>
+        <p>
+          I then tried to simply run <tt>ora2g</tt> but that failed with:
+          <pre>Can't locate DBI.pm in @INC (you may need to install the DBI module ...</pre>
+          So I installed a number of modules with:
+          <pre>perl -MCPAN -e 'install DBD::Oracle'
+          </pre>
+        </p>
+        <p>
+          I then tried to install <i>DBI</i> with:
+          <pre>perl -MCPAN -e 'install DBI::Perl'</pre>
+          &hellip; but that failed with:
+          <pre>Warning: Cannot install DBI::Perl, don't know what it is.</pre>
+          &hellip; so I checked and verified that the <i>DBI</i> Perl module was
+          already installed and thus, no need to install it from MCPAN:
+          <pre>perl -MDBI -e 1</pre>
+          <pre>perl -e 'use DBI'</pre>
+          (both the above produced no output and exited with a status of 0).
+        </p>
+        <p>
+          The next step was to install the <i>DBD::Oracle</i> Perl module but I had
+          read that that requires installing the Oracle Instant Client.
+          So I downloaded from the Oracle site the following zip files:
+          <ul>
+            <li><tt>instantclient-basic-linux.x64-21.3.0.0.0.zip</tt></li>
+            <li><tt>instantclient-sdk-linux.x64-21.3.0.0.0.zip</tt></li>
+          </ul>
+        </p>
+        <p>
+          I verified by experimenting that the SDK is indeed needed otherwise
+          you get messages about missing <tt>oci.h</tt> file further down the road.
+          To install the Oracle Instant Client I basically followed
+          the instructions found on the Oracle site (<a href='https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html'>here</a>, local copy <a href='./oracle.html.files/oic-downloads.pdf'>here</a>).
+          After exploding both zip files in the same directory I made a note to always prefix any command with <tt>LD_LIBRARY_PATH=/path/to/exploded/oracle/instant/client/zips</tt> as I didn't want to export that variable or put in some <tt>bashrc</tt> file. 
+        </p>
+        <p>Following the successful installation of the Oracle Instant Client I was able to install the Oracle Perl DBD module with:
+          <pre>perl -MCPAN -e 'install DBD::Oracle'</pre>
+        </p>
+        <p>Also, I do recall that at some point, either during the installation
+          of the tool, or during the use of the tool to extract data I had to install
+          <tt>libaio</tt> (Linux kernel asynchronous I/O):
+          <pre>sudo apt install libaio-dev</pre>
+        </p>
+        <li style='color: blue'><h2>USAGE</h2></li>
+        <p><span class='nb'>NB:</span> In what follows it is assumed that
+          the environmental variable <tt>LD_LIBRARY_PATH</tt> is properly set
+          on the shell or its value is prefixed on each command. This variable
+          must point to the directory where the Oracle Instant Client is located.</p>
+        <p>
+          I started by copying the <tt>ora2pg.conf</tt> file from its installation
+          location (where it resides as <tt>ora2pg.conf.dist</tt>) locally:
+          <pre>cp /etc/ora2pg/ora2pg.conf.dist ora2pg.conf</pre>
+        </p>
+        <p>I then edited the file to include (among other things) the coordinates
+          to the Oracle database I wish to connect, and then tried some simple
+          commands that don't do anything much:
+          <pre>
+        ora2pg -t SHOW_VERSION -c ora2pg.conf
+        ora2pg -t SHOW_REPORT  -c ora2pg.conf</pre>
+        </p>
+        <p>(the usage of the tool is described, in detail, <a href='https://ora2pg.darold.net/documentation.html#Ora2Pg-usage'>here</a>)</p>
+        <p>I then created a new project to extract the data from the
+          Oracle database. I named the project <i>xfiles</i>:
+          <pre>ora2pg -c ora2pg.conf --project_base . --init_project xfiles</pre>
+
+        </p>
+        <p>Once the project was created I <tt>cd</tt> into it and run
+          the <tt>export_schema.sh</tt> script
+        </p>
+        <p>
+          The above created all necessary DDL files, I then downloaded
+          the data using:
+          <pre>ora2pg -t COPY -o data.sql -b ./data -c ./config/ora2pg.conf</pre>
+          &hellip; as of the time of this writing, the above command has
+          been running for a couple of hours now. And there the matter
+          rests (for now).
+        </p>
+      </ol>
+</body>
