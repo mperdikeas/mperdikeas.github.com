@@ -4,6 +4,35 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>useful commands at <i>psql</i></li>
+    <p>
+      <dl>
+        <dt>find current database</dt><dd><pre>SELECT current_database();</pre></dd>
+        <dt>list tables and databases, change databases etc</dt><dd>See <a href='https://dba.stackexchange.com/a/1288/34332'>this</a></dd>
+      </dl>
+    </p>
+    <li>installation of <i>PostGIS</i> in PostgreSQL 12 (October 2021)</li>
+    <p>I followed the instructions from <a href='https://computingforgeeks.com/how-to-install-postgis-on-ubuntu-debian/'>here</a>
+    <pre>
+sudo apt update
+sudo apt install postgis postgresql-12-postgis-3</pre>
+    </p>
+    <p>
+      &hellip; subsequently, I connected to the database I wanted to create
+      the extension in with, e.g.:
+      <pre>psql -U mperdikeas -d acme_industries</pre>
+    </p>
+    <p>
+      &hellip; and then created the extension there with:
+      <pre>CREATE EXTENSION postgis;</pre>
+    </p>
+    <p>
+      So, apparently, the <i>PostGIS</i> extension is not installed on the PostgreSQL
+      cluster as a whole, but on each particular database. This means that the
+      extension has to be re-created whenever the database is dropped. Finally,
+      I verified that the extension is now available with:
+      <pre>SELECT PostGIS_version();</pre>
+    </p>
     <li>installation and initial configuration of PostgreSQL 12 on Ubuntu 20.04 (May 2021)</li>
     <p>
       I followed the instructions from <a href='http://www.postgresql.org/download/linux/ubuntu/'>here</a> and asked, specifically, for <i>PostgreSQL 12</i> to be installed on the last step:
