@@ -15,6 +15,14 @@
         <li style='color: blue'><h2>INSTALLATION</h2></li>
         <p>
           I downloaded the sources for version 22.1 from <a href='https://github.com/darold/ora2pg/releases'>here</a>.
+        </p>
+        <p><b>UPDATE</b> a few days later in response to a
+          <a href='https://github.com/darold/ora2pg/issues/1261'>bug report of mine</a>,
+          there was a bug fix which I had to get (but no new release). So I had to clone the repo
+          locally and issue the
+          <i>perl Makefile.PL</i> and <i>make && make install</i> commands I mention
+          below from the repo rather than from the exploded tarball.
+          </p>
           The tools requires a version of Perl greater than 5.10 which I alread had:
           <pre>
 $ perl --version | head -2
