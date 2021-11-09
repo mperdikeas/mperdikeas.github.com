@@ -6,7 +6,7 @@ How to install it on *nix:
 
     mkdir -p ~/texmf/tex/latex/
     cd ~/texmf/tex/latex/
-    git clone
+    git clone https://github.com/leinardi/europecv2013.git
 
 Find examples in:
 
