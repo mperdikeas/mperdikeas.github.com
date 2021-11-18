@@ -4,6 +4,24 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>how to take a dump of a PostgreSQL database</li>
+    <p>
+      Text dump:
+      <pre>
+pg_dump -U mperdikeas -h 192.168.2.9 -p 5432 -Fp dbname > /path/to/dump.txt</pre>
+    </p>
+    <p>
+      Binary dump:
+      <pre>
+pg_dump -U mperdikeas -h 192.168.2.9 -p 5432 -Fc dbname > /path/to/dump.bin</pre>
+    </p>
+    <li>how to restore a PostgreSQL dump</li>
+    <p>
+    <span class='nb'>NB:</span> the database <i>dbname</i> needs to exist
+    before running the command given below:
+    <pre>
+pg_restore -d dbname -U mperdikeas -h localhost /path/to/file.dump </pre>
+    </p>
     <li>useful commands at <i>psql</i></li>
     <p>
       <dl>
