@@ -1,9 +1,147 @@
 <head>
   <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
   <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style>
+   .step {
+     font-weight: bold;
+     background: gold;
+     color: blue;
+     }
+  </style>
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>streamlined procedure for setting up PostgreSQL 12 (December 2021)</li>
+    <ol>
+      <li class='step'>purge previous version</b></li>
+<pre>
+$ sudo apt remove --purge postgresql
+$ sudo apt remove --purge postgresql-12*
+</pre>
+      <li class='step'>install PostgreSQL</li>
+      Optionally with the PostGIS extension:
+<pre>
+$ sudo apt install postgis postgresql-12-postgis-3
+$ sudo apt install postgresql-12
+</pre>
+<li class='step'>change password for Oracle user <tt>postgres</tt></li>
+<p>
+    At this point you want to take advantage of the initial, default <i>peer</i>
+  authentication mode to change the Oracle password for the Oracle user <i>postgres</i>.
+  This will come into play later when you change the authentication mode
+  for the <i>postgres</i> user (and any other user for that matter) from <i>peer</i>
+  to <i>md5</i>:
+<pre>
+$ sudo -i -u postgres psql postgres
+psql (12.9 (Ubuntu 12.9-2.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# \password postgres
+Enter new password: 
+Enter it again: 
+</pre>
+</p>
+<p id='better-way-to-check-for-locked-status-of-account'>
+  Note that (according to my understanding) the above only affects the <i>Oracle</i>
+  user <tt>postgres</tt>, not the Unix user <tt>postgres</tt>. The latter in fact
+  exists as can be verified by:
+<pre>
+$ cat /etc/passwd | grep -i postgres | wc -l
+1
+</pre>  
+&hellip; but the account is "locked" (and you want to keep it locked as advised <a href='https://serverfault.com/questions/110154/whats-the-default-superuser-username-password-for-postgres-after-a-new-install/325596#325596'>in this SO answer</a>. The locked status can be verified by (<a href='https://www.2daygeek.com/lock-unlock-disable-enable-user-account-linux/'>source</a>):
+<pre>
+$ sudo passwd --status postgres
+postgres L 05/26/2021 0 99999 7 -1
+</pre>
+</p>
+<p>
+  In general, you don't want to do anything with the UNIX user <tt>postgres</tt> and you
+  <b>DEFINITELY</b> don't want to set a password for that user (as that would unlock the account) by doing a:<br/>
+  <br/>
+  <span class='nb'>DANGER: do not do the below:</span>
+  <pre>$ sudo passwd postgres</pre>
+  You can read more <a href='https://serverfault.com/a/325596'>in this SO answer</a>.
+</p>
+<li class='step'>create user and database</li>
+<p>
+  In the same vein you might also want to create an actual user (not <i>postgres</i>)
+  while the <i>peer</i> authentication mode is still applicable:
+<pre>
+$ sudo -i -u postgres createuser --interactive johndoe
+$ sudo -i -u postgres psql
+psql (12.9 (Ubuntu 12.9-2.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# ALTER USER johndoe WITH PASSWORD 'super.secret';
+ALTER ROLE
+</pre>
+<pre>
+$ sudo -u postgres psql -c 'create database acmeindustries';
+CREATE DATABASE
+</pre>
+</p>
+
+
+<li class='step'>make copies of the basic configuration files</li>
+<pre>
+$ cp /etc/postgresql/12/main/pg_hba.conf /etc/postgresql/12/main/pg_hba.conf.ORIGINAL
+$ cp /etc/postgresql/12/main/postgresql.conf  /etc/postgresql/12/main/postgresql.conf.ORIGINAL
+</pre>
+<li class='step'>change authentication mode from <tt>peer</tt> to <tt>md5</tt></li>
+<p>
+In file <tt>pg_hba.conf</tt> change the following line:
+<pre>local   all             postgres                                peer</pre>
+to:
+<pre>local   all             postgres                                md5</pre>
+</p>
+<p>
+ In the same file, I have also done the following changes but I don't know how essential they are:</br>
+  Change the following line:
+<pre>
+host    all             all             127.0.0.1/32            md5
+</pre>
+to:
+<pre>
+host    all             all             192.168.2.0/8           md5
+</pre>
+&hellip; and also comment out the replication lines at the end of the file (since I don't believe I am using this feature)
+</p>
+<li class='step'>create file <tt>~/.pgpass</tt></li>
+<p>Now is a good time to create file <tt>~/.pgpass</tt> to make
+  connecting to the database easier. Typical contents:
+<pre>
+$ cat ~/.pgpass
+localhost:5432:postgres:postgres:super.secret
+localhost:5432:acmeindustries:johndoe:duper.secret
+</pre>
+</p>
+<p>
+  You might also want to create the <tt>~/.psqlrc</tt> file but this is less
+  useful (and might even be confusing at times if you are not aware of its existence):
+<pre>$ cat ~/.psqlrc 
+\set ON_ERROR_STOP on
+</pre>
+</p>
+<li class='step'>configure PostgreSQL to listen to remote connections</li>
+<p>
+  To do that you have to edit the <tt>postgresql.conf</tt> file and
+  change the <tt>listen_addresses</tt> setting. Typical value to instruct your
+  machine (assuming your IP is <tt>192.168.2.2</tt>) to listen to the external <a href='https://en.wikipedia.org/wiki/Network_interface_controller'>NIC</a>
+  and not just to the local loopback:
+  <pre>listen_addresses = 'localhost, 192.168.2.2'</pre>
+</p>
+
+  <li class='step'>other configurations in <tt>postgresql.conf</tt></li>
+<p>
+      At this point, you might also want to change the <tt>port</tt> setting to a value other than the
+  default of <tt>5432</tt>. This might be necessary if another PostgreSQL cluster (e.g.
+  some previous version, say PostgreSQL 9) is also running on the same machine.
+</p>
+<p>
+I also have found it necessary at times, e.g. when using migration tools to increase the value of <tt>max_locks_per_transaction</tt> to 1024.
+  </p>
+    </ol>
     <li>how to create user and database in PostgreSQL</li>
     <p>
       Tried that on PostgreSQL 12.9:<br/>
@@ -145,6 +283,9 @@ $ sudo passwd -S postgres
 postgres L 11/12/2016 0 99999 7 -1</pre>
     You may read more <a href='https://serverfault.com/a/325596/139074'>here</a>.
     </p>
+    <p><span class='nb'>update 2021-12-15</span> An easier way to check
+      for the locked status of an account is offered <a href='#better-way-to-check-for-locked-status-of-account'>here</a>.
+      </p>
     <p>
       I then changed the password of the TCP user <tt>postgres</tt> by doing:
       <pre>$ sudo -i -u postgres psql postgres
