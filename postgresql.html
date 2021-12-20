@@ -12,6 +12,20 @@
 <body>
   <ol reversed class=main-list-items>
 
+    <li>how I created tablespaces in PostgreSQL</li>
+<p>
+I created a number of directories using:
+<pre>
+mkdir ~/postgresql-tblspaces && cd ~/postgresql-tblspaces
+mkdir userspay2019 && chown -R postgres:postgres *
+</pre>
+&hellip; while at the same time creating the tablespaces
+from inside <tt>psql</tt>:
+<pre>
+psql -U postgres
+CREATE TABLESPACE userspay2019 LOCATION '/home/mperdikeas/postgresql-tblspaces/userspay2019';
+</pre>
+</p>
     <li>how to discover data directory and configration file in PostgreSQL</li>
 <pre>
 postgres=# show data_directory;
@@ -544,7 +558,7 @@ sudo apt-get install python-dev libpq-dev libevent-dev
 sudo pip install pgcli
     </pre>
     <li>how to convert VARCHAR data to XML so that the XPATH function may be used on them</li>
-    Use the <tt>XMLPARSE</tt> function:
+Use the <tt>XMLPARSE</tt> function:
     <pre>
 SELECT DISTINCT CAST (XPATH('@status',XMLPARSE(CONTENT "content")) AS VARCHAR), isdeleted
 FROM vo_business.hosted_record_version
