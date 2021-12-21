@@ -14,6 +14,91 @@
       <hr>
     </header>
     <article>
+      <h2>update Dec 2020</h2>
+      <p>
+        When trying to follow the <i>streamlined</i> procedure on my Ubuntu 20.04 machine
+        I encountered various problems related to the following:
+        <ul>
+          <li>that the <tt>audible-activator.py</tt> uses Python2 and I was missing the <tt>requests</tt>
+            and <tt>selenium</tt> libraries for Python2 (I have both Python2.7 and Python3 on machine
+            and the libraries were only available in Python3</li>
+          <li>that the package manager <tt>pip</tt> was installed for Python3 but not Python2</li>
+          <li>some problems with the <tt>ffmpeg</tt> library required by the script <tt>AAXtoMP3</tt> </li>
+        </ul>
+      </p>
+      <p>
+        The first hurdle to overcome was to install pip for Python2.7. It turns out that this
+        is not straightforward in Ubuntu 20.4:
+        <pre>
+$ python2 -m pip install requests
+/usr/bin/python2: No module named pip
+mperdikeas@mp-ThinkStation-P320:~/aax2mp3tools-if-this-is-a-man/audible-activator-master#
+$ sudo apt install python-pip
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package python-pip is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+However the following packages replace it:
+  python3-pip
+
+E: Package 'python-pip' has no installation candidate
+        </pre>
+        &hellip;, in the end I followed the procedure identified in <a href='https://stackoverflow.com/a/65125295/274677'>this SO answer</a>:
+        <pre>
+$ sudo apt update
+(output omitted)
+$ curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py 
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 1863k  100 1863k    0     0  2200k      0 --:--:-- --:--:-- --:--:-- 2197k
+mperdikeas@mp-ThinkStation-P320:~/aax2mp3tools-if-this-is-a-man/audible-activator-master#
+$ python2 get-pip.py 
+DEPRECATION: Python 2.7 reached the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 is no longer maintained. pip 21.0 will drop support for Python 2.7 in January 2021. More details about Python 2 support in pip can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support pip 21.0 will remove support for this functionality.
+Defaulting to user installation because normal site-packages is not writeable
+Collecting pip<21.0
+  Downloading pip-20.3.4-py2.py3-none-any.whl (1.5 MB)
+     |████████████████████████████████| 1.5 MB 1.1 MB/s 
+Collecting setuptools<45
+  Downloading setuptools-44.1.1-py2.py3-none-any.whl (583 kB)
+     |████████████████████████████████| 583 kB 22.8 MB/s 
+Collecting wheel
+  Downloading wheel-0.37.0-py2.py3-none-any.whl (35 kB)
+Installing collected packages: pip, setuptools, wheel
+Successfully installed pip-20.3.4 setuptools-44.1.1 wheel-0.37.0
+mperdikeas@mp-ThinkStation-P320:~/aax2mp3tools-if-this-is-a-man/audible-activator-master#
+$ pip --version
+pip 20.3.4 from /home/mperdikeas/.local/lib/python2.7/site-packages/pip (python 2.7)
+</pre>
+      </p>
+      <p>
+        After that I verified that I have two versions of <tt>pip</tt>: one for Python2.7
+        and one for Python 3 (with <i>pip</i> corresponding
+        to <tt>pip2</tt>):
+        <pre>
+$ pip2 --version
+pip 20.3.4 from /home/mperdikeas/.local/lib/python2.7/site-packages/pip (python 2.7)
+$ pip --version
+pip 20.3.4 from /home/mperdikeas/.local/lib/python2.7/site-packages/pip (python 2.7)
+$ pip3 --version
+pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8) </pre>
+      </p>
+
+      <p>
+        Installing <tt>pip</tt> for Python2 allowed me to properly install and <i>requests</i> and
+        <i>selenium</i> for Python2 and finally be able to successfully run <i>audible-activator.py</i> (which uses the Python2 interpreter).
+      </p>
+      <p>
+        However, that was not the end of my problems as when I tried to run the <tt>AAXtoMP3</tt>
+        script I encountered further problems related to the availability of <i>ffmpeg</i>
+        libraries for my Ubuntu 20.04 machine. I am not able to do a write down of that part
+        (which was quite chaotic) as there was a power outage / reboot cycle and I have
+        lost the terminal history, but in the end I got <tt>AAXtoMP3</tt> to work as well
+        (albeit after trying a number of things in a very chaotic manner as conceded). But
+        in the end, I managed to get everything to work and basically followed the
+        "streamlined" procedure described below.
+      </p>
       <h2>Streamlined</h2>
       <p>
         The below are for the audible site at the UK (notice the <tt>-l uk</tt> switch):
