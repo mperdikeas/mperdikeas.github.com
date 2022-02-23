@@ -9,6 +9,23 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
+    <li>Notes on upgrading Ubuntu 16.04 to 18.04 LTS </li>
+    <p>
+      The normative way to upgrade is:
+      <pre>sudo apt update
+sudo apt upgrade</pre>
+      &hellip; followed by:
+      <pre>sudo do-release-upgrade</pre>
+      (read more <a href='https://askubuntu.com/a/915793/89663'>here</a>)
+    </p>
+    <p id='broken-python-prevents-upgrade'>In February 2022 I encountered problems when following the above
+      procedure as it failed, at the last step, with the following:
+    <pre>Checking for a new Ubuntu release
+ Please install all available updates for your release before upgrading.</pre></p>
+    <p>
+      It turned out that this was due to a broken Python installation
+      which I had to fix <a href='./python.html#fix-python'>like this</a>.
+    </p>
     <li>fixed unverifiable signatures during <tt>apt update</tt></li>
     <a href='https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/'>source</a>
     <p>
