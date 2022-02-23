@@ -9,6 +9,28 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
+    <li>fixed unverifiable signatures during <tt>apt update</tt></li>
+    <a href='https://chrisjean.com/fix-apt-get-update-the-following-signatures-couldnt-be-verified-because-the-public-key-is-not-available/'>source</a>
+    <p>
+      Sometimes, during <tt>apt-get update</tt> you get hit by
+      the following:
+      <pre>the following signatures couldn’t be verified because the public key is not available</pre>
+    </p>
+    <p>E.g. like the following output:
+
+      <pre>$ sudo apt-get update
+Ign http://security.ubuntu.com trusty-security InRelease
+Get:1 http://security.ubuntu.com trusty-security Release.gpg [933 B]
+...
+Fetched 21.9 MB in 14s (1,537 kB/s)
+Reading package lists... Done
+W: GPG error: http://security.ubuntu.com trusty-security Release: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 40976EAF437D05B5 NO_PUBKEY 3B4FE6ACC0B21F32
+W: GPG error: http://archive.canonical.com trusty Release: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 40976EAF437D05B5 NO_PUBKEY 3B4FE6ACC0B21F32 </pre>
+    </p>
+    <p>
+      In such cases, the following fixes it:
+      <pre>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 40976EAF437D05B5</pre>
+    </p>
     <a name='install-oracle-xe-11_2'></a>
     <li>how to install Oracle XE 11.2 on Ubuntu 16.04</li>
     In January 2021 I used the instructions found
