@@ -52,10 +52,10 @@ $ sudo apt remove --purge postgresql-12*
 $ sudo apt install postgis postgresql-12-postgis-3
 $ sudo apt install postgresql-12
 </pre>
-<li class='step'>change password for Oracle user <tt>postgres</tt></li>
+<li class='step'>change password for PostgreSQL user <tt>postgres</tt></li>
 <p>
     At this point you want to take advantage of the initial, default <i>peer</i>
-  authentication mode to change the Oracle password for the Oracle user <i>postgres</i>.
+  authentication mode to change the PostgreSQL password for the PostgreSQL user <i>postgres</i>.
   This will come into play later when you change the authentication mode
   for the <i>postgres</i> user (and any other user for that matter) from <i>peer</i>
   to <i>md5</i>:
@@ -70,7 +70,7 @@ Enter it again:
 </pre>
 </p>
 <p id='better-way-to-check-for-locked-status-of-account'>
-  Note that (according to my understanding) the above only affects the <i>Oracle</i>
+  Note that (according to my understanding) the above only affects the <i>PostgreSQL</i>
   user <tt>postgres</tt>, not the Unix user <tt>postgres</tt>. The latter in fact
   exists as can be verified by:
 <pre>
