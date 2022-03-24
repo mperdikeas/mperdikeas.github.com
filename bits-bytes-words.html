@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <link rel='icon' href='Marcus_Brutus-favicon.png'/>
+    <link rel="stylesheet" type="text/css" href="./mperdikeasgithub.css">    
+    <title>Hyphen, en dash and em dash</title>
+    <style>
+     img {
+       width: 240px;
+       height: 160px;
+       }
+    </style>
+  </head>
+
+  <body>
+    <h1>On the fascinating topic of bits, bytes, octets, words and smallest addressable units</h1>
+    <p>
+      I try, below, to condense the various (and often contradicting) bits
+      (pun not intended) of information found in various sources
+      and present my own understanding on this subject.
+    </p>
+    <p>
+      It turns out the the only two precisely defined terms whose meaning
+      is context-invariant are "bit" and "octet" so I'll start with these:
+      <dl>
+        <dt>bit</dt><dd>a single binary digit</dd>
+        <dt>octet</dt><dd>eight binary digits</dd>
+      </dl>
+    </p>
+    <p>
+      "Word" is <i>usually</i> defined as "the natural size with which a processor is handling data (the register size)". Wikipedia <a href='https://en.wikipedia.org/wiki/Word_(computer_architecture)'>defines</a> it very similarly as "the natural unit of data used by a particular processor design". The most common word sizes encountered today are 8, 16, 32 and 64 bits, but other sizes are possible. For examples, there were a few 36 bit machines, or even 12 bit machines. In other words, "word" is the most common chunk of bits with which a processor can do processing (like addition and subtraction) at a time. That definition is a bit fuzzy, as some processor might have different word sizes for different tasks (integer vs. floating point arithmetic for example). The word size is what the majority of operations work with (<a href='https://stackoverflow.com/a/7750439/274677'>source</a>). By that definition, the word size of a CPU is also the size of the data path of the ALU (NB: not to be confused with the memory data bus).
+    </p>
+    <p>"Pointer size" TBP</p>    
+    <p>"Smallest addressable unit" TBP</p>
+    <p>"Data bus size" TBP</p>
+    <p>"Cache line" TBP</p>
+  </body>
+</html>
