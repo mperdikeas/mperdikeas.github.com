@@ -5,6 +5,14 @@
   </head>
   <body>
     <ol reversed class=main-list-items>
+      <li>upgrade all dependencies to their latest major version</li>
+      <a href='https://nodejs.dev/learn/update-all-the-nodejs-dependencies-to-their-latest-version'>source</a></br>
+      <pre>
+npm install -g npm-check-updates
+ncu -u
+npm update     # use this if node_modules already exists
+npm install    # use this otherwise
+      </pre>
       <li>how to monitor for code changes and to continuously run Node application</li>
       <p>I've used the <a href='https://github.com/remy/nodemon'>nodemon</a> package for
         that. See target <i>monitor</i> in <tt>package.json</tt> in <a href='https://github.com/mperdikeas/ora2pg-migration-assessment'>my
