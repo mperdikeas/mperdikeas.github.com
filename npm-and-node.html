@@ -19,6 +19,13 @@ node -v</pre>
 v14.19.2
 </pre>
       </p>
+      <p><i>However</i>, due to what I am almost confident are broken dependencies issues among my packages, the installation
+        of <tt>node</tt> messed up my <tt>npm</tt> and I was unable to re-install it with conventional means. As such, I
+        had to download the <tt>node</tt> tarball from <a href='https://nodejs.org/download/release/v14.6.0/'>here</a>,
+        explode the tarball
+        in a directory and set in my <tt>PATH</tt> the path to <tt>node-v14.16.0-linux-x64/bin</tt> (wherein the <tt>npm</tt>
+        executable is to be found). This was mighty iffy and unsettling.
+      </p>
       <li>upgrade all dependencies to their latest major version</li>
       <a href='https://nodejs.dev/learn/update-all-the-nodejs-dependencies-to-their-latest-version'>source</a></br>
       <pre>
