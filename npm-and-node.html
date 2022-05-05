@@ -5,6 +5,20 @@
   </head>
   <body>
     <ol reversed class=main-list-items>
+      <li>how I upgraded the <tt>nodejs</tt> version to the latest LTS (I think) version</li>
+      <p>
+        (source: <a href='https://askubuntu.com/a/1291854'>https://askubuntu.com/a/1291854</a>)
+        I executed the following commands (<i>May 2022</i>):
+<pre>sudo apt update
+curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+sudo apt install -y nodejs
+node -v</pre>
+      </p>
+      <p>After running the last command I saw:
+<pre>$ node -v
+v14.19.2
+</pre>
+      </p>
       <li>upgrade all dependencies to their latest major version</li>
       <a href='https://nodejs.dev/learn/update-all-the-nodejs-dependencies-to-their-latest-version'>source</a></br>
       <pre>
