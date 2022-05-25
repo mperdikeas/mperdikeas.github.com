@@ -5,6 +5,21 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>ultra-useful script for reducing the size of PDF files by lowering resolution</li>
+      <p>
+        <pre>find . -iname \*.pdf -exec gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile='{}.2.pdf' '{}' \; -exec mv '{}.2.pdf' '{}' \; </pre>
+      </p>
+      <p>
+        <span class='nb'>NB:</span> I have not found a way to specify a custom resolution
+        that would be lower to that of <tt>/screen</tt>
+      </p>
+      <p>
+        sources:
+        <ol>
+          <li><a href='https://askubuntu.com/a/256449'>https://askubuntu.com/a/256449</a></li>
+          <li><a href='https://stackoverflow.com/a/6043896'>https://stackoverflow.com/a/6043896</a></li>
+        </ol>
+      </p>
       <li>useful programs for examining / comparing binary files</li>
       <p>
         <tt>hexdump</tt>, <tt>cmp</tt> and the <i>hexl-mode</i> of
