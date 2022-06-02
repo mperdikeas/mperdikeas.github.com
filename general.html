@@ -5,6 +5,16 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>rotate and resize PDF</li>
+      <a href='https://unix.stackexchange.com/a/459596'>source</a>
+      <p>
+        The program <tt>pdfjam</tt> is installed with:
+        <pre>sudo apt install texlive-extra-utils</pre>
+      </p>
+      <p>
+        I then did:<br/>
+        <pre>pdfjam --paper a4paper --angle 90 some-file.pdf</pre>
+      </p>
       <li>ultra-useful script for reducing the size of PDF files by lowering resolution</li>
       <p>
         <pre>find . -iname \*.pdf -exec gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile='{}.2.pdf' '{}' \; -exec mv '{}.2.pdf' '{}' \; </pre>
