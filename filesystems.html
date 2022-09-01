@@ -5,6 +5,18 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to fix a broken filesystem</li>
+      <p>
+        Use the following (mutatis mutandis for the filesystem type):
+        <pre>
+sudo fsck.ext4 /dev/sda[NUMBER]</pre>
+        <a href='https://askubuntu.com/a/910794/89663'>source</a>
+      </p>
+      <p>
+        To understand what can cause a filesystem to become broken see
+        <a href='https://askubuntu.com/a/1197946/89663'>here</a>.
+      </p>
+      
       <li>how to detach a busy device immediately</li>
       <pre>sudo umount -l /media/usb</pre>
       <a href='https://stackoverflow.com/a/19969471/274677'>source</a>
