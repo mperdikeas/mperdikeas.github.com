@@ -5,6 +5,13 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to detach a busy device immediately</li>
+      <pre>sudo umount -l /media/usb</pre>
+      <a href='https://stackoverflow.com/a/19969471/274677'>source</a>
+
+      <li>how to find the filesystem of a thumb drive (not mounted)</li>
+      <pre>sudo blkid /dev/sdc1</pre>
+      <a href='https://askubuntu.com/a/19686/89663'>source</a>
       <li id='how-to-label-fat32-filesystem'>how to label a FAT32 file system</li>
       <p>
         In April 2018 to label a FAT32 file system on a USB flash drive I did:
