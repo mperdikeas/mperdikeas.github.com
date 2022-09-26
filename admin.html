@@ -9,6 +9,18 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
+    <li>how I configured Microsoft Mouse speed (incl. wheel speed)</li>
+    <p>
+      In September 2022 I replaced my Logitech mouse with a "Microsoft Comfort 4500" mouse on my
+      ThinkStation P320 machine (running Ubuntu 20.04). I had to configure both the mouse acceleration
+      and the wheel speed (both were very slow). The scripts I used are found in the following
+      locations:
+      <dl>
+        <dt>mouse acceleration</dt><dd>in project <i>"environment"</i>, path: <tt>local-startup-scripts-ThinkStation-P320/change-microsoft-mouse-acceleration.sh</tt></dd>
+        <dt>wheel speed</dt><dd>in project <i>"tools"</i>, path: <tt>configure-mouse-wheel-speed.sh</tt></dd>
+      </dl>
+      Be sure to also look for any accompanying README files (if any).
+    </p>
     <li>how to list all custom repositories</li>
     <pre>ls /etc/apt/sources.list.d</pre>
     <li>Notes on upgrading Ubuntu 16.04 to 18.04 LTS </li>
