@@ -5,6 +5,18 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>remove metadata from PNG (and other) image files</li>
+      <a href='https://unix.stackexchange.com/a/490925/24044'>source</a>
+      <p>The following command removes all metadata:
+      <pre>$ exiftool -all= foo.png</pre>
+      </p>
+      <p>The following command displays metadata (notice the missing equals sign)
+      <pre>$ exiftool -all foo.png</pre>
+      </p>
+      <p>
+        One can also use the <tt>mogrify</tt> program:
+        <pre>mogrify -strip foo.png</pre>
+      </p>
       <li>rotate and resize PDF</li>
       <a href='https://unix.stackexchange.com/a/459596'>source</a>
       <p>
