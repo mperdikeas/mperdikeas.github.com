@@ -64,7 +64,7 @@ scp -o 'ProxyCommand ssh username@B nc %h %p' someFile username@C:/some/path</pr
       So I did:
       <pre>
 scp -o 'ProxyCommand ssh username@B -W %h:%p' someFile username@C:/some/path</pre>
-      &hellip; which also worked &emdash; observe that there is now a colon (<tt>:</tt>) between <tt>%h</tt>
+      &hellip; which also worked &mdash; observe that there is now a colon (<tt>:</tt>) between <tt>%h</tt>
       and <tt>%p</tt> which wasn't there before.
     </p>
     <p>
