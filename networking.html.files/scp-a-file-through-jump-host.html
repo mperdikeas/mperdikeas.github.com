@@ -4,13 +4,14 @@
     <link rel='icon' href='/knowledge-favicon.ico'/>
   </head>
   <style>
-   h1 {font-size: 130%;}
-   h2 {font-size: 110%; background: grey; color: white;}
+   h1 {font-size: 140%; background: blue; color: white; }
+   h2 {font-size: 110%; background: rgb(167, 199, 231); color: grey;}
   </style>
   <body>
     <h1>how to <code>scp</code> a file through an intermediate host (a.k.a. jump host)</h1>
-    (with or without using an SSH tunnel)<br/>
-    There's various methods (more recently I used and settled to <a href='#method-c'>method C</a>).
+    
+    There's various methods (with or without using an SSH tunnel). More recently I used
+    and settled to <a href='#method-c'>method C</a>.
     <h2 id='method-a'>method A</h2>
     <a href='http://superuser.com/a/276549/138891'>source</a>
     <p>
@@ -73,5 +74,21 @@ scp -o 'ProxyCommand ssh username@B -W %h:%p' someFile username@C:/some/path</pr
       <pre>
 sshpass -f password scp -o 'ProxyCommand ssh username@B -W %h:%p' someFile username@C:/some/path</pre>
     </p>
+    <h2>Update (October 2022)</h2>
+    <p>
+      <i>thanks to @moppman for reporting this &mdash; I have not had a chance to use this though</i>
+      <p>
+        A couple of years ago scp gained the ability to use jump hosts in a much more concise and intuitive manner. Using the <tt>-J</tt> flag, you can now do the following:
+
+        <pre>scp -J username@B username@C:/some/path /some/path</pre>
+
+        You can even add more jump hosts seperated by a comma.
+
+        As scp's manual states, the <tt>-J</tt> flag is just a shortcut for ssh commands very
+        similar to what I described in the other methods on this page.
+      </p>
+    </p>
+
+
   </body>
 </html>
