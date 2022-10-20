@@ -5,6 +5,9 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>format output to a specific line length</li>
+      <a href='https://unix.stackexchange.com/a/317002/24044'>source</a><br/>
+        <pre>fold -s -w80 /some/file</pre>
       <li>continuous work approach</li>
       <pre>while inotifywait -e close_write contract.tex; do make; done</pre>
       <li>remove metadata from PNG (and other) image files</li>
