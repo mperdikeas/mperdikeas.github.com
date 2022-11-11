@@ -5,6 +5,17 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>looping through files with spaces in names</li>
+      <p>
+        I've successfully used the following script (<a href='https://unix.stackexchange.com/a/9499/24044'>source</a>):
+<pre>
+find . -type f -name "*.csv" -print0 | while IFS= read -r -d '' file; do
+    echo "file = $file"
+    diff "$file" "/some/other/path/$file"
+    read line &lt;/dev/tty
+done
+</pre>
+      </p>
       <li>format output to a specific line length</li>
       <a href='https://unix.stackexchange.com/a/317002/24044'>source</a><br/>
         <pre>fold -s -w80 /some/file</pre>
