@@ -9,6 +9,19 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
+    <li>how I fixed broken and missing packages</li>
+    <p>
+      In November 2022 I was initially unable to install <tt>kdiff3</tt> on my Ubuntu 20.04 machine
+      due to missing and broken packages. I was able to fix that with the following sequence:
+    </p>
+    <pre>
+sudo apt update --fix-missing
+sudo apt install -f
+sudo apt --fix-broken install
+sudo apt autoremove</pre>
+    <p>
+      &hellip; after which <tt>sudo apt install kdiff3</tt> succeeded.
+    </p>
     <li>how I configured Microsoft Mouse speed (incl. wheel speed)</li>
     <p>
       In September 2022 I replaced my Logitech mouse with a "Microsoft Comfort 4500" mouse on my
