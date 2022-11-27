@@ -5,6 +5,42 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>sample <tt>~/.gitconfig</tt> file</li>
+      <p>
+        These are the contents of the <tt>~/.giconfig</tt> file on my <i>Ubuntu 20.04 ThinkStation</i> machine as of November 2022:
+        <pre>
+[core]
+	excludesfile = /home/mperdikeas/.gitignore_global
+	editor = emacs
+[alias]
+	lgb = log --color  --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+        lg  = log --color --graph --oneline --decorate
+        sstatus = status -s --ignored
+        ppush = "!sh -c 'git push --all && git push --tags'"
+        df = difftool
+        branchdate = !git for-each-ref --sort='-authordate' --format='%(refname)%09%(authordate)' refs/heads | sed -e 's-refs/heads/--'
+[color]
+	ui = true
+        diff=always
+        status=auto
+        branch=auto
+[diff]
+	tool = vimdiff
+        external = git-meld
+[user]
+        name = mperdikeas
+        email = mperdikeas@gmail.com
+[push]
+	default = current
+[credential]
+        username = mperdikeas@gmail.com
+        password=ghp_kdflk328DtBTa3KvS_obviously-mangled # I've put the PAT here, obviously mangled
+	helper = store
+[gc]
+	auto = 0
+        </pre>
+
+      </p>
       <li>how to merge a github pull request locally in order to test it before accepting it</li>
       <p>
         <a href='https://gist.github.com/adam-p/15413fabef6cffecd897'>source</a>
