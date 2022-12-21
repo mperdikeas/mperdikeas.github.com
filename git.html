@@ -5,6 +5,15 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to cleanly solve conflicts during <tt>git stash pop</tt> without a commit</li>
+      I've used the following (<a href='https://stackoverflow.com/a/27382210/274677'>source</a>)
+      with great success:
+      <pre>
+git stash pop
+// manually resolve conflicts and save the files (NB: don't use "git add" !!)
+git restore --staged .
+git stash drop</pre>
+      
       <li>sample <tt>~/.gitconfig</tt> file</li>
       <p>
         These are the contents of the <tt>~/.giconfig</tt> file on my <i>Ubuntu 20.04 ThinkStation</i> machine as of November 2022:
