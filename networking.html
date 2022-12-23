@@ -5,6 +5,23 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>find default gateway</li>
+      <i>tested Ubuntu 20.04</i>
+<pre>$ ip route list
+default via 192.168.2.1 dev eno1 proto static metric 100 
+169.254.0.0/16 dev eno1 scope link metric 1000 
+192.168.2.0/24 dev eno1 proto kernel scope link src 192.168.2.2 metric 100 
+      
+</pre>
+      <li>find device name of network interfaces</li>
+      <i>tested Ubuntu 20.04</i>
+      <pre>$ sudo nmcli connection show
+NAME          UUID                                  TYPE      DEVICE 
+netplan-eno1  10838d80-caeb-349e-ba73-08ed16d4d666  ethernet  eno1
+</pre>
+      <li>restart network manager</li>
+      <i>tested Ubuntu 20.04</i>
+      <pre>sudo service network-manager restart</pre>
       <li>find if a server is listening on a specific port</li>
       <p>
         nc -zv 127.0.0.1 80
