@@ -1,0 +1,65 @@
+$ sudo -i -u postgres psql postgres
+Password for user postgres: 
+psql (12.9 (Ubuntu 12.9-2.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# CREATE TABLESPACE crnt20 LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/';
+ERROR:  could not set permissions on directory "/home/mperdikeas/postgresql-opekepe-tblspaces": Operation not permitted
+postgres=# CREATE TABLESPACE crnt20 LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/';
+CREATE TABLESPACE
+postgres=# CREATE TABLESPACE usersaee2020log LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/';
+ERROR:  directory "/home/mperdikeas/postgresql-opekepe-tblspaces/PG_12_201909212" already in use as a tablespace
+postgres=# DROP TABLESPACE crnt20
+postgres-# ;
+DROP TABLESPACE
+postgres=# CREATE TABLESPACE crnt20 LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/crnt20';
+ERROR:  could not set permissions on directory "/home/mperdikeas/postgresql-opekepe-tblspaces/crnt20": Operation not permitted
+postgres=# CREATE TABLESPACE crnt20 LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/crnt20';
+CREATE TABLESPACE
+postgres=# CREATE TABLESPACE usersaee2020log LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/usersaee2020log';
+CREATE TABLESPACE
+postgres=# CREATE TABLESPACE usersaee2020 LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/usersaee2020';
+CREATE TABLESPACE
+postgres=# CREATE TABLESPACE users LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/users';
+CREATE TABLESPACE
+postgres=# CREATE TABLESPACE userspay2020 LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/userspay2020';
+CREATE TABLESPACE
+postgres=# CREATE TABLESPACE rdiis LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/rdiis';
+CREATE TABLESPACE
+postgres=# CREATE TABLESPACE sadmin20 LOCATION '/home/mperdikeas/postgresql-opekepe-tblspaces/sadmin20';
+CREATE TABLESPACE
+postgres=# 
+
+
+
+At the same time, in parallel, with the above I was doing:
+
+        $ sudo -i
+root@mp-ThinkStation-P320:~# cd /home/mperdikeas/postgresql-opekepe-tblspaces/
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# ls
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# sudo mkdir crnt20
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres
+chown: missing operand after ‘postgres:postgres’
+Try 'chown --help' for more information.
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres *
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# tree
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# tree
+.
+└── crnt20
+    └── PG_12_201909212
+
+2 directories, 0 files
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# sudo mkdir usersaee2020log
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres *
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# sudo mkdir usersaee2020
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres *
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# sudo mkdir users
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres *
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# sudo mkdir userspay2020
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres *
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# sudo mkdir rdiis
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres *
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# sudo mkdir sadmin20
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# chown -R postgres:postgres *
+root@mp-ThinkStation-P320:/home/mperdikeas/postgresql-opekepe-tblspaces# ls
+        

@@ -5,6 +5,8 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>find files and sort based on modification time</li>
+      <pre>find src -regex '.*-func.tsx' -printf "%T@ %Tc %p\n" | sort -n</pre>
       <li>looping through files with spaces in names</li>
       <p>
         I've successfully used the following script (<a href='https://unix.stackexchange.com/a/9499/24044'>source</a>):

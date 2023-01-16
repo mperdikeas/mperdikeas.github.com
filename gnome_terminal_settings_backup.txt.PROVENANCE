@@ -1,0 +1,17 @@
+https://askubuntu.com/a/1025098/89663
+
+After I posted the above question, I found the answer in the suggested answers:
+
+Earlier answer: Backup GNOME-Terminal | Ask Ubuntu
+
+synopsis: Save settings:
+
+dconf dump /org/gnome/terminal/ > gnome_terminal_settings_backup.txt
+Load the saved settings:
+
+dconf load /org/gnome/terminal/ < gnome_terminal_settings_backup.txt
+
+
+----
+
+This will dump more settings: dconf dump /org/gnome/terminal/legacy/profiles:/:XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/ > material-theme-profile.conf also see https://gist.github.com/reavon/0bbe99150810baa5623e5f601aa93afc        
