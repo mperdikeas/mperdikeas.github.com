@@ -5,6 +5,13 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>recursively change modification timestamp in a set of files</li>
+    <pre> for f in $(find some-dir/); do  sudo touch -a -m -t 202303062145.32 $f; done</pre>
+    <span class='nb'>NB:</span> the above procedure will <b>NOT</b> modify the status change timestamp. The status change timestamp is shown with the <tt>stat</tt> command and is, by design, impossible to change. The only way to accomplish this would be to change the time in the entire system. See: <a href='./admin.html#artificially-set-time'>here</a>.
+      <li>overwrite modification timestamps when creating a tarball</li>
+      <pre>
+tar -cvf boo-2023-03-06.tar --sort=name --mtime='UTC 2023-03-06' boo/ </pre>
+      <a href='https://stackoverflow.com/a/54908072/274677'>source</a>
       <li>find files and sort based on modification time</li>
       <pre>find src -regex '.*-func.tsx' -printf "%T@ %Tc %p\n" | sort -n</pre>
       <br/>&mdash; or, to search all non-directories, use: <br/>
