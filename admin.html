@@ -9,6 +9,20 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
+    <li>How to artificially change the time in Ubuntu:</li>
+    <p>
+      <a href='https://phoenixnap.com/kb/how-to-set-or-change-timezone-date-time-ubuntu'>source</a><br/>
+<pre>
+$ timedatectl set-ntp no
+$ timedatectl set-time 1974-12-24
+$ timedatectl set-time 03:05:49
+$ // do what you want to do ...
+$ timedatectl set-ntp yes
+</pre>      
+<span class='NB'>NB: </span><tt>set-time</tt> is indeed used for both date <b>and</b> time.
+<br/>
+<span class='NB'>NB2: </span><tt>1</tt> and <tt>0</tt> can also be used in lieu of <tt>yes</tt> and <tt>no</tt> (respectively).
+    </p>
     <li>how I fixed broken and missing packages</li>
     <p>
       In November 2022 I was initially unable to install <tt>kdiff3</tt> on my Ubuntu 20.04 machine
