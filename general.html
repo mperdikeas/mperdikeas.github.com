@@ -7,7 +7,9 @@
     <ol class='main-list-items' reversed>
       <li>recursively change modification timestamp in a set of files</li>
     <pre> for f in $(find some-dir/); do  sudo touch -a -m -t 202303062145.32 $f; done</pre>
-    <span class='nb'>NB:</span> the above procedure will <b>NOT</b> modify the status change timestamp. The status change timestamp is shown with the <tt>stat</tt> command and is, by design, impossible to change. The only way to accomplish this would be to change the time in the entire system. See: <a href='./admin.html#artificially-set-time'>here</a>.
+    <span class='nb'>NB:</span> the above procedure will <b>NOT</b> modify the "change date" of the file (<i>ctime</i>).
+    The status change timestamp is shown with the <tt>stat</tt> command and is, <a href='https://unix.stackexchange.com/a/36105/24044'>by design</a>, impossible to change.
+    The only way to accomplish this would be to change the time in the entire system. See: <a href='./admin.html#artificially-set-time'>here</a>.
       <li>overwrite modification timestamps when creating a tarball</li>
       <pre>
 tar -cvf boo-2023-03-06.tar --sort=name --mtime='UTC 2023-03-06' boo/ </pre>
