@@ -5,6 +5,36 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to unzip files zipped with the AES encryption</li>
+      <p>
+        In April 2023 when trying to use <tt>unzip</tt> on a <i>*.zip</i> file
+        I encountered the following message:
+<pre>
+$ unzip staging-2023-cred.zip 
+Archive:  staging-2023-cred.zip
+   skipping: staging-2023-cred.txt   unsupported compression method 99
+</pre>
+It turns out that my <tt>unzip</tt> program was unable to unzip
+the archive as it used the <i>Adavanced Encryption Standard</i> (AES)
+encryption, which is not supported by unzip, at least not in the version
+I was using:
+<pre>
+$ unzip -v
+UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP.
+</pre>
+After some googling I realized I had to install the <tt>7zip</tt> package
+which supports AES encryption:
+<pre>
+$ sudo apt update
+$ sudo apt install p7zip-full p7zip-rar
+</pre>
+&hellip; following the above, I was able to unzip using:
+<pre>
+$ 7z e staging-2023-cred.zip
+</pre>
+Note that the archive was password-protected and I was prompted for the
+password by the <tt>7z</tt> program.
+      </p>
       <li>recursively change modification timestamp in a set of files</li>
     <pre> for f in $(find some-dir/); do  sudo touch -a -m -t 202303062145.32 $f; done</pre>
     <span class='nb'>NB:</span> the above procedure will <b>NOT</b> modify the "change date" of the file (<i>ctime</i>).
