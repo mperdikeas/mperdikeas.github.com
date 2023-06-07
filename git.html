@@ -5,6 +5,23 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to undo a <tt>git commit --amend</tt> and on the difference between <tt>HEAD@{1}</tt> and <tt>HEAD^</tt> (or <tt>HEAD~1</tt>)</li>
+      <p>
+      This <a href='https://stackoverflow.com/a/1459264/274677'>answer</a> is very deep; in my case
+      I only used the first incantation:
+
+      <pre>git reset --soft HEAD@{1}</pre>
+
+      &hellip; but not the second one:
+
+      <pre>git commit -C HEAD@{1}</pre>
+
+      Instead, I typed the commit message anew.
+
+      Note, in particular the answer's caveat that <tt>HEAD@{1}</tt> is pointing to different
+      things in the two incantations. Like I said, pretty deep.
+      </p>
+
       <li>how to cleanly solve conflicts during <tt>git stash pop</tt> without a commit</li>
       I've used the following (<a href='https://stackoverflow.com/a/27382210/274677'>source</a>)
       with great success:
