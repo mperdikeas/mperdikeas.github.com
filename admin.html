@@ -9,6 +9,16 @@
   </p>
   <hr>
   <ol class='main-list-items' reversed>
+    <li>How to burn a blank CD on Ubuntu 20.04</li>
+    <p>
+      Trying to mount a, just purchased, blank CD as in:
+      <pre>$ sudo mount /dev/sr0 /media/cdrom</pre>
+      &hellip; will give you:
+      <pre>mount: /media/cdrom: can't read superblock on /dev/sr0.</pre>
+      Apparently at that point there is no filesystem at all on the disk.
+      So simply insert the blank disk in the CD-ROM device and use
+      the <i>Brasero CD/DVD burner</i> to burn a "data CD". Works like a charm.
+    </p>
     <li id='artificially-set-time'>How to artificially change the time in Ubuntu:</li>
     <p>
       <a href='https://phoenixnap.com/kb/how-to-set-or-change-timezone-date-time-ubuntu'>source #1</a><br/>
