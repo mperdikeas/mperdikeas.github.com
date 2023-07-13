@@ -5,6 +5,25 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li><tt>currentColor</tt> property</li>
+      <p>
+        CSS’s <tt>currentColor</tt> property (that we mostly all know and love) allows you to use the current color of an element as the value for another property. This is useful for things like borders, outlines, and box shadows. But did you know that you can adjust the transparency dynamically?
+      </p>
+      
+      <pre>body {
+  font-family: sans-serif;
+  color: lightpink;
+  background-color: black;
+}
+
+div {
+  padding: 16px;
+  border-style: solid;
+  border-color: color-mix(in srgb, transparent 60%, currentColor);
+}</pre>
+      <p>
+        The color-mix function in CSS returns a new color value by mixing two colors together by a given percentage. The first argument is the color space, the second is the percentage, and the third is the color to mix with. Combined with currentColor, it is very useful.
+      </p>
       <li>how I installed Sass on Ubuntu 16.04</li>
       <pre>
 $ sudo apt-get install ruby
