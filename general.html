@@ -5,6 +5,19 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>HTML to PDF conversion</li>
+      <p>
+        In August 2023 I used <a href='https://wkhtmltopdf.org/'>wkhtmltopdf</a>.
+        I had some problems with Greek characters so I had to add the following
+        in the HTML:
+        <pre>
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+&lt;/head&gt;</pre>
+        &hellip; as advised <a href='https://github.com/wkhtmltopdf/wkhtmltopdf/issues/1840'>here</a>.
+        Eventually, the final incantation used was:
+        <pre> wkhtmltopdf --disable-smart-shrinking -O Landscape -s foo.html foo.pdf</pre>
+      </p>
       <li>how to unzip files zipped with the AES encryption</li>
       <p>
         In April 2023 when trying to use <tt>unzip</tt> on a <i>*.zip</i> file
