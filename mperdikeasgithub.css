@@ -48,6 +48,11 @@ tt.message {
     color: white;
 }
 
+tt.console {
+    background: black;
+    color: white;
+}
+
 kbd {
     display:inline-block;
     margin:0 .1em;

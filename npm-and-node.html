@@ -28,6 +28,7 @@ apt-get install -y nodejs
       </p>
 
       <p>
+        <a id='killed-the-script-and-followed-the-instructions'>
         As a result of the above warning, I killed the script and followed (as advised)
         the instructions given
         <a href='https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions'>here</a>.
@@ -80,8 +81,10 @@ mperdikeas@mp-ThinkStation-P320:~/repos/prj/cognitera-iacs/iacs-ui#
 $ npm --version
 6.14.18
 </pre>
-&hellip; and my application build worked as before. I also verified that this is the correct
+&hellip; and my application build worked as before. I also verified that this
+is the correct
 <a href='https://stackoverflow.com/a/51243675/274677'>correspondance between Node and NPM versions</a>.
+See also <a href='https://nodejs.org/en/download/releases'>here</a>.
       </p>
       <p>
         That would have been the end of the travail for a neurotypical person, but not for me. I subsequently
@@ -97,7 +100,7 @@ $ npm --version
         to downgrade back to the compatible <tt>npm</tt> version for my version of <tt>Node</tt>:
         <pre>$ npm install  -g npm@6.14.18</pre>
         In fact the error message was exactly the same, I wasn't
-        even able to run <tt style='background: black; color: white'>npm --version</tt>.
+        even able to run <tt class='console'>npm --version</tt>.
       </p>
       <p>
         In the end, I was left with no other option available than to repeat the entire ordeal once again, i.e.
@@ -107,6 +110,66 @@ $ npm --version
         important realization: That <tt>Node</tt> and <tt>npm</tt> are inextricably tied together and that I
         should never bother with installing <tt>npm</tt> independently. Just accept the version that comes
         bundled with <tt>Node</tt>.
+      </p>
+        However, there's more to it. At (what I thought was) the end of this ordeal I had the following:
+      <pre>
+        $ node -v
+        v14.21.3
+        $ npm -v
+        6.14.18 </pre>
+      <p>
+        Unfortunately, every time I tried to run <tt>npm</tt> I got:
+        <pre>
+$ npm install -g npm@6.14.17
+TypeError: isexe is not a function
+    at E (/usr/lib/node_modules/npm/node_modules/which/which.js:82:7)
+    at F (/usr/lib/node_modules/npm/node_modules/which/which.js:91:7)
+    at which (/usr/lib/node_modules/npm/node_modules/which/which.js:92:5)
+    at load (/usr/lib/node_modules/npm/lib/npm.js:250:5)
+    at EventEmitter.npm.load (/usr/lib/node_modules/npm/lib/npm.js:246:5)
+    at /usr/lib/node_modules/npm/bin/npm-cli.js:79:7
+    at Object.<anonymous> (/usr/lib/node_modules/npm/bin/npm-cli.js:155:3)
+    at Module._compile (internal/modules/cjs/loader.js:1114:14)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1143:10)
+    at Module.load (internal/modules/cjs/loader.js:979:32)
+/usr/lib/node_modules/npm/lib/npm.js:59
+      throw new Error('npm.load() required')
+      ^
+
+Error: npm.load() required
+    at Object.get (/usr/lib/node_modules/npm/lib/npm.js:59:13)
+    at process.errorHandler (/usr/lib/node_modules/npm/lib/utils/error-handler.js:208:32)
+    at process.emit (events.js:400:28)
+    at process._fatalException (internal/process/execution.js:167:25)
+        </pre>
+      </p>
+      <p>
+        In fact the only <tt>npm</tt> command I was able to run was <tt clas=s'console'>npm -v</tt>.
+        Googling revealed that this case existed but there was only
+        <a href='https://stackoverflow.com/q/77098688/274677'a single low-visibility
+           question on SO</a>. Incidentally, the question was only a month old pointing to some
+        recent breakage.
+      </p>
+      <p>
+        I frantically tried the same cycle a couple of times more (i.e. purging <tt>Node</tt> and then installing
+        version 14) but I kept getting the same results.
+      </p>
+      <p>
+        In the end, at the point where I was beginning to despair, I decided to follow 
+        <a href='https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions'>these instructions</a>
+        which I had also tried <a href='killed-the-script-and-followed-the-instructions'>near the beginning of this ordeal</a>
+        with the difference this time of setting the <tt>NODE_MAJOR</tt> environmental variable to something less than 20.
+        So I tried first with <tt>18</tt> but the resultant <tt>Node/npm</tt> configuration was breaking the build of my
+        IACS application (mentioned above). I then tried with <tt>16</tt> and everything is working fine.
+      </p>
+      <p>
+        So, at the end of this ordeal I did manage to upgrade the <tt>Node</tt>/<tt>npm</tt> versions to the following:
+        <pre>
+$ node --version
+v16.20.2
+$ npm --version
+8.19.4
+        </pre>
       </p>
       <li><a id='2022-May-Node_upgrade'>how I upgraded the <tt>nodejs</tt> version to the latest LTS (I think) version</li>
       <p>
