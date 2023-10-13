@@ -5,7 +5,110 @@
   </head>
   <body>
     <ol reversed class=main-list-items>
-      <li>how I upgraded the <tt>nodejs</tt> version to the latest LTS (I think) version</li>
+      <li>October 2023 &mdash; how I upgraded the <tt>nodejs</tt> version to <tt>Node 20x</tt> and then went back to where I started (twice)</li>
+      <p>
+        Initially, I tried to follow the instructions given <a href='https://askubuntu.com/a/1401499'>here</a>:
+        <pre>
+This set of instructions will install whatever version is the latest LTS version.
+When a new version is released, you may have to run these instructions again to
+ pull the new install script for the new version.
+
+# As a user with sudo
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# As root
+curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+apt-get install -y nodejs
+        </pre>    
+      </p>
+      <p>
+        However, upon executing the script I encountered the following warning:
+        <img src='./npm-and-node.html.files/node-install-script-deprecation-warning.png' />
+      </p>
+
+      <p>
+        As a result of the above warning, I killed the script and followed (as advised)
+        the instructions given
+        <a href='https://github.com/nodesource/distributions#debian-and-ubuntu-based-distributions'>here</a>.
+      </p>
+
+      <p>
+        First off, I checked that the latest suport Node version for my Ubuntu system (which is <tt>20.04</tt>)
+        was Node <tt>20x</tt>:
+        <img src='npm-and-node.html.files/node-supported-versions-per-Ubuntu-system.png'/>
+      </p>
+      <p>
+        I then followed the instructions given below to first download and import the Nodesource GPG key:
+        <pre>
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl gnupg
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+        </pre>
+        &hellip; then to create the deb repository (where I used <tt>NODE_MAJOR=20</tt>):
+        <pre>
+NODE_MAJOR=20
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+        </pre>
+        &hellip; and finally I run update and install as instructed:
+        <pre>
+sudo apt-get update
+sudo apt-get install nodejs -y
+        </pre>
+      </p>
+      <p>
+        Unfortunately, after all this effort I discovered that the new node version breaks the build of a very crucial application (IACS)
+        so I had to downgrade back to Node 14 (which is where I started off) by doing the following:
+
+      <ol>
+        <li>purge Node:
+<pre>sudo apt purge nodejs</pre>
+        </li>
+        <li>
+          Installing an older version of Node by following the instructions given <a href='#2022-May-Node_upgrade'>here</a>.
+        </li>
+      </ol>
+      </p>      
+      <p>
+        After that (during which process I ignored all deprecation warnings which incidentally hadn't appeared the last
+        time I run this script), I was back where I started:
+        <pre>
+$ node --version
+v14.21.3
+mperdikeas@mp-ThinkStation-P320:~/repos/prj/cognitera-iacs/iacs-ui#
+$ npm --version
+6.14.18
+</pre>
+&hellip; and my application build worked as before. I also verified that this is the correct
+<a href='https://stackoverflow.com/a/51243675/274677'>correspondance between Node and NPM versions</a>.
+      </p>
+      <p>
+        That would have been the end of the travail for a neurotypical person, but not for me. I subsequently
+        carried away and decided to see whether I can upgrade to the latest version of <tt>npm</tt> by
+        using:
+        <pre>sudo npm install -g npm@latest</pre>
+      </p>
+      <p>
+        Unfortunately the above failed badly as when I tried to run <tt>npm</tt> I got:
+        <pre>ERROR: npm v10.2.0 is known not to run on Node.js v14.21.3. ...</pre>
+        I.e. I had managed to upgrade to <tt>npm</tt> version <tt>10</tt> but that version was incompatible
+        with the Node version <tt>14</tt> I am using. Furthermore, I was unable to use the following
+        to downgrade back to the compatible <tt>npm</tt> version for my version of <tt>Node</tt>:
+        <pre>$ npm install  -g npm@6.14.18</pre>
+        In fact the error message was exactly the same, I wasn't
+        even able to run <tt style='background: black; color: white'>npm --version</tt>.
+      </p>
+      <p>
+        In the end, I was left with no other option available than to repeat the entire ordeal once again, i.e.
+        purge <tt>Node</tt> (this also purges <tt>npm</tt> as part of the process) and re-install <tt>Node</tt>
+        version <tt>14</tt> (which also installs <tt>npm</tt> version <tt>6</tt> as part of the process). This
+        went smoothly (like the first time) and I was now back to where I started two hours later but with one
+        important realization: That <tt>Node</tt> and <tt>npm</tt> are inextricably tied together and that I
+        should never bother with installing <tt>npm</tt> independently. Just accept the version that comes
+        bundled with <tt>Node</tt>.
+      </p>
+      <li><a id='2022-May-Node_upgrade'>how I upgraded the <tt>nodejs</tt> version to the latest LTS (I think) version</li>
       <p>
         (source: <a href='https://askubuntu.com/a/1291854'>https://askubuntu.com/a/1291854</a>)
         I executed the following commands (<i>May 2022</i>):
