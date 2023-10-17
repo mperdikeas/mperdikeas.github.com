@@ -146,7 +146,7 @@ Error: npm.load() required
       <p>
         In fact the only <tt>npm</tt> command I was able to run was <tt clas=s'console'>npm -v</tt>.
         Googling revealed that this case existed but there was only
-        <a href='https://stackoverflow.com/q/77098688/274677'a single low-visibility
+        <a href='https://stackoverflow.com/q/77098688/274677'>a single low-visibility
            question on SO</a>. Incidentally, the question was only a month old pointing to some
         recent breakage.
       </p>
@@ -170,6 +170,62 @@ v16.20.2
 $ npm --version
 8.19.4
         </pre>
+      </p>
+      <p>
+        <b>update a couple of days later (at 2023-10-17)</b><br/>
+        Alas, this was not meant to be. A couple of days later I tried to run
+        the <tt>create-react-app</tt> application and came across this dreaded
+        message (which I have often seen before):
+        <pre>
+$ npx create-react-app cognitera-app-1 --template typescript
+npm ERR! must provide string spec
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /home/mperdikeas/.npm/_logs/2023-10-17T11_42_06_557Z-debug-0.log </pre>
+      </p>
+      <p>&hellip; not only that but at further investigation I realized, to my horror, that
+        I could not even run <tt>npm install</tt> any more as it failed with the exact
+        same message. I came to the awful realization that my previous upgrade (to version
+        16 of <tt>node</tt> and version 8 of <tt>npm</tt>) was broken. Moreover, reading my
+        previous notes in this travail, I further realized in horror that I wouldn't even be able
+        to downgrade to <tt>node</tt> version 14 as previous attempts had fail. What's more
+        this realization came only after I had opened the gates of Hell with:
+        <pre class='console'>sudo apt purge node</pre>. I now faced the spectre of a totally broken system
+        with no possibility to ever install <tt>node</tt> or <tt>npm</tt>.
+      </p>
+      <p>
+        However, despite all odds, and despite my previously paintstakingly elaborate notes
+        to the contrary,
+        this time the installation of <tt>node</tt> 14 miraculously succeeded and was
+        entirely uneventful:
+        <pre>
+$curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+ ...
+$sudo apt install -y nodejs
+ ...
+$ node -v
+v14.21.3
+$ npm -v
+6.14.18
+        </pre>
+
+        &hellip; Moreover, I confirmed that I was now able to execute
+        both <tt class='console'>npm install</tt>
+        and <tt class='console'>npx create-react-app</tt>
+      </p>
+      <p>
+        So, eventually, I manage to safely return back to where I had started (for the third time).
+        I have no explanation as to why this time I was able to install <tt>Node</tt> version 14
+        even though in the previous attempts I failed miserably. Perhaps the intermediate
+        installation of <tt>Node</tt> version 16 changed something in the system?
+      </p>
+      <p>
+        This is is all very unsettling.
+        I think the morale of the story is to be extremely hessitant in updating the <tt>node</tt>
+        or <tt>npm</tt> versions of the system. I have also realized that <tt>node</tt>, <tt>npm</tt>
+        (and <tt>npx</tt> too) are inextricably tied together and are installed together as
+        part of the <tt>Node</tt> installation. The part about <tt>npx</tt> was confirmed
+        independently by ChatGPT.
       </p>
       <li><a id='2022-May-Node_upgrade'>how I upgraded the <tt>nodejs</tt> version to the latest LTS (I think) version</li>
       <p>
