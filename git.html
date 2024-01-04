@@ -5,6 +5,13 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to add as a submodule an existing, locally available git repo</li>
+      <p>
+        In January 2024 I followed <a href='https://stackoverflow.com/a/36389987/274677'>this approach</a> with good results:
+        <pre>
+$ git submodule add &lt;url&gt; &lt;path&gt;
+$ git submodule absorbgitdirs &lt;path&gt;</pre>        
+      </p>
       <li><a href='https://jvns.ca/blog/2023/11/23/branches-intuition-reality/'>git branches: intuition & reality</a></li>
       <li><a href='https://jvns.ca/blog/2023/11/10/how-cherry-pick-and-revert-work/'>git cherry picking & 3-way merge</a></li>
       <li>what can go wrong in a rebase? (Julia Evans)</li>
