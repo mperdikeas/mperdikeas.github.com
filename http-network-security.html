@@ -10,6 +10,15 @@
 
   <body>
     <ol reversed class='main-list-items'>
+      <li>CORS <tt>Access-Control-Allow-Origin</tt> header</li>
+      <p>
+        <a href='https://stackoverflow.com/a/10636765/274677'>Great explanation</a> of exactly how the <tt>Access-Control-Allow-Origin</tt> header
+        works. Explains choreography in detail and touches upon concepts of
+        <i>simple</i> versus <i>non-simple</i> HTTP requests, <i>OPTIONS</i> requests and
+        explains that the network fetch actually does happen but the Browser refuses
+        to process it any further and throws <tt>XMLHttpRequest error</tt> if the right
+        conditions are not met.
+      </p>
       <li>multipart POST</li>
       <p><a href='https:////stackoverflow.com/a/28380690/274677'>This SO answer</a> nails it. NB: I had to
         tweak some scripts &mdash; a running example is available in my <i>playground/http/multipart-post</i>
