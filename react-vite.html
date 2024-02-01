@@ -1,0 +1,22 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+<link rel='icon' href='/knowledge-favicon.ico'/>
+</head>
+<body>
+  <ol reversed class='main-list-items'>
+    <li>Vite stalling in dev server</li>
+    <p>
+      In eary 2024 I began experiencing the dreaded vite development server's stalling.
+      After much frustration I encountered <a href='https://stackoverflow.com/q/74394658/274677'>this SO question</a>
+      which pointed to <a href='https://vitejs.dev/guide/troubleshooting.html#requests-are-stalled-forever'>this vite documentation page</a>.
+    </p>
+    <p>
+      Following the instructions on said page I <b>only</b>, I added the line:
+      <code>* - nofile 65536</code>
+      to the file <tt>/etc/security/limits.conf</tt> and restarted. Vite development
+      server has been working flawlessly ever since.
+    </p>
+</ol>
+</body>
+</html>
