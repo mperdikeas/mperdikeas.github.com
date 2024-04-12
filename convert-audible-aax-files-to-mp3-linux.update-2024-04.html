@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+
+  </style>
+  <body>
+    <header>
+      <h1>How to convert Audible aax files to mp3 in Linux &mdash; update April 2024</h1>
+      <hr>
+    </header>
+    <article>
+      <h2>PREAMBLE</h2>
+      <p>
+        The previous instructions given <a href='convert-audible-aax-files-to-mp3-linux.html'>here</a> no longer
+        work as regards the script [audible-activator.py]. In particular it appears that this script (which uses Selenium)
+        to navigate to one of the main Amazon/Audible sites (configurable as a command line option whether it be US, UK etc)
+        is now broken, due to what has been in all likelihood a change (after so many years) in the Amazon web sites (whether intentional as a
+        counter-measure to that script or not cannot be said). At any rate said script was only used to extract the activation
+        bytes which are then (manually) given as command line arguments when one invokes the [AAXtoMP3] executable.
+      </p>
+      <p>
+        As a reminder, the previous steps were:
+        <ol>
+          <li>download the Audiobook you have bought. There's an option for that in the Audible site (I couldn't find
+            one in the Amazon site itself). See <a href='convert-audible-aax-files-to-mp3-linux.update-2024-04.html.audible-screenshot-2024-04-12.png'>this screenshot</a></li>
+          <li>use the script <tt>audible-activator.py</tt> to extract an activation code from the Audible web site</li>
+          <li>use the <tt>AAXtoMP3</tt> program, passing it the activation code obtained in the previous step, as a command line
+          parameter, in order to convert the proprietary <tt>*.aax</tt> format into the open <tt>*.mp3</tt> format</li>
+        </ol>
+      </p>
+      <h2>Current process</h2>
+      <p>
+        Now, therefore of the three-step process identified above, only the second (#2) step changes as the
+        <tt>audible-activator.py</tt> script no longer works. Instead, I used the <i>audible tools</i> web site
+        as shown in the below image:
+        <a href='convert-audible-aax-files-to-mp3-linux.update-2024-04.html.audible-tools-screenshot.png'><img src='convert-audible-aax-files-to-mp3-linux.update-2024-04.html.audible-tools-screenshot.png' height='300'/></a>
+      </p>
+      <p>
+        The website is apparently able to extract the activation bytes if you upload the <tt>*.aax</tt> file
+        or even (remarkably) just it's checksum (?).
+      </p>
+      <p>
+        I found this website in <a href='https://www.reddit.com/r/audible/comments/i4o06j/new_website_where_you_can_get_your_activation/'>this Reddit discussion</a>.
+      </p>
+    </article>
+
+  </body>
+</html>
