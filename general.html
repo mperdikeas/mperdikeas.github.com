@@ -178,7 +178,7 @@ done
       <li>test mouse for click problems in Ubuntu</li>
       <pre>xev | awk '/ButtonRelease/ {print $1, i++}'</pre>
       <li>play music CDs from the command line</li>
-      <pre>mplayer -cdrom-device /dev/sr0 cdda://</pre>
+      <pre>mplayer -cdrom-device -cache 5000 /dev/sr0 cdda://</pre>
       <li id='decrypting-PDF-files'>decrypting PDF files</li>
       <a href='https://www.howtogeek.com/197195/how-to-remove-a-password-from-a-pdf-file-in-linux/'>source</a><br/>
       <p>On 2019-03-08 I used the <tt>qpdf</tt> tool as described in the source:
