@@ -5,6 +5,130 @@
   </head>
   <body>
     <ol reversed class=main-list-items>
+      <li>April 2024 &mdash; how I removed <tt>Node</tt> and then installed <tt>nvm</tt> and (after that) <tt>Node</tt> again</li>
+      <p>
+      I wanted to develop a backend application (rest API) using NestJS but read that it requires
+      Node version &ge;16. Given previous complications when trying to upgrade the version of Node, I decided
+      to use <tt>nvm</tt> this time as that would allow me to have multiple versions of <tt>Node</tt> (and associated
+        versions of <tt>npm</tt>) on my system.
+      </p>
+      <p>
+        I followed the instructions from ChatGPT which read as follows:<br/>
+        <a href='npm-and-node.html.nvm-installation-guide-chatGPT.png'>
+          <img width="400" src='npm-and-node.html.nvm-installation-guide-chatGPT.png'>
+        </a>
+        <br/>
+        I had to correct the numbering because ChatGPT numbered all sections as <i>1</i> and obstinately
+        refused to number them correctly.
+      </p>
+      <p>
+        I actually skipped steps <i>1</i> and <i>2</i> (no ill effects as I already had <tt>curl</tt> and
+        <tt>wget</tt> installed in their latest versions). More importantly, before attempting to install
+        <tt>nvm</tt> I did the following:
+        <ol type='i'>
+          <li>I established and recorded somewhere that the currently available version of
+            <tt>Node</tt> (with which all existing
+            applications work fine) was <tt>v14.21.3</tt> which is also, BTW, the latest version available
+            on the official Ubuntu 22.04 repos.</li>
+          <li>removed the existing <tt>Node</tt> installation:
+        <pre>sudo apt purge nodejs</pre></li>
+        </ol>
+      </p>
+      <p>
+        Also, at first I followed some other instructions so I attempted to install <tt>nvm</tt> using a
+        different script:
+        <pre>curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash</pre>
+        &hellip; but when installation of the above script failed with:
+        <pre>You have $NVM_DIR set to "~/.nvm", but that directory does not exist.
+Check your profile files and environment.</pre>
+        &hellip; I used the ChatGPT instructions even though &mdash;unbeknowest to me at
+        that point&mdash; I encountered the exact same problem with the ChatGPT instructions
+        too (and eventually solved it).
+      </p>
+      <p>
+        Before executing step <i>3</i> in the ChatGPT instructions I established that the latest <tt>nvm</tt>
+        version at that time was actually <tt>0.39.2</tt> so I executed step <i>3</i> as follows:
+        <pre>curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash</pre>
+      </p>
+      <p>
+        However the above failed with the same message as before:
+        <pre>You have $NVM_DIR set to "~/.nvm", but that directory does not exist.
+Check your profile files and environment.</pre>
+      </p>
+      <p>
+        Curiously, even when I manually created the <tt>~/.nvm</tt> directory prior to running
+        the above script, it failed again, with the <b>exact</b> same message even though
+        such a directory (empty) now clearly existed. Let it also be recorded that I, very consciously,
+        resisted the tempation to install <tt>nvm</tt> under <i>sudo</i> privilleges as <tt>nvm</tt>
+        is meant to be run be ordinary users.
+      </p>
+      <p>
+        I then explored what is the value of the <tt>NVM_DIR</tt> variable. It gave the following:
+        <pre>$ echo $NVM_DIR
+~/.nvm</pre>
+        This variable is apparently declared in <tt>~/.bashrc</tt> and has been there for quite some
+        time (most likely as the result of a previous <tt>nvm</tt> installation). I speculated then that
+        perhaps some script is run as a user other than <i>mperdikeas</i> so I explicitly exported
+        this variable on the shell substituting <i>~</i> for <i>mperdikeas</i>:
+        <pre>export NVM_DIR=/home/mperdikeas/.nvm</pre>
+      </p>
+      <p>
+        After the above, I re-run the installation script and this time it completed successfuly
+        so that was the root of the problem:
+        <a href='npm-and-node.html.nvm-successful-installation.png'>
+          <img width="50%" src='npm-and-node.html.nvm-successful-installation.png'/>
+        </a>
+      </p>
+      <p>
+        After this last step, there were some conflicting / confusing instructions I encountered only.
+        First of all, some said that the installation script modifies file <tt>~/.profile</tt>. However,
+        I noticed no such modification. Then some said that I have to source <i>~/.bashrc</i> before
+        I can use <tt>nvm</tt>. I tried that but I had a problem in my <tt>~/.bashrc</tt> script
+        and it failed. Eventually I sourced the <tt>~/.nvm/nvm.sh</tt> file and then I was indeed
+        able to run <tt>nvm</tt>. However, I couldn't afford to be doing that on every shell I opened.
+        Also, I noted at that time that the <tt>nvm</tt> installation script had indeed modified
+        the <tt>~/.bashrc</tt> file. Finally I noticed that, even after the script modifications
+        to <tt>~/.bashrc</tt>, when opening other shells I would get:
+        <pre>$ nvm --version
+
+Command 'nvm' not found, but there are 13 similar ones.</pre>
+      </p>
+      <p>
+        In the end after some googling I had the following three lines added
+        in my <tt>~/.bashrc</tt> file (click the image link for the text)
+        <a href='npm-and-node.html.bashrc-modifications.png.html'>
+          <img src='npm-and-node.html.bashrc-modifications.png'/>
+        </a>
+      </p>
+      <p>
+        I do believe (with 95% certainty) that the last line (line no 282) was
+        added automatically by the script and that the first two lines (lines no 278-9)
+        were manually added by me. After that, I was able to remove the following two older lines
+        which I had added in some past experimantation with <tt>nvm</tt>:<br/>
+        <img src='npm-and-node.html.bashrc-old-lines-removal.png'/>
+      </p>
+      <p>
+        After that, I had <tt>nvm</tt> available in all new shells. So this concludes the
+        <tt>nvm</tt> installation part proper.
+      </p>
+      <p>Following that I installed the below two versions of node:
+        <ol type='i'>
+          <li><pre>nvm install --lts</pre> and &hellip;</li>
+          <li><pre>nvm use lts/fermium</pre></li>
+        </ol>
+        The latter one corresponding to the <tt>v14</tt> version of <tt>Node</tt> that I
+        had recorded previously as the only being used by current applications.
+      </p>
+      <p>
+        I then grew tired of having to type:
+        <pre>nvm use lts/fermium</pre>
+        every time I wanted to use the existing applications and so did a:
+        <pre>nvm alias default lts/fermium</pre> in some random shell.
+        Following that in every new shell I opened I had <tt>v14.21.3</tt>
+        as the default <tt>Node</tt> version while also being able to
+        do <pre>nvm use lts/iron</pre> when wanting to play with <tt>NestJS</tt>.
+      </p>
+      <p>And there the matter rests having been successfully concluded.</p>
       <li>October 2023 &mdash; how I upgraded the <tt>nodejs</tt> version to <tt>Node 20x</tt> and then went back to where I started (twice)</li>
       <p>
         Initially, I tried to follow the instructions given <a href='https://askubuntu.com/a/1401499'>here</a>:
