@@ -11,7 +11,32 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
-
+    <li>May 2024 &mdash; how I configured my local PostreSQL 12 to allow users to connect over DBeaver</li>
+    <p>
+      I tried to connect over DBeaver with an existing user and password and got:
+<pre>
+FATAL: no pg_hba.conf entry for host "127.0.0.1", user "mperdikeas", database "test", SSL on
+</pre>
+    </p>
+    <p>
+      After investigation and reading <a href='https://dba.stackexchange.com/a/122317/34332'>this SO answer</a>
+      I got it to work after adding the following line on my <tt>/etc/postgresql/12/main/pg_hba.conf</tt>
+      file:
+      <pre>
+host all           mperdikeas           127.0.0.1/32    md5</pre>
+    </p>
+    <p>
+      <span class='nb'>NB:</span> It is important to use the <tt>/32</tt> notation. Simply writing
+      <tt>127.0.0.1</tt> fails with the hardly elucidating message: <i>Connection refused (Connection refused)</i>
+    </p>
+    <p>
+      No changes were necessary in the sibling file <tt>/etc/postgresql/12/main/postgresql.conf</tt>
+      IIRC
+    </p>
+    <p>
+      Following the above one, obviously, has to restart PostgreSQL:
+      <pre>service postgresql restart</pre>
+    </p>
     <li>how I created tablespaces in PostgreSQL</li>
 <p>
 I created a number of directories using:
