@@ -1,4 +1,9 @@
 2023: 7 days in total
-2024: 1 day on 16/8 to partially offset a weekend I had been working
-      1 day on 20/8 to fully     -----------------------------------
+
+             |     b e f o r e    e v e n t               | event 
+YEAR | MM-DD | cum leave days taken | cum sick days taken | 
+-----+-------+----------------------+---------------------+----------------------------------------------------------------
+2024 | 08-16 |                   -2 |                   0 | 1 day leave to partially offset a weekend I had been working
+     | 08-20 |                   -1 |                   0 | sick day
+     | 08-31 |                   -1 |                   1 | worked on this Saturday
       
