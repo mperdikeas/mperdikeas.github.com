@@ -6,4 +6,7 @@ YEAR | MM-DD | cum leave days taken | cum sick days taken |
 2024 | 08-16 |                   -2 |                   0 | 1 day leave to partially offset a weekend I had been working
      | 08-20 |                   -1 |                   0 | sick day
      | 08-31 |                   -1 |                   1 | worked on this Saturday
+     | 09-01 |                   -2 |                   1 | worked on this Sunday # counter will *not* be increased as my schedule now calls for working on Sundays, not Mondays
+     | 09-02 |                   -2 |                   1 | worked on this Monday # counter *will* be increased ----------------------------------------------------------------
+     |       |                   -3 | 
       
