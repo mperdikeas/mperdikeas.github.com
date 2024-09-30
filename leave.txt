@@ -10,4 +10,14 @@ YEAR | MM-DD | cum leave days taken | cum sick days taken |
      | 09-02 |                   -2 |                   1 | worked on this Monday # counter *will* be increased ----------------------------------------------------------------
      | 09-09 |                   -3 |                   1 | worked on this Monday # counter *will* be increased ----------------------------------------------------------------
      | 09-16 |                   -4 |                   1 | worked on this Monday # counter *will* be increased ----------------------------------------------------------------
-     |       |                   -5 |                   1 |     
+     | 09-30 |                   -5 |                   1 | worked on this Sunday and the coming Monday # counter *will* be incremented by 1 (#1)
+     |       |                   -6 |                   1 | 
+
+
+
+
+
+
+Notes
+=================================================================================================================================
+#1    GMel asked me over the phone to sign a fake leave application (for 21 days) to simplify accounting and payments. I obliged.
