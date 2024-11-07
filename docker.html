@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <body>
+    <ol class='main-list-items' reversed>
+      <li>[Errno 101] Network is unreachable</li>
+      <p>
+        In November 2024 when going through <a href='https://docker-curriculum.com/#docker-run'>this docker beginners tutorial</a>
+        (also saved <a href='docker.html.files/a-docker-tutorial-for-beginners.pdf'>here</a>)
+        I encountered <a href='docker.html.files/a-docker-tutorial-for-beginners.problem.png'>this trace</a>:
+      </p>
+      <p>
+        In the end I had to change the <tt>docker build</tt> invocation from:
+        <pre>docker build . -t mperdikeas/catnip</pre>
+        to:
+        <pre>docker build . --network host -t mperdikeas/catnip</pre>
+      </p>
+      <p>
+        In initially commented on an already existing bug report
+        and then reported my solution <a href='https://github.com/prakhar1989/docker-curriculum/issues/373'>here</a>.
+      </p>
+      <p>
+        The solution was found in
+        <a href='https://github.com/StefanScherer/dockerfiles-windows/issues/270'>this thread</a>
+        which also reports at least one additional approach.
+      </p>
+      <p>
+        See also <a href='https://chatgpt.com/c/672cc54f-a5b8-800a-b9f2-7e5fd1d5359f'>
+        this ChatGPT thread of mine</a>.
+      </p>
+    </ol>
+  </body>
+</html>
