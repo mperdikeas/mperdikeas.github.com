@@ -5,6 +5,16 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock</li>
+      <p>
+        <a href='https://stackoverflow.com/a/48957722/274677'>provenance</a><br/>
+        The user that is running the docker commands (if he is a non-root user) must be added in the <ti>docker</ti> group.
+        This is done with the following incantation:
+        <pre>sudo usermode -aG docker $USER</pre>
+        &hellip; but only takes effect after a system reboot.
+        In the meantime you can use <tt>newgrp docker</tt> in the shell you're working (this will result in a new shell with the
+        current user being part of the <tt>docker</tt> group).
+      </p>
       <li>[Errno 101] Network is unreachable</li>
       <p>
         In November 2024 when going through <a href='https://docker-curriculum.com/#docker-run'>this docker beginners tutorial</a>
