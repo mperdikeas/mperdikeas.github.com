@@ -5,7 +5,37 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
-      <li>permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock</li>
+      <li id='#iacs-24-cogn'>how to build the docker image and run the container for IACS'24'COGN</li>
+      <p>
+        <ol>
+          <li><tt>cd</tt> into the <tt>/iacs-ui.24.cognitera/frontend</tt> directory so that you have the
+            <tt>Dockerfile</tt> in the current directory</li>
+          <li>Make sure the user is in the <tt>docker</tt> group (see <a href='#perm-denied-docker-grp'>the entry below</a>)</li>
+          <li>
+            build the docker image with the <tt>--network host</tt> option and supply a plausible name:<br/>
+            <pre>$ docker build --network host -t iacs-ui.24.cogn:v1 .</pre>
+          </li>
+          <li>
+            run the image by mapping port 8080 to its 8000 port (alternatively use the <tt>-P</tt> option)
+            and supply a short reasonable name for the container (e.g. <tt>iacs</tt> in the incantation below):
+            <pre>$ docker run -d -p 8080:8000 --name iacs iacs-ui.24.cogn:v1</pre>
+          </li>
+          <li>
+            verify the ports the container hosting the web application is listening on:
+            <pre>
+$ docker port iacs
+8000/tcp -> 0.0.0.0:8080
+8000/tcp -> [::]:8080</pre>
+          </li>
+          <li>
+            connect your browser to localhost:8080
+          </li>
+          <li>once you are done, stop the container using <tt>docker stop iacs</tt> &mdash; there's no need to do
+            <tt>docker container prune</tt> to remove the stopped container as the image was run with the <tt>-d</tt>
+            option in step <b>4</b>
+          </li>
+        </ol>
+      <li id='perm-denied-docker-grp'>permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock</li>
       <p>
         <a href='https://stackoverflow.com/a/48957722/274677'>provenance</a><br/>
         The user that is running the docker commands (if he is a non-root user) must be added in the <ti>docker</ti> group.
