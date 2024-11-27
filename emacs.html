@@ -63,6 +63,23 @@ But now, everything’s fine.<br/>
           I will now try to refresh the Emacs packages and see whether I can finally succeed in
           installing IntelliSense for TypeScript in my Emacs 28.
         </p>
+        <p>
+          <h3>follow-up</h3>
+          While trying to refresh the package implementations, it turned out that I
+          also had to remove the <tt>crosshairs</tt> package from my <tt>.emacs</tt> file as that
+          package does not support versions of Emacs beyond 26. During the package refresh
+          process I also had to do <tt>(setq package-check-signature nil)</tt> &mdash; this dangerous line is currently
+          commented-out at the head of my <tt>.emacs</tt> file. Note that I think that the package
+          refresh process wasn't triggered until I removed the <tt>.emacs.d</tt> directory from my
+          home directory. At the same time I decided that it makes little or zero sense to keep
+          the <tt>.emacs.d</tt> directory under git source control.
+        </p>
+        <p>
+          Finally, unrelated to the previous package refreshing issues, I had to fix my <tt>emax</tt>
+          script that handles multiple Emacs clients out of a single Emacs server. The fix consisted
+          of a minor <tt>grep</tt> adjustment.
+
+        </p>
         <li><b>2024, November</b>: failure to install Emacs 27 and Language Server on Ubuntu 20.04</li>
         <p>
           In November 2024 I spent about 5 hours trying to install Emacs 27 on Ubuntu 20.04. In the end I failed.
