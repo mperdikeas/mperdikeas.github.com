@@ -12,7 +12,58 @@
     </div>
     <div style='margin-top: 30px; position: absolute;'>
       <ol reversed class='main-list-items'>
-        <li><b>2024, November</b>failure to install Emacs 27 and Language Server on Ubuntu 20.04</li>
+        <li><b>2024, November</b>: successful installation of Emacs 28 (Ubuntu 20.04) </li>
+        <p>
+          Following a previous disastrous attempt to install Emacs 27 in my ThinkStation desktop
+          (running Ubuntu 20.04) I tried again the next day and succeeded to actually install
+          Emacs 28 instead.
+        </p>
+        <p>
+          I followed the instructions from
+          <a href='https://ubuntuhandbook.org/index.php/2020/09/install-emacs-27-1-ppa-ubuntu-20-04/'>here</a>
+          (which are pretty much what I tried the previous day); only this time I thoroughly uninstalled
+          Emacs 26 alongside a number of extra packages using the following incantation:
+          <pre>
+sudo apt remove emacs26-common emacs26 emacs-common emacs apel flim w3m-el emacs-el emacs-bin-common</pre>
+          &hellip; as advised in a comment in the above linked instructions that reads:
+          <div style="border: 1px solid grey; padding: 0.5em; margin-right: 1em; background-color: lightgray"/>
+          <i>
+Dan Jones December 23, 2020 at 2:58 pm<br/>
+I kept getting unmet dependency errors.<br/>
+<br/>
+I had to remove a lot of extra packages for this to work.<br/>
+<br/>
+sudo apt remove emacs26-common emacs26 emacs-common emacs apel flim w3m-el emacs-el emacs-bin-common<br/>
+<br/>
+After that, I could finally do sudo apt install emacs27 and it worked.<br/>
+<br/>
+It also had to re-download all of my packages on the first run, so the first run was especially slow.<br/>
+<br/>
+But now, everything’s fine.<br/>
+          </i>
+          </div>
+        </p>
+        <p>
+          Indeed following the above instructions <tt>sudo apt install emacs28</tt> worked like a charm
+          with zero complaints or warnings; not only that but my configuration files (developed and
+          tested for Emacs 26) also worked <u>right off the bat</u> with <b>zero</b> modifications
+          needed. This was, by a wide margin, the most uneventful Emacs upgrade ever.
+        </p>
+        <p>
+          For completeness purposes, this is the history (slightly edited) in the terminal from where I performed the installation:
+          <pre>
+ $ sudo add-apt-repository ppa:kelleyk/emacs
+ $ apt update
+ $ sudo apt remove emacs26-common emacs26 emacs-common emacs apel flim w3m-el emacs-el emacs-bin-common
+ $ sudo apt install emacs28</pre>
+          Note finally that I did try to install the very latest Emacs 29 also but apparently it is
+          not available in the <tt>ppa:kellyk/emacs</tt> repository. Well, no matter.
+        </p>
+        <p>
+          I will now try to refresh the Emacs packages and see whether I can finally succeed in
+          installing IntelliSense for TypeScript in my Emacs 28.
+        </p>
+        <li><b>2024, November</b>: failure to install Emacs 27 and Language Server on Ubuntu 20.04</li>
         <p>
           In November 2024 I spent about 5 hours trying to install Emacs 27 on Ubuntu 20.04. In the end I failed.
           Large part of the time spent was in trying to restore Emacs 26.3 (which is what Ubuntu 20.04 supports
