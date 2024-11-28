@@ -12,6 +12,25 @@
     </div>
     <div style='margin-top: 30px; position: absolute;'>
       <ol reversed class='main-list-items'>
+        <li><b>2024, November</b>: successful installation of Emacs 29 (Ubuntu 20.04) </li>
+        <p>
+          After I installed Emacs 28 I became frustrated that <tt>lsp-mode</tt> and the overall machinery I used
+          to get TypeScript IntelliSense in Emacs was too slow, so I thought I might try to upgrade to Emacs 29.
+          Installing Emacs 29 wasn't possible as apparently it's only available as a <i>snap</i>. I initially
+          found <a href='https://emacs.stackexchange.com/a/73857/4003'>this emacs stackexchange answer</a>
+          and was then led to <a href='https://snapcraft.io/install/emacs/ubuntu'>these instructions</a>.
+          Installing Emacs 29 was only a matter of doing:
+          <pre>sudo snap install emacs --classic</pre>
+          and modifying my <tt>~/.bashrc</tt> to place the <tt>/snap/bin</tt> directory at the front of
+          the <i>PATH</i> to ensure that <tt>emacs</tt>
+          on the shell picks <i>Emacs 29</i> and not <i>Emacs 28</i> (which was installed with <tt>apt</tt>)
+        </p>
+        <p>
+          Following the installation I just removed a number of packages that were no longer available
+          (nor, it would seem, relevant as nothing was affected following their removal), moved the
+          main package installation block at the head of my <tt>.emacs</tt> file and started off with a
+          clean <tt>.emacs.d</tt> directory. Everything went surprisingly smoothly.
+        </p>
         <li><b>2024, November</b>: successful installation of Emacs 28 (Ubuntu 20.04) </li>
         <p>
           Following a previous disastrous attempt to install Emacs 27 in my ThinkStation desktop
