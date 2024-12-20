@@ -3,8 +3,74 @@
     <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
     <link rel='icon' href='/knowledge-favicon.ico'/>
   </head>
+  <style>
+   table, th, td {
+     border: 1px solid black;
+     border-collapse: collapse;
+   }
+   th, td {
+     padding: 5px;
+   }
+   th {
+     text-align: left;
+   }
+  </style>
   <body>
     <ol class='main-list-items' reversed>
+      <li>my scratchpad</li>
+      <table style='width:100%'>
+        <colgroup>
+          <col span="1" style="width: 35%;">
+          <col span="1" style="width: 65%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" style="color: white; background: darkblue">command / prompt</th>
+            <th scope="col" style="color: white; background: cornflowerblue">description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">/var/lib/docker</th>
+            <td>where are docker containers stored</td>
+          </tr>
+          <tr>
+            <th scope="row">docker image ls</th>
+            <td>list all docker images</td>
+          </tr>
+          <tr>
+            <th scope="row">docker image rm</th>
+            <td>removes an image from the host node &mdash; alias <tt>docker rmi</tt></td>
+          </tr>
+          <tr>
+            <th scope="row">docker rmi $(docker images -a -q)</th>
+            <td>remove all locally installed Docker images</td>
+          </tr>
+          <tr>
+            <th scope="row">docker ps -a</th>
+            <td>list all containers, including the stopped ones &mdash; alias: <tt>docker container ls -(l)a</tt></td>
+          </tr>
+          <tr>
+            <th scope="row">docker logs <container_id></th>
+            <td><i>container_id</i> can be either the <i>name</i> or the <i>identifier</i> of the container. You can also use <tt>-f</tt> to follow</td>
+          </tr>
+          <tr>
+            <th scope="row">systemctl status docker</th>
+            <td>check the status of the docker deamon</td>
+          </tr>
+          <tr>
+            <th scope="row">pgrep docker</th>
+            <td>find the PID of the docker deamon</td>
+          </tr>
+        </tbody>
+      </table>
+      <li>some docker cheatsheets</li>
+      <ul>
+        <li>
+          <a href='./docker.html.files/the-ultimate-docker-cheat-sheet-4.png'>Aichbauer v4</a>
+          (<a href='https://devopscycle.com/wp-content/uploads/sites/4/2023/11/the-ultimate-docker-cheat-sheet-4.png'>provenance</a>)
+        </li>
+      </ul>
       <li id='#iacs-24-cogn'>how to build the docker image and run the container for IACS'24'COGN</li>
       <p>
         <ol>
@@ -14,6 +80,11 @@
           <li>
             build the docker image with the <tt>--network host</tt> option and supply a plausible name:<br/>
             <pre>$ docker build --network host -t iacs-ui.24.cogn:v1 .</pre>
+          </li>
+          <li>
+            if you want to keep and perhaps examine the logs of the docker build process use
+            the following in lieu of the above command:<br/>
+            <pre>docker build --no-cache --progress=plain --network host -t iacs-ui.24.cogn:v1 . 2>&1 | tee docker-build.log</pre>
           </li>
           <li>
             run the image by mapping port 8080 to its 8000 port (alternatively use the <tt>-P</tt> option)
