@@ -35,6 +35,11 @@
             <td>where are docker containers stored</td>
           </tr>
           <tr>
+            <th scope="row">docker exec -it &lt;container_name&gt; sh</th>
+            <td>open a shell into a running container
+              (<a href='https://stackoverflow.com/a/30173220/274677'>more</a>)</td>
+          </tr>
+          <tr>
             <th scope="row">docker image ls</th>
             <td>list all docker images</td>
           </tr>
@@ -49,6 +54,10 @@
           <tr>
             <th scope="row">docker ps -a</th>
             <td>list all containers, including the stopped ones &mdash; alias: <tt>docker container ls -(l)a</tt></td>
+          </tr>
+          <tr>
+            <th scope="row">docker container prune</th>
+            <td>remove stopped containers</td>
           </tr>
           <tr>
             <th scope="row">docker logs <container_id></th>
@@ -87,9 +96,10 @@
             <pre>docker build --no-cache --progress=plain --network host -t iacs-ui.24.cogn:v1 . 2>&1 | tee docker-build.log</pre>
           </li>
           <li>
-            run the image by mapping port 8080 to its 8000 port (alternatively use the <tt>-P</tt> option)
-            and supply a short reasonable name for the container (e.g. <tt>iacs</tt> in the incantation below):
-            <pre>$ docker run -d -p 8080:8000 --name iacs iacs-ui.24.cogn:v1</pre>
+            run the image by mapping port 8080 to its 8000 port (alternatively use the <tt>-P</tt> option), pass an
+            <i>environment variables</i> file into the container and also
+            supply a short reasonable name for the container (e.g. <tt>iacs</tt> in the incantation below):
+            <pre>$ docker run -d -p 8090:8000 --env-file=.env --name iacs iacs-ui.24.cogn:v1</pre>
           </li>
           <li>
             verify the ports the web application being hosted inside the container is listening on:
@@ -100,6 +110,11 @@ $ docker port iacs
           </li>
           <li>
             connect your browser to localhost:8080
+          </li>
+          <li>to "ssh" (sort of) into the container you cannot use <tt>docker attach</tt> but you must
+            instead use <tt>docker exec</tt> as follows (see
+            <a href='https://stackoverflow.com/a/30173220/274677'>this SO answer</a> for more):
+            <pre>docker exec -it iacs sh</pre>
           </li>
           <li>once you are done, stop the container using <tt>docker stop iacs</tt> &mdash; there's no need to do
             <tt>docker container prune</tt> to remove the stopped container as the image was run with the <tt>-d</tt>
