@@ -1064,7 +1064,7 @@ xinput set-int-prop 11 "Device Enabled" 8 0
   <pre>
 xinput set-int-prop 11 "Device Enabled" 8 1
   </pre>
-  <li>remove existing partitions and format USB flash drive or SDHC memory card for Linux</li>
+  <li>remove existing partitions and format USB flash drive or SDHC memory card or a new HDD for Linux</li>
   <a href="http://www.quentinhuys.com/extharddrive.html">source</a><br/>
   <p>Before you start, make sure you've unmounted any file systems that were mounted on that device</p>
   First of all do a <b>sudo -i</b>. Then, use two
@@ -1154,6 +1154,14 @@ sudo fdisk /dev/sdb</pre>
     <pre>$ sudo fdisk /dev/sdc</pre>
     Only after the above step (which has always succeeded in my experience) should you
     go ahead with the <tt>mkfs.ext4</tt> tool.
+  </p>
+  <p>
+    <b style='color:blue'>2025, January</b>
+    I followed the above procedure (as recorded for <i>May, 2021</i>) while installing an second
+    Hard Disk Drive on my work desktop computer. It worked flawlessly (and assigned a volume
+    label too, just fine) except that I need to configure the system so as to automatically
+    mount the partition on system startup. This I did with <tt>sudo gnome-disks</tt>
+    as advised <a href='https://askubuntu.com/a/375319/89663'>here</a>.
   </p>
 
   <li>remove BOM from files in Linux</li>
