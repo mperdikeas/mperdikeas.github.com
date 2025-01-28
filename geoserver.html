@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css" />
+    <link rel="icon" href="/knowledge-favicon.ico" />
+  </head>
+  <body>
+    <ol class="main-list-items" reversed>
+      <li id="geoserver-2.26.2-installation">installation of GeoServer <tt>2.26.2</tt> on Ubuntu 20.04 (January 2024)</li>
+      <p>
+        <span class='nb'>NB:</span> the below instructions assume that <tt>Java 11</tt> is already installed (I had the OpenJDK version).
+      </p>
+      <p>
+        Contrary to representations on
+        <a
+          href="https://docs.geoserver.org/stable/en/user/installation/war.html"
+          >this page</a>
+
+        which declare that
+        <i>"GeoServer [2.26.x] requires a newer version of Tomcat (7.0.65 or
+          later) that implements Servlet 3 [...]"</i>
+        I nevertheless encountered
+        <a href="https://gis.stackexchange.com/q/389555/158056"> this problem</a>
+        which shows that GeoServer <tt>2.26.2</tt> is incompatible with Tomcat
+        <tt>10.1.34</tt>. As advised in the 
+        <a href="https://gis.stackexchange.com/a/389559/158056">
+          currently accepted solution
+        </a> I therefore installed Tomcat <tt>9.0.98</tt> using
+        the procedure described below and found GeoServer to run fine with it.
+        <ol>
+          <li>download and explode the <tt>apache-tomcat-9.0.98.tar.gz</tt> tarball.</li>
+          <li>enter into the <tt>/bin</tt> directory and create file
+            <tt>setenv.sh</tt> as described in <tt>RUNNING.txt</tt> with the
+            following contents:
+            <pre>
+CATALINA_HOME=/media/hddb/software/apache-tomcat/apache-tomcat-9.0.98/
+CATALINA_BASE=/media/hddb/software/apache-tomcat/apache-tomcat-9.0.98/
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/</pre>
+          </li>
+          <li>at this point Apache Tomcat can be started by running the
+            <tt>bin/startup.sh</tt> script</li>
+          <li>edit the <tt>conf/tomcat-users.xml</tt> file to activate
+            the <i>admin</i> user for the <i>manager-gui</i> role
+          </li>
+          <li>I then downloaded the GeoServer web archive version
+            from <a href="https://geoserver.org/download/">here</a>
+            in the form of file <tt>geoserver-2.26.2-war.zip</tt>
+          </li>
+          <li>I unzipped said file and simply copyied the <tt>*.war</tt> that
+              was inside under the <tt>webapps</tt> directory in <i>Tomcat</i>.
+          </li>
+          <li>pointing my browser at <tt>http://localhost:8080/geoserver</tt>
+            I saw that <i>GeoSserver</i> was indeed availabe.
+          </li>
+        </ol>
+
+      </p>
+    </ol>
+  </body>
+</html>
