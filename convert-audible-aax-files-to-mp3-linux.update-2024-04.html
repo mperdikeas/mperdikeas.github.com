@@ -47,6 +47,11 @@
       <p>
         I found this website in <a href='https://www.reddit.com/r/audible/comments/i4o06j/new_website_where_you_can_get_your_activation/'>this Reddit discussion</a>.
       </p>
+      <p>
+        <span class='nb'>UPDATE 2025-01-28</span> I asked DeepSeek and I am now able to extract the
+        proprietary Amazon Audible checksum using the <tt>*.aax</tt> file using the below incantation:
+        <pre>ffprobe -i filename.aax -show_format 2>&1  | grep checksum</pre>
+      </p>
     </article>
 
   </body>
