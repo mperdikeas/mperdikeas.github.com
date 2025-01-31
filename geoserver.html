@@ -5,10 +5,27 @@
   </head>
   <body>
     <ol class="main-list-items" reversed>
+      <li>configuring an external data directory in Geoserver</li>
+      <p>
+        By default, Geoserver uses a data directory under <tt>webapps/</tt>.
+        This is, of course, ridiculous for persistence purposes, as on each undeploy all data are lost.
+        To configure an external data directory able to survive undeployments, you need to edit <tt>WEB-INF/web.xml</tt> and set the value of the <i>context parameter</i> <tt>GEOSERVER_DATA_DIR</tt> to point to that directory. E.g.:
+        <pre>
+   &lt;context-param&gt;
+      &lt;param-name&gt;GEOSERVER_DATA_DIR&lt;/param-name&gt;
+       &lt;param-value&gt;/mnt/some-other-disk/geoserver-data&lt;/param-value&gt;
+   &lt;/context-param&gt;</pre>
+      </p>
+      <p>
+        Purportedly setting and exporting the environment variable
+        <tt>GEOSERVER_DATA_DIR</tt> on the shell from which Tomcat
+        is launched has the same effect but my experience was to the
+        contrary.
+      </p>
       <li>restore the <tt>root</tt> password in GeoServer</li>
       <p>
         After trying various suggestions on how to restore the
-        root password in Geoserver, in the end, what did the
+        <tt>root</tt> password in Geoserver, in the end, what did the
         trick was deleting the entire <tt>data/security</tt>
         directory at which point the default settings were
         restored.
