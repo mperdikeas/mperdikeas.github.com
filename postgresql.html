@@ -76,7 +76,9 @@ rsync -av /var/lib/postgresql/12/main/ /media/hddb/postgresql-12-data/</pre>
           <pre>
 $ cat /etc/postgresql/12/main/postgresql.conf | grep -i data_directory | grep -v ^#
 data_directory = '/media/hddb/postgresql-12-data'</pre>
-          <span class='nb'>NB:</span> in constrast to the instructions I was following, as
+          <span class='nb'>NB:</span> the single quotes were actually entered in the config file
+          &mdash; I am not 100% certain they were essential.<br/>
+          <span class='nb'>NB2:</span> in constrast to the instructions I was following, as
           already mentioned above, in my case the <i>configuration</i> directory was in
           an entirely different subtree (<tt>/etc/postgresql/12/main/postgresql.conf</tt>)
           than the <i>data directory</i> (<tt>/var/lib/postgresql/12/main</tt>). So, in
