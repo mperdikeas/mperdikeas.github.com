@@ -11,6 +11,101 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>January 2025 &mdash; configure PostgreSQL to use a <i>data directory</i> in some other location (disk)</li>
+    <p>
+      I used the procedure outlined below to move the data directory
+      of my PostgreSQL 12 installation (on my <i>ThinkStation P320</i>
+      machine running <tt>Ubuntu 20.04</tt>) to a second, much larger,
+      disk as I needed to import a huge (~100GB) binary dump of some
+      PostgreSQL database that wasn't going to fit in the current location
+      of the <i>data directory</i>. The below procedure of course only
+      relates the <i>data directory</i> migration part, not the importation
+      part (which I fear will be a separate ordeal).
+      In the procedure detailed below, I basically followed the instructions
+      I found
+      <a href='https://fitodic.github.io/how-to-change-postgresql-data-directory-on-linux'>here</a>
+      (archived locally
+      <a href='./postgresql.html.files/postgresql.html.files/change-postgresql-data-directory.pdf'>here</a>
+      ).
+      The instructions were almost entiery accurate with three
+      notable exceptions:
+      <ul>
+        <li>the instructions assume that the <i>config file</i>
+          is located inside the <i>data directory</i>. This was not true
+          in my case. I believe that <i>PostgreSQL 12</i> keeps the data
+          directory and the location of the configuration files different
+          in the default installation so perhaps the instructions I found
+          were written with a different version of PostgreSQL in mind.
+        </li>
+        <li>
+          It was not at all necessary to edit the file at:
+          <tt>/lib/systemd/system/postgresql.service</tt>
+        </li>
+        <li>The <i>SELinux</i> part was not at all applicable (I don't even
+        know what that is)</li>
+      </ul>
+    </p>
+    <p>
+      The steps I followed were:
+      <ol>
+        <li>Take note of the <i>config file</i> and the <i>data directory</i>
+          locations. Do this by connecting to PostgreSQL with the <tt>postgres</tt> user doing <pre>pgsql postgres</pre> and then execute
+          the following commands:<br/>
+          <img src='./postgresql.html.files/change-postgresql-data-directory-step-1.png'/>
+        </li>
+        <li style="margin-top: 1em">stop the PostgreSQL server (cluster in PostgreSQL terminology)
+          <pre>systemctl stop postgresql</pre>
+        </li>
+        <li>prepare the destination directory. In my case I executed
+          the following commands:
+
+          <pre>
+mkdir /media/hddb/postgresql-12-data
+sudo chown postgres:postgres /media/hddb/postgresql-12-data
+sudo chmod 700 /media/hddb/postgresql-12-data/
+rsync -av /var/lib/postgresql/12/main/ /media/hddb/postgresql-12-data/ </pre>
+        </li>
+        <li>copy over the existing <i>data directory</i> to its new location:
+          <pre>
+rsync -av /var/lib/postgresql/12/main/ /media/hddb/postgresql-12-data/</pre>          
+        </li>
+        <li>Change the <tt>data_directory</tt> parameter value in the
+          <tt>postgresql.conf</tt> configuration file. The parameter
+          was previously commented out (and so default value was used); I
+          obviously set it to the new location:
+          <pre>
+$ cat /etc/postgresql/12/main/postgresql.conf | grep -i data_directory | grep -v ^#
+data_directory = '/media/hddb/postgresql-12-data'</pre>
+          <span class='nb'>NB:</span> in constrast to the instructions I was following, as
+          already mentioned above, in my case the <i>configuration</i> directory was in
+          an entirely different subtree (<tt>/etc/postgresql/12/main/postgresql.conf</tt>)
+          than the <i>data directory</i> (<tt>/var/lib/postgresql/12/main</tt>). So, in
+          contrast to the instructions I was using as a guide, I changed the <tt>postgresql.conf</tt>
+          file in the <u>existing</u> configuration location, and <b>not</b> in the new one
+          (in the instructions the case was that the <i>configuration file</i> was
+          located <u>inside</u> the <i>data directory</i> so of course, in the case, you'd
+          have wanted to edit the <i>configuration file</i> in the new location).
+        </li>
+        <li>the step in the instructions under the header <i>systemcd configuration</i> was
+          entirely skipped as explained in the introcution</li>
+        <li>
+          I then restarted the PostgreSQL cluster (database server) using:
+          <pre>
+systemctl daemon-reload
+systemctl start postgresql.service
+systemctl status postgresql.service</pre>
+          <span class='nb'>NB:</span> the first command (<tt>systemctl daemon-reload</tt>) needs to be executed
+          every time the <i>configuration file</i> changes so it's essential (merely stopping and restarting
+          the cluster won't cut it).
+        </li>
+        <li>the step in the instructions under the header <i>SELinux</i> was also skipped
+          as explained in the introduction</li>
+        <li>to confirm that everything was ok I entirely <u>removed</u> the old data directory and
+          connected to PostgreSQL to verify that the new locations are now recognized:<br/>
+          <img src='./postgresql.html.files/change-postgresql-data-directory-step-9.png'/>
+        </li>
+      </ol>
+    </p>
     <li id='configure-local-postgresql-to-allow-users-to-connect-over-dbeaver'>May 2024 &mdash; how I configured my local PostreSQL 12 to allow users to connect over DBeaver</li>
     <p>
       I tried to connect over DBeaver with an existing user and password and got:
