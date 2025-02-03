@@ -11,7 +11,23 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
-    <li>January 2025 &mdash; configure PostgreSQL to use a <i>data directory</i> in some other location (disk)</li>
+    <li>February 2025 &mdash; start/stop PostgreSQL 12 and find hostname and port</li>
+    <p>
+      Use the following commands to start/stop or get the status of a locally running PostgreSQL cluster (database server):
+      <pre>
+systemctl start postgresql.service
+systemctl stop postgresql.service
+systemctl status postgresql.service</pre>
+    </p>
+    <p>
+      To find the hostname and port all I had to do, in my local installation at least,
+      was connect as user <tt>postgres</tt>:
+      <pre>psql postgres</pre>
+      &mdash; and then run the <tt>\conninfo</tt> command:
+      <br/>
+      <img src='./postgresql.html.files/psql-conn-info-output.png'/>
+    </p>
+    <li>January 2025 &mdash; configure PostgreSQL 12 to use a <i>data directory</i> in some other location (disk)</li>
     <p>
       I used the procedure outlined below to move the data directory
       of my PostgreSQL 12 installation (on my <i>ThinkStation P320</i>
