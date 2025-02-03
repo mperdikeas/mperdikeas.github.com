@@ -1,0 +1,46 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="../../mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style>
+   .step {
+     font-weight: bold;
+     background: gold;
+     color: blue;
+   }
+   .nm {
+     font-weight: bold;
+     background: red;
+     color: white;
+     font-size: 105%;
+   }
+  </style>
+</head>
+<body>
+  <ol reversed class=main-list-items>
+    <li>access the various <i>k9s</i> machines in cognitera</li>
+    <p>
+      I've placed a single, text-based <tt>config</tt> file sent to me by [StVa] in 2025-01 on <i>mattermost</i>
+      in my home directory under: <tt>~/.kube</tt>. I am then able to access (and open a shell into) all
+      machines on various namespaces by launching the <tt>k9s</tt> program. I am also able to transfer
+      files from them using the same text-based GUI.
+    </p>
+    <li>notable machine names</li>
+    <p>
+      All of the below names exist in the <tt class='nm'>cognitera-platform</tt> namespace.
+      <dl>
+        <dt><tt class='nm'>ubuntu-worker</tt></dt><dd>this is the machine where the PostgreSQL cluster used by
+          IACS GUI is running. The location of the IACS DB binary dump files on that machine is given below:
+          <pre>/opt/database_backups/backups/eae_db</pre></dd>
+      </dl>
+      <dl>
+        <dt><tt class='nm'>cognitera-database-postgresql-primary-0</tt> and <tt class='nm'>cognitera-database-postgresql-read-0</tt></dt>
+        <dd>these two pods run the PostgreSQL server. Their names were obtained from a local shell on my
+          ThinkStation P320 machine with the following incantantion:
+          <pre>kubectl get pods --context=cognitor-aks --namespace=cognitera-platform | grep "postgresql"</pre>
+          
+        </dd>
+      </dl>
+    </p>
+  </ol>
+
+</body>
