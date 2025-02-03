@@ -11,6 +11,19 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>February 2025 &mdash; change the password for user <tt>postgres</tt></li>
+    <p>
+      I simply connected using the <tt>psql</tt> program as user <tt>postgres</tt>:
+      <pre>$ ./eae.pg_dump.RESTORE.sh</pre> &hellip; and then issued the following command:
+      <pre>postgres=# \password postgres</pre>
+    </p>
+    <p>
+      &hellip; full interaction from the command line shown in the below figure:<br/>
+      <img src='./postgresql.html.files/change-postgres-password.png'/>
+    </p>
+    <p>I have no explanation as to why I was not prompted for a password
+      on the first step when I launched the <tt>psql</tt> program.
+    </p>
     <li>February 2025 &mdash; start/stop PostgreSQL 12 and find hostname and port</li>
     <p>
       Use the following commands to start/stop or get the status of a locally running PostgreSQL cluster (database server):
@@ -23,7 +36,7 @@ systemctl status postgresql.service</pre>
       To find the hostname and port all I had to do, in my local installation at least,
       was connect as user <tt>postgres</tt>:
       <pre>psql postgres</pre>
-      &mdash; and then run the <tt>\conninfo</tt> command:
+      &hellip; and then run the <tt>\conninfo</tt> command:
       <br/>
       <img src='./postgresql.html.files/psql-conn-info-output.png'/>
     </p>
