@@ -49,18 +49,26 @@
       <li id='allow-root-login'>allow login with the <tt>root</tt> user in Geoserver</li>
       <p><a href="https://osgeo-org.atlassian.net/browse/GEOS-10209?focusedCommentId=82882">provenance</a> (tried January 2025)</p>
       <p>
-      Login via master password has been disabled by default back in 2018, see GEOS-8928: Disable master password Admin GUI login by default
-        In order to enable root login, take the following steps:
-        <ol>
-          <li>Open “Passwords” in the Security sub-menu</li>
-          <li>Open the master password provider (clicking on “default”)</li>
-          <li>Select the “allow root user to login as admin” checkbox (unchecked by default)</li>
-          <li>Log-out as admin, and try to log in back as “root”. You should succeed.</li>
-        </ol>
+        <i>
+          Login via master password has been disabled by default back in 2018, see GEOS-8928: Disable master password Admin GUI login by default
+          In order to enable root login, take the following steps:
+          <ol>
+            <li>Open “Passwords” in the Security sub-menu</li>
+            <li>Open the master password provider (clicking on “default”)</li>
+            <li>Select the “allow root user to login as admin” checkbox (unchecked by default)</li>
+            <li>Log-out as admin, and try to log in back as “root”. You should succeed.</li>
+          </ol>
+        </i>
+      </p>
+      <p>
+        It should be noted that the effect of the above instructions results in a change in the
+        contents of file <tt>security/masterpw/default/config.xml</tt> which is to be found
+        in GeoServer' <i>data directory</i>. Specifically, the following element is added:
+        <pre>&lt;loginEnabled&gt;true&lt;/loginEnabled&gt;</pre>
       </p>
       <p>
         If you have lost the ability to get in as admin, you can enable the root login by going to the data directory,
-        get into “security/masterpw/default”, open “config.xml” and switch loginEnabled to true. Then probably restart
+        get into “security/masterpw/default”, open “config.xml” and switch <tt>loginEnabled</tt> to true. Then probably restart
         (not 100% sure it’s needed) and you should be able to login.
       </p>
       <li id="geoserver-2.26.2-installation">installation of GeoServer <tt>2.26.2</tt> on Ubuntu 20.04 (January 2024)</li>
