@@ -6,11 +6,41 @@
      font-weight: bold;
      background: gold;
      color: blue;
-     }
+   }
+   .nm {
+     font-weight: bold;
+     background: red;
+     color: white;
+     font-size: 105%;
+   }   
   </style>
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>February 2025 &mdash; start/stop PostgreSQL 12 and find hostname and port</li>
+    <p>One can, in general use either of the following two programs:
+      <ul>
+        <li><tt class='nm'>systemctl</tt> <tt>&lt;command&gt; &lt;service-name&gt;</tt> (does not require sudo), or,</li>
+        <li><tt>sudo</tt> <tt class='nm'>service</tt> &lt;service-name&gt; &lt;command&gt;</tt></li>
+      </ul>
+      Note the different order in which: (a) the name of the service, and (b) the command to use on that service
+      appear in the respective command lines. Also the service name may appear as follows:
+      <ul>
+        <li>either <tt>posgresql.service</tt> or simply <tt>postgresql</tt> in
+          the <tt class='nm'>systemctl</tt> program's command line</li>
+        <li>only as <tt>postgresql</tt> in the <tt class='nm'>service</tt> command line</li>
+      </ul>
+    </p>
+    <p>Finally, a further degree of freedom is that either <tt>postgresql</tt> or <tt>postgresql@12-main</tt>
+      may be used (if one knows the version of PostgreSQL and the name of the cluster &mdash; in the above
+      example <i>12</i> and <i>main</i> respectively).
+    </p>
+    <p>
+      As a result all of the following commands to start/stop or get the status of a locally running PostgreSQL cluster (database server) are valid:
+      <pre>
+$ systemctl [ start/stop/status ] [ postgresql/postgresql.service/postgresql@12-main/postgresql@12-main.service ]
+$ sudo service [ postgresql/postgresql@12-main ] [ start/stop/status ]</pre>
+    </p>
     <li>February 2025 &mdash; restore a binary dump from PostgreSQL 15 into a PostgreSQL 12 database</li>
     <p>
       In February 2025 I was able to restore a binary dump taken from a PostgreSQL 15 database into a
@@ -50,14 +80,7 @@ $ pg_restore -l eae.pg_dump | head -n 10
     <p>I have no explanation as to why I was not prompted for a password
       on the first step when I launched the <tt>psql</tt> program.
     </p>
-    <li>February 2025 &mdash; start/stop PostgreSQL 12 and find hostname and port</li>
-    <p>
-      Use the following commands to start/stop or get the status of a locally running PostgreSQL cluster (database server):
-      <pre>
-systemctl start postgresql.service
-systemctl stop postgresql.service
-systemctl status postgresql.service</pre>
-    </p>
+    <li>February 2025 &mdash; find hostname and port</li>
     <p>
       To find the hostname and port all I had to do, in my local installation at least,
       was connect as user <tt>postgres</tt>:
