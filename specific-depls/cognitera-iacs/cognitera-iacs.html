@@ -17,12 +17,13 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
-    <li>access the various <i>k9s</i> machines in cognitera</li>
+    <li id='access-k9s-pods'>access the various <i>k9s</i> machines in cognitera</li>
     <p>
       I've placed a single, text-based <tt>config</tt> file sent to me by [StVa] in 2025-01 on <i>mattermost</i>
       in my home directory under: <tt>~/.kube</tt>. I am then able to access (and open a shell into) all
       machines on various namespaces by launching the <tt>k9s</tt> program. I am also able to transfer
-      files from them using the same text-based GUI.
+      files from them using the same text-based GUI. Once a specific pod is selected <tt class='nm'>s</tt> can be used
+      to open a shell on that pod, and <tt class='nm'>t</tt> can be used to transfer files from that pod.
     </p>
     <li>notable machine names</li>
     <p>

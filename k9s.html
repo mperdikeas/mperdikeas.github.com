@@ -1,0 +1,34 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style>
+   .step {
+     font-weight: bold;
+     background: gold;
+     color: blue;
+     }
+  </style>
+</head>
+<body>
+  <ol reversed class=main-list-items>
+    <li>connect to various pods</li>
+    <p>
+      One can always use the <tt>k9s</tt> program (set up and used as advised
+      <a href='./specific-depls/cognitera-iacs/cognitera-iacs.html#access-k9s-pods'>here</a>).
+      Alternatively it is possible to directly open a shell into, or transfer files from a
+      pod using the following incantations from one's own shell:
+      <ul>
+        <li>to retrieve pod names</li>
+        <pre>kubectl get pods --context=cognitor-aks --namespace=cognitera-platform</pre>
+        <li>to open a shell into a pod (identified by name)</li>
+        <pre>kubectl exec -it --context=cognitor-aks --namespace=&lt;namespace&gt; pod/&lt;pod name&gt; -- bash</pre>
+        <li>retrieve from or transfer files to a pod</li>
+        <pre>kubectl cp --context=cognitor-aks --namespace=&lt;namespace&gt; ./local-file.txt &lt;pod name&gt;:/tmp/remote-file.txt</pre>
+      </ul>
+
+    </p>
+
+  </ol>
+
+
+</body>
