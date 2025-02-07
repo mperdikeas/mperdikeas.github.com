@@ -24,6 +24,8 @@
         <pre>kubectl exec -it --context=cognitor-aks --namespace=&lt;namespace&gt; pod/&lt;pod name&gt; -- bash</pre>
         <li>retrieve from or transfer files to a pod</li>
         <pre>kubectl cp --context=cognitor-aks --namespace=&lt;namespace&gt; ./local-file.txt &lt;pod name&gt;:/tmp/remote-file.txt</pre>
+        <li>setup port forwarding with local machine</li>
+        <pre>kubectl port-forward --context=hetzner-staging --namespace=cognitera-platform svc/postgresql 35001:5432</pre>
       </ul>
 
     </p>
