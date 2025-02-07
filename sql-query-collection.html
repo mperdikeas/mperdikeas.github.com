@@ -1,0 +1,72 @@
+<head>
+  <link type="text/css" rel="stylesheet" href="./mperdikeasgithub.css"/>
+  <link rel='icon' href='/knowledge-favicon.ico'/>
+  <style>
+   .step {
+     font-weight: bold;
+     background: gold;
+     color: blue;
+   }
+   .nm {
+     font-weight: bold;
+     background: red;
+     color: white;
+     font-size: 105%;
+   }
+  </style>
+</head>
+<body>
+  <ol reversed class=main-list-items>
+    <li>example query using <tt class='nm'>WITH</tt></li>
+    <p>
+      The following works in PostgreSQL:
+      <pre>
+with _data as (
+    select
+        asp.id submission_portal_id ,
+        ea.tax_number,
+        ea.id application_id,
+        (
+            select
+                count(1)
+            from
+                eae_field ef 
+            join eae_field_geospatial_data efgd 
+                on ef.id = efgd.field_id 
+            where
+                ea.id = ef.application_id 
+        ) field_count,
+        (
+            select
+                count(1)
+            from
+                eae_livestock el 
+            join eae_livestock_stable els
+                on el.id = els.livestock_id
+            where
+                ea.id = el.application_id 
+        ) stable_count
+    from
+        eae_application ea
+    left join eae_applicant_commitment eac
+        on ea.tax_number = eac.tax_number
+    left join app_submission_portal asp
+        on eac.submission_portal_id = asp.id
+    where
+        ea.application_status_id in (2) and
+        asp.id = 569
+)
+select
+    *
+from
+    _data t
+where
+    t.field_count > 10 and
+    t.stable_count > 3
+;
+      </pre>
+    </p>
+    </p>
+  </ol>
+
+</body>
