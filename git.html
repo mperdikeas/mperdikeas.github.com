@@ -10,9 +10,9 @@
         In February 2025 I followed the below procedure and it worked like a charm.
         My situation was that I wanted to submit a pull request to a github repo
         to which I was unable to push a branch. Therefore, as per the suggested
-        procedure in these cases, I cloned the original repo,
+        procedure in these cases, I forked the original repo,
         created a branch, pushed it
-        (to my cloned repo) and issued the pull request from <i>github.com</i>. This
+        (to my forked repo) and issued the pull request from <i>github.com</i>. This
         all worked with no problem. The problem came on the next step.
       </p>
       <p>
@@ -23,18 +23,18 @@
         more importantly, to be able to create a new pull request out of the
         latest revision of the master branch. At that point simply doing:
         <tt>git fetch origin</tt> failed to achieve this as the <i>origin</i>
-        for my local repo (on my development machine) was obviously my own
-        cloned repo. To address this I had to define a new <i>remote</i> for
+        for my local cloned repo (on my development machine) was obviously set to point to
+        my own forked repo. To address this, I had to define a new <i>remote</i> for
         the upstream repo that I cloned from, and followed the below procedure:
         <dl>
           <dt><tt>$ git remote -v</tt></dt>
           <dd>to see the existing remotes</dd>
-          <dt><tt>$ git remote adt upstream https://github.com/kyp44/Topology.git</tt></dt>
-          <dd>to adt a new remote for the original repo I had cloned</dd>
+          <dt><tt>$ git remote add upstream https://github.com/kyp44/Topology.git</tt></dt>
+          <dd>to add a new remote for the original repo I had cloned</dd>
           <dt><tt>$ git remote -v</tt></dt>
           <dd>to confirm the new remotes</dd>
           <dt><tt>$ git checkout master</tt></dt>
-          <dd>to checkout the <i>master</i> of my cloned repo</dd>
+          <dd>to checkout the <i>master</i> of my forked repo into my development, locally-cloned repo</dd>
           <dt><tt>$ git fetch upstream</tt></dt>
           <dd>to fetch the <i>upstream</i> main branch</dd>
           <dt><tt>$ git merge upstream/master master</tt></dt>
@@ -43,7 +43,7 @@
           <dt><tt>$ git push origin</tt></dt>
           <dd>to push my local current (<i>master</i>) branch, that was
             just merged with the <i>upstream</i> <i>master</i>
-            into my cloned repo's remote <i>master</i> branch</dd>
+            into my forked repo's remote <i>master</i> branch</dd>
         </dl>
       </p>
       <p>
