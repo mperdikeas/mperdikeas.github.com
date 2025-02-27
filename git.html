@@ -5,6 +5,20 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>how to resolve merge conflicts after a <tt>stash pop</tt></li>
+      <p>
+        The following procedure worked flawlessly in February 2025 (<a href='https://stackoverflow.com/a/27382210/274677'>provenance</a>):
+        <ol>
+          <li>manually resolve conflicts</li>
+          <li><pre>git restore --staged src/</pre> &mdash; or some other specific path(s) as the last argument.
+            <span class='nb'>NB:</span> before executing the above command, when I did <tt>git status -s</tt> I
+            could still see conflict markers (<tt>UU</tt>) but went ahead nonetheless. I think that's the idea.
+          </li>
+          <li>drop the stash (since it was kept after the pop due to the presence of merge conflicts). Use either: 
+            (a) <tt>git stash drop</tt> if only one entry is present or
+            (b) <tt>git stash drop stash@{0}</tt> to only drop the topmost stash entry</li>
+        </ol>
+      </p>
       <li>how to submit multipled pull requests add as a submodule an existing, locally available git repo</li>
       <p>
         In February 2025 I followed the below procedure and it worked like a charm.
