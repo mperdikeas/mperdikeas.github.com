@@ -52,6 +52,16 @@
         proprietary Amazon Audible checksum using the <tt>*.aax</tt> file using the below incantation:
         <pre>ffprobe -i filename.aax -show_format 2>&1  | grep checksum</pre>
       </p>
+
+      <p>
+        <span class='nb'>UPDATE 2025-03-26</span> The above page has now been redesigned; in order to use the
+        site at <a href='https://audible-tools.kamsker.at/'>https://audible-tools.kamsker.at/</a> to
+        obtain the activation bytes you have to click on the button that reads <i>"Expert mode"</i> &mdash; this allows you to just enter the checksum instead
+        of uploading the entire file. Also, I found out (perhaps this was the case before I dunno) that the incantation:
+        <pre>./AAXtoMP3 --authcode &lt;activation bytes&gt; &lt;location of the *.aax file&gt;</pre>
+        &hellip; has to be prefixed with <tt>sudo</tt>.
+      </p>
+
     </article>
 
   </body>
