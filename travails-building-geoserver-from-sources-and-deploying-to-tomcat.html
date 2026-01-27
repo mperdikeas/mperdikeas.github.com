@@ -1,0 +1,100 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+   li {
+     margin: 1em 0;
+   }
+  </style>
+  <body>
+    <header>
+      <h1>Write-up of how I build GeoServer from sources and deployed it to a locally installed Tomcat on my ThinkStation P320 Tower machine running <tt>Ubuntu 20.04</tt> (January 2026)</h1>
+      <hr>
+    </header>
+    <p>
+      In late January 2026 I built <tt>GeoServer v2.28</tt> from sources and deployed it to a local <tt>Apache Tomcat v9</tt> servlet container on a <tt>Ubuntu 20.04</tt> machine.
+      The main steps were:
+      <ol>
+        <li>configuring the right version of <tt>javac</tt> to compile <tt>GeoServer</tt> with</li>
+        <li>installing the right version of <tt>Maven</tt></li>
+        <li>installing (and troubleshooting) the installation of <tt>Tomcat</tt></li>
+      </ol>
+    </p>
+    <p>
+      The guides I used were:
+      <ol>
+        <li>initial, top-level
+          <a href='https://chatgpt.com/s/t_6978d3b70c0c8191951d4024b9607449'>
+            ChatGPT discussion
+          </a>
+          outlining all steps</a> (also archived
+          <a href='./travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/ChatGPT-geoServer-v2_28-setup.pdf'>
+            here
+          </a>
+          ).<br/>
+          It should be noted that, using this guide &endash; and after manually upgrading Maven &endash; I was able
+          to compile Geoserver from sources, including <u>all extensions</u> using this incantation (as given in the guide):<br/>
+          <pre class="code">$ mvn clean install -P allExtensions -DskipTests</pre>
+          <br/>If memory serves the tests were executing sort of nicely (with some warnings) but, in the end, I decided to skip them
+          as they were taking far too long.
+        </li>
+        <li>
+          <a href='https://phoenixnap.com/kb/install-maven-on-ubuntu'>
+            Guide on how to (manually) download and install Maven on Ubuntu
+          </a>. Also archived
+          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/how-to-install-Maven-on-Ubuntu.pdf'>
+            here
+          </a>. The reason this was necessary is that the version of GeoServer I wanted
+          to install (<tt>v2.28</tt>) required a higher version of <tt>Maven</tt> than
+          was available in the official Ubuntu repository for Ubuntu <tt>20.04</tt>.
+        </li>
+        <li>
+          <a href='https://blog.cloudsigma.com/installing-apache-tomcat-9-on-ubuntu-20-04/'>
+            Guide on how to manually install Apache Tomcat 9 on Ubuntu 20.04
+          </a>. Also archived
+          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/installing-Apache-Tomcat-9-on-Ubuntu-20_04-CloudSigma.pdf'>
+            here
+          </a>. I followed this particular guide except only (if memory serves) changing
+          the suggested installation location from: <tt>/opt/tomcat</tt> to:
+          <tt>~/software</tt> (a decision I've come to regret, not for any particular
+          technical reason but solely for the fact that the alternative location
+          I chose feels weird and is not normative).
+          <br/>
+          It should also be noted that even though I configured the <i>Uncomplicated Firewall</i>
+          with an additional rule, as suggested by the guide:<br/>
+          <pre class='code'>$ sudo ufw allow 8080</pre><br/>
+          &hellip; this step (<i>Step 6</i>
+          in the guide) was moot in my case as I don't have the
+          <tt>ufw</tt> firewall enabled on my system upon startup.
+        </li>
+        <li>
+          Following the instructions on the above guide resulted in Tomcat being unable to start properly
+          so I then entered into a
+          <a href='https://chat.deepseek.com/share/aekqdv14exmy5coiuz'>
+            discussion with DeepSeek
+          </a> on how to troubleshoot the problem I was facing. This discussion is also
+          archived
+          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/deepseek-troubleshooting-tomcat-installation.pdf'>
+            here</a>.
+          <br/>
+          <br/>
+          In the end, I ended up modifying the <tt>systemd/system</tt> Tomcat <i>Unit file</i> from:<br/>
+          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.original'>the version originally suggested by guide #3
+          </a>
+          <br/>&hellip; to:<br/>
+          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.final'>this</a>.
+          <br/>The above changes also account for the fact that I'm using a different version of Java than the one suggested in guide #3.
+          <br/>
+          A (sadly cropped) visual comparison (produced by Meld) is given in 
+          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.meld.screenshot.png'>this screenshot</a>.
+        </li>
+
+      </ol>
+    </p>
+
+  </body>
+</html>
