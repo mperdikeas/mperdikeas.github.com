@@ -72,29 +72,57 @@
           in the guide) was moot in my case as I don't have the
           <tt>ufw</tt> firewall enabled on my system upon startup.
         </li>
-        <li>
-          Following the instructions on the above guide resulted in Tomcat being unable to start properly
-          so I then entered into a
-          <a href='https://chat.deepseek.com/share/aekqdv14exmy5coiuz'>
-            discussion with DeepSeek
-          </a> on how to troubleshoot the problem I was facing. This discussion is also
-          archived
-          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/deepseek-troubleshooting-tomcat-installation.pdf'>
-            here</a>.
-          <br/>
-          <br/>
-          In the end, I ended up modifying the <tt>systemd/system</tt> Tomcat <i>Unit file</i> from:<br/>
-          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.original'>the version originally suggested by guide #3
-          </a>
-          <br/>&hellip; to:<br/>
-          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.final'>this</a>.
-          <br/>The above changes also account for the fact that I'm using a different version of Java than the one suggested in guide #3.
-          <br/>
-          A (sadly cropped) visual comparison (produced by Meld) is given in 
-          <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.meld.screenshot.png'>this screenshot</a>.
-        </li>
-
       </ol>
+      Following the instructions on the above guides resulted in Tomcat being unable to start properly
+      so I then entered into a
+      <a href='https://chat.deepseek.com/share/aekqdv14exmy5coiuz'>
+        discussion with DeepSeek
+      </a> on how to troubleshoot the problem I was facing. This discussion is also
+      archived
+      <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/deepseek-troubleshooting-tomcat-installation.pdf'>
+        here</a>.
+      <br/>
+      <br/>
+      In the end, I ended up modifying the <tt>systemd/system</tt> Tomcat <i>Unit file</i> from:<br/>
+      <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.original'>the version originally suggested by guide #3
+      </a>
+      <br/>&hellip; to:<br/>
+      <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.final'>this</a>.
+      <br/>The above changes also account for the fact that I'm using a different version of Java than the one suggested in guide #3.
+      <br/>
+      A (sadly cropped) visual comparison (produced by Meld) is given in 
+      <a href='travails-building-geoserver-from-sources-and-deploying-to-tomcat.html.files/tomcat.service.meld.screenshot.png'>this screenshot</a>.
+    </p>
+    <p>
+      After properly configuring the <tt>systemd</tt> Tomcat Unit file
+      (<tt>/etc/systemd/system/tomcat.service</tt>), I was able to interact with Tomcat
+      and examine its logs using such commands as the following:
+      <pre class="code">
+$ sudo systemctl start tomcat.service # or just 'tomcat' in lieu of 'tomcat.service'
+$ sudo systemctl stop tomcat.service
+$ sudo systemctl status tomcat.service
+$ sudo systemctl reload-or-restart tomcat.service
+$ journalctl -f -u tomcat.service</pre>
+    </p>
+    <p>
+      In the end, I realized that for my purposes (local development / testing) I had gone to unnecessary
+      lengths and suffered unnecessary pain to install Tomcat as a system-wide service with its own
+      dedicated (pseudo-) user (plus it was less ergonomic to modify configuration files I had
+      to <tt>sudo</tt> and such). It is indeed infinetely simpler (with zero complications) to just
+      download the Tomcat tarball from the official site, explode it somewhere under my 
+      <i>home</i> directory and control it via the <tt>/bin/startup.sh</tt> and <tt>/bin/shutdown.sh</tt>
+      scripts.
+    </p>
+    <p>
+      So after writing these lines my plan is to remove the <i>tomcat</i> user from my system and its
+      associated <tt>systemd</tt> Unit files.
+    </p>
+    <p>
+      Regardless of the method of installing <i>Tomcat</i> I also encountered a CORS issue with
+      <i>GeoServer</i> in the troubleshooting of which I lost a day and entered into a couple of
+      discussions with two AIs (that went nowhere due to a red-herring) before finally realizing
+      what it was all about and what was necessary. This record is kept in the repo of noteworthy
+      AI discussions.
     </p>
 
   </body>
