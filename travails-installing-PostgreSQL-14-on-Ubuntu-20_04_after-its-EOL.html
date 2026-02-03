@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+   li {
+     margin: 1em 0;
+   }
+  </style>
+  <body>
+    <header>
+      <h1>Write-up of how I installed <tt>PostgreSQL 14</tt> on <tt>Ubuntu 20.04</tt> after its December 2025 EOL</h1>
+      <hr>
+    </header>
+    <p>
+      In early February 2026 I manage to install PostgreSQL 14 (this was the highest
+      version I have successfully installed on that machine) on my Ubuntu 20.04 system that had already entered
+      EOL since December 2025.
+    </p>
+    <p>
+      I started off with a
+      <a href='https://chat.deepseek.com/share/ymt5hw5ydugkeqszh4'>DeepSeek conversation</a>
+      (also archived
+      <a href='travails-installing-PostgreSQL-14-on-Ubuntu-20_04_after-its-EOL.html.files/deepseek-2026-02-03-installing_PostgreSQL14_on_Ubuntu_20_04.pdf'>here</a>). Eventually that run
+      into some problems although it did point me towards the right direction.
+    </p>
+    <p>
+      Eventually I discovered this
+      <a href='https://medium.com/@yadavarvind100100/how-to-install-postgresql-14-pgadmin4-on-ubuntu-20-04-in-december-2025-after-eol-253865e80c43'>Medium article</a> which I've also archived
+      here in various formats (because of a popup that obscures a little more than a line parts in any given format):
+      <ul>
+        <li>A4 (portrait): <a href='travails-installing-PostgreSQL-14-on-Ubuntu-20_04_after-its-EOL.html.files/medium-article-install-PostgreSQL-on-Ubuntu_20_04.pdf'>link</a></li>
+        <li>A4 (landscape): <a href='travails-installing-PostgreSQL-14-on-Ubuntu-20_04_after-its-EOL.html.files/medium-article-install-PostgreSQL-on-Ubuntu_20_04.landscape.pdf'>link</a></li>
+        <li>A3 (portrait): <a href='travails-installing-PostgreSQL-14-on-Ubuntu-20_04_after-its-EOL.html.files/medium-article-install-PostgreSQL-on-Ubuntu_20_04.A3.pdf'>link</a></li>
+      </ul>
+    </p>
+    <p>
+      After following the Medium article I was able to get PostgreSQL. Subsequently, I verified
+      that it has its own user and group:
+      <pre class='code'>
+$ sudo cut -d: -f1 /etc/passwd | xargs groups | grep -i postgres
+postgres : postgres ssl-cert</pre>
+
+      
+      &hellip; and that the PostgreSQL server is indeed running 
+      <pre class='code'>
+$ sudo systemctl status postgresql@14-main
+● postgresql@14-main.service - PostgreSQL Cluster 14-main
+     Loaded: loaded (/lib/systemd/system/postgresql@.service; enabled-runtime; vendor preset: enabl>
+     Active: active (running) since Tue 2026-02-03 14:34:08 EET; 50min ago
+$ #
+$ # rest of output ommitted
+$ #
+$</pre>
+
+      &hellip; and has the expected version:
+      <pre class='code'>
+$ sudo -u postgres psql -c "SELECT version();"
+mperdikeas@mp-ThinkStation-P320:~/repos/prj/mperdikeas.github.com#
+$ sudo -u postgres psql -c "SELECT version();"
+                                                               version                                                               
+-------------------------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 14.18 (Ubuntu 14.18-1.pgdg20.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0, 64-bit
+(1 row)</pre>
+
+      &hellip; and the port it listens to:
+      <pre class='code'>
+$ sudo ss -tlnp | grep -i postgres
+LISTEN    0         244              127.0.0.1:5432             0.0.0.0:*        users:(("postgres",pid=1115709,fd=5))</pre>
+    </p>
+
+
+    <p>
+      I was also able to find the location of the configuration file and the data directory:
+
+      <pre class='code'>
+$ sudo -u postgres psql postgres
+[sudo] password for mperdikeas: 
+psql (14.18 (Ubuntu 14.18-1.pgdg20.04+1))
+Type "help" for help.
+
+postgres=# show config_file;
+               config_file               
+-----------------------------------------
+ /etc/postgresql/14/main/postgresql.conf
+(1 row)
+
+postgres=# show data_directory;
+       data_directory        
+-----------------------------
+ /var/lib/postgresql/14/main
+(1 row)
+
+postgres=# </pre>
+    </p>
+
+    <p>
+      After that, I went back to the DeepSeek discussion (linked above) and asked a number of
+      questions regarding Unit files in <tt>/lib/systemd/system</tt> and how to
+      properly cleanup some leftover files from a previous <tt>PostgreSQL 12</tt> installation.
+      You can find details on all the above towards the end of the DeepSeek conversation.
+      
+    </p>
+
+    <p>
+      After clearing up a number of scripts and stale links from a previous <tt>PostgreSQL 12</tt>
+      installation, I inquired, in the context of the same DeepSeek discussion how to
+      install all PostGIS extensions for <tt>PostgreSQL 14</tt> and indeed installed them
+      using:
+      <pre>$ sudo apt install postgresql-14-postgis-3-scripts -y</pre>
+
+      (before that I had verified independently that, indeed, PostGIS 3 is the version to
+      install with PostgreSQL 14).
+      
+    </p>
+    <p>
+      The above succeeded and allowed me to install the following extensions from inside <tt>psql</tt> for on some database I was interested in:
+
+      <pre class='code'>CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+CREATE EXTENSION IF NOT EXISTS postgis;
+CREATE EXTENSION IF NOT EXISTS postgis_raster;
+CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder;
+CREATE EXTENSION IF NOT EXISTS postgis_topology;
+CREATE EXTENSION IF NOT EXISTS postgres_fdw;</pre>
+    </p>
+
+    <p>
+      Following the above I installed:
+      <pre>sudo apt install postgresql-14-pgaudit -y</pre>
+    </p>
+    
+    <p>I then went ahead and did the necessary configurations as instructed
+      in the linked DeepSeek discussion (see there). The reason being that in
+      contract to <i>PostGIS</i>, <i>pgaudit</i> requires additional configuration.
+      However, before doing that I created a <i>git</i> repo (owned by root) in
+      <tt>/etc/postgresql/14/main/</tt>
+      to keep track of all modifications to <tt>PostgreSQL</tt> configuration
+      files.
+    </p>
+    <p>
+      Following the modification of the <tt>/etc/postgresql/14/main/postgresql.conf</tt>
+      file and the restart of <i>PostgreSQL</i> (as advised in the linked DeepSeek conversation)
+      I was indeed able to connect using <i>psql</i> to my database and execute the below:
+      <pre class='code'>CREATE EXTENSION IF NOT EXISTS pgaudit;</pre>
+    </p>
+  </body>
+</html>
