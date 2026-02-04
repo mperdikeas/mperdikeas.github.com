@@ -34,6 +34,13 @@
        border: 1px solid #bbb;
        padding: 0 0.3em;
      }
+    #extra-content {
+      display: none;
+     }
+
+     #extra-content.visible {
+       display: block;
+     }
     </style>
     <title>Menelaus Perdikeas scratchpad</title>
   </head>
@@ -138,6 +145,10 @@
     </p>
     <hr style='border:solid #ff0000 2px; width: 100%'>
 
+    <button id='toggleBtn'>Show messy scratchpad</button>
+    <div id='extra-content'>
+
+    
     <h2>Platforms</h2>
     <div class='horiz-col'>
       <div>
@@ -301,7 +312,6 @@
     <div>
       &nbsp;
     </div>
-    </div>
     
 
     <h2>Travails</h2>
@@ -399,9 +409,22 @@
       <a href="libreoffice-draw-shapes/index.html">LibreOffice Draw shapes</a>
       <a href="1407.3083v1.pdf">OAI-PMH registry paper</a>
     </div>
+
     <br/>
     <br/>
     <br/>
+    </div>
+    <script>
+     const button = document.getElementById('toggleBtn');
+     const content = document.getElementById('extra-content');
+
+     button.addEventListener('click', () => {
+       const isVisible = content.classList.toggle('visible');
+       button.textContent = isVisible ? 'Hide messy scratchpad ': 'Show messy scratchpad' ;
+     });
+    </script>
+
+
   </body>
 </html>
 
