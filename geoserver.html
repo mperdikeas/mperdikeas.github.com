@@ -22,6 +22,17 @@
         is launched has the same effect but my experience was to the
         contrary.
       </p>
+      <p>
+        <b>UPDATE 2026-02-09:</b>I have been advised by ChatGPT
+        that creating a <tt>setenv.sh</tt> file in <tt>$CATALINA_HOME/bin</tt> with the
+        following contents is actually the superior and the most "proper" solution for Tomcat deployments:
+        <pre style='code'>
+export CATALINA_OPTS="$CATALINA_OPTS -DGEOSERVER_DATA_DIR=/some/external/dir"</pre>
+        <br/>
+        Source: <a href='https://chatgpt.com/share/6984c286-f678-800a-aa09-0b51478e49e1'>ChatGPT discussion</a> &mdash; archived here as <a href='./geoserver.html.files/geoserver-overlays-Tomcat-and-deployment-issues.pdf'>PDF transcript</a>
+        <br/>
+        Warning: this is a long discussion the point in question is buried somewhere in there, in a couple of places too.
+      </p>
       <li>restore the <tt>root</tt> password in GeoServer</li>
       <p>
         After trying various suggestions on how to restore the
