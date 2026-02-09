@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="mperdikeasgithub.css"/>
+    <link rel='icon' href='/knowledge-favicon.ico'/>
+  </head>
+  <style>
+   h1 {font-size: 130%;}
+   h2 {font-size: 120%;}
+   li {
+     margin: 1em 0;
+   }
+  </style>
+  <body>
+    <header>
+      <h1>Write-up of how I created <tt>LPIS</tt> database on a local PostgreSQL 14 cluster</h1>
+      <hr>
+    </header>
+    <p>
+      In early February 2026 I manage to install PostgreSQL 14 (this was the highest
+      version I have successfully installed on that machine) on my Ubuntu 20.04 system that had
+      already entered
+      EOL since December 2025. You may read the full transcript <a href='./travails-installing-PostgreSQL-14-on-Ubuntu-20_04_after-its-EOL.html'>here</a>.
+    </p>
+    <p>
+      Following that, I set out to create the LPIS database locally.
+      So first I created a user <i>lpis</i> 
+      and gave him superuser privilleges
+      (note: this is not part of the normative instructions handed to us by the previous team).
+      <pre class='code'>
+sudo -u postgres psql -c "CREATE USER lpis WITH PASSWORD 'xxxx';"
+sudo -u postgres psql -c "ALTER USER lpis WITH SUPERUSER"</pre>
+    </p>
+  </body>
+</html>
