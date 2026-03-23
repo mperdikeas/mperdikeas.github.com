@@ -11,7 +11,13 @@ YEAR | MM-DD | cum leave days taken | cum sick days taken |
      | 09-09 |                   -3 |                   1 | worked on this Monday # counter *will* be increased ----------------------------------------------------------------
      | 09-16 |                   -4 |                   1 | worked on this Monday # counter *will* be increased ----------------------------------------------------------------
      | 09-30 |                   -5 |                   1 | worked on this Sunday and the coming Monday # counter *will* be incremented by 1 (#1)
-     |       |                   -6 |                   1 | 
+     |       |                   -6 |                   1 |
+-----+-------+----------------------+---------------------+---------------------------------------------
+2025 | 12-10 |  on that day (or thereabout) it was agreed that I had 9 days of leave remaining for 2025, during the December crunch I worked overtime
+     |       |  for an additional two days at the very least so that the counter at the end (31/12) of 2025 stands at 11 days of leave (9+2)
+     |       |  N.B. the 9 days were implicitly acknowledged in email by Androutsos, the other two (2) were neither acknowledged nor denied
+-----+-------+--------------------------------------------+---------------------------------------------------------------------------------------
+2026 | 02-13 |                  -11 |                   0 | took one day of normal leave on Friday 13/2 (had asked for Monday too but cancelled it)
 
 
 
