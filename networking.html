@@ -5,6 +5,12 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to check if some VPN connection is up</li>
+      <p>
+        <pre>$ nmcli con  | grep -i vpn</pre>
+        NB: some VPNs solutions(such as Kerio) display a device name (in the output of the
+        <tt>nmcli conn</tt> command) that does not include the string "vpn".
+      </p>
       <li>bash incantation to get public IP</li>
       <pre>curl ipinfo.io/ip && echo ""</pre>
       <li>find default gateway</li>
