@@ -5,6 +5,14 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to start/stop Kerio VPN</li>
+      <p>
+        One way is:
+        <pre>/etc/init.d/kerio-kvc {start|stop|restart|reload|force-reload}</pre>
+        <br/>
+        Apparently the below also works:
+        <pre>sudo systemctl {stop|stop} kerio-kvc</pre>
+      </p>
       <li>how to check if some VPN connection is up</li>
       <p>
         <pre>$ nmcli con  | grep -i vpn</pre>
