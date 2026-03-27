@@ -17,7 +17,8 @@ YEAR | MM-DD | cum leave days taken | cum sick days taken |
      |       |  for an additional two days at the very least so that the counter at the end (31/12) of 2025 stands at 11 days of leave (9+2)
      |       |  N.B. the 9 days were implicitly acknowledged in email by Androutsos, the other two (2) were neither acknowledged nor denied
 -----+-------+--------------------------------------------+---------------------------------------------------------------------------------------
-2026 | 02-13 |                  -11 |                   0 | took one day of normal leave on Friday 13/2 (had asked for Monday too but cancelled it)
+2026 | 02-13 |                  -11 |                   0 | took one day of normal leave on Friday 13/2 (had asked for Monday too but cancelled it); normal leave taken for 2026 now stands at -10 days
+2026 | 03-26 |                  -10 |                   0 | 1 day of leave; normal leave taken for 2026 now stands at -9 days
 
 
 
