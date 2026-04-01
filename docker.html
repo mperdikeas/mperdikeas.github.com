@@ -90,6 +90,18 @@
           (<a href='https://devopscycle.com/wp-content/uploads/sites/4/2023/11/the-ultimate-docker-cheat-sheet-4.png'>provenance</a>)
         </li>
       </ul>
+      <li id='#iacs-24-cogn'>how to build the docker image and run the container for Kartoza GeoServer image</li>
+      <p>
+        To test locally, on port 8081, with your own supplied username / password do:
+
+        <pre>$ docker build --network host -t lpis_geospatial_server
+$ docker run -d -p 8081:8080 --name lpis_geo -e GEOSERVER_ADMIN_USER=changeme -e GEOSERVER_ADMIN_PASSWORD=changeme lpis_geospatial_server</pre>
+        The above exposes the GeoServer at the <tt>localhost:8081/geoserver/web</tt> URL.
+        It is also possible to open an interactive shell to the GeoServer container constructed above
+        by doing, as usual:
+        <pre>docker exec -it lpis_geo sh</pre>
+
+      </p>
       <li id='#iacs-24-cogn'>how to build the docker image and run the container for IACS'24'COGN</li>
       <p>
         <ol>
