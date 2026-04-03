@@ -11,6 +11,15 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>simple workflow when dealing with multiple clusters</li>
+    <p>
+      From the terminal use <tt>kubectl</tt> to see the list of all available contexts (which also shows clusters):
+      <pre>kubctl config get-contexts</pre>
+    </p>
+    <p>
+      The launch <tt>k9s</tt> either simply, or by specifying a context:
+      <pre>k9s --context some-context</pre>
+    </p>
     <li>connect to various pods</li>
     <p>
       One can always use the <tt>k9s</tt> program (set up and used as advised
