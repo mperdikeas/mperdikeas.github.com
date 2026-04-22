@@ -34,7 +34,9 @@
             <th scope="row">docker run -it --entrypoint=sh &lt;image&gt;</th>
             <td>start up a container but supply a different entrypoint. This
               has the effect of <b>not</b> executing the <tt>CMD</tt> supplied
-              in the <i>Dockerfile</i> and is very useful for debugging</td>
+              in the <i>Dockerfile</i> and is very useful for debugging. In other
+              words, it can be used to override <tt>CMD</tt> when running a Docker
+              image.</td>
           </tr>
           <tr>
             <th scope="row"> docker run -d -p 8081:80 --name &lt;container-name&gt; --env-file .env -e X=Y &lt;image-name&gt;</th>
@@ -91,6 +93,10 @@
           </tr>
         </tbody>
       </table>
+      <li>SO answers</li>
+      <ul>
+        <li> <a href='https://stackoverflow.com/a/41518225/274677'>how to execute a shell command (and apply env variables)</a></li>
+      </ul>
       <li>some docker tutorials</li>
       <ul>
         <li><a href='https://www.youtube.com/watch?v=pg19Z8LL06w'>Docker crash course for beginners</a></li>
