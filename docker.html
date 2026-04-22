@@ -31,8 +31,18 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">/var/lib/docker</th>
-            <td>where are docker containers stored</td>
+            <th scope="row">docker run -it --entrypoint=sh &lt;image&gt;</th>
+            <td>start up a container but supply a different entrypoint. This
+              has the effect of <b>not</b> executing the <tt>CMD</tt> supplied
+              in the <i>Dockerfile</i> and is very useful for debugging</td>
+          </tr>
+          <tr>
+            <th scope="row"> docker run -d -p 8081:80 --name &lt;container-name&gt; --env-file .env -e X=Y &lt;image-name&gt;</th>
+            <td>start up container in detached mode,
+              map its local port <tt>80</tt> to the host's port <tt>8081</tt>, give
+              it the name <tt>foo-cont</tt> and pass tt environment variables
+              from the <tt>.env</tt> file overriding env variable <tt>X</tt>
+            with the value <tt>Y</tt></td>
           </tr>
           <tr>
             <th scope="row">docker exec -it &lt;container_name&gt; sh</th>
@@ -75,6 +85,10 @@
             <th scope="row">pgrep docker</th>
             <td>find the PID of the docker deamon</td>
           </tr>
+          <tr>
+            <th scope="row">/var/lib/docker</th>
+            <td>where are docker containers stored</td>
+          </tr>
         </tbody>
       </table>
       <li>some docker tutorials</li>
@@ -96,7 +110,8 @@
 
         <pre>$ docker build --network host -t lpis_geospatial_server .
 $ docker run -d -p 8081:8080 --name lpis_geo -e GEOSERVER_ADMIN_USER=changeme -e GEOSERVER_ADMIN_PASSWORD=changeme lpis_geospatial_server</pre>
-        The above exposes the GeoServer at the <tt>localhost:8081/geoserver/web</tt> URL.
+        The above runs the container in detached mode (<tt>-d</tt>) and exposes the GeoServer at
+       t doche <tt>localhost:8081/geoserver/web</tt> URL.
         It is also possible to open an interactive shell to the GeoServer container constructed above
         by doing, as usual:
         <pre>docker exec -it lpis_geo sh</pre>
