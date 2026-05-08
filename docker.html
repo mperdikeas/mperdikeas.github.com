@@ -17,7 +17,26 @@
   </style>
   <body>
     <ol class='main-list-items' reversed>
-      <li>my scratchpad</li>
+      <li>docker build incantations</li>
+      <table style='width:100%'>
+        <colgroup>
+          <col span="1" style="width: 45%;">
+          <col span="1" style="width: 55%;">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col" style="color: white; background: darkblue">command / prompt</th>
+            <th scope="col" style="color: white; background: cornflowerblue">description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">docker build --network host --progress=plain -t &lt;tag name&gt; .</th>
+            <td>build using the <tt>Dockerfile</tt> in the current dir. The <i>--progress=plain</i> part of the incantation supprisingly produces way more verbose output.</td>
+          </tr>
+        </tbody>
+      </table>
+      <li>other incantations</li>
       <table style='width:100%'>
         <colgroup>
           <col span="1" style="width: 35%;">
