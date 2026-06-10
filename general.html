@@ -149,7 +149,14 @@ done
         Filezilla delivered.
       </p>
       <li>concatenate PDFs (much simpler method)</li>
-      <pre>pdftk pg1.pdf pg2.pdf cat output all.pdf</pre>
+      <p>
+        <pre>pdftk pg1.pdf pg2.pdf cat output all.pdf</pre>
+        A more involved scenario is the following (concatenates the first five pages of document A with the
+        entirety of document B):
+        <pre>pdftk A=document1.pdf B=document2.pdf cat A1-5 B output result.pdf</pre>
+        &hellip; For multiple non-consecutive pages the following <i>cat specification syntax</i> may be used:
+        <pre>cat A1 A3 A5 B</pre>
+      </p>
       <li>dead simple HTTP server</li>
       <a href='https://unix.stackexchange.com/a/32200/24044'>source</a>
       <p>
