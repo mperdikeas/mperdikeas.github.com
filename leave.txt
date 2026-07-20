@@ -22,6 +22,8 @@ YEAR | MM-DD | cum leave days taken | cum sick days taken |
 2026 | 04-09 |                   -9 |                   0 | 1 day of leave (Great Thursday); normal leave taken for 2026 now stands at -8 days
 2026 | 04-14 |                   -8 |                   0 | 1 day of leave (Tuesday after Easter); normal leave taken for 2026 now stands at -7 days
 2026 | 04-24 |                   -7 |                   0 | 1 day of leave; normal leave taken for 2026 now stands at -6 days
+2026 | 07-17 |                   -6 |                   0 | I worked into the early morning hours of Saturday July 18th; normal leave taken for 2026 now stands at -7 days
+2026 | 07-19 |                   -7 |                   0 | I worked this Sunday for at least 6 hours; normal leave taken for 2026 now stands at -8 days
 
 
 
