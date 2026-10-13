@@ -5,6 +5,15 @@
   </head>
   <body>
     <ol class='main-list-items' reversed>
+      <li>how to check which VPNs are up</li>
+      <p>
+        <pre>nmcli c show --active | grep vpn</pre>
+        <pre>nmcli con show --active</pre>
+      </p>
+      <h3>update September 2026</h3>
+      <p>
+        I now have a <tt>vpns</tt> function in my <tt>.bashrc</tt>
+      </p>
       <li>how to start/stop Cognitera VPN</li>
       <p>
         <pre>wg-quick up/down cognitera-vpn</pre>
