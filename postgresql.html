@@ -17,6 +17,31 @@
 </head>
 <body>
   <ol reversed class=main-list-items>
+    <li>October 2026 &mdash; get all essential info about local running PostgreSQL</li>
+    <pre>
+$ psql --version
+psql (PostgreSQL) 14.18 (Ubuntu 14.18-1.pgdg20.04+1)
+$
+$
+$ pg_lsclusters
+Ver Cluster Port Status Owner    Data directory              Log file
+14  main    5432 online postgres /var/lib/postgresql/14/main /var/log/postgresql/postgresql-14-main.log
+$
+$
+$ sudo -u postgres psql -c 'select version()';
+[sudo] password for mperdikeas:
+                                                               version
+
+-------------------------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 14.18 (Ubuntu 14.18-1.pgdg20.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0, 64-bit
+(1 row)
+
+$ sudo -u postgres psql -c 'show port';
+ port
+------
+ 5432
+(1 row)
+</pre>
     <li>February 2025 &mdash; start/stop PostgreSQL 12 and find hostname and port</li>
     <p>One can, in general use either of the following two programs:
       <ul>
