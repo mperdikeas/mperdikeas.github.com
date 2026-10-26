@@ -1,0 +1,273 @@
+<h1 id="mdb-tools-command-line-access-to-ms-access-databases">MDB Tools — command-line access to MS Access databases</h1>
+<p>The suite you installed on <strong>2026-09-07</strong> is <strong><code>mdbtools</code> 0.7.1-6build1</strong> (Ubuntu package), plus its two shared libraries:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Package</th>
+<th>Version</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mdbtools</code></td>
+<td>0.7.1-6build1</td>
+<td>The <code>mdb-*</code> command-line utilities</td>
+</tr>
+<tr class="even">
+<td><code>libmdb2</code></td>
+<td>0.7.1-6build1</td>
+<td>Core JET / MDB reader library</td>
+</tr>
+<tr class="odd">
+<td><code>libmdbsql2</code></td>
+<td>0.7.1-6build1</td>
+<td>SQL layer used by <code>mdb-sql</code></td>
+</tr>
+</tbody>
+</table>
+<p>Binaries in <code>/usr/bin</code>:</p>
+<pre><code>mdb-ver        mdb-tables     mdb-schema     mdb-export
+mdb-sql        mdb-prop       mdb-array      mdb-header
+mdb-parsecsv   mdb-hexdump</code></pre>
+<p><code>mdbtools</code> is <strong>read-only</strong> — there is no way to write back into the <code>.mdb</code>/<code>.accdb</code> file with these tools.</p>
+<blockquote>
+<p><strong>Version note.</strong> 0.7.1 is the old (2011-era) release that Ubuntu 20.04 ships. The newer upstream 1.0.x adds <code>mdb-count</code>, <code>mdb-json</code>, <code>mdb-queries</code>, <code>mdb-import</code> and a much better <code>mdb-sql</code>. Several workarounds below exist purely because of 0.7.1’s limitations.</p>
+</blockquote>
+<h2 id="the-database-on-this-machine">The database on this machine</h2>
+<pre><code>/home/mperdikeas/repos/prj/cognitera-iacs/p371/p371-reports-adhoc-work/2026-09-00/analysis.accdb</code></pre>
+<p>144 MB, format <strong>ACE14</strong> (Access 2010+), one user table <code>analysis</code> with 27 columns and 410,847 rows. All examples below are run against it.</p>
+<p>Set a shell variable first so the examples stay short:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1"><span class="va">DB=</span>~/repos/prj/cognitera-iacs/p371/p371-reports-adhoc-work/2026-09-00/analysis.accdb</a></code></pre></div>
+<h2 id="what-kind-of-file-is-it">1. What kind of file is it?</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1"><span class="ex">mdb-ver</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span></a></code></pre></div>
+<pre><code>ACE14</code></pre>
+<p>Possible values: <code>JET3</code> (Access 97), <code>JET4</code> (2000–2003), <code>ACE12</code>/<code>ACE14</code>/<code>ACE15</code> (2007 and later <code>.accdb</code>).</p>
+<h2 id="list-the-tables">2. List the tables</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" title="1"><span class="ex">mdb-tables</span> -1 <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span>          <span class="co"># one per line</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="ex">mdb-tables</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span>             <span class="co"># tab-separated on one line</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="ex">mdb-tables</span> -1 -S <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span>       <span class="co"># include the MSys* system tables</span></a></code></pre></div>
+<pre><code>analysis</code></pre>
+<h2 id="show-a-tables-structure">3. Show a table’s structure</h2>
+<h3 id="as-ddl-mdb-schema">As DDL — <code>mdb-schema</code></h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="ex">mdb-schema</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span>                      <span class="co"># all tables, Access dialect</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="ex">mdb-schema</span> -T analysis <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span>          <span class="co"># one table only</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">CREATE</span> <span class="kw">TABLE</span> [analysis]</a>
+<a class="sourceLine" id="cb9-2" title="2"> (</a>
+<a class="sourceLine" id="cb9-3" title="3">        [<span class="kw">ID</span>]                    <span class="dt">Long</span> <span class="dt">Integer</span>,</a>
+<a class="sourceLine" id="cb9-4" title="4">        [Πληρωμή εξισωτικής]    Text (<span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb9-5" title="5">        [ΑΦΜ]                   Text (<span class="dv">40</span>),</a>
+<a class="sourceLine" id="cb9-6" title="6">        [Επώνυμο]               Text (<span class="dv">120</span>),</a>
+<a class="sourceLine" id="cb9-7" title="7">        [Ποσό]                  Currency,</a>
+<a class="sourceLine" id="cb9-8" title="8">        [Συν Δηλ Εκτ (ha)]      <span class="dt">Double</span>,</a>
+<a class="sourceLine" id="cb9-9" title="9">        <span class="op">..</span>.</a>
+<a class="sourceLine" id="cb9-10" title="10"> );</a></code></pre></div>
+<p>Append a <strong>backend</strong> to get DDL in another dialect — <code>access</code> (default), <code>sqlite</code>, <code>postgres</code>, <code>mysql</code>, <code>oracle</code>, <code>sybase</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" title="1"><span class="ex">mdb-schema</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> postgres</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="ex">mdb-schema</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> sqlite</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb11-1" title="1"><span class="co">-- postgres</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">CREATE</span> <span class="kw">TABLE</span> <span class="ot">&quot;analysis&quot;</span></a>
+<a class="sourceLine" id="cb11-3" title="3"> (</a>
+<a class="sourceLine" id="cb11-4" title="4">        <span class="ot">&quot;ID&quot;</span>                    SERIAL,</a>
+<a class="sourceLine" id="cb11-5" title="5">        <span class="ot">&quot;Πληρωμή εξισωτικής&quot;</span>    <span class="dt">VARCHAR</span> (<span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb11-6" title="6">        <span class="ot">&quot;ΑΦΜ&quot;</span>                   <span class="dt">VARCHAR</span> (<span class="dv">40</span>),</a>
+<a class="sourceLine" id="cb11-7" title="7">        <span class="op">..</span>.</a></code></pre></div>
+<p>Useful schema flags: <code>--drop-table</code>, <code>--no-not-null</code>, <code>--no-indexes</code>, <code>--no-relations</code>, <code>--default-values</code>, <code>-N &lt;namespace&gt;</code>.</p>
+<h3 id="as-a-compact-field-list-mdb-sql">As a compact field list — <code>mdb-sql</code></h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" title="1"><span class="bu">printf</span> <span class="st">&#39;describe table analysis\ngo\n&#39;</span> <span class="kw">|</span> <span class="ex">mdb-sql</span> -H -p <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span></a></code></pre></div>
+<pre><code>ID                      Long Integer    4
+Πληρωμή εξισωτικής      Text            100
+ΑΦΜ                     Text            40
+Επώνυμο                 Text            120
+Ποσό                    Currency        8</code></pre>
+<h3 id="just-the-column-names-numbered">Just the column names, numbered</h3>
+<p>Handy because you will be addressing columns <em>by position</em> in the pipelines below:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" title="1"><span class="ex">mdb-export</span> -d <span class="st">&#39;|&#39;</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis <span class="kw">|</span> <span class="fu">head</span> -1 <span class="kw">|</span> <span class="fu">tr</span> <span class="st">&#39;|&#39;</span> <span class="st">&#39;\n&#39;</span> <span class="kw">|</span> <span class="fu">nl</span></a></code></pre></div>
+<pre><code>     1  ID
+     2  Πληρωμή εξισωτικής
+     3  ΑΦΜ
+     4  Επώνυμο
+     5  Όνομα</code></pre>
+<h2 id="count-the-rows">4. Count the rows</h2>
+<p>0.7.1 has no <code>mdb-count</code>, and its <code>mdb-sql</code> does not implement <code>COUNT(*)</code>. Export and count lines instead — subtract the header row:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" title="1"><span class="ex">mdb-export</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis <span class="kw">|</span> <span class="fu">tail</span> -n +2 <span class="kw">|</span> <span class="fu">wc</span> -l</a></code></pre></div>
+<pre><code>410847</code></pre>
+<p>Or suppress the header with <code>-H</code> and skip the arithmetic:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" title="1"><span class="ex">mdb-export</span> -H <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis <span class="kw">|</span> <span class="fu">wc</span> -l</a></code></pre></div>
+<p>This reads the whole table (~14 s for these 410 k rows), so cache it if you need the number more than once. Note it counts <em>lines</em>, so a text field containing a newline would inflate the count; use <code>-R</code> to set an unambiguous row delimiter if that is a concern.</p>
+<h2 id="export-data-mdb-export">5. Export data — <code>mdb-export</code></h2>
+<p>This is the workhorse. Full CSV dump:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" title="1"><span class="ex">mdb-export</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis <span class="op">&gt;</span> analysis.csv</a></code></pre></div>
+<pre><code>ID,Πληρωμή εξισωτικής,ΑΦΜ,Επώνυμο,Όνομα,...
+1,&quot;Ορεινές (2η εκκαθάριση)&quot;,&quot;002448127&quot;,&quot;ΧΑΤΖΗΓΡΗΓΟΡΙΟΥ&quot;,&quot;ΓΡΗΓΟΡΙΟΣ&quot;,...</code></pre>
+<p>Options:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>-H</code></td>
+<td>Suppress the header row</td>
+</tr>
+<tr class="even">
+<td><code>-Q</code></td>
+<td>Don’t wrap text fields in quotes</td>
+</tr>
+<tr class="odd">
+<td><code>-d &lt;delim&gt;</code></td>
+<td>Column delimiter (default <code>,</code>)</td>
+</tr>
+<tr class="even">
+<td><code>-R &lt;delim&gt;</code></td>
+<td>Row delimiter (default newline)</td>
+</tr>
+<tr class="odd">
+<td><code>-q &lt;char&gt;</code></td>
+<td>Quote character (default <code>"</code>)</td>
+</tr>
+<tr class="even">
+<td><code>-X &lt;char&gt;</code></td>
+<td>Escape character for quotes inside a field (default: doubling)</td>
+</tr>
+<tr class="odd">
+<td><code>-I &lt;backend&gt;</code></td>
+<td>Emit <code>INSERT</code> statements instead of CSV</td>
+</tr>
+<tr class="even">
+<td><code>-D &lt;format&gt;</code></td>
+<td>Date format, <code>strftime(3)</code> syntax</td>
+</tr>
+<tr class="odd">
+<td><code>-N &lt;ns&gt;</code></td>
+<td>Prefix identifiers with a namespace</td>
+</tr>
+<tr class="even">
+<td><code>-b strip\|raw\|octal</code></td>
+<td>How to handle binary/OLE columns</td>
+</tr>
+</tbody>
+</table>
+<p>Tab-separated, unquoted, no header — the friendliest shape for <code>awk</code>/<code>cut</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" title="1"><span class="ex">mdb-export</span> -H -Q -d <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis</a></code></pre></div>
+<p><code>INSERT</code> statements for a target dialect:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb22-1" title="1"><span class="ex">mdb-export</span> -I postgres <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis <span class="kw">|</span> <span class="fu">head</span> -1</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">INSERT</span> <span class="kw">INTO</span> <span class="ot">&quot;analysis&quot;</span> (<span class="ot">&quot;ID&quot;</span>, <span class="ot">&quot;Πληρωμή εξισωτικής&quot;</span>, <span class="ot">&quot;ΑΦΜ&quot;</span>, <span class="op">..</span>.) <span class="kw">VALUES</span> (<span class="dv">1</span>, <span class="op">..</span>.);</a></code></pre></div>
+<p>ISO dates:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb24-1" title="1"><span class="ex">mdb-export</span> -D <span class="st">&#39;%Y-%m-%d&#39;</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis</a></code></pre></div>
+<h2 id="ad-hoc-queries">6. Ad-hoc queries</h2>
+<h3 id="the-direct-route-mdb-sql">The direct route: <code>mdb-sql</code></h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb25-1" title="1"><span class="bu">printf</span> <span class="st">&#39;select ID from analysis where ID &lt; 5\ngo\n&#39;</span> <span class="kw">|</span> <span class="ex">mdb-sql</span> -H -p -d <span class="st">&#39;|&#39;</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span></a></code></pre></div>
+<pre><code>1
+2
+3
+4
+4 Rows retrieved</code></pre>
+<p>Run it with no redirection for an interactive prompt:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb27-1" title="1"><span class="ex">mdb-sql</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span></a></code></pre></div>
+<p>Flags: <code>-H</code> suppress header, <code>-p</code> pretty-print off (plain delimited rows), <code>-d &lt;delim&gt;</code> column delimiter, <code>-i &lt;file&gt;</code> read SQL from a file, <code>-o &lt;file&gt;</code> write results to a file.</p>
+<p><strong>Know the limits before you rely on it</strong> — all four of these were tested against this database and all four fail in 0.7.1:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>What you try</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A trailing <code>;</code> on the statement</td>
+<td><code>syntax error near ;</code> — terminate with <code>go</code> on its own line instead, never a semicolon</td>
+</tr>
+<tr class="even">
+<td><code>select count(*) …</code> and any aggregate</td>
+<td><code>syntax error near (</code> — no aggregate functions at all</td>
+</tr>
+<tr class="odd">
+<td>A non-ASCII column name, e.g. <code>ΑΦΜ</code></td>
+<td><code>syntax error near ?</code> — the lexer is ASCII-only</td>
+</tr>
+<tr class="even">
+<td>Bracketing it as <code>[ΑΦΜ]</code></td>
+<td><code>syntax error near [</code> — no identifier quoting either</td>
+</tr>
+</tbody>
+</table>
+<p>There are also no joins, no <code>GROUP BY</code>, no <code>ORDER BY</code> and no <code>LIMIT</code>. In practice <code>mdb-sql</code> here is good for <code>describe table</code> and for trivial <code>SELECT</code>s over ASCII-named columns. <strong>For this database, whose columns are nearly all Greek, it is effectively unusable for querying</strong> — use one of the two routes below.</p>
+<h3 id="route-a-pipe-the-export-through-unix-tools">Route A: pipe the export through Unix tools</h3>
+<p>Good for one-off questions, no import step. Count and rank the values of column 2 (<code>Πληρωμή εξισωτικής</code>):</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb28-1" title="1"><span class="ex">mdb-export</span> -Q -d <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis \</a>
+<a class="sourceLine" id="cb28-2" title="2">  <span class="kw">|</span> <span class="fu">awk</span> -F<span class="st">&#39;\t&#39;</span> <span class="st">&#39;NR&gt;1 {s[$2]++} END {for (k in s) printf &quot;%8d  %s\n&quot;, s[k], k}&#39;</span> \</a>
+<a class="sourceLine" id="cb28-3" title="3">  <span class="kw">|</span> <span class="fu">sort</span> -rn</a></code></pre></div>
+<pre><code>  254584  Ορεινές (2η εκκαθάριση)
+  131305  Μειονεκτικές (2η εκκαθάριση)
+   24958  Λοιπές (2η εκκαθάριση)</code></pre>
+<p>Sum a currency column (column 20, <code>Πληρωτέο (€)</code>) per category:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb30-1" title="1"><span class="ex">mdb-export</span> -H -Q -d <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis \</a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="kw">|</span> <span class="fu">awk</span> -F<span class="st">&#39;\t&#39;</span> <span class="st">&#39;{s[$2] += $20} END {for (k in s) printf &quot;%18.2f  %s\n&quot;, s[k], k}&#39;</span></a></code></pre></div>
+<p>Pull a few columns for one ΑΦΜ:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb31-1" title="1"><span class="ex">mdb-export</span> -d <span class="st">$&#39;</span><span class="dt">\t</span><span class="st">&#39;</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis \</a>
+<a class="sourceLine" id="cb31-2" title="2">  <span class="kw">|</span> <span class="fu">awk</span> -F<span class="st">&#39;\t&#39;</span> <span class="st">&#39;NR==1 || $3==&quot;\&quot;002448127\&quot;&quot;&#39;</span> \</a>
+<a class="sourceLine" id="cb31-3" title="3">  <span class="kw">|</span> <span class="fu">cut</span> -f1,3,4,5,20</a></code></pre></div>
+<h3 id="route-b-load-into-postgresql-and-use-real-sql">Route B: load into PostgreSQL and use real SQL</h3>
+<p>The right move for anything you will query more than once — 410 k rows with 27 columns deserve an index. <code>psql</code> is already installed on this machine.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb32-1" title="1"><span class="ex">createdb</span> accdb_analysis</a>
+<a class="sourceLine" id="cb32-2" title="2"></a>
+<a class="sourceLine" id="cb32-3" title="3"><span class="co"># schema, then data</span></a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="ex">mdb-schema</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> postgres           <span class="kw">|</span> <span class="ex">psql</span> -q accdb_analysis</a>
+<a class="sourceLine" id="cb32-5" title="5"><span class="ex">mdb-export</span> -I postgres <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis <span class="kw">|</span> <span class="ex">psql</span> -q accdb_analysis</a></code></pre></div>
+<p>Then query it properly:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb33-1" title="1"><span class="ex">psql</span> accdb_analysis -c <span class="st">&#39;SELECT count(*) FROM analysis&#39;</span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="ex">psql</span> accdb_analysis -c <span class="st">&#39;SELECT &quot;Πληρωμή εξισωτικής&quot;, count(*), sum(&quot;Πληρωτέο (€)&quot;)</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="st">                        FROM analysis GROUP BY 1 ORDER BY 2 DESC&#39;</span></a></code></pre></div>
+<p>A <code>COPY</code> of the CSV is much faster than 410 k individual <code>INSERT</code>s:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb34-1" title="1"><span class="ex">mdb-schema</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> postgres <span class="kw">|</span> <span class="ex">psql</span> -q accdb_analysis</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="ex">mdb-export</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis <span class="kw">|</span> <span class="ex">psql</span> -q accdb_analysis \</a>
+<a class="sourceLine" id="cb34-3" title="3">  -c <span class="st">&quot;\copy analysis FROM STDIN WITH (FORMAT csv, HEADER true)&quot;</span></a></code></pre></div>
+<p>Note <code>mdb-schema … postgres</code> maps the Access autonumber <code>ID</code> to <code>SERIAL</code>; change it to plain <code>INTEGER</code> first if you want the exported IDs preserved without a sequence tagging along.</p>
+<blockquote>
+<p><code>sqlite3</code> is <strong>not</strong> installed here, so the otherwise-popular <code>mdb-schema "$DB" sqlite | sqlite3 out.db</code> recipe needs <code>sudo apt install sqlite3</code> first.</p>
+</blockquote>
+<h2 id="character-encoding">7. Character encoding</h2>
+<p>Access files are not UTF-8 internally. Two environment variables control the conversion:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># charset of a JET3 (Access 97) source file; default CP1252</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="bu">export</span> <span class="va">MDB_JET3_CHARSET=</span>CP1253      <span class="co"># e.g. Greek Access 97 files</span></a>
+<a class="sourceLine" id="cb35-3" title="3"></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="co"># output charset; default UTF-8</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="bu">export</span> <span class="va">MDBICONV=</span>UTF-8</a></code></pre></div>
+<p><code>ACE14</code>/<code>JET4</code> files store text as UTF-16 and need no input hint — the Greek in <code>analysis.accdb</code> comes out as correct UTF-8 with no configuration.</p>
+<h2 id="the-remaining-utilities">8. The remaining utilities</h2>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb36-1" title="1"><span class="ex">mdb-prop</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis        <span class="co"># per-object properties  → &quot;No properties.&quot; here</span></a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="ex">mdb-array</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span> analysis       <span class="co"># dump the table as a C array literal</span></a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="ex">mdb-header</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span>               <span class="co"># C header of the table structs</span></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="ex">mdb-hexdump</span> <span class="st">&quot;</span><span class="va">$DB</span><span class="st">&quot;</span>              <span class="co"># raw page-level hex dump, for debugging</span></a>
+<a class="sourceLine" id="cb36-5" title="5"><span class="ex">mdb-parsecsv</span>                   <span class="co"># generates C code from a CSV; a build-time helper</span></a></code></pre></div>
+<p><code>mdb-header</code> fails on this database with <code>ERROR: unsupported type.</code> — it does not handle every ACE14 column type. Neither of <code>mdb-array</code>/<code>mdb-header</code> is useful for data analysis; they exist to generate C source.</p>
+<h2 id="gotchas-worth-remembering">9. Gotchas worth remembering</h2>
+<ul>
+<li><strong><code>mdb-sql</code> statements end with <code>go</code>, not <code>;</code>.</strong> A trailing semicolon is a syntax error.</li>
+<li><strong>Doubles come out in exponential notation.</strong> <code>0.92</code> exports as <code>9.2000000000000004e-01</code>. Fine for <code>awk</code> and for PostgreSQL <code>double precision</code>, but it will surprise a naive CSV consumer or a spreadsheet import.</li>
+<li><strong>Every operation is a full table scan.</strong> There is no index use for filtering, so filtering with <code>awk</code> costs the same as exporting everything. For repeated querying, import once (§6 Route B).</li>
+<li><strong>Column order is your API.</strong> With no working <code>SELECT</code> by name, the positional numbering from §3 is what you actually address columns by.</li>
+<li><strong>Read-only.</strong> Nothing here modifies the <code>.accdb</code>.</li>
+<li><strong><code>MSys*</code> tables are hidden</strong> unless you pass <code>-S</code> to <code>mdb-tables</code>.</li>
+</ul>
+<h2 id="getting-the-newer-mdbtools-optional">10. Getting the newer mdbtools (optional)</h2>
+<p>If the 0.7.1 limits become annoying — particularly the <code>mdb-sql</code> restrictions — upstream 1.0.x is a straightforward source build:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" title="1"><span class="fu">sudo</span> apt install build-essential libglib2.0-dev unixodbc-dev \</a>
+<a class="sourceLine" id="cb37-2" title="2">                 gawk bison flex autoconf automake libtool</a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="fu">git</span> clone https://github.com/mdbtools/mdbtools.git</a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="bu">cd</span> mdbtools <span class="kw">&amp;&amp;</span> <span class="ex">autoreconf</span> -i -f <span class="kw">&amp;&amp;</span> <span class="ex">./configure</span> <span class="kw">&amp;&amp;</span> <span class="fu">make</span> <span class="kw">&amp;&amp;</span> <span class="fu">sudo</span> make install</a></code></pre></div>
+<p>That gets you <code>mdb-count</code> (a real row count without exporting), <code>mdb-json</code>, <code>mdb-queries</code> (reads the saved queries stored in the Access file) and a SQL parser that handles quoted and non-ASCII identifiers.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><code>man mdb-tables</code>, <code>man mdb-schema</code>, <code>man mdb-export</code>, <code>man mdb-sql</code></li>
+<li><a href="https://github.com/mdbtools/mdbtools" class="uri">https://github.com/mdbtools/mdbtools</a></li>
+</ul>
