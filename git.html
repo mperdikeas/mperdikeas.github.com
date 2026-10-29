@@ -5,6 +5,10 @@
   </head>
   <body>
     <ol reversed class='main-list-items'>
+      <li>show tags pushed to some remote</li>
+      <pre>git ls-remote --tags --refs &lt;remote&gt; | grep &lt;some tag&gt;
+git ls-remote --tags --refs &lt;remote&gt; &lt;some tag RegExp&gt;</pre>
+The <tt>--refs</tt> option suppresses lines for the "peeled hashes".
       <li>how to resolve merge conflicts after a <tt>stash pop</tt></li>
       <p>
         The following procedure worked flawlessly in February 2025 (<a href='https://stackoverflow.com/a/27382210/274677'>provenance</a>):
